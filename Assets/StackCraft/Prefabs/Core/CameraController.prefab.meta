@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: bac6796dd8c3a14469f4d3b82e57a875
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Core/CameraController.prefab
+  uploadId: 847534

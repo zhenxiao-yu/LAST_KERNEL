@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cd07ac519c9e49945a115885ba158123
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Cards/Materials/Card_Stone.asset
+  uploadId: 847534

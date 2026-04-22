@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4b320b3fabc742a4a89385926b5a51d5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Cards/Materials/Card_Timber.asset
+  uploadId: 847534

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 81fb3c4f11c280247a6a00b58c2cd78f
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Scenes/Island.unity
+  uploadId: 847534

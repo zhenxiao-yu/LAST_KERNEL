@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4c1ffe18211a3a04e971d6986fa03c87
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Quests/10_Survive/survive_03.asset
+  uploadId: 847534

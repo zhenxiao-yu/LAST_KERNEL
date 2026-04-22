@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: da442aaebc4c14945bfee3fc854e89b5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Cards/Card_Mob.prefab
+  uploadId: 847534

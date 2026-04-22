@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d7d83f6ce030f224faf8b19bcccc0827
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Core/AudioManager.prefab
+  uploadId: 847534

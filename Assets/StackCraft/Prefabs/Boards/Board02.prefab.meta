@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2d5c9720d0a21304a8cb9b8bf644f267
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Boards/Board02.prefab
+  uploadId: 847534

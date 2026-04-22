@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f1d55a776b0c66b4e9086c9a4d0cf68a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Core/GraphicsManager.prefab
+  uploadId: 847534

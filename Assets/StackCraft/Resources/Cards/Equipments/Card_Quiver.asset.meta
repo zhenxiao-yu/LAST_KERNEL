@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6eb790b82ebb38c4b846faa559603641
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Cards/Equipments/Card_Quiver.asset
+  uploadId: 847534

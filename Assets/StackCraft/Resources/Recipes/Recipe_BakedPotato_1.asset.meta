@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5bc8e310584063d42bdef946c401d1c2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Recipes/Recipe_BakedPotato_1.asset
+  uploadId: 847534

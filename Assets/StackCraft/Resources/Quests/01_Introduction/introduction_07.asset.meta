@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f9cdcade7b09255438db691b89a8a387
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Quests/01_Introduction/introduction_07.asset
+  uploadId: 847534

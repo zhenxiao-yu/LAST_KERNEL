@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 97f7fb60f81c4a649a9a909539c0bdb6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Scripts/Crafting/Definitions/RecipeDefinition.cs
+  uploadId: 847534

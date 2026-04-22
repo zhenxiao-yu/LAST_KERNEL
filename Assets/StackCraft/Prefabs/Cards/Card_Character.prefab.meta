@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: eaba020d99ed3fa4a8468960b601c67d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Cards/Card_Character.prefab
+  uploadId: 847534

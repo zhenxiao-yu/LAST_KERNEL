@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 872432520b51ffb4db7e9b21c05ef188
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Scripts/Card/Definitions/EnclosureDefinition.cs
+  uploadId: 847534

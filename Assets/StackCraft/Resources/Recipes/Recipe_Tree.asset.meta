@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 39efa2f7ce3da224b9292509e571fdbb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Recipes/Recipe_Tree.asset
+  uploadId: 847534

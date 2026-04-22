@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dd2693ebe3b7fbc46a8825052c06d4a1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Cards/Consumables/Card_Coconut.asset
+  uploadId: 847534

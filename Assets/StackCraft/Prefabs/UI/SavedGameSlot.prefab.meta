@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 220d7905ebde81945a397e8b25eb555d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/UI/SavedGameSlot.prefab
+  uploadId: 847534

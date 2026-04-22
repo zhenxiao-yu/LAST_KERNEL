@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4f8bc3fbeab15924eb23dce964444c0e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Quests/04_Advancement/advancement_05.asset
+  uploadId: 847534

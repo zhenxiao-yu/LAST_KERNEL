@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fdcf95c3938acc54598fd044b3f04c74
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Recipes/Recipe_Kiln.asset
+  uploadId: 847534

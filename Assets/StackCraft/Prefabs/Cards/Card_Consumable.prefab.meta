@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e90d7b8333e57a04eae115572a93bebb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/Cards/Card_Consumable.prefab
+  uploadId: 847534

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d7f97b1703c8e0c47a6962638643c572
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/UI/CombatRect.prefab
+  uploadId: 847534

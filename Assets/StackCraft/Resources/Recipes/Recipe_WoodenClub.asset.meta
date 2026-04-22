@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2bfeb346ae6b1cb4a861d38735715a61
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Recipes/Recipe_WoodenClub.asset
+  uploadId: 847534

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5ee89605ed76a784aad9fb326974f154
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Cards/Structures/Card_LoggingCamp.asset
+  uploadId: 847534

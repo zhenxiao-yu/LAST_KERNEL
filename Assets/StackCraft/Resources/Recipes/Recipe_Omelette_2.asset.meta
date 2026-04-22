@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eda0836839ebdef43ae15312623b0c96
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Resources/Recipes/Recipe_Omelette_2.asset
+  uploadId: 847534

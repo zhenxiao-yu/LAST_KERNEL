@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 14a040b8aaafd8342878bfa503b99721
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Scripts/UI/GameOptionsUI.cs
+  uploadId: 847534

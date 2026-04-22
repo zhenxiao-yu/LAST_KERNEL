@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 903deec29e8a86e45b969d88e5deeafc
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/VFX/PuffParticle.prefab
+  uploadId: 847534

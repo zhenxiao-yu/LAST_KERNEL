@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5e2985d7789c5254b831d166e6931134
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: StackCraft - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/StackCraft/Prefabs/UI/UIRoot.prefab
+  uploadId: 847534
