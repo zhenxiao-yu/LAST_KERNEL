@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: f250ee043498e3f4b85011f214fbb91f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Scripts/Quest/QuestInstance.cs
+  uploadId: 847534
+

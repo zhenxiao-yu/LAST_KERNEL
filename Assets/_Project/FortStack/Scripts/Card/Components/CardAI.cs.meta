@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 461480a4ecf93324c8d1a010378b59de
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Scripts/Card/Components/CardAI.cs
+  uploadId: 847534
+

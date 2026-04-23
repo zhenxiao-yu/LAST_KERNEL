@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 92d76d10eddc9cc44976725675904aad
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Prefabs/UI/Projectile_Magic.prefab
+  uploadId: 847534
+

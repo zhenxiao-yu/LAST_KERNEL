@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 57b203c4af26778488bc371ebcc92963
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Shaders/CustomPostProcess.shader
+  uploadId: 847534
+

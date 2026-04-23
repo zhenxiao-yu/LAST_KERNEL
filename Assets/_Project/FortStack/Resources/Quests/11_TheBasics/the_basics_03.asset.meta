@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 15d8407c002880c41b7300e6e02464b5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Quests/11_TheBasics/the_basics_03.asset
+  uploadId: 847534
+

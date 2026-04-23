@@ -1,6 +1,6 @@
 {
   "name": "FortStack.Editor",
-  "rootNamespace": "FortStack.Editor",
+  "rootNamespace": "Markyu.FortStack.Editor",
   "references": [
     "FortStack.Runtime"
   ],

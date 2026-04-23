@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 912f4d7c879d6464bb32730cdfd825fe
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Prefabs/Cards/Card_Currency.prefab
+  uploadId: 847534
+

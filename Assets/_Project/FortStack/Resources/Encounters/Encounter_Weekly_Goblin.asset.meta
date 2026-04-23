@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3e2626dd2731d224ab1fafb0461b2bb0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Encounters/Encounter_Weekly_Goblin.asset
+  uploadId: 847534
+

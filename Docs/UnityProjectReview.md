@@ -17,8 +17,8 @@
 ## Findings
 
 1. `ProjectSettings/ProjectSettings.asset` still referenced the template scene path `Assets/Scenes/SampleScene.unity` even though build settings use `Assets/_Project/Scenes/SampleScene.unity`. That mismatch was fixed.
-2. `ProjectSettings/EditorSettings.asset` had no default root namespace. It now uses `FortStack` so new scripts start cleaner.
-3. `PlayerSettings` still use `DefaultCompany` and `com.DefaultCompany.2D-URP`. I did not change those because bundle IDs and save-data paths can have knock-on effects. Set them intentionally before your first real build.
+2. `ProjectSettings/EditorSettings.asset` now uses `Markyu.FortStack` as the default root namespace so new scripts start cleaner.
+3. `PlayerSettings` now use `Markyu` and `FortStack`. Bundle IDs and save-data paths should still be sanity-checked before your first public build.
 4. `Packages/manifest.json` includes packages that may be optional for this game:
    - `com.unity.collab-proxy`
    - `com.unity.multiplayer.center`
@@ -59,7 +59,7 @@ Suggested runtime domains:
 
 ## Boilerplate to remove later, not now
 
-- Default template/company identifiers
+- Any leftover template identifiers outside the core project settings
 - Unused Unity packages
 - Vendor demo scenes and example assets you are not actively learning from
 - Legacy placeholder script folders once real runtime/editor folders are in use

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d11a24b8c7b89094c9e5dabd89fd4c40
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Quests/07_Hoarder/hoarder_07.asset
+  uploadId: 847534
+

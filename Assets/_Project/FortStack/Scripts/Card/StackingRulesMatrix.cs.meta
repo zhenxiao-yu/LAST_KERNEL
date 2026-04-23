@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 82dcd34f94d7a60428bd5756cb458e08
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Scripts/Card/StackingRulesMatrix.cs
+  uploadId: 847534
+

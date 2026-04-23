@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ff332e75fb8842942a379e7397816f5a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Cards/Resources/Card_Tree.asset
+  uploadId: 847534
+

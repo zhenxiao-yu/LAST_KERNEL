@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 448705f33a9d7be4bb4ee01ab1f39328
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Recipes/Recipe_Wood_2.asset
+  uploadId: 847534
+

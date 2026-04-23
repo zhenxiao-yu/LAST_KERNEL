@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6f4a1f79f75c00244a7a5280105c2a2e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Prefabs/Cards/Card_Structure.prefab
+  uploadId: 847534
+

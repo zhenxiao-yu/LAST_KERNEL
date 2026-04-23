@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d5849cf3a6819a946bfe8c7d7f6d737d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Cards/Mobs/Card_Cow.asset
+  uploadId: 847534
+

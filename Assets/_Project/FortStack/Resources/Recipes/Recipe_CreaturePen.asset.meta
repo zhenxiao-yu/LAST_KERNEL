@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a60eb16151d8f76429eceed663e20ab1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Recipes/Recipe_CreaturePen.asset
+  uploadId: 847534
+

@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: FORTSTACK
+  companyName: Markyu
+  productName: FortStack
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -164,7 +164,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.4
   androidMinAspectRatio: 1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.2D-URP
+    Standalone: com.markyu.fortstack
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -717,14 +717,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: FORTSTACK
+  metroPackageName: FortStack
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: FORTSTACK
+  metroApplicationDescription: FortStack
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -799,7 +799,7 @@ PlayerSettings:
   cloudProjectId: 40dea9b7-e636-4ba5-8a05-5fe780ddbd7c
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: FORTSTACK
+  projectName: FortStack
   organizationId: markyu0615
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0

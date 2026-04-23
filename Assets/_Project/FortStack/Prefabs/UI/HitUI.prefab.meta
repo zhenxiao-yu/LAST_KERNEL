@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e5d893f9cfc4b6842a9cdb1af54fdee9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Prefabs/UI/HitUI.prefab
+  uploadId: 847534
+

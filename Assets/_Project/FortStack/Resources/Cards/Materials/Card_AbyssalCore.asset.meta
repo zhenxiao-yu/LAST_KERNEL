@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 66baeb9feaea34246829ea2ed1d93be1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Cards/Materials/Card_AbyssalCore.asset
+  uploadId: 847534
+

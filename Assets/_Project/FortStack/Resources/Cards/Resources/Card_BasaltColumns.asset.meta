@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fd23682f1349fb942936e3125f7bf01d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Cards/Resources/Card_BasaltColumns.asset
+  uploadId: 847534
+

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d2cc936c81521804e8fbdb98d7056016
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Quests/08_Construction/construction_02.asset
+  uploadId: 847534
+

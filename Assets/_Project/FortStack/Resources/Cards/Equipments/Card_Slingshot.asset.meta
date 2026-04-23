@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9df151d357a5fc745b993a2e51813bc7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Cards/Equipments/Card_Slingshot.asset
+  uploadId: 847534
+

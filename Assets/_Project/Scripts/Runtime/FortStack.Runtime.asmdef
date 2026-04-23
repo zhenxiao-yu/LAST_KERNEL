@@ -1,6 +1,6 @@
 {
   "name": "FortStack.Runtime",
-  "rootNamespace": "FortStack",
+  "rootNamespace": "Markyu.FortStack",
   "references": [],
   "includePlatforms": [],
   "excludePlatforms": [],

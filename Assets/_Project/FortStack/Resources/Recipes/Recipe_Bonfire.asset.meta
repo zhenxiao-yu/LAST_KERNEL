@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 9a29a729eeaef064eb84dc9d690f1414
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Resources/Recipes/Recipe_Bonfire.asset
+  uploadId: 847534
+
