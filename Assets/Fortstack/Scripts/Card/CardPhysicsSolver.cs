@@ -6,18 +6,20 @@ namespace Markyu.FortStack
     public static class CardPhysicsSolver
     {
         /// <summary>
-        /// Iteratively resolves two types of planar overlaps: stack-to-stack and stack-to-combat-area.
+        /// Resolves planar stack placement either by snapping stacks onto the board grid
+        /// or, when grid snapping is disabled, by using the original overlap-separation solver.
         /// </summary>
-        /// <remarks>
-        /// This function runs multiple iterations to ensure all overlaps are fully resolved or
-        /// until the maximum iteration count is reached. It uses a push-pull mechanism to translate
-        /// stacks out of collision, respecting the 'IsLocked' state of each stack.
-        /// </remarks>
         /// <param name="stacks">A list of all active CardStacks to be checked for overlap.</param>
         /// <param name="combatRects">A collection of active CombatRects that stacks must be separated from.</param>
-        /// <param name="maxIterations">The maximum number of times the solver loop is allowed to run.</param>
+        /// <param name="maxIterations">Unused by grid mode, but preserved for the legacy solver path.</param>
         public static void ResolveOverlaps(IList<CardStack> stacks, IEnumerable<CombatRect> combatRects, int maxIterations)
         {
+            if (Board.Instance != null && Board.Instance.SnapCardsToGrid)
+            {
+                ResolveToGrid(stacks, combatRects);
+                return;
+            }
+
             int iter = 0;
             bool anyOverlap = true;
 
@@ -57,6 +59,69 @@ namespace Markyu.FortStack
                         }
                     }
                 }
+            }
+        }
+
+        private static void ResolveToGrid(IList<CardStack> stacks, IEnumerable<CombatRect> combatRects)
+        {
+            if (Board.Instance == null || stacks == null)
+            {
+                return;
+            }
+
+            var board = Board.Instance;
+            var blockedRects = new List<Rect>();
+
+            if (combatRects != null)
+            {
+                foreach (var combatRect in combatRects)
+                {
+                    if (combatRect != null)
+                    {
+                        blockedRects.Add(board.GetCombatRectWorldRect(combatRect));
+                    }
+                }
+            }
+
+            var occupiedRects = new List<Rect>();
+            var orderedStacks = new List<StackEntry>(stacks.Count);
+
+            for (int i = 0; i < stacks.Count; i++)
+            {
+                var stack = stacks[i];
+                if (stack == null || stack.TopCard == null)
+                {
+                    continue;
+                }
+
+                orderedStacks.Add(new StackEntry(stack, i));
+            }
+
+            orderedStacks.Sort((a, b) =>
+            {
+                int lockedCompare = b.Stack.IsLocked.CompareTo(a.Stack.IsLocked);
+                return lockedCompare != 0 ? lockedCompare : a.Index.CompareTo(b.Index);
+            });
+
+            foreach (var entry in orderedStacks)
+            {
+                var stack = entry.Stack;
+                Vector3 desiredPosition = board.EnforcePlacementRules(stack.TargetPosition, stack);
+
+                if (!board.TryFindNearestGridPosition(
+                        desiredPosition,
+                        stack,
+                        occupiedRects,
+                        blockedRects,
+                        out var resolvedPosition))
+                {
+                    resolvedPosition = desiredPosition;
+                }
+
+                occupiedRects.Add(board.GetStackRect(resolvedPosition, stack));
+
+                bool instant = Vector3.SqrMagnitude(stack.TargetPosition - resolvedPosition) < 0.0001f;
+                stack.SetTargetPosition(resolvedPosition, instant);
             }
         }
 
@@ -157,6 +222,18 @@ namespace Markyu.FortStack
             }
 
             return true;
+        }
+
+        private readonly struct StackEntry
+        {
+            public CardStack Stack { get; }
+            public int Index { get; }
+
+            public StackEntry(CardStack stack, int index)
+            {
+                Stack = stack;
+                Index = index;
+            }
         }
     }
 }

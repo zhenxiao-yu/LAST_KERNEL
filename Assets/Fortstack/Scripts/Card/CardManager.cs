@@ -215,6 +215,8 @@ namespace Markyu.FortStack
                 {
                     RestoreStack(stackData);
                 }
+
+                ResolveOverlaps();
             }
             else
             {

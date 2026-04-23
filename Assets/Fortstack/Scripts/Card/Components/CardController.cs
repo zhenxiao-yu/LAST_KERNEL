@@ -213,7 +213,9 @@ namespace Markyu.FortStack
                 return;
             }
 
-            var finalPos = Board.Instance.EnforcePlacementRules(dropPosition, _card.Stack);
+            var finalPos = Board.Instance != null
+                ? Board.Instance.SnapToNearestGridPosition(dropPosition, _card.Stack)
+                : dropPosition;
             _card.Stack.SetTargetPosition(finalPos);
 
             var attachedToStack = _card.TryAttachToNearbyStack(_card.Settings.AttachRadius, stackToIgnore: null);
