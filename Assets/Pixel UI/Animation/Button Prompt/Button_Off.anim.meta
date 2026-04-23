@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 837f6c100b470144db8307004362a434
+timeCreated: 1564638524
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Animation/Button Prompt/Button_Off.anim
+  uploadId: 323337

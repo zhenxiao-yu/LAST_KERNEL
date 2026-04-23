@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d50dbb7b8f0e69848a9e1432d9500d9e
+timeCreated: 1548889971
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Rounded/Scrollbar.prefab
+  uploadId: 323337

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: dce09a01f0597664fb5f10f38ad9432e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Scripts/Editor/CreateTextMenu.cs
+  uploadId: 323337

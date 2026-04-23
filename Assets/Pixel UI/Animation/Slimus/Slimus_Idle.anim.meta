@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 32398f04b581e9a40af9d7eedfe032db
+timeCreated: 1564618424
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Animation/Slimus/Slimus_Idle.anim
+  uploadId: 323337

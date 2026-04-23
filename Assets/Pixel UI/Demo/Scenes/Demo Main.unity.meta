@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 62bb7b133d84a4c418766e6f9a04e206
+timeCreated: 1548888581
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Demo/Scenes/Demo Main.unity
+  uploadId: 323337

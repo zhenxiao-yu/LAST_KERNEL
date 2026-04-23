@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d573b5fa333ae1743bc0bd2c3a26bec4
+timeCreated: 1564639155
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Extras/Button Prompt.prefab
+  uploadId: 323337

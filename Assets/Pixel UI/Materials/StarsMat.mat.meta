@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 50cf5ca5905dfce4caad7cc293fd2f49
+timeCreated: 1552756820
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Materials/StarsMat.mat
+  uploadId: 323337

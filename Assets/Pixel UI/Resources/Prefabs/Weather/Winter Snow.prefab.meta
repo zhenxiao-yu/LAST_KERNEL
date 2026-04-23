@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 59c2582fc650fb944a7d358595b6402d
+timeCreated: 1556462887
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Weather/Winter Snow.prefab
+  uploadId: 323337

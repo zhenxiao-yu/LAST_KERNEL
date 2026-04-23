@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f1a0c8323d25f4b46809aca380137b70
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Demo/Scripts/DemoWindow.cs
+  uploadId: 323337

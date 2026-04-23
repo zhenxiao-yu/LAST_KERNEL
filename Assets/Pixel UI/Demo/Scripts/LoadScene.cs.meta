@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 703117b93b2f71548a88ca460c04943f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Demo/Scripts/LoadScene.cs
+  uploadId: 323337

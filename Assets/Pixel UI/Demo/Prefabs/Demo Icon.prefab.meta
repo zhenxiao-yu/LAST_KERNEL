@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6eed1b466dbe96940bccb781adecbe31
+timeCreated: 1551546299
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Demo/Prefabs/Demo Icon.prefab
+  uploadId: 323337

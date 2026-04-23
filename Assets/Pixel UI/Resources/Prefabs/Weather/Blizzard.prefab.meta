@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 30dbf42569de68041be233fc762279f2
+timeCreated: 1556462923
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Weather/Blizzard.prefab
+  uploadId: 323337

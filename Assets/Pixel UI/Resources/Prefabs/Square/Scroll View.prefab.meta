@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 269a4953297d9864285a609c707b48fa
+timeCreated: 1548889987
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Square/Scroll View.prefab
+  uploadId: 323337

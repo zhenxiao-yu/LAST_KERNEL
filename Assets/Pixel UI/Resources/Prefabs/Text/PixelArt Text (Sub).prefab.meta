@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ec8d868ba834e574a9ceb3152c1b1681
+timeCreated: 1548887538
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Text/PixelArt Text (Sub).prefab
+  uploadId: 323337

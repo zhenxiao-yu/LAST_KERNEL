@@ -33,3 +33,4 @@ Material:
     - _VignettePower: 0
     m_Colors: []
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

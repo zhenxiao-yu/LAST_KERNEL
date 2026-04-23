@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a4bc1ddc23cc04847a92dafc17e69e17
+timeCreated: 1549301090
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 100100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Resources/Prefabs/Extras/Energy Bar (Horizontal).prefab
+  uploadId: 323337

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7fc308b524a003e4b8c821ee2424672c
+timeCreated: 1548886821
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Materials/PixelUISub.mat
+  uploadId: 323337

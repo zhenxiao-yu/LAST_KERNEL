@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 06b93d844adac4e488b2f2f2e8f9df90
+timeCreated: 1550695590
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 128440
+  packageName: Pixel UI
+  packageVersion: 1.5
+  assetPath: Assets/Pixel UI/Scripts/UITooltip.cs
+  uploadId: 323337
