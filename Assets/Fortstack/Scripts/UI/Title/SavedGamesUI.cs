@@ -27,6 +27,8 @@ namespace Markyu.FortStack
 
         private void Start()
         {
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+
             foreach (var savedGame in GameDirector.Instance.SavedGames.Values)
             {
                 var slot = Instantiate(slotPrefab, contentRect);
@@ -36,14 +38,24 @@ namespace Markyu.FortStack
 
             clearButton.SetOnClick(() =>
                 modalWindow.Show(
-                    "Delete Games",
-                    "Are you sure you want to delete all saved games?" +
-                    "\nThis action is permanent and cannot be undone.",
+                    GameLocalization.Get("save.clearTitle"),
+                    GameLocalization.Get("save.clearBody"),
                     ClearSavedGames
                 )
             );
 
             closeButton.SetOnClick(Close);
+            RefreshLocalizedText();
+        }
+
+        private void OnDestroy()
+        {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            RefreshLocalizedText();
         }
 
         private void ClearSavedGames()
@@ -51,6 +63,12 @@ namespace Markyu.FortStack
             slots.RemoveAll(slot => slot == null);
             slots.ForEach(slot => slot.DeleteSavedGame());
             slots.Clear();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            clearButton.SetText(GameLocalization.Get("title.clearSaves"));
+            closeButton.SetText(GameLocalization.Get("common.closeButton"));
         }
     }
 }

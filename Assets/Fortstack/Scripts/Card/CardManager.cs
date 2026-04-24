@@ -104,6 +104,8 @@ namespace Markyu.FortStack
 
                 RestoreDiscoveredCards();
             }
+
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
         }
 
         private void OnDestroy()
@@ -113,6 +115,8 @@ namespace Markyu.FortStack
                 GameDirector.Instance.OnSceneDataReady -= HandleSceneDataReady;
                 GameDirector.Instance.OnBeforeSave -= HandleBeforeSave;
             }
+
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
         }
 
 #if UNITY_EDITOR
@@ -517,11 +521,11 @@ namespace Markyu.FortStack
 
             if (recipe.ResultingCard != null)
             {
-                dynamicDef.SetDisplayName($"蓝图：{recipe.ResultingCard.DisplayName}");
+                dynamicDef.SetDisplayName(GameLocalization.Format("recipe.blueprint", recipe.ResultingCard.DisplayName));
             }
             else
             {
-                dynamicDef.SetDisplayName("蓝图：未知");
+                dynamicDef.SetDisplayName(GameLocalization.Get("recipe.unknown"));
             }
 
             string description = CraftingManager.Instance?.GetFormattedIngredients(recipe);
@@ -733,6 +737,41 @@ namespace Markyu.FortStack
             {
                 if (card.Category == CardCategory.Recipe) return;
                 discoveredCards.Add(card);
+            }
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            UpdateLocalizedRecipeCards();
+        }
+
+        private void UpdateLocalizedRecipeCards()
+        {
+            foreach (var card in AllCards)
+            {
+                if (card == null || card.Definition == null || card.Definition.Category != CardCategory.Recipe)
+                    continue;
+
+                string definitionId = card.Definition.Id;
+                if (string.IsNullOrEmpty(definitionId) || !definitionId.StartsWith("Recipe:"))
+                    continue;
+
+                string recipeId = definitionId.Substring("Recipe:".Length);
+                RecipeDefinition recipe = CraftingManager.Instance?.GetRecipeById(recipeId);
+                if (recipe == null)
+                    continue;
+
+                if (recipe.ResultingCard != null)
+                {
+                    card.Definition.SetDisplayName(GameLocalization.Format("recipe.blueprint", recipe.ResultingCard.DisplayName));
+                }
+                else
+                {
+                    card.Definition.SetDisplayName(GameLocalization.Get("recipe.unknown"));
+                }
+
+                card.Definition.SetDescription(CraftingManager.Instance?.GetFormattedIngredients(recipe) ?? string.Empty);
+                card.SetDefinition(card.Definition);
             }
         }
         #endregion

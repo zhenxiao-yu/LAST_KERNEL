@@ -19,6 +19,8 @@ namespace Markyu.FortStack
 
         private void Start()
         {
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+
             if (CraftingManager.Instance != null)
                 CraftingManager.Instance.OnRecipeDiscovered += HandleRecipeDiscovered;
 
@@ -27,6 +29,8 @@ namespace Markyu.FortStack
 
         private void OnDestroy()
         {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+
             if (CraftingManager.Instance != null)
                 CraftingManager.Instance.OnRecipeDiscovered -= HandleRecipeDiscovered;
         }
@@ -57,7 +61,7 @@ namespace Markyu.FortStack
                 // Create the Header Button
                 // We initially hide it. It only appears if we have discovered recipes in it.
                 TextButton headerBtn = CreateItemButton(
-                    $"{category} {SYMBOL_EXPANDED}",
+                    GetCategoryHeaderLabel(category, true),
                     null, // No hover info for headers
                     35f
                 );
@@ -133,7 +137,7 @@ namespace Markyu.FortStack
             // Update Header Text
             if (categoryHeaderButtons.TryGetValue(category, out var headerBtn))
             {
-                headerBtn.SetText($"{category} {(newState ? SYMBOL_EXPANDED : SYMBOL_COLLAPSED)}");
+                headerBtn.SetText(GetCategoryHeaderLabel(category, newState));
             }
 
             // Update Visibility of all recipes in this category
@@ -163,7 +167,7 @@ namespace Markyu.FortStack
                 return ("", "");
 
             return (
-                $"蓝图：{recipe.ResultingCard.DisplayName}",
+                GameLocalization.Format("recipe.blueprint", recipe.ResultingCard.DisplayName),
                 CraftingManager.Instance?.GetFormattedIngredients(recipe) ?? ""
             );
         }
@@ -174,6 +178,19 @@ namespace Markyu.FortStack
                 return recipe.Id;
 
             return null;
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            foreach (var kvp in categoryHeaderButtons)
+            {
+                kvp.Value.SetText(GetCategoryHeaderLabel(kvp.Key, categoryToggleState[kvp.Key]));
+            }
+        }
+
+        private static string GetCategoryHeaderLabel(RecipeCategory category, bool isExpanded)
+        {
+            return $"{GameLocalization.GetRecipeCategoryLabel(category)} {(isExpanded ? SYMBOL_EXPANDED : SYMBOL_COLLAPSED)}";
         }
     }
 }

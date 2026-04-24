@@ -216,7 +216,7 @@ namespace Markyu.FortStack
                 string body = questInstance.QuestData.Description;
                 if (!questInstance.IsComplete())
                 {
-                    body += $"\n\n进度：{questInstance.CurrentAmount} / {questInstance.QuestData.TargetAmount}";
+                    body += $"\n\n{GameLocalization.Format("quest.progress", questInstance.CurrentAmount, questInstance.QuestData.TargetAmount)}";
                 }
                 return (header, body);
             }

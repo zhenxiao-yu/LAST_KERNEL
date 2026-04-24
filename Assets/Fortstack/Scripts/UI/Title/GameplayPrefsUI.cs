@@ -40,24 +40,29 @@ namespace Markyu.FortStack
             cancelButton.SetOnClick(Close);
             confirmButton.SetOnClick(StartNewGame);
 
-            UpdateDurationLabel((int)durationSlider.value);
-            UpdateFriendlyLabel(isFriendlyToggle.isOn);
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+            RefreshLocalizedText();
         }
 
         private void UpdateDurationLabel(int duration)
         {
-            durationLabel.text = $"白昼时长：{duration} 秒";
+            durationLabel.text = GameLocalization.Format("gameplay.dayDuration", duration);
         }
 
         private void UpdateFriendlyLabel(bool isFriendly)
         {
-            string state = isFriendly ? "开启" : "关闭";
-            string message = isFriendly ? "（敌对目标不会出现）" : "（敌对目标可能出现）";
-            isFriendlyLabel.text = $"友好模式：{state}\n<size=23>{message}";
+            isFriendlyLabel.text = isFriendly
+                ? GameLocalization.Get("gameplay.friendlyOn")
+                : GameLocalization.Get("gameplay.friendlyOff");
         }
 
         public void Open() => gameObject.SetActive(true);
         private void Close() => gameObject.SetActive(false);
+
+        private void OnDestroy()
+        {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+        }
 
         private void StartNewGame()
         {
@@ -66,6 +71,19 @@ namespace Markyu.FortStack
             var prefs = new GameplayPrefs(dayDuration, isFriendlyMode);
             GameDirector.Instance.NewGame(prefs);
             Close();
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            RefreshLocalizedText();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            cancelButton.SetText(GameLocalization.Get("common.cancelButton"));
+            confirmButton.SetText(GameLocalization.Get("common.confirmButton"));
+            UpdateDurationLabel((int)durationSlider.value);
+            UpdateFriendlyLabel(isFriendlyToggle.isOn);
         }
     }
 }

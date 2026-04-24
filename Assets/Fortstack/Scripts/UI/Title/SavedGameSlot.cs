@@ -20,15 +20,8 @@ namespace Markyu.FortStack
         public void Initialize(GameData data, ModalWindow modalWindow, SavedGamesUI parentUI)
         {
             this.data = data;
-
-            var sb = new StringBuilder();
-            sb.Append($"[Slot {data.SlotNumber:D3}] {data.CurrentScene}");
-            if (data.TryGetScene(out var sceneData))
-            {
-                sb.Append($" ({sceneData.QuestProgress}%)");
-            }
-            sb.Append($"\nLast Saved: {data.LastSaved}");
-            labelText.text = sb.ToString();
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+            RefreshLocalizedText();
 
             loadButton.SetOnClick(() =>
             {
@@ -38,9 +31,8 @@ namespace Markyu.FortStack
 
             deleteButton.SetOnClick(() =>
                 modalWindow.Show(
-                    "Delete Game",
-                    $"Are you sure you want to delete the saved game in Slot {data.SlotNumber}?" +
-                    "\nThis action is permanent and cannot be undone.",
+                    GameLocalization.Get("save.deleteTitle"),
+                    GameLocalization.Format("save.deleteBody", data.SlotNumber),
                     DeleteSavedGame
                 )
             );
@@ -50,6 +42,38 @@ namespace Markyu.FortStack
         {
             GameDirector.Instance?.DeleteGame(data);
             Destroy(gameObject);
+        }
+
+        private void OnDestroy()
+        {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            RefreshLocalizedText();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            if (data == null)
+                return;
+
+            string progressSuffix = string.Empty;
+            if (data.TryGetScene(out var sceneData))
+            {
+                progressSuffix = GameLocalization.Format("save.progressSuffix", sceneData.QuestProgress);
+            }
+
+            var sb = new StringBuilder();
+            sb.Append(GameLocalization.Format("save.slotLabel", data.SlotNumber, data.CurrentScene, progressSuffix));
+            sb.Append(GameLocalization.Format(
+                "save.lastSaved",
+                data.LastSaved.ToString("g", GameLocalization.CurrentCulture)));
+
+            labelText.text = sb.ToString();
+            loadButton.SetText(GameLocalization.Get("common.loadButton"));
+            deleteButton.SetText(GameLocalization.Get("common.deleteButton"));
         }
     }
 }

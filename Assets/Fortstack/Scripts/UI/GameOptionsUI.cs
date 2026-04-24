@@ -6,6 +6,8 @@ namespace Markyu.FortStack
 {
     public class GameOptionsUI : MonoBehaviour
     {
+        private TextButton languageButton;
+
         [Header("Graphics")]
         [SerializeField, Tooltip("The button used to cycle through available screen resolutions.")]
         private TextButton resolutionButton;
@@ -48,10 +50,12 @@ namespace Markyu.FortStack
 
         private void Start()
         {
+            EnsureLanguageButton();
+
             resolutionButton.SetOnClick(() =>
             {
-                var res = GraphicsManager.Instance.CycleScreenResolution();
-                resolutionButton.SetText($"分辨率 {res.width}x{res.height}");
+                GraphicsManager.Instance.CycleScreenResolution();
+                resolutionButton.SetText(GraphicsManager.Instance.GetResolutionLabel());
             });
 
             fullscreenButton.SetOnClick(() =>
@@ -78,31 +82,33 @@ namespace Markyu.FortStack
                 shadowButton.SetText(GraphicsManager.Instance.FormatShadowLabel());
             });
 
-            InitButtonLabels();
-
             sliderSFX.onValueChanged.AddListener(value =>
             {
                 AudioManager.Instance?.SetSFXVolume(value);
-                labelSFX.text = $"音效 {Mathf.RoundToInt(value * 100)}%";
+                UpdateSfxLabel(value);
             });
 
             sliderBGM.onValueChanged.AddListener(value =>
             {
                 AudioManager.Instance?.SetBGMVolume(value);
-                labelBGM.text = $"背景音乐 {Mathf.RoundToInt(value * 100)}%";
+                UpdateBgmLabel(value);
             });
 
             InitVolumeSliders();
 
             resetButton.SetOnClick(() =>
                 modalWindow.Show(
-                    "重置系统设置？",
-                    "这会把全部图形与音频参数恢复为默认值，且无法撤销。",
+                    GameLocalization.Get("options.resetTitle"),
+                    GameLocalization.Get("options.resetBody"),
                     ResetAllSettings
                 )
             );
 
             closeButton.SetOnClick(Close);
+            languageButton?.SetOnClick(GameLocalization.CycleLanguage);
+
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+            RefreshLocalizedText();
         }
 
         private void InitButtonLabels()
@@ -118,12 +124,15 @@ namespace Markyu.FortStack
         {
             sliderSFX.value = AudioManager.Instance.GetSavedSFXVolumeSlider();
             sliderBGM.value = AudioManager.Instance.GetSavedBGMVolumeSlider();
+            UpdateSfxLabel(sliderSFX.value);
+            UpdateBgmLabel(sliderBGM.value);
         }
 
         private void OnDestroy()
         {
             sliderSFX.onValueChanged.RemoveAllListeners();
             sliderBGM.onValueChanged.RemoveAllListeners();
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
         }
 
         public void Open()
@@ -139,14 +148,63 @@ namespace Markyu.FortStack
 
         private void ResetAllSettings()
         {
+            GameLanguage currentLanguage = GameLocalization.CurrentLanguage;
+
             PlayerPrefs.DeleteAll();
-            PlayerPrefs.Save();
+            GameLocalization.SetLanguage(currentLanguage, force: true);
 
             GraphicsManager.Instance?.InitGraphicsSettings();
             InitButtonLabels();
 
             AudioManager.Instance?.InitAudioMixerVolumes();
             InitVolumeSliders();
+            RefreshLocalizedText();
+        }
+
+        private void EnsureLanguageButton()
+        {
+            if (languageButton != null)
+                return;
+
+            TextButton template = shadowButton != null ? shadowButton : closeButton;
+            if (template == null)
+                return;
+
+            GameObject buttonObject = Instantiate(template.gameObject, template.transform.parent);
+            buttonObject.name = "LanguageButton";
+            buttonObject.transform.SetSiblingIndex(template.transform.GetSiblingIndex() + 1);
+            languageButton = buttonObject.GetComponent<TextButton>();
+        }
+
+        private void UpdateSfxLabel(float value)
+        {
+            labelSFX.text = GameLocalization.Format("options.sfx", Mathf.RoundToInt(value * 100f));
+        }
+
+        private void UpdateBgmLabel(float value)
+        {
+            labelBGM.text = GameLocalization.Format("options.bgm", Mathf.RoundToInt(value * 100f));
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            RefreshLocalizedText();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            InitButtonLabels();
+            UpdateSfxLabel(sliderSFX.value);
+            UpdateBgmLabel(sliderBGM.value);
+
+            resetButton.SetText(GameLocalization.Get("common.resetButton"));
+            closeButton.SetText(GameLocalization.Get("common.closeButton"));
+
+            if (languageButton != null)
+            {
+                languageButton.SetText(GameLocalization.GetLanguageButtonLabel());
+                languageButton.SetOnClick(GameLocalization.CycleLanguage);
+            }
         }
     }
 }

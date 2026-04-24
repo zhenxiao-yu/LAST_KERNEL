@@ -165,11 +165,11 @@ namespace Markyu.FortStack
                 var task = CraftingManager.Instance?.GetCraftingTask(Stack);
 
                 info.header = task.Recipe.DisplayName;
-                info.body = $"Time left: {task.Recipe.CraftingDuration - task.Progress:F1}s";
+                info.body = GameLocalization.Format("card.timeLeft", task.Recipe.CraftingDuration - task.Progress);
             }
             else if (Stack.Cards.Count > 1)
             {
-                info.header = "Stack of Cards";
+                info.header = GameLocalization.Get("card.stackHeader");
 
                 var grouped = Stack.Cards
                     .GroupBy(c => c.Definition)
@@ -190,7 +190,7 @@ namespace Markyu.FortStack
 
                 if (Stack.TopCard.Definition.Category is CardCategory.Character)
                 {
-                    info.body += $"\nHealth ({CurrentHealth}/{Stack.TopCard.Stats.MaxHealth.Value})";
+                    info.body += "\n" + GameLocalization.Format("card.health", CurrentHealth, Stack.TopCard.Stats.MaxHealth.Value);
 
                     if (Stack.TopCard.Definition.CombatType != CombatType.None)
                     {

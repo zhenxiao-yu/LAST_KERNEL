@@ -222,11 +222,11 @@ namespace Markyu.FortStack
 
             TimeManager.Instance.SetExternalPause(true);
 
-            var (header, body) = vendor.GetInfo();
+            var (_, body) = vendor.GetInfo();
             InfoPanel.Instance?.RequestInfoDisplay(
                 sequenceRequester,
                 InfoPriority.Sequence,
-                ("新卡包已解锁", body)
+                (GameLocalization.Get("trade.packUnlocked"), body)
             );
 
             vendor.SetHighlighted(true);

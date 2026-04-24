@@ -31,6 +31,9 @@ namespace Markyu.FortStack
             continueButton.SetOnClick(ToggleActiveState);
             optionsButton.SetOnClick(gameOptionsUI.Open);
             titleButton.SetOnClick(GameDirector.Instance.BackToTitle);
+
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+            RefreshLocalizedText();
         }
 
         private void Update()
@@ -49,6 +52,23 @@ namespace Markyu.FortStack
             canvasGroup.blocksRaycasts = isActive;
 
             TimeManager.Instance.SetExternalPause(isActive);
+        }
+
+        private void OnDestroy()
+        {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            RefreshLocalizedText();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            continueButton.SetText(GameLocalization.Get("pause.resume"));
+            optionsButton.SetText(GameLocalization.Get("options.header"));
+            titleButton.SetText(GameLocalization.Get("pause.backToTitle"));
         }
     }
 }

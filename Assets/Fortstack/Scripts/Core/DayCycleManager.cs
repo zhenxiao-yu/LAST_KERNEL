@@ -50,8 +50,8 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ($"第 {day} 天结束", "居民们需要补充口粮。"),
-                "分发口粮",
+                (GameLocalization.Format("daycycle.dayEndedTitle", day), GameLocalization.Get("daycycle.dayEndedBody")),
+                GameLocalization.Get("daycycle.dayEndedAction"),
                 () =>
                 {
                     StartCoroutine(FeedingPhase());
@@ -66,7 +66,7 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ("正在分发口粮", "正在为街区居民派发补给。")
+                (GameLocalization.Get("daycycle.feedingTitle"), GameLocalization.Get("daycycle.feedingBody"))
             );
 
             // Wait for the card animations and logic to finish
@@ -124,7 +124,10 @@ namespace Markyu.FortStack
                 InfoPanel.Instance?.RequestInfoDisplay(
                     dayCycleRequester,
                     InfoPriority.Modal,
-                    ("清理超载库存", $"你还需要处理 {excess} 张超额卡牌，系统才会推进到下一循环。")
+                    (
+                        GameLocalization.Get("daycycle.cleanupTitle"),
+                        GameLocalization.Format("daycycle.cleanupBody", excess)
+                    )
                 );
             }
         }
@@ -159,8 +162,8 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ($"第 {nextDay} 天开始", "殖民节点已重新联机。"),
-                "启动新一天",
+                (GameLocalization.Format("daycycle.dayStartedTitle", nextDay), GameLocalization.Get("daycycle.dayStartedBody")),
+                GameLocalization.Get("daycycle.dayStartedAction"),
                 () =>
                 {
                     IsEndingCycle = false;
@@ -179,8 +182,8 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ("聚落失守", "你已经没有任何幸存居民了。"),
-                "返回标题",
+                (GameLocalization.Get("daycycle.gameOverTitle"), GameLocalization.Get("daycycle.gameOverBody")),
+                GameLocalization.Get("daycycle.gameOverAction"),
                 () => GameDirector.Instance.GameOver()
             );
         }

@@ -29,6 +29,8 @@ namespace Markyu.FortStack
 
         private void Start()
         {
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+
             if (TimeManager.Instance != null)
             {
                 TimeManager.Instance.OnDayEnded += HandleDayEnded;
@@ -45,6 +47,8 @@ namespace Markyu.FortStack
                 TimeManager.Instance.OnDayEnded -= HandleDayEnded;
                 TimeManager.Instance.OnDayStarted -= HandleDayStarted;
             }
+
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
         }
 
         private void Update()
@@ -62,7 +66,7 @@ namespace Markyu.FortStack
 
         private void HandleDayStarted(int currentDay)
         {
-            dayText.text = $"第 {currentDay} 天";
+            UpdateDayLabel(currentDay);
             paceImage.sprite = paceIcons[1];
 
             canvasGroup.alpha = 1f;
@@ -75,6 +79,19 @@ namespace Markyu.FortStack
             paceImage.sprite = paceIcons[timePaceIndex];
 
             AudioManager.Instance?.PlaySFX(AudioId.Click);
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            if (TimeManager.Instance != null)
+            {
+                UpdateDayLabel(TimeManager.Instance.CurrentDay);
+            }
+        }
+
+        private void UpdateDayLabel(int currentDay)
+        {
+            dayText.text = GameLocalization.Format("day.current", currentDay);
         }
     }
 }

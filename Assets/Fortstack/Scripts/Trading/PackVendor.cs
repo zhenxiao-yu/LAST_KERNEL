@@ -28,6 +28,8 @@ namespace Markyu.FortStack
 
         private void Start()
         {
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+
             if (CraftingManager.Instance != null)
             {
                 CraftingManager.Instance.OnRecipeDiscovered += OnCollectionDataChanged;
@@ -41,6 +43,8 @@ namespace Markyu.FortStack
 
         private void OnDestroy()
         {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+
             if (CraftingManager.Instance != null)
             {
                 CraftingManager.Instance.OnRecipeDiscovered -= OnCollectionDataChanged;
@@ -98,7 +102,7 @@ namespace Markyu.FortStack
         private void UpdatePriceText()
         {
             if (priceText != null)
-                priceText.text = $"价格：{buyPrice - paidAmount}";
+                priceText.text = GameLocalization.Format("trade.price", buyPrice - paidAmount);
         }
 
         public bool TryActivate(int completedQuests)
@@ -179,11 +183,11 @@ namespace Markyu.FortStack
             }
             else if (foundItems >= totalItems)
             {
-                trackerText.text = "<color=#FFD700>已完全解锁</color>";
+                trackerText.text = GameLocalization.Get("trade.collectionComplete");
             }
             else
             {
-                trackerText.text = $"已收录：\n{foundItems}/{totalItems}";
+                trackerText.text = GameLocalization.Format("trade.collectionProgress", foundItems, totalItems);
             }
         }
 
@@ -272,7 +276,19 @@ namespace Markyu.FortStack
         {
             if (!isActive || offeredPack == null) return ("", "");
 
-            return ("卡包贩卖终端", $"在这里可以购买 {offeredPack.DisplayName}。");
+            return (
+                GameLocalization.Get("trade.vendorHeader"),
+                GameLocalization.Format("trade.vendorBody", offeredPack.DisplayName)
+            );
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            if (!isActive)
+                return;
+
+            UpdatePriceText();
+            UpdateCollectionTracker();
         }
     }
 }

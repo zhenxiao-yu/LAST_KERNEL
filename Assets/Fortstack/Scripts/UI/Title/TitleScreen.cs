@@ -32,16 +32,37 @@ namespace Markyu.FortStack
 
         private void Start()
         {
+            RefreshLocalizedText();
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+
             newGameButton.SetOnClick(() => gameplayPrefsUI.Open());
             loadGameButton.SetOnClick(() => savedGamesUI.Open());
             gameOptionsButton.SetOnClick(() => gameOptionsUI.Open());
             quitGameButton.SetOnClick(() =>
                 modalWindow.Show(
-                    "退出游戏",
-                    "确认要退出游戏吗？",
+                    GameLocalization.Get("title.quitConfirmTitle"),
+                    GameLocalization.Get("title.quitConfirmBody"),
                     Application.Quit
                 )
             );
+        }
+
+        private void OnDestroy()
+        {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            RefreshLocalizedText();
+        }
+
+        private void RefreshLocalizedText()
+        {
+            newGameButton.SetText(GameLocalization.Get("title.newGame"));
+            loadGameButton.SetText(GameLocalization.Get("title.loadGame"));
+            gameOptionsButton.SetText(GameLocalization.Get("title.options"));
+            quitGameButton.SetText(GameLocalization.Get("title.quitGame"));
         }
     }
 }

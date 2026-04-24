@@ -305,7 +305,7 @@ namespace Markyu.FortStack
         /// <returns>A string representing the currently applied screen resolution setting.</returns>
         public string GetResolutionLabel()
         {
-            return $"分辨率 {currentRes.width}x{currentRes.height}";
+            return GameLocalization.Format("graphics.resolution", currentRes.width, currentRes.height);
         }
 
         /// <summary>
@@ -315,8 +315,8 @@ namespace Markyu.FortStack
         public string GetFullscreenLabel()
         {
             return currentMode == FullScreenMode.Windowed
-                ? "全屏模式（窗口化）"
-                : "全屏模式（开启）";
+                ? GameLocalization.Get("graphics.fullscreen.windowed")
+                : GameLocalization.Get("graphics.fullscreen.fullscreen");
         }
 
         /// <summary>
@@ -327,10 +327,10 @@ namespace Markyu.FortStack
         {
             return currentVSync switch
             {
-                0 => "垂直同步 关闭",
-                1 => "垂直同步 开启",
-                2 => "垂直同步 半速",
-                _ => "垂直同步 未知"
+                0 => GameLocalization.Get("graphics.vsync.off"),
+                1 => GameLocalization.Get("graphics.vsync.on"),
+                2 => GameLocalization.Get("graphics.vsync.half"),
+                _ => GameLocalization.Get("graphics.vsync.unknown")
             };
         }
 
@@ -341,8 +341,8 @@ namespace Markyu.FortStack
         public string FormatFpsLabel()
         {
             return currentFpsCap == -1
-                ? "帧率上限 不限"
-                : $"帧率上限 {currentFpsCap}";
+                ? GameLocalization.Get("graphics.fps.unlimited")
+                : GameLocalization.Format("graphics.fps.capped", currentFpsCap);
         }
 
         /// <summary>
@@ -351,7 +351,7 @@ namespace Markyu.FortStack
         /// <returns>A string representing the currently applied shadow quality preset.</returns>
         public string FormatShadowLabel()
         {
-            return $"阴影质量 {GetShadowPresetLabel(currentShadowPreset)}";
+            return GameLocalization.Format("graphics.shadow.quality", GetShadowPresetLabel(currentShadowPreset));
         }
         #endregion
 
@@ -360,12 +360,12 @@ namespace Markyu.FortStack
         {
             return preset switch
             {
-                ShadowPreset.Off => "关闭",
-                ShadowPreset.Low => "低",
-                ShadowPreset.Medium => "中",
-                ShadowPreset.High => "高",
-                ShadowPreset.Ultra => "超高",
-                _ => "未知"
+                ShadowPreset.Off => GameLocalization.Get("graphics.shadow.off"),
+                ShadowPreset.Low => GameLocalization.Get("graphics.shadow.low"),
+                ShadowPreset.Medium => GameLocalization.Get("graphics.shadow.medium"),
+                ShadowPreset.High => GameLocalization.Get("graphics.shadow.high"),
+                ShadowPreset.Ultra => GameLocalization.Get("graphics.shadow.ultra"),
+                _ => GameLocalization.Get("graphics.shadow.unknown")
             };
         }
 
