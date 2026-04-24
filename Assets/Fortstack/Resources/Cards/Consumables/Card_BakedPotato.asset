@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_BakedPotato
   m_EditorClassIdentifier: 
   id: 99e2119c72604b3bb710e70253822444
-  displayName: Baked Potato
-  description: A warm, cooked potato with a rich aroma.
+  displayName: '热板薯块'
+  description: '在街边加热盘上烤熟的高淀粉补给块。'
   artTexture: {fileID: 2800000, guid: 1318024881bc33443b2dc699754e9a7e, type: 3}
   category: 3
   faction: 0

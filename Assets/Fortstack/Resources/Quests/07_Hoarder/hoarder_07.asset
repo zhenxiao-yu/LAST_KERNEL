@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_07
   m_EditorClassIdentifier: 
   id: ab3415c893c94a1780a2b19714527428
-  title: Savings Goal I
-  description: Accumulate at least 30 Coins to complete the objective.
+  title: '信用额度 I'
+  description: '累积至少 30 枚信用芯片。'
   type: 12
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

@@ -51,7 +51,7 @@ namespace Markyu.FortStack
             resolutionButton.SetOnClick(() =>
             {
                 var res = GraphicsManager.Instance.CycleScreenResolution();
-                resolutionButton.SetText($"Resolution {res.width}x{res.height}");
+                resolutionButton.SetText($"分辨率 {res.width}x{res.height}");
             });
 
             fullscreenButton.SetOnClick(() =>
@@ -83,21 +83,21 @@ namespace Markyu.FortStack
             sliderSFX.onValueChanged.AddListener(value =>
             {
                 AudioManager.Instance?.SetSFXVolume(value);
-                labelSFX.text = $"SFX {Mathf.RoundToInt(value * 100)}%";
+                labelSFX.text = $"音效 {Mathf.RoundToInt(value * 100)}%";
             });
 
             sliderBGM.onValueChanged.AddListener(value =>
             {
                 AudioManager.Instance?.SetBGMVolume(value);
-                labelBGM.text = $"BGM {Mathf.RoundToInt(value * 100)}%";
+                labelBGM.text = $"背景音乐 {Mathf.RoundToInt(value * 100)}%";
             });
 
             InitVolumeSliders();
 
             resetButton.SetOnClick(() =>
                 modalWindow.Show(
-                    "Reset all settings?",
-                    "This will restore all game settings to their default values. This action cannot be undone.",
+                    "重置系统设置？",
+                    "这会把全部图形与音频参数恢复为默认值，且无法撤销。",
                     ResetAllSettings
                 )
             );

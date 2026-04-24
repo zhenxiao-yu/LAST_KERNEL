@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: construction_02
   m_EditorClassIdentifier: 
   id: 4a99e9859ee54ce6b3257ec8081d46b2
-  title: Logging Camp
-  description: Build a Logging Camp.
+  title: '建造伐木机站'
+  description: '建造一座伐木机站。'
   type: 4
   targetCard: {fileID: 11400000, guid: 5ee89605ed76a784aad9fb326974f154, type: 2}
   targetRecipe: {fileID: 0}

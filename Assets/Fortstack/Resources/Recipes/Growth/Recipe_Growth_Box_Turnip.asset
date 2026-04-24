@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: b716d22bfbeb4635a6c80283b53e5dc9
   category: 6
-  displayName: Planting Turnip
+  displayName: '培育根芯芜菁'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 93befcbc9fba8cb42b030aacca7f2fde, type: 2}
     count: 1

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ascension_04
   m_EditorClassIdentifier: 
   id: 43293fd2234f4d739c0805e7707d31f0
-  title: Relic of the Acolyte
-  description: Track and slay a Crimson Acolyte to claim the Blood Chalice, a vessel
-    of forbidden power.
+  title: '门徒遗器'
+  description: '追猎并击杀一名绯红门徒，夺取血铬圣杯这件危险仪式容器。'
   type: 0
   targetCard: {fileID: 11400000, guid: f8e9a3afb1a655a439f3b7bdf13299bb, type: 2}
   targetRecipe: {fileID: 0}

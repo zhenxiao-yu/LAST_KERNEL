@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 11_Pack_Survival
   m_EditorClassIdentifier: 
   id: a252cc43cf9c44e792bb8cfd2729f5f7
-  displayName: Survival
-  description: A Survival card pack.
+  displayName: '生存应急包'
+  description: '围绕极端环境和续航压力准备的保命卡包。'
   artTexture: {fileID: 2800000, guid: c37b6bf959e2885499ac6191255e27de, type: 3}
   category: 0
   faction: 0

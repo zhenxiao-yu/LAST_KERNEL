@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e58b3852bfc6495d82f593447b5bb775
   category: 6
-  displayName: Planting Potato
+  displayName: '培育淀粉块根'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 93befcbc9fba8cb42b030aacca7f2fde, type: 2}
     count: 1

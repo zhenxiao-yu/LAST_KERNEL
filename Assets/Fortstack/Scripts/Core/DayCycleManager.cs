@@ -50,8 +50,8 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ($"End of Day {day}", "Your people are hungry!"),
-                "Feed People",
+                ($"第 {day} 天结束", "居民们需要补充口粮。"),
+                "分发口粮",
                 () =>
                 {
                     StartCoroutine(FeedingPhase());
@@ -66,7 +66,7 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ("Feeding People", "Distributing food...")
+                ("正在分发口粮", "正在为街区居民派发补给。")
             );
 
             // Wait for the card animations and logic to finish
@@ -124,7 +124,7 @@ namespace Markyu.FortStack
                 InfoPanel.Instance?.RequestInfoDisplay(
                     dayCycleRequester,
                     InfoPriority.Modal,
-                    ("Sell Excess Cards", $"You must sell {excess} excess {(excess > 1 ? "cards" : "card")} to continue.")
+                    ("清理超载库存", $"你还需要处理 {excess} 张超额卡牌，系统才会推进到下一循环。")
                 );
             }
         }
@@ -159,8 +159,8 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ($"Start of Day {nextDay}", "Everything is ready."),
-                "Start Day",
+                ($"第 {nextDay} 天开始", "殖民节点已重新联机。"),
+                "启动新一天",
                 () =>
                 {
                     IsEndingCycle = false;
@@ -179,8 +179,8 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                ("Game Over", "You have no people left."),
-                "Return to Title",
+                ("聚落失守", "你已经没有任何幸存居民了。"),
+                "返回标题",
                 () => GameDirector.Instance.GameOver()
             );
         }

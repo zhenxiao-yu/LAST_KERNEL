@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2dccaea2e66347f4b4bb7c8c42603ee0
   category: 5
-  displayName: Twisting Fibers
+  displayName: '加工纳米绳索'
   requiredIngredients:
   - card: {fileID: 11400000, guid: e40215f29ec7f974590ebf228b1ee60b, type: 2}
     count: 3

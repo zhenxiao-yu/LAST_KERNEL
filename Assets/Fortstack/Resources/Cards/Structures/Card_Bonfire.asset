@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Bonfire
   m_EditorClassIdentifier: 
   id: d613fa3e139b4e1a83bd12d3470a81a2
-  displayName: Bonfire
-  description: You can cook things here.
+  displayName: '等离子炉火'
+  description: '可供烹饪与野外作业的粗犷热源。'
   artTexture: {fileID: 2800000, guid: 80b3269d49cd562489bf0746f1c773a0, type: 3}
   category: 6
   faction: 0

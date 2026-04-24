@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1c66038a4139476da0f8a1cc867dc1ae
   category: 4
-  displayName: Crafting Chainmail
+  displayName: '装配链片护甲'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 8ca68e344bcdba54dabca7cbcc29f565, type: 2}
     count: 2

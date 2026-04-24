@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Action Button
+  m_text: 执行动作
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4283229951
-  m_fontColor: {r: 1, g: 0.9, b: 0.3, a: 1}
+  m_fontColor: {r: 0.24, g: 1, b: 0.95, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0.015, g: 0.04, b: 0.08, a: 0.82}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -361,7 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
+  m_Color: {r: 0.03, g: 0.07, b: 0.13, a: 0.93}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21960784, g: 0.64705884, b: 0.8784314, a: 0.8}
+  m_Color: {r: 0.05, g: 0.78, b: 0.92, a: 0.88}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -752,7 +752,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: GAME PAUSED
+  m_text: 已暂停
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -762,7 +762,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
+  m_Color: {r: 0.03, g: 0.07, b: 0.13, a: 0.93}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Day N
+  m_text: 第 N 天
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21933962, g: 0.6486481, b: 0.8773585, a: 1}
+  m_Color: {r: 0.05, g: 0.87, b: 0.96, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1478,7 +1478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
+  m_Color: {r: 0.08, g: 0.75, b: 0.82, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1595,7 +1595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.21933962, g: 0.6486481, b: 0.8773585, a: 1}
+  m_Color: {r: 0.05, g: 0.87, b: 0.96, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1810,7 +1810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0.015, g: 0.04, b: 0.08, a: 0.82}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1921,7 +1921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
+  m_Color: {r: 0.03, g: 0.07, b: 0.13, a: 0.93}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2060,7 +2060,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue to Play
+  m_text: 继续游戏
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2070,7 +2070,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quests
+  m_text: 任务
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2624,7 +2624,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Recipes
+  m_text: 蓝图
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2892,10 +2892,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '<size=34>[Info Text]<size=30>
+  m_text: '<size=34>[情报面板]<size=30>
 
-    Information will be displayed here.
-    The panel automatically adjusts its size based on the text''s length.'
+    信息会显示在这里。
+    面板会根据文本长度自动调整尺寸。'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3139,7 +3139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit to Title & Save
+  m_text: 保存并返回标题
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3149,7 +3149,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3392,7 +3392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.9019608}
+  m_Color: {r: 0.09, g: 0.16, b: 0.26, a: 0.93}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3509,7 +3509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0.015, g: 0.04, b: 0.08, a: 0.82}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3753,7 +3753,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FortStack Gameplay Demo by Markyu
+  m_text: FortStack 赛博殖民试作 / 作者 Markyu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4228,7 +4228,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Options
+  m_text: 运行设置
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4238,7 +4238,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4371,7 +4371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
+  m_Color: {r: 0.03, g: 0.07, b: 0.13, a: 0.93}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4753,4 +4753,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a040b8aaafd8342878bfa503b99721, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e851568af11f44fcb3a77f24a4ea44bf
   category: 2
-  displayName: Burying Corpse
+  displayName: '建造记忆灵柩'
   requiredIngredients:
   - card: {fileID: 11400000, guid: f7e0b31eb7aafda4ba2da048c7774792, type: 2}
     count: 1

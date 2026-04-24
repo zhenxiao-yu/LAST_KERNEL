@@ -716,7 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questGroups:
-  - GroupName: Introduction
+  - GroupName: 新手引导
     Quests:
     - {fileID: 11400000, guid: be7223b64bf56cc4fac2142d6fa8e920, type: 2}
     - {fileID: 11400000, guid: 0295f117315d33841ab675934823d1f9, type: 2}
@@ -733,7 +733,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 6bf0b187999e31447b061e037ea6db6d, type: 2}
     - {fileID: 11400000, guid: ebde28f181cf0014db7bd96dfaacf1c2, type: 2}
     - {fileID: 11400000, guid: 022720e5c652cef4f93a0a1908524f15, type: 2}
-  - GroupName: Ascension
+  - GroupName: 异界升格
     Quests:
     - {fileID: 11400000, guid: 8ab80445d25e0e7439e78094e4fe0d98, type: 2}
     - {fileID: 11400000, guid: 7c856db6610ae4048bd1d3bbfa7f2324, type: 2}
@@ -743,12 +743,12 @@ MonoBehaviour:
     - {fileID: 11400000, guid: e7c45776e6e362246864c301c2329861, type: 2}
     - {fileID: 11400000, guid: 42ad39efa4529ab4298197c2fccb35b1, type: 2}
     - {fileID: 11400000, guid: 7dc58e74440138440834f7be8e86a49b, type: 2}
-  - GroupName: Training
+  - GroupName: 战斗训练
     Quests:
     - {fileID: 11400000, guid: fd389a5ba424cca4ca1e0660a286ced5, type: 2}
     - {fileID: 11400000, guid: bf803dd51c75e874cadee2653ddd9b34, type: 2}
     - {fileID: 11400000, guid: 7772df7e179e60b41b4cb37bccdd0303, type: 2}
-  - GroupName: Advancement
+  - GroupName: 殖民进阶
     Quests:
     - {fileID: 11400000, guid: d85c15ae205110c4398377d54c592dd9, type: 2}
     - {fileID: 11400000, guid: d93d0e7bc51188f4187b5fe2af49be99, type: 2}
@@ -756,21 +756,21 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 5c750781fa2368945a4cb61f45c886f6, type: 2}
     - {fileID: 11400000, guid: 4f8bc3fbeab15924eb23dce964444c0e, type: 2}
     - {fileID: 11400000, guid: 41b1e490b08e7cd4684fc6f77db7c4a3, type: 2}
-  - GroupName: Cooking
+  - GroupName: 后勤炊事
     Quests:
     - {fileID: 11400000, guid: 39352155b026ccd41a9ec12cacd9bb95, type: 2}
     - {fileID: 11400000, guid: 380935d97a8a375479c45f62583575c7, type: 2}
     - {fileID: 11400000, guid: 3243bf1898c794a4fb8b87c595253116, type: 2}
     - {fileID: 11400000, guid: ac9c10ca01941214c99c26b316beff4b, type: 2}
     - {fileID: 11400000, guid: 8db8b881a67d3bf4d90e1e311bcd5bc2, type: 2}
-  - GroupName: Exploration
+  - GroupName: 区域探索
     Quests:
     - {fileID: 11400000, guid: 88853149afe2d1d45a987fa1048d3460, type: 2}
     - {fileID: 11400000, guid: e3c74cebc1ffb334e918be46117d1714, type: 2}
     - {fileID: 11400000, guid: e4f5169ef331d7b4caaac5fe7a6a2625, type: 2}
     - {fileID: 11400000, guid: 4527fcf1b0471d04690a59806c7114e0, type: 2}
     - {fileID: 11400000, guid: d7db95a423dbba9428bc1b36b4e225f2, type: 2}
-  - GroupName: Hoarder
+  - GroupName: 囤积者
     Quests:
     - {fileID: 11400000, guid: f3888a306bcf63547b39c3e5006da2c2, type: 2}
     - {fileID: 11400000, guid: 275557e6dac4ab54dbe9b3f56d67eded, type: 2}
@@ -784,14 +784,14 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 9b817196f21f15441be26f70086d919c, type: 2}
     - {fileID: 11400000, guid: 0c82a0db655b96a41a214a1722fef6fd, type: 2}
     - {fileID: 11400000, guid: efd44b0cf1af8bf4ba89fdc79f7b3fd2, type: 2}
-  - GroupName: Construction
+  - GroupName: 基础建设
     Quests:
     - {fileID: 11400000, guid: 881f594802178af46948717c2793d3ab, type: 2}
     - {fileID: 11400000, guid: d2cc936c81521804e8fbdb98d7056016, type: 2}
     - {fileID: 11400000, guid: 3d5d98ddc04847745b2d70c319a7e028, type: 2}
     - {fileID: 11400000, guid: b081908b146a5ea4a89190b24f8fd15b, type: 2}
     - {fileID: 11400000, guid: 24db2966d5de02345b6ef5602200d876, type: 2}
-  - GroupName: Survive
+  - GroupName: 生存挑战
     Quests:
     - {fileID: 11400000, guid: dec073a3b9a41bf419381b25a440aeea, type: 2}
     - {fileID: 11400000, guid: e20bd9d9b3a1da245aa99ced5b0892d3, type: 2}
@@ -1426,4 +1426,5 @@ SceneRoots:
   - {fileID: 2056759083933773671}
   - {fileID: 1211518933}
   - {fileID: 2604837606948666750}
+
 

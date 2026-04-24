@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: a30a576e97104addb346389250590b4b
   category: 5
-  displayName: Smelting Iron
+  displayName: '加工铁素锭'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 035fcb98e6bf9cb4d99cfd0dbd0534c9, type: 2}
     count: 1

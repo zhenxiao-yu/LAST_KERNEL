@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 66ce4e7347764c2ea82c47493e615471
   category: 4
-  displayName: Imbuing Magic
+  displayName: '装配导能手杖'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
     count: 1

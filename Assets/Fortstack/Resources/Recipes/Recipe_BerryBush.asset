@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0deed7346cf8437d894ef53fcbe10e42
   category: 6
-  displayName: Growing Berry
+  displayName: '加工荧丛灌木'
   requiredIngredients:
   - card: {fileID: 11400000, guid: a731e6eacd5ff85408bc7bc72c109143, type: 2}
     count: 1

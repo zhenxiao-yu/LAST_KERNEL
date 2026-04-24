@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: fcac4d1beb0c45f781c2a8ede4f68981
   category: 2
-  displayName: Building Farm
+  displayName: '建造水培农场'
   requiredIngredients:
   - card: {fileID: 11400000, guid: a731e6eacd5ff85408bc7bc72c109143, type: 2}
     count: 1

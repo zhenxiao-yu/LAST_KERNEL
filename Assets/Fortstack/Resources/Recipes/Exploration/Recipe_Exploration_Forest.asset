@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4df507377f6a4d769321bbcf05e0e4c2
   category: 0
-  displayName: Exploring Forest
+  displayName: '执行制造流程'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cea56a23d9a12cb4cb7f6f182382d075, type: 2}
     count: 1

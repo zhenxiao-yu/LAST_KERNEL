@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7959581579a541e3806f9fe786a79119
   category: 2
-  displayName: Building House
+  displayName: '建造居住舱'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
     count: 1

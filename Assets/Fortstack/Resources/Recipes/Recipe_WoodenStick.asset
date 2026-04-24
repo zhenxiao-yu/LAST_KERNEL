@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 830eb7d8b0d04b14ace7a9fe51ab25d3
   category: 5
-  displayName: Crafting Stick
+  displayName: '加工讯号杆'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 4b320b3fabc742a4a89385926b5a51d5, type: 2}
     count: 1

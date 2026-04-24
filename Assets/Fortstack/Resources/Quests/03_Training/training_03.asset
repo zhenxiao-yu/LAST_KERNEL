@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: training_03
   m_EditorClassIdentifier: 
   id: 9534bd6ae63c4d01801f57b6a9ca8960
-  title: Kill a Goblin
-  description: Drag and drop a character onto a Goblin to engage in combat.
+  title: '击杀街巷地精'
+  description: '把任意角色拖到街巷地精上，完成一次有效清剿。'
   type: 3
   targetCard: {fileID: 11400000, guid: 06b45747ae3922147809ae68228f5063, type: 2}
   targetRecipe: {fileID: 0}

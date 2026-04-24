@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f4179d38969549d7ad70f09d79e707a4
   category: 0
-  displayName: Studying Recipe
+  displayName: '研究档案数据库'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cde3481f9fa90da4dbcafc55b3fa91ad, type: 2}
     count: 1

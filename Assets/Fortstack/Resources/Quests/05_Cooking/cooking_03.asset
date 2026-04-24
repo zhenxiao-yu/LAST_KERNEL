@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: cooking_03
   m_EditorClassIdentifier: 
   id: 08705ef3699644cdacad8d009470e95e
-  title: Cook a Steak
-  description: Craft a Steak by combining Raw Meat with a Bonfire.
+  title: '煎制肉排'
+  description: '把培植鲜肉与等离子炉火组合，做出闪煎肉排。'
   type: 4
   targetCard: {fileID: 11400000, guid: 99ed60a85092674458be69c4bdac5261, type: 2}
   targetRecipe: {fileID: 0}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_WoodenStick
   m_EditorClassIdentifier: 
   id: 1f354aeaece54105a7475ae08b9276ba
-  displayName: Wooden Stick
-  description: A stick made from wood.
+  displayName: '讯号杆'
+  description: '用于组装设施、装备与生存物资的工业材料。'
   artTexture: {fileID: 2800000, guid: c0a94d76b8d2f814fb5077e9940011c6, type: 3}
   category: 4
   faction: 0

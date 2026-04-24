@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_05
   m_EditorClassIdentifier: 
   id: 59fbb8faccd74d908edfb87eb3917055
-  title: Provision Check II
-  description: Collect consumable cards whose combined Nutrition reaches 20 or more.
+  title: '口粮审计 II'
+  description: '收集总营养值达到 20 或以上的消耗品卡牌。'
   type: 11
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

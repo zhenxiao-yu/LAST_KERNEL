@@ -1067,7 +1067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questGroups:
-  - GroupName: The Basics
+  - GroupName: 海岛基础
     Quests:
     - {fileID: 11400000, guid: 974294b8014fd654e92a9b34ea8c7109, type: 2}
     - {fileID: 11400000, guid: d252fcb3859e97643b5ff8044768b58c, type: 2}
@@ -1299,3 +1299,4 @@ SceneRoots:
   - {fileID: 7101359580411908041}
   - {fileID: 1211518933}
   - {fileID: 343328109}
+

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 08_Pack_Construction
   m_EditorClassIdentifier: 
   id: ae9bc80b79444f81860f49d1818270b0
-  displayName: Construction
-  description: A Construction card pack.
+  displayName: '建设模组包'
+  description: '帮助殖民节点扩张基础设施的建设卡包。'
   artTexture: {fileID: 2800000, guid: faa1469fddaf2894ea32eab96e08683a, type: 3}
   category: 0
   faction: 0

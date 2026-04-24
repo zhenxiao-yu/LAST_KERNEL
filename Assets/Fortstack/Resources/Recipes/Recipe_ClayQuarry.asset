@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 86f80c58cc994c2ea82d30f0de00e22e
   category: 2
-  displayName: Building Clay Quarry
+  displayName: '建造陶料采场'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 499e594ed9683634ba40cc3c9ace2c90, type: 2}
     count: 3

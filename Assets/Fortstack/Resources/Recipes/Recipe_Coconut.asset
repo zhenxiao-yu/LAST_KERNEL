@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7c0da9371f144d54b81e1ddcc304675c
   category: 1
-  displayName: Shaking Tree
+  displayName: '制备冷却椰核'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 6924a592de4e8c942b3f7e1eb89389fb, type: 2}
     count: 1

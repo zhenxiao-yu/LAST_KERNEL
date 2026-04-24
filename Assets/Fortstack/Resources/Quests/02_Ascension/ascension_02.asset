@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ascension_02
   m_EditorClassIdentifier: 
   id: 8d1fadcec53643f1b5e9a11d04f7cecb
-  title: First Blood
-  description: Start a combat by dragging a Villager onto a Slime and defeat it.
+  title: '首次见血'
+  description: '把霓虹流民拖到纳米史莱姆上发起战斗，并将其击败。'
   type: 3
   targetCard: {fileID: 11400000, guid: ab518c0794a7c9f4db0ff8fcd4e6dfd5, type: 2}
   targetRecipe: {fileID: 0}

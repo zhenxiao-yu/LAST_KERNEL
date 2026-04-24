@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Crab
   m_EditorClassIdentifier: 
   id: a1a3f8d510c14806802d25310f6fcd8a
-  displayName: Crab
-  description: Oh crab!
+  displayName: '钢壳蟹'
+  description: '游荡在废墟与管网间的危险生命体。'
   artTexture: {fileID: 2800000, guid: f93975edd3a4f4f4c9763f3410e41f76, type: 3}
   category: 9
   faction: 2

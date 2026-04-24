@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: exploration_04
   m_EditorClassIdentifier: 
   id: b9e1738891054e2b91651a4f6f887051
-  title: Explore the Ruins
-  description: Send someone into the ruins to discover what lies within.
+  title: '探索黑站废墟'
+  description: '派一名居民进入黑站废墟，寻找失落科技与危险信号。'
   type: 8
   targetCard: {fileID: 11400000, guid: ff52a1dc39756dc41bfea423da264550, type: 2}
   targetRecipe: {fileID: 0}

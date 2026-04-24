@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Flint
   m_EditorClassIdentifier: 
   id: 7e1e85f0a88c4eae92717429ce662f70
-  displayName: Flint
-  description: Can create a spark.
+  displayName: '点火燧石'
+  description: '用于组装设施、装备与生存物资的工业材料。'
   artTexture: {fileID: 2800000, guid: 3334c3d671800134a99a3c72c5b7786e, type: 3}
   category: 4
   faction: 0

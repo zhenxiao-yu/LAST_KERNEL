@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: survive_01
   m_EditorClassIdentifier: 
   id: 4de577b2fdca487f92d97e54c53b06c9
-  title: Day 8
-  description: Survive until day 8.
+  title: '存活到第 8 天'
+  description: '在这座霓虹废土中坚持到第 8 天。'
   type: 10
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

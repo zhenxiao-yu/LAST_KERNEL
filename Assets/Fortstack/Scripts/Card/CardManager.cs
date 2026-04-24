@@ -517,11 +517,11 @@ namespace Markyu.FortStack
 
             if (recipe.ResultingCard != null)
             {
-                dynamicDef.SetDisplayName($"Recipe: {recipe.ResultingCard.DisplayName}");
+                dynamicDef.SetDisplayName($"蓝图：{recipe.ResultingCard.DisplayName}");
             }
             else
             {
-                dynamicDef.SetDisplayName($"Recipe: ???");
+                dynamicDef.SetDisplayName("蓝图：未知");
             }
 
             string description = CraftingManager.Instance?.GetFormattedIngredients(recipe);

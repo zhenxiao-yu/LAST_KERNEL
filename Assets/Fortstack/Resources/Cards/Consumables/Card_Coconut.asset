@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Coconut
   m_EditorClassIdentifier: 
   id: 549139afa95b48a2bb3a8c5d10107116
-  displayName: Coconut
-  description: A tough nut to crack, but refreshing once opened.
+  displayName: '冷却椰核'
+  description: '厚壳里封着甘甜降温液的海岸补给。'
   artTexture: {fileID: 2800000, guid: 289850f27e9bd994cbe2208d074975fe, type: 3}
   category: 3
   faction: 0

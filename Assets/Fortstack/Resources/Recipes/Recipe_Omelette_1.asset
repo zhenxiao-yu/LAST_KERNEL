@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 42b0ef7479594e599afea07cbf782acc
   category: 3
-  displayName: Frying Egg
+  displayName: '制备伺服蛋卷'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 73eadadfa1a27934693e2b6fcb4a5425, type: 2}
     count: 1

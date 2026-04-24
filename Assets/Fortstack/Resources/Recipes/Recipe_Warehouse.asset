@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 822e8648715a4b2aa01a634aeda39690
   category: 2
-  displayName: Building Warehouse
+  displayName: '建造货运枢纽'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
     count: 1

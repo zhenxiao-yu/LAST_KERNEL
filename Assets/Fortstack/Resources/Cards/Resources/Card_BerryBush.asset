@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_BerryBush
   m_EditorClassIdentifier: 
   id: 1c6b7c9bc2cf4120bbf1408aa3ab1ab9
-  displayName: Berry Bush
-  description: Berries grow here.
+  displayName: '荧丛灌木'
+  description: '挂满可食用发光果的顽强霓虹灌木。'
   artTexture: {fileID: 2800000, guid: d70974ae4d87bbe4a927913cc832036f, type: 3}
   category: 1
   faction: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_07
   m_EditorClassIdentifier: 
   id: 11ccb846cf494092b08c299303cad2b8
-  title: Get Timber
-  description: Drag Villager onto a Wood to craft Timber.
+  title: '加工处理木材'
+  description: '把霓虹流民拖到聚合木材上，制成处理木材。'
   type: 4
   targetCard: {fileID: 11400000, guid: 4b320b3fabc742a4a89385926b5a51d5, type: 2}
   targetRecipe: {fileID: 0}

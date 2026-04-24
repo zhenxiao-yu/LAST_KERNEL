@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: the_basics_02
   m_EditorClassIdentifier: 
   id: ed3a33820eda4076bbd69edcc18e5753
-  title: Food Source
-  description: Have a Coconut. It occasionally drops from palm trees.
+  title: '食物来源'
+  description: '拥有一个冷却椰核；它会偶尔从太阳棕榈上掉落。'
   type: 0
   targetCard: {fileID: 11400000, guid: dd2693ebe3b7fbc46a8825052c06d4a1, type: 2}
   targetRecipe: {fileID: 11400000, guid: ca3d374621c4e8c4f9c076e7cd302a56, type: 2}

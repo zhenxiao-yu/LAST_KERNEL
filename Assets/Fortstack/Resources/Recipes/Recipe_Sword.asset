@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: eb1b129e91fa4f45b0d8084d70430113
   category: 4
-  displayName: Forging Sword
+  displayName: '装配合金长刃'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 8ca68e344bcdba54dabca7cbcc29f565, type: 2}
     count: 1

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: b232df8019264734a3f843e1469ac8f7
   category: 3
-  displayName: Roasting Acorn
+  displayName: '制备炙化橡果'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 73eadadfa1a27934693e2b6fcb4a5425, type: 2}
     count: 1

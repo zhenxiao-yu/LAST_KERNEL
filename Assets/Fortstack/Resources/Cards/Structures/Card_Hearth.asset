@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Hearth
   m_EditorClassIdentifier: 
   id: a08c49e00fde44c6b40af0f26937fff8
-  displayName: Hearth
-  description: A well-built hearth for crafting finer meals.
+  displayName: '热源节点'
+  description: '维系安全庇护所的紧凑热能单元。'
   artTexture: {fileID: 2800000, guid: 1a1d8971483ac4d4799dbab8f39c001b, type: 3}
   category: 6
   faction: 0

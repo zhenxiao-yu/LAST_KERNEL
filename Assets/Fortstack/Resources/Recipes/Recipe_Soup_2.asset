@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1db9e5c1fd0e45479ee5ba98887aef38
   category: 3
-  displayName: Cooking Soup
+  displayName: '制备街区热汤'
   requiredIngredients:
   - card: {fileID: 11400000, guid: e8ac81eea747f3e4793f2930a3cb1246, type: 2}
     count: 1

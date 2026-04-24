@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 07_Pack_Adventure
   m_EditorClassIdentifier: 
   id: b01ddab9e13a44ca89102c4f30695ad0
-  displayName: Adventure
-  description: An Adventure card pack.
+  displayName: '边境行动包'
+  description: '偏向战斗、远征与风险收益的行动卡包。'
   artTexture: {fileID: 2800000, guid: b3f1d29763521eb4295f1fa764d250a0, type: 3}
   category: 0
   faction: 0

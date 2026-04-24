@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Bow
   m_EditorClassIdentifier: 
   id: b634b3141a2c400cac9fcc9c55033082
-  displayName: Bow
-  description: An elastic launching device that is used to propel an arrow.
+  displayName: '复合长弓'
+  description: '能提升居民生存率的改装装备。'
   artTexture: {fileID: 2800000, guid: 373fe0650f7ad284e91c177ffbcbdf38, type: 3}
   category: 5
   faction: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_ClayPit
   m_EditorClassIdentifier: 
   id: cfd8d1f88b9e4a4db02fcaeb7bb3a864
-  displayName: Clay Pit
-  description: A reliable source of clay.
+  displayName: '陶泥坑'
+  description: '可在废土地表、生态舱或旧城区中回收的原始资源。'
   artTexture: {fileID: 2800000, guid: 3ef7db91a568d4740a060bde424bf805, type: 3}
   category: 1
   faction: 0

@@ -62,7 +62,7 @@ namespace Markyu.FortStack
 
         private void HandleDayStarted(int currentDay)
         {
-            dayText.text = $"Day {currentDay}";
+            dayText.text = $"第 {currentDay} 天";
             paceImage.sprite = paceIcons[1];
 
             canvasGroup.alpha = 1f;

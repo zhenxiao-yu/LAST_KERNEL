@@ -98,7 +98,7 @@ namespace Markyu.FortStack
         private void UpdatePriceText()
         {
             if (priceText != null)
-                priceText.text = $"Price: {buyPrice - paidAmount}";
+                priceText.text = $"价格：{buyPrice - paidAmount}";
         }
 
         public bool TryActivate(int completedQuests)
@@ -179,11 +179,11 @@ namespace Markyu.FortStack
             }
             else if (foundItems >= totalItems)
             {
-                trackerText.text = "<color=#FFD700>COMPLETED</color>";
+                trackerText.text = "<color=#FFD700>已完全解锁</color>";
             }
             else
             {
-                trackerText.text = $"Discovered:\n{foundItems}/{totalItems}";
+                trackerText.text = $"已收录：\n{foundItems}/{totalItems}";
             }
         }
 
@@ -272,7 +272,7 @@ namespace Markyu.FortStack
         {
             if (!isActive || offeredPack == null) return ("", "");
 
-            return ("Pack Vendor", $"You can buy {offeredPack.DisplayName} card pack here.");
+            return ("卡包贩卖终端", $"在这里可以购买 {offeredPack.DisplayName}。");
         }
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 48c00b4d1bd5472ea0dcc84a4cd26787
   category: 2
-  displayName: Building Kiln
+  displayName: '建造陶化炉'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 71995e795738a0849a04d5c6f0f6804f, type: 2}
     count: 1

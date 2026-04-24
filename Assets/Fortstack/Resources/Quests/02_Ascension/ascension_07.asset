@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ascension_07
   m_EditorClassIdentifier: 
   id: 051e6c5473e54e428d2d72020b428daa
-  title: End the Darkness
-  description: Face the Demon Lord in battle and destroy the ultimate evil born from
-    the sacrificial ritual.
+  title: '终结黑暗协议'
+  description: '直面守护进程魔君，将这个由禁忌堆栈孕育出的终极威胁彻底摧毁。'
   type: 3
   targetCard: {fileID: 11400000, guid: e16d248f60801ef4d821a119adc4d92c, type: 2}
   targetRecipe: {fileID: 0}

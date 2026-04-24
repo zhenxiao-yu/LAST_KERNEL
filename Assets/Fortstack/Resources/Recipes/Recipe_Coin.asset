@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4fa4cf4286984ce0934f2a37ab0011d4
   category: 1
-  displayName: Opening Chest
+  displayName: '加工信用芯片'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 502ba0efbafa5f341ba8abd250a5693e, type: 2}
     count: 1

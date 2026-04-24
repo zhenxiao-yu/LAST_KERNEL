@@ -55,8 +55,12 @@ namespace Markyu.FortStack
             questLookup.Clear();
             foreach (var group in questGroups)
             {
+                if (group == null || group.Quests == null) continue;
+
                 foreach (var quest in group.Quests)
                 {
+                    if (quest == null) continue;
+
                     if (!questLookup.ContainsKey(quest.Id))
                     {
                         questLookup.Add(quest.Id, quest);
@@ -234,11 +238,11 @@ namespace Markyu.FortStack
             OnQuestActivated?.Invoke(newQuest);
 
             // Immediate check for specific quest types upon activation
-            if (newQuest.QuestData.Type == QuestType.Have)
+            if (newQuest.QuestData.Type == QuestType.Have && CardManager.Instance != null)
             {
                 HandleStatsChanged(CardManager.Instance.GetStatsSnapshot());
             }
-            else if (newQuest.QuestData.Type == QuestType.Discover)
+            else if (newQuest.QuestData.Type == QuestType.Discover && CraftingManager.Instance != null)
             {
                 foreach (var recipeId in CraftingManager.Instance.DiscoveredRecipes)
                 {
@@ -257,7 +261,7 @@ namespace Markyu.FortStack
                 completedQuests.Add(quest);
 
                 // Unlock next quests
-                foreach (var nextQuest in quest.QuestData.QuestsToUnlock)
+                foreach (var nextQuest in quest.QuestData.QuestsToUnlock ?? Enumerable.Empty<Quest>())
                 {
                     if (CanActivate(nextQuest))
                     {
@@ -275,9 +279,11 @@ namespace Markyu.FortStack
 
         private bool CanActivate(Quest questData)
         {
+            if (questData == null) return false;
+
             // Check if all prerequisites are in the completed list
-            return questData.PrerequisiteQuests.All(
-                prereq => completedQuestIDs.Contains(prereq.Id)
+            return (questData.PrerequisiteQuests ?? new List<Quest>()).All(
+                prereq => prereq != null && completedQuestIDs.Contains(prereq.Id)
             );
         }
 
@@ -285,6 +291,8 @@ namespace Markyu.FortStack
         // --- HAVE | FOOD | COINS | CAPACITY ---
         private void HandleStatsChanged(StatsSnapshot stats)
         {
+            if (CardManager.Instance == null) return;
+
             var matchingQuests = activeQuests.Where(
                 q => q.QuestData.Type == QuestType.Have ||
                      q.QuestData.Type == QuestType.Food ||
@@ -297,6 +305,12 @@ namespace Markyu.FortStack
                 switch (quest.QuestData.Type)
                 {
                     case QuestType.Have:
+                        if (quest.QuestData.TargetCard == null)
+                        {
+                            Debug.LogWarning($"QuestManager: 'Have' quest '{quest.QuestData.Title}' is missing TargetCard. Skipping progress update.");
+                            continue;
+                        }
+
                         if (quest.QuestData.TargetCard.Category == CardCategory.Currency)
                         {
                             quest.SetProgress(stats.Currency);
@@ -348,6 +362,7 @@ namespace Markyu.FortStack
         {
             var matchingQuests = activeQuests.Where(
                 q => q.QuestData.Type == QuestType.Discover &&
+                     q.QuestData.TargetRecipe != null &&
                      q.QuestData.TargetRecipe.Id == recipeId
             ).ToList();
 

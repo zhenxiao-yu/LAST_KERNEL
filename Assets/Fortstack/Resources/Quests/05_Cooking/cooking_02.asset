@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: cooking_02
   m_EditorClassIdentifier: 
   id: 462669c4e5294c218abb6caf9d4ee9fa
-  title: Cook an Omelette
-  description: Cook an Omelette using an Egg and a Bonfire.
+  title: '制作伺服蛋卷'
+  description: '用蛋白卵和等离子炉火制备一份伺服蛋卷。'
   type: 4
   targetCard: {fileID: 11400000, guid: 82d90981ac565d440bcd3c6dc5f52b56, type: 2}
   targetRecipe: {fileID: 0}

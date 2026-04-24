@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_15
   m_EditorClassIdentifier: 
   id: 09f9198abe3742f79243ca38883b1df1
-  title: Into Manhood
-  description: Place a Baby on a House to raise it into a Villager.
+  title: '长成大人'
+  description: '把街区幼童放入居住舱，将其养成为一名霓虹流民。'
   type: 4
   targetCard: {fileID: 11400000, guid: 3e0351bd595e3654d9d80dc4286c0a65, type: 2}
   targetRecipe: {fileID: 0}

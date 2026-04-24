@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 98ee75bd61af4259b254673105d02e66
   category: 2
-  displayName: Building Mine
+  displayName: '建造采矿钻机'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 26aeb0eb260e6064dacc12cbc2cf226a, type: 2}
     count: 2

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Berry
   m_EditorClassIdentifier: 
   id: febdef2ec5ee43a4b7e7a7fe72aeb937
-  displayName: Berry
-  description: Picked from the bush.
+  displayName: '荧光浆果'
+  description: '从受辐照灌丛中摘下的发光果实。'
   artTexture: {fileID: 2800000, guid: 34ffcacdbfced144fa264afe16b9af3f, type: 3}
   category: 3
   faction: 0

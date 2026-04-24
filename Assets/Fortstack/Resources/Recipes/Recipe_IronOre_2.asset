@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0c15e8c3141f49a9b6b4609689fb9e52
   category: 1
-  displayName: Mining Ores
+  displayName: '加工铁素矿'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 3937003a26dc8564abb0e93e911774c9, type: 2}
     count: 1

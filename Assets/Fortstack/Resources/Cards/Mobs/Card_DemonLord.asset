@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Card_DemonLord
   m_EditorClassIdentifier: 
   id: 9ed83f496aae415fa2c2bf028e6d8a1f
-  displayName: Demon Lord
-  description: The supreme fiend of the underworld, summoned only through blood-soaked
-    sacrifice.
+  displayName: '守护进程魔君'
+  description: '游荡在废墟与管网间的危险生命体。'
   artTexture: {fileID: 2800000, guid: 311da7d30715d79468980c0f875a495e, type: 3}
   category: 9
   faction: 2

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Chainmail
   m_EditorClassIdentifier: 
   id: 1953140219454a36b01dfd40191e22c5
-  displayName: Chainmail
-  description: An armor made from chains linked together.
+  displayName: '链片护甲'
+  description: '能提升居民生存率的改装装备。'
   artTexture: {fileID: 2800000, guid: b26451825f4bbcd4782cdea4f786aebe, type: 3}
   category: 5
   faction: 0

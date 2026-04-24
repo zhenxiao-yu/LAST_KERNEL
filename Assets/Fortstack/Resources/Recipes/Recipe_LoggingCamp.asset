@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9850996af862455eb89762f73002c149
   category: 2
-  displayName: Building Logging Camp
+  displayName: '建造伐木机站'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
     count: 3

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_03
   m_EditorClassIdentifier: 
   id: a0fe5f27084840b381a3e65272f5be9f
-  title: Stockpile the Clay
-  description: Gather at least 10 Clays to build up your essential resources.
+  title: '囤积陶瓷泥浆'
+  description: '至少收集 10 份陶瓷泥浆，为后续制造做好准备。'
   type: 0
   targetCard: {fileID: 11400000, guid: 499e594ed9683634ba40cc3c9ace2c90, type: 2}
   targetRecipe: {fileID: 0}

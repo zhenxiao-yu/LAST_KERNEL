@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_13
   m_EditorClassIdentifier: 
   id: 9c7d74c92ec34825bf4308e791919d7f
-  title: Grow Your Population
-  description: Bring your village to life by having at least 2 Villagers.
+  title: '扩编人口'
+  description: '让你的聚落至少拥有 2 名霓虹流民。'
   type: 0
   targetCard: {fileID: 11400000, guid: 3e0351bd595e3654d9d80dc4286c0a65, type: 2}
   targetRecipe: {fileID: 0}

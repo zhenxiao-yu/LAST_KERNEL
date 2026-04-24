@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Highlands
   m_EditorClassIdentifier: 
   id: d140f6326fb44586a68211b56266c0b4
-  displayName: Highlands
-  description: Elevated terrain where hardy creatures roam the rocky slopes.
+  displayName: '天际高地'
+  description: '混凝土山脊与高架废墟间盘踞着凶险目标。'
   artTexture: {fileID: 2800000, guid: 3cd91c97d1a91b043a3538a7209984e5, type: 3}
   category: 10
   faction: 0

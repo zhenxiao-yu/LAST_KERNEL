@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 087ff08292534f0db7e6ccfdce0514ac
   category: 1
-  displayName: Chopping Tree
+  displayName: '加工聚合木材'
   requiredIngredients:
   - card: {fileID: 11400000, guid: ff332e75fb8842942a379e7397816f5a, type: 2}
     count: 1

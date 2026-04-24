@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f6161479118941028235572fff5b2317
   category: 5
-  displayName: Crafting Brick
+  displayName: '加工复合砖'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 499e594ed9683634ba40cc3c9ace2c90, type: 2}
     count: 3

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: deb0d6871c20464e903d1dfb1de7f613
   category: 6
-  displayName: Farming Berry
+  displayName: '培育荧光浆果'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 7ba80899b38b3b043a407c33446a8886, type: 2}
     count: 1

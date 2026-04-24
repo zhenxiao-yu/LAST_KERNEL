@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: cooking_04
   m_EditorClassIdentifier: 
   id: 17291e757b4846d99121b19893d4373d
-  title: Make a Soup
-  description: Stack Turnip onto Bonfire to craft a warm Soup.
+  title: '熬制街区热汤'
+  description: '把根芯芜菁放进等离子炉火里，做出一碗街区热汤。'
   type: 4
   targetCard: {fileID: 11400000, guid: 9272e686173e6914e934361ecee225b5, type: 2}
   targetRecipe: {fileID: 0}

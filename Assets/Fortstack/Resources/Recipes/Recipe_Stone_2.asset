@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: b2d8884252254a18a68c57490d05aa3b
   category: 1
-  displayName: Rock Processing
+  displayName: '加工铁晶石'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 8d5a290ece114f84fa877655d5fc0e82, type: 2}
     count: 1

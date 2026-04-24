@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Satyr
   m_EditorClassIdentifier: 
   id: 273ce16cf1b2444b9bd4687dcc55c527
-  displayName: Satyr
-  description: A playful but dangerous horned archer lurking in the deep woods.
+  displayName: '角兽浪人'
+  description: '游荡在废墟与管网间的危险生命体。'
   artTexture: {fileID: 2800000, guid: c96f3cc35e9ad6243a3066ae795d45de, type: 3}
   category: 9
   faction: 2

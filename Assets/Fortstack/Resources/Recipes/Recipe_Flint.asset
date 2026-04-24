@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 29500c31cc574bea89a3027e0b56ef73
   category: 1
-  displayName: Mining Rock
+  displayName: '加工点火燧石'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 819eb0291ba0479448286c2ec007085d, type: 2}
     count: 1

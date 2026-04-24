@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: be2718b27a174c51adef3578099ce8fe
   category: 2
-  displayName: Building Pen
+  displayName: '建造收容栏'
   requiredIngredients:
   - card: {fileID: 11400000, guid: ff958ed6e79eda44baff0c3862d262e9, type: 2}
     count: 2

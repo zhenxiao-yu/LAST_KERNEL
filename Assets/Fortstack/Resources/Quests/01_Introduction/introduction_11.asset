@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_11
   m_EditorClassIdentifier: 
   id: 844be2f5bbac480db883bc5fbdc2281c
-  title: Collect Berries
-  description: Gather and stockpile 4 Berries to help feed your people.
+  title: '储备浆果'
+  description: '收集并囤积 4 份荧光浆果，为你的居民准备口粮。'
   type: 1
   targetCard: {fileID: 11400000, guid: 2ac53164cb5efa24c857c2d32d1057c1, type: 2}
   targetRecipe: {fileID: 0}

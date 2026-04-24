@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: introduction_01
   m_EditorClassIdentifier: 
   id: 30a535c1d7c84b27ba7dfebebe3fd1dc
-  title: Open Starter Pack
-  description: Click a Starter card pack multiple times to fully open it and claim
-    all the cards inside.
+  title: '打开起始补给包'
+  description: '多次点击起始补给包，直到完全拆封并领取其中全部卡牌。'
   type: 3
   targetCard: {fileID: 11400000, guid: 51c2d41ab5d413649adfbe0e3bb29d85, type: 2}
   targetRecipe: {fileID: 0}

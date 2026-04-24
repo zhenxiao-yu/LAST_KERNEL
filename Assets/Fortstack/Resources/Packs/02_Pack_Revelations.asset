@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 02_Pack_Revelations
   m_EditorClassIdentifier: 
   id: 8ae9fc9e89de42e4a72aeef2f935ea6d
-  displayName: Revelations
-  description: A Revelations card pack.
+  displayName: '启示档案包'
+  description: '收录危险线索与深层异象的加密卡包。'
   artTexture: {fileID: 2800000, guid: 575f8d8a400ea97429cfefd688ca806e, type: 3}
   category: 0
   faction: 0

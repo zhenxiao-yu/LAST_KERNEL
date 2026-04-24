@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Ruins
   m_EditorClassIdentifier: 
   id: 3aa46e0d7f7046daba8c39098b2b1f4f
-  displayName: Ruins
-  description: Crumbling remnants of an ancient civilization now overrun by monsters.
+  displayName: '黑站废墟'
+  description: '坍塌巨构深处埋藏着失落科技与敌意生命。'
   artTexture: {fileID: 2800000, guid: 35c4ad7985a626e4e8982a408be75720, type: 3}
   category: 10
   faction: 0

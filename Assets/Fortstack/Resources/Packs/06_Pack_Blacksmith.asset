@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 06_Pack_Blacksmith
   m_EditorClassIdentifier: 
   id: c49d9b2f9ef041bdbd77506f42dd846e
-  displayName: Blacksmith
-  description: A Blacksmith card pack.
+  displayName: '锻造工坊包'
+  description: '让你建立武装生产线的工业卡包。'
   artTexture: {fileID: 2800000, guid: 2561bd8f0054aac458178647b32084ea, type: 3}
   category: 0
   faction: 0

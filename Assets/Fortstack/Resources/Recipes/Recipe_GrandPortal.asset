@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: d29628eb66b34cf2bc75b759b90c2faa
   category: 2
-  displayName: Building Portal
+  displayName: '建造门域枢纽'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
     count: 5

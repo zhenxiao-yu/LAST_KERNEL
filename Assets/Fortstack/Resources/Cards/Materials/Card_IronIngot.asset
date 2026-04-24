@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_IronIngot
   m_EditorClassIdentifier: 
   id: 55a226c1fb614df8a90b80d71b57f0f6
-  displayName: Iron Ingot
-  description: A solid bar of refined iron.
+  displayName: '铁素锭'
+  description: '用于组装设施、装备与生存物资的工业材料。'
   artTexture: {fileID: 2800000, guid: 3bf84655b14a6e941b5f15b716361b7a, type: 3}
   category: 4
   faction: 0

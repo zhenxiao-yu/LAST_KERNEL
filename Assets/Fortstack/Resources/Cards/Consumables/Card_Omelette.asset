@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Omelette
   m_EditorClassIdentifier: 
   id: d04d3b4a18c545aab29b1bf10911ce7d
-  displayName: Omelette
-  description: A fried chicken egg.
+  displayName: '伺服蛋卷'
+  description: '在炽热金属板上迅速折成的高蛋白餐。'
   artTexture: {fileID: 2800000, guid: 63510b6eff392564191425cec2c97888, type: 3}
   category: 3
   faction: 0

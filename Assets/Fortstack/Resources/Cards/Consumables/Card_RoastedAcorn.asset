@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_RoastedAcorn
   m_EditorClassIdentifier: 
   id: 266e7c2f3b8f4d52916ecd33ac1f4804
-  displayName: Roasted Acorn
-  description: A simple snack made by roasting an Acorn over a Bonfire.
+  displayName: '炙化橡果'
+  description: '带烟熏尾韵的烘烤能量坚果。'
   artTexture: {fileID: 2800000, guid: 83bcf27f648468f4598f0c22e510ed79, type: 3}
   category: 3
   faction: 0

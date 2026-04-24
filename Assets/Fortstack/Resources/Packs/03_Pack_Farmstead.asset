@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 03_Pack_Farmstead
   m_EditorClassIdentifier: 
   id: 8c1c9032539f469ab3c0d270671c32b0
-  displayName: Farmstead
-  description: A Farmstead card pack.
+  displayName: '农务拓展包'
+  description: '为聚落食物链补齐水培与畜养设施的卡包。'
   artTexture: {fileID: 2800000, guid: 1fb3b3003d74fb447b7b1f089c416db3, type: 3}
   category: 0
   faction: 0

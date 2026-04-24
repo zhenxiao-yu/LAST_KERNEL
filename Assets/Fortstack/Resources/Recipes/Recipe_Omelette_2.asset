@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6ff667d029bc4e7db4d6bce23f15b8aa
   category: 3
-  displayName: Cooking Egg
+  displayName: '制备伺服蛋卷'
   requiredIngredients:
   - card: {fileID: 11400000, guid: e8ac81eea747f3e4793f2930a3cb1246, type: 2}
     count: 1

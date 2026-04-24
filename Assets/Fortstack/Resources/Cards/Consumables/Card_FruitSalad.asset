@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_FruitSalad
   m_EditorClassIdentifier: 
   id: d955f6ee6b48432b8c05888720bb2674
-  displayName: Fruit Salad
-  description: A refreshing bowl of assorted fruits.
+  displayName: '霓彩果拼'
+  description: '合成果块与糖胶混成的亮色能量餐。'
   artTexture: {fileID: 2800000, guid: 6aa39be48a414ee47b136089a2cec267, type: 3}
   category: 3
   faction: 0

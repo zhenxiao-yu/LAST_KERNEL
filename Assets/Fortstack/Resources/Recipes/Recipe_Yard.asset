@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 056eb48935974a84a2f5bac4a6869bcc
   category: 2
-  displayName: Building Yard
+  displayName: '建造物流堆场'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
     count: 1

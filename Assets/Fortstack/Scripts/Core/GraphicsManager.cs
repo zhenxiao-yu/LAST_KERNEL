@@ -305,7 +305,7 @@ namespace Markyu.FortStack
         /// <returns>A string representing the currently applied screen resolution setting.</returns>
         public string GetResolutionLabel()
         {
-            return $"Resolution {currentRes.width}x{currentRes.height}";
+            return $"分辨率 {currentRes.width}x{currentRes.height}";
         }
 
         /// <summary>
@@ -315,8 +315,8 @@ namespace Markyu.FortStack
         public string GetFullscreenLabel()
         {
             return currentMode == FullScreenMode.Windowed
-                ? "Fullscreen (Windowed)"
-                : "Fullscreen (Enabled)";
+                ? "全屏模式（窗口化）"
+                : "全屏模式（开启）";
         }
 
         /// <summary>
@@ -327,10 +327,10 @@ namespace Markyu.FortStack
         {
             return currentVSync switch
             {
-                0 => "vSync Off",
-                1 => "vSync On",
-                2 => "vSync Half",
-                _ => "vSync Unknown"
+                0 => "垂直同步 关闭",
+                1 => "垂直同步 开启",
+                2 => "垂直同步 半速",
+                _ => "垂直同步 未知"
             };
         }
 
@@ -341,8 +341,8 @@ namespace Markyu.FortStack
         public string FormatFpsLabel()
         {
             return currentFpsCap == -1
-                ? "FPS Unlimited"
-                : $"FPS {currentFpsCap}";
+                ? "帧率上限 不限"
+                : $"帧率上限 {currentFpsCap}";
         }
 
         /// <summary>
@@ -351,11 +351,24 @@ namespace Markyu.FortStack
         /// <returns>A string representing the currently applied shadow quality preset.</returns>
         public string FormatShadowLabel()
         {
-            return $"Shadows {currentShadowPreset}";
+            return $"阴影质量 {GetShadowPresetLabel(currentShadowPreset)}";
         }
         #endregion
 
         #region Helper Methods
+        private static string GetShadowPresetLabel(ShadowPreset preset)
+        {
+            return preset switch
+            {
+                ShadowPreset.Off => "关闭",
+                ShadowPreset.Low => "低",
+                ShadowPreset.Medium => "中",
+                ShadowPreset.High => "高",
+                ShadowPreset.Ultra => "超高",
+                _ => "未知"
+            };
+        }
+
         private void ApplyShadowPreset(ShadowPreset preset)
         {
             var urpAsset = GraphicsSettings.currentRenderPipeline as UniversalRenderPipelineAsset;

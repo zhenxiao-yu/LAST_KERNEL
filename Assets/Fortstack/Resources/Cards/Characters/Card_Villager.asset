@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Villager
   m_EditorClassIdentifier: 
   id: eb540db18bc94b9f9f308ea04ca0700b
-  displayName: Villager
-  description: A healthy villager.
+  displayName: '霓虹流民'
+  description: '在巨型都市边缘讨生活的普通市民。'
   artTexture: {fileID: 2800000, guid: 333e6e8b7a20f524cb003290b070993b, type: 3}
   category: 2
   faction: 1

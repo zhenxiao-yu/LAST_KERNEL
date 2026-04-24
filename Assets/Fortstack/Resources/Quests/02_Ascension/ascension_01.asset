@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ascension_01
   m_EditorClassIdentifier: 
   id: b290d6c76d034dedb6845ed8995bfeee
-  title: A Proper Settlement
-  description: 'Reach a total of three Villagers to expand your workforce.
+  title: '像样的据点'
+  description: '让聚落总共拥有 3 名霓虹流民，扩充你的地面劳动力。'
 
 '
   type: 0

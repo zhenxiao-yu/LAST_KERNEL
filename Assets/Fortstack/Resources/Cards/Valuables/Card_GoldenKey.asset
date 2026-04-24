@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_GoldenKey
   m_EditorClassIdentifier: 
   id: 32184f3ce4c4425aa0ccac01fc35d733
-  displayName: Golden Key
-  description: A key of pure gold. Whatever it opens must be precious.
+  displayName: '鎏金密钥卡'
+  description: '通往高价值目标的镀金权限钥卡。'
   artTexture: {fileID: 2800000, guid: 753e3fa9c399be74a9a6d5c786f33886, type: 3}
   category: 11
   faction: 0

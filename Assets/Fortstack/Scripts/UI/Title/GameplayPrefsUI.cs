@@ -28,21 +28,32 @@ namespace Markyu.FortStack
         {
             durationSlider.onValueChanged.AddListener(value =>
             {
-                int duration = (int)value;
-                durationLabel.text = $"Day Duration: {duration} sec";
+                UpdateDurationLabel((int)value);
             });
 
             isFriendlyToggle.onValueChanged.AddListener(isOn =>
             {
-                string state = isOn ? "ON" : "OFF";
-                string message = isOn ? "(No enemies will appear)" : "(Enemies may appear)";
-                isFriendlyLabel.text = $"Friendly Mode: {state}\n<size=23>{message}";
-
+                UpdateFriendlyLabel(isOn);
                 AudioManager.Instance?.PlaySFX(AudioId.Click);
             });
 
             cancelButton.SetOnClick(Close);
             confirmButton.SetOnClick(StartNewGame);
+
+            UpdateDurationLabel((int)durationSlider.value);
+            UpdateFriendlyLabel(isFriendlyToggle.isOn);
+        }
+
+        private void UpdateDurationLabel(int duration)
+        {
+            durationLabel.text = $"白昼时长：{duration} 秒";
+        }
+
+        private void UpdateFriendlyLabel(bool isFriendly)
+        {
+            string state = isFriendly ? "开启" : "关闭";
+            string message = isFriendly ? "（敌对目标不会出现）" : "（敌对目标可能出现）";
+            isFriendlyLabel.text = $"友好模式：{state}\n<size=23>{message}";
         }
 
         public void Open() => gameObject.SetActive(true);

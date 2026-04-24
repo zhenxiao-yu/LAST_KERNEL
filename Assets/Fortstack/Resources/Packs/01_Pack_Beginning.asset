@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 01_Pack_Beginning
   m_EditorClassIdentifier: 
   id: 3e45f750f7f54f3690292a52b9becec2
-  displayName: Beginning
-  description: A Beginning card pack.
+  displayName: '初阶扩展包'
+  description: '帮助你把临时营地升级为稳定节点的卡包。'
   artTexture: {fileID: 2800000, guid: aa755a8873af8b046869065c16996a85, type: 3}
   category: 0
   faction: 0

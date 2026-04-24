@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Grower_PlanterBox
   m_EditorClassIdentifier: 
   id: 9967cedeef734ff590627de884631c93
-  displayName: Planter Box
-  description: Can be used to grow plants.
+  displayName: '种植槽'
+  description: '用于洁净培育作物的紧凑栽培箱。'
   artTexture: {fileID: 2800000, guid: fbc4c32829e1fe74e89f679046c24fc2, type: 3}
   category: 6
   faction: 0

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Card_Sign
   m_EditorClassIdentifier: 
   id: 4b895ef3ea10446db27ea494f2ee32db
-  displayName: Sign
-  description: A sign placed by the template author to mark the end of the sample
-    setup.
+  displayName: '全息路牌'
+  description: '支撑赛博聚落运转的基础设施。'
   artTexture: {fileID: 2800000, guid: 69e398841f180504f8fce9120de1df75, type: 3}
   category: 6
   faction: 0

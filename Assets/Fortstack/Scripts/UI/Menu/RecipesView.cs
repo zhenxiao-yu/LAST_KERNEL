@@ -163,7 +163,7 @@ namespace Markyu.FortStack
                 return ("", "");
 
             return (
-                $"Recipe: {recipe.ResultingCard.DisplayName}",
+                $"蓝图：{recipe.ResultingCard.DisplayName}",
                 CraftingManager.Instance?.GetFormattedIngredients(recipe) ?? ""
             );
         }

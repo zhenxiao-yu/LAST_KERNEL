@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9584d08ea4bc41ae94909aeff7af9506
   category: 3
-  displayName: Cooking Acorn
+  displayName: '制备炙化橡果'
   requiredIngredients:
   - card: {fileID: 11400000, guid: e8ac81eea747f3e4793f2930a3cb1246, type: 2}
     count: 1

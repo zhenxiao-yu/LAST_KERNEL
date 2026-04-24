@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ascension_08
   m_EditorClassIdentifier: 
   id: 66597ea08e5040b0a26fd5295dc9bf41
-  title: Gateway to Beyond
-  description: Use the Abyssal Core taken from the Demon Lord to construct the Grand
-    Portal and unlock travel between realms.
+  title: '异界网关'
+  description: '利用从守护进程魔君身上夺得的深渊核心，建造门域枢纽。'
   type: 4
   targetCard: {fileID: 11400000, guid: 962dbc66c6c0bf141b59f29a7d10c412, type: 2}
   targetRecipe: {fileID: 0}

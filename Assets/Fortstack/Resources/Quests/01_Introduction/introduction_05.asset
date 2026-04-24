@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_05
   m_EditorClassIdentifier: 
   id: 4e0deae95aa44635bbb58bdbbc91a7e3
-  title: Buy Beginning Card Pack
-  description: Drag coins onto the Beginning pack vendor to buy it.
+  title: '购买初阶扩展包'
+  description: '把信用芯片拖到初阶扩展包贩卖终端上完成购买。'
   type: 6
   targetCard: {fileID: 11400000, guid: 698b3b4edf76314489a111931de35a35, type: 2}
   targetRecipe: {fileID: 0}

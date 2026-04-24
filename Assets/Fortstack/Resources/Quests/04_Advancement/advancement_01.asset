@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: advancement_01
   m_EditorClassIdentifier: 
   id: 96e0138b58cb4102a026e65bad865762
-  title: Little Protection
-  description: Make a Villager wear a Slime Hat.
+  title: '基础防护'
+  description: '给一名霓虹流民戴上史莱姆帽，提高生存率。'
   type: 7
   targetCard: {fileID: 11400000, guid: 2779c2a939b1de446895fa126c81280d, type: 2}
   targetRecipe: {fileID: 0}

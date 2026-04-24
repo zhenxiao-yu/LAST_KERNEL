@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: training_02
   m_EditorClassIdentifier: 
   id: a998ccb30187450ebc24bb02fdde1134
-  title: Kill a Slime
-  description: Drag and drop a character onto a Slime to engage in combat.
+  title: '击杀纳米史莱姆'
+  description: '把任意角色拖到纳米史莱姆上，进入战斗并取胜。'
   type: 3
   targetCard: {fileID: 11400000, guid: ab518c0794a7c9f4db0ff8fcd4e6dfd5, type: 2}
   targetRecipe: {fileID: 0}

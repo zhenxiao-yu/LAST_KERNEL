@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 10_Pack_Island
   m_EditorClassIdentifier: 
   id: 89489ff855b54ef7a6a6bce49643df5e
-  displayName: Island
-  description: An Island card pack.
+  displayName: '海岛补给包'
+  description: '适用于海岛区求生与资源循环的基础卡包。'
   artTexture: {fileID: 2800000, guid: eb09c03927519a54a95f8622de2af4e6, type: 3}
   category: 0
   faction: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Coral
   m_EditorClassIdentifier: 
   id: 3603ca743af84709a8fc8355d8379567
-  displayName: Coral
-  description: A beautiful coral.
+  displayName: '生体珊瑚'
+  description: '带有观赏与生物回收价值的海域结晶。'
   artTexture: {fileID: 2800000, guid: 339f4d954ba130141872747e06924861, type: 3}
   category: 7
   faction: 0

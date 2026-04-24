@@ -69,7 +69,7 @@ namespace Markyu.FortStack
 
         public override (string, string) GetInfo()
         {
-            return ("Card Buyer", "Sell your cards here.");
+            return ("卡牌回收终端", "把可出售的卡牌拖到这里，换取信用芯片。");
         }
     }
 }

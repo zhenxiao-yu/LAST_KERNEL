@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 187d105fa9ab493181e10aa3fe2d25a6
   category: 1
-  displayName: Mining Stone
+  displayName: '加工铁晶石'
   requiredIngredients:
   - card: {fileID: 11400000, guid: fd23682f1349fb942936e3125f7bf01d, type: 2}
     count: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Soil
   m_EditorClassIdentifier: 
   id: a15777e682b74b7894b2e2f2171bdcb2
-  displayName: Soil
-  description: A vital habitat for plants.
+  displayName: '生长基质'
+  description: '可在废土地表、生态舱或旧城区中回收的原始资源。'
   artTexture: {fileID: 2800000, guid: 0bfcbbd4370c1734ba8ad3f0c1fe24bd, type: 3}
   category: 1
   faction: 0

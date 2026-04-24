@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 14eeabdba1264346a3ac885881e4bce2
   category: 1
-  displayName: Forest Processing
+  displayName: '加工聚合木材'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 5ee89605ed76a784aad9fb326974f154, type: 2}
     count: 1

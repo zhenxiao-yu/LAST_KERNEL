@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: a859539ef3e74bebb00e8a981fd2805b
   category: 3
-  displayName: Shaking Milk
+  displayName: '制备蛋白奶昔'
   requiredIngredients:
   - card: {fileID: 11400000, guid: c91a5c6773f466941a0d4ae2ff3cf4a2, type: 2}
     count: 1

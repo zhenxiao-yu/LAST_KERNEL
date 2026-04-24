@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: training_01
   m_EditorClassIdentifier: 
   id: 96cc6a4cfc594e3d91ee83eaa03201fe
-  title: Train a Warrior
-  description: Drag a Wooden Club onto a Villager to train a Warrior.
+  title: '训练铬甲战士'
+  description: '把废料短棍拖到霓虹流民身上，将其训练成铬甲战士。'
   type: 7
   targetCard: {fileID: 11400000, guid: c7c554e773779c44b935ac769f24c3aa, type: 2}
   targetRecipe: {fileID: 0}

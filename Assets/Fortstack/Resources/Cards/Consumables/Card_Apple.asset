@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Apple
   m_EditorClassIdentifier: 
   id: 592f802d14b04fb6b38b0222d7b4f10e
-  displayName: Apple
-  description: A sweet apple.
+  displayName: '合成苹果'
+  description: '弧区流水线批量培植的脆甜水果。'
   artTexture: {fileID: 2800000, guid: e7ce3972a39d57949a8e3af252878669, type: 3}
   category: 3
   faction: 0

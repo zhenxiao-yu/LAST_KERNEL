@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f419b2da57ce4911ac79307d167f512c
   category: 2
-  displayName: Building Graveyard
+  displayName: '前往数据墓场'
   requiredIngredients:
   - card: {fileID: 11400000, guid: abff905e2f7834c479688b02bd2515be, type: 2}
     count: 2

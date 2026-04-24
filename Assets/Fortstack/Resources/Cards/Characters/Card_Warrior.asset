@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Warrior
   m_EditorClassIdentifier: 
   id: 4e00430d082346bc8f7e88ee33b3a051
-  displayName: Warrior
-  description: A fierce warrior.
+  displayName: '铬甲战士'
+  description: '披着镀铬外骨骼硬闯前线的近战狠角色。'
   artTexture: {fileID: 2800000, guid: 895759ac03c5eb343a55e9c526db2a31, type: 3}
   category: 2
   faction: 1

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ascension_05
   m_EditorClassIdentifier: 
   id: 306c402afc1c4d42a7766ff28f469a08
-  title: The First Offering
-  description: Craft the Sacrificial Altar, a ritual platform needed for handling
-    blood-bound artifacts.
+  title: '第一份贡品'
+  description: '制作献祭接口，这是处理禁忌协议所需的黑暗终端。'
   type: 4
   targetCard: {fileID: 11400000, guid: 509c3447d5c156345955810e5c6a32f1, type: 2}
   targetRecipe: {fileID: 0}

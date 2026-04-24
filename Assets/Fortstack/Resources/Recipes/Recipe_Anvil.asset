@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: a0d3ab610fd248a1afca1bcd5ef73c82
   category: 2
-  displayName: Making Anvil
+  displayName: '建造锻造砧台'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 8ca68e344bcdba54dabca7cbcc29f565, type: 2}
     count: 2

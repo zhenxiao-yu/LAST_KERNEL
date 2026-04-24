@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: survive_03
   m_EditorClassIdentifier: 
   id: 62562e13dab0444cb8595b98ac5f36fc
-  title: Day 32
-  description: Survive until day 32.
+  title: '存活到第 32 天'
+  description: '让你的聚落撑过第 32 天的运转周期。'
   type: 10
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

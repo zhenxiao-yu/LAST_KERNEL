@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Coin
   m_EditorClassIdentifier: 
   id: 4bda315463bf4b73b63f1d232fb522e4
-  displayName: Coin
-  description: A shiny gold coin.
+  displayName: '信用芯片'
+  description: '在边缘殖民地流通的标准交易芯片。'
   artTexture: {fileID: 2800000, guid: bf5d527cb73ddee47a581f5325a211b7, type: 3}
   category: 7
   faction: 0

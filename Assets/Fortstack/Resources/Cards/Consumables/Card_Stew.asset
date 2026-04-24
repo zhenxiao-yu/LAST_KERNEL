@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Stew
   m_EditorClassIdentifier: 
   id: f1ab35e09bff4fc0b4c90f18dbc0608e
-  displayName: Stew
-  description: A hearty meal made from meat and vegetables simmered over a warm hearth.
+  displayName: '反应堆炖锅'
+  description: '为漫长班次准备的厚重高能炖餐。'
   artTexture: {fileID: 2800000, guid: f94476029d7df9f4fb060fc25de414ee, type: 3}
   category: 3
   faction: 0

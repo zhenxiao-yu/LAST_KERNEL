@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 109c4b4cc0534159843b82a3bbaba8b9
   category: 3
-  displayName: Cooking Stew
+  displayName: '制备反应堆炖锅'
   requiredIngredients:
   - card: {fileID: 11400000, guid: e8ac81eea747f3e4793f2930a3cb1246, type: 2}
     count: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: advancement_06
   m_EditorClassIdentifier: 
   id: a0b32a38ba85422d874f9175a0f5d66d
-  title: Arm the Ranger
-  description: Equip your Ranger with a Quiver to ready them for tougher encounters.
+  title: '武装游骑'
+  description: '为栅格游骑装备弹道箭袋，提升远程压制能力。'
   type: 7
   targetCard: {fileID: 11400000, guid: 6eb790b82ebb38c4b846faa559603641, type: 2}
   targetRecipe: {fileID: 0}

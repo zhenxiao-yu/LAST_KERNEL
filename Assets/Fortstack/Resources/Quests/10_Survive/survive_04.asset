@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: survive_04
   m_EditorClassIdentifier: 
   id: d909957d445a4186ad9c488242c3375d
-  title: Day 64
-  description: Survive until day 64.
+  title: '存活到第 64 天'
+  description: '在漫长而危险的城市边缘存活到第 64 天。'
   type: 10
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

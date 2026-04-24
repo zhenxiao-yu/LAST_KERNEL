@@ -226,7 +226,7 @@ namespace Markyu.FortStack
             InfoPanel.Instance?.RequestInfoDisplay(
                 sequenceRequester,
                 InfoPriority.Sequence,
-                ("Pack Unlocked", body)
+                ("新卡包已解锁", body)
             );
 
             vendor.SetHighlighted(true);

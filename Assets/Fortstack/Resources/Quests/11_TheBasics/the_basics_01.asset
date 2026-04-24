@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: the_basics_01
   m_EditorClassIdentifier: 
   id: 502669b2b38e4623b9db898442942d04
-  title: Open Island Pack
-  description: Open the default Island card pack.
+  title: '打开海岛补给包'
+  description: '打开默认的海岛补给包。'
   type: 3
   targetCard: {fileID: 11400000, guid: 413f08c4a1c64ed46a8b1aac38a088f6, type: 2}
   targetRecipe: {fileID: 0}

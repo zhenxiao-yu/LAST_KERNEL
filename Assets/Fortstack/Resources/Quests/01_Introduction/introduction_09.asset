@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: introduction_09
   m_EditorClassIdentifier: 
   id: 7b812b6257914db5ad0911f6452ab25e
-  title: Pause the Game
-  description: Click the play icon (top-left) twice to cycle the time pace and pause
-    the game.
+  title: '暂停系统时钟'
+  description: '连续点击左上角的时间图标两次，切换时间倍率并暂停游戏。'
   type: 9
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

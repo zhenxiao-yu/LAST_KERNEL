@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Anvil
   m_EditorClassIdentifier: 
   id: 2a3b83bd1247422a88fd769a702272a5
-  displayName: Anvil
-  description: Used for crafting equipments.
+  displayName: '锻造砧台'
+  description: '供重型制造使用的硬化工作台。'
   artTexture: {fileID: 2800000, guid: 9e558d4902d081f4aac50f92f28a4ea2, type: 3}
   category: 6
   faction: 0

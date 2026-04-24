@@ -37,8 +37,8 @@ namespace Markyu.FortStack
             gameOptionsButton.SetOnClick(() => gameOptionsUI.Open());
             quitGameButton.SetOnClick(() =>
                 modalWindow.Show(
-                    "Quit Game",
-                    "Are you sure you want to quit the game?",
+                    "退出游戏",
+                    "确认要退出游戏吗？",
                     Application.Quit
                 )
             );

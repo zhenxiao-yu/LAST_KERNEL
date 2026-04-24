@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_12
   m_EditorClassIdentifier: 
   id: d2d4bc3e50c04b2b98f31cbdca744968
-  title: The Expander III
-  description: Increase your card capacity to 60 or more.
+  title: '容量扩展 III'
+  description: '把卡牌容量提升到 60 或以上。'
   type: 13
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

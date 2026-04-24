@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Cow
   m_EditorClassIdentifier: 
   id: 2621db9f8f1e47a1bf96bfbe51486f88
-  displayName: Cow
-  description: A sturdy livestock animal valued for its milk.
+  displayName: '乳源牛'
+  description: '游荡在废墟与管网间的危险生命体。'
   artTexture: {fileID: 2800000, guid: 76cfac3c6d430ea4ea3e4ef9dbdf0fc2, type: 3}
   category: 9
   faction: 2

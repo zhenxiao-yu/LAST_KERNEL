@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Encounter_Villager
   m_EditorClassIdentifier: 
   id: d43b874dc3884ec4856fd7aa6093ac1f
-  notificationMessage: You come across a wandering villager.
+  notificationMessage: '你在街区边缘遇见了一名迷路的霓虹流民。'
   cardToSpawn: {fileID: 11400000, guid: 3e0351bd595e3654d9d80dc4286c0a65, type: 2}
   count: 1
   oneTimeOnly: 1

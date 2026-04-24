@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Egg
   m_EditorClassIdentifier: 
   id: 85e392d1882a4c61b5b2736e6fb64f4b
-  displayName: Egg
-  description: Cook it first before eating.
+  displayName: '蛋白卵'
+  description: '适合在长期值守时补充体力的街区口粮。'
   artTexture: {fileID: 2800000, guid: 70fe1a50eecb5fa49bd65348e7d3bca5, type: 3}
   category: 3
   faction: 0

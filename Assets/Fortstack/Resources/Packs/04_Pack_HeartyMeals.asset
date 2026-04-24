@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 04_Pack_HeartyMeals
   m_EditorClassIdentifier: 
   id: 32b15fa2906042c89f1c530fd35f8e99
-  displayName: Hearty Meals
-  description: A Hearty Meals card pack.
+  displayName: '热餐补给包'
+  description: '围绕高能口粮与烹饪链条整理出的后勤卡包。'
   artTexture: {fileID: 2800000, guid: 22c87890250755e43b665b7b31165273, type: 3}
   category: 0
   faction: 0

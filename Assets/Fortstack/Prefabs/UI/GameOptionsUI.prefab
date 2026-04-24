@@ -255,7 +255,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: BGM 50%
+  m_text: 背景音乐 50%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -390,7 +390,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shadows High
+  m_text: 阴影 高
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -536,7 +536,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Game Options
+  m_text: 运行设置
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -546,7 +546,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6}
+  m_Color: {r: 0.025, g: 0.055, b: 0.11, a: 0.72}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -783,7 +783,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Reset]'
+  m_text: '[重置]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -930,7 +930,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fullscreen (Enabled)
+  m_text: 全屏 已启用
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -940,7 +940,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: FPS 60
+  m_text: 帧率 60
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1087,7 +1087,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_Color: {r: 0.07, g: 0.13, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1291,7 +1291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6}
+  m_Color: {r: 0.025, g: 0.055, b: 0.11, a: 0.72}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1377,7 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7, g: 0.7, b: 0.7, a: 1}
+  m_Color: {r: 0.07, g: 0.75, b: 0.84, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1500,7 +1500,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: vSync On
+  m_text: 垂直同步 开启
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_Color: {r: 0.07, g: 0.13, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1786,7 +1786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_Color: {r: 0.07, g: 0.13, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2024,7 +2024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_Color: {r: 0.07, g: 0.13, b: 0.2, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2107,7 +2107,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Resolution 1920x1080
+  m_text: 分辨率 1920x1080
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2117,7 +2117,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2248,7 +2248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0.02, g: 0.045, b: 0.09, a: 0.84}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2355,7 +2355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[Close]'
+  m_text: '[关闭]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2365,7 +2365,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2501,7 +2501,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SFX 50%
+  m_text: 音效 50%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2511,7 +2511,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4279505940
-  m_fontColor: {r: 0.08, g: 0.08, b: 0.08, a: 1}
+  m_fontColor: {r: 0.92, g: 0.96, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_AppleTree
   m_EditorClassIdentifier: 
   id: e03a91bf3fbd481c8b6b469f4aeb2f08
-  displayName: Apple Tree
-  description: Apples grow from this tree.
+  displayName: '合成果树'
+  description: '可在废土地表、生态舱或旧城区中回收的原始资源。'
   artTexture: {fileID: 2800000, guid: 3bf0c0456afd2144e9b318cf9456663f, type: 3}
   category: 1
   faction: 0

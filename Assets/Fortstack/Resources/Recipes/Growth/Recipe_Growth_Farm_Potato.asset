@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: fe7c01c3f4b24832906187659b7160e0
   category: 6
-  displayName: Farming Potato
+  displayName: '培育淀粉块根'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 7ba80899b38b3b043a407c33446a8886, type: 2}
     count: 1

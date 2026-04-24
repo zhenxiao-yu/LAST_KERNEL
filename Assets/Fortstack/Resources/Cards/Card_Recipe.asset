@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Recipe
   m_EditorClassIdentifier: 
   id: 23913e28894a4312a2bb5e69212aaf39
-  displayName: 
-  description: 
+  displayName: '制造蓝图'
+  description: '属于霓虹生存殖民地体系的一张关键卡牌。'
   artTexture: {fileID: 0}
   category: 8
   faction: 0

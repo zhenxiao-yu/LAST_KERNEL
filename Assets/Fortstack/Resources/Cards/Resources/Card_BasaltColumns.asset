@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_BasaltColumns
   m_EditorClassIdentifier: 
   id: 7eed52b26492496982e73eeae7685900
-  displayName: Basalt Columns
-  description: Volcanic cliffs that drop dark stone chunks.
+  displayName: '黑石柱群'
+  description: '可在废土地表、生态舱或旧城区中回收的原始资源。'
   artTexture: {fileID: 2800000, guid: e73e11ce7a790504eabcb6f65130fc46, type: 3}
   category: 1
   faction: 0
