@@ -39,6 +39,9 @@ namespace Markyu.FortStack
 
         private void HandleDayEnded(int day)
         {
+            RunStateManager.Instance?.SetPhase(GamePhase.Dusk);
+            RunStateManager.Instance?.ApplyDuskPressure(CardManager.Instance.GetStatsSnapshot());
+
             InputManager.Instance.AddLock(dayCycleInputLock);
             IsEndingCycle = true;
             StartCoroutine(NotificationPhase(day));
@@ -135,10 +138,15 @@ namespace Markyu.FortStack
         // --- PHASE 4: ENCOUNTER ---
         private IEnumerator EncounterPhase()
         {
+            RunStateManager.Instance?.SetPhase(GamePhase.Night);
+
             // 1. Check if we have an encounter for the current day.
             int currentDay = TimeManager.Instance.CurrentDay;
 
             var encounter = EncounterManager.Instance.GetBestEncounter(currentDay);
+            bool hostileContact = encounter != null &&
+                encounter.CardToSpawn != null &&
+                encounter.CardToSpawn.IsAggressive;
 
             if (encounter != null)
             {
@@ -149,12 +157,16 @@ namespace Markyu.FortStack
                 InputManager.Instance.RemoveLock(dayCycleInputLock);
             }
 
+            RunStateManager.Instance?.RecordNightContact(hostileContact);
             PrepareForNewDay();
         }
 
         // --- PHASE 5: NEW DAY ---
         private void PrepareForNewDay()
         {
+            RunStateManager.Instance?.SetPhase(GamePhase.Dawn);
+            RunStateManager.Instance?.ApplyDawnRecovery(CardManager.Instance.GetStatsSnapshot());
+
             InputManager.Instance.AddLock(dayCycleInputLock);
 
             int nextDay = TimeManager.Instance.CurrentDay + 1;
@@ -170,6 +182,7 @@ namespace Markyu.FortStack
                     InfoPanel.Instance?.ClearInfoRequest(dayCycleRequester);
                     InputManager.Instance.RemoveLock(dayCycleInputLock);
                     TimeManager.Instance.StartNewDay();
+                    RunStateManager.Instance?.SetPhase(GamePhase.Day);
                     GameDirector.Instance.SaveGame();
                 }
             );

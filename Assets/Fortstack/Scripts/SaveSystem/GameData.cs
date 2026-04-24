@@ -13,6 +13,7 @@ namespace Markyu.FortStack
         public HashSet<string> DiscoveredCards = new();
         public HashSet<string> DiscoveredRecipes = new();
         public HashSet<string> SeenItems = new();
+        public RunStateData RunState = new();
         public System.DateTime LastSaved;
 
         public GameData() { }
@@ -25,6 +26,8 @@ namespace Markyu.FortStack
 
         public bool TryGetScene(out SceneData sceneData)
         {
+            EnsureRunState();
+
             if (SavedScenes.TryGetValue(CurrentScene, out sceneData))
             {
                 return true;
@@ -33,6 +36,17 @@ namespace Markyu.FortStack
             sceneData = new SceneData(CurrentScene);
             SavedScenes.Add(CurrentScene, sceneData);
             return false;
+        }
+
+        public RunStateData EnsureRunState()
+        {
+            if (RunState == null)
+            {
+                RunState = new RunStateData();
+            }
+
+            RunState.Clamp();
+            return RunState;
         }
     }
 

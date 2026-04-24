@@ -94,6 +94,7 @@ namespace Markyu.FortStack
             }
 
             GameData = new GameData(candidateSlot, prefs);
+            RunStateManager.Instance?.Bind(GameData);
             StartCoroutine(TravelSequence(defaultScene, null));
         }
 
@@ -107,6 +108,7 @@ namespace Markyu.FortStack
         public void SaveGame()
         {
             if (GameData == null) return;
+            RunStateManager.Instance?.SyncToGameData(GameData);
             OnBeforeSave?.Invoke(GameData);
             GameData.LastSaved = System.DateTime.Now;
             string fileName = $"SaveSlot{GameData.SlotNumber:D3}";
@@ -121,6 +123,7 @@ namespace Markyu.FortStack
         public void LoadGame(GameData gameData)
         {
             this.GameData = gameData;
+            RunStateManager.Instance?.Bind(GameData);
             StartCoroutine(TravelSequence(gameData.CurrentScene, null));
         }
 
