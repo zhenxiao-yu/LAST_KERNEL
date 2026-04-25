@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace Markyu.FortStack
@@ -135,29 +136,45 @@ namespace Markyu.FortStack
             }
         }
 
-        // --- PHASE 4: ENCOUNTER ---
+        // --- PHASE 4: NIGHT COMBAT ---
         private IEnumerator EncounterPhase()
         {
             RunStateManager.Instance?.SetPhase(GamePhase.Night);
+            InputManager.Instance.AddLock(dayCycleInputLock);
 
-            // 1. Check if we have an encounter for the current day.
-            int currentDay = TimeManager.Instance.CurrentDay;
-
-            var encounter = EncounterManager.Instance.GetBestEncounter(currentDay);
-            bool hostileContact = encounter != null &&
-                encounter.CardToSpawn != null &&
-                encounter.CardToSpawn.IsAggressive;
-
-            if (encounter != null)
+            if (NightPhaseManager.Instance != null)
             {
-                InputManager.Instance.AddLock(dayCycleInputLock);
+                // Build deployment plan from all living character cards
+                var colonyCards = CardManager.Instance.AllCards
+                    .Where(c => c != null)
+                    .ToList();
 
-                yield return EncounterManager.Instance.ExecuteEncounter(encounter);
+                var plan = NightDeploymentPlan.BuildAutomatic(colonyCards);
 
-                InputManager.Instance.RemoveLock(dayCycleInputLock);
+                // Run night combat (blocks until combat + aftermath are fully done)
+                yield return NightPhaseManager.Instance.RunNight(plan);
+
+                // Apply run-state consequences from the combat result
+                RunStateManager.Instance?.ApplyNightCombatResult(NightPhaseManager.Instance.LastResult);
+            }
+            else
+            {
+                // Fallback: legacy encounter path if NightPhaseManager is not in the scene
+                Debug.LogWarning("DayCycleManager: NightPhaseManager not found. Running legacy encounter fallback.");
+
+                int currentDay = TimeManager.Instance.CurrentDay;
+                var encounter = EncounterManager.Instance.GetBestEncounter(currentDay);
+                bool hostileContact = encounter != null &&
+                    encounter.CardToSpawn != null &&
+                    encounter.CardToSpawn.IsAggressive;
+
+                if (encounter != null)
+                    yield return EncounterManager.Instance.ExecuteEncounter(encounter);
+
+                RunStateManager.Instance?.RecordNightContact(hostileContact);
             }
 
-            RunStateManager.Instance?.RecordNightContact(hostileContact);
+            InputManager.Instance.RemoveLock(dayCycleInputLock);
             PrepareForNewDay();
         }
 

@@ -106,6 +106,10 @@ namespace Markyu.FortStack
             CardManager.Instance?.RegisterStack(Stack);
             TryAttachToNearbyStack(settings.SpawnAttachRadius, stackToIgnore);
             CardManager.Instance?.ResolveOverlaps();
+
+            // Initialize feel presenter after all card state is set up.
+            if (settings?.FeelProfile != null)
+                GetComponent<CardFeelPresenter>()?.Initialize(settings.FeelProfile);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -641,12 +645,13 @@ namespace Markyu.FortStack
         }
 
         /// <summary>
-        /// Safely stops and cleans up the active movement and combat DOTween animations.
+        /// Safely stops and cleans up all active DOTween animations on this card, including feel tweens.
         /// </summary>
         public void KillTweens()
         {
             _moveTween?.Kill();
             _combatTween?.Kill();
+            GetComponent<CardFeelPresenter>()?.KillFeelTweens();
         }
         #endregion
     }

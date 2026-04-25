@@ -98,6 +98,20 @@ namespace Markyu.FortStack
             Clamp();
         }
 
+        /// <summary>
+        /// Applies the outcome of a completed night combat to this run-state.
+        /// Called by RunStateManager after NightPhaseManager.RunNight() completes.
+        /// </summary>
+        public void ApplyNightCombatResult(NightCombatResult result)
+        {
+            Morale += result.MoraleDelta;
+            Fatigue += result.FatigueDelta;
+            SalvageValue += result.SalvageDelta;
+            Casualties += result.DeadDefenders.Count;
+            NightsSurvived++;
+            Clamp();
+        }
+
         public string GetStatusLine()
         {
             return $"Morale {Morale} / Fatigue {Fatigue} / Injured {InjuredPersonnel} / Damage {StructuralDamage} / Power Deficit {PowerDeficit}";

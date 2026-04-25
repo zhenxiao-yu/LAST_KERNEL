@@ -46,6 +46,10 @@ namespace Markyu.FortStack
         [SerializeField, Range(50f, 150f), Tooltip("How quickly a card follows its target. Higher values make the stack tighter and more responsive.")]
         private float swaySharpness = 100f;
 
+        [Header("Feel")]
+        [SerializeField, Tooltip("Interaction feel tunables: hover, drag, snap, spawn, merge. Create via Right-click > LastKernel > Card Feel Profile.")]
+        private CardFeelProfile feelProfile;
+
         [Header("Visual Effects")]
         [SerializeField, Tooltip("Puff particle that plays when the card performs an action.")]
         private PuffParticle puffParticle;
@@ -78,6 +82,8 @@ namespace Markyu.FortStack
         public float MoveDuration => moveDuration;
         public Ease MoveEase => moveEase;
         public float SwaySharpness => swaySharpness;
+
+        public CardFeelProfile FeelProfile => feelProfile;
 
         public PuffParticle PuffParticle => puffParticle;
         public Material OutlineMaterial => outlineMaterial;

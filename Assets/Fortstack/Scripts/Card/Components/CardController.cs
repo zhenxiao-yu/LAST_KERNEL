@@ -12,6 +12,7 @@ namespace Markyu.FortStack
         private CardInstance _card;
         private CardCombatant _combatant;
         private CardEquipment _equipmentComponent;
+        private CardFeelPresenter _feelPresenter;
         private Camera _mainCam;
 
         // Drag State
@@ -28,6 +29,7 @@ namespace Markyu.FortStack
             _card = GetComponent<CardInstance>();
             _combatant = GetComponent<CardCombatant>();
             _equipmentComponent = GetComponent<CardEquipment>();
+            _feelPresenter = GetComponent<CardFeelPresenter>();
             _mainCam = Camera.main;
         }
 
@@ -55,6 +57,7 @@ namespace Markyu.FortStack
                 _card.Stack.KillAllTweens();
 
                 _dragOffset = transform.position - GetMouseWorldPosition();
+                _feelPresenter?.OnPickup();
 
                 CardManager.Instance?.HighlightStackableStacks(_card);
                 TradeManager.Instance?.HighlightTradeableZones(_card.Stack);
@@ -72,6 +75,7 @@ namespace Markyu.FortStack
                     _card.Stack = new CardStack(_card, transform.position);
                     _card.IsBeingDragged = true;
                     _dragOffset = transform.position - GetMouseWorldPosition();
+                    _feelPresenter?.OnPickup();
                 }
                 return;
             }
@@ -103,6 +107,7 @@ namespace Markyu.FortStack
 
             _card.Stack.KillAllTweens();
             _dragOffset = transform.position - GetMouseWorldPosition();
+            _feelPresenter?.OnPickup();
 
             CardManager.Instance?.HighlightStackableStacks(_card);
             TradeManager.Instance?.HighlightTradeableZones(_card.Stack);
@@ -126,6 +131,7 @@ namespace Markyu.FortStack
             if (!_card.IsBeingDragged) return;
 
             _card.IsBeingDragged = false;
+            _feelPresenter?.OnRelease();
 
             CardManager.Instance?.TurnOffHighlightedCards();
             TradeManager.Instance?.TurnOffHighlightedZones();
@@ -219,6 +225,8 @@ namespace Markyu.FortStack
             _card.Stack.SetTargetPosition(finalPos);
 
             var attachedToStack = _card.TryAttachToNearbyStack(_card.Settings.AttachRadius, stackToIgnore: null);
+
+            attachedToStack?.TopCard?.GetComponent<CardFeelPresenter>()?.OnMergeReceived();
 
             if (_card.OriginalCraftingStack != null)
             {

@@ -92,6 +92,14 @@ namespace Markyu.FortStack
             NotifyStateChanged();
         }
 
+        public void ApplyNightCombatResult(NightCombatResult result)
+        {
+            if (result == null) return;
+            EnsureState();
+            State.ApplyNightCombatResult(result);
+            NotifyStateChanged();
+        }
+
         private void EnsureState()
         {
             if (State == null)

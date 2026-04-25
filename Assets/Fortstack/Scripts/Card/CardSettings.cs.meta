@@ -1,14 +1,5 @@
 fileFormatVersion: 2
 guid: eaa82958be74f6e46968a97840c38453
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
 AssetOrigin:
   serializedVersion: 1
   productId: 355516
@@ -16,4 +7,15 @@ AssetOrigin:
   packageVersion: 1.0.0
   assetPath: Assets/_Project/FortStack/Scripts/Card/CardSettings.cs
   uploadId: 847534
-
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - feelProfile: {fileID: 11400000, guid: 8a3c7de79508a594faf8281033f1d485, type: 2}
+  - puffParticle: {instanceID: 0}
+  - outlineMaterial: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
