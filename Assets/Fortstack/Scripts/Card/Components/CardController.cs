@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 namespace Markyu.FortStack
 {
-    [RequireComponent(typeof(CardInstance))]
+    [RequireComponent(typeof(CardInstance), typeof(CardFeelPresenter))]
     public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         // Component References
@@ -29,7 +29,7 @@ namespace Markyu.FortStack
             _card = GetComponent<CardInstance>();
             _combatant = GetComponent<CardCombatant>();
             _equipmentComponent = GetComponent<CardEquipment>();
-            _feelPresenter = GetComponent<CardFeelPresenter>();
+            _feelPresenter = CardFeelPresenter.EnsureOn(gameObject);
             _mainCam = Camera.main;
         }
 
@@ -226,7 +226,7 @@ namespace Markyu.FortStack
 
             var attachedToStack = _card.TryAttachToNearbyStack(_card.Settings.AttachRadius, stackToIgnore: null);
 
-            attachedToStack?.TopCard?.GetComponent<CardFeelPresenter>()?.OnMergeReceived();
+            attachedToStack?.TopCard?.FeelPresenter?.OnMergeReceived();
 
             if (_card.OriginalCraftingStack != null)
             {

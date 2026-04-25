@@ -30,8 +30,6 @@ namespace Markyu.FortStack
 
     public static class GameLocalization
     {
-        private const string LanguagePlayerPrefsKey = "FortStack.Language";
-
         private static bool isInitialized;
 
         private static readonly Dictionary<string, LocalizedTextEntry> TextEntries = new()
@@ -62,7 +60,7 @@ namespace Markyu.FortStack
                 "<size=34>[Intel Panel]<size=30>\nInformation appears here.\nThe panel resizes to fit the text."),
 
             ["ui.action"] = new("执行动作", "Run Action"),
-            ["ui.footer"] = new("FortStack 赛博殖民试作 / 作者 Markyu", "FortStack Cyber Colony Prototype / Markyu"),
+            ["ui.footer"] = new("Last Kernel 赛博殖民试作 / 作者 Markyu", "Last Kernel Cyber Colony Prototype / Markyu"),
 
             ["common.confirmButton"] = new("[确认]", "[Confirm]"),
             ["common.cancelButton"] = new("[取消]", "[Cancel]"),
@@ -184,6 +182,7 @@ namespace Markyu.FortStack
             ["蓝图"] = "menu.blueprints",
             ["保存并返回标题"] = "pause.backToTitle",
             ["FortStack 赛博殖民试作 / 作者 Markyu"] = "ui.footer",
+            ["Last Kernel 赛博殖民试作 / 作者 Markyu"] = "ui.footer",
             ["运行设置"] = "options.header",
             ["[Delete]"] = "common.deleteButton",
             ["[Load]"] = "common.loadButton",
@@ -231,7 +230,7 @@ namespace Markyu.FortStack
 
             isInitialized = true;
 
-            int savedValue = PlayerPrefs.GetInt(LanguagePlayerPrefsKey, (int)GameLanguage.SimplifiedChinese);
+            int savedValue = LoadLanguagePreference();
             if (!Enum.IsDefined(typeof(GameLanguage), savedValue))
             {
                 savedValue = (int)GameLanguage.SimplifiedChinese;
@@ -324,8 +323,26 @@ namespace Markyu.FortStack
 
         private static void SaveLanguagePreference(GameLanguage language)
         {
-            PlayerPrefs.SetInt(LanguagePlayerPrefsKey, (int)language);
+            PlayerPrefs.SetInt(GameIdentity.LanguagePlayerPrefsKey, (int)language);
             PlayerPrefs.Save();
+        }
+
+        private static int LoadLanguagePreference()
+        {
+            if (PlayerPrefs.HasKey(GameIdentity.LanguagePlayerPrefsKey))
+            {
+                return PlayerPrefs.GetInt(GameIdentity.LanguagePlayerPrefsKey, (int)GameLanguage.SimplifiedChinese);
+            }
+
+            if (PlayerPrefs.HasKey(GameIdentity.LegacyLanguagePlayerPrefsKey))
+            {
+                int legacyValue = PlayerPrefs.GetInt(GameIdentity.LegacyLanguagePlayerPrefsKey, (int)GameLanguage.SimplifiedChinese);
+                PlayerPrefs.SetInt(GameIdentity.LanguagePlayerPrefsKey, legacyValue);
+                PlayerPrefs.Save();
+                return legacyValue;
+            }
+
+            return (int)GameLanguage.SimplifiedChinese;
         }
     }
 }

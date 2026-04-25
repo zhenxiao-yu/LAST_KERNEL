@@ -6,7 +6,7 @@ namespace Markyu.FortStack
 {
     public static class RenderPipelineSwitcher
     {
-        private const string URP_ASSET_PATH = "Assets/_Project/FortStack/Settings/URP/URP_Asset.asset";
+        private const string URP_ASSET_PATH = "Assets/Fortstack/Settings/URP/URP_Asset.asset";
 
         [MenuItem("Tools/Markyu/Switch to URP")]
         public static void SwitchToURP()

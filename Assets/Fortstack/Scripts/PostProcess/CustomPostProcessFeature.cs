@@ -35,7 +35,7 @@ namespace Markyu.FortStack
 
         class CustomPass : ScriptableRenderPass
         {
-            private const string PassName = "FortStack Custom Post Process";
+            private const string PassName = "Last Kernel Custom Post Process";
 
             private Material material;
 
@@ -63,7 +63,7 @@ namespace Markyu.FortStack
                     return;
 
                 TextureDesc destinationDesc = renderGraph.GetTextureDesc(source);
-                destinationDesc.name = "_FortStackCustomPostProcessColor";
+                destinationDesc.name = "_LastKernelCustomPostProcessColor";
                 destinationDesc.clearBuffer = false;
 
                 TextureHandle destination = renderGraph.CreateTexture(destinationDesc);

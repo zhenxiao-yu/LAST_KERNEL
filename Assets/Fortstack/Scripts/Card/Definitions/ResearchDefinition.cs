@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Special Cards/Research Card", fileName = "Card_Research_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Special Cards/Research Card", fileName = "Card_Research_")]
     public class ResearchDefinition : CardDefinition
     {
         // Intentionally empty.

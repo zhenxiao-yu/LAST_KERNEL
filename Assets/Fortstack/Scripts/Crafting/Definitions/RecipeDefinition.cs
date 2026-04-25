@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Recipe", fileName = "Recipe_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Recipe", fileName = "Recipe_")]
     public class RecipeDefinition : ScriptableObject
     {
         [System.Serializable]
@@ -56,6 +56,20 @@ namespace Markyu.FortStack
         {
             if (string.IsNullOrWhiteSpace(id))
                 id = System.Guid.NewGuid().ToString("N");
+
+            if (requiredIngredients == null)
+            {
+                requiredIngredients = new List<Ingredient>();
+            }
+
+            for (int i = 0; i < requiredIngredients.Count; i++)
+            {
+                var ingredient = requiredIngredients[i];
+                ingredient.count = Mathf.Max(1, ingredient.count);
+                requiredIngredients[i] = ingredient;
+            }
+
+            craftingDuration = Mathf.Max(0f, craftingDuration);
         }
 
         /// <summary>
@@ -64,6 +78,12 @@ namespace Markyu.FortStack
         /// </summary>
         public virtual void Execute(CardStack stack)
         {
+            if (stack == null || stack.TopCard == null)
+            {
+                Debug.LogWarning($"RecipeDefinition: Cannot execute recipe '{DisplayName}' without a valid stack.", this);
+                return;
+            }
+
             // 1. Map the rules for easy lookup
             var rules = GetIngredientRules();
 
@@ -100,8 +120,9 @@ namespace Markyu.FortStack
         #region Subclass Helpers
         protected Dictionary<CardDefinition, Ingredient> GetIngredientRules()
         {
-            // Groups by card definition to handle duplicates if necessary
+            // Groups by card definition so accidental duplicate ingredient rows still behave predictably.
             return requiredIngredients
+                .Where(i => i.card != null)
                 .GroupBy(i => i.card)
                 .ToDictionary(g => g.Key, g => g.First());
         }
@@ -112,7 +133,10 @@ namespace Markyu.FortStack
             var cardsToCheck = stack.Cards.ToList();
 
             // Track how many we still need to process (for recipes requiring multiple of the same card)
-            var remainingNeeds = requiredIngredients.ToDictionary(i => i.card, i => i.count);
+            var remainingNeeds = requiredIngredients
+                .Where(i => i.card != null)
+                .GroupBy(i => i.card)
+                .ToDictionary(g => g.Key, g => g.Sum(i => i.count));
 
             foreach (var card in cardsToCheck)
             {

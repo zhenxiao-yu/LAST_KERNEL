@@ -73,6 +73,11 @@ namespace Markyu.FortStack
 
         private void OnDestroy()
         {
+            if (Instance == this)
+            {
+                Instance = null;
+            }
+
             if (GameDirector.Instance != null)
             {
                 GameDirector.Instance.OnSceneDataReady -= HandleSceneDataReady;
@@ -106,7 +111,7 @@ namespace Markyu.FortStack
             }
             _activeCombats.Clear();
 
-            if (sceneData.SavedCombats == null) return;
+            if (sceneData.SavedCombats == null || CardManager.Instance == null) return;
 
             foreach (var combatData in sceneData.SavedCombats)
             {
@@ -127,7 +132,7 @@ namespace Markyu.FortStack
 
                         task.Rect.UpdateLayout();
 
-                        CardManager.Instance.ResolveOverlaps(task.Rect);
+                        CardManager.Instance?.ResolveOverlaps(task.Rect);
                     }
                 }
             }
@@ -140,7 +145,9 @@ namespace Markyu.FortStack
 
             foreach (var data in dataList)
             {
-                CardInstance card = CardManager.Instance.RestoreCardFromData(data, Vector3.zero);
+                CardInstance card = CardManager.Instance != null
+                    ? CardManager.Instance.RestoreCardFromData(data, Vector3.zero)
+                    : null;
 
                 if (card != null)
                 {
@@ -165,6 +172,12 @@ namespace Markyu.FortStack
         /// <returns>The newly created or merged <see cref="CombatTask"/>, or null if creation failed.</returns>
         public CombatTask StartCombat(List<CardInstance> attackers, List<CardInstance> defenders, bool playerIsAttacker)
         {
+            if (attackers == null || defenders == null)
+            {
+                Debug.LogWarning("CombatManager: Cannot start combat with a null attacker or defender list.", this);
+                return null;
+            }
+
             // 1. Find any existing combat tasks that overlap with the new one's initiation area.
             var tasksToMerge = FindOverlappingTasks(attackers, defenders);
 
@@ -226,20 +239,26 @@ namespace Markyu.FortStack
         private CombatTask CreateCombatTaskInternal(List<CardInstance> attackers, List<CardInstance> defenders, bool playerIsAttacker)
         {
             // Do not create combat if one side is empty.
-            if (attackers.Count == 0 || defenders.Count == 0) return null;
+            if (attackers == null || defenders == null || attackers.Count == 0 || defenders.Count == 0) return null;
+
+            if (combatRectPrefab == null)
+            {
+                Debug.LogError("CombatManager: Combat Rect prefab is not assigned.", this);
+                return null;
+            }
 
             var rect = Instantiate(combatRectPrefab, WorldCanvas.Instance?.transform);
             rect.Initialize(attackers, defenders);
             var task = new CombatTask(attackers, defenders, playerIsAttacker, rect);
 
             // Make every card aware that it is now in this specific combat.
-            attackers.ForEach(a => a.Combatant.EnterCombat(task));
-            defenders.ForEach(d => d.Combatant.EnterCombat(task));
+            attackers.ForEach(a => a?.Combatant?.EnterCombat(task));
+            defenders.ForEach(d => d?.Combatant?.EnterCombat(task));
 
             _activeCombats.Add(task);
 
             // Ensure no world stacks are overlapping the new combat rect.
-            CardManager.Instance.ResolveOverlaps(rect);
+            CardManager.Instance?.ResolveOverlaps(rect);
             return task;
         }
 
@@ -329,7 +348,7 @@ namespace Markyu.FortStack
         {
             foreach (var task in _activeCombats)
             {
-                if (task.Rect.IsPositionInside(worldPosition))
+                if (task.Rect != null && task.Rect.IsPositionInside(worldPosition))
                 {
                     return task;
                 }
@@ -348,6 +367,12 @@ namespace Markyu.FortStack
         /// <param name="hitResult">The result data (damage, hit type, advantage) used to configure the UI.</param>
         public void SpawnHitUI(Vector3 position, HitResult hitResult)
         {
+            if (hitUIPrefab == null)
+            {
+                Debug.LogWarning("CombatManager: Hit UI prefab is not assigned; skipping hit feedback.", this);
+                return;
+            }
+
             var hitUI = Instantiate(hitUIPrefab, position, Quaternion.Euler(90, 0, 0), WorldCanvas.Instance?.transform);
             hitUI.Initialize(hitResult);
         }
@@ -378,6 +403,12 @@ namespace Markyu.FortStack
                     break;
             }
 
+            if (projectilePrefab == null)
+            {
+                Debug.LogWarning($"CombatManager: No projectile prefab assigned for combat type '{type}'.", this);
+                return null;
+            }
+
             var projectileObj = Instantiate(
                 projectilePrefab,
                 start,
@@ -401,6 +432,11 @@ namespace Markyu.FortStack
         /// <returns>A Bounds struct representing the world-space boundaries of the combat area.</returns>
         private Bounds GetWorldBounds(CombatRect combatRect)
         {
+            if (combatRect == null || combatRect.Rect == null)
+            {
+                return new Bounds();
+            }
+
             var rectTransform = combatRect.Rect;
             Vector3 worldCenter = rectTransform.position;
 
@@ -425,13 +461,22 @@ namespace Markyu.FortStack
         /// <returns>A Bounds struct representing the calculated potential world-space boundaries.</returns>
         private Bounds CalculatePotentialBounds(List<CardInstance> combatants)
         {
-            Vector3 center = combatants
-                .Select(c => c.transform.position)
-                .Aggregate(Vector3.zero, (acc, v) => acc + v) / combatants.Count();
+            var validCombatants = combatants
+                .Where(card => card != null && card.Definition != null)
+                .ToList();
 
-            int attackerCount = combatants.Count(c => c.Definition.Faction == CardFaction.Player);
-            int defenderCount = combatants.Count - attackerCount;
-            var firstCard = combatants[0];
+            if (validCombatants.Count == 0)
+            {
+                return new Bounds();
+            }
+
+            Vector3 center = validCombatants
+                .Select(c => c.transform.position)
+                .Aggregate(Vector3.zero, (acc, v) => acc + v) / validCombatants.Count;
+
+            int attackerCount = validCombatants.Count(c => c.Definition.Faction == CardFaction.Player);
+            int defenderCount = validCombatants.Count - attackerCount;
+            var firstCard = validCombatants[0];
 
             Vector2 rectSize = CombatRect.CalculateRequiredSize(
                 attackerCount, defenderCount, firstCard.Size, CombatRect.Margin

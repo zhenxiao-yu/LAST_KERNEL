@@ -48,7 +48,7 @@ namespace Markyu.FortStack
         {
             if (SceneManager.GetActiveScene().name != titleScene)
             {
-                if (DayCycleManager.Instance.IsEndingCycle) return;
+                if (DayCycleManager.Instance != null && DayCycleManager.Instance.IsEndingCycle) return;
 
                 SaveGame();
             }
@@ -64,6 +64,12 @@ namespace Markyu.FortStack
 
             if (scene.name != titleScene)
             {
+                if (GameData == null)
+                {
+                    Debug.LogWarning($"GameDirector: Scene '{scene.name}' loaded without active GameData. Scene data initialization skipped.", this);
+                    return;
+                }
+
                 GameData.CurrentScene = scene.name;
                 bool wasLoaded = GameData.TryGetScene(out SceneData sceneData);
                 OnSceneDataReady?.Invoke(sceneData, wasLoaded);
@@ -122,9 +128,20 @@ namespace Markyu.FortStack
         /// <param name="gameData">The GameData object loaded from a save file.</param>
         public void LoadGame(GameData gameData)
         {
+            if (gameData == null)
+            {
+                Debug.LogWarning("GameDirector: Ignoring load request for null GameData.", this);
+                return;
+            }
+
             this.GameData = gameData;
             RunStateManager.Instance?.Bind(GameData);
-            StartCoroutine(TravelSequence(gameData.CurrentScene, null));
+
+            string sceneToLoad = string.IsNullOrWhiteSpace(gameData.CurrentScene)
+                ? defaultScene
+                : gameData.CurrentScene;
+
+            StartCoroutine(TravelSequence(sceneToLoad, null));
         }
 
         /// <summary>
@@ -134,6 +151,12 @@ namespace Markyu.FortStack
         /// <param name="gameData">The GameData object corresponding to the save file to be deleted.</param>
         public void DeleteGame(GameData gameData)
         {
+            if (gameData == null)
+            {
+                Debug.LogWarning("GameDirector: Ignoring delete request for null GameData.", this);
+                return;
+            }
+
             string fileName = $"SaveSlot{gameData.SlotNumber:D3}";
             SavedGames.Remove(fileName);
             SaveSystem.DeleteSave(fileName);
@@ -157,6 +180,12 @@ namespace Markyu.FortStack
         /// </remarks>
         public void GameOver()
         {
+            if (GameData == null)
+            {
+                StartCoroutine(TravelSequence(titleScene, null));
+                return;
+            }
+
             DeleteGame(this.GameData);
             StartCoroutine(TravelSequence(titleScene, null));
         }
@@ -226,6 +255,13 @@ namespace Markyu.FortStack
 
         private void SpawnTravelers()
         {
+            if (CardManager.Instance == null)
+            {
+                Debug.LogWarning("GameDirector: CardManager was not ready, so incoming travelers could not be restored.", this);
+                incomingTravelers.Clear();
+                return;
+            }
+
             foreach (var data in incomingTravelers)
             {
                 var randomPos = Random.insideUnitSphere.Flatten();

@@ -3,7 +3,7 @@ using DG.Tweening;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Card Settings")]
+    [CreateAssetMenu(menuName = "Last Kernel/Card Settings")]
     public class CardSettings : ScriptableObject
     {
         [Header("Game Rules & Economy")]
@@ -47,7 +47,7 @@ namespace Markyu.FortStack
         private float swaySharpness = 100f;
 
         [Header("Feel")]
-        [SerializeField, Tooltip("Interaction feel tunables: hover, drag, snap, spawn, merge. Create via Right-click > LastKernel > Card Feel Profile.")]
+        [SerializeField, Tooltip("Interaction feel tunables: hover, drag, snap, spawn, merge. Create via Right-click > Last Kernel > Card Feel Profile.")]
         private CardFeelProfile feelProfile;
 
         [Header("Visual Effects")]

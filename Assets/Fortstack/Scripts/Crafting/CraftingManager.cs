@@ -25,6 +25,8 @@ namespace Markyu.FortStack
 
         private readonly List<CraftingTask> activeCraftingTasks = new();
         private readonly Dictionary<CraftingTask, ProgressUI> activeCraftingUIs = new();
+        private readonly Dictionary<string, RecipeDefinition> recipesById = new();
+        private bool warnedMissingProgressUI;
 
         #region Unity Lifecycle
         void Awake()
@@ -36,7 +38,7 @@ namespace Markyu.FortStack
             }
             Instance = this;
 
-            AllRecipes = Resources.LoadAll<RecipeDefinition>("Recipes").ToList();
+            LoadRecipes();
 
             if (GameDirector.Instance != null)
             {
@@ -94,6 +96,32 @@ namespace Markyu.FortStack
         }
         #endregion
 
+        private void LoadRecipes()
+        {
+            AllRecipes = Resources.LoadAll<RecipeDefinition>("Recipes")
+                .Where(recipe => recipe != null)
+                .ToList();
+
+            recipesById.Clear();
+
+            foreach (var recipe in AllRecipes)
+            {
+                if (string.IsNullOrWhiteSpace(recipe.Id))
+                {
+                    Debug.LogWarning($"CraftingManager: Recipe '{recipe.name}' has an empty id and cannot be restored from saves.", recipe);
+                    continue;
+                }
+
+                if (recipesById.ContainsKey(recipe.Id))
+                {
+                    Debug.LogWarning($"CraftingManager: Duplicate recipe id '{recipe.Id}' on '{recipe.name}'. Keeping the first recipe.", recipe);
+                    continue;
+                }
+
+                recipesById.Add(recipe.Id, recipe);
+            }
+        }
+
         #region Save & Load
         private void HandleBeforeSave(GameData gameData)
         {
@@ -150,128 +178,47 @@ namespace Markyu.FortStack
         {
             if (stack == null || stack.Cards.Count == 0) return;
 
-            // 1. Find ALL recipes that match the stack.
-            List<RecipeDefinition> matchingRecipes = AllRecipes
-                .Where(recipe => DoesStackMatchRecipe(stack, recipe))
-                .ToList();
+            List<RecipeDefinition> matchingRecipes = RecipeMatcher.FindMatchingRecipes(
+                stack.Cards.Select(card => card != null ? card.BaseDefinition : null),
+                AllRecipes);
 
-            // 2. If no recipes matched, we're done.
             if (matchingRecipes.Count == 0)
             {
                 return;
             }
 
-            // 3. Calculate the total weight of all possible recipes.
-            float totalWeight = matchingRecipes.Sum(recipe => recipe.RandomWeight);
-
-            // 4. If total weight is zero (e.g., all matches have 0 weight),
-            //    we can't do a weighted random, so just pick one at random to avoid errors.
-            if (totalWeight <= 0)
-            {
-                // Fallback to simple random selection
-                int randomIndex = Random.Range(0, matchingRecipes.Count);
-                StartCraftingTask(stack, matchingRecipes[randomIndex]);
-                return;
-            }
-
-            // 5. Pick a random number between 0 and the total weight.
-            float randomRoll = Random.Range(0f, totalWeight);
-
-            // 6. Iterate until our "roll" is "used up".
-            RecipeDefinition chosenRecipe = null;
-            foreach (var recipe in matchingRecipes)
-            {
-                // Subtract this recipe's weight from the roll.
-                randomRoll -= recipe.RandomWeight;
-
-                // If the roll is now 0 or less, this is the one we've landed on.
-                if (randomRoll <= 0f)
-                {
-                    chosenRecipe = recipe;
-                    break;
-                }
-            }
-
-            // (Safety check in case of floating point issues, defaulting to the last item)
-            if (chosenRecipe == null)
-            {
-                chosenRecipe = matchingRecipes.Last();
-            }
-
-            // 7. Start the crafting task with the weighted-randomly chosen recipe.
+            RecipeDefinition chosenRecipe = RecipeMatcher.PickRandomWeightedRecipe(matchingRecipes);
             StartCraftingTask(stack, chosenRecipe);
         }
 
         private bool DoesStackMatchRecipe(CardStack stack, RecipeDefinition recipe)
         {
-            // Group the cards in the stack by their base definition and count them.
-            var stackComposition = stack.Cards
-                .GroupBy(c => c.BaseDefinition)
-                .ToDictionary(g => g.Key, g => g.Count());
-
-            var recipeIngredients = recipe.RequiredIngredients;
-
-            // 1. Verify the stack contains all necessary ingredients with the correct counts.
-            foreach (var ingredient in recipeIngredients)
-            {
-                // Check if missing
-                if (!stackComposition.TryGetValue(ingredient.card, out int countInStack))
-                {
-                    return false;
-                }
-
-                // If it is a Workstation recipe (AllowExcessIngredients), we only care about "At Least" the amount.
-                // If it is a Standard recipe, we enforce strict counts for non-Resources (e.g. Tree, Rock).
-                if (recipe.AllowExcessIngredients || ingredient.card.Category == CardCategory.Resource)
-                {
-                    if (countInStack < ingredient.count) return false;
-                }
-                else
-                {
-                    // Strict match for standard recipes
-                    if (countInStack != ingredient.count) return false;
-                }
-            }
-
-            // 2. Verify the stack does NOT contain any extra, non-recipe cards.
-
-            // If AllowExcessIngredients is true, we SKIP this check. 
-            // This allows the stack to contain [Sawmill, Wood x10, Plank x3] and still match the [Sawmill, Wood x2] recipe.
-            if (!recipe.AllowExcessIngredients)
-            {
-                var recipeIngredientSet = new HashSet<CardDefinition>(recipeIngredients.Select(i => i.card));
-
-                if (stackComposition.Keys.Any(cardDef => !recipeIngredientSet.Contains(cardDef)))
-                {
-                    return false;
-                }
-            }
-
-            return true;
+            return stack != null && RecipeMatcher.DoesStackMatchRecipe(
+                stack.Cards.Select(card => card != null ? card.BaseDefinition : null),
+                recipe);
         }
         #endregion
 
         #region Task Management
         private void StartCraftingTask(CardStack stack, RecipeDefinition recipe)
         {
+            if (stack == null || recipe == null)
+            {
+                Debug.LogWarning("CraftingManager: Cannot start a crafting task without both a stack and a recipe.", this);
+                return;
+            }
+
+            if (GetCraftingTask(stack) != null)
+            {
+                return;
+            }
+
             // Create and add a new crafting task to the list
             var newTask = new CraftingTask(recipe, stack);
             activeCraftingTasks.Add(newTask);
             stack.SetCraftingState(true);
 
-            // Instantiate and track the UI for the new task
-            ProgressUI newUI = Instantiate(
-                progressUIPrefab,
-                stack.TargetPosition + progressUIPrefab.DisplayOffset,
-                Quaternion.identity
-            );
-
-            newUI.transform.SetParent(WorldCanvas.Instance?.transform);
-            newUI.transform.localRotation = Quaternion.identity;
-
-            activeCraftingUIs.Add(newTask, newUI);
-
-            // Debug.Log($"Started crafting task for {recipe.ResultingCard.DisplayName}.");
+            TryCreateProgressUI(newTask, stack);
 
             if (!DiscoveredRecipes.Contains(recipe.Id))
             {
@@ -312,6 +259,11 @@ namespace Markyu.FortStack
 
         private void PerformCraftingAction(CraftingTask task)
         {
+            if (task == null || task.Recipe == null || task.TargetStack == null)
+            {
+                return;
+            }
+
             var recipe = task.Recipe;
             var stack = task.TargetStack;
 
@@ -366,7 +318,11 @@ namespace Markyu.FortStack
             var task = GetCraftingTask(targetStack);
             if (task == null) return false;
 
-            // 2. If the recipe allows excess (Workstation), check if the card is a valid ingredient
+            if (incomingCard == null || task.Recipe == null)
+            {
+                return false;
+            }
+
             if (task.Recipe.AllowExcessIngredients)
             {
                 // Check if the incoming card is part of the recipe requirements
@@ -428,7 +384,7 @@ namespace Markyu.FortStack
 
         public void MarkRecipeAsDiscovered(RecipeDefinition recipe)
         {
-            if (!string.IsNullOrEmpty(recipe.Id) && !DiscoveredRecipes.Contains(recipe.Id))
+            if (recipe != null && !string.IsNullOrEmpty(recipe.Id) && !DiscoveredRecipes.Contains(recipe.Id))
             {
                 DiscoveredRecipes.Add(recipe.Id);
                 OnRecipeDiscovered?.Invoke(recipe.Id);
@@ -439,7 +395,9 @@ namespace Markyu.FortStack
         #region  Helper Methods
         public RecipeDefinition GetRecipeById(string recipeId)
         {
-            return AllRecipes.FirstOrDefault(r => r.Id == recipeId);
+            return !string.IsNullOrWhiteSpace(recipeId) && recipesById.TryGetValue(recipeId, out var recipe)
+                ? recipe
+                : null;
         }
 
         public CraftingTask GetCraftingTask(CardStack stack)
@@ -452,7 +410,7 @@ namespace Markyu.FortStack
         /// </summary>
         public string GetFormattedIngredients(RecipeDefinition recipe)
         {
-            if (!AllRecipes.Contains(recipe))
+            if (recipe == null || !AllRecipes.Contains(recipe))
             {
                 return string.Empty;
             }
@@ -471,6 +429,31 @@ namespace Markyu.FortStack
             if (sb.Length > 0) sb.Append(".");
 
             return sb.ToString();
+        }
+
+        private void TryCreateProgressUI(CraftingTask task, CardStack stack)
+        {
+            if (progressUIPrefab == null)
+            {
+                if (!warnedMissingProgressUI)
+                {
+                    warnedMissingProgressUI = true;
+                    Debug.LogWarning("CraftingManager: Progress UI prefab is not assigned. Crafting will continue without a visible progress indicator.", this);
+                }
+
+                return;
+            }
+
+            ProgressUI newUI = Instantiate(
+                progressUIPrefab,
+                stack.TargetPosition + progressUIPrefab.DisplayOffset,
+                Quaternion.identity
+            );
+
+            newUI.transform.SetParent(WorldCanvas.Instance?.transform);
+            newUI.transform.localRotation = Quaternion.identity;
+
+            activeCraftingUIs.Add(task, newUI);
         }
         #endregion 
     }

@@ -28,7 +28,7 @@ namespace Markyu.FortStack
         Capacity
     }
 
-    [CreateAssetMenu(fileName = "New Quest", menuName = "FortStack/Quest")]
+    [CreateAssetMenu(fileName = "New Quest", menuName = "Last Kernel/Quest")]
     public class Quest : ScriptableObject
     {
         // Info

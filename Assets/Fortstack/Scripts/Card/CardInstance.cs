@@ -42,6 +42,7 @@ namespace Markyu.FortStack
         public CardCombatant Combatant { get; private set; }
         public CardEquipper EquipperComponent { get; private set; }
         public CardEquipment EquipmentComponent { get; private set; }
+        public CardFeelPresenter FeelPresenter { get; private set; }
 
         public bool IsBeingDragged { get; set; }
 
@@ -72,6 +73,20 @@ namespace Markyu.FortStack
         /// <param name="stackToIgnore">A specific stack to ignore when searching for nearby merge candidates.</param>
         public void Initialize(CardDefinition definition, CardSettings settings = null, CardStack stackToIgnore = null)
         {
+            if (definition == null)
+            {
+                Debug.LogError("CardInstance: Cannot initialize with a null card definition.", this);
+                enabled = false;
+                return;
+            }
+
+            if (settings == null)
+            {
+                Debug.LogError($"CardInstance: Cannot initialize '{definition.DisplayName}' without CardSettings.", this);
+                enabled = false;
+                return;
+            }
+
             _mainCam = Camera.main;
             _renderer = GetComponent<MeshRenderer>();
             _col = GetComponent<BoxCollider>();
@@ -79,6 +94,7 @@ namespace Markyu.FortStack
             Combatant = GetComponent<CardCombatant>();
             EquipperComponent = GetComponent<CardEquipper>();
             EquipmentComponent = GetComponent<CardEquipment>();
+            FeelPresenter = CardFeelPresenter.EnsureOn(gameObject);
 
             gameObject.name = $"{(definition is PackDefinition ? "Pack" : "Card")}_{definition.DisplayName}";
 
@@ -95,11 +111,14 @@ namespace Markyu.FortStack
             CurrentHealth = Stats.MaxHealth.Value;
             CurrentNutrition = definition.Nutrition;
 
-            titleText.text = Definition.DisplayName;
+            if (titleText != null)
+            {
+                titleText.text = Definition.DisplayName;
+            }
 
             UpdateStatDisplays();
 
-            if (Definition.ArtTexture != null)
+            if (Definition.ArtTexture != null && _renderer != null)
                 _renderer.material.SetTexture("_OverlayTex", Definition.ArtTexture);
 
             Stack = new CardStack(this, transform.position);
@@ -107,9 +126,16 @@ namespace Markyu.FortStack
             TryAttachToNearbyStack(settings.SpawnAttachRadius, stackToIgnore);
             CardManager.Instance?.ResolveOverlaps();
 
-            // Initialize feel presenter after all card state is set up.
-            if (settings?.FeelProfile != null)
-                GetComponent<CardFeelPresenter>()?.Initialize(settings.FeelProfile);
+            // The presenter is initialized after gameplay state and art are ready so shader feedback
+            // reads the correct material defaults and overlay texture.
+            if (settings.FeelProfile != null)
+            {
+                FeelPresenter?.Initialize(settings.FeelProfile);
+            }
+            else
+            {
+                Debug.LogWarning($"CardInstance: '{Definition.DisplayName}' has no CardFeelProfile assigned in CardSettings.", this);
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -167,6 +193,10 @@ namespace Markyu.FortStack
             if (Stack.IsCrafting)
             {
                 var task = CraftingManager.Instance?.GetCraftingTask(Stack);
+                if (task == null || task.Recipe == null)
+                {
+                    return info;
+                }
 
                 info.header = task.Recipe.DisplayName;
                 info.body = GameLocalization.Format("card.timeLeft", task.Recipe.CraftingDuration - task.Progress);
@@ -213,6 +243,11 @@ namespace Markyu.FortStack
         /// </summary>
         public void UpdateStatDisplays()
         {
+            if (Definition == null)
+            {
+                return;
+            }
+
             if (priceText != null) priceText.text = Definition.SellPrice.ToString();
             if (nutritionText != null) nutritionText.text = CurrentNutrition.ToString();
             if (healthText != null) healthText.text = CurrentHealth.ToString();
@@ -236,6 +271,11 @@ namespace Markyu.FortStack
         /// <param name="value">If true, the card is highlighted; otherwise, the highlight is hidden.</param>
         public void SetHighlighted(bool value)
         {
+            if (Settings == null || Settings.OutlineMaterial == null)
+            {
+                return;
+            }
+
             if (_highlight == null)
             {
                 var mesh = GetComponent<MeshFilter>().mesh;
@@ -250,7 +290,10 @@ namespace Markyu.FortStack
         /// </summary>
         public void PlayPuffParticle()
         {
-            Instantiate(Settings.PuffParticle, transform.position, Quaternion.identity);
+            if (Settings?.PuffParticle != null)
+            {
+                Instantiate(Settings.PuffParticle, transform.position, Quaternion.identity);
+            }
         }
         #endregion
 
@@ -364,7 +407,8 @@ namespace Markyu.FortStack
                 if (candidateStack.IsCrafting && candidateStack != OriginalCraftingStack)
                 {
                     // Ask CraftingManager if this specific card is allowed to join the active task
-                    if (!CraftingManager.Instance.CanJoinActiveCraft(candidateStack, Definition))
+                    if (CraftingManager.Instance == null ||
+                        !CraftingManager.Instance.CanJoinActiveCraft(candidateStack, Definition))
                     {
                         continue; // It's crafting and we aren't a valid ingredient. Block the merge.
                     }
@@ -402,7 +446,7 @@ namespace Markyu.FortStack
                     CraftingManager.Instance.ResumeCraftingTask(OriginalCraftingStack);
                 }
                 // If the stack we're dropping was crafting, stop it since it's being merged.
-                else if (droppedStack.IsCrafting)
+                else if (droppedStack.IsCrafting && CraftingManager.Instance != null)
                 {
                     CraftingManager.Instance.StopCraftingTask(droppedStack);
                 }
@@ -413,7 +457,7 @@ namespace Markyu.FortStack
                 // If the interaction (like a Chest) left cards behind, we must keep the stack registered.
                 if (droppedStack.Cards.Count == 0)
                 {
-                    CardManager.Instance.UnregisterStack(droppedStack);
+                    CardManager.Instance?.UnregisterStack(droppedStack);
                     bestCandidateStack.SetTargetPosition(bestCandidateStack.TargetPosition);
                 }
                 else
@@ -421,14 +465,14 @@ namespace Markyu.FortStack
                     // The stack still exists (e.g., partial deposit or full chest).
                     // We let the interaction logic (ChestLogic) or CardManager handle the overlap resolution,
                     // but we ensure the stack remains "alive" in the system.
-                    CardManager.Instance.ResolveOverlaps();
+                    CardManager.Instance?.ResolveOverlaps();
                 }
 
                 // SAFE CHECK: Only look for new recipes if the stack is IDLE.
                 // This prevents resetting the timer on active Workstations.
                 if (!bestCandidateStack.IsCrafting)
                 {
-                    CraftingManager.Instance.CheckForRecipe(bestCandidateStack);
+                    CraftingManager.Instance?.CheckForRecipe(bestCandidateStack);
                 }
 
                 return bestCandidateStack;
@@ -450,7 +494,9 @@ namespace Markyu.FortStack
         /// <param name="healAmount">The amount of health to restore.</param>
         public void Heal(int healAmount)
         {
-            CurrentHealth += healAmount;
+            CurrentHealth = Stats != null
+                ? Mathf.Min(Stats.MaxHealth.Value, CurrentHealth + Mathf.Max(0, healAmount))
+                : CurrentHealth + Mathf.Max(0, healAmount);
             UpdateStatDisplays();
         }
 
@@ -465,19 +511,28 @@ namespace Markyu.FortStack
             UpdateStatDisplays();
 
             _hurtTween?.Kill();
+            _hurtTween = null;
 
-            var flashTween = _renderer.material
-                .DOFloat(1f, "_FlashAmount", 0.1f)
-                .SetDelay(0.05f)
-                .SetLoops(2, LoopType.Yoyo);
+            bool handledByFeel = FeelPresenter != null && FeelPresenter.OnDamageTaken();
+            if (handledByFeel)
+            {
+                return;
+            }
 
-            var shakeTween = transform
-                .DOPunchRotation(new Vector3(0, 15, 0), 0.25f, vibrato: 25);
+            var sequence = DOTween.Sequence();
 
-            _hurtTween = DOTween.Sequence()
-                .Join(flashTween)
-                .Join(shakeTween)
-                .SetUpdate(true);
+            if (_renderer != null && _renderer.material.HasProperty("_FlashAmount"))
+            {
+                sequence.Join(_renderer.material
+                    .DOFloat(1f, "_FlashAmount", 0.1f)
+                    .SetDelay(0.05f)
+                    .SetLoops(2, LoopType.Yoyo));
+            }
+
+            sequence.Join(transform
+                .DOPunchRotation(new Vector3(0, 15, 0), 0.25f, vibrato: 25));
+
+            _hurtTween = sequence.SetUpdate(true);
         }
 
         /// <summary>
@@ -497,12 +552,13 @@ namespace Markyu.FortStack
                 Combatant.CurrentCombatTask.RemoveCombatant(this);
             }
 
-            if (Definition.Category is CardCategory.Mob or CardCategory.Character)
+            if (Definition != null && Definition.Category is CardCategory.Mob or CardCategory.Character)
             {
-                CardManager.Instance?.CreateCardInstance(
-                    Definition.GetRandomLoot(),
-                    transform.position
-                );
+                CardDefinition loot = Definition.GetRandomLoot();
+                if (loot != null)
+                {
+                    CardManager.Instance?.CreateCardInstance(loot, transform.position);
+                }
             }
 
             PlayPuffParticle();
@@ -517,8 +573,8 @@ namespace Markyu.FortStack
         /// <param name="value">If true<, the card is visible and collidable; otherwise, it is hidden.</param>
         public void SetVisible(bool value)
         {
-            _renderer.enabled = value;
-            _col.enabled = value;
+            if (_renderer != null) _renderer.enabled = value;
+            if (_col != null) _col.enabled = value;
 
             if (titleText != null) titleText.enabled = value;
             if (priceText != null) priceText.enabled = value;
@@ -533,11 +589,19 @@ namespace Markyu.FortStack
         /// <param name="newDefinition">The new definition to assign to the card.</param>
         public void SetDefinition(CardDefinition newDefinition)
         {
+            if (newDefinition == null)
+            {
+                Debug.LogWarning("CardInstance: Attempted to set a null card definition.", this);
+                return;
+            }
+
             Definition = newDefinition;
             Stats = Definition.CreateCombatStats();
             if (titleText != null) titleText.text = Definition.DisplayName;
             if (Definition.ArtTexture != null && _renderer != null)
                 _renderer.material.SetTexture("_OverlayTex", Definition.ArtTexture);
+
+            FeelPresenter?.RefreshMaterialState();
         }
 
         /// <summary>
@@ -563,7 +627,7 @@ namespace Markyu.FortStack
         #region Helpers & Utilities
         private bool CanStack(CardDefinition bottom, CardDefinition top)
         {
-            return CardManager.Instance.CanStack(bottom, top);
+            return CardManager.Instance != null && CardManager.Instance.CanStack(bottom, top);
         }
 
         /// <summary>
@@ -577,7 +641,7 @@ namespace Markyu.FortStack
             _isFollowingDamped = false;
 
             if (forceGround) target.y = 0f;
-            KillTweens();
+            KillMoveTween();
             _moveTween = transform.DOMove(target, Settings.MoveDuration)
                 .SetEase(Settings.MoveEase)
                 .SetUpdate(true);
@@ -598,7 +662,7 @@ namespace Markyu.FortStack
             _isFollowingDamped = false;
 
             if (forceGround) target.y = 0f;
-            KillTweens();
+            KillMoveTween();
             transform.position = target;
 
             if (Time.timeScale == 0f) Physics.SyncTransforms();
@@ -610,7 +674,7 @@ namespace Markyu.FortStack
         /// </summary>
         public void SetTargetDamped(Vector3 target)
         {
-            KillTweens();
+            KillMoveTween();
             _dampedTargetPos = target;
             _isFollowingDamped = true;
         }
@@ -638,10 +702,28 @@ namespace Markyu.FortStack
         /// <returns>The combat Tween that was started.</returns>
         public Tween StartCombatTween(Tween tween)
         {
-            KillTweens();
+            KillMotionTweens();
 
             _combatTween = tween;
             return _combatTween;
+        }
+
+        /// <summary>
+        /// Stops card movement/combat tweens without touching the presentation tweens.
+        /// Stack layout uses this frequently; killing feel here would cancel hover/spawn feedback.
+        /// </summary>
+        public void KillMotionTweens()
+        {
+            KillMoveTween();
+            _combatTween?.Kill();
+            _combatTween = null;
+            _isFollowingDamped = false;
+        }
+
+        private void KillMoveTween()
+        {
+            _moveTween?.Kill();
+            _moveTween = null;
         }
 
         /// <summary>
@@ -649,9 +731,10 @@ namespace Markyu.FortStack
         /// </summary>
         public void KillTweens()
         {
-            _moveTween?.Kill();
-            _combatTween?.Kill();
-            GetComponent<CardFeelPresenter>()?.KillFeelTweens();
+            KillMotionTweens();
+            _hurtTween?.Kill();
+            _hurtTween = null;
+            FeelPresenter?.KillFeelTweens();
         }
         #endregion
     }

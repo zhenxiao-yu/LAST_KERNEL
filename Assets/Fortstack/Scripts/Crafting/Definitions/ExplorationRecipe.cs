@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Special Recipes/Exploration Recipe", fileName = "Recipe_Exploration_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Exploration Recipe", fileName = "Recipe_Exploration_")]
     public class ExplorationRecipe : RecipeDefinition
     {
         public override void Execute(CardStack stack)

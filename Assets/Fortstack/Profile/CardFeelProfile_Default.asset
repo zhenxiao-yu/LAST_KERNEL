@@ -42,6 +42,24 @@ MonoBehaviour:
   mergePunchAmount: 0.08
   mergePunchDuration: 0.17
   mergePunchVibrato: 5
+  hoverFlashAmount: 0.08
+  pickupFlashAmount: 0.16
+  mergeFlashAmount: 0.18
+  damageFlashAmount: 0.65
+  flashReturnDuration: 0.18
+  overlayParallaxAmount: 0.055
+  idleOverlayDriftAmount: 0.012
+  idleOverlayDriftFrequency: 0.7
+  hoverBrightnessBoost: 0.08
+  dragBrightnessBoost: 0.14
+  hoverSaturationBoost: 0.05
+  idleHueShiftAmount: 0.01
+  idleHueShiftFrequency: 0.45
+  glowColor: {r: 0.52, g: 0.85, b: 1, a: 1}
+  hoverGlowIntensity: 0.12
+  dragGlowIntensity: 0.18
+  damagePunchAngle: 12
+  damagePunchDuration: 0.2
   snapDuration: 0.13
   snapEase: 27
   snapOvershoot: 0.55

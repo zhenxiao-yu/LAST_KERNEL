@@ -11,7 +11,7 @@ namespace Markyu.FortStack
         MinimumDay      // Happens any day after Day X
     }
 
-    [CreateAssetMenu(fileName = "Encounter_", menuName = "FortStack/Encounter")]
+    [CreateAssetMenu(fileName = "Encounter_", menuName = "Last Kernel/Encounter")]
     public class EncounterDefinition : ScriptableObject
     {
         // Identity

@@ -11,7 +11,7 @@ namespace Markyu.FortStack
     ///   Sharp, mechanical, controlled. Short tweens. Subtle settle.
     ///   Nothing bubbly. Nothing casino. Industrial tension.
     /// </summary>
-    [CreateAssetMenu(menuName = "LastKernel/Card Feel Profile", fileName = "CardFeelProfile")]
+    [CreateAssetMenu(menuName = "Last Kernel/Card Feel Profile", fileName = "CardFeelProfile")]
     public class CardFeelProfile : ScriptableObject
     {
         // ── Hover ─────────────────────────────────────────────────────────────────
@@ -131,6 +131,66 @@ namespace Markyu.FortStack
         [SerializeField, Range(1, 20)]
         private int mergePunchVibrato = 5;
 
+        // ── Shader / material feedback ───────────────────────────────────────────
+
+        [Header("Shader Feedback")]
+        [SerializeField, Range(0f, 1f), Tooltip("Temporary flash added when the cursor enters a card.")]
+        private float hoverFlashAmount = 0.08f;
+
+        [SerializeField, Range(0f, 1f), Tooltip("Temporary flash added when a card is picked up.")]
+        private float pickupFlashAmount = 0.16f;
+
+        [SerializeField, Range(0f, 1f), Tooltip("Temporary flash added to a stack when it accepts another card.")]
+        private float mergeFlashAmount = 0.18f;
+
+        [SerializeField, Range(0f, 1f), Tooltip("Temporary flash added when a card takes damage.")]
+        private float damageFlashAmount = 0.65f;
+
+        [SerializeField, Min(0.03f)]
+        private float flashReturnDuration = 0.18f;
+
+        [SerializeField, Range(0f, 0.25f), Tooltip("Moves the card overlay texture opposite the tilt to create a small parallax shimmer.")]
+        private float overlayParallaxAmount = 0.055f;
+
+        [SerializeField, Range(0f, 0.1f), Tooltip("Subtle idle overlay drift. Keep low so card art remains readable.")]
+        private float idleOverlayDriftAmount = 0.012f;
+
+        [SerializeField, Range(0.1f, 3f)]
+        private float idleOverlayDriftFrequency = 0.7f;
+
+        [SerializeField, Range(0f, 0.4f)]
+        private float hoverBrightnessBoost = 0.08f;
+
+        [SerializeField, Range(0f, 0.4f)]
+        private float dragBrightnessBoost = 0.14f;
+
+        [SerializeField, Range(0f, 0.4f)]
+        private float hoverSaturationBoost = 0.05f;
+
+        [SerializeField, Range(0f, 0.15f), Tooltip("Tiny color drift used while idle so cards do not look perfectly static.")]
+        private float idleHueShiftAmount = 0.01f;
+
+        [SerializeField, Range(0.1f, 3f)]
+        private float idleHueShiftFrequency = 0.45f;
+
+        [SerializeField, Tooltip("Emission color used by card shaders that expose _EmissionColor.")]
+        private Color glowColor = new Color(0.52f, 0.85f, 1f, 1f);
+
+        [SerializeField, Range(0f, 1f)]
+        private float hoverGlowIntensity = 0.12f;
+
+        [SerializeField, Range(0f, 1f)]
+        private float dragGlowIntensity = 0.18f;
+
+        // ── Damage feedback ──────────────────────────────────────────────────────
+
+        [Header("Damage Feedback")]
+        [SerializeField, Range(0f, 30f)]
+        private float damagePunchAngle = 12f;
+
+        [SerializeField, Min(0.05f)]
+        private float damagePunchDuration = 0.2f;
+
         // ── Movement snap ─────────────────────────────────────────────────────────
 
         [Header("Movement Snap")]
@@ -184,8 +244,46 @@ namespace Markyu.FortStack
         public float MergePunchDuration => mergePunchDuration;
         public int MergePunchVibrato => mergePunchVibrato;
 
+        public float HoverFlashAmount => hoverFlashAmount;
+        public float PickupFlashAmount => pickupFlashAmount;
+        public float MergeFlashAmount => mergeFlashAmount;
+        public float DamageFlashAmount => damageFlashAmount;
+        public float FlashReturnDuration => flashReturnDuration;
+        public float OverlayParallaxAmount => overlayParallaxAmount;
+        public float IdleOverlayDriftAmount => idleOverlayDriftAmount;
+        public float IdleOverlayDriftFrequency => idleOverlayDriftFrequency;
+        public float HoverBrightnessBoost => hoverBrightnessBoost;
+        public float DragBrightnessBoost => dragBrightnessBoost;
+        public float HoverSaturationBoost => hoverSaturationBoost;
+        public float IdleHueShiftAmount => idleHueShiftAmount;
+        public float IdleHueShiftFrequency => idleHueShiftFrequency;
+        public Color GlowColor => glowColor;
+        public float HoverGlowIntensity => hoverGlowIntensity;
+        public float DragGlowIntensity => dragGlowIntensity;
+        public float DamagePunchAngle => damagePunchAngle;
+        public float DamagePunchDuration => damagePunchDuration;
+
         public float SnapDuration => snapDuration;
         public Ease SnapEase => snapEase;
         public float SnapOvershoot => snapOvershoot;
+
+        private void OnValidate()
+        {
+            hoverScale = Mathf.Max(0.01f, hoverScale);
+            hoverScaleDuration = Mathf.Max(0.02f, hoverScaleDuration);
+            hoverPunchDuration = Mathf.Max(0.05f, hoverPunchDuration);
+            pickupPunchDuration = Mathf.Max(0.04f, pickupPunchDuration);
+            dragTiltMax = Mathf.Max(0f, dragTiltMax);
+            dragTiltSmoothing = Mathf.Max(0.01f, dragTiltSmoothing);
+            mouseTiltSmoothing = Mathf.Max(0.01f, mouseTiltSmoothing);
+            autoTiltFrequency = Mathf.Max(0.01f, autoTiltFrequency);
+            dropSquishDuration = Mathf.Max(0.03f, dropSquishDuration);
+            dropSettleDuration = Mathf.Max(0.05f, dropSettleDuration);
+            spawnDuration = Mathf.Max(0.05f, spawnDuration);
+            mergePunchDuration = Mathf.Max(0.05f, mergePunchDuration);
+            flashReturnDuration = Mathf.Max(0.03f, flashReturnDuration);
+            damagePunchDuration = Mathf.Max(0.05f, damagePunchDuration);
+            snapDuration = Mathf.Max(0.01f, snapDuration);
+        }
     }
 }

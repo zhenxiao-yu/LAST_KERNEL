@@ -51,7 +51,7 @@ namespace Markyu.FortStack
             _combatants.AddRange(defenders);
             foreach (var card in _combatants)
             {
-                card.Combatant.InitializeCombatActionProgress();
+                card?.Combatant?.InitializeCombatActionProgress();
             }
         }
 
@@ -142,7 +142,9 @@ namespace Markyu.FortStack
                 Vector3 fireOrigin = attacker.transform.position + Vector3.up * 0.05f;
                 Vector3 targetCenter = defender.transform.position + Vector3.up * 0.05f;
 
-                Tween projectileTween = CombatManager.Instance.SpawnProjectile(type, fireOrigin, targetCenter);
+                Tween projectileTween = CombatManager.Instance != null
+                    ? CombatManager.Instance.SpawnProjectile(type, fireOrigin, targetCenter)
+                    : null;
 
                 if (projectileTween != null)
                 {
@@ -155,7 +157,7 @@ namespace Markyu.FortStack
             if (result.Type != HitType.Miss)
             {
                 defender.TakeDamage(result.Damage);
-                _cameraController.Shake();
+                _cameraController?.Shake();
                 PlayHitSound(type);
 
                 if (result.Type is HitType.Critical)
@@ -169,7 +171,7 @@ namespace Markyu.FortStack
             }
 
             Vector3 uiSpawnPos = defender.transform.TransformPoint(new Vector3(0.3f, 0.1f, 0.4f));
-            CombatManager.Instance.SpawnHitUI(uiSpawnPos, result);
+            CombatManager.Instance?.SpawnHitUI(uiSpawnPos, result);
 
             // --- RETURN PHASE (ANIMATION) ---
             float returnTime = 0.3f;
@@ -215,75 +217,22 @@ namespace Markyu.FortStack
         #region Combat Resolution
         private HitResult ResolveAttack(CardInstance attacker, CardInstance defender)
         {
-            // 1. Hit Chance
-            float hitChance = Mathf.Clamp((attacker.Stats.Accuracy.Value - defender.Stats.Dodge.Value) / 100f, 0.05f, 0.95f);
-            if (Random.value > hitChance)
-                return new HitResult(HitType.Miss, 0, CombatTypeAdvantage.None);
+            float advantageMultiplier = CombatManager.Instance != null
+                ? CombatManager.Instance.AdvantageMultiplier
+                : 1.5f;
+            float disadvantageMultiplier = CombatManager.Instance != null
+                ? CombatManager.Instance.DisadvantageMultiplier
+                : 0.75f;
 
-            // 2. Critical Check
-            float critChance = Mathf.Clamp(attacker.Stats.CriticalChance.Value / 100f, 0f, 1f);
-            bool isCritical = Random.value <= critChance;
-
-            // 3. Damage Calculation
-            int attackPower = attacker.Stats.Attack.Value;
-            int defensePower = defender.Stats.Defense.Value;
-            int damage = Mathf.Max(1, attackPower - defensePower);
-
-            // 4. RPS Logic
-            CombatType attackerType = attacker.Definition.CombatType;
-            CombatType defenderType = defender.Definition.CombatType;
-            CombatTypeAdvantage advantage = GetAdvantage(attackerType, defenderType);
-
-            if (advantage == CombatTypeAdvantage.Advantage)
-            {
-                damage = Mathf.RoundToInt(damage * CombatManager.Instance.AdvantageMultiplier);
-            }
-            else if (advantage == CombatTypeAdvantage.Disadvantage)
-            {
-                damage = Mathf.RoundToInt(damage * CombatManager.Instance.DisadvantageMultiplier);
-            }
-
-            if (isCritical)
-                damage = Mathf.RoundToInt(damage * attacker.Stats.CriticalMultiplier.Value / 100f);
-
-            return new HitResult(isCritical ? HitType.Critical : HitType.Normal, damage, advantage);
-        }
-
-        /// <summary>
-        /// Determines the combat advantage between two unit types based on the Rock-Paper-Scissors rule.
-        /// </summary>
-        /// <remarks>
-        /// The rules are: Melee > Ranged, Ranged > Magic, and Magic > Melee. 
-        /// If types are the same or if either type is <see cref="CombatType.None"/>,
-        /// the result is <see cref="CombatTypeAdvantage.None"/>.
-        /// </remarks>
-        /// <param name="attackerType">The CombatType of the attacking unit.</param>
-        /// <param name="defenderType">The CombatType of the defending unit.</param>
-        /// <returns>A CombatTypeAdvantage value (Advantage, Disadvantage, or None).</returns>
-        private CombatTypeAdvantage GetAdvantage(CombatType attackerType, CombatType defenderType)
-        {
-            // If either card doesn't have a type, there is no advantage.
-            if (attackerType == CombatType.None || defenderType == CombatType.None)
-                return CombatTypeAdvantage.None;
-
-            // If types are the same, no advantage.
-            if (attackerType == defenderType)
-                return CombatTypeAdvantage.None;
-
-            // Melee > Ranged
-            if (attackerType == CombatType.Melee && defenderType == CombatType.Ranged)
-                return CombatTypeAdvantage.Advantage;
-
-            // Ranged > Magic
-            if (attackerType == CombatType.Ranged && defenderType == CombatType.Magic)
-                return CombatTypeAdvantage.Advantage;
-
-            // Magic > Melee
-            if (attackerType == CombatType.Magic && defenderType == CombatType.Melee)
-                return CombatTypeAdvantage.Advantage;
-
-            // If it's not None and not an Advantage, it must be a Disadvantage.
-            return CombatTypeAdvantage.Disadvantage;
+            return CombatRules.ResolveAttack(
+                attacker?.Stats,
+                attacker != null && attacker.Definition != null ? attacker.Definition.CombatType : CombatType.None,
+                defender?.Stats,
+                defender != null && defender.Definition != null ? defender.Definition.CombatType : CombatType.None,
+                advantageMultiplier,
+                disadvantageMultiplier,
+                Random.value,
+                Random.value);
         }
         #endregion
 
@@ -304,6 +253,11 @@ namespace Markyu.FortStack
 
             foreach (var newCombatant in newCombatants)
             {
+                if (newCombatant == null || newCombatant.Definition == null || newCombatant.Combatant == null)
+                {
+                    continue;
+                }
+
                 var cardFaction = newCombatant.Definition.Faction;
                 List<CardInstance> targetList = null;
 
@@ -440,7 +394,9 @@ namespace Markyu.FortStack
                     CardStack newStack = new CardStack(card, card.transform.position);
                     CardManager.Instance?.RegisterStack(newStack);
 
-                    Vector3 finalPos = Board.Instance.EnforcePlacementRules(card.transform.position, newStack);
+                    Vector3 finalPos = Board.Instance != null
+                        ? Board.Instance.EnforcePlacementRules(card.transform.position, newStack)
+                        : card.transform.position;
                     newStack.SetTargetPosition(finalPos);
                 }
             }
@@ -477,17 +433,17 @@ namespace Markyu.FortStack
             switch (type)
             {
                 case CombatType.Ranged:
-                    AudioManager.Instance.PlaySFX(AudioId.AttackRanged);
+                    AudioManager.Instance?.PlaySFX(AudioId.AttackRanged);
                     break;
 
                 case CombatType.Magic:
-                    AudioManager.Instance.PlaySFX(AudioId.AttackMagic);
+                    AudioManager.Instance?.PlaySFX(AudioId.AttackMagic);
                     break;
 
                 case CombatType.None:
                 case CombatType.Melee:
                 default:
-                    AudioManager.Instance.PlaySFX(AudioId.AttackMelee);
+                    AudioManager.Instance?.PlaySFX(AudioId.AttackMelee);
                     break;
             }
         }
@@ -497,17 +453,17 @@ namespace Markyu.FortStack
             switch (type)
             {
                 case CombatType.Ranged:
-                    AudioManager.Instance.PlaySFX(AudioId.HitRanged);
+                    AudioManager.Instance?.PlaySFX(AudioId.HitRanged);
                     break;
 
                 case CombatType.Magic:
-                    AudioManager.Instance.PlaySFX(AudioId.HitMagic);
+                    AudioManager.Instance?.PlaySFX(AudioId.HitMagic);
                     break;
 
                 case CombatType.None:
                 case CombatType.Melee:
                 default:
-                    AudioManager.Instance.PlaySFX(AudioId.HitMelee);
+                    AudioManager.Instance?.PlaySFX(AudioId.HitMelee);
                     break;
             }
         }

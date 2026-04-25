@@ -58,6 +58,7 @@ namespace Markyu.FortStack
         #endregion
 
         private readonly List<CardStack> stacks = new();
+        private const string RecipeDefinitionIdPrefix = "Recipe:";
 
         public IEnumerable<CardInstance> AllCards
         {
@@ -76,7 +77,7 @@ namespace Markyu.FortStack
         }
 
         private Dictionary<CardCategory, CardInstance> prefabLookup;
-        private Dictionary<string, CardDefinition> definitionLookup;
+        private CardDefinitionCatalog definitionCatalog;
 
         private List<CardInstance> highlightedCards = new();
 
@@ -133,17 +134,23 @@ namespace Markyu.FortStack
         {
             prefabLookup = new Dictionary<CardCategory, CardInstance>();
 
+            if (cardPrefabs == null || cardPrefabs.Count == 0)
+            {
+                Debug.LogWarning("CardManager: No card prefab mappings are assigned. Card spawning will fail until mappings are configured.", this);
+                return;
+            }
+
             foreach (var mapping in cardPrefabs)
             {
                 if (mapping.prefab == null)
                 {
-                    Debug.LogWarning($"CardManager: Prefab for category '{mapping.category}' is missing!");
+                    Debug.LogWarning($"CardManager: Prefab for category '{mapping.category}' is missing.", this);
                     continue;
                 }
 
                 if (prefabLookup.ContainsKey(mapping.category))
                 {
-                    Debug.LogWarning($"CardManager: Duplicate entry for category '{mapping.category}' detected. Ignoring second entry.");
+                    Debug.LogWarning($"CardManager: Duplicate entry for category '{mapping.category}' detected. Ignoring second entry.", this);
                 }
                 else
                 {
@@ -154,23 +161,7 @@ namespace Markyu.FortStack
 
         private void BuildDefinitionDatabase()
         {
-            definitionLookup = new Dictionary<string, CardDefinition>();
-
-            foreach (var def in Resources.LoadAll<CardDefinition>("Cards"))
-            {
-                if (!definitionLookup.ContainsKey(def.Id))
-                {
-                    definitionLookup.Add(def.Id, def);
-                }
-            }
-
-            foreach (var packDef in Resources.LoadAll<PackDefinition>("Packs"))
-            {
-                if (!definitionLookup.ContainsKey(packDef.Id))
-                {
-                    definitionLookup.Add(packDef.Id, packDef);
-                }
-            }
+            definitionCatalog = CardDefinitionCatalog.LoadFromResources();
         }
 
         /// <summary>
@@ -184,18 +175,20 @@ namespace Markyu.FortStack
         /// <returns>The found <see cref="CardDefinition"/>, or null if the ID is not recognized.</returns>
         public CardDefinition GetDefinitionById(string id)
         {
-            // 1. Try standard static lookup first
-            if (definitionLookup.TryGetValue(id, out var def))
-                return def;
-
-            // 2. Handle Dynamic Recipe Cards
-            // Check if this ID looks like our formatted Recipe ID
-            if (id.StartsWith("Recipe:"))
+            if (string.IsNullOrWhiteSpace(id))
             {
-                // Extract the original Recipe ID (e.g., "Recipe:12345abcde" -> "12345abcde")
-                string recipeId = id.Substring("Recipe:".Length);
+                Debug.LogWarning("CardManager: Cannot look up a card definition with an empty id.", this);
+                return null;
+            }
 
-                // Find the static recipe asset
+            if (definitionCatalog != null && definitionCatalog.TryGetDefinition(id, out var def))
+            {
+                return def;
+            }
+
+            if (id.StartsWith(RecipeDefinitionIdPrefix))
+            {
+                string recipeId = id.Substring(RecipeDefinitionIdPrefix.Length);
                 var recipe = CraftingManager.Instance?.GetRecipeById(recipeId);
 
                 if (recipe != null)
@@ -204,8 +197,7 @@ namespace Markyu.FortStack
                 }
             }
 
-            // 3. Fail gracefully
-            Debug.LogError($"CardManager: Could not find CardDefinition with ID '{id}'");
+            Debug.LogError($"CardManager: Could not find CardDefinition with ID '{id}'.", this);
             return null;
         }
         #endregion
@@ -251,6 +243,12 @@ namespace Markyu.FortStack
                 }
 
                 CardInstance newCard = CreateCardInstance(def, stackPos, CardStack.RefuseAll);
+                if (newCard == null)
+                {
+                    Debug.LogWarning($"CardManager: Failed to restore card '{cardData.Id}' in saved stack.", this);
+                    continue;
+                }
+
                 newCard.RestoreSavedStats(cardData);
 
                 if (newCard.EquipperComponent != null && cardData.EquippedItems != null && cardData.EquippedItems.Count > 0)
@@ -288,7 +286,7 @@ namespace Markyu.FortStack
                 // If this stack had an active crafting task when saved, restore and resume it.
                 if (stackData.ActiveCraft != null && !string.IsNullOrEmpty(stackData.ActiveCraft.RecipeId))
                 {
-                    CraftingManager.Instance.RestoreCraftingTask(
+                    CraftingManager.Instance?.RestoreCraftingTask(
                         mainStack,
                         stackData.ActiveCraft.RecipeId,
                         stackData.ActiveCraft.Progress
@@ -304,7 +302,7 @@ namespace Markyu.FortStack
             if (!string.IsNullOrEmpty(data.OriginalId))
             {
                 var originalDef = GetDefinitionById(data.OriginalId);
-                character.EquipperComponent.SetOriginalDefinition(originalDef);
+                character.EquipperComponent?.SetOriginalDefinition(originalDef);
             }
 
             // 2. Instantiate and Equip items
@@ -316,13 +314,18 @@ namespace Markyu.FortStack
                 // Create the item "in the void" (Vector3.zero)
                 // We temporarily create it on the board, but Equip() will immediately remove it.
                 CardInstance itemCard = CreateCardInstance(itemDef, Vector3.zero, CardStack.RefuseAll);
+                if (itemCard == null)
+                {
+                    Debug.LogWarning($"CardManager: Failed to restore equipped item '{itemData.Id}' on '{character.Definition.DisplayName}'.", this);
+                    continue;
+                }
 
                 // Restore stats (durability, etc)
                 itemCard.RestoreSavedStats(itemData);
 
                 // Perform the Equip
                 // Because we set OriginalDefinition above, this won't accidentally double-transform the class.
-                character.EquipperComponent.Equip(itemCard);
+                character.EquipperComponent?.Equip(itemCard);
             }
         }
 
@@ -407,8 +410,20 @@ namespace Markyu.FortStack
         #region Card Factory
         private void SpawnDefaultCards()
         {
+            if (defaultSpawnCards == null || defaultSpawnCards.Count == 0)
+            {
+                Debug.LogWarning("CardManager: No default spawn cards configured for a new game.", this);
+                return;
+            }
+
             foreach (var card in defaultSpawnCards)
             {
+                if (card == null)
+                {
+                    Debug.LogWarning("CardManager: Default spawn list contains a missing card definition.", this);
+                    continue;
+                }
+
                 Vector3 randomPos = Random.insideUnitSphere * defaultSpawnRadius;
                 Vector3 spawnPos = defaultSpawnPosition + randomPos.Flatten();
 
@@ -439,9 +454,22 @@ namespace Markyu.FortStack
         /// <returns>The newly created <see cref="CardInstance"/> object, or null if spawning failed (e.g., in Friendly Mode).</returns>
         public CardInstance CreateCardInstance(CardDefinition definition, Vector3 position, CardStack stackToIgnore = null)
         {
+            if (definition == null)
+            {
+                Debug.LogError("CardManager: Cannot create a card instance from a null definition.", this);
+                return null;
+            }
+
+            if (cardSettings == null)
+            {
+                Debug.LogError($"CardManager: Cannot spawn '{definition.DisplayName}' because CardSettings is not assigned.", this);
+                return null;
+            }
+
             MarkCardAsDiscovered(definition);
 
-            if (GameDirector.Instance.GameData.GameplayPrefs.IsFriendlyMode && definition.IsAggressive)
+            bool friendlyMode = GameDirector.Instance?.GameData?.GameplayPrefs?.IsFriendlyMode ?? false;
+            if (friendlyMode && definition.IsAggressive)
             {
                 return null;
             }
@@ -461,7 +489,7 @@ namespace Markyu.FortStack
 
             if (prefabToSpawn == null)
             {
-                Debug.LogError($"CardManager: No prefab found for category '{definition.Category}'. Cannot spawn card '{definition.DisplayName}'.");
+                Debug.LogError($"CardManager: No prefab found for category '{definition.Category}'. Cannot spawn card '{definition.DisplayName}'.", this);
                 return null;
             }
 
@@ -492,6 +520,24 @@ namespace Markyu.FortStack
         /// <returns>The newly created <see cref="PackInstance"/> object.</returns>
         public PackInstance CreatePackInstance(PackDefinition definition, Vector3 position)
         {
+            if (definition == null)
+            {
+                Debug.LogError("CardManager: Cannot create a pack from a null definition.", this);
+                return null;
+            }
+
+            if (packPrefab == null)
+            {
+                Debug.LogError($"CardManager: Cannot spawn pack '{definition.DisplayName}' because Pack Prefab is not assigned.", this);
+                return null;
+            }
+
+            if (cardSettings == null)
+            {
+                Debug.LogError($"CardManager: Cannot spawn pack '{definition.DisplayName}' because CardSettings is not assigned.", this);
+                return null;
+            }
+
             PackInstance newPack = Instantiate(packPrefab, position, Quaternion.identity);
             newPack.Initialize(definition, cardSettings);
             return newPack;
@@ -509,15 +555,21 @@ namespace Markyu.FortStack
         /// <returns>A dynamically created <see cref="CardDefinition"/> representing the recipe.</returns>
         public CardDefinition CreateRecipeCardDefinition(RecipeDefinition recipe)
         {
+            if (recipe == null)
+            {
+                Debug.LogError("CardManager: Cannot create a recipe card from a null recipe.", this);
+                return null;
+            }
+
             if (recipeCardTemplate == null)
             {
-                Debug.LogError("CardManager: 'Recipe Card Template' is not assigned in the Inspector!");
+                Debug.LogError("CardManager: 'Recipe Card Template' is not assigned in the Inspector.", this);
                 return null;
             }
 
             CardDefinition dynamicDef = Instantiate(recipeCardTemplate);
 
-            dynamicDef.SetId($"Recipe:{recipe.Id}");
+            dynamicDef.SetId($"{RecipeDefinitionIdPrefix}{recipe.Id}");
 
             if (recipe.ResultingCard != null)
             {
@@ -541,7 +593,18 @@ namespace Markyu.FortStack
         /// <param name="craftingStack">The <see cref="CardStack"/> that is currently crafting, used for positioning the new card.</param>
         public void SpawnRecipeCard(RecipeDefinition recipe, CardStack craftingStack)
         {
+            if (craftingStack == null)
+            {
+                Debug.LogWarning("CardManager: Cannot spawn a recipe card without a target crafting stack.", this);
+                return;
+            }
+
             var dynamicDef = CreateRecipeCardDefinition(recipe);
+            if (dynamicDef == null)
+            {
+                return;
+            }
+
             var spawnPos = craftingStack.TargetPosition.Flatten();
             CreateCardInstance(dynamicDef, spawnPos, craftingStack);
         }
@@ -557,6 +620,12 @@ namespace Markyu.FortStack
         /// <param name="cardToDrop">The equipment <see cref="CardInstance"/> being returned to the game board.</param>
         public void ReturnCardToBoard(CardInstance cardToDrop)
         {
+            if (cardToDrop == null)
+            {
+                Debug.LogWarning("CardManager: Attempted to return a null card to the board.", this);
+                return;
+            }
+
             var dropPosition = cardToDrop.transform.position;
             var newStack = new CardStack(cardToDrop, dropPosition.Flatten());
             RegisterStack(newStack);
@@ -595,6 +664,17 @@ namespace Markyu.FortStack
         /// <returns>True if the stacking rule allows the placement; otherwise, false.</returns>
         public bool CanStack(CardDefinition bottom, CardDefinition top)
         {
+            if (bottom == null || top == null)
+            {
+                return false;
+            }
+
+            if (stackingMatrix == null)
+            {
+                Debug.LogWarning("CardManager: Stacking matrix is not assigned; refusing stack operation.", this);
+                return false;
+            }
+
             var rule = stackingMatrix.GetRule(bottom.Category, top.Category);
 
             switch (rule)
@@ -649,6 +729,7 @@ namespace Markyu.FortStack
         /// </summary>
         public void ResolveOverlaps()
         {
+            int maxIterations = cardSettings != null ? cardSettings.MaxIterations : 10;
             var combatRects = CombatManager.Instance != null
                 ? CombatManager.Instance.ActiveCombatRects
                 : null;
@@ -656,7 +737,7 @@ namespace Markyu.FortStack
             CardPhysicsSolver.ResolveOverlaps(
                 stacks,
                 combatRects,
-                cardSettings.MaxIterations
+                maxIterations
             );
         }
 
@@ -668,6 +749,7 @@ namespace Markyu.FortStack
         /// <param name="stackToIgnore">A specific stack to ignore during the overlap resolution process.</param>
         public void ResolveOverlaps(CombatRect combatRect, CardStack stackToIgnore = null)
         {
+            int maxIterations = cardSettings != null ? cardSettings.MaxIterations : 10;
             var combatRects = CombatManager.Instance != null
                 ? CombatManager.Instance.ActiveCombatRects
                 : null;
@@ -675,7 +757,7 @@ namespace Markyu.FortStack
             CardPhysicsSolver.ResolveOverlaps(
                 stacks,
                 combatRects,
-                cardSettings.MaxIterations
+                maxIterations
             );
         }
 
@@ -753,10 +835,10 @@ namespace Markyu.FortStack
                     continue;
 
                 string definitionId = card.Definition.Id;
-                if (string.IsNullOrEmpty(definitionId) || !definitionId.StartsWith("Recipe:"))
+                if (string.IsNullOrEmpty(definitionId) || !definitionId.StartsWith(RecipeDefinitionIdPrefix))
                     continue;
 
-                string recipeId = definitionId.Substring("Recipe:".Length);
+                string recipeId = definitionId.Substring(RecipeDefinitionIdPrefix.Length);
                 RecipeDefinition recipe = CraftingManager.Instance?.GetRecipeById(recipeId);
                 if (recipe == null)
                     continue;
@@ -800,7 +882,7 @@ namespace Markyu.FortStack
             {
                 if (character == null) continue;
 
-                if (Camera.main.transform.parent.TryGetComponent<CameraController>(out var cam))
+                if (TryGetCameraController(out var cam))
                 {
                     yield return cam.MoveTo(character.transform.position);
                 }
@@ -864,83 +946,20 @@ namespace Markyu.FortStack
         /// <returns>A <see cref="StatsSnapshot"/> struct containing the current state of tracked resources and limits.</returns>
         public StatsSnapshot GetStatsSnapshot()
         {
-            var allCards = AllCards.ToList();
+            return CardStatsCalculator.Calculate(AllCards, cardSettings);
+        }
 
-            int cardsOwned = CalculateCardsOwned(allCards);
-            int totalBoost = CalculateTotalBoost(allCards);
-            int cardLimit = cardSettings.BaseCardLimit + totalBoost;
+        private bool TryGetCameraController(out CameraController cameraController)
+        {
+            cameraController = null;
 
-            return new StatsSnapshot
+            Camera mainCamera = Camera.main;
+            if (mainCamera == null || mainCamera.transform.parent == null)
             {
-                TotalNutrition = CalculateTotalNutrition(allCards),
-                NutritionNeed = CalculateNutritionNeed(allCards),
-                Currency = CalculateCurrency(allCards),
-                CardsOwned = cardsOwned,
-                TotalBoost = totalBoost,
-                CardLimit = cardLimit,
-                ExcessCards = cardsOwned - cardLimit,
-                TotalCharacters = CalculateCharacter(allCards)
-            };
-        }
-
-        private int CalculateTotalNutrition(List<CardInstance> allCards)
-        {
-            return allCards
-                .Where(card => card.Definition.Category == CardCategory.Consumable)
-                .Sum(card => card.CurrentNutrition);
-        }
-
-        private int CalculateNutritionNeed(List<CardInstance> allCards)
-        {
-            return allCards
-                .Where(card => card.Definition.Category == CardCategory.Character)
-                .Count() * cardSettings.HungerPerCharacter;
-        }
-
-        private int CalculateCurrency(List<CardInstance> allCards)
-        {
-            int total = 0;
-
-            foreach (var card in allCards)
-            {
-                if (card.Definition.Category == CardCategory.Currency)
-                    total++;
-
-                if (card.TryGetComponent<ChestLogic>(out var chest))
-                    total += chest.StoredCoins;
+                return false;
             }
 
-            return total;
-        }
-
-        private int CalculateCardsOwned(List<CardInstance> allCards)
-        {
-            return allCards
-                .Where(card => !(card is PackInstance))
-                .Where(card => card.Definition.Category != CardCategory.Currency)
-                .Count();
-        }
-
-        private int CalculateTotalBoost(List<CardInstance> allCards)
-        {
-            int totalBoost = 0;
-
-            foreach (var card in allCards)
-            {
-                if (card.Definition is LimitBoosterDefinition boosterDef)
-                {
-                    totalBoost += boosterDef.BoostAmount;
-                }
-            }
-
-            return totalBoost;
-        }
-
-        private int CalculateCharacter(List<CardInstance> allCards)
-        {
-            return allCards
-                .Where(card => card.Definition.Category == CardCategory.Character)
-                .Count();
+            return mainCamera.transform.parent.TryGetComponent(out cameraController);
         }
         #endregion
     }

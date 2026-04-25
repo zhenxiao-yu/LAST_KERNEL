@@ -12,15 +12,20 @@ namespace Markyu.FortStack
         /// </summary>
         public static void SaveData<T>(T data, string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".json");
+            string filePath = GetSaveFilePath(Application.persistentDataPath, fileName);
 
-            // Convert the data object to a JSON string
-            // Formatting.Indented makes the file readable (good for debugging). 
-            // Change to Formatting.None for a smaller file size in release.
-            string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+            try
+            {
+                Directory.CreateDirectory(Application.persistentDataPath);
 
-            // Write the string to the file
-            File.WriteAllText(filePath, json);
+                // Keep saves readable during active development; release builds can switch this to Formatting.None.
+                string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+                File.WriteAllText(filePath, json);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"SaveSystem: Failed to save '{fileName}' to '{filePath}'. {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -28,24 +33,27 @@ namespace Markyu.FortStack
         /// </summary>
         public static T LoadData<T>(string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".json");
-
-            if (File.Exists(filePath))
+            foreach (string directoryPath in GetCandidateSaveDirectories())
             {
-                // Read the JSON string from the file
-                string json = File.ReadAllText(filePath);
+                string filePath = GetSaveFilePath(directoryPath, fileName);
+                if (!File.Exists(filePath))
+                {
+                    continue;
+                }
 
-                // Convert the JSON string back into the object of type T
-                T data = JsonConvert.DeserializeObject<T>(json);
+                try
+                {
+                    string json = File.ReadAllText(filePath);
+                    return JsonConvert.DeserializeObject<T>(json);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"SaveSystem: Failed to load save file '{filePath}'. {ex.Message}");
+                    return default;
+                }
+            }
 
-                return data;
-            }
-            else
-            {
-                // Optional warning
-                // Debug.LogWarning($"Save file not found at: {filePath}");
-                return default(T);
-            }
+            return default;
         }
 
         /// <summary>
@@ -55,37 +63,30 @@ namespace Markyu.FortStack
         public static Dictionary<string, T> LoadAllValidData<T>()
         {
             Dictionary<string, T> validDataDict = new Dictionary<string, T>();
-            string directoryPath = Application.persistentDataPath;
-
-            // 1. Ensure the directory exists
-            if (!Directory.Exists(directoryPath))
+            foreach (string directoryPath in GetCandidateSaveDirectories())
             {
-                return validDataDict;
-            }
-
-            // 2. Get all .json files in the directory
-            string[] filePaths = Directory.GetFiles(directoryPath, "*.json");
-
-            foreach (string filePath in filePaths)
-            {
-                try
+                if (!Directory.Exists(directoryPath))
                 {
-                    // 3. Attempt to read and deserialize
-                    string json = File.ReadAllText(filePath);
-                    T data = JsonConvert.DeserializeObject<T>(json);
+                    continue;
+                }
 
-                    if (data != null)
+                foreach (string filePath in Directory.GetFiles(directoryPath, "*.json"))
+                {
+                    try
                     {
-                        // 4. Get the file name to use as the Key (e.g., "SaveSlot001")
+                        string json = File.ReadAllText(filePath);
+                        T data = JsonConvert.DeserializeObject<T>(json);
                         string fileName = Path.GetFileNameWithoutExtension(filePath);
 
-                        // Add to dictionary
-                        validDataDict.Add(fileName, data);
+                        if (data != null && !validDataDict.ContainsKey(fileName))
+                        {
+                            validDataDict.Add(fileName, data);
+                        }
                     }
-                }
-                catch (System.Exception ex)
-                {
-                    Debug.LogWarning($"Skipped invalid save file at: {filePath}. Error: {ex.Message}");
+                    catch (System.Exception ex)
+                    {
+                        Debug.LogWarning($"SaveSystem: Skipped invalid save file at '{filePath}'. {ex.Message}");
+                    }
                 }
             }
 
@@ -97,11 +98,72 @@ namespace Markyu.FortStack
         /// </summary>
         public static void DeleteSave(string fileName)
         {
-            string filePath = Path.Combine(Application.persistentDataPath, fileName + ".json");
-            if (File.Exists(filePath))
+            foreach (string directoryPath in GetCandidateSaveDirectories())
             {
-                File.Delete(filePath);
+                string filePath = GetSaveFilePath(directoryPath, fileName);
+                if (!File.Exists(filePath))
+                {
+                    continue;
+                }
+
+                try
+                {
+                    File.Delete(filePath);
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogWarning($"SaveSystem: Failed to delete save file '{filePath}'. {ex.Message}");
+                }
             }
+        }
+
+        private static string GetSaveFilePath(string directoryPath, string fileName)
+        {
+            return Path.Combine(directoryPath, fileName + ".json");
+        }
+
+        private static IEnumerable<string> GetCandidateSaveDirectories()
+        {
+            string currentPath = Application.persistentDataPath;
+            if (!string.IsNullOrWhiteSpace(currentPath))
+            {
+                yield return currentPath;
+            }
+
+            string legacyPath = TryGetLegacyPersistentDataPath(currentPath);
+            if (!string.IsNullOrWhiteSpace(legacyPath) && legacyPath != currentPath)
+            {
+                yield return legacyPath;
+            }
+        }
+
+        private static string TryGetLegacyPersistentDataPath(string currentPath)
+        {
+            if (string.IsNullOrWhiteSpace(currentPath))
+            {
+                return null;
+            }
+
+            string normalizedCurrent = TrimTrailingDirectorySeparators(currentPath);
+            string currentProductFolder = Path.GetFileName(normalizedCurrent);
+
+            if (string.IsNullOrEmpty(currentProductFolder) ||
+                currentProductFolder == GameIdentity.LegacyDisplayName ||
+                !currentProductFolder.Contains(GameIdentity.ProductNameNoSpaces) &&
+                !currentProductFolder.Contains(GameIdentity.DisplayName))
+            {
+                return null;
+            }
+
+            string parent = Directory.GetParent(normalizedCurrent)?.FullName;
+            return string.IsNullOrEmpty(parent)
+                ? null
+                : Path.Combine(parent, GameIdentity.LegacyDisplayName);
+        }
+
+        private static string TrimTrailingDirectorySeparators(string path)
+        {
+            return path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
     }
 }

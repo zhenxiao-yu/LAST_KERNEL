@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Special Cards/Grower Card", fileName = "Card_Grower_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Special Cards/Grower Card", fileName = "Card_Grower_")]
     public class GrowerDefinition : CardDefinition
     {
         // Intentionally empty.

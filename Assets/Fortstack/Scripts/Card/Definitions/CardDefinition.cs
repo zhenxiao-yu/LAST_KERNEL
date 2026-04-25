@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Card", fileName = "Card_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Card", fileName = "Card_")]
     public class CardDefinition : ScriptableObject
     {
         // Identification

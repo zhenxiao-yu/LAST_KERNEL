@@ -17,8 +17,8 @@
 ## Findings
 
 1. `ProjectSettings/ProjectSettings.asset` still referenced the template scene path `Assets/Scenes/SampleScene.unity` even though build settings use `Assets/_Project/Scenes/SampleScene.unity`. That mismatch was fixed.
-2. `ProjectSettings/EditorSettings.asset` now uses `Markyu.FortStack` as the default root namespace so new scripts start cleaner.
-3. `PlayerSettings` now use `Markyu` and `FortStack`. Bundle IDs and save-data paths should still be sanity-checked before your first public build.
+2. `ProjectSettings/EditorSettings.asset` now uses `Markyu.LastKernel` as the default root namespace so new scripts start cleaner. Existing runtime code intentionally remains under `Markyu.FortStack` until a dedicated Unity serialization migration.
+3. `PlayerSettings` now use `Markyu` and `Last Kernel`. Save loading checks the legacy `FortStack` persistent-data folder so existing local saves are not silently orphaned.
 4. `Packages/manifest.json` includes packages that may be optional for this game:
    - `com.unity.collab-proxy`
    - `com.unity.multiplayer.center`

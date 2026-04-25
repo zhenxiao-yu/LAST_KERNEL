@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Pack", fileName = "Pack_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Pack", fileName = "Pack_")]
     public class PackDefinition : CardDefinition
     {
         [SerializeField, Min(0)] private int buyPrice = 3;

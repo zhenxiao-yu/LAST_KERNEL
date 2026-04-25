@@ -9,7 +9,7 @@ namespace Markyu.FortStack
         SameDefinition  // Allowed only if bottom.Definition == top.Definition
     }
 
-    [CreateAssetMenu(menuName = "FortStack/Stacking Rules Matrix")]
+    [CreateAssetMenu(menuName = "Last Kernel/Stacking Rules Matrix")]
     public class StackingRulesMatrix : ScriptableObject
     {
         [SerializeField] private StackingRule[] rules;

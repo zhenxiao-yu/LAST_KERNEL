@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Markyu.FortStack
 {
-    [CreateAssetMenu(menuName = "FortStack/Special Recipes/Travel Recipe", fileName = "Recipe_Travel_")]
+    [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Travel Recipe", fileName = "Recipe_Travel_")]
     public class TravelRecipe : RecipeDefinition
     {
         [SerializeField] private List<string> targetScenes;

@@ -67,6 +67,11 @@ namespace Markyu.FortStack
         /// <param name="card">The card instance to be added.</param>
         public void AddCard(CardInstance card)
         {
+            if (card == null)
+            {
+                return;
+            }
+
             Cards.Add(card);
             card.Stack = this;
         }
@@ -100,6 +105,11 @@ namespace Markyu.FortStack
         /// <param name="stackToMerge">The stack whose cards will be moved into the current stack.</param>
         public void MergeWith(CardStack stackToMerge)
         {
+            if (stackToMerge == null || stackToMerge.Cards == null || stackToMerge.Cards.Count == 0)
+            {
+                return;
+            }
+
             // Check if the bottom card has ANY component that can handle this.
             var stackable = this.BottomCard?.GetComponent<IOnStackable>();
 
@@ -159,7 +169,7 @@ namespace Markyu.FortStack
         {
             if (Cards.Remove(card))
             {
-                if (IsCrafting) CraftingManager.Instance.StopCraftingTask(this);
+                if (IsCrafting) CraftingManager.Instance?.StopCraftingTask(this);
 
                 card.Stack = null;
                 GameObject.Destroy(card.gameObject);
@@ -181,7 +191,7 @@ namespace Markyu.FortStack
         /// </summary>
         public void DestroyAllCards()
         {
-            if (IsCrafting) CraftingManager.Instance.StopCraftingTask(this);
+            if (IsCrafting) CraftingManager.Instance?.StopCraftingTask(this);
 
             foreach (var card in Cards)
             {
@@ -232,7 +242,9 @@ namespace Markyu.FortStack
         public void ApplyTranslation(Vector3 worldTranslation)
         {
             var newTargetPosition = TargetPosition + worldTranslation;
-            var finalPosition = Board.Instance.EnforcePlacementRules(newTargetPosition, this);
+            var finalPosition = Board.Instance != null
+                ? Board.Instance.EnforcePlacementRules(newTargetPosition, this)
+                : newTargetPosition;
 
             SetTargetPosition(finalPosition);
         }
@@ -269,13 +281,14 @@ namespace Markyu.FortStack
         }
 
         /// <summary>
-        /// Immediately stops all active movement and DOTween animations on every card within the stack.
+        /// Immediately stops active movement/combat tweens on every card within the stack.
+        /// Presentation tweens are intentionally left alone so layout changes do not cancel card feel.
         /// </summary>
         public void KillAllTweens()
         {
             foreach (var card in Cards)
             {
-                card.KillTweens();
+                card.KillMotionTweens();
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Markyu.FortStack
     [InitializeOnLoad]
     public static class PlayModeStartScene
     {
-        private const string PlayModeScenePath = "Assets/_Project/FortStack/Scenes/Title.unity";
+        private const string PlayModeScenePath = "Assets/Fortstack/Scenes/Title.unity";
         private const string PreviousSceneKey = "PlayModeStartScene.PreviousScene";
 
         static PlayModeStartScene()
