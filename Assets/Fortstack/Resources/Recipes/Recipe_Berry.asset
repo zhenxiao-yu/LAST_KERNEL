@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: ef5210e6506a41d28216845c42359e99
   category: 1
-  displayName: '制备荧光浆果'
+  displayName: 'Recover Ration Pack'
   requiredIngredients:
   - card: {fileID: 11400000, guid: f7d0d2080bf68dc48885e8d4f6381af2, type: 2}
     count: 1

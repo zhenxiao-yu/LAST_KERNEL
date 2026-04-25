@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_04
   m_EditorClassIdentifier: 
   id: 5e143bb2c68d4e2baa19c609af7ca4e4
-  title: '出售一张卡'
-  description: '把卡牌拖到卡牌回收终端，换取信用芯片。'
+  title: 'Sell Salvage'
+  description: 'Drag any spare card into the recycler terminal and take Credits.'
   type: 5
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

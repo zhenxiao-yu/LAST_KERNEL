@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_LoggingCamp
   m_EditorClassIdentifier: 
   id: f2429591f7fe49a8993f675c5ab70569
-  displayName: '伐木机站'
-  description: '专门负责剥采和转运木材的野外机站。'
+  displayName: 'Recycler Yard'
+  description: 'A work yard for stripping scrap into usable stock.'
   artTexture: {fileID: 2800000, guid: 62c3fbde70aa4be4f80b39eb29cec629, type: 3}
   category: 6
   faction: 0

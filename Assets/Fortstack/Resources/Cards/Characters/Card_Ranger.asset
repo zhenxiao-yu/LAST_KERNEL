@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Ranger
   m_EditorClassIdentifier: 
   id: 42003fea9eb14e10b84192648703c732
-  displayName: '栅格游骑'
-  description: '依靠精确火控与侦察模组远距点杀目标的猎手。'
+  displayName: 'Scavenger'
+  description: 'A sharp-eyed runner built for ranged work and salvage routes.'
   artTexture: {fileID: 2800000, guid: 46414bac97486d24d9a6f7ddc66f97d3, type: 3}
   category: 2
   faction: 1

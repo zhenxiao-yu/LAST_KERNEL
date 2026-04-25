@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Soup
   m_EditorClassIdentifier: 
   id: 2e914c8ada2041a68576faf58c3b69ab
-  displayName: '街区热汤'
-  description: '用片区剩余原料熬出的廉价暖胃汤。'
+  displayName: 'District Broth'
+  description: 'Hot water, protein scraps, and discipline. Enough to keep a crew moving.'
   artTexture: {fileID: 2800000, guid: 3b7a14ca97a356d459db28d5632adb1d, type: 3}
   category: 3
   faction: 0

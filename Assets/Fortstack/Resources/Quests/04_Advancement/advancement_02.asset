@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: advancement_02
   m_EditorClassIdentifier: 
   id: 1e0ab17ba3a2436692e08fb9946d4c88
-  title: '训练栅格游骑'
-  description: '为居民装备轨道弹弓，把他们训练成栅格游骑。'
+  title: 'Train a Scavenger'
+  description: 'Equip a Recruit with a Rail Sling and open ranged work.'
   type: 7
   targetCard: {fileID: 11400000, guid: 9df151d357a5fc745b993a2e51813bc7, type: 2}
   targetRecipe: {fileID: 0}

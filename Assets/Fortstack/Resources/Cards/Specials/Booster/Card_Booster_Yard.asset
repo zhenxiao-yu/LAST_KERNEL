@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Booster_Yard
   m_EditorClassIdentifier: 
   id: 730f53d947f84ae4a6955ab55b886fd3
-  displayName: '物流堆场'
-  description: '可让卡牌容量增加 4 的开放式装卸平台。'
+  displayName: 'Logistics Yard'
+  description: 'A cleared sorting yard for bulky salvage. Gives the district room to breathe.'
   artTexture: {fileID: 2800000, guid: bd6bbc3bbe90632418c56097a57b57e0, type: 3}
   category: 6
   faction: 0

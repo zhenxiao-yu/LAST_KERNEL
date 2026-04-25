@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Satyr
   m_EditorClassIdentifier: 
   id: 273ce16cf1b2444b9bd4687dcc55c527
-  displayName: '角兽浪人'
-  description: '游荡在废墟与管网间的危险生命体。'
+  displayName: 'Reclaimer'
+  description: 'A horned salvage brute that strips living districts for parts.'
   artTexture: {fileID: 2800000, guid: c96f3cc35e9ad6243a3066ae795d45de, type: 3}
   category: 9
   faction: 2

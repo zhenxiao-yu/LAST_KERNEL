@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: c932458f360843d79c50f35dfa7a0cc7
   category: 5
-  displayName: '加工处理木板'
+  displayName: 'Press Alloy Plate'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 151165b67d75692449fe4594b25d9dc7, type: 2}
     count: 1

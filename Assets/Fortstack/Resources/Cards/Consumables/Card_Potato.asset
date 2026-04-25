@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Potato
   m_EditorClassIdentifier: 
   id: 896c0611dc7f484c989f0dddd403f4fe
-  displayName: '淀粉块根'
-  description: '在营养泥与托盘中高效培育的块茎。'
+  displayName: 'Starch Root'
+  description: 'A hardy hydroponic tuber grown in dirty nutrient trays.'
   artTexture: {fileID: 2800000, guid: 0f153a9e3580fd844963b0e760b816b3, type: 3}
   category: 3
   faction: 0

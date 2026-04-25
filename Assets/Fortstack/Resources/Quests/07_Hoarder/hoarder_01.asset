@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_01
   m_EditorClassIdentifier: 
   id: a89af1799f6d4111b8149307b354b35f
-  title: '囤积聚合木材'
-  description: '至少收集 10 份聚合木材，打好基础物资储备。'
+  title: 'Stockpile Scrap'
+  description: 'Hold at least 10 Scrap for repairs and emergency builds.'
   type: 0
   targetCard: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
   targetRecipe: {fileID: 0}

@@ -30,10 +30,10 @@ namespace Markyu.FortStack
         [SerializeField, Tooltip("The card definition that is created when the recipe is fulfilled.")]
         protected CardDefinition resultingCard;
 
-        [SerializeField, Tooltip("Mark this 'true' for recipes that should run automatically and continuously (e.g. Logging Camp + Villager).")]
+        [SerializeField, Tooltip("Mark this 'true' for recipes that should run automatically and continuously (e.g. Recycler Yard + Recruit).")]
         protected bool isContinuous = false;
 
-        [SerializeField, Tooltip("If true, this recipe matches even if the stack has more items than required (e.g. Sawmill + 10 Wood).")]
+        [SerializeField, Tooltip("If true, this recipe matches even if the stack has more items than required (e.g. Cutter Frame + 10 Scrap).")]
         protected bool allowExcessIngredients = false;
 
         [SerializeField, Tooltip("The time in seconds required to complete this crafting recipe.")]
@@ -175,7 +175,7 @@ namespace Markyu.FortStack
         /// <summary>Default. Reduces uses count or durability. Destroys if empty.</summary>
         Consume = 0,
 
-        /// <summary>The card is required but is NOT modified (e.g., Soil, Villager).</summary>
+        /// <summary>The card is required but is NOT modified (e.g., Nutrient Bed, Recruit).</summary>
         Keep = 1,
 
         /// <summary>Destroys the card instance immediately, ignoring durability/uses.</summary>

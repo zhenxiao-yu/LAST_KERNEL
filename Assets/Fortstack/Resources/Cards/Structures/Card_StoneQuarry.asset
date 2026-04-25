@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_StoneQuarry
   m_EditorClassIdentifier: 
   id: e9f60ebd9f5e45f5b1f74161a79a2adf
-  displayName: '铁晶采场'
-  description: '稳定产出石材的开采坑道。'
+  displayName: 'Rubble Extractor'
+  description: 'A crusher that turns city rubble into circuit-grade salvage.'
   artTexture: {fileID: 2800000, guid: 1b4541a75d5bf684f80301db86f43a00, type: 3}
   category: 6
   faction: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: d7bbdb8c448043da8cdd04b5c2748f48
   category: 1
-  displayName: '制备合成苹果'
+  displayName: 'Print Synth Apple'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 1c16fb1c7cf7f8f4ba0b71b39dfcabf8, type: 2}
     count: 1

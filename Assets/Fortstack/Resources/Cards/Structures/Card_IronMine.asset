@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_IronMine
   m_EditorClassIdentifier: 
   id: 930078fddf554e19a1891a03723ccee8
-  displayName: '采矿钻机'
-  description: '让铁素矿持续输出的深层抽取装置。'
+  displayName: 'Alloy Drill'
+  description: 'A drilling rig for reinforced deposits. Loud enough to attract trouble.'
   artTexture: {fileID: 2800000, guid: e0c95e8033e71004ca8de6e7e849b27a, type: 3}
   category: 6
   faction: 0

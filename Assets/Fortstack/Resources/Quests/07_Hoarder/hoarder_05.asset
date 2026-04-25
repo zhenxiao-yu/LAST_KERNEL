@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_05
   m_EditorClassIdentifier: 
   id: 59fbb8faccd74d908edfb87eb3917055
-  title: '口粮审计 II'
-  description: '收集总营养值达到 20 或以上的消耗品卡牌。'
+  title: 'Ration Audit II'
+  description: 'Hold consumables worth at least 20 total nutrition.'
   type: 11
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

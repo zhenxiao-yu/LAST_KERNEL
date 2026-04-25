@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3017bc5f2fbc45d19a288c0cbb16719e
   category: 2
-  displayName: '建造锁盒货箱'
+  displayName: 'Assemble Encrypted Cache'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
     count: 2

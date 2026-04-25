@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e146475c8086450f995ff6f8bc4b6531
   category: 2
-  displayName: '建造等离子炉火'
+  displayName: 'Build Heat Coil'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 8ac674a56ad01e64fb1f8c9bddb2b50e, type: 2}
     count: 1

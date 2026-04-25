@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f9dbca7551a64ce7b1ad8bd1b9711ab5
   category: 5
-  displayName: '加工处理木材'
+  displayName: 'Brace Reinforced Scrap'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
     count: 1

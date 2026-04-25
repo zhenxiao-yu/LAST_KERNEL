@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: a8d9abc5568041b384badcbf3eadae1f
   category: 4
-  displayName: '装配复合长弓'
+  displayName: 'Assemble Coilbow'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
     count: 1

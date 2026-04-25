@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: construction_04
   m_EditorClassIdentifier: 
   id: 954e9f3f16a3409dae0a4801a7427141
-  title: '建造陶料采场'
-  description: '建造一座陶料采场。'
+  title: 'Build Slurry Pump'
+  description: 'Build a Slurry Pump to feed ceramic production.'
   type: 4
   targetCard: {fileID: 11400000, guid: d597a45d2a2d9884da4065a071a395b0, type: 2}
   targetRecipe: {fileID: 0}

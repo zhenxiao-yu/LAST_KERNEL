@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Booster_Warehouse
   m_EditorClassIdentifier: 
   id: 8c47d9879c1d48d6874a5b2f38198f23
-  displayName: '货运枢纽'
-  description: '可让卡牌容量增加 10 的模块化仓储节点。'
+  displayName: 'Cargo Depot'
+  description: 'A storage hub that expands board capacity. More space means more mistakes you can survive.'
   artTexture: {fileID: 2800000, guid: 96a941cbc991f2f4688a35a784ed09a9, type: 3}
   category: 6
   faction: 0

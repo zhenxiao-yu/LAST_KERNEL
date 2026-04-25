@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Mage
   m_EditorClassIdentifier: 
   id: b2ecc5ab13064df5b3a176b545510c8c
-  displayName: '密码术士'
-  description: '把不稳定能量与入侵协议当作武器的战斗黑客。'
+  displayName: 'Netrunner'
+  description: 'A field hacker who turns signal noise into weaponized breaches.'
   artTexture: {fileID: 2800000, guid: a83b078e55d0bb649ada35adee02d139, type: 3}
   category: 2
   faction: 1

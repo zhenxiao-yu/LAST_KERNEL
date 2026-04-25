@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Furnace
   m_EditorClassIdentifier: 
   id: bf0872866bf0413585f8b1deadfa8467
-  displayName: '熔炼核心'
-  description: '将矿石转成合金锭的高温处理单元。'
+  displayName: 'Smelter Core'
+  description: 'A controlled furnace for turning raw alloy into usable ingots.'
   artTexture: {fileID: 2800000, guid: 6be9375c247eed943816df2f27742faa, type: 3}
   category: 6
   faction: 0

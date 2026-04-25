@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Chicken
   m_EditorClassIdentifier: 
   id: 4649fd43af5e45c0b800dd47854f4023
-  displayName: '蛋白鸡'
-  description: '游荡在废墟与管网间的危险生命体。'
+  displayName: 'Protein Drone'
+  description: 'A docile food unit with more firmware than instinct. It lays protein pods if kept alive.'
   artTexture: {fileID: 2800000, guid: 4dcb94efa5b47ca43ad953f6bde73238, type: 3}
   category: 9
   faction: 2

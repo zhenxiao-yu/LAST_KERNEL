@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 88d9abf097cc4f2aa517bda11cb09b2b
   category: 0
-  displayName: '培育守护进程魔君'
+  displayName: 'Wake Kernel Sovereign'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 509c3447d5c156345955810e5c6a32f1, type: 2}
     count: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Stone
   m_EditorClassIdentifier: 
   id: e168bd9c6eeb48c091ab1e8e60c7478c
-  displayName: '铁晶石'
-  description: '用于组装设施、装备与生存物资的工业材料。'
+  displayName: 'Circuit Parts'
+  description: 'Reusable boards, contacts, and ceramic sockets from dead devices.'
   artTexture: {fileID: 2800000, guid: a62dcaf171410bf47b6c747313d19e9b, type: 3}
   category: 4
   faction: 0

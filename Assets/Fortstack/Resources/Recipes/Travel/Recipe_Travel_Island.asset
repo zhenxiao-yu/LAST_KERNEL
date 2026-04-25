@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 855ae8516bbe4452947cbe71cf150ab5
   category: 0
-  displayName: '前往海岛节点'
+  displayName: 'Route to Floodline Sector'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 962dbc66c6c0bf141b59f29a7d10c412, type: 2}
     count: 1

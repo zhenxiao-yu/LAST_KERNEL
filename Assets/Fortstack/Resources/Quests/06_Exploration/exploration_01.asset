@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: exploration_01
   m_EditorClassIdentifier: 
   id: b675c7461de248d89d78b28337833a3c
-  title: '探索霓光密林'
-  description: '派一名居民进入霓光密林，看看线路与树林里藏着什么。'
+  title: 'Survey Relay Graveyard'
+  description: 'Send a Recruit through the fallen masts and recover what still transmits.'
   type: 8
   targetCard: {fileID: 11400000, guid: cea56a23d9a12cb4cb7f6f182382d075, type: 2}
   targetRecipe: {fileID: 0}

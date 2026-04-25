@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: construction_01
   m_EditorClassIdentifier: 
   id: 2894233df84a450795899a0eb77a56dd
-  title: '建造物流堆场'
-  description: '建造一座物流堆场。'
+  title: 'Build Logistics Yard'
+  description: 'Clear a Logistics Yard so the district can hold more.'
   type: 4
   targetCard: {fileID: 11400000, guid: bd8ec86c3b7345a47b47067b776af305, type: 2}
   targetRecipe: {fileID: 0}

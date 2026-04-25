@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: construction_05
   m_EditorClassIdentifier: 
   id: 6e78f3fc53534340bc2a5be9d70a451e
-  title: '建造水培农场'
-  description: '建造一座水培农场。'
+  title: 'Build Hydroponic Farm'
+  description: 'Build a Hydroponic Farm and stabilize ration growth.'
   type: 4
   targetCard: {fileID: 11400000, guid: 7ba80899b38b3b043a407c33446a8886, type: 2}
   targetRecipe: {fileID: 0}

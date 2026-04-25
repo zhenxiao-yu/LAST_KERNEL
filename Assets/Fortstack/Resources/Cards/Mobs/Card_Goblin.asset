@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Goblin
   m_EditorClassIdentifier: 
   id: f6cac76a302245f3912997c679ee3b17
-  displayName: '街巷地精'
-  description: '游荡在废墟与管网间的危险生命体。'
+  displayName: 'Glitched Raider'
+  description: 'A scavenger corrupted by bad implants and worse hunger.'
   artTexture: {fileID: 2800000, guid: ba42a0bc87152ff4080c3aca0323f2cf, type: 3}
   category: 9
   faction: 2

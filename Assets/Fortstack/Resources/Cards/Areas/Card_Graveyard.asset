@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Graveyard
   m_EditorClassIdentifier: 
   id: c9f212337370485faab1cceca65ef27e
-  displayName: '数据墓场'
-  description: '埋着尸骸、报废机体与残留数据的禁区。'
+  displayName: 'Memory Pit'
+  description: 'A disposal trench for bodies, drives, and erased records. Some entries keep answering.'
   artTexture: {fileID: 2800000, guid: 0baf018a03ed64f4bb0ef18112c5ddc6, type: 3}
   category: 10
   faction: 0

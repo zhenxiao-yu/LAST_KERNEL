@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_RawMeat
   m_EditorClassIdentifier: 
   id: 052e5d11bccf480297d51931e13e51d6
-  displayName: '培植鲜肉'
-  description: '刚打印出来、还需要进一步加热的肉块。'
+  displayName: 'Printed Protein'
+  description: 'Fresh tissue from a cheap vat printer. Cook before morale notices.'
   artTexture: {fileID: 2800000, guid: 70466bf3549141645b55fb5834c98000, type: 3}
   category: 3
   faction: 0

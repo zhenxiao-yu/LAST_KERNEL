@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 04_Pack_HeartyMeals
   m_EditorClassIdentifier: 
   id: 32b15fa2906042c89f1c530fd35f8e99
-  displayName: '热餐补给包'
-  description: '围绕高能口粮与烹饪链条整理出的后勤卡包。'
+  displayName: 'Recovery Crate'
+  description: 'Prepared meals and recovery components for hungry crews. Turns survival pressure into margin.'
   artTexture: {fileID: 2800000, guid: 22c87890250755e43b665b7b31165273, type: 3}
   category: 0
   faction: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
   statModifiers: []
   classChangeResult: {fileID: 0}
   buyPrice: 10
-  minQuests: 22
+  minQuests: 18
   slots:
   - Entries:
     - Card: {fileID: 11400000, guid: f0816f0dc611c524c94410abbd34628c, type: 2}

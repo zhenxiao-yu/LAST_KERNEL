@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_TreasureChest
   m_EditorClassIdentifier: 
   id: b603cba8a9b6444d982cacf078fe8c5e
-  displayName: '战利品缓存'
-  description: '封着高价值物资的密闭缓存箱。'
+  displayName: 'Encrypted Cache'
+  description: 'A sealed crate from before the blackout. Useful if you can open it.'
   artTexture: {fileID: 2800000, guid: 89c8a412fc86d9f49a4683f921a08061, type: 3}
   category: 11
   faction: 0

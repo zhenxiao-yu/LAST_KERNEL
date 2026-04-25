@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Encounter_Weekly_Goblin
   m_EditorClassIdentifier: 
   id: 59ec587dbfa747deb9f66f200a777ad2
-  notificationMessage: '一支街巷地精小队正在逼近聚落外围！'
+  notificationMessage: 'A Glitched Raider crew is closing on the outer barricades.'
   cardToSpawn: {fileID: 11400000, guid: 06b45747ae3922147809ae68228f5063, type: 2}
   count: 1
   oneTimeOnly: 0

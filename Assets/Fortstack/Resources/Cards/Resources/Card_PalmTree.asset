@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_PalmTree
   m_EditorClassIdentifier: 
   id: 523f305da6ad44699aa3a2b06fc727a0
-  displayName: '太阳棕榈'
-  description: '可在废土地表、生态舱或旧城区中回收的原始资源。'
+  displayName: 'Power Cabinet'
+  description: 'A utility cabinet still holding charged cells and coolant pods.'
   artTexture: {fileID: 2800000, guid: 7418295af6281d749aee8cf1317a5b6e, type: 3}
   category: 1
   faction: 0

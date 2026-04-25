@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ascension_06
   m_EditorClassIdentifier: 
   id: 5c97be80347e48cd9a9c337fc9c07067
-  title: '最终仪式'
-  description: '把血铬圣杯放到献祭接口上，完成召唤守护进程魔君的最终仪式。'
+  title: 'Start the Root Rite'
+  description: 'Place the Bloodchrome Vessel on the Blacksite Conduit and force a response.'
   type: 2
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 11400000, guid: cb60c20e38f0d354abb784c0754eb356, type: 2}

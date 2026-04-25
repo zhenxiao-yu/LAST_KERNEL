@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: bc2bdd7f872444c7900160312cb0db8b
   category: 2
-  displayName: '建造铁晶采场'
+  displayName: 'Build Rubble Extractor'
   requiredIngredients:
   - card: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
     count: 3

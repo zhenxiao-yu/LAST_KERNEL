@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Sword
   m_EditorClassIdentifier: 
   id: 0a622d88e8ec43118cb78d19b1a6fb5f
-  displayName: '合金长刃'
-  description: '能提升居民生存率的改装装备。'
+  displayName: 'Alloy Cutter'
+  description: 'A heavy cutting blade for close work in narrow streets.'
   artTexture: {fileID: 2800000, guid: 1d585bc31947d7c4a958791ddf5b3d2c, type: 3}
   category: 5
   faction: 0

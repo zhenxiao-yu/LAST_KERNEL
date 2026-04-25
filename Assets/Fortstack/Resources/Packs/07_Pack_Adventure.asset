@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 07_Pack_Adventure
   m_EditorClassIdentifier: 
   id: b01ddab9e13a44ca89102c4f30695ad0
-  displayName: '边境行动包'
-  description: '偏向战斗、远征与风险收益的行动卡包。'
+  displayName: 'Blackout Expedition Crate'
+  description: 'Risk-heavy sector access with threats and area cards. Sends the board into the dark for better salvage.'
   artTexture: {fileID: 2800000, guid: b3f1d29763521eb4295f1fa764d250a0, type: 3}
   category: 0
   faction: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
   statModifiers: []
   classChangeResult: {fileID: 0}
   buyPrice: 20
-  minQuests: 30
+  minQuests: 28
   slots:
   - Entries:
     - Card: {fileID: 11400000, guid: f7d0d2080bf68dc48885e8d4f6381af2, type: 2}

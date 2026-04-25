@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Acorn
   m_EditorClassIdentifier: 
   id: 4ebaf8c8ff3d4c1995ced1d7fbcc32ff
-  displayName: '伏特橡果'
-  description: '经生化改造的种子，内部储着微量电能。'
+  displayName: 'Volt Nut'
+  description: 'A small energy seed from a cracked hydro rack. Better toasted than raw.'
   artTexture: {fileID: 2800000, guid: 85a5f07916ba0ae4a9214af029599355, type: 3}
   category: 3
   faction: 0

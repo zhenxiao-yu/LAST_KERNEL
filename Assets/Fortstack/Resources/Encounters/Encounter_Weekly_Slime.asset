@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Encounter_Weekly_Slime
   m_EditorClassIdentifier: 
   id: d252dfb9523b41119c8b77fefa9dcd1b
-  notificationMessage: '一团纳米史莱姆闯入了你的地盘！'
+  notificationMessage: 'A Null Anomaly leaks through the outer grid.'
   cardToSpawn: {fileID: 11400000, guid: ab518c0794a7c9f4db0ff8fcd4e6dfd5, type: 2}
   count: 1
   oneTimeOnly: 0

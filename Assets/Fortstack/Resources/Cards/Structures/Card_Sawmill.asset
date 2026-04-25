@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Sawmill
   m_EditorClassIdentifier: 
   id: ccf07f125148486cb1f59a10f991f42c
-  displayName: '切锯机架'
-  description: '把木料切成板材的连续加工线。'
+  displayName: 'Cutter Frame'
+  description: 'A cutting rig for turning scrap stock into clean plates.'
   artTexture: {fileID: 2800000, guid: 05c0737a1d5940947a3bc3c93373c314, type: 3}
   category: 6
   faction: 0

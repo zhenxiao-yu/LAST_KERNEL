@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Enclosure_CreaturePen
   m_EditorClassIdentifier: 
   id: 081c365703974818b221f0e5f47404a9
-  displayName: '收容栏'
-  description: '关押已捕获生物的围栏区。'
+  displayName: 'Containment Pen'
+  description: 'A fenced holding zone for dangerous finds. It keeps problems measurable.'
   artTexture: {fileID: 2800000, guid: 4ac7197d170ad0b4495d2cc8efb0b927, type: 3}
   category: 6
   faction: 0

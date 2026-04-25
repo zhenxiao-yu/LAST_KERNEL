@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_09
   m_EditorClassIdentifier: 
   id: 42dd1013968b4e47a9b197cb0252fd04
-  title: '信用额度 III'
-  description: '累积至少 100 枚信用芯片。'
+  title: 'Credit Reserve III'
+  description: 'Hold at least 100 Credits in the district ledger.'
   type: 12
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

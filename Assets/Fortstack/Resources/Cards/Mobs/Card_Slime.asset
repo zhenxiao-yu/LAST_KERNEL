@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Slime
   m_EditorClassIdentifier: 
   id: 366be2e0e40c4b4d93229a94ae7133ae
-  displayName: '纳米史莱姆'
-  description: '游荡在废墟与管网间的危险生命体。'
+  displayName: 'Null Anomaly'
+  description: 'A crawling mass of nanite failure. It dissolves clean edges into static.'
   artTexture: {fileID: 2800000, guid: 81536172f5f86274ca563f8fd368f7cb, type: 3}
   category: 9
   faction: 2

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6d73a11d03434772b606c5f55ee85c8b
   category: 1
-  displayName: '加工陶瓷泥浆'
+  displayName: 'Pump Ceramic Slurry'
   requiredIngredients:
   - card: {fileID: 11400000, guid: d597a45d2a2d9884da4065a071a395b0, type: 2}
     count: 1

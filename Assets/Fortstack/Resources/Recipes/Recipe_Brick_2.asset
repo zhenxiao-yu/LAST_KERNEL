@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 12a41b6cb07e49ea8409d0be5176992a
   category: 5
-  displayName: '加工复合砖'
+  displayName: 'Cure Heat Brick'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 499e594ed9683634ba40cc3c9ace2c90, type: 2}
     count: 2

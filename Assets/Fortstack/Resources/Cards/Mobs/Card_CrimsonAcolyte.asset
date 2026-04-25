@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_CrimsonAcolyte
   m_EditorClassIdentifier: 
   id: 9acaf66a110745a88f67d77a92ef5d4b
-  displayName: '绯红门徒'
-  description: '游荡在废墟与管网间的危险生命体。'
+  displayName: 'Blackout Cultist'
+  description: 'A human zealot wired into broken doctrine. It wants the Kernel silent.'
   artTexture: {fileID: 2800000, guid: 361beea9fa5c0634588568a71c221303, type: 3}
   category: 9
   faction: 2

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Baby
   m_EditorClassIdentifier: 
   id: 1048bfa14d374720bbc4bbfdc206347e
-  displayName: '街区幼童'
-  description: '在霓虹与机噪中长大的新生代幸存者。'
+  displayName: 'Dependent'
+  description: 'A district child under your protection. No output yet, but the future has weight.'
   artTexture: {fileID: 2800000, guid: 719a72e62dafeba4b975ad96edf4c4c3, type: 3}
   category: 2
   faction: 0

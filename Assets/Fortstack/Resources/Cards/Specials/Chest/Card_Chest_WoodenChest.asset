@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Chest_WoodenChest
   m_EditorClassIdentifier: 
   id: ba6562ad321b4337887660f8ba04f59d
-  displayName: '锁盒货箱'
-  description: '用于封存物资与权限芯片的储物单元。'
+  displayName: 'Encrypted Cache'
+  description: 'A sealed crate from before the blackout. Useful if you can open it.'
   artTexture: {fileID: 2800000, guid: b41fa92c6bfec1f49a755735484eeeae, type: 3}
   category: 6
   faction: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_02
   m_EditorClassIdentifier: 
   id: a1fadf2bd01d41d7a19356155ccc1fa6
-  title: '采收荧丛灌木'
-  description: '把一名霓虹流民拖到荧丛灌木上，收集荧光浆果。'
+  title: 'Recover Rations'
+  description: 'Stack a Recruit on the Supply Cache to pull a usable Ration Pack.'
   type: 2
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 11400000, guid: 1cae339b8715ded4abf3c02d8cac07bc, type: 2}

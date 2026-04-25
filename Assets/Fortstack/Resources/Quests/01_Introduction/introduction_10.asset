@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_10
   m_EditorClassIdentifier: 
   id: f39f0e437de74aeb8c926db032b3a882
-  title: '培育荧丛灌木'
-  description: '把荧光浆果叠放到生长基质上，培育出荧丛灌木。'
+  title: 'Seed a Supply Cache'
+  description: 'Stack a Ration Pack on a Nutrient Bed to prepare another Supply Cache.'
   type: 4
   targetCard: {fileID: 11400000, guid: f7d0d2080bf68dc48885e8d4f6381af2, type: 2}
   targetRecipe: {fileID: 0}

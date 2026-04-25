@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: ec9781804dc64fa2a79c0d94a90aad18
   category: 6
-  displayName: '培育霓虹流民'
+  displayName: 'Train Recruit'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 7f7cbdd5fe023044abc18e6793bcd4b4, type: 2}
     count: 1

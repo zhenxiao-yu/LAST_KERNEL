@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e5935137ea0844a6afa589e4cb466e7b
   category: 1
-  displayName: '加工铁素矿'
+  displayName: 'Extract Raw Alloy'
   requiredIngredients:
   - card: {fileID: 11400000, guid: bef65c9c6c9b0094a970ebef7246a462, type: 2}
     count: 1

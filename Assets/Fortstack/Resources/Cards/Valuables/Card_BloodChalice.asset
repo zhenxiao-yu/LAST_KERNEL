@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_BloodChalice
   m_EditorClassIdentifier: 
   id: d8d4ae93c52446c4ae785f5e9e8af7e9
-  displayName: '血铬圣杯'
-  description: '盛满发光生体血浆的仪式容器。'
+  displayName: 'Bloodchrome Vessel'
+  description: 'A blacksite vessel keyed to bioelectric sacrifice. Do not leave it unattended.'
   artTexture: {fileID: 2800000, guid: c9f266659bd963945b4abf432cceec23, type: 3}
   category: 11
   faction: 0

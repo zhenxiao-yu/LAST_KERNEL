@@ -202,17 +202,17 @@ namespace Markyu.FortStack
     public enum CardCategory
     {
         None,       // Non-card (e.g. Pack)
-        Resource,   // Tree, Rock
-        Character,  // Villager, Warrior, Archer, Mage
-        Consumable, // Food, Potion
-        Material,   // Wood, Stone, Branch
+        Resource,   // Scrap Heap, Rubble Slab
+        Character,  // Recruit, Enforcer, Scavenger, Netrunner
+        Consumable, // Rations, Med Gel
+        Material,   // Scrap, Circuit Parts, Power Cell
         Equipment,  // Weapon, Armor, Accessory
-        Structure,  // Yard, House
-        Currency,   // Coin, Gem
+        Structure,  // Logistics Yard, Hab Pod
+        Currency,   // Credits, trade goods
         Recipe,     // Recipe exclusive
-        Mob,        // Chicken, Cow, Slime, Goblin
+        Mob,        // Protein Drone, Null Anomaly, Glitched Raider
         Area,       // Area exclusive
-        Valuable    // Treasure Chest, Keys, Artifacts
+        Valuable    // Encrypted Cache, Root Keycard, Kernel artifacts
         // ...
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 95a3c39f110344498227fdf4f1b68410
   category: 0
-  displayName: '执行制造流程'
+  displayName: 'Sweep Ruins Sector'
   requiredIngredients:
   - card: {fileID: 11400000, guid: ff52a1dc39756dc41bfea423da264550, type: 2}
     count: 1

@@ -297,15 +297,15 @@ namespace Markyu.FortStack
 
         private void RestoreEquipmentForCard(CardInstance character, CardData data)
         {
-            // 1. If this character changed class (e.g. is now a Warrior), 
-            // manually inject the "Villager" base state so the Equipper knows we aren't starting fresh.
+            // If this personnel card changed class, preserve the Recruit base state
+            // so the equipment system knows it is restoring an upgraded card.
             if (!string.IsNullOrEmpty(data.OriginalId))
             {
                 var originalDef = GetDefinitionById(data.OriginalId);
                 character.EquipperComponent?.SetOriginalDefinition(originalDef);
             }
 
-            // 2. Instantiate and Equip items
+            // Instantiate and equip saved items.
             foreach (var itemData in data.EquippedItems)
             {
                 var itemDef = GetDefinitionById(itemData.Id);

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Staff
   m_EditorClassIdentifier: 
   id: 08bc1a8376ff44f48a80c6bc67da3084
-  displayName: '导能法杖'
-  description: '能提升居民生存率的改装装备。'
+  displayName: 'Signal Staff'
+  description: 'A conductor pole tuned for directed arcs and hostile signals.'
   artTexture: {fileID: 2800000, guid: f34d18c3d9b59b04fbeceb588cf90057, type: 3}
   category: 5
   faction: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: construction_03
   m_EditorClassIdentifier: 
   id: 21981c69d91844db899df37018357ae1
-  title: '建造铁晶采场'
-  description: '建造一座铁晶采场。'
+  title: 'Build Rubble Extractor'
+  description: 'Build a Rubble Extractor for steady circuit salvage.'
   type: 4
   targetCard: {fileID: 11400000, guid: 8d5a290ece114f84fa877655d5fc0e82, type: 2}
   targetRecipe: {fileID: 0}

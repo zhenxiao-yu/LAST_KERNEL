@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Turnip
   m_EditorClassIdentifier: 
   id: caec36282b544f539454bb11f5ba52b4
-  displayName: '根芯芜菁'
-  description: '带矿物清脆感的浅色水培根菜。'
+  displayName: 'Root Ration'
+  description: 'A mineral-rich root crop from low-power hydroponics.'
   artTexture: {fileID: 2800000, guid: a163d1c69cf89be418e0100a7eb0136d, type: 3}
   category: 3
   faction: 0

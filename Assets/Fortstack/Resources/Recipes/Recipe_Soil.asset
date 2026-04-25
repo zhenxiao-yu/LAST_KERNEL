@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: cbb5c61e0a594f3491f6f2cd292c824f
   category: 1
-  displayName: '加工生长基质'
+  displayName: 'Filter Nutrient Bed'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 502ba0efbafa5f341ba8abd250a5693e, type: 2}
     count: 1

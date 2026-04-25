@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 00_Pack_Starter
   m_EditorClassIdentifier: 
   id: 50991991c8f14b698b047c2d9b860954
-  displayName: '起始补给包'
-  description: '面向新入网者的基础补给卡包。'
+  displayName: 'Survivor Intake Crate'
+  description: 'A free intake drop for a cold district start. Expect one worker, one food source, and barely enough salvage.'
   artTexture: {fileID: 2800000, guid: 39672eb470c87b440abfd4e32b7ab9bd, type: 3}
   category: 0
   faction: 0

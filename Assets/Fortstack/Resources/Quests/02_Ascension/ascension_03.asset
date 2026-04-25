@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ascension_03
   m_EditorClassIdentifier: 
   id: 48256446b5474ba38626d6a0ebcda30f
-  title: '数据安葬许可'
-  description: '建造一片数据墓场。'
+  title: 'Open the Memory Pit'
+  description: 'Construct access to the Memory Pit for bodies, drives, and old debts.'
   type: 4
   targetCard: {fileID: 11400000, guid: 601f144cf9f0bf947a1e61c64a99587f, type: 2}
   targetRecipe: {fileID: 0}

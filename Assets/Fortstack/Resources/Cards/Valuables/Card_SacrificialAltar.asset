@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_SacrificialAltar
   m_EditorClassIdentifier: 
   id: 1d06006d35cd40d08dc7e1469b94881e
-  displayName: '献祭接口'
-  description: '接收贡品与启动禁忌召唤的黑色终端。'
+  displayName: 'Blacksite Conduit'
+  description: 'A forbidden relay that trades flesh, data, and power for access.'
   artTexture: {fileID: 2800000, guid: 7e0ec43f4c7ab3c40b655af708176271, type: 3}
   category: 11
   faction: 0

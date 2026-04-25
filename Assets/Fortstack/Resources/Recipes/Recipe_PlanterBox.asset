@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 180901a54fce4ac2aa2a6615c6c01a76
   category: 2
-  displayName: '建造种植槽'
+  displayName: 'Build Nutrient Tray'
   requiredIngredients:
   - card: {fileID: 11400000, guid: a731e6eacd5ff85408bc7bc72c109143, type: 2}
     count: 1

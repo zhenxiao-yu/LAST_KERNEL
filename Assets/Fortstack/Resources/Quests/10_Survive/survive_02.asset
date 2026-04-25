@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: survive_02
   m_EditorClassIdentifier: 
   id: 1072e346a95143f697d37d1dfdf8c56f
-  title: '存活到第 16 天'
-  description: '在不断升级的压力下坚持到第 16 天。'
+  title: 'Hold Until Day 16'
+  description: 'Survive long enough for shortages to become systems.'
   type: 10
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

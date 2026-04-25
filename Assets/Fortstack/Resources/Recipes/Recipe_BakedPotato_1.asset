@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 149cc03740c44af9b4a6c81e63d6a3cd
   category: 3
-  displayName: '制备热板薯块'
+  displayName: 'Heat Starch Block'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 73eadadfa1a27934693e2b6fcb4a5425, type: 2}
     count: 1

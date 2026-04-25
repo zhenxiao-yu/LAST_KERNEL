@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: f289803223cf447da67528f9bd03f032
   category: 0
-  displayName: '执行制造流程'
+  displayName: 'Sweep Memory Pit'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 601f144cf9f0bf947a1e61c64a99587f, type: 2}
     count: 1

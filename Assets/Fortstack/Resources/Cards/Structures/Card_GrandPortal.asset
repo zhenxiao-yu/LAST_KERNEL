@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_GrandPortal
   m_EditorClassIdentifier: 
   id: 351239861efd4f539f39b7b2883f04d6
-  displayName: '门域枢纽'
-  description: '连接远端区域与异常空间的高能传送门。'
+  displayName: 'Transit Gate'
+  description: 'A patched access gate to distant city sectors. Every trip comes back changed.'
   artTexture: {fileID: 2800000, guid: 4e3b3ec04fd4ef942a7bf871773df5cf, type: 3}
   category: 6
   faction: 0

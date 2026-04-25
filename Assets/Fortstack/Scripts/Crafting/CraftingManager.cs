@@ -279,22 +279,21 @@ namespace Markyu.FortStack
 
             if (resultIsLiving) return;
 
-            // 2. Determine if we should Auto-Repeat
+            // Determine if the recipe should keep running after one completion.
             bool shouldRepeat = false;
 
             if (recipe.IsContinuous)
             {
-                // Explicitly set to continuous (e.g. Logging Camp)
+                // Explicit continuous producers, such as Recycler Yard routes.
                 shouldRepeat = true;
             }
             else if (recipe.HasConsumableIngredients() && stack.Cards.Count > 0)
             {
-                // Not continuous, BUT we consumed something (Sawmill + 10 Wood).
+                // Batch processors may still have enough ingredients left.
                 // If there are cards left, we should check if we can craft again.
                 shouldRepeat = true;
             }
 
-            // 3. Execute Repeat
             if (shouldRepeat)
             {
                 CheckForRecipe(stack);

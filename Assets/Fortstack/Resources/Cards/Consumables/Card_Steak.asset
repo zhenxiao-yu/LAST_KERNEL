@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Steak
   m_EditorClassIdentifier: 
   id: 9ebc922d8c8d463e8fcbb93a9d2bfec7
-  displayName: '闪煎肉排'
-  description: '快火煎封的培植肉排，口感扎实。'
+  displayName: 'Searpack'
+  description: 'Pressed protein flash-seared on a hot plate. Good morale per gram.'
   artTexture: {fileID: 2800000, guid: 4e56d86df6c80364bb47cfee76c848a0, type: 3}
   category: 3
   faction: 0

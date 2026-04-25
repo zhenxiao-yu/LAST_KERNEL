@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Tunic
   m_EditorClassIdentifier: 
   id: 1f555126592b4d1696317a5a72c61f64
-  displayName: '纤维外衣'
-  description: '能提升居民生存率的改装装备。'
+  displayName: 'Patchcoat'
+  description: 'A reinforced coat stitched from tarps, mesh, and stubbornness.'
   artTexture: {fileID: 2800000, guid: 67db2a19031d5c249833fed5a74f6c4d, type: 3}
   category: 5
   faction: 0

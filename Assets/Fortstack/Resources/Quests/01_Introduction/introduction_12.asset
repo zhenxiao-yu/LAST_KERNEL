@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_12
   m_EditorClassIdentifier: 
   id: 897c699abd3b477bb3e638ac305c48fc
-  title: '建造居住舱'
-  description: '建造一个居住舱，为居民提供稳定庇护。'
+  title: 'Build a Hab Pod'
+  description: 'Construct a Hab Pod so civilians can survive inside the fortress line.'
   type: 0
   targetCard: {fileID: 11400000, guid: 7f7cbdd5fe023044abc18e6793bcd4b4, type: 2}
   targetRecipe: {fileID: 0}

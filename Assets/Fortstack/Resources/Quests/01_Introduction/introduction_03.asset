@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_03
   m_EditorClassIdentifier: 
   id: 39159c26fad34655943d4d0c8b32e571
-  title: '获取铁晶石'
-  description: '开采碎岩板，拿到一块铁晶石。'
+  title: 'Strip Circuit Parts'
+  description: 'Work the Rubble Slab until you recover Circuit Parts.'
   type: 4
   targetCard: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
   targetRecipe: {fileID: 0}

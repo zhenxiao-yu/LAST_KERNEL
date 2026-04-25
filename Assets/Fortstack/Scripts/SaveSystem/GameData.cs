@@ -168,7 +168,7 @@ namespace Markyu.FortStack
         public int CurrentNutrition;
         public int StoredCoins;
 
-        public string OriginalId; // Stores "Villager" if current Id is "Warrior"
+        public string OriginalId; // Preserves the base personnel definition after a class upgrade.
         public List<CardData> EquippedItems = new();
 
         public CardData() { }

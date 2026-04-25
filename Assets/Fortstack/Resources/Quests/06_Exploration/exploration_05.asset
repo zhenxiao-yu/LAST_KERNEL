@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: exploration_05
   m_EditorClassIdentifier: 
   id: 42154f461e5e4211aa488297c74c2ede
-  title: '探索数据墓场'
-  description: '派一名居民前往数据墓场，搜索被遗弃的残骸与记录。'
+  title: 'Search Memory Pit'
+  description: 'Send a Recruit into the pit and bring back whatever still has a name.'
   type: 8
   targetCard: {fileID: 11400000, guid: 601f144cf9f0bf947a1e61c64a99587f, type: 2}
   targetRecipe: {fileID: 0}

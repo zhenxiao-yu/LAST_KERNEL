@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3380f848b699406c9fb7f8b7f769d813
   category: 6
-  displayName: '培育街区幼童'
+  displayName: 'Register Dependent'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 7f7cbdd5fe023044abc18e6793bcd4b4, type: 2}
     count: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: advancement_05
   m_EditorClassIdentifier: 
   id: 10103a30dc024c7eb04b0f7dde4eb3be
-  title: '训练密码术士'
-  description: '把导能手杖交给一名角色，激活他们的术式潜能。'
+  title: 'Train a Netrunner'
+  description: 'Give a Recruit a Signal Cane and teach the board to listen.'
   type: 7
   targetCard: {fileID: 11400000, guid: 75b974c09ffed1041a7cd678c71148ab, type: 2}
   targetRecipe: {fileID: 0}

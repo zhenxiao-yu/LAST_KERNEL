@@ -23,8 +23,8 @@ namespace Markyu.FortStack
                 }
             }
 
-            // 2. Consume inputs (Explorers/Villagers)
-            // Note: We deliberately exclude the Area card from consumption unless it's explicitly in the rules
+            // Consume personnel and tools. The area card stays unless the recipe
+            // explicitly marks it for consumption.
             var rules = GetIngredientRules();
             ConsumeIngredients(stack, rules);
         }

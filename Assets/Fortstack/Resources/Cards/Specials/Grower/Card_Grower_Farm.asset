@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Grower_Farm
   m_EditorClassIdentifier: 
   id: b6040443ac2a4b358a0f06aaa7f64f69
-  displayName: '水培农场'
-  description: '面向大批量食物生产的叠层种植系统。'
+  displayName: 'Hydroponic Farm'
+  description: 'A scaled food system for steady ration production. Power hungry, worth it.'
   artTexture: {fileID: 2800000, guid: b51eb5e1f28effb40a7cd96ba2c0781d, type: 3}
   category: 6
   faction: 0

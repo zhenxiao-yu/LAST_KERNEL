@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: advancement_01
   m_EditorClassIdentifier: 
   id: 96e0138b58cb4102a026e65bad865762
-  title: '基础防护'
-  description: '给一名霓虹流民戴上史莱姆帽，提高生存率。'
+  title: 'Patch Armor'
+  description: 'Give a Recruit a Gel Hood. Cheap protection still counts.'
   type: 7
   targetCard: {fileID: 11400000, guid: 2779c2a939b1de446895fa126c81280d, type: 2}
   targetRecipe: {fileID: 0}

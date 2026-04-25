@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1927de4239e64d7392aae611f90bf208
   category: 2
-  displayName: '建造收容笼'
+  displayName: 'Build Drone Cage'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 8ac674a56ad01e64fb1f8c9bddb2b50e, type: 2}
     count: 4

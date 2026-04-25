@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Clay
   m_EditorClassIdentifier: 
   id: 10b3a0df81014af2b3b82881ef0e3899
-  displayName: '陶瓷泥浆'
-  description: '用于组装设施、装备与生存物资的工业材料。'
+  displayName: 'Ceramic Slurry'
+  description: 'Ceramic slurry from broken pipes and filter tanks. It hardens into useful casing.'
   artTexture: {fileID: 2800000, guid: 75abfaf2e7b23e444865a5405078f76b, type: 3}
   category: 4
   faction: 0

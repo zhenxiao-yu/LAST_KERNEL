@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Forest
   m_EditorClassIdentifier: 
   id: 286a68ab3cb1468b9f50829ac068ca23
-  displayName: '霓光密林'
-  description: '线缆、苔层与旧科技纠缠成片的合成树林。'
+  displayName: 'Relay Graveyard'
+  description: 'A maze of fallen masts and live wire. Signals still move through it in bad shapes.'
   artTexture: {fileID: 2800000, guid: 9e509f27d7edaf242a5fd0f4311d673f, type: 3}
   category: 10
   faction: 0

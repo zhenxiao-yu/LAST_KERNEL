@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1e2c9476bc3049a38af87932c2176e69
   category: 2
-  displayName: '建造热源节点'
+  displayName: 'Build Generator'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 71995e795738a0849a04d5c6f0f6804f, type: 2}
     count: 1

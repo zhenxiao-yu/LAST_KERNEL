@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: exploration_02
   m_EditorClassIdentifier: 
   id: 9024ed01f0e94de788c2d122cb151107
-  title: '探索霓虹原野'
-  description: '派一名居民进入霓虹原野，发掘新的资源与风险。'
+  title: 'Sweep Blackout Yard'
+  description: 'Send a Recruit into the yard and mark the safe lanes.'
   type: 8
   targetCard: {fileID: 11400000, guid: 6baac782c2acd694f9dd9003a8824df8, type: 2}
   targetRecipe: {fileID: 0}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9811be9a1c284a7bac92d2975dfa616c
   category: 6
-  displayName: '加工合成果树'
+  displayName: 'Assemble Hydro Orchard'
   requiredIngredients:
   - card: {fileID: 11400000, guid: a731e6eacd5ff85408bc7bc72c109143, type: 2}
     count: 1

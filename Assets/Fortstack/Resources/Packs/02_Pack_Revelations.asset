@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 02_Pack_Revelations
   m_EditorClassIdentifier: 
   id: 8ae9fc9e89de42e4a72aeef2f935ea6d
-  displayName: '启示档案包'
-  description: '收录危险线索与深层异象的加密卡包。'
+  displayName: 'Kernel Research Crate'
+  description: 'Encrypted leads, archive fragments, and volatile access pieces. Buy when the district can survive a bad draw.'
   artTexture: {fileID: 2800000, guid: 575f8d8a400ea97429cfefd688ca806e, type: 3}
   category: 0
   faction: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
   equipmentSlot: 0
   statModifiers: []
   classChangeResult: {fileID: 0}
-  buyPrice: 4
-  minQuests: 10
+  buyPrice: 12
+  minQuests: 18
   slots:
   - Entries:
     - Card: {fileID: 11400000, guid: f7d0d2080bf68dc48885e8d4f6381af2, type: 2}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: dc6816205b8748a7b159d8ca4beaaf0a
   category: 6
-  displayName: '培育荧光浆果'
+  displayName: 'Grow Ration Culture'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 93befcbc9fba8cb42b030aacca7f2fde, type: 2}
     count: 1

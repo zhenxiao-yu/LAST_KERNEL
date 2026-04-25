@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Research_Library
   m_EditorClassIdentifier: 
   id: be227bbf964143ae9994c6c6447223e5
-  displayName: '档案数据库'
-  description: '用于研究新蓝图的安全档案节点。'
+  displayName: 'Kernel Archive'
+  description: 'A secured archive node for new blueprints. Knowledge survives when power does.'
   artTexture: {fileID: 2800000, guid: 3c41a3958d5cf444d805024885d13d71, type: 3}
   category: 6
   faction: 0

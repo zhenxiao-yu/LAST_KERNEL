@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Fiber
   m_EditorClassIdentifier: 
   id: cafb22b36cd34038a07e437081076f68
-  displayName: '纤维束'
-  description: '用于组装设施、装备与生存物资的工业材料。'
+  displayName: 'Cable Fiber'
+  description: 'Stripped insulation and braided synth thread. Flexible, light, always needed.'
   artTexture: {fileID: 2800000, guid: 13c832f7187af464f81c78d3c2f2cddd, type: 3}
   category: 4
   faction: 0

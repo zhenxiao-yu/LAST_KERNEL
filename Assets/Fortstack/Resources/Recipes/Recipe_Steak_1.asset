@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 81849741f8ee48e989f328ec322f9d3e
   category: 3
-  displayName: '制备闪煎肉排'
+  displayName: 'Sear Protein Pack'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 73eadadfa1a27934693e2b6fcb4a5425, type: 2}
     count: 1

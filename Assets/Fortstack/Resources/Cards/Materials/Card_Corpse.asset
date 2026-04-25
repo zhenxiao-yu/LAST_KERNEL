@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Corpse
   m_EditorClassIdentifier: 
   id: ba6f7f6aedfc41d29edce8ccb78bd295
-  displayName: '尸体数据壳'
-  description: '用于组装设施、装备与生存物资的工业材料。'
+  displayName: 'Biometric Shell'
+  description: 'A dead body or ruined clone chassis. Grim salvage for systems that still demand flesh.'
   artTexture: {fileID: 2800000, guid: 5fd8a41f828838747ac41c211c5e237a, type: 3}
   category: 4
   faction: 0

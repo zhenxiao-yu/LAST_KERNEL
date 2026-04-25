@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: exploration_03
   m_EditorClassIdentifier: 
   id: 85d60adf4b9e466fa83bb7d51a477452
-  title: '探索天际高地'
-  description: '派一名居民前往天际高地，调查高架废墟深处的动静。'
+  title: 'Scout Dead Transit'
+  description: 'Send a Recruit onto the elevated transit line.'
   type: 8
   targetCard: {fileID: 11400000, guid: 9390a1bb285c1af4895d874e85f3e919, type: 2}
   targetRecipe: {fileID: 0}

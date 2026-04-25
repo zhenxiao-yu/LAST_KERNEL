@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_02
   m_EditorClassIdentifier: 
   id: 69a65868997c4d17abb67785ee0ea451
-  title: '囤积铁晶石'
-  description: '至少收集 10 份铁晶石，补强你的建筑储备。'
+  title: 'Stockpile Circuit Parts'
+  description: 'Hold at least 10 Circuit Parts before the next infrastructure push.'
   type: 0
   targetCard: {fileID: 11400000, guid: cd07ac519c9e49945a115885ba158123, type: 2}
   targetRecipe: {fileID: 0}

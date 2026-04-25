@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: cooking_05
   m_EditorClassIdentifier: 
   id: da9df182a7f446c8afe09e2d61ba6fb8
-  title: '小份零食'
-  description: '把伏特橡果丢进等离子炉火，做成炙化橡果。'
+  title: 'Toast Volt Nut'
+  description: 'Toast a Volt Nut on the Heat Coil for a compact snack.'
   type: 4
   targetCard: {fileID: 11400000, guid: 34c6cf5339ea53f428b41faff7387959, type: 2}
   targetRecipe: {fileID: 0}

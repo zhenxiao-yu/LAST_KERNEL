@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e817f093ef154f048541cccbabfd6813
   category: 1
-  displayName: '加工铁晶石'
+  displayName: 'Strip Circuit Parts'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 819eb0291ba0479448286c2ec007085d, type: 2}
     count: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Rock
   m_EditorClassIdentifier: 
   id: 3083d44f30ab4721a539da80d422108b
-  displayName: '碎岩板'
-  description: '可在废土地表、生态舱或旧城区中回收的原始资源。'
+  displayName: 'Rubble Slab'
+  description: 'Broken concrete, device shells, and rebar. Slow work, dependable parts.'
   artTexture: {fileID: 2800000, guid: e887d86c34beb4947aa049fa11814ad4, type: 3}
   category: 1
   faction: 0

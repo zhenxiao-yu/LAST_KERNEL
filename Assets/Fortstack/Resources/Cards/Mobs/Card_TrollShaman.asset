@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_TrollShaman
   m_EditorClassIdentifier: 
   id: bd83fbc693c945b7b285bad5162dde90
-  displayName: '巨魔巫机'
-  description: '游荡在废墟与管网间的危险生命体。'
+  displayName: 'Process Echo'
+  description: 'A corrupted operator pattern repeating rituals it no longer understands.'
   artTexture: {fileID: 2800000, guid: 42e673efa856ebc4e89bbed79d9c0c91, type: 3}
   category: 9
   faction: 2

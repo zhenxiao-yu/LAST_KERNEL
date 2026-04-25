@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 21f3b52cb899497593f72c23aabe4ecd
   category: 6
-  displayName: '加工碳木树'
+  displayName: 'Scavenge Scrap Heap'
   requiredIngredients:
   - card: {fileID: 11400000, guid: a731e6eacd5ff85408bc7bc72c109143, type: 2}
     count: 1

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Milk
   m_EditorClassIdentifier: 
   id: 0e726159fbb24c51950139c423a826ab
-  displayName: '合成乳'
-  description: '实验室培养的洁净乳制品。'
+  displayName: 'Nutrient Milk'
+  description: 'Cultured feedstock with enough minerals to blunt hunger.'
   artTexture: {fileID: 2800000, guid: 2ec65869536c3e84481032433618df01, type: 3}
   category: 3
   faction: 0

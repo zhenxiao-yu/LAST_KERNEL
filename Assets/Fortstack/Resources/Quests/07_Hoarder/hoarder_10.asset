@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: hoarder_10
   m_EditorClassIdentifier: 
   id: 262c1fde482342a39d3a3b997a8a08d5
-  title: '容量扩展 I'
-  description: '把卡牌容量提升到 30 或以上。'
+  title: 'Storage Buffer I'
+  description: 'Raise card capacity to 30 or more.'
   type: 13
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 0}

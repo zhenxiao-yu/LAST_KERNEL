@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6ba1751a276c44e8ad3a101090d8f8f2
   category: 1
-  displayName: '加工纤维束'
+  displayName: 'Strip Cable Fiber'
   requiredIngredients:
   - card: {fileID: 11400000, guid: c79e3830e1a920f40a0f507d3b31b7b2, type: 2}
     count: 1

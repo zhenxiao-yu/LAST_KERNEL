@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: advancement_03
   m_EditorClassIdentifier: 
   id: 4e516067ef724b708d5b1e5e4cbd2214
-  title: '建造锻造砧台'
-  description: '收集材料并制作锻造砧台，解锁更高级的制造链。'
+  title: 'Build Fabrication'
+  description: 'Construct a Fabricator Bench for serious gear.'
   type: 4
   targetCard: {fileID: 11400000, guid: 9e4a8e57f755493428b41fd81fd0bc4e, type: 2}
   targetRecipe: {fileID: 0}

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: introduction_14
   m_EditorClassIdentifier: 
   id: 24859f8a041d47e99f4b0b4eebe03f0a
-  title: '新生住民'
-  description: '把 2 名霓虹流民放进居住舱，让聚落迎来新的街区幼童。'
+  title: 'Protect a Dependent'
+  description: 'Place two Recruits in a Hab Pod and register a Dependent.'
   type: 4
   targetCard: {fileID: 11400000, guid: 625e3b3240f9d314dbc421d433d16542, type: 2}
   targetRecipe: {fileID: 0}

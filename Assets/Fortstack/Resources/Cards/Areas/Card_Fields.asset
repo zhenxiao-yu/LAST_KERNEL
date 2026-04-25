@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Fields
   m_EditorClassIdentifier: 
   id: ac684ad21b8d4fe583a98e59a26a4117
-  displayName: '霓虹原野'
-  description: '被广告巨屏与巡游拾荒者照亮的开阔作业区。'
+  displayName: 'Blackout Yard'
+  description: 'An open work yard under dead billboards. Good salvage, poor cover.'
   artTexture: {fileID: 2800000, guid: 9df6dcd4d5b974449a431ea103e58f82, type: 3}
   category: 10
   faction: 0

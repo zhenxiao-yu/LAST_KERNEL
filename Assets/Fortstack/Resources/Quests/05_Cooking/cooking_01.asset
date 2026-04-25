@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: cooking_01
   m_EditorClassIdentifier: 
   id: 7599024e37ef46fdaa59b50029c73f38
-  title: '点燃等离子炉火'
-  description: '拿到一团等离子炉火，为聚落提供取暖和烹饪能力。'
+  title: 'Power the Heat Coil'
+  description: 'Secure a Heat Coil for cooking, warmth, and emergency work.'
   type: 2
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 11400000, guid: 9a29a729eeaef064eb84dc9d690f1414, type: 2}

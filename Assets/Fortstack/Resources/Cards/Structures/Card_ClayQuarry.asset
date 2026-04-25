@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_ClayQuarry
   m_EditorClassIdentifier: 
   id: b929305dd3ab4f64a99f0026fbe136d8
-  displayName: '陶料采场'
-  description: '能持续产出陶瓷泥浆的工业采掘场。'
+  displayName: 'Slurry Pump'
+  description: 'A crude pump that pulls ceramic slurry from flooded lower levels.'
   artTexture: {fileID: 2800000, guid: eccd26f68ac6df94c8a3b22e5b165560, type: 3}
   category: 6
   faction: 0

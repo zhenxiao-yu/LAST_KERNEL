@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Sign
   m_EditorClassIdentifier: 
   id: 4b895ef3ea10446db27ea494f2ee32db
-  displayName: '全息路牌'
-  description: '支撑赛博聚落运转的基础设施。'
+  displayName: 'Relay Sign'
+  description: 'A lit marker and local signal post. It tells crews where home still is.'
   artTexture: {fileID: 2800000, guid: 69e398841f180504f8fce9120de1df75, type: 3}
   category: 6
   faction: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: the_basics_03
   m_EditorClassIdentifier: 
   id: 398afbd28f6d40c6a1d98fa67886b5bd
-  title: '石材来源'
-  description: '开采黑石柱群，获取铁晶石。'
+  title: 'Mine Server Spine'
+  description: 'Work the Server Spine and recover Circuit Parts.'
   type: 2
   targetCard: {fileID: 0}
   targetRecipe: {fileID: 11400000, guid: 4c99b8ec82c8cfb40af1c8f213f8114e, type: 2}

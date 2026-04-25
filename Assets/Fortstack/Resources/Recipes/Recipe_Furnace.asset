@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 39c9f2cd97de45b397c5b5193d36cafd
   category: 2
-  displayName: '建造熔炼核心'
+  displayName: 'Build Smelter Core'
   requiredIngredients:
   - card: {fileID: 11400000, guid: 26aeb0eb260e6064dacc12cbc2cf226a, type: 2}
     count: 2
