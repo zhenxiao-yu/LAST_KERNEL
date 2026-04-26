@@ -24,9 +24,9 @@ MonoBehaviour:
   moveDuration: 0.1
   moveEase: 6
   swaySharpness: 100
+  feelProfile: {fileID: 11400000, guid: 8a3c7de79508a594faf8281033f1d485, type: 2}
   puffParticle: {fileID: 7066159731596260550, guid: 903deec29e8a86e45b969d88e5deeafc, type: 3}
   outlineMaterial: {fileID: -876546973899608171, guid: 8fec2bb547e39ed4aaa73cdd972bf993, type: 3}
-  feelProfile: {fileID: 11400000, guid: 8a3c7de79508a594faf8281033f1d485, type: 3}
   moveInterval: 5
   moveRadius: 1
   maxAttemptsPerMove: 5

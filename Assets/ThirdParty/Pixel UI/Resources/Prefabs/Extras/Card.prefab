@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 3663272767101404192}
   - component: {fileID: 8170309007454993773}
   - component: {fileID: 589475116296464735}
+  - component: {fileID: -4451157352260865324}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -368,6 +369,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e8c9d742ae54f418c7112de96b8136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Markyu.FortStack.CardFeelPresenter
+--- !u!114 &-4451157352260865324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1230088822766806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 942913ac91df52140849a2b62ea9df46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Markyu.LastKernel.CardController
 --- !u!1 &1251156451231746
 GameObject:
   m_ObjectHideFlags: 0

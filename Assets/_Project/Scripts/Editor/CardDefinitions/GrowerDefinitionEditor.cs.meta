@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 7749477f826e48d4aa58eb04ca6ab000
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Scripts/Card/Definitions/Editor/GrowerDefinitionEditor.cs
+  uploadId: 847534
+

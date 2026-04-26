@@ -1,0 +1,77 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Markyu.LastKernel
+{
+    [CreateAssetMenu(menuName = "LastKernel/Night Wave", fileName = "Wave_Night_")]
+    public class NightWaveDefinition : ScriptableObject
+    {
+        [SerializeField] private string waveName = "Incursion Wave";
+
+        [SerializeField, TextArea]
+        private string flavorText;
+
+        [SerializeField] private List<EnemyEntry> enemies = new();
+
+        [Header("Run-State Consequences")]
+        [SerializeField, Tooltip("Morale change on player victory.")]
+        private int victoryMoraleDelta = 5;
+
+        [SerializeField, Tooltip("Morale change on player defeat (use negative value).")]
+        private int defeatMoraleDelta = -10;
+
+        [SerializeField, Tooltip("Fatigue added per defender committed to the lane.")]
+        private int fatigueCostPerDefender = 2;
+
+        [SerializeField, Tooltip("Salvage earned per enemy killed.")]
+        private int salvagePerKill = 1;
+
+        public string WaveName => GameLocalization.GetOptional(
+            LocalizationKeyBuilder.ForAsset(this, "night.wave", "name"),
+            waveName);
+
+        public string FlavorText => GameLocalization.GetOptional(
+            LocalizationKeyBuilder.ForAsset(this, "night.wave", "flavor"),
+            flavorText);
+        public IReadOnlyList<EnemyEntry> Enemies => enemies;
+        public int VictoryMoraleDelta => victoryMoraleDelta;
+        public int DefeatMoraleDelta => defeatMoraleDelta;
+        public int FatigueCostPerDefender => fatigueCostPerDefender;
+        public int SalvagePerKill => salvagePerKill;
+
+        public List<EnemyDefinition> BuildEnemyList()
+        {
+            var result = new List<EnemyDefinition>();
+            foreach (var entry in enemies)
+            {
+                if (entry.Enemy == null) continue;
+                for (int i = 0; i < entry.Count; i++)
+                    result.Add(entry.Enemy);
+            }
+            return result;
+        }
+
+        public static NightWaveDefinition CreateRuntime(
+            string name, string flavor, List<EnemyEntry> entries,
+            int victoryMorale = 5, int defeatMorale = -10,
+            int fatigue = 1, int salvage = 1)
+        {
+            var wave = ScriptableObject.CreateInstance<NightWaveDefinition>();
+            wave.waveName              = name;
+            wave.flavorText            = flavor;
+            wave.enemies               = entries;
+            wave.victoryMoraleDelta    = victoryMorale;
+            wave.defeatMoraleDelta     = defeatMorale;
+            wave.fatigueCostPerDefender = fatigue;
+            wave.salvagePerKill        = salvage;
+            return wave;
+        }
+    }
+
+    [System.Serializable]
+    public class EnemyEntry
+    {
+        public EnemyDefinition Enemy;
+        [Min(1)] public int Count = 1;
+    }
+}

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ab8ecc81441e35541989e389e8858858
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 355516
+  packageName: FortStack - Card Stacking Survival Game
+  packageVersion: 1.0.0
+  assetPath: Assets/_Project/FortStack/Materials/Cards/Mob.mat
+  uploadId: 847534
+
