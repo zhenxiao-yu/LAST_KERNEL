@@ -26,7 +26,7 @@ using UnityEngine;
 
 namespace Markyu.LastKernel
 {
-    public class CardManager : MonoBehaviour, ICardService
+    public class CardManager : MonoBehaviour, ICardService, ICardEventSink
     {
         #region Singleton & Events
         public static CardManager Instance { get; private set; }
@@ -894,10 +894,14 @@ namespace Markyu.LastKernel
 
         #region  Game Cycles
         /// <summary>
-        /// Executes the global feeding phase, where all Character cards attempt to consume 
+        /// Executes the global feeding phase, where all Character cards attempt to consume
         /// available Consumable cards to satisfy their hunger.
         /// </summary>
         /// <returns>An IEnumerator to run the feeding process as a coroutine, managing animations and delays.</returns>
+        // NOTE: Lives in CardManager rather than DayCycleManager because it needs direct access
+        // to cardSettings (HungerPerCharacter, DragHeight) and the camera controller. Exposing
+        // those through ICardService would increase the interface surface without real benefit.
+        // DayCycleManager orchestrates WHEN feeding happens; CardManager handles HOW.
         public IEnumerator FeedCharacters()
         {
             var allCards = AllCards.ToList();

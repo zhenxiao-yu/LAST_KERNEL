@@ -35,10 +35,6 @@ namespace Markyu.LastKernel
         void MarkCardAsDiscovered(CardDefinition card);
         StatsSnapshot GetStatsSnapshot();
 
-        void NotifyCardKilled(CardInstance card);
-        void NotifyCardEquipped(CardDefinition card);
-        void NotifyStatsChanged();
-
         IEnumerator FeedCharacters();
     }
 }

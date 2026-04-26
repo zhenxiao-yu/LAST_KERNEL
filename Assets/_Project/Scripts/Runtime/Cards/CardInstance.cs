@@ -1,3 +1,34 @@
+// CardInstance — Runtime representation of a single card on the board.
+//
+// Owns the card's identity (Definition, Stats), mutable runtime state
+// (CurrentHealth, CurrentNutrition, UsesLeft), and visual presentation.
+// Acts as the integration point for optional capability components:
+//   CardCombatant    — combat attack/defense logic
+//   CardEquipper     — equipping items onto this card (class change)
+//   CardEquipment    — this card IS an item that can be equipped onto another
+//   CardFeelPresenter — hover/pickup/damage visual feedback (shaders, tweens)
+//
+// Regions:
+//   Fields & Properties      — serialized text refs, runtime state, component refs
+//   Lifecycle & Initialization — Initialize, pointer hover, OnEnable/Disable, Update
+//   Information & Visuals    — hover tooltip, stat text, highlight, art texture
+//   World Interactions       — Consume (feeding animation), TryAttachToNearbyStack
+//   State Management         — Heal, TakeDamage, Kill, SetDefinition, RestoreSavedStats
+//   Localization & Presentation — language change handler, localized text refresh
+//   Movement & Animation     — tween-based movement, damped drag trailing, combat tweens
+//
+// Future refactor candidates:
+//   • TryAttachToNearbyStack — merge + validation logic; natural home is CardController
+//     once CardController owns the full drag-drop lifecycle end-to-end.
+//   • SetTargetAnimated/Instant/Damped + tween fields — natural CardMovement component;
+//     requires CardStack to cache the component instead of calling through CardInstance.
+//
+// Key dependencies:
+//   CardManager      — stack registration, overlap resolution, stats notification
+//   CraftingManager  — crafting task queries in TryAttachToNearbyStack
+//   CardFeelPresenter — damage and hover visual feedback delegation
+//   GameLocalization — display name and description refresh on language change
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -377,66 +408,92 @@ namespace Markyu.LastKernel
         }
 
         /// <summary>
-        /// Searches for nearby <see cref="CardStack"/> candidates within the specified radius 
-        /// and attempts to merge the current card's stack into the best compatible candidate.
+        /// Searches for a nearby compatible <see cref="CardStack"/> and merges into it.
+        /// Validates stacking rules, crafting ingredient safety, and board placement.
         /// </summary>
-        /// <remarks>
-        /// This process involves complex validation, including physical stacking rules, 
-        /// crafting ingredient compatibility checks, and stack management logic (merging, 
-        /// unregistering empty stacks, and recipe checking).
-        /// </remarks>
-        /// <param name="radius">The sphere radius used to search for nearby stacks.</param>
-        /// <param name="stackToIgnore">A specific stack to exclude from being a merge candidate.</param>
-        /// <returns>The <see cref="CardStack"/> the card successfully attached to, or null if no compatible stack was found.</returns>
+        /// <param name="radius">Sphere radius to search for candidate stacks.</param>
+        /// <param name="stackToIgnore">Stack to exclude from consideration (e.g. the stack just split from).</param>
+        /// <returns>The stack the card merged into, or null if no compatible candidate was found.</returns>
         public CardStack TryAttachToNearbyStack(float radius, CardStack stackToIgnore = null)
         {
             if (stackToIgnore == CardStack.RefuseAll)
-            {
                 return null;
+
+            var bestCandidateStack = FindBestMergeCandidate(radius, stackToIgnore);
+            if (bestCandidateStack == null)
+                return null;
+
+            var droppedStack = Stack;
+
+            // Returning to the stack we were pulled from: restore the paused crafting task.
+            if (bestCandidateStack == OriginalCraftingStack)
+            {
+                CraftingManager.Instance.ResumeCraftingTask(OriginalCraftingStack);
+            }
+            // Merging a crafting stack elsewhere: cancel its task before the cards move.
+            else if (droppedStack.IsCrafting && CraftingManager.Instance != null)
+            {
+                CraftingManager.Instance.StopCraftingTask(droppedStack);
             }
 
-            Collider[] hits = Physics.OverlapSphere(transform.position, radius);
-            CardStack bestCandidateStack = null;
-            float bestSqrDist = float.MaxValue;
+            bestCandidateStack.MergeWith(droppedStack);
 
-            HashSet<CardStack> checkedStacks = new HashSet<CardStack>();
+            if (droppedStack.Cards.Count == 0)
+            {
+                CardManager.Instance?.UnregisterStack(droppedStack);
+                bestCandidateStack.SetTargetPosition(bestCandidateStack.TargetPosition);
+            }
+            else
+            {
+                // Cards remain (e.g., ChestLogic kept some after a partial deposit).
+                // Keep the source stack alive and let CardManager resolve the overlap.
+                CardManager.Instance?.ResolveOverlaps();
+            }
+
+            // Never reset an active workstation timer — only check for a new recipe on idle stacks.
+            if (!bestCandidateStack.IsCrafting)
+                CraftingManager.Instance?.CheckForRecipe(bestCandidateStack);
+
+            return bestCandidateStack;
+        }
+
+        // Returns the nearest compatible stack within radius, or null.
+        // Applies stacking rules and crafting safety checks; deduplicates by stack.
+        private CardStack FindBestMergeCandidate(float radius, CardStack stackToIgnore)
+        {
+            Collider[] hits = Physics.OverlapSphere(transform.position, radius);
+            CardStack best = null;
+            float bestSqrDist = float.MaxValue;
+            var checkedStacks = new HashSet<CardStack>();
 
             foreach (var hit in hits)
             {
                 var otherCard = hit.GetComponent<CardInstance>();
                 if (otherCard == null) continue;
 
-                var candidateStack = otherCard.Stack;
+                var candidate = otherCard.Stack;
 
-                // 1. Basic Self/Null Checks
-                if (candidateStack == null ||
-                    candidateStack == Stack ||
-                    candidateStack == stackToIgnore)
+                if (candidate == null || candidate == Stack || candidate == stackToIgnore)
                     continue;
 
-                // 2. Crafting Safety Check
-                // If the candidate is crafting (and isn't the one we just unplugged from),
-                // we need to verify if we are allowed to "feed" it.
-                if (candidateStack.IsCrafting && candidateStack != OriginalCraftingStack)
+                // A crafting stack only accepts cards that are valid ingredients for its active recipe.
+                // Exception: allow re-joining the stack we were originally pulled from.
+                if (candidate.IsCrafting && candidate != OriginalCraftingStack)
                 {
-                    // Ask CraftingManager if this specific card is allowed to join the active task
                     if (CraftingManager.Instance == null ||
-                        !CraftingManager.Instance.CanJoinActiveCraft(candidateStack, Definition))
-                    {
-                        continue; // It's crafting and we aren't a valid ingredient. Block the merge.
-                    }
+                        !CraftingManager.Instance.CanJoinActiveCraft(candidate, Definition))
+                        continue;
                 }
 
-                // 3. Physical Stacking Check (Can a Wood card physically sit on a Sawmill?)
-                if (!CanStack(Definition, candidateStack.BottomCard.Definition))
+                if (!CanStack(Definition, candidate.BottomCard.Definition))
                     continue;
 
-                // Skip if we already checked this stack
-                if (!checkedStacks.Add(candidateStack)) continue;
+                if (!checkedStacks.Add(candidate)) continue;
 
-                // Distance: compare against the closest card in the stack
+                // Measure distance to the closest individual card in the candidate stack,
+                // not the stack anchor, so tall stacks don't lose to nearby single cards.
                 float sqrDist = float.MaxValue;
-                foreach (var card in candidateStack.Cards)
+                foreach (var card in candidate.Cards)
                 {
                     float d = (card.transform.position - transform.position).sqrMagnitude;
                     if (d < sqrDist) sqrDist = d;
@@ -445,53 +502,11 @@ namespace Markyu.LastKernel
                 if (sqrDist < bestSqrDist)
                 {
                     bestSqrDist = sqrDist;
-                    bestCandidateStack = candidateStack;
+                    best = candidate;
                 }
             }
 
-            if (bestCandidateStack != null)
-            {
-                var droppedStack = Stack;
-
-                // If we are merging back into the original crafting stack, RESUME it.
-                if (bestCandidateStack == OriginalCraftingStack)
-                {
-                    CraftingManager.Instance.ResumeCraftingTask(OriginalCraftingStack);
-                }
-                // If the stack we're dropping was crafting, stop it since it's being merged.
-                else if (droppedStack.IsCrafting && CraftingManager.Instance != null)
-                {
-                    CraftingManager.Instance.StopCraftingTask(droppedStack);
-                }
-
-                bestCandidateStack.MergeWith(droppedStack);
-
-                // Only unregister the stack if it has been fully absorbed or emptied.
-                // If the interaction (like a Chest) left cards behind, we must keep the stack registered.
-                if (droppedStack.Cards.Count == 0)
-                {
-                    CardManager.Instance?.UnregisterStack(droppedStack);
-                    bestCandidateStack.SetTargetPosition(bestCandidateStack.TargetPosition);
-                }
-                else
-                {
-                    // The stack still exists (e.g., partial deposit or full chest).
-                    // We let the interaction logic (ChestLogic) or CardManager handle the overlap resolution,
-                    // but we ensure the stack remains "alive" in the system.
-                    CardManager.Instance?.ResolveOverlaps();
-                }
-
-                // SAFE CHECK: Only look for new recipes if the stack is IDLE.
-                // This prevents resetting the timer on active Workstations.
-                if (!bestCandidateStack.IsCrafting)
-                {
-                    CraftingManager.Instance?.CheckForRecipe(bestCandidateStack);
-                }
-
-                return bestCandidateStack;
-            }
-
-            return null;
+            return best;
         }
         #endregion
 
@@ -636,7 +651,7 @@ namespace Markyu.LastKernel
         }
         #endregion
 
-        #region Helpers & Utilities
+        #region Localization & Presentation
         private bool CanStack(CardDefinition bottom, CardDefinition top)
         {
             return CardManager.Instance != null && CardManager.Instance.CanStack(bottom, top);
@@ -676,7 +691,9 @@ namespace Markyu.LastKernel
 
             View?.SetArt(texture);
         }
+        #endregion
 
+        #region Movement & Animation
         /// <summary>
         /// Moves the card to a specified target position using a DOTween animation,
         /// overriding any existing movement tweens.
