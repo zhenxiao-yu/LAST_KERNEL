@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Markyu.LastKernel
 {
-    public class CraftingManager : MonoBehaviour
+    public class CraftingManager : MonoBehaviour, ICraftingService
     {
         public static CraftingManager Instance { get; private set; }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Markyu.LastKernel
 {
-    public class CardManager : MonoBehaviour
+    public class CardManager : MonoBehaviour, ICardService
     {
         #region Singleton & Events
         public static CardManager Instance { get; private set; }
@@ -964,23 +964,5 @@ namespace Markyu.LastKernel
         #endregion
     }
 
-    public struct StatsSnapshot
-    {
-        public int TotalNutrition { get; set; }
-        public int NutritionNeed { get; set; }
-        public int Currency { get; set; }
-        public int CardsOwned { get; set; }
-        public int TotalBoost { get; set; }
-        public int CardLimit { get; set; }
-        public int ExcessCards { get; set; }
-        public int TotalCharacters { get; set; }
-    }
-
-    [System.Serializable]
-    public struct CategoryEntry
-    {
-        public CardCategory category;
-        public CardInstance prefab;
-    }
 }
 

@@ -11,7 +11,7 @@ namespace Markyu.LastKernel
         public List<Quest> Quests = new();
     }
 
-    public class QuestManager : MonoBehaviour
+    public class QuestManager : MonoBehaviour, IQuestService
     {
         public static QuestManager Instance { get; private set; }
 

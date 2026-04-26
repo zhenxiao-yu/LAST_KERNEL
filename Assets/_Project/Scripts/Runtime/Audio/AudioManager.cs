@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 
 namespace Markyu.LastKernel
 {
-    public class AudioManager : MonoBehaviour
+    public class AudioManager : MonoBehaviour, IAudioService
     {
         public static AudioManager Instance { get; private set; }
 
