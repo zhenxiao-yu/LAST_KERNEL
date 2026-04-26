@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Travel Recipe", fileName = "Recipe_Travel_")]
     public class TravelRecipe : RecipeDefinition

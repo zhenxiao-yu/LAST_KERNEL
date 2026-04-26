@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomEditor(typeof(LimitBoosterDefinition))]
     public class LimitBoosterDefinitionEditor : CardDefinitionEditor

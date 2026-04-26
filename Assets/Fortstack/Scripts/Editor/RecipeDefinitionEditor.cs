@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomEditor(typeof(RecipeDefinition), true)]
     public class RecipeDefinitionEditor : Editor

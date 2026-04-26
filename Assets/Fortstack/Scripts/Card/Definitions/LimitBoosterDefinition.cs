@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Cards/Limit Booster Card", fileName = "Card_Booster_")]
     public class LimitBoosterDefinition : CardDefinition

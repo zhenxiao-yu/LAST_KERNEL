@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Orchestrates the night combat slice. Called explicitly by DayCycleManager at dusk.
@@ -174,7 +174,6 @@ namespace Markyu.FortStack
         {
             if (defaultWave != null) return defaultWave;
 
-            // Fallback: try loading from Resources/Waves/
             var loaded = Resources.LoadAll<NightWaveDefinition>("Waves");
             if (loaded != null && loaded.Length > 0)
             {
@@ -182,7 +181,36 @@ namespace Markyu.FortStack
                 return loaded[0];
             }
 
-            return null;
+            return BuildProceduralWave();
+        }
+
+        /// <summary>
+        /// Generates a runtime wave when no NightWaveDefinition asset is configured.
+        /// Scavenger count and stats scale with the current day so the challenge grows
+        /// without requiring hand-authored wave assets for every night.
+        ///
+        /// Scaling (approximate):
+        ///   Day  1 → 1 Scavenger  HP 8  ATK 2  DEF 0
+        ///   Day  5 → 2 Scavengers HP 14 ATK 2  DEF 0
+        ///   Day  9 → 3 Scavengers HP 20 ATK 3  DEF 0
+        ///   Day 14 → 4 Scavengers HP 27 ATK 4  DEF 1
+        /// </summary>
+        private NightWaveDefinition BuildProceduralWave()
+        {
+            int day   = TimeManager.Instance?.CurrentDay ?? 1;
+            int hp    = Mathf.RoundToInt(6 + day * 1.5f);
+            int atk   = 2 + day / 7;
+            int def   = day / 10;
+            int count = Mathf.Clamp(1 + (day - 1) / 4, 1, 6);
+
+            var scavenger = EnemyDefinition.CreateRuntime(
+                GameLocalization.GetOptional("night.enemy.scavenger", "Scavenger"),
+                hp, atk, def);
+
+            return NightWaveDefinition.CreateRuntime(
+                GameLocalization.GetOptional("night.wave.procedural.name", "Nightly Incursion"),
+                GameLocalization.GetOptional("night.wave.procedural.flavor", "Scavengers probe the perimeter under cover of dark."),
+                new List<EnemyEntry> { new EnemyEntry { Enemy = scavenger, Count = count } });
         }
 
         // ── Edge cases ────────────────────────────────────────────────────────────

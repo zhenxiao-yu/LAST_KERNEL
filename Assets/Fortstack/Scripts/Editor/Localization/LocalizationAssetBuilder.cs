@@ -12,7 +12,7 @@ using UnityEngine.Localization.Metadata;
 using UnityEngine.Localization.Settings;
 using UnityEngine.Localization.Tables;
 
-namespace Markyu.FortStack.Localization.EditorTools
+namespace Markyu.LastKernel.Localization.EditorTools
 {
     public static class LocalizationAssetBuilder
     {

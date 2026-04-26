@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     internal static class TMPChineseFontBootstrap
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class ProgressUI : MonoBehaviour
     {

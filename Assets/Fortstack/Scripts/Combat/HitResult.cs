@@ -1,4 +1,4 @@
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public enum HitType
     {

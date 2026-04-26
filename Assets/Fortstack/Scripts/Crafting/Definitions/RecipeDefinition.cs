@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Recipe", fileName = "Recipe_")]
     public class RecipeDefinition : ScriptableObject

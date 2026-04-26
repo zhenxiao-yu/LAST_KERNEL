@@ -2,7 +2,7 @@ using System.Text;
 using UnityEngine;
 using TMPro;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class SavedGameSlot : LocalizedUIBehaviour
     {

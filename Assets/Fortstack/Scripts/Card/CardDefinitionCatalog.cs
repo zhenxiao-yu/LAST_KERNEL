@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Owns runtime card-definition lookup so CardManager can stay focused on scene orchestration and spawning.

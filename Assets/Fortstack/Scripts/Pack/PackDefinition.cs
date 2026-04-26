@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Pack", fileName = "Pack_")]
     public class PackDefinition : CardDefinition

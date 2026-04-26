@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Research Recipe", fileName = "Recipe_Research_")]
     public class ResearchRecipe : RecipeDefinition

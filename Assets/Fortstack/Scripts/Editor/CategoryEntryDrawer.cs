@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomPropertyDrawer(typeof(CategoryEntry))]
     public class CategoryEntryDrawer : PropertyDrawer

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(TextMeshProUGUI))]

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using DG.Tweening;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(MeshRenderer), typeof(BoxCollider))]
     public class CardInstance : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler

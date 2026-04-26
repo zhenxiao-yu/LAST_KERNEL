@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 #endif
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class InputManager : MonoBehaviour
     {

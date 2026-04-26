@@ -3,7 +3,7 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class GameplayPrefsUI : LocalizedUIBehaviour
     {

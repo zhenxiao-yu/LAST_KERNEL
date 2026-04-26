@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Cards/Chest Card", fileName = "Card_Chest_")]
     public class ChestDefinition : CardDefinition

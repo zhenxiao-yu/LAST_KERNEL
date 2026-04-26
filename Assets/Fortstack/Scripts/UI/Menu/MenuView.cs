@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class MenuView : LocalizedUIBehaviour

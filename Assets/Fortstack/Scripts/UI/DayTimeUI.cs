@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class DayTimeUI : LocalizedUIBehaviour, IPointerClickHandler

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class RecipesView : MenuView
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public sealed class TMPThemeController : MonoBehaviour
     {

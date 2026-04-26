@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(Canvas))]
     public class WorldCanvas : MonoBehaviour

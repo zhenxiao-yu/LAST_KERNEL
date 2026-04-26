@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class EnclosureLogic : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(CardInstance), typeof(CardFeelPresenter))]
     public class CardController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler

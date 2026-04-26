@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Defines a component that can be "clicked" for a special action,

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomEditor(typeof(Quest))]
     public class QuestEditor : Editor

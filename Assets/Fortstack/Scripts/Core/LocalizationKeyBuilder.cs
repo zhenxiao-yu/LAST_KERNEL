@@ -1,7 +1,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public static class LocalizationKeyBuilder
     {

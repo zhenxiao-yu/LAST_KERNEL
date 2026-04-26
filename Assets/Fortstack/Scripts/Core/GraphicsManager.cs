@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class GraphicsManager : MonoBehaviour
     {

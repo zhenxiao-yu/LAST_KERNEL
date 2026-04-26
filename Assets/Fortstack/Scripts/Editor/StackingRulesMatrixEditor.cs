@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomEditor(typeof(StackingRulesMatrix))]
     public class StackingRulesMatrixEditor : Editor

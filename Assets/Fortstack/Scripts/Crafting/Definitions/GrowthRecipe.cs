@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Growth Recipe", fileName = "Recipe_Growth_")]
     public class GrowthRecipe : RecipeDefinition

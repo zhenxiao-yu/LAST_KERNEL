@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using TMPro;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public enum InfoPriority
     {

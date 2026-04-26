@@ -1,4 +1,4 @@
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Defines a component that can interact with a card stack

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Keeps aggregate card-count/resource math out of CardManager's orchestration code.

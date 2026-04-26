@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class ScreenFader : MonoBehaviour

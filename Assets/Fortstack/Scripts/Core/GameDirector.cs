@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class GameDirector : MonoBehaviour
     {

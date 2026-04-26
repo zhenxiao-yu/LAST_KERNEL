@@ -1,6 +1,6 @@
 using UnityEditor;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomEditor(typeof(ResearchDefinition))]
     public class ResearchDefinitionEditor : CardDefinitionEditor

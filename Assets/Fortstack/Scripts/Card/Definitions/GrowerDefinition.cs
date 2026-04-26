@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Cards/Grower Card", fileName = "Card_Grower_")]
     public class GrowerDefinition : CardDefinition

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class QuestsView : MenuView
     {

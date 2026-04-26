@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [DefaultExecutionOrder(-200)]
     public class RunStateManager : MonoBehaviour

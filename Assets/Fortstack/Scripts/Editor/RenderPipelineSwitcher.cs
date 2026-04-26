@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public static class RenderPipelineSwitcher
     {

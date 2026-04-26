@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CustomEditor(typeof(EncounterDefinition))]
     public class EncounterDefinitionEditor : Editor

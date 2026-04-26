@@ -1,4 +1,4 @@
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Centralizes player-facing identity while the serialized runtime namespace remains stable.

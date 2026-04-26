@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class CardStatsUI : MonoBehaviour

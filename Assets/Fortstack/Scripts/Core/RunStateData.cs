@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public enum GamePhase
     {

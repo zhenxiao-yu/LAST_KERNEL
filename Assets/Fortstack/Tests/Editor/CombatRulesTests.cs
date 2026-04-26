@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Markyu.FortStack.Tests
+namespace Markyu.LastKernel.Tests
 {
     public class CombatRulesTests
     {

@@ -3,7 +3,7 @@ using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace Markyu.FortStack.Tests
+namespace Markyu.LastKernel.Tests
 {
     public class RecipeMatcherTests
     {

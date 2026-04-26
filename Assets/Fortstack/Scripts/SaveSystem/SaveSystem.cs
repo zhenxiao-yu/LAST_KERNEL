@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public static class SaveSystem
     {

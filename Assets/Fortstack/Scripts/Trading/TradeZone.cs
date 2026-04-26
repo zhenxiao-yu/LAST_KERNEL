@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [RequireComponent(typeof(MeshRenderer), typeof(BoxCollider))]
     public abstract class TradeZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler

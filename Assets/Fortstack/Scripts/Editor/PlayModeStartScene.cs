@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [InitializeOnLoad]
     public static class PlayModeStartScene

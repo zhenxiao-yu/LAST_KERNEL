@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class AudioManager : MonoBehaviour
     {

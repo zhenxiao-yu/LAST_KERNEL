@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class CameraController : MonoBehaviour
     {

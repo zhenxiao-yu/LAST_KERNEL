@@ -15,7 +15,7 @@
 
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Camera Settings", fileName = "Default_Camera_Settings")]
     public class CameraSettings : ScriptableObject

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "LastKernel/Night Wave", fileName = "Wave_Night_")]
     public class NightWaveDefinition : ScriptableObject
@@ -49,6 +49,22 @@ namespace Markyu.FortStack
                     result.Add(entry.Enemy);
             }
             return result;
+        }
+
+        public static NightWaveDefinition CreateRuntime(
+            string name, string flavor, List<EnemyEntry> entries,
+            int victoryMorale = 5, int defeatMorale = -10,
+            int fatigue = 1, int salvage = 1)
+        {
+            var wave = ScriptableObject.CreateInstance<NightWaveDefinition>();
+            wave.waveName              = name;
+            wave.flavorText            = flavor;
+            wave.enemies               = entries;
+            wave.victoryMoraleDelta    = victoryMorale;
+            wave.defeatMoraleDelta     = defeatMorale;
+            wave.fatigueCostPerDefender = fatigue;
+            wave.salvagePerKill        = salvage;
+            return wave;
         }
     }
 

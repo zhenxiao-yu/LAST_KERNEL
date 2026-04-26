@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "Last Kernel/Special Cards/Research Card", fileName = "Card_Research_")]
     public class ResearchDefinition : CardDefinition

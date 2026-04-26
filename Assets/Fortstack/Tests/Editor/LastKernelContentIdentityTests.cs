@@ -5,7 +5,7 @@ using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
-namespace Markyu.FortStack.Tests
+namespace Markyu.LastKernel.Tests
 {
     public sealed class LastKernelContentIdentityTests
     {

@@ -20,7 +20,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class NightDeploymentView : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     /// <summary>
     /// Immutable output of a completed night battle.

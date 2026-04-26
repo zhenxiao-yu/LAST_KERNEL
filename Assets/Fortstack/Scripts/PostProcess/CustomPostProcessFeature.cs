@@ -4,7 +4,7 @@ using UnityEngine.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.RenderGraphModule.Util;
 using UnityEngine.Rendering.Universal;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     public class CustomPostProcessFeature : ScriptableRendererFeature
     {

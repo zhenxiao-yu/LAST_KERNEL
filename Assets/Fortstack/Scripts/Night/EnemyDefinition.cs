@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Markyu.FortStack
+namespace Markyu.LastKernel
 {
     [CreateAssetMenu(menuName = "LastKernel/Enemy Definition", fileName = "Enemy_")]
     public class EnemyDefinition : ScriptableObject
@@ -29,5 +29,23 @@ namespace Markyu.FortStack
         public float CritChance => critChance;
         public float CritMultiplier => critMultiplier;
         public Texture2D ArtTexture => artTexture;
+
+        public static EnemyDefinition CreateRuntime(
+            string name, int hp, int atk, int def,
+            int speed = 80, float accuracy = 90f, float dodge = 0f,
+            float critChance = 5f, float critMult = 150f)
+        {
+            var e = ScriptableObject.CreateInstance<EnemyDefinition>();
+            e.displayName  = name;
+            e.maxHP        = Mathf.Max(1, hp);
+            e.attack       = Mathf.Max(0, atk);
+            e.defense      = Mathf.Max(0, def);
+            e.attackSpeed  = Mathf.Max(1, speed);
+            e.accuracy     = accuracy;
+            e.dodge        = dodge;
+            e.critChance   = critChance;
+            e.critMultiplier = critMult;
+            return e;
+        }
     }
 }
