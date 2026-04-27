@@ -38,6 +38,19 @@ namespace Markyu.LastKernel
         private float _flashAmount;
         private float _currentGlow;
 
+        // Hover lift — raises the card in Y while hovered so tilt can't dip card edges
+        // into neighboring flat cards. Magnitude is auto-computed from DragTiltMax each
+        // frame, so it is correct even if HoverLiftAmount in the profile is 0.
+        // Applied in LateUpdate using the stack's authoritative TargetPosition as the
+        // base Y so the value is always correct regardless of in-flight DOTween animations.
+        private float _currentHoverLift;
+
+        // Per-renderer sort-order management. On hover, all card renderers (body + TMP text
+        // + panel overlays) are elevated so the hovered card draws over neighboring cards'
+        // transparent layers (TMP, alpha-tested borders) without depending on 3D depth order.
+        private Renderer[] _allRenderers;
+        private int[] _savedSortingOrders;
+
         private Vector4 _baseOverlayOffset;
         private Color _baseEmissionColor;
         private float _baseBrightness;
@@ -97,10 +110,12 @@ namespace Markyu.LastKernel
             _mainCam = Camera.main;
 
             CacheMaterialDefaults();
+            CacheRenderers();
 
             transform.localScale = Vector3.one * _profile.SpawnStartScale;
             _flashAmount = 0f;
             _currentGlow = 0f;
+            _currentHoverLift = 0f;
             ApplyMaterialFeedback();
             PlaySpawnPop();
         }
@@ -125,11 +140,35 @@ namespace Markyu.LastKernel
 
             float deltaTime = Time.unscaledDeltaTime;
             UpdateTilt(deltaTime);
+            UpdateHoverLift(deltaTime);
             UpdateMaterialFeedback(deltaTime);
+        }
+
+        private void LateUpdate()
+        {
+            if (!_initialized || _card == null || _card.IsBeingDragged) return;
+            if (_currentHoverLift < 0.0001f) return;
+
+            // Resolve the Y the stack intends for this card, then add the hover lift on top.
+            // Reading from CardStack.TargetPosition is authoritative and immune to DOTween
+            // desync: DOTween updates run in Update; this LateUpdate always wins afterward.
+            float baseY = ComputeStackBaseY();
+            var pos = transform.position;
+            pos.y = baseY + _currentHoverLift;
+            transform.position = pos;
         }
 
         private void OnDisable()
         {
+            RestoreSortOrder();
+
+            if (_currentHoverLift > 0.0001f)
+            {
+                var pos = transform.position;
+                pos.y = ComputeStackBaseY();
+                transform.position = pos;
+            }
+            _currentHoverLift = 0f;
             ResetMaterialFeedback();
         }
 
@@ -141,6 +180,7 @@ namespace Markyu.LastKernel
             }
 
             _isHovered = true;
+            ElevateSortOrder();
             ScaleTo(_profile.HoverScale, _profile.HoverScaleDuration, _profile.HoverScaleEase);
             PulseFlash(_profile.HoverFlashAmount, _profile.FlashReturnDuration);
             PlayYawPunch(_profile.HoverPunchAngle, _profile.HoverPunchDuration);
@@ -154,6 +194,7 @@ namespace Markyu.LastKernel
             }
 
             _isHovered = false;
+            RestoreSortOrder();
             ScaleTo(1f, _profile.HoverScaleDuration, _profile.HoverScaleEase);
         }
 
@@ -166,6 +207,7 @@ namespace Markyu.LastKernel
 
             _lastPosition = transform.position;
             _isHovered = false;
+            RestoreSortOrder();
             _rotationTween?.Kill();
             _punchYaw = 0f;
 
@@ -303,6 +345,23 @@ namespace Markyu.LastKernel
             ApplyMaterialFeedback();
         }
 
+        private void UpdateHoverLift(float deltaTime)
+        {
+            float target = 0f;
+            if (_isHovered && !_card.IsBeingDragged)
+            {
+                // Compute the minimum lift needed to keep all tilted card edges above Y=0.
+                // Standard cards are 0.8×1.0 units; half-diagonal = 0.64. Use 0.65 to cover
+                // all prefab sizes. At DragTiltMax=7°: 0.65×sin(7°)+0.02 ≈ 0.094 units.
+                // This is computed every frame from DragTiltMax so it is always correct
+                // even when HoverLiftAmount in the profile asset is still at its default 0.
+                float maxTiltRad = Mathf.Max(_profile.DragTiltMax, 1f) * Mathf.Deg2Rad;
+                float computedLift = 0.65f * Mathf.Sin(maxTiltRad) + 0.02f;
+                target = Mathf.Max(_profile.HoverLiftAmount, computedLift);
+            }
+            _currentHoverLift = Mathf.Lerp(_currentHoverLift, target, 1f - Mathf.Exp(-12f * deltaTime));
+        }
+
         private void PlaySpawnPop()
         {
             KillScaleTween();
@@ -433,11 +492,19 @@ namespace Markyu.LastKernel
 
             if (_hasOverlayOffset)
             {
-                float idlePhase = Time.unscaledTime * _profile.IdleOverlayDriftFrequency + _phaseOffset;
-                Vector4 offset = _baseOverlayOffset;
-                offset.x += -tilt01.x * _profile.OverlayParallaxAmount + Mathf.Sin(idlePhase) * _profile.IdleOverlayDriftAmount;
-                offset.y += -tilt01.y * _profile.OverlayParallaxAmount + Mathf.Cos(idlePhase) * _profile.IdleOverlayDriftAmount;
-                _propertyBlock.SetVector(OverlayOffsetId, offset);
+                // UV-space parallax and idle drift are disabled for pixel-art cards.
+                //
+                // Shifting _OverlayOffset while the base card art stays fixed at UV 0,0→1,1
+                // creates a hard seam wherever the overlay has sharp-edged content (card frames,
+                // borders, icons). With Point (nearest-neighbor) texture filtering the offset
+                // snaps to integer pixel boundaries, making the split sharply visible as a
+                // diagonal tear when both X and Y shift simultaneously.
+                //
+                // The tilt feel is already delivered by transform.rotation in UpdateTilt —
+                // the whole card rotates as a rigid mesh, which is safe for pixel art.
+                // To re-enable UV parallax: switch overlay textures to Bilinear/Trilinear
+                // filtering AND ensure the overlay has no hard edges that would produce a seam.
+                _propertyBlock.SetVector(OverlayOffsetId, _baseOverlayOffset);
             }
 
             float hover01 = _isHovered ? 1f : 0f;
@@ -493,6 +560,46 @@ namespace Markyu.LastKernel
             _hasEmissionColor = false;
         }
 
+        // ── Hover-lift helpers ────────────────────────────────────────────────────
+
+        private float ComputeStackBaseY()
+        {
+            if (_card == null) return 0f;
+            var stack = _card.Stack;
+            if (stack == null || _card.Settings == null) return 0f;
+            int idx = stack.Cards.IndexOf(_card);
+            return idx < 0 ? 0f : stack.TargetPosition.y + _card.Settings.StackStep.y * idx;
+        }
+
+        // ── Sort-order helpers ────────────────────────────────────────────────────
+
+        private void CacheRenderers()
+        {
+            _allRenderers = GetComponentsInChildren<Renderer>(true);
+            _savedSortingOrders = new int[_allRenderers.Length];
+            for (int i = 0; i < _allRenderers.Length; i++)
+                _savedSortingOrders[i] = _allRenderers[i].sortingOrder;
+        }
+
+        // Elevates every renderer on this card by +100 sort order so the hovered card's
+        // transparent layers (TMP text, alpha-tested borders) draw over those on all
+        // neighbors regardless of camera-space depth.
+        private void ElevateSortOrder()
+        {
+            if (_allRenderers == null) return;
+            for (int i = 0; i < _allRenderers.Length; i++)
+                _allRenderers[i].sortingOrder = _savedSortingOrders[i] + 100;
+        }
+
+        private void RestoreSortOrder()
+        {
+            if (_allRenderers == null) return;
+            for (int i = 0; i < _allRenderers.Length; i++)
+                _allRenderers[i].sortingOrder = _savedSortingOrders[i];
+        }
+
+        // ── Scale-tween helpers ───────────────────────────────────────────────────
+
         private void KillScaleTween()
         {
             _scaleTween?.Kill();
@@ -512,7 +619,9 @@ namespace Markyu.LastKernel
             _punchYaw = 0f;
             _flashAmount = 0f;
             _currentGlow = 0f;
+            _currentHoverLift = 0f;
             _currentTilt = Vector2.zero;
+            RestoreSortOrder();
             transform.rotation = Quaternion.identity;
             ApplyMaterialFeedback();
         }

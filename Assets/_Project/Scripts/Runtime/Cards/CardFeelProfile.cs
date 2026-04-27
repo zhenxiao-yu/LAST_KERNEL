@@ -149,11 +149,14 @@ namespace Markyu.LastKernel
         [SerializeField, Min(0.03f)]
         private float flashReturnDuration = 0.18f;
 
-        [SerializeField, Range(0f, 0.25f), Tooltip("Moves the card overlay texture opposite the tilt to create a small parallax shimmer.")]
-        private float overlayParallaxAmount = 0.055f;
+        [SerializeField, Range(0f, 0.25f), Tooltip("How far the card rises above Y=0 on hover. Prevents tilt rotation from dipping card edges into neighboring flat cards. Rule of thumb: (card_half_depth * sin(DragTiltMax)) + 0.02 margin. At the default 7° tilt on a 1-unit card, 0.08 clears the dip with room to spare.")]
+        private float hoverLiftAmount = 0.08f;
 
-        [SerializeField, Range(0f, 0.1f), Tooltip("Subtle idle overlay drift. Keep low so card art remains readable.")]
-        private float idleOverlayDriftAmount = 0.012f;
+        [SerializeField, Range(0f, 0.25f), Tooltip("UV parallax on the overlay texture opposite the tilt direction. KEEP AT 0 for pixel-art cards: Point-filtered textures snap to integer pixel boundaries, producing a hard diagonal seam. Only raise this if the overlay uses Bilinear/Trilinear filtering with no hard-edged content.")]
+        private float overlayParallaxAmount = 0f;
+
+        [SerializeField, Range(0f, 0.1f), Tooltip("Idle UV drift on the overlay texture. KEEP AT 0 for pixel-art cards: same Point-filter pixel-snapping issue as OverlayParallaxAmount — any non-zero value will produce a visible crawling seam.")]
+        private float idleOverlayDriftAmount = 0f;
 
         [SerializeField, Range(0.1f, 3f)]
         private float idleOverlayDriftFrequency = 0.7f;
@@ -244,6 +247,7 @@ namespace Markyu.LastKernel
         public float MergePunchDuration => mergePunchDuration;
         public int MergePunchVibrato => mergePunchVibrato;
 
+        public float HoverLiftAmount => hoverLiftAmount;
         public float HoverFlashAmount => hoverFlashAmount;
         public float PickupFlashAmount => pickupFlashAmount;
         public float MergeFlashAmount => mergeFlashAmount;
