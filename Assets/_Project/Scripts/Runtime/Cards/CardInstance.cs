@@ -322,6 +322,7 @@ namespace Markyu.LastKernel
             {
                 var mesh = GetComponent<MeshFilter>().mesh;
                 _highlight = new Highlight(transform, mesh, Settings.OutlineMaterial);
+                GetComponent<CardRenderOrderController>()?.Refresh();
             }
             else _highlight.SetActive(value);
 

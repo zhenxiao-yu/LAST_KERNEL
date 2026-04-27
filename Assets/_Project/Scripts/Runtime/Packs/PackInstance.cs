@@ -36,7 +36,11 @@ namespace Markyu.LastKernel
 
             var slot = Definition.Slots[Definition.Slots.Count - UsesLeft];
             var cardDefinition = slot.GetRandomCard();
-            CardManager.Instance?.CreateCardInstance(cardDefinition, Stack.TargetPosition + Vector3.up * 0.1f);
+
+            Vector3 spawnPos = Stack.TargetPosition + new Vector3(Size.x + 0.1f, 0f, 0f);
+            if (Board.Instance != null)
+                spawnPos = Board.Instance.EnforcePlacementRules(spawnPos, null);
+            CardManager.Instance?.CreateCardInstance(cardDefinition, spawnPos.Flatten(), Stack);
 
             Use();
 

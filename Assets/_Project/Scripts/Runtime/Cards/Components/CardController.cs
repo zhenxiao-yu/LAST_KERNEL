@@ -82,7 +82,7 @@ namespace Markyu.LastKernel
 
             // 3. Handle Standard Drag (Stack Splitting)
             _card.IsBeingDragged = true;
-            _dragStartPosition = transform.position;
+            _dragStartPosition = GetMouseWorldPosition();
 
             var oldStack = _card.Stack;
             var newStack = oldStack.SplitAt(_card);
