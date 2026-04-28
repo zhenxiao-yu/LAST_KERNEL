@@ -31,6 +31,7 @@ namespace Markyu.LastKernel
             Tween moveTween = transform.DOMove(targetPos, duration)
                 .SetEase(Ease.Linear)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() => Destroy(gameObject));
 
             return moveTween;

@@ -267,12 +267,12 @@ namespace Markyu.LastKernel
         /// <summary>
         /// Updates the stack positions specifically during a drag interaction.
         /// The Top card snaps instantly (responsiveness), while the trailing cards sway.
+        /// leadZBias is added to the leading card's visual Z so it stays in front of stationary
+        /// stacks; it is NOT stored in TargetPosition so the physics solver reads clean positions.
         /// </summary>
-        public void SetDragTargetPosition(Vector3 newPosition)
+        public void SetDragTargetPosition(Vector3 newPosition, float leadZBias = 0f)
         {
             TargetPosition = newPosition;
-
-            Vector3 currentLeadingCardPos = TargetPosition;
 
             for (int i = 0; i < Cards.Count; i++)
             {
@@ -281,10 +281,9 @@ namespace Markyu.LastKernel
 
                 if (i == 0)
                 {
-                    cardTargetPos = TargetPosition + card.Settings.StackStep * i;
+                    cardTargetPos = TargetPosition;
+                    cardTargetPos.z += leadZBias;
                     card.SetTargetInstant(cardTargetPos);
-
-                    currentLeadingCardPos = cardTargetPos;
                 }
                 else
                 {

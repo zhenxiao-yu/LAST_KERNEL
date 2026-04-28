@@ -134,7 +134,8 @@ namespace Markyu.LastKernel
             if (type is CombatType.Melee or CombatType.None)
             {
                 Vector3 targetPos = defender.transform.position + Vector3.up * 0.05f;
-                var attackTween = attacker.transform.DOJump(targetPos, 1f, 1, 0.3f).SetUpdate(true);
+                // NOTE: DOJump moves the physics root; a visual-offset child would be cleaner but requires combat refactor.
+                var attackTween = attacker.transform.DOJump(targetPos, 1f, 1, 0.3f).SetUpdate(true).SetLink(attacker.gameObject);
                 yield return attacker.StartCombatTween(attackTween).WaitForCompletion();
             }
             else if (type is CombatType.Ranged or CombatType.Magic)
@@ -179,7 +180,8 @@ namespace Markyu.LastKernel
             {
                 Vector3 returnPos = Rect.GetLayoutPosition(attacker);
                 var returnTween = attacker.transform.DOJump(returnPos, 1f, 1, returnTime)
-                    .SetUpdate(true);
+                    .SetUpdate(true)
+                    .SetLink(attacker.gameObject);
 
                 yield return attacker.StartCombatTween(returnTween).WaitForCompletion();
             }

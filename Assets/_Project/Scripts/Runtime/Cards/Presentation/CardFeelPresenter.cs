@@ -173,7 +173,8 @@ namespace Markyu.LastKernel
             _scaleTween = DOTween.Sequence()
                 .Append(visualRoot.DOScale(Vector3.one * peakScale, halfDur).SetEase(Ease.OutQuad))
                 .Append(visualRoot.DOScale(Vector3.one * holdScale,  halfDur).SetEase(Ease.InOutQuad))
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .SetLink(gameObject);
         }
 
         public void OnRelease()
@@ -191,6 +192,7 @@ namespace Markyu.LastKernel
                 .Append(visualRoot.DOScale(Vector3.one * restScale, _profile.DropSettleDuration)
                     .SetEase(_profile.DropSettleEase, _profile.DropSettleOvershoot))
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() => visualRoot.localScale = Vector3.one * restScale);
         }
 
@@ -209,6 +211,7 @@ namespace Markyu.LastKernel
                     _profile.MergePunchVibrato,
                     elasticity: 0.5f)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() => _renderOrder?.SetMerging(false));
         }
 
@@ -226,6 +229,7 @@ namespace Markyu.LastKernel
                     vibrato: 6,
                     elasticity: 0.3f)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() => visualRoot.localScale = Vector3.one);
 
             return true;
@@ -255,6 +259,7 @@ namespace Markyu.LastKernel
                 .From(Vector3.one * _profile.SpawnStartScale)
                 .SetEase(_profile.SpawnEase, _profile.SpawnOvershoot)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() => visualRoot.localScale = Vector3.one);
         }
 
@@ -273,7 +278,8 @@ namespace Markyu.LastKernel
                     ApplyMaterialFeedback();
                 }, 0f, Mathf.Max(0.03f, returnDuration))
                 .SetEase(Ease.OutQuad)
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .SetLink(gameObject);
         }
 
         private void ScaleTo(float targetUniform, float duration, Ease ease)
@@ -285,7 +291,8 @@ namespace Markyu.LastKernel
             _scaleTween = visualRoot
                 .DOScale(Vector3.one * targetUniform, duration)
                 .SetEase(ease)
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .SetLink(gameObject);
         }
 
         private void ResolveVisualRoot()

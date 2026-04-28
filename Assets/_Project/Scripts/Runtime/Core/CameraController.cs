@@ -255,6 +255,7 @@ namespace Markyu.LastKernel
 
             yield return transform.DOMove(newCameraPos, duration)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .WaitForCompletion();
 
             targetPos = newCameraPos;
@@ -266,7 +267,8 @@ namespace Markyu.LastKernel
         public void Shake(float duration = 0.3f, float strength = 0.1f)
         {
             cameraTransform.DOShakePosition(duration, strength)
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .SetLink(gameObject);
         }
     }
 }

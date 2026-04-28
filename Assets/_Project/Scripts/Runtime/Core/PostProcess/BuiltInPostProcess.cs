@@ -43,6 +43,9 @@ namespace Markyu.LastKernel
                 TimeManager.Instance.OnDayEnded -= HandleDayEnded;
                 TimeManager.Instance.OnDayStarted -= HandleDayStarted;
             }
+
+            vignetteTween?.Kill();
+            grayscaleTween?.Kill();
         }
 
         private void Initialize()
@@ -90,7 +93,7 @@ namespace Markyu.LastKernel
                 x => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
                 target,
                 duration
-            ).SetUpdate(true);
+            ).SetUpdate(true).SetLink(gameObject);
         }
 
         private void FadeOutGrayscale(float duration = 0.3f)
@@ -101,7 +104,7 @@ namespace Markyu.LastKernel
                 x => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
                 0f,
                 duration
-            ).SetUpdate(true);
+            ).SetUpdate(true).SetLink(gameObject);
         }
 
         private void FadeInVignette(float duration = 0.5f, float target = 1.2f)
@@ -112,7 +115,7 @@ namespace Markyu.LastKernel
                 x => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
                 target,
                 duration
-            ).SetUpdate(true);
+            ).SetUpdate(true).SetLink(gameObject);
         }
 
         private void FadeOutVignette(float duration = 0.5f)
@@ -123,7 +126,7 @@ namespace Markyu.LastKernel
                 x => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
                 0f,
                 duration
-            ).SetUpdate(true);
+            ).SetUpdate(true).SetLink(gameObject);
         }
     }
 }

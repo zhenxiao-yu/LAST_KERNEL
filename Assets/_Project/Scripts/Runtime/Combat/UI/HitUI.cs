@@ -92,6 +92,7 @@ namespace Markyu.LastKernel
 
             transform.DOPunchScale(new Vector3(0.15f, 0.15f), 1f)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() => Destroy(gameObject));
         }
     }

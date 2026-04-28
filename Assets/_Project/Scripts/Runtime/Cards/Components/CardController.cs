@@ -134,19 +134,11 @@ namespace Markyu.LastKernel
             mousePos.y = _card.Settings.DragHeight;
             Vector3 logicalPos = Board.Instance.ClampToBounds(mousePos, _card.Stack);
 
-            // Store the unbiased logical position in TargetPosition so the physics
-            // solver reads the correct layout position during drag (fix C-1).
-            _card.Stack?.SetDragTargetPosition(logicalPos);
-
-            // Apply Z-bias directly to the leading card's transform for depth-buffer
-            // correctness: StackStep.z is negative (closer to camera), keeping the
-            // dragged card in front of stationary stack cards without corrupting TargetPosition.
-            if (_card.Stack?.TopCard != null)
-            {
-                var pos = _card.Stack.TopCard.transform.position;
-                pos.z += _card.Settings.StackStep.z;
-                _card.Stack.TopCard.transform.position = pos;
-            }
+            // Pass StackStep.z as leadZBias so the leading card is pushed toward the camera
+            // for depth-buffer correctness while TargetPosition stays unbiased for the physics
+            // solver (fix C-1). Trailing cards receive their targets from the already-biased
+            // leading position, keeping the full stack visually separated.
+            _card.Stack?.SetDragTargetPosition(logicalPos, _card.Settings.StackStep.z);
         }
 
         public void OnPointerUp(PointerEventData eventData)

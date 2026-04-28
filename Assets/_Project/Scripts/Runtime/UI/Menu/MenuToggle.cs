@@ -59,13 +59,11 @@ namespace Markyu.LastKernel
                     value => targetRect.anchoredPosition = value,
                     new Vector2(targetPosX, targetRect.anchoredPosition.y),
                     0.5f)
-                .SetUpdate(true) // Ensure animation plays even if Time.timeScale is 0
+                .SetUpdate(true)
+                .SetLink(gameObject)
                 .OnComplete(() =>
                 {
                     isAnimating = false;
-                    // Update label to reflect the new state
-                    // If targetPosX > 0, it just closed, so show "<<" (to open).
-                    // If targetPosX = 0, it just opened, so show ">>" (to close).
                     labelText.text = targetPosX > 0f ? "<<" : ">>";
                 });
 

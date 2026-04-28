@@ -386,6 +386,7 @@ namespace Markyu.LastKernel
 
             yield return transform.DOMoveY(Settings.DragHeight, 0.1f)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .WaitForCompletion();
 
             Vector3 target = new Vector3(
@@ -398,6 +399,7 @@ namespace Markyu.LastKernel
 
             yield return transform.DOMove(target, 0.2f)
                 .SetUpdate(true)
+                .SetLink(gameObject)
                 .WaitForCompletion();
 
             AudioManager.Instance?.PlaySFX(AudioId.Eat);
@@ -724,7 +726,8 @@ namespace Markyu.LastKernel
             KillMoveTween();
             _moveTween = transform.DOMove(target, Settings.MoveDuration)
                 .SetEase(Settings.MoveEase)
-                .SetUpdate(true);
+                .SetUpdate(true)
+                .SetLink(gameObject);
 
             if (Time.timeScale == 0f)
             {
