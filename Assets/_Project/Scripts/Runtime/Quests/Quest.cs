@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -31,40 +32,50 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(fileName = "New Quest", menuName = "Last Kernel/Quest")]
     public class Quest : ScriptableObject
     {
-        // Info
-        [SerializeField, Tooltip("A unique identifier for this quest. Automatically generated if left empty.")]
+        [BoxGroup("Info")]
+        [ReadOnly, SerializeField, Tooltip("Unique identifier — auto-generated on creation.")]
         private string id;
 
-        [SerializeField, Tooltip("The short, display name of the quest.")]
+        [BoxGroup("Info")]
+        [SerializeField, Tooltip("Short display name of the quest.")]
         private string title;
 
-        [SerializeField, TextArea, Tooltip("The detailed description or guide for the quest.")]
+        [BoxGroup("Info")]
+        [SerializeField, TextArea, Tooltip("Detailed description or guide for the quest.")]
         private string description;
 
-        // Requirements
+        [BoxGroup("Requirements")]
         [SerializeField, Tooltip("The type of action or condition required to complete this quest.")]
         private QuestType type;
 
-        [SerializeField, Tooltip("The specific CardDefinition (item, character, enemy, etc.) related to the quest requirement.")]
+        [BoxGroup("Requirements")]
+        [ShowIf("@type == QuestType.Have || type == QuestType.Obtain || type == QuestType.Defeat || type == QuestType.Craft || type == QuestType.Sell || type == QuestType.Buy || type == QuestType.Equip || type == QuestType.Explore")]
+        [SerializeField, Tooltip("Card required by this quest.")]
         private CardDefinition targetCard;
 
-        [SerializeField, Tooltip("The specific RecipeDefinition required for 'Craft' type quests.")]
+        [BoxGroup("Requirements")]
+        [ShowIf("@type == QuestType.Discover")]
+        [SerializeField, Tooltip("Recipe required for Discover quests.")]
         private RecipeDefinition targetRecipe;
 
-        [SerializeField, Min(1), Tooltip("The quantity or duration required to complete the quest.")]
+        [BoxGroup("Requirements")]
+        [HideIf("@type == QuestType.Discover || type == QuestType.Equip || type == QuestType.Explore || type == QuestType.Time")]
+        [SerializeField, Min(1), Tooltip("Quantity or duration required.")]
         private int targetAmount = 1;
 
-        [SerializeField, Tooltip("The time pace (e.g., Normal, Fast) to monitor for 'Time' quests.")]
+        [BoxGroup("Requirements")]
+        [ShowIf("@type == QuestType.Time")]
+        [SerializeField, Tooltip("Time pace condition for Time quests.")]
         private TimePace targetPace = TimePace.Normal;
 
-        // Flow
-        [SerializeField, Tooltip("Quests that must be completed before this quest becomes available.")]
+        [BoxGroup("Flow")]
+        [SerializeField, Tooltip("Quests that must be completed before this one unlocks.")]
         private List<Quest> prerequisiteQuests;
 
-        [SerializeField, Tooltip("Quests that will be unlocked and activated upon successful completion of this quest.")]
+        [BoxGroup("Flow")]
+        [SerializeField, Tooltip("Quests unlocked upon completion.")]
         private List<Quest> questsToUnlock;
 
-        // Info
         public string Id => id;
         public string Title => GameLocalization.GetOptional(
             LocalizationKeyBuilder.ForAsset(this, "quest", "title"),
@@ -74,14 +85,12 @@ namespace Markyu.LastKernel
             LocalizationKeyBuilder.ForAsset(this, "quest", "description"),
             description);
 
-        // Requirements
         public QuestType Type => type;
         public CardDefinition TargetCard => targetCard;
         public RecipeDefinition TargetRecipe => targetRecipe;
         public int TargetAmount => targetAmount;
         public TimePace TargetPace => targetPace;
 
-        // Flow
         public List<Quest> PrerequisiteQuests => prerequisiteQuests;
         public List<Quest> QuestsToUnlock => questsToUnlock;
 
@@ -89,7 +98,10 @@ namespace Markyu.LastKernel
         {
             if (string.IsNullOrWhiteSpace(id))
                 id = System.Guid.NewGuid().ToString("N");
+
+            if (type == QuestType.Discover || type == QuestType.Equip ||
+                type == QuestType.Explore || type == QuestType.Time)
+                targetAmount = 1;
         }
     }
 }
-
