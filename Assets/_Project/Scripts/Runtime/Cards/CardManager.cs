@@ -22,6 +22,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -48,32 +49,40 @@ namespace Markyu.LastKernel
         #endregion
 
         #region Serialized Fields
-        [Header("Defaults")]
+        [BoxGroup("Defaults")]
         [SerializeField, Tooltip("The radius within which default cards will spawn randomly around the default spawn position.")]
         private float defaultSpawnRadius = 1f;
 
+        [BoxGroup("Defaults")]
         [SerializeField, Tooltip("The center point for where the initial set of cards will be spawned when a new game starts.")]
         private Vector3 defaultSpawnPosition = Vector3.zero;
 
+        [BoxGroup("Defaults")]
         [SerializeField, Tooltip("A list of CardDefinitions to be instantiated when a new game session is created.")]
         private List<CardDefinition> defaultSpawnCards;
 
-        [Header("References")]
+        [BoxGroup("References")]
         [SerializeField, Tooltip("The prefab used for all Card Packs (e.g., Starter Pack, Booster Pack).")]
         private PackInstance packPrefab;
 
-        [SerializeField, Tooltip("A list mapping CardCategory enums to their corresponding CardInstance prefabs for instantiation.")]
+        [BoxGroup("References")]
+        [TableList(AlwaysExpanded = true)]
+        [SerializeField, Tooltip("Maps CardCategory enums to their corresponding CardInstance prefabs.")]
         private List<CategoryEntry> cardPrefabs;
 
+        [BoxGroup("References")]
         [SerializeField, Tooltip("Prefab used specifically for Mobs marked as Aggressive.")]
         private CardInstance aggressiveMobPrefab;
 
+        [BoxGroup("References")]
         [SerializeField, Tooltip("The base ScriptableObject used to dynamically create temporary Recipe Card Definitions at runtime.")]
         private CardDefinition recipeCardTemplate;
 
+        [BoxGroup("References")]
         [SerializeField, Tooltip("The ScriptableObject containing all the defined rules for which card categories can stack on top of others.")]
         private StackingRulesMatrix stackingMatrix;
 
+        [BoxGroup("References")]
         [SerializeField, Tooltip("Reference to the global CardSettings ScriptableObject for configuration values like radii and limits.")]
         private CardSettings cardSettings;
         #endregion
