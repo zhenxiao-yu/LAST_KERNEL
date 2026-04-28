@@ -15,7 +15,8 @@ namespace Markyu.LastKernel
 
         public void UpdateUI(CraftingTask task)
         {
-            transform.position = task.TargetStack.TargetPosition + displayOffset;
+            var anchor = task.TargetStack.TopCard;
+            transform.position = (anchor != null ? anchor.transform.position : task.TargetStack.TargetPosition) + displayOffset;
             float normalizedProgress = task.Progress / task.Recipe.CraftingDuration;
             progressFill.fillAmount = normalizedProgress;
         }
