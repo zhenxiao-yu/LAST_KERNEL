@@ -66,6 +66,9 @@ namespace Markyu.LastKernel
             Section("Audio");
             ValidateAudio(summary);
 
+            Section("Odin Migration");
+            ValidateOdinMigration(summary);
+
             Section("Code Ownership");
             ValidateCodeOwnership(summary);
 
@@ -140,6 +143,15 @@ namespace Markyu.LastKernel
             var summary = new ValidationSummary();
             Debug.Log("=== ProjectValidator: Validating audio IDs ===");
             ValidateAudio(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Audit Odin Migration")]
+        public static void AuditOdinMigrationOnly()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Auditing Odin Inspector migration ===");
+            ValidateOdinMigration(summary);
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
@@ -645,6 +657,35 @@ namespace Markyu.LastKernel
             int enumCount = Enum.GetValues(typeof(AudioId)).Length;
             if (sfxList.arraySize < enumCount)
                 summary.Warning($"AudioManager SFX list has {sfxList.arraySize} entries; AudioId enum has {enumCount} values — some IDs may be unregistered.");
+        }
+
+        // ─── Odin Migration ──────────────────────────────────────────────────
+
+        private static void ValidateOdinMigration(ValidationSummary summary)
+        {
+            string runtimeRoot = "Assets/_Project/Scripts/Runtime";
+            string[] guids = AssetDatabase.FindAssets("t:MonoScript", new[] { runtimeRoot });
+
+            var legacyFiles = new List<string>();
+            foreach (string guid in guids)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guid);
+                string text;
+                try { text = File.ReadAllText(path); }
+                catch { continue; }
+
+                if (text.Contains("[Header("))
+                    legacyFiles.Add(path.Replace('\\', '/'));
+            }
+
+            if (legacyFiles.Count == 0)
+            {
+                Debug.Log("[Validator] Odin migration: no legacy [Header] attributes found in Runtime scripts.");
+                return;
+            }
+
+            foreach (string path in legacyFiles)
+                summary.Warning($"Odin migration: '[Header]' not replaced in '{path}'.");
         }
 
         // ─── Code Ownership ──────────────────────────────────────────────────

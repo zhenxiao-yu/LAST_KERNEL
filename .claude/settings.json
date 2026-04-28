@@ -1,13 +1,19 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git -C e:/FORTSTACK check-ignore -v Assets/Plugins/Sirenix)",
+      "Bash(git -C e:/FORTSTACK check-ignore -v Assets/ThirdParty/vFolders)",
+      "Bash(git -C e:/FORTSTACK check-ignore -v \"Assets/ThirdParty/Plugins 1\")",
+      "Bash(git -C e:/FORTSTACK check-ignore -v Assets/ThirdParty/Plugins)",
+      "Bash(xargs grep *)",
+      "Bash(grep -v \"\\\\.meta$\")"
+    ]
+  },
   "enabledPlugins": {
     "firebase@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
     "commit-commands@claude-plugins-official": true
-  },
-  "permissions": {
-    "allow": [
-      "Bash(git add *)",
-      "Bash(git commit -m ' *)"
-    ]
   }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -10,35 +11,42 @@ namespace Markyu.LastKernel
     {
         public static AudioManager Instance { get; private set; }
 
-        [Header("SFX Settings")]
+        [BoxGroup("SFX Settings")]
         [SerializeField, Tooltip("Number of AudioSource objects in the pool for playing SFX.")]
         private int _SFXPoolSize = 8;
 
+        [BoxGroup("SFX Settings")]
         [SerializeField, Tooltip("Randomly vary pitch for sound effects for a more natural feel.")]
         private bool _randomizeSFXPitch = true;
 
-        [Header("BGM Settings")]
-        [SerializeField, Tooltip("Default music clip to play on scene load.")]
-        private AudioClip _BGMClip;
-
-        [SerializeField, Tooltip("Default music volume for the BGM AudioSource.")]
-        private float _defaultMusicVolume = 0.3f;
-
+        [BoxGroup("SFX Settings")]
         [SerializeField, Tooltip("Minimum delay (in seconds) before the same SFX can be played again.")]
         private float _SFXCooldown = 0.05f;
 
-        [Header("Audio Mixer")]
+        [BoxGroup("BGM Settings")]
+        [SerializeField, Tooltip("Default music clip to play on scene load.")]
+        private AudioClip _BGMClip;
+
+        [BoxGroup("BGM Settings")]
+        [SerializeField, Tooltip("Default music volume for the BGM AudioSource.")]
+        private float _defaultMusicVolume = 0.3f;
+
+        [BoxGroup("Audio Mixer")]
         [SerializeField, Tooltip("Main AudioMixer controlling overall game audio.")]
         private AudioMixer _audioMixer;
 
+        [BoxGroup("Audio Mixer")]
         [SerializeField, Tooltip("AudioMixerGroup assigned to all sound effects.")]
         private AudioMixerGroup _SFXAudioGroup;
 
+        [BoxGroup("Audio Mixer")]
         [SerializeField, Tooltip("AudioMixerGroup assigned to background music.")]
         private AudioMixerGroup _BGMAudioGroup;
 
-        [Header("Sound Effects")]
-        [SerializeField, Tooltip("List of all sound effects with their AudioId identifiers.")]
+        [BoxGroup("Sound Effects")]
+        [SerializeField, Tooltip("One entry per AudioId enum value. Duplicate IDs and missing clips are flagged here.")]
+        [TableList(AlwaysExpanded = true, ShowIndexLabels = true)]
+        [ValidateInput("ValidateSFXList")]
         private List<AudioData> _SFXDataList;
 
         private Dictionary<AudioId, AudioClip> _SFXClipLookup;
@@ -276,6 +284,37 @@ namespace Markyu.LastKernel
             _audioMixer.GetFloat(BGM_VOL_KEY, out float dB);
             return Mathf.Clamp01(Mathf.Pow(10f, dB / 20f));
         }
+
+        // Called by [ValidateInput] in the Inspector — never at runtime.
+        private bool ValidateSFXList(List<AudioData> list, ref string message)
+        {
+            if (list == null || list.Count == 0)
+            {
+                message = "SFX list is empty — no sound effects will play.";
+                return false;
+            }
+
+            var issues = new System.Text.StringBuilder();
+            var seen = new HashSet<AudioId>();
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                var entry = list[i];
+                if (entry == null) continue;
+                if (entry.audioClip == null)
+                    issues.AppendLine($"[{i}] {entry.audioId}: no AudioClip assigned.");
+                if (!seen.Add(entry.audioId))
+                    issues.AppendLine($"[{i}] Duplicate AudioId: {entry.audioId}.");
+            }
+
+            int enumCount = System.Enum.GetValues(typeof(AudioId)).Length;
+            if (list.Count < enumCount)
+                issues.AppendLine($"Only {list.Count} of {enumCount} AudioId values registered.");
+
+            if (issues.Length == 0) return true;
+            message = issues.ToString().TrimEnd();
+            return false;
+        }
     }
 
     public enum AudioId
@@ -294,7 +333,11 @@ namespace Markyu.LastKernel
     [System.Serializable]
     public class AudioData
     {
+        [TableColumnWidth(160, Resizable = false)]
         public AudioId audioId;
+
+        [TableColumnWidth(220)]
+        [Required]
         public AudioClip audioClip;
     }
 }

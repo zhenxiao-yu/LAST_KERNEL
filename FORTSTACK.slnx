@@ -10,6 +10,7 @@
   <Project Path="_Project.Editor.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.Runtime.csproj" />
   <Project Path="Lofelt.NiceVibrations.Demo.csproj" />
+  <Project Path="TGS_PackageImporter.csproj" />
   <Project Path="Lofelt.NiceVibrations.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.Unity.Addressables.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.TMP.Runtime.csproj" />
@@ -21,7 +22,6 @@
   <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.UITk.Runtime.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
-  <Project Path="TGS_PackageImporter.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityLocalization.csproj" />
   <Project Path="_Project.Tests.EditMode.csproj" />
 </Solution>

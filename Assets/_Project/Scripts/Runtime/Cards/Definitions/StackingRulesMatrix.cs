@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -12,7 +13,46 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "Last Kernel/Stacking Rules Matrix")]
     public class StackingRulesMatrix : ScriptableObject
     {
-        [SerializeField] private StackingRule[] rules;
+        // Drawn entirely by StackingRulesMatrixEditor — do not expose raw array in Inspector.
+        [HideInInspector, SerializeField] private StackingRule[] rules;
+
+#if UNITY_EDITOR
+        [BoxGroup("Bulk Operations"), HorizontalGroup("Bulk Operations/Row")]
+        [Button("All: None"), GUIColor(0.85f, 0.45f, 0.45f)]
+        private void SetAllNone()
+        {
+            UnityEditor.Undo.RecordObject(this, "Stacking Rules: Set All None");
+            SetAll(StackingRule.None);
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        [HorizontalGroup("Bulk Operations/Row")]
+        [Button("All: Category-Wide"), GUIColor(0.45f, 0.8f, 0.45f)]
+        private void SetAllCategoryWide()
+        {
+            UnityEditor.Undo.RecordObject(this, "Stacking Rules: Set All Category-Wide");
+            SetAll(StackingRule.CategoryWide);
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        [HorizontalGroup("Bulk Operations/Row")]
+        [Button("All: Same Definition"), GUIColor(0.45f, 0.65f, 0.9f)]
+        private void SetAllSameDefinition()
+        {
+            UnityEditor.Undo.RecordObject(this, "Stacking Rules: Set All Same Definition");
+            SetAll(StackingRule.SameDefinition);
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+
+        private void SetAll(StackingRule rule)
+        {
+            EnsureInitialized();
+            int size = System.Enum.GetValues(typeof(CardCategory)).Length;
+            for (int y = 0; y < size; y++)
+                for (int x = 0; x < size; x++)
+                    rules[y * size + x] = rule;
+        }
+#endif
 
         private void OnValidate()
         {
