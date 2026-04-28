@@ -3,6 +3,7 @@
 // Displays reward summary and a "Continue to Day" button.
 // Subscribes to RewardController.OnRewardsReady for the data to show.
 
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,13 +16,19 @@ namespace Markyu.LastKernel
     /// </summary>
     public class VictoryPanel : MonoBehaviour
     {
-        [Header("UI Elements")]
+        [BoxGroup("UI Elements")]
         [SerializeField] private TextMeshProUGUI titleLabel;
-        [SerializeField] private TextMeshProUGUI descriptionLabel;
-        [SerializeField] private TextMeshProUGUI scrapRewardLabel;
-        [SerializeField] private Button          continueButton;
 
-        [Header("References")]
+        [BoxGroup("UI Elements")]
+        [SerializeField] private TextMeshProUGUI descriptionLabel;
+
+        [BoxGroup("UI Elements")]
+        [SerializeField] private TextMeshProUGUI scrapRewardLabel;
+
+        [BoxGroup("UI Elements")]
+        [SerializeField] private Button continueButton;
+
+        [BoxGroup("References")]
         [SerializeField] private RewardController rewardController;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────

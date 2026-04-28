@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using DG.Tweening;
 
@@ -10,24 +11,28 @@ namespace Markyu.LastKernel
         public static CombatManager Instance { get; private set; }
 
         #region Serialized Fields
-        [Header("RPS Settings")]
+        [BoxGroup("RPS Settings")]
         [SerializeField, Tooltip("Damage multiplier for an advantageous type (e.g., 1.5 for 50% bonus).")]
         private float advantageMultiplier = 1.5f;
 
+        [BoxGroup("RPS Settings")]
         [SerializeField, Tooltip("Damage multiplier for a disadvantageous type (e.g., 0.75 for 25% penalty).")]
         private float disadvantageMultiplier = 0.75f;
 
-        [Header("UI References")]
-        [SerializeField, Tooltip("The prefab used to create the visual area for active combat (a rectangle that holds units).")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Prefab for the visual area for active combat.")]
         private CombatRect combatRectPrefab;
 
-        [SerializeField, Tooltip("The prefab used to instantiate floating UI elements to show damage numbers and hit types.")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Prefab for floating damage number UI elements.")]
         private HitUI hitUIPrefab;
 
-        [SerializeField, Tooltip("The projectile prefab used for attacks of CombatType.Ranged (e.g., Arrows).")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Projectile prefab for CombatType.Ranged attacks.")]
         private CombatProjectile arrowProjectile;
 
-        [SerializeField, Tooltip("The projectile prefab used for attacks of CombatType.Magic (e.g., Spells).")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Projectile prefab for CombatType.Magic attacks.")]
         private CombatProjectile magicProjectile;
         #endregion
 

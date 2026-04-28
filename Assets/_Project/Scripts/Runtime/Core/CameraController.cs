@@ -1,4 +1,5 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -7,39 +8,55 @@ namespace Markyu.LastKernel
 {
     public class CameraController : MonoBehaviour
     {
-        [Header("Object References")]
-        [SerializeField, Tooltip("The transform of the pivot camera that moves and zooms with this controller.")]
+        [BoxGroup("References")]
+        [Required, SerializeField, Tooltip("The transform of the pivot camera that moves and zooms with this controller.")]
         private Transform cameraTransform;
 
-        [Header("Pan Settings")]
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("How fast the camera moves across the board when dragging.")]
         private float panSpeed = 0.01f;
 
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("Smoothing time used when interpolating camera movement toward the target position.")]
         private float smoothTime = 0.15f;
 
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("How far past the board edge the camera can scroll.")]
         private float panPadding = 0.5f;
 
-        [Header("Zoom Settings (Distance)")]
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("How fast the camera zooms in and out when scrolling.")]
         private float zoomSpeed = 1f;
 
+        [BoxGroup("Zoom")]
+        [SerializeField, Tooltip("Scale applied to pinch-zoom pixel deltas. Tune per device DPI.")]
+        private float pinchZoomSpeed = 0.004f;
+
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("Minimum allowed zoom-in distance from the ground.")]
         private float minDistance = 5f;
 
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("Maximum allowed zoom-out distance from the ground.")]
         private float maxDistance = 20f;
 
-        [Header("Fallback Movement Bounds")]
-        [SerializeField, Tooltip("Default minimum X/Z pan boundary used when no Board is present (e.g. Title scene). Overridden at runtime by Board.WorldBounds.")]
+        [BoxGroup("Fallback Bounds")]
+        [InfoBox("Overridden at runtime by Board.WorldBounds when a Board is present.")]
+        [SerializeField, Tooltip("Default minimum X/Z pan boundary when no Board is present (Title scene).")]
         private Vector2 clampMin = new Vector2(-10f, -5f);
 
-        [SerializeField, Tooltip("Default maximum X/Z pan boundary used when no Board is present (e.g. Title scene). Overridden at runtime by Board.WorldBounds.")]
+        [BoxGroup("Fallback Bounds")]
+        [SerializeField, Tooltip("Default maximum X/Z pan boundary when no Board is present (Title scene).")]
         private Vector2 clampMax = new Vector2(10f, 5f);
 
+        // Single-finger pan state
         private bool isDragging;
         private Vector3 dragOrigin;
+
+        // Two-finger pan state
+        private bool _isTwoFingerPanning;
+        private Vector2 _twoFingerPanOrigin;
+
         private Vector3 targetPos;
         private Vector3 velocity;
 
@@ -67,15 +84,10 @@ namespace Markyu.LastKernel
 
         private void UpdateMovementClamps(Bounds boardBounds)
         {
-            // X Axis
             clampMin.x = boardBounds.min.x - panPadding;
             clampMax.x = boardBounds.max.x + panPadding;
-
-            // Z Axis
             clampMin.y = boardBounds.min.z - panPadding;
             clampMax.y = boardBounds.max.z + panPadding;
-
-            // Immediately clamp current target to ensure we don't get stuck outside if board shrinks.
             ClampTargetPosition();
         }
 
@@ -99,7 +111,50 @@ namespace Markyu.LastKernel
 
         private void HandlePan(InputManager input)
         {
-            if ((input.WasPrimaryPointerPressedThisFrame() && !IsPointerBlocked()) || input.WasMiddlePointerPressedThisFrame())
+            int touchCount = input.GetTouchCount();
+
+            // ── Two-finger pan (mobile) ──────────────────────────────────────
+            // Two-finger pan takes priority over single-finger pan so the player
+            // can reposition while also pinch-zooming. Card drag is never active
+            // during two-finger gestures.
+            if (touchCount >= 2)
+            {
+                Vector2 midpoint = input.GetTwoFingerMidpoint();
+
+                if (!_isTwoFingerPanning)
+                {
+                    _twoFingerPanOrigin = midpoint;
+                    _isTwoFingerPanning = true;
+                    isDragging = false; // cancel any single-finger pan
+                }
+                else
+                {
+                    Vector2 delta = midpoint - _twoFingerPanOrigin;
+                    Vector3 move  = new Vector3(-delta.x, 0f, -delta.y) * panSpeed * (transform.position.y / 10f);
+                    targetPos += move;
+                    ClampTargetPosition();
+                    _twoFingerPanOrigin = midpoint;
+                }
+                return;
+            }
+
+            _isTwoFingerPanning = false;
+
+            // ── Guard: never pan while a card is being dragged ───────────────
+            // CardFeelPresenter.IsDraggingAny is set synchronously by CardController
+            // inside the EventSystem pointer-down callback, which may run in the
+            // same frame as this Update. The physics-raycast inside IsPointerBlocked
+            // handles the same-frame case; this guard prevents stale-panning on
+            // subsequent frames after a drag has begun.
+            if (CardFeelPresenter.IsDraggingAny)
+            {
+                isDragging = false;
+                return;
+            }
+
+            // ── Single-finger / mouse pan ─────────────────────────────────────
+            if ((input.WasPrimaryPointerPressedThisFrame() && !IsPointerBlocked()) ||
+                 input.WasMiddlePointerPressedThisFrame())
             {
                 dragOrigin = input.GetPointerScreenPosition();
                 isDragging = true;
@@ -112,7 +167,7 @@ namespace Markyu.LastKernel
             {
                 Vector3 currentPointerPosition = input.GetPointerScreenPosition();
                 Vector3 delta = currentPointerPosition - dragOrigin;
-                Vector3 move = new Vector3(-delta.x, 0, -delta.y) * panSpeed * (transform.position.y / 10f);
+                Vector3 move  = new Vector3(-delta.x, 0f, -delta.y) * panSpeed * (transform.position.y / 10f);
 
                 targetPos += move;
                 ClampTargetPosition();
@@ -123,7 +178,6 @@ namespace Markyu.LastKernel
 
         private void ClampTargetPosition()
         {
-            // Ensure clampMin/Max have been set (Board might not be ready in frame 1).
             if (Mathf.Approximately(clampMin.x, clampMax.x)) return;
 
             targetPos.x = Mathf.Clamp(targetPos.x, clampMin.x, clampMax.x);
@@ -133,54 +187,82 @@ namespace Markyu.LastKernel
         private void HandleZoom(InputManager input)
         {
             float scroll = input.GetScrollDeltaY();
+            float pinch  = input.GetPinchDelta() * pinchZoomSpeed;
 
-            if (Mathf.Abs(scroll) > 0.01f)
+            // Prefer scroll wheel; fall back to pinch on touch.
+            float zoomInput = Mathf.Abs(scroll) > 0.01f ? scroll * zoomSpeed : pinch;
+
+            if (Mathf.Abs(zoomInput) > 0.001f)
             {
                 Vector3 forward = cameraTransform.forward;
-                Vector3 newPos = targetPos + forward * (scroll * zoomSpeed);
+                Vector3 newPos  = targetPos + forward * zoomInput;
 
-                float distance = newPos.y / Mathf.Cos(Mathf.Deg2Rad * (90f - cameraTransform.eulerAngles.x));
+                float cosAngle = Mathf.Cos(Mathf.Deg2Rad * (90f - cameraTransform.eulerAngles.x));
+                float distance = Mathf.Approximately(cosAngle, 0f) ? maxDistance
+                    : newPos.y / cosAngle;
+
                 if (distance >= minDistance && distance <= maxDistance)
                 {
                     targetPos = newPos;
-                    // Re-clamp after zoom because zooming moves the camera position in X/Z too.
                     ClampTargetPosition();
                 }
             }
         }
 
+        /// <summary>
+        /// Returns true if the current pointer position is blocked by a UI element or a card,
+        /// preventing the camera from starting a pan gesture.
+        /// On mobile this uses a physics raycast against card colliders because
+        /// EventSystem.IsPointerOverGameObject() without a touch-specific pointer ID
+        /// only checks the mouse pointer and misses touch contacts.
+        /// </summary>
         private bool IsPointerBlocked()
         {
-            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+            if (EventSystem.current == null) return false;
+
+            // On mobile: raycast against the physics scene to detect cards under the touch.
+            // This is reliable regardless of EventSystem pointer ID mapping.
+            if (InputManager.Instance != null && InputManager.Instance.GetTouchCount() > 0)
+            {
+                Vector2 touchPos = InputManager.Instance.GetPointerScreenPosition();
+                Camera cam = Camera.main;
+                if (cam != null)
+                {
+                    Ray ray = cam.ScreenPointToRay(touchPos);
+                    if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity) &&
+                        hit.collider.GetComponent<CardInstance>() != null)
+                        return true;
+                }
+            }
+
+            // Standard check for UI overlays (works reliably for mouse on all platforms).
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
         /// <summary>
         /// Smoothly moves the camera to a target world position.
         /// </summary>
-        /// <param name="target">The world position to focus on.</param>
-        /// <param name="duration">Tween duration in seconds.</param>
-        /// <returns>Coroutine yielding until movement finishes.</returns>
         public IEnumerator MoveTo(Vector3 target, float duration = 0.5f)
         {
             isDragging = false;
-            dragOrigin = InputManager.Instance != null ? InputManager.Instance.GetPointerScreenPosition() : Vector3.zero;
+            dragOrigin = InputManager.Instance != null
+                ? InputManager.Instance.GetPointerScreenPosition()
+                : Vector3.zero;
 
             float desiredDistance = Mathf.Lerp(maxDistance, minDistance, 0.8f);
-            Vector3 offset = -cameraTransform.forward * desiredDistance;
-            Vector3 newCameraPosition = target + offset;
+            Vector3 offset        = -cameraTransform.forward * desiredDistance;
+            Vector3 newCameraPos  = target + offset;
 
-            yield return transform.DOMove(newCameraPosition, duration)
+            yield return transform.DOMove(newCameraPos, duration)
                 .SetUpdate(true)
                 .WaitForCompletion();
 
-            targetPos = newCameraPosition;
+            targetPos = newCameraPos;
         }
 
         /// <summary>
         /// Shakes the camera additively.
         /// </summary>
-        /// <param name="duration">How long the shake should last.</param>
-        /// <param name="strength">How intense the shake should be.</param>
         public void Shake(float duration = 0.3f, float strength = 0.1f)
         {
             cameraTransform.DOShakePosition(duration, strength)
@@ -188,4 +270,3 @@ namespace Markyu.LastKernel
         }
     }
 }
-

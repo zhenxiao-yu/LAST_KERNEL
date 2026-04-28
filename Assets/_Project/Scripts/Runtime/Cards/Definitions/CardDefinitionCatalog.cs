@@ -5,6 +5,11 @@ namespace Markyu.LastKernel
 {
     /// <summary>
     /// Owns runtime card-definition lookup so CardManager can stay focused on scene orchestration and spawning.
+    ///
+    /// Load order:
+    ///   1. If a GameDatabase asset exists at Resources/GameDatabase, use its pre-built lists.
+    ///      This is faster (no filesystem scan) and lets the GameDatabase act as the source of truth.
+    ///   2. Otherwise fall back to Resources.LoadAll so the game still works without a GameDatabase asset.
     /// </summary>
     public sealed class CardDefinitionCatalog
     {
@@ -15,8 +20,20 @@ namespace Markyu.LastKernel
         public static CardDefinitionCatalog LoadFromResources()
         {
             var catalog = new CardDefinitionCatalog();
-            catalog.AddDefinitions(Resources.LoadAll<CardDefinition>("Cards"), "Cards");
-            catalog.AddDefinitions(Resources.LoadAll<PackDefinition>("Packs"), "Packs");
+
+            var db = Resources.Load<GameDatabase>("GameDatabase");
+            if (db != null && db.Cards.Count > 0)
+            {
+                catalog.AddDefinitions(db.Cards, "GameDatabase/Cards");
+                catalog.AddDefinitions(db.Packs, "GameDatabase/Packs");
+            }
+            else
+            {
+                // Fallback: scan Resources folders directly.
+                catalog.AddDefinitions(Resources.LoadAll<CardDefinition>("Cards"), "Cards");
+                catalog.AddDefinitions(Resources.LoadAll<PackDefinition>("Packs"), "Packs");
+            }
+
             return catalog;
         }
 
@@ -28,35 +45,29 @@ namespace Markyu.LastKernel
 
         private void AddDefinitions(IEnumerable<CardDefinition> definitions, string sourceName)
         {
-            if (definitions == null)
-            {
-                return;
-            }
-
+            if (definitions == null) return;
             foreach (var definition in definitions)
-            {
                 AddDefinition(definition, sourceName);
-            }
         }
 
         private void AddDefinition(CardDefinition definition, string sourceName)
         {
             if (definition == null)
             {
-                Debug.LogWarning($"CardDefinitionCatalog: Null definition found while loading Resources/{sourceName}.");
+                Debug.LogWarning($"CardDefinitionCatalog: Null definition in {sourceName}.");
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(definition.Id))
             {
-                Debug.LogWarning($"CardDefinitionCatalog: '{definition.name}' in Resources/{sourceName} has an empty id and will be ignored.", definition);
+                Debug.LogWarning($"CardDefinitionCatalog: '{definition.name}' in {sourceName} has an empty ID and will be ignored.", definition);
                 return;
             }
 
             if (definitionsById.TryGetValue(definition.Id, out var existing))
             {
                 Debug.LogWarning(
-                    $"CardDefinitionCatalog: Duplicate card id '{definition.Id}' on '{definition.name}'. Keeping '{existing.name}' and ignoring the duplicate.",
+                    $"CardDefinitionCatalog: Duplicate card ID '{definition.Id}' on '{definition.name}'. Keeping '{existing.name}'.",
                     definition);
                 return;
             }

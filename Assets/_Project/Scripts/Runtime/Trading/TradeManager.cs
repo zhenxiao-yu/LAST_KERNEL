@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -14,38 +15,44 @@ namespace Markyu.LastKernel
         public event System.Action<PackDefinition> OnPackPurchased;
         public void NotifyPackPurchased(PackDefinition pack) => OnPackPurchased?.Invoke(pack);
 
-        [Header("Buyer")]
+        [BoxGroup("Buyer")]
         [SerializeField, Tooltip("Prefab for the Card Buyer trade zone.")]
         private CardBuyer buyerPrefab;
 
-        [SerializeField, Tooltip("The CardDefinition to be used as currency for trading.")]
+        [BoxGroup("Buyer")]
+        [SerializeField, Tooltip("CardDefinition to be used as currency for trading.")]
         private CardDefinition currencyCard;
 
-        [Header("Vendor")]
+        [BoxGroup("Vendor")]
         [SerializeField, Tooltip("Prefab for the Pack Vendor trade zone.")]
         private PackVendor vendorPrefab;
 
-        [SerializeField, Tooltip("The list of card packs to offer. Each item creates one vendor.")]
+        [BoxGroup("Vendor")]
+        [SerializeField, Tooltip("Card packs to offer. Each entry creates one vendor.")]
         private List<PackDefinition> offeredPacks;
 
-        [Header("Colony Expansion")]
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Tooltip("Creates an isolated terminal that sells colony board row upgrades.")]
         private bool enableColonyExpansionVendor = false;
 
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Min(1), Tooltip("Credit cost for the first purchased colony board row.")]
         private int colonyExpansionBaseCost = 8;
 
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Min(0), Tooltip("Additional credit cost added after each purchased row.")]
         private int colonyExpansionCostStep = 4;
 
-        [Header("Layout")]
-        [SerializeField, Tooltip("The horizontal distance between the centers of each trade zone.")]
+        [BoxGroup("Layout")]
+        [SerializeField, Tooltip("Horizontal distance between the centers of each trade zone.")]
         private float spacing = 1.1f;
 
-        [SerializeField, Tooltip("The local scale to apply to each instantiated zone prefab.")]
+        [BoxGroup("Layout")]
+        [SerializeField, Tooltip("Local scale applied to each instantiated zone prefab.")]
         private Vector3 zoneScale = new Vector3(1.125f, 1.0f, 1.125f);
 
-        [SerializeField, Tooltip("The local offset from the zone's center where cards will spawn.")]
+        [BoxGroup("Layout")]
+        [SerializeField, Tooltip("Local offset from the zone's center where cards will spawn.")]
         private Vector3 spawnOffset = new Vector3(0f, 0f, -1.4f);
 
         public CardDefinition CurrencyCard => currencyCard;

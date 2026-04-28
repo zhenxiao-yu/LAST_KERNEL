@@ -33,7 +33,7 @@ namespace Markyu.LastKernel
 
         private static readonly string[] ProjectNamespacePrefixes = { "Markyu.LastKernel" };
 
-        // ─── Entry Point ─────────────────────────────────────────────────────
+        // ─── Entry Points ─────────────────────────────────────────────────────
 
         [MenuItem("Tools/LAST KERNEL/Validate Project")]
         public static void ValidateProject()
@@ -72,8 +72,150 @@ namespace Markyu.LastKernel
             Debug.Log($"=== ProjectValidator: Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
+        [MenuItem("Tools/LAST KERNEL/Validate All Game Data")]
+        public static void ValidateAllGameData()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Validating all game data ===");
+            Section("Cards");    ValidateCardSettings(summary); ValidateCardDefinitions(summary);
+            Section("Recipes");  ValidateRecipes(summary);
+            Section("Packs");    ValidatePacks(summary);
+            Section("Quests");   ValidateQuests(summary);
+            Section("Audio");    ValidateAudio(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Detect Duplicate IDs")]
+        public static void DetectDuplicateIds()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Detecting duplicate IDs ===");
+            DetectDuplicateCardIds(summary);
+            DetectDuplicateRecipeIds(summary);
+            DetectDuplicateQuestIds(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Find Missing References")]
+        public static void FindMissingReferences()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Scanning for missing references in prefabs ===");
+            Section("Prefabs");
+            ValidatePrefabReferences(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Validate Card Prefabs")]
+        public static void ValidateCardPrefabsOnly()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Validating card prefabs ===");
+            Section("Card Prefabs");
+            ValidatePrefabReferences(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Validate Recipes")]
+        public static void ValidateRecipesOnly()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Validating recipes ===");
+            ValidateRecipes(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Validate Localization Keys")]
+        public static void ValidateLocalizationKeysOnly()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Validating localization keys ===");
+            ValidateLocalizationKeys(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Validate Audio IDs")]
+        public static void ValidateAudioIdsOnly()
+        {
+            var summary = new ValidationSummary();
+            Debug.Log("=== ProjectValidator: Validating audio IDs ===");
+            ValidateAudio(summary);
+            Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
+        }
+
+        [MenuItem("Tools/LAST KERNEL/Open Game Database")]
+        public static void OpenGameDatabase()
+        {
+            string[] guids = AssetDatabase.FindAssets("t:GameDatabase", new[] { "Assets/_Project" });
+            if (guids.Length == 0)
+            {
+                Debug.LogWarning("[Validator] No GameDatabase asset found. Create one via Right-click > Last Kernel > Game Database.");
+                return;
+            }
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
+            var asset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(path);
+            UnityEditor.Selection.activeObject = asset;
+            EditorGUIUtility.PingObject(asset);
+        }
+
         private static void Section(string name) =>
             Debug.Log($"--- [Validator] {name} ---");
+
+        // ─── Targeted ID checks (used by DetectDuplicateIds) ─────────────────
+
+        private static void DetectDuplicateCardIds(ValidationSummary summary)
+        {
+            var seen = new Dictionary<string, string>();
+            foreach (CardDefinition def in LoadAssets<CardDefinition>())
+            {
+                string path = AssetDatabase.GetAssetPath(def);
+                var so = new SerializedObject(def);
+                string id = so.FindProperty("id")?.stringValue ?? string.Empty;
+                if (!string.IsNullOrEmpty(id))
+                {
+                    if (seen.TryGetValue(id, out string other))
+                        summary.Error($"Duplicate card ID '{id}' at '{path}' and '{other}'.");
+                    else
+                        seen[id] = path;
+                }
+            }
+        }
+
+        private static void DetectDuplicateRecipeIds(ValidationSummary summary)
+        {
+            var seen = new Dictionary<string, string>();
+            foreach (RecipeDefinition recipe in LoadAssets<RecipeDefinition>())
+            {
+                string path = AssetDatabase.GetAssetPath(recipe);
+                var so = new SerializedObject(recipe);
+                string id = so.FindProperty("id")?.stringValue ?? string.Empty;
+                if (!string.IsNullOrEmpty(id))
+                {
+                    if (seen.TryGetValue(id, out string other))
+                        summary.Error($"Duplicate recipe ID '{id}' at '{path}' and '{other}'.");
+                    else
+                        seen[id] = path;
+                }
+            }
+        }
+
+        private static void DetectDuplicateQuestIds(ValidationSummary summary)
+        {
+            var seen = new Dictionary<string, string>();
+            foreach (Quest quest in LoadAssets<Quest>())
+            {
+                string path = AssetDatabase.GetAssetPath(quest);
+                var so = new SerializedObject(quest);
+                string id = so.FindProperty("id")?.stringValue ?? string.Empty;
+                if (!string.IsNullOrEmpty(id))
+                {
+                    if (seen.TryGetValue(id, out string other))
+                        summary.Error($"Duplicate quest ID '{id}' at '{path}' and '{other}'.");
+                    else
+                        seen[id] = path;
+                }
+            }
+        }
 
         // ─── Cards ───────────────────────────────────────────────────────────
 

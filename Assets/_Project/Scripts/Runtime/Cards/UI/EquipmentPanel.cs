@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,21 +16,24 @@ namespace Markyu.LastKernel
             public float NoiseOffsetZ;
         }
 
-        [Header("Attach Points")]
-        [SerializeField, Tooltip("The local position where a Weapon card is attached. Visualized by a gizmo in the editor.")]
+        [BoxGroup("Attach Points")]
+        [SerializeField, Tooltip("Local position where a Weapon card is attached.")]
         private Vector3 weaponAttachPoint = new Vector3(-1f, 0.2f, 0f);
 
-        [SerializeField, Tooltip("The local position where an Armor card is attached. Visualized by a gizmo in the editor.")]
+        [BoxGroup("Attach Points")]
+        [SerializeField, Tooltip("Local position where an Armor card is attached.")]
         private Vector3 armorAttachPoint = new Vector3(0f, 0.2f, -0.7f);
 
-        [SerializeField, Tooltip("The local position where an Accessory card is attached. Visualized by a gizmo in the editor.")]
+        [BoxGroup("Attach Points")]
+        [SerializeField, Tooltip("Local position where an Accessory card is attached.")]
         private Vector3 accessoryAttachPoint = new Vector3(1f, 0.2f, 0f);
 
-        [Header("Animation")]
-        [SerializeField, Tooltip("How far the cards will randomly orbit from their attach point.")]
+        [BoxGroup("Animation")]
+        [SerializeField, Tooltip("How far the cards randomly orbit from their attach point.")]
         private float animationRadius = 0.1f;
 
-        [SerializeField, Tooltip("How fast the cards will move in their random orbit.")]
+        [BoxGroup("Animation")]
+        [SerializeField, Tooltip("How fast the cards move in their random orbit.")]
         private float animationSpeed = 1f;
 
         private Camera _mainCam;

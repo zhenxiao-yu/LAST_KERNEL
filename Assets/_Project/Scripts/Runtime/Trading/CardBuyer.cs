@@ -1,12 +1,13 @@
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
 {
     public class CardBuyer : TradeZone
     {
-        [Header("UI Components")]
-        [SerializeField, Tooltip("The MeshRenderer used to display the texture of the currency used by this buyer.")]
+        [BoxGroup("UI Components")]
+        [SerializeField, Tooltip("Displays the texture of the currency used by this buyer.")]
         private MeshRenderer iconRenderer;
 
         private CardDefinition currencyCard;

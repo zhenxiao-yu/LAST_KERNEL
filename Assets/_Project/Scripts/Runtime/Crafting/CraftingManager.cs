@@ -19,6 +19,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -35,7 +36,7 @@ namespace Markyu.LastKernel
         public event System.Action<CardDefinition> OnExplorationFinished;
         public void NotifyExplorationFinished(CardDefinition definition) => OnExplorationFinished?.Invoke(definition);
 
-        [Header("UI References")]
+        [BoxGroup("References")]
         [SerializeField, Tooltip("UI prefab displayed above a card stack to show crafting progress.")]
         private ProgressUI progressUIPrefab;
 

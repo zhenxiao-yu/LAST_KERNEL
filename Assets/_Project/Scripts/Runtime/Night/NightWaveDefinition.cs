@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -6,23 +7,30 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "LastKernel/Night Wave", fileName = "Wave_Night_")]
     public class NightWaveDefinition : ScriptableObject
     {
+        [BoxGroup("Identity")]
         [SerializeField] private string waveName = "Incursion Wave";
 
+        [BoxGroup("Identity")]
         [SerializeField, TextArea]
         private string flavorText;
 
+        [BoxGroup("Enemies")]
+        [TableList(AlwaysExpanded = true)]
         [SerializeField] private List<EnemyEntry> enemies = new();
 
-        [Header("Run-State Consequences")]
+        [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Morale change on player victory.")]
         private int victoryMoraleDelta = 5;
 
+        [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Morale change on player defeat (use negative value).")]
         private int defeatMoraleDelta = -10;
 
+        [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Fatigue added per defender committed to the lane.")]
         private int fatigueCostPerDefender = 2;
 
+        [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Salvage earned per enemy killed.")]
         private int salvagePerKill = 1;
 
@@ -57,13 +65,13 @@ namespace Markyu.LastKernel
             int fatigue = 1, int salvage = 1)
         {
             var wave = ScriptableObject.CreateInstance<NightWaveDefinition>();
-            wave.waveName              = name;
-            wave.flavorText            = flavor;
-            wave.enemies               = entries;
-            wave.victoryMoraleDelta    = victoryMorale;
-            wave.defeatMoraleDelta     = defeatMorale;
+            wave.waveName               = name;
+            wave.flavorText             = flavor;
+            wave.enemies                = entries;
+            wave.victoryMoraleDelta     = victoryMorale;
+            wave.defeatMoraleDelta      = defeatMorale;
             wave.fatigueCostPerDefender = fatigue;
-            wave.salvagePerKill        = salvage;
+            wave.salvagePerKill         = salvage;
             return wave;
         }
     }
@@ -71,7 +79,9 @@ namespace Markyu.LastKernel
     [System.Serializable]
     public class EnemyEntry
     {
+        [TableColumnWidth(200)]
         public EnemyDefinition Enemy;
-        [Min(1)] public int Count = 1;
+        [TableColumnWidth(60), Min(1)]
+        public int Count = 1;
     }
 }

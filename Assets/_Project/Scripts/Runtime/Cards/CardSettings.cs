@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using DG.Tweening;
 
@@ -6,66 +7,95 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "Last Kernel/Card Settings")]
     public class CardSettings : ScriptableObject
     {
-        [Header("Game Rules & Economy")]
-        [SerializeField, Tooltip("The starting limit for how many cards the player can have.")]
+        // ── Economy ───────────────────────────────────────────────────────────
+
+        [BoxGroup("Economy")]
+        [SerializeField, Min(1), Tooltip("Starting card limit for the player.")]
         private int baseCardLimit = 24;
 
-        [SerializeField, Tooltip("The amount of nutrition each Character card requires per feeding cycle.")]
+        [BoxGroup("Economy")]
+        [SerializeField, Min(1), Tooltip("Nutrition each Character card requires per feeding cycle.")]
         private int hungerPerCharacter = 2;
 
-        [Header("Input & Interaction")]
-        [SerializeField, Tooltip("How far the mouse must move to be considered a 'drag' instead of a 'click'.")]
+        // ── Input & Interaction ───────────────────────────────────────────────
+
+        [BoxGroup("Input")]
+        [SerializeField, Min(0f), Tooltip("Mouse travel distance before a click becomes a drag.")]
         private float clickThreshold = 0.02f;
 
-        [SerializeField, Tooltip("The height the card lifts to when dragged.")]
+        [BoxGroup("Input")]
+        [SerializeField, Min(0f), Tooltip("World Y the card lifts to when dragged.")]
         private float dragHeight = 0.1f;
 
-        [Header("Physics & Stacking Logic")]
-        [SerializeField, Tooltip("How close you need to drop a card to attach to another.")]
+        // ── Physics & Stacking ────────────────────────────────────────────────
+
+        [BoxGroup("Physics")]
+        [SerializeField, Min(0f), Tooltip("Drop radius to attach to another stack.")]
         private float attachRadius = 0.25f;
 
-        [SerializeField, Tooltip("The wider radius used to find a stack automatically when a card is first spawned.")]
+        [BoxGroup("Physics")]
+        [SerializeField, Min(0f), Tooltip("Wider auto-attach radius used at spawn.")]
         private float spawnAttachRadius = 1f;
 
-        [SerializeField, Tooltip("Extra space added to the card's collider size, used for layout and stacking calculations.")]
+        [BoxGroup("Physics")]
+        [SerializeField, Tooltip("Extra space added to the collider used for layout and stacking.")]
         private Vector2 margin = new Vector2(0.1f, 0.1f);
 
-        [SerializeField, Tooltip("Maximum iterations per resolve call to avoid infinite loops.")]
+        [BoxGroup("Physics")]
+        [SerializeField, Range(1, 20), Tooltip("Max solver iterations per frame.")]
         private int maxIterations = 8;
 
-        [Header("Visual Layout & Animation")]
-        [SerializeField, Tooltip("Per-card visual offset within a stack.")]
+        // ── Visual Layout & Animation ─────────────────────────────────────────
+
+        [BoxGroup("Animation")]
+        [SerializeField, Tooltip("Per-card visual offset within a stack (Z is depth-bias for render order).")]
         private Vector3 stackStep = new Vector3(0f, 0.002f, -0.18f);
 
-        [SerializeField, Tooltip("How long it takes to tween into the resolved position.")]
+        [BoxGroup("Animation")]
+        [SerializeField, Min(0.01f), Tooltip("Duration for standard card movement tweens.")]
         private float moveDuration = 0.1f;
 
-        [SerializeField, Tooltip("Ease type for smooth movement.")]
+        [BoxGroup("Animation")]
+        [SerializeField]
         private Ease moveEase = Ease.OutQuad;
 
-        [SerializeField, Range(50f, 150f), Tooltip("How quickly a card follows its target. Higher values make the stack tighter and more responsive.")]
+        [BoxGroup("Animation")]
+        [SerializeField, Range(10f, 300f), Tooltip("Exponential follow sharpness for trailing drag cards.")]
         private float swaySharpness = 100f;
 
-        [Header("Feel")]
-        [SerializeField, Tooltip("Interaction feel tunables: hover, drag, snap, spawn, merge. Create via Right-click > Last Kernel > Card Feel Profile.")]
+        // ── Feel ──────────────────────────────────────────────────────────────
+
+        [BoxGroup("Feel")]
+        [SerializeField, Required, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [Tooltip("Hover, drag, snap, spawn, merge tunables. Create via Right-click > Last Kernel > Card Feel Profile.")]
         private CardFeelProfile feelProfile;
 
-        [Header("Visual Effects")]
-        [SerializeField, Tooltip("Puff particle that plays when the card performs an action.")]
+        // ── Visual Effects ────────────────────────────────────────────────────
+
+        [BoxGroup("Visual Effects")]
+        [SerializeField, Required]
         private PuffParticle puffParticle;
 
-        [SerializeField, Tooltip("Material used by the highlight system to draw the card outline.")]
+        [BoxGroup("Visual Effects")]
+        [SerializeField, Required]
+        [Tooltip("Material used by the highlight system for the card outline.")]
         private Material outlineMaterial;
 
-        [Header("Mob AI")]
-        [SerializeField, Tooltip("The time in seconds between each automatic move attempt for a mob card.")]
+        // ── Mob AI ────────────────────────────────────────────────────────────
+
+        [BoxGroup("Mob AI")]
+        [SerializeField, Min(0f), Tooltip("Seconds between each mob's automatic move attempt.")]
         private float moveInterval = 5f;
 
-        [SerializeField, Tooltip("The maximum distance a mob will travel during a single random move or when pursuing a target.")]
+        [BoxGroup("Mob AI")]
+        [SerializeField, Min(0f), Tooltip("Max distance a mob travels per random move.")]
         private float moveRadius = 1f;
 
-        [SerializeField, Tooltip("How many times the mob will try to find a valid random position before giving up on the current move.")]
+        [BoxGroup("Mob AI")]
+        [SerializeField, Range(1, 20), Tooltip("Max attempts to find a valid position per move.")]
         private int maxAttemptsPerMove = 5;
+
+        // ── Properties ────────────────────────────────────────────────────────
 
         public int BaseCardLimit => baseCardLimit;
         public int HungerPerCharacter => hungerPerCharacter;
@@ -93,4 +123,3 @@ namespace Markyu.LastKernel
         public int MaxAttemptsPerMove => maxAttemptsPerMove;
     }
 }
-

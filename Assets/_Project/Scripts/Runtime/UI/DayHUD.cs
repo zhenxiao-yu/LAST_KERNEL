@@ -7,6 +7,7 @@
 //
 // Extend this as you add more day-phase UI elements (resource counters, quest progress, etc.).
 
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +19,13 @@ namespace Markyu.LastKernel
     /// </summary>
     public class DayHUD : MonoBehaviour
     {
-        [Header("UI Elements")]
+        [BoxGroup("UI Elements")]
         [SerializeField] private TextMeshProUGUI phaseLabel;
-        [SerializeField] private Button          startNightButton;
+
+        [BoxGroup("UI Elements")]
+        [SerializeField] private Button startNightButton;
+
+        [BoxGroup("UI Elements")]
         [SerializeField, Tooltip("Root GameObject of the day-phase HUD — hidden at night.")]
         private GameObject dayHUDRoot;
 

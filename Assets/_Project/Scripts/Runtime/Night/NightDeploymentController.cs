@@ -13,6 +13,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -21,9 +22,8 @@ namespace Markyu.LastKernel
     {
         public static NightDeploymentController Instance { get; private set; }
 
-        [Header("View")]
-        [SerializeField, Tooltip("The NightDeploymentView in the scene. Wire this in the Inspector. " +
-                                 "Combat runs without it (auto-deploy fallback).")]
+        [BoxGroup("View")]
+        [SerializeField, Tooltip("NightDeploymentView in the scene. Combat runs without it (auto-deploy fallback).")]
         private NightDeploymentView deploymentView;
 
         /// <summary>

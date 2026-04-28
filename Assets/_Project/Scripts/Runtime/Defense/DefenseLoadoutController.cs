@@ -8,6 +8,7 @@
 // look up DefenderData via CardDefinition.DefenderDataOverride or a mapping table,
 // and return the resolved array from ResolveLoadout().
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -18,7 +19,8 @@ namespace Markyu.LastKernel
     /// </summary>
     public class DefenseLoadoutController : MonoBehaviour
     {
-        [Header("Fallback Loadout (used when card integration is not yet active)")]
+        [BoxGroup("Fallback Loadout")]
+        [InfoBox("Used when card integration is not yet active.")]
         [SerializeField, Tooltip("One entry per defender slot. Null = empty slot.")]
         private DefenderData[] defenderOverrides;
 

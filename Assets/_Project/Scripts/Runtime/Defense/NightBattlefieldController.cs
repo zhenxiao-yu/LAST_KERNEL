@@ -20,6 +20,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -32,25 +33,35 @@ namespace Markyu.LastKernel
     {
         // ── Inspector wiring ──────────────────────────────────────────────────
 
-        [Header("Scene References")]
+        [BoxGroup("Scene References")]
         [SerializeField] private BaseCoreController baseCoreController;
+
+        [BoxGroup("Scene References")]
         [SerializeField, Tooltip("World positions where defenders can be placed. Index 0 = frontline.")]
         private Transform[] defenderSlots;
+
+        [BoxGroup("Scene References")]
         [SerializeField, Tooltip("Enemies spawn at this world position each wave.")]
         private Transform spawnMarker;
+
+        [BoxGroup("Scene References")]
         [SerializeField, Tooltip("Enemies move toward this marker. Also used for base-reach detection.")]
         private Transform baseMarker;
 
-        [Header("Prefabs")]
+        [BoxGroup("Prefabs")]
         [SerializeField] private GameObject enemyPrefab;
+
+        [BoxGroup("Prefabs")]
         [SerializeField] private GameObject defenderPrefab;
 
-        [Header("Wave")]
+        [BoxGroup("Wave")]
         [SerializeField] private NightWaveDefinition currentWave;
+
+        [BoxGroup("Wave")]
         [SerializeField, Min(0.5f), Tooltip("Delay in seconds between each enemy spawn.")]
         private float spawnInterval = 1.2f;
 
-        [Header("Loadout")]
+        [BoxGroup("Loadout")]
         [SerializeField, Tooltip("Assign defender data per slot. Leave null to leave that slot empty.")]
         private DefenderData[] defaultLoadout;
 

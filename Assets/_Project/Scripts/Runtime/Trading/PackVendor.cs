@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using TMPro;
 
@@ -7,14 +8,16 @@ namespace Markyu.LastKernel
 {
     public class PackVendor : TradeZone
     {
-        [Header("UI Components")]
-        [SerializeField, Tooltip("The TextMeshPro component used to display the name of the offered card pack.")]
+        [BoxGroup("UI Components")]
+        [SerializeField, Tooltip("Displays the name of the offered card pack.")]
         private TextMeshPro titleText;
 
-        [SerializeField, Tooltip("The TextMeshPro component used to display the remaining cost to purchase the pack.")]
+        [BoxGroup("UI Components")]
+        [SerializeField, Tooltip("Displays the remaining cost to purchase the pack.")]
         private TextMeshPro priceText;
 
-        [SerializeField, Tooltip("The TextMeshPro component used to display the progress of card/recipe discovery.")]
+        [BoxGroup("UI Components")]
+        [SerializeField, Tooltip("Displays card/recipe discovery progress.")]
         private TextMeshPro trackerText;
 
         public string PackId => offeredPack != null ? offeredPack.Id : "";

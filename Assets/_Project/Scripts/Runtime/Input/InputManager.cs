@@ -58,38 +58,53 @@ namespace Markyu.LastKernel
                 inputLocks.Remove(requester);
         }
 
+        // ── Pointer / Touch ───────────────────────────────────────────────────
+
         /// <summary>
         /// Returns the current pointer position in screen space.
+        /// Prefers the primary touch position when a touch is active.
         /// </summary>
         public Vector2 GetPointerScreenPosition()
         {
 #if ENABLE_INPUT_SYSTEM
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+                return Touchscreen.current.primaryTouch.position.ReadValue();
             return Mouse.current != null ? Mouse.current.position.ReadValue() : Vector2.zero;
 #else
+            if (Input.touchCount > 0)
+                return Input.GetTouch(0).position;
             return Input.mousePosition;
 #endif
         }
 
         /// <summary>
-        /// Returns true on the frame the primary pointer button is pressed.
+        /// Returns true on the frame the primary pointer (left mouse button or first touch) is pressed.
         /// </summary>
         public bool WasPrimaryPointerPressedThisFrame()
         {
 #if ENABLE_INPUT_SYSTEM
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+                return true;
             return Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame;
 #else
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+                return true;
             return Input.GetMouseButtonDown(0);
 #endif
         }
 
         /// <summary>
-        /// Returns true on the frame the primary pointer button is released.
+        /// Returns true on the frame the primary pointer is released.
         /// </summary>
         public bool WasPrimaryPointerReleasedThisFrame()
         {
 #if ENABLE_INPUT_SYSTEM
+            if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasReleasedThisFrame)
+                return true;
             return Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame;
 #else
+            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+                return true;
             return Input.GetMouseButtonUp(0);
 #endif
         }
@@ -141,6 +156,82 @@ namespace Markyu.LastKernel
             return Input.GetKeyDown(KeyCode.Escape);
 #endif
         }
+
+        // ── Multi-touch ───────────────────────────────────────────────────────
+
+        /// <summary>
+        /// Returns the number of active touch contacts on the screen.
+        /// Returns 0 on desktop (no touchscreen).
+        /// </summary>
+        public int GetTouchCount()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Touchscreen.current == null) return 0;
+            int count = 0;
+            foreach (var touch in Touchscreen.current.touches)
+                if (touch.press.isPressed) count++;
+            return count;
+#else
+            return Input.touchCount;
+#endif
+        }
+
+        /// <summary>
+        /// Returns the screen-space midpoint between the first two active touch fingers.
+        /// Falls back to the primary pointer position when fewer than two touches exist.
+        /// </summary>
+        public Vector2 GetTwoFingerMidpoint()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Touchscreen.current == null) return GetPointerScreenPosition();
+            Vector2 first = Vector2.zero, second = Vector2.zero;
+            int found = 0;
+            foreach (var touch in Touchscreen.current.touches)
+            {
+                if (!touch.press.isPressed) continue;
+                found++;
+                if (found == 1) first = touch.position.ReadValue();
+                else if (found == 2) { second = touch.position.ReadValue(); break; }
+            }
+            return found >= 2 ? (first + second) * 0.5f : GetPointerScreenPosition();
+#else
+            if (Input.touchCount < 2) return GetPointerScreenPosition();
+            return (Input.GetTouch(0).position + Input.GetTouch(1).position) * 0.5f;
+#endif
+        }
+
+        /// <summary>
+        /// Returns the change in distance between two active touch fingers this frame,
+        /// suitable for pinch-to-zoom. Positive = fingers spreading (zoom in),
+        /// negative = fingers pinching (zoom out). Returns 0 when fewer than 2 touches.
+        /// </summary>
+        public float GetPinchDelta()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (Touchscreen.current == null) return 0f;
+            Vector2 firstPos = Vector2.zero, firstPrev = Vector2.zero;
+            Vector2 secondPos = Vector2.zero, secondPrev = Vector2.zero;
+            int found = 0;
+            foreach (var touch in Touchscreen.current.touches)
+            {
+                if (!touch.press.isPressed) continue;
+                Vector2 pos   = touch.position.ReadValue();
+                Vector2 delta = touch.delta.ReadValue();
+                found++;
+                if      (found == 1) { firstPos  = pos; firstPrev  = pos - delta; }
+                else if (found == 2) { secondPos = pos; secondPrev = pos - delta; break; }
+            }
+            if (found < 2) return 0f;
+            return Vector2.Distance(firstPos, secondPos) - Vector2.Distance(firstPrev, secondPrev);
+#else
+            if (Input.touchCount < 2) return 0f;
+            Touch t0 = Input.GetTouch(0);
+            Touch t1 = Input.GetTouch(1);
+            float currentDist = Vector2.Distance(t0.position, t1.position);
+            float prevDist    = Vector2.Distance(t0.position - t0.deltaPosition,
+                                                  t1.position - t1.deltaPosition);
+            return currentDist - prevDist;
+#endif
+        }
     }
 }
-

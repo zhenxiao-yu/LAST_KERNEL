@@ -9,6 +9,7 @@
 // All data comes from events; this script never polls game state.
 // Wire references in the Inspector on the NightHUD Canvas GameObject.
 
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,24 +22,32 @@ namespace Markyu.LastKernel
     /// </summary>
     public class NightHUD : MonoBehaviour
     {
-        [Header("Phase Labels")]
+        [BoxGroup("Phase Labels")]
         [SerializeField] private TextMeshProUGUI phaseLabel;
+
+        [BoxGroup("Phase Labels")]
         [SerializeField] private TextMeshProUGUI waveLabel;
 
-        [Header("Base HP")]
-        [SerializeField] private Slider           baseHPBar;
-        [SerializeField] private TextMeshProUGUI  baseHPText;
+        [BoxGroup("Base HP")]
+        [SerializeField] private Slider baseHPBar;
 
-        [Header("Enemy Count")]
+        [BoxGroup("Base HP")]
+        [SerializeField] private TextMeshProUGUI baseHPText;
+
+        [BoxGroup("Enemy Count")]
         [SerializeField] private TextMeshProUGUI enemyCountLabel;
 
-        [Header("Speed Control (optional)")]
-        [SerializeField] private Button  speedToggleButton;
+        [BoxGroup("Speed Control")]
+        [SerializeField] private Button speedToggleButton;
+
+        [BoxGroup("Speed Control")]
         [SerializeField] private TextMeshProUGUI speedLabel;
         private bool _isDoubleSpeed;
 
-        [Header("References")]
-        [SerializeField] private BaseCoreController        baseCoreController;
+        [BoxGroup("References")]
+        [SerializeField] private BaseCoreController baseCoreController;
+
+        [BoxGroup("References")]
         [SerializeField] private NightBattlefieldController battlefield;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────

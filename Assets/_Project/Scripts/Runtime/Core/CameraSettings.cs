@@ -13,6 +13,7 @@
 //      CameraController to read from it instead of its own [SerializeField] fields
 //      (optional — the controller works standalone without this asset).
 
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -20,54 +21,52 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "Last Kernel/Camera Settings", fileName = "Default_Camera_Settings")]
     public class CameraSettings : ScriptableObject
     {
-        // ─── Design Resolution ────────────────────────────────────────────────
-        // The game targets 1920×1080 as its reference resolution.
-        // Canvas Scalers should use Scale With Screen Size at 1920×1080.
-        // The camera itself is not constrained to pixels; URP renders at native res.
-
-        [Header("Design Reference (documentation only — not read at runtime)")]
-        [SerializeField, Tooltip("Intended target resolution. Used when configuring Canvas Scalers. Not enforced in code.")]
+        [BoxGroup("Design Reference")]
+        [InfoBox("Documentation only — values in this group are not read at runtime.")]
+        [SerializeField, Tooltip("Intended target resolution. Used when configuring Canvas Scalers.")]
         private Vector2Int referenceResolution = new Vector2Int(1920, 1080);
 
+        [BoxGroup("Design Reference")]
         [SerializeField, Tooltip("Aspect ratio the game is primarily designed for.")]
         private string targetAspect = "16:9";
 
-        // ─── Camera Rig ───────────────────────────────────────────────────────
-        [Header("Camera Rig (for documentation / future CameraController opt-in)")]
-        [SerializeField, Tooltip("Typical starting distance from the board when a scene loads.")]
+        [BoxGroup("Camera Rig")]
+        [SerializeField, Tooltip("Starting distance from the board when a scene loads.")]
         private float defaultDistance = 12f;
 
+        [BoxGroup("Camera Rig")]
         [SerializeField, Tooltip("Minimum zoom-in distance from the board surface.")]
         private float minDistance = 5f;
 
+        [BoxGroup("Camera Rig")]
         [SerializeField, Tooltip("Maximum zoom-out distance from the board surface.")]
         private float maxDistance = 20f;
 
-        // ─── Pan ──────────────────────────────────────────────────────────────
-        [Header("Pan")]
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("Base pan speed multiplier. Actual speed also scales with camera height.")]
         private float panSpeed = 0.01f;
 
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("SmoothDamp smoothing time for camera movement.")]
         private float smoothTime = 0.15f;
 
-        [SerializeField, Tooltip("Extra padding (world units) beyond the Board edge that the camera can scroll into.")]
+        [BoxGroup("Pan")]
+        [SerializeField, Tooltip("Extra padding (world units) beyond the Board edge the camera can scroll into.")]
         private float panPadding = 0.5f;
 
-        // ─── Zoom ─────────────────────────────────────────────────────────────
-        [Header("Zoom")]
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("Scroll-wheel zoom speed multiplier.")]
         private float zoomSpeed = 1f;
 
-        // ─── Fallback Bounds (when no Board is present) ───────────────────────
-        [Header("Fallback Pan Bounds (Title scene / no Board)")]
+        [BoxGroup("Fallback Pan Bounds")]
+        [InfoBox("Used when no Board is present (Title scene).")]
         [SerializeField, Tooltip("Minimum X/Z pan boundary when no Board drives the clamps.")]
         private Vector2 defaultClampMin = new Vector2(-10f, -5f);
 
+        [BoxGroup("Fallback Pan Bounds")]
         [SerializeField, Tooltip("Maximum X/Z pan boundary when no Board drives the clamps.")]
         private Vector2 defaultClampMax = new Vector2(10f, 5f);
 
-        // ─── Accessors ────────────────────────────────────────────────────────
         public Vector2Int ReferenceResolution => referenceResolution;
         public float DefaultDistance => defaultDistance;
         public float MinDistance => minDistance;

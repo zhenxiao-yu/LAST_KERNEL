@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -7,31 +8,36 @@ namespace Markyu.LastKernel
 {
     public class HitUI : MonoBehaviour
     {
-        [Header("References")]
-        [SerializeField, Tooltip("The Image component used to display the type of hit (Miss, Normal, Critical).")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Displays the type of hit (Miss, Normal, Critical).")]
         private Image hitImage;
 
-        [SerializeField, Tooltip("The Image component used to display combat type effectiveness (Advantage or Disadvantage).")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Displays combat type effectiveness (Advantage or Disadvantage).")]
         private Image effectivenessImage;
 
-        [SerializeField, Tooltip("The TextMeshProUGUI component used to display the damage dealt.")]
+        [BoxGroup("References")]
+        [SerializeField, Tooltip("Displays the damage dealt.")]
         private TextMeshProUGUI damageLabel;
 
-        [Header("Hit Sprites")]
-        [SerializeField, Tooltip("The sprite to display when the attack results in a Miss.")]
+        [BoxGroup("Hit Sprites")]
+        [SerializeField, Tooltip("Sprite for a Miss result.")]
         private Sprite missSprite;
 
-        [SerializeField, Tooltip("The sprite to display when the attack results in a Normal hit.")]
+        [BoxGroup("Hit Sprites")]
+        [SerializeField, Tooltip("Sprite for a Normal hit.")]
         private Sprite normalSprite;
 
-        [SerializeField, Tooltip("The sprite to display when the attack results in a Critical hit.")]
+        [BoxGroup("Hit Sprites")]
+        [SerializeField, Tooltip("Sprite for a Critical hit.")]
         private Sprite criticalSprite;
 
-        [Header("Effectiveness Sprites")]
-        [SerializeField, Tooltip("The sprite to display when the attack has a Combat Type Advantage.")]
+        [BoxGroup("Effectiveness Sprites")]
+        [SerializeField, Tooltip("Sprite for Combat Type Advantage.")]
         private Sprite advantageSprite;
 
-        [SerializeField, Tooltip("The sprite to display when the attack has a Combat Type Disadvantage.")]
+        [BoxGroup("Effectiveness Sprites")]
+        [SerializeField, Tooltip("Sprite for Combat Type Disadvantage.")]
         private Sprite disadvantageSprite;
 
         /// <summary>

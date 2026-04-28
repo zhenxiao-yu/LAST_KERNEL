@@ -2,6 +2,7 @@
 //
 // Presents a game-over state with options to retry (restart scene) or quit to main menu.
 
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,10 +14,14 @@ namespace Markyu.LastKernel
     /// </summary>
     public class DefeatPanel : MonoBehaviour
     {
-        [Header("UI Elements")]
+        [BoxGroup("UI Elements")]
         [SerializeField] private TextMeshProUGUI messageLabel;
-        [SerializeField] private Button          retryButton;
-        [SerializeField] private Button          quitToMenuButton;
+
+        [BoxGroup("UI Elements")]
+        [SerializeField] private Button retryButton;
+
+        [BoxGroup("UI Elements")]
+        [SerializeField] private Button quitToMenuButton;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────
 

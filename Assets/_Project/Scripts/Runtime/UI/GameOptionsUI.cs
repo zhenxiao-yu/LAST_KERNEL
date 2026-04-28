@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -11,44 +12,52 @@ namespace Markyu.LastKernel
         private UnityAction<float> sfxSliderChangedHandler;
         private UnityAction<float> bgmSliderChangedHandler;
 
-        [Header("Graphics")]
-        [SerializeField, Tooltip("The button used to cycle through available screen resolutions.")]
+        [BoxGroup("Graphics")]
+        [SerializeField, Tooltip("Cycles through available screen resolutions.")]
         private TextButton resolutionButton;
 
-        [SerializeField, Tooltip("The button used to cycle through fullscreen modes (e.g., Windowed, Fullscreen).")]
+        [BoxGroup("Graphics")]
+        [SerializeField, Tooltip("Cycles through fullscreen modes (Windowed, Fullscreen, etc.).")]
         private TextButton fullscreenButton;
 
-        [SerializeField, Tooltip("The button used to toggle Vertical Sync (V-Sync) ON or OFF.")]
+        [BoxGroup("Graphics")]
+        [SerializeField, Tooltip("Toggles V-Sync ON or OFF.")]
         private TextButton vSyncButton;
 
-        [SerializeField, Tooltip("The button used to cycle through the maximum frame rate cap (FPS limit).")]
+        [BoxGroup("Graphics")]
+        [SerializeField, Tooltip("Cycles through FPS cap presets.")]
         private TextButton fpsButton;
 
-        [SerializeField, Tooltip("The button used to cycle through different Shadow quality presets.")]
+        [BoxGroup("Graphics")]
+        [SerializeField, Tooltip("Cycles through Shadow quality presets.")]
         private TextButton shadowButton;
 
-        [Header("Audio")]
-        [SerializeField, Tooltip("The TextMeshPro label displaying the current volume percentage for Sound Effects (SFX).")]
+        [BoxGroup("Audio")]
+        [SerializeField, Tooltip("Label displaying the current SFX volume percentage.")]
         private TextMeshProUGUI labelSFX;
 
-        [SerializeField, Tooltip("The Slider component used to adjust the volume level of Sound Effects (SFX).")]
+        [BoxGroup("Audio")]
+        [SerializeField, Tooltip("Slider for SFX volume.")]
         private Slider sliderSFX;
 
-        [SerializeField, Tooltip("The TextMeshPro label displaying the current volume percentage for Background Music (BGM).")]
+        [BoxGroup("Audio")]
+        [SerializeField, Tooltip("Label displaying the current BGM volume percentage.")]
         private TextMeshProUGUI labelBGM;
 
-        [SerializeField, Tooltip("The Slider component used to adjust the volume level of Background Music (BGM).")]
+        [BoxGroup("Audio")]
+        [SerializeField, Tooltip("Slider for BGM volume.")]
         private Slider sliderBGM;
 
-        [Header("Footer")]
-        [SerializeField, Tooltip("The button that opens a confirmation modal to reset all game settings to default.")]
+        [BoxGroup("Footer")]
+        [SerializeField, Tooltip("Opens confirmation modal to reset all settings to default.")]
         private TextButton resetButton;
 
-        [SerializeField, Tooltip("The button used to save and close the Game Options UI panel.")]
+        [BoxGroup("Footer")]
+        [SerializeField, Tooltip("Saves and closes the Game Options UI panel.")]
         private TextButton closeButton;
 
-        [Header("Screens")]
-        [SerializeField, Tooltip("Reference to the generic Modal Window used for confirmation prompts, such as resetting settings.")]
+        [BoxGroup("Screens")]
+        [SerializeField, Tooltip("Modal Window used for confirmation prompts.")]
         private ModalWindow modalWindow;
 
         private void Awake()

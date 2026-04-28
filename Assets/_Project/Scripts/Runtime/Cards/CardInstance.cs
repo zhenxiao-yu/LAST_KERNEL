@@ -32,6 +32,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -43,18 +44,20 @@ namespace Markyu.LastKernel
     public class CardInstance : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         #region Fields & Properties
-        [Header("Identification")]
-        [SerializeField, Tooltip("The TextMeshPro component used to display the card's name.")]
+        [BoxGroup("Text References")]
+        [Required, SerializeField, Tooltip("Displays the card's name.")]
         private TextMeshPro titleText;
 
-        [Header("Stat Displays")]
-        [SerializeField, Tooltip("The TextMeshPro component for displaying the card's sell price.")]
+        [BoxGroup("Text References")]
+        [SerializeField, Tooltip("Displays sell price.")]
         private TextMeshPro priceText;
 
-        [SerializeField, Tooltip("The TextMeshPro component for displaying the card's nutrition value.")]
+        [BoxGroup("Text References")]
+        [SerializeField, Tooltip("Displays nutrition value.")]
         private TextMeshPro nutritionText;
 
-        [SerializeField, Tooltip("The TextMeshPro component for displaying the card's current health.")]
+        [BoxGroup("Text References")]
+        [SerializeField, Tooltip("Displays current health.")]
         private TextMeshPro healthText;
 
         public CardDefinition Definition { get; protected set; }
@@ -87,6 +90,7 @@ namespace Markyu.LastKernel
         private Tween _hurtTween;
 
         private Highlight _highlight;
+        private MaterialPropertyBlock _artPropBlock;
 
         private bool _isHovered;
 
@@ -134,6 +138,7 @@ namespace Markyu.LastKernel
             EquipperComponent = GetComponent<CardEquipper>();
             EquipmentComponent = GetComponent<CardEquipment>();
             FeelPresenter = CardFeelPresenter.EnsureOn(gameObject);
+            CardLongPressHandler.EnsureOn(gameObject);
             View = GetComponent<CardView>();
 
             gameObject.name = $"{(definition is PackDefinition ? "Pack" : "Card")}_{definition.DisplayName}";
@@ -221,6 +226,18 @@ namespace Markyu.LastKernel
         #endregion
 
         #region Information & Visuals
+
+        /// <summary>
+        /// Pushes this card's info into the InfoPanel as a hover entry.
+        /// Called by CardLongPressHandler so touch players can inspect without hover.
+        /// </summary>
+        public void ShowInspectInfo() => InfoPanel.Instance?.RegisterHover(GetInfo());
+
+        /// <summary>
+        /// Clears the hover info entry that was pushed by ShowInspectInfo.
+        /// </summary>
+        public void HideInspectInfo() => InfoPanel.Instance?.UnregisterHover();
+
         private (string, string) GetInfo()
         {
             (string header, string body) info = ("", "");
@@ -548,20 +565,13 @@ namespace Markyu.LastKernel
                 return;
             }
 
-            var sequence = DOTween.Sequence();
-
-            if (_renderer != null && _renderer.material.HasProperty("_FlashAmount"))
-            {
-                sequence.Join(_renderer.material
-                    .DOFloat(1f, "_FlashAmount", 0.1f)
-                    .SetDelay(0.05f)
-                    .SetLoops(2, LoopType.Yoyo));
-            }
-
-            sequence.Join(transform
-                .DOPunchRotation(new Vector3(0, 15, 0), 0.25f, vibrato: 25));
-
-            _hurtTween = sequence.SetUpdate(true);
+            // Fix C-4: the original fallback used _renderer.material (creates an instance,
+            // conflicts with MaterialPropertyBlock) and DOPunchRotation on the root transform
+            // (collider stays axis-aligned while mesh tilts, causing overlap desync).
+            // CardFeelPresenter.EnsureOn() in Initialize() makes this branch dead code for
+            // any card that went through Initialize(). Log and bail rather than run broken effects.
+            Debug.LogWarning($"CardInstance: TakeDamage visual fallback on '{name}' — FeelPresenter is missing. Skipping damage effects.", this);
+            _hurtTween = null;
         }
 
         /// <summary>
@@ -687,7 +697,12 @@ namespace Markyu.LastKernel
         {
             if (_renderer != null && texture != null)
             {
-                _renderer.material.SetTexture("_OverlayTex", texture);
+                // Fix C-2: use MaterialPropertyBlock to avoid creating a material instance,
+                // which would conflict with CardFeelPresenter's sharedMaterial baseline.
+                if (_artPropBlock == null) _artPropBlock = new MaterialPropertyBlock();
+                _renderer.GetPropertyBlock(_artPropBlock);
+                _artPropBlock.SetTexture("_OverlayTex", texture);
+                _renderer.SetPropertyBlock(_artPropBlock);
             }
 
             View?.SetArt(texture);

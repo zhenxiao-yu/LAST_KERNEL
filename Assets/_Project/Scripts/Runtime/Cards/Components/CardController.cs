@@ -72,7 +72,10 @@ namespace Markyu.LastKernel
                     _combatant.CurrentCombatTask.Attackers.Contains(_card) &&
                     !_combatant.IsAttacking)
                 {
+                    // Fix C-3: register the combat drag stack so the physics solver
+                    // and CardManager are aware of it during the drag.
                     _card.Stack = new CardStack(_card, transform.position);
+                    CardManager.Instance?.RegisterStack(_card.Stack);
                     _card.IsBeingDragged = true;
                     _dragOffset = transform.position - GetMouseWorldPosition();
                     _feelPresenter?.OnPickup();
@@ -129,15 +132,21 @@ namespace Markyu.LastKernel
         {
             Vector3 mousePos = GetMouseWorldPosition() + _dragOffset;
             mousePos.y = _card.Settings.DragHeight;
-            // StackStep.z is negative (more-negative Z = closer to camera).
-            // Without this offset, moving the cursor even slightly toward positive Z
-            // lets stationary stack cards (which hold their more-negative Z) win the
-            // depth test and occlude the dragged card. Shifting one step forward
-            // keeps the dragged card in front regardless of cursor direction.
-            mousePos.z += _card.Settings.StackStep.z;
-            Vector3 finalPos = Board.Instance.ClampToBounds(mousePos, _card.Stack);
+            Vector3 logicalPos = Board.Instance.ClampToBounds(mousePos, _card.Stack);
 
-            _card.Stack?.SetDragTargetPosition(finalPos);
+            // Store the unbiased logical position in TargetPosition so the physics
+            // solver reads the correct layout position during drag (fix C-1).
+            _card.Stack?.SetDragTargetPosition(logicalPos);
+
+            // Apply Z-bias directly to the leading card's transform for depth-buffer
+            // correctness: StackStep.z is negative (closer to camera), keeping the
+            // dragged card in front of stationary stack cards without corrupting TargetPosition.
+            if (_card.Stack?.TopCard != null)
+            {
+                var pos = _card.Stack.TopCard.transform.position;
+                pos.z += _card.Settings.StackStep.z;
+                _card.Stack.TopCard.transform.position = pos;
+            }
         }
 
         public void OnPointerUp(PointerEventData eventData)

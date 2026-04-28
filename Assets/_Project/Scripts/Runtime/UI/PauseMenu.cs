@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -5,18 +6,20 @@ namespace Markyu.LastKernel
     [RequireComponent(typeof(CanvasGroup))]
     public class PauseMenu : LocalizedUIBehaviour
     {
-        [Header("Buttons")]
-        [SerializeField, Tooltip("The button used to close the pause menu and resume the game.")]
+        [BoxGroup("Buttons")]
+        [SerializeField, Tooltip("Closes the pause menu and resumes the game.")]
         private TextButton continueButton;
 
-        [SerializeField, Tooltip("The button used to open the Game Options menu.")]
+        [BoxGroup("Buttons")]
+        [SerializeField, Tooltip("Opens the Game Options menu.")]
         private TextButton optionsButton;
 
-        [SerializeField, Tooltip("The button used to return to the main Title Screen.")]
+        [BoxGroup("Buttons")]
+        [SerializeField, Tooltip("Returns to the main Title Screen.")]
         private TextButton titleButton;
 
-        [Header("Screens")]
-        [SerializeField, Tooltip("Reference to the Game Options UI panel that is opened when the 'Options' button is clicked.")]
+        [BoxGroup("Screens")]
+        [SerializeField, Tooltip("Game Options UI panel opened when 'Options' is clicked.")]
         private GameOptionsUI gameOptionsUI;
 
         private CanvasGroup canvasGroup;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -9,11 +10,12 @@ namespace Markyu.LastKernel
     {
         public static EncounterManager Instance { get; private set; }
 
-        [Header("Configuration")]
-        [SerializeField, Tooltip("All possible EncounterDefinitions that this manager should evaluate for spawning events.")]
+        [BoxGroup("Configuration")]
+        [SerializeField, Tooltip("All EncounterDefinitions this manager evaluates for spawning events.")]
         private List<EncounterDefinition> allEncounters;
 
-        [SerializeField, Tooltip("The minimum distance (in world units) from the edge of the board that a new card can spawn.")]
+        [BoxGroup("Configuration")]
+        [SerializeField, Tooltip("Minimum distance (world units) from board edge where a new card can spawn.")]
         private float spawnEdgePadding = 2f;
 
         private HashSet<string> completedEncounters = new();

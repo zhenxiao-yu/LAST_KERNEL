@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -7,102 +8,147 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "Last Kernel/Card", fileName = "Card_")]
     public class CardDefinition : ScriptableObject
     {
-        // Identification
-        [SerializeField, Tooltip("Unique identifier for this card. Automatically generated.")]
+        // ── Identification ────────────────────────────────────────────────────
+
+        [BoxGroup("Identification")]
+        [SerializeField, ReadOnly, Tooltip("Unique identifier. Auto-generated on first OnValidate.")]
         private string id;
 
-        [SerializeField, Tooltip("Readable name shown in UI and tooltips.")]
+        [BoxGroup("Identification")]
+        [SerializeField, Required]
         private string displayName;
 
-        [SerializeField, TextArea, Tooltip("Short description or flavor text displayed in tooltips.")]
+        [BoxGroup("Identification")]
+        [SerializeField, TextArea(2, 5)]
         private string description;
 
-        [SerializeField, Tooltip("Card art displayed in the card GameObject.")]
+        // ── Art ───────────────────────────────────────────────────────────────
+
+        [BoxGroup("Art")]
+        [SerializeField, PreviewField(100, ObjectFieldAlignment.Left)]
+        [ValidateInput("@artTexture != null", "Art texture is missing — card will appear blank in-game.")]
         private Texture2D artTexture;
 
-        // Classification
-        [SerializeField, Tooltip("Category that defines this card's type and gameplay behavior.")]
+        // ── Classification ────────────────────────────────────────────────────
+
+        [BoxGroup("Classification")]
+        [SerializeField]
+        [ValidateInput("@category != CardCategory.None", "Category None is reserved for non-card objects (e.g. Packs).")]
         private CardCategory category;
 
-        [SerializeField, Tooltip("Faction this card belongs to (e.g., Player, Mob, Neutral).")]
+        [BoxGroup("Classification")]
+        [SerializeField]
         private CardFaction faction;
 
-        [SerializeField, Tooltip("The combat type for Rock-Paper-Scissors advantage.")]
+        [BoxGroup("Classification")]
+        [SerializeField]
         private CombatType combatType = CombatType.None;
 
-        // Loot
-        [SerializeField, Tooltip("Weighted list of possible cards this card can produce.")]
+        // ── Loot ──────────────────────────────────────────────────────────────
+
+        [FoldoutGroup("Loot")]
+        [SerializeField, TableList(AlwaysExpanded = true, ShowIndexLabels = true)]
         private List<LootEntry> loot;
 
-        // Aggressive Mob
-        [SerializeField, Tooltip("FALSE = Passive Mob.")]
+        // ── Mob AI ────────────────────────────────────────────────────────────
+
+        [FoldoutGroup("Mob AI")]
+        [SerializeField, Tooltip("FALSE = Passive Mob — uses Produce instead.")]
         private bool isAggressive = false;
 
-        [SerializeField, Tooltip("The range at which this mob will detect player cards.")]
+        [FoldoutGroup("Mob AI"), ShowIf("isAggressive")]
+        [SerializeField, Range(0f, 20f)]
         private float aggroRadius = 5f;
 
-        [SerializeField, Tooltip("The range at which this mob will stop moving and initiate combat.")]
+        [FoldoutGroup("Mob AI"), ShowIf("isAggressive")]
+        [SerializeField, Range(0f, 10f)]
         private float attackRadius = 1.5f;
 
-        // Passive Mob
-        [SerializeField, Tooltip("Card that this mob periodically creates (e.g., Egg, Milk, Wool). Only used on non-aggressive mobs.")]
+        // ── Produce (Passive Mob) ─────────────────────────────────────────────
+
+        [FoldoutGroup("Produce"), HideIf("isAggressive")]
+        [SerializeField]
         private CardDefinition produceCard;
 
-        [SerializeField, Tooltip("Base time in seconds between produce spawns.")]
+        [FoldoutGroup("Produce"), HideIf("isAggressive")]
+        [SerializeField, Min(1f)]
         private float produceInterval = 10f;
 
-        // Trading
-        [SerializeField, Tooltip("If checked, this card can be sold for coins.")]
+        // ── Economy ───────────────────────────────────────────────────────────
+
+        [BoxGroup("Economy")]
+        [SerializeField]
         private bool isSellable = true;
 
-        [SerializeField, Tooltip("Amount of coins gained when selling this card.")]
+        [BoxGroup("Economy"), ShowIf("isSellable")]
+        [SerializeField, Min(0)]
+        [ValidateInput("@!isSellable || sellPrice > 0", "Sellable card should have sellPrice > 0.")]
         private int sellPrice = 1;
 
-        // Crafting
-        [SerializeField, Tooltip("If true, this card has a specific amount of uses before breaking (e.g. Trees, Rocks). If false, it acts as a single item.")]
+        [BoxGroup("Economy")]
+        [SerializeField, Tooltip("Has limited uses (e.g. Trees, Rocks). False = single item.")]
         private bool hasDurability = false;
 
-        [SerializeField, Min(1), Tooltip("How many times this card can be used as a crafting ingredient.")]
+        [BoxGroup("Economy"), ShowIf("hasDurability")]
+        [SerializeField, Min(1)]
         private int uses = 1;
 
-        // Food
-        [SerializeField, Tooltip("Amount of nutrition (health) restored when consumed.")]
+        // ── Food ──────────────────────────────────────────────────────────────
+
+        [BoxGroup("Food")]
+        [SerializeField, Min(0)]
         private int nutrition;
 
-        // Stats
-        [SerializeField, Tooltip("Maximum health value if this card represents a combatant.")]
+        // ── Combat Stats ──────────────────────────────────────────────────────
+
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Min(1)]
         private int maxHealth = 15;
 
-        [SerializeField, Tooltip("Base attack damage dealt by this card in combat.")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Min(0)]
         private int attack = 2;
 
-        [SerializeField, Tooltip("Reduces incoming damage from attacks.")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Min(0)]
         private int defense = 1;
 
-        [SerializeField, Tooltip("Number of attacks per second, in percent (%).")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Range(1, 300), Tooltip("Attacks per second in percent (100 = 1/s).")]
         private int attackSpeed = 100;
 
-        [SerializeField, Tooltip("Chance to hit the target, in percent (%).")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Range(0, 100)]
         private int accuracy = 95;
 
-        [SerializeField, Tooltip("Chance to evade an incoming attack, in percent (%).")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Range(0, 100)]
         private int dodge = 5;
 
-        [SerializeField, Tooltip("Chance to land a critical hit, in percent (%).")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Range(0, 100)]
         private int criticalChance = 5;
 
-        [SerializeField, Tooltip("Damage multiplier for critical hits, in percent (%).")]
+        [FoldoutGroup("Combat Stats")]
+        [SerializeField, Range(100, 500), Tooltip("Critical damage multiplier in percent.")]
         private int criticalMultiplier = 150;
 
-        // Equipment
-        [SerializeField, Tooltip("Only applies if Card Category is Equipment.")]
+        // ── Equipment ─────────────────────────────────────────────────────────
+
+        [FoldoutGroup("Equipment"), ShowIf("@category == CardCategory.Equipment")]
+        [SerializeField]
         private EquipmentSlot equipmentSlot;
 
-        [SerializeField, Tooltip("The list of stat modifications this equipment provides.")]
+        [FoldoutGroup("Equipment"), ShowIf("@category == CardCategory.Equipment")]
+        [SerializeField, TableList(ShowIndexLabels = true)]
         private List<StatModifier> statModifiers;
 
-        [SerializeField, Tooltip("If equipped, transforms the character into this new card definition.")]
+        [FoldoutGroup("Equipment"), ShowIf("@category == CardCategory.Equipment")]
+        [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+        [Tooltip("If equipped, transforms the character into this definition.")]
         private CardDefinition classChangeResult;
+
+        // ── Properties ────────────────────────────────────────────────────────
 
         public string Id => id;
         public string DisplayName => GetLocalizedDisplayName();
@@ -153,9 +199,7 @@ namespace Markyu.LastKernel
             foreach (var entry in loot)
             {
                 if (entry != null && entry.Weight > 0)
-                {
                     totalWeight += entry.Weight;
-                }
             }
 
             if (totalWeight <= 0) return null;
@@ -167,30 +211,17 @@ namespace Markyu.LastKernel
                 if (entry == null || entry.Weight <= 0) continue;
 
                 if (randomPoint < entry.Weight)
-                {
                     return entry.Card;
-                }
 
                 randomPoint -= entry.Weight;
             }
 
-            return null; // Fallback (should not be hit).
+            return null;
         }
 
-        public void SetId(string id)
-        {
-            this.id = id;
-        }
-
-        public void SetDisplayName(string displayName)
-        {
-            this.displayName = displayName;
-        }
-
-        public void SetDescription(string description)
-        {
-            this.description = description;
-        }
+        public void SetId(string id) => this.id = id;
+        public void SetDisplayName(string displayName) => this.displayName = displayName;
+        public void SetDescription(string description) => this.description = description;
 
         private string GetLocalizedDisplayName()
         {
@@ -245,7 +276,6 @@ namespace Markyu.LastKernel
         Mob,        // Protein Drone, Null Anomaly, Glitched Raider
         Area,       // Area exclusive
         Valuable    // Encrypted Cache, Root Keycard, Kernel artifacts
-        // ...
     }
 
     public enum CardFaction
@@ -270,4 +300,3 @@ namespace Markyu.LastKernel
         Accessory
     }
 }
-

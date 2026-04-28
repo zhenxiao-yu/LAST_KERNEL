@@ -1,33 +1,40 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
 {
     public class TitleScreen : LocalizedUIBehaviour
     {
-        [Header("Menu Buttons")]
-        [SerializeField, Tooltip("The button that opens the Gameplay Preferences UI to start a new game.")]
+        [BoxGroup("Menu Buttons")]
+        [SerializeField, Tooltip("Opens the Gameplay Preferences UI to start a new game.")]
         private TextButton newGameButton;
 
-        [SerializeField, Tooltip("The button that opens the Saved Games UI to load a previous session.")]
+        [BoxGroup("Menu Buttons")]
+        [SerializeField, Tooltip("Opens the Saved Games UI to load a previous session.")]
         private TextButton loadGameButton;
 
-        [SerializeField, Tooltip("The button that opens the Game Options UI for general settings.")]
+        [BoxGroup("Menu Buttons")]
+        [SerializeField, Tooltip("Opens the Game Options UI for general settings.")]
         private TextButton gameOptionsButton;
 
-        [SerializeField, Tooltip("The button that triggers a confirmation modal to quit the application.")]
+        [BoxGroup("Menu Buttons")]
+        [SerializeField, Tooltip("Shows a confirmation modal to quit the application.")]
         private TextButton quitGameButton;
 
-        [Header("Menu Screens")]
-        [SerializeField, Tooltip("Reference to the UI panel used for configuring Day Duration and Friendly Mode before starting a new game.")]
+        [BoxGroup("Menu Screens")]
+        [SerializeField, Tooltip("UI panel for configuring Day Duration and Friendly Mode before a new game.")]
         private GameplayPrefsUI gameplayPrefsUI;
 
-        [SerializeField, Tooltip("Reference to the UI panel used for displaying and selecting saved game files.")]
+        [BoxGroup("Menu Screens")]
+        [SerializeField, Tooltip("UI panel for displaying and selecting saved game files.")]
         private SavedGamesUI savedGamesUI;
 
-        [SerializeField, Tooltip("Reference to the UI panel for general game settings (e.g., volume, display).")]
+        [BoxGroup("Menu Screens")]
+        [SerializeField, Tooltip("UI panel for general game settings (volume, display, etc.).")]
         private GameOptionsUI gameOptionsUI;
 
-        [SerializeField, Tooltip("Reference to the generic Modal Window used for confirmation prompts, like quitting the game.")]
+        [BoxGroup("Menu Screens")]
+        [SerializeField, Tooltip("Modal Window for confirmation prompts.")]
         private ModalWindow modalWindow;
 
         private void Awake()

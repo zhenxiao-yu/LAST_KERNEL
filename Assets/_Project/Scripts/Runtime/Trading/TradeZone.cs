@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,10 +7,11 @@ namespace Markyu.LastKernel
     [RequireComponent(typeof(MeshRenderer), typeof(BoxCollider))]
     public abstract class TradeZone : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [Header("Visual Effects")]
-        [SerializeField, Tooltip("A particle effect prefab (puff) that is instantiated when a successful transaction occurs.")]
+        [BoxGroup("Visual Effects")]
+        [SerializeField, Tooltip("Particle effect instantiated when a successful transaction occurs.")]
         private PuffParticle puffParticle;
 
+        [BoxGroup("Visual Effects")]
         [SerializeField, Tooltip("Material used by the highlight system to draw the zone outline.")]
         private Material outlineMaterial;
 

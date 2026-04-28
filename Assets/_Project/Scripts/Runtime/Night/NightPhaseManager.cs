@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -24,19 +25,20 @@ namespace Markyu.LastKernel
     {
         public static NightPhaseManager Instance { get; private set; }
 
-        [Header("Wave")]
-        [SerializeField, Tooltip("The wave definition to spawn each night. Create via Right-click > LastKernel > Night Wave.")]
+        [BoxGroup("Wave")]
+        [SerializeField, Tooltip("Wave definition spawned each night. Create via Right-click > LastKernel > Night Wave.")]
         private NightWaveDefinition defaultWave;
 
-        [Header("Simulation")]
+        [BoxGroup("Simulation")]
         [SerializeField, Min(0.1f), Tooltip("Seconds between simulation ticks. Lower = faster combat.")]
         private float tickInterval = 0.8f;
 
+        [BoxGroup("Simulation")]
         [SerializeField, Min(10), Tooltip("Safety cap on tick count to prevent runaway loops.")]
         private int maxTicks = 300;
 
-        [Header("View")]
-        [SerializeField, Tooltip("Optional. Wire the CombatLaneView scene component here. Combat runs without it.")]
+        [BoxGroup("View")]
+        [SerializeField, Tooltip("Optional CombatLaneView — combat runs without it.")]
         private CombatLaneView laneView;
 
         /// <summary>Available after RunNight() coroutine completes.</summary>

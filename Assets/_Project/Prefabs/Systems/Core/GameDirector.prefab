@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6066138536592372928}
   - component: {fileID: 689445094593624249}
+  - component: {fileID: -8104032703549297496}
   m_Layer: 0
   m_Name: GameDirector
   m_TagString: Untagged
@@ -46,3 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   titleScene: MainMenu
   defaultScene: Game
+--- !u!114 &-8104032703549297496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792244941708590965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0974a11b92a83ae4099d5806fbeab98e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.MobileStartup
+  lockLandscape: 1
+  mobileTargetFPS: 60
+  preventScreenSleep: 1
+  mobileShadowDistance: 15

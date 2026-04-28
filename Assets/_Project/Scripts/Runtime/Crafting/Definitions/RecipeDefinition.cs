@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -10,37 +11,58 @@ namespace Markyu.LastKernel
         [System.Serializable]
         public struct Ingredient
         {
+            [TableColumnWidth(180)]
             public CardDefinition card;
+            [TableColumnWidth(50)]
             public int count;
+            [TableColumnWidth(100)]
             public IngredientConsumption consumptionMode;
         }
 
-        [SerializeField, Tooltip("Unique identifier for this recipe. Automatically generated if left empty.")]
+        // ── Identity ──────────────────────────────────────────────────────────
+
+        [BoxGroup("Identity")]
+        [SerializeField, ReadOnly, Tooltip("Auto-generated unique ID.")]
         protected string id;
 
-        [SerializeField, Tooltip("The category this recipe belongs to in the UI.")]
-        protected RecipeCategory category;
-
-        [SerializeField, Tooltip("The user-facing name for this recipe.")]
+        [BoxGroup("Identity")]
+        [SerializeField, Required]
         protected string displayName;
 
-        [SerializeField, Tooltip("List of required card definitions and their quantities.")]
+        [BoxGroup("Identity")]
+        [SerializeField]
+        protected RecipeCategory category;
+
+        // ── Ingredients & Output ──────────────────────────────────────────────
+
+        [BoxGroup("Recipe")]
+        [SerializeField, TableList(AlwaysExpanded = true, ShowIndexLabels = true)]
+        [ValidateInput("@requiredIngredients != null && requiredIngredients.Count > 0", "Recipe needs at least one ingredient.")]
         protected List<Ingredient> requiredIngredients;
 
-        [SerializeField, Tooltip("The card definition that is created when the recipe is fulfilled.")]
+        [BoxGroup("Recipe")]
+        [SerializeField, InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         protected CardDefinition resultingCard;
 
-        [SerializeField, Tooltip("Mark this 'true' for recipes that should run automatically and continuously (e.g. Recycler Yard + Recruit).")]
+        // ── Behaviour ─────────────────────────────────────────────────────────
+
+        [BoxGroup("Behaviour")]
+        [SerializeField, Tooltip("Runs automatically and continuously (e.g. Recycler + Recruit).")]
         protected bool isContinuous = false;
 
-        [SerializeField, Tooltip("If true, this recipe matches even if the stack has more items than required (e.g. Cutter Frame + 10 Scrap).")]
+        [BoxGroup("Behaviour")]
+        [SerializeField, Tooltip("Matches even if the stack has more items than required.")]
         protected bool allowExcessIngredients = false;
 
-        [SerializeField, Tooltip("The time in seconds required to complete this crafting recipe.")]
+        [BoxGroup("Behaviour")]
+        [SerializeField, Min(0.1f)]
         protected float craftingDuration = 5f;
 
-        [SerializeField, Tooltip("The relative chance this recipe is chosen when multiple recipes match. Higher values are more likely.")]
+        [BoxGroup("Behaviour")]
+        [SerializeField, Min(0f), Tooltip("Relative weight when multiple recipes match. Higher = more likely.")]
         protected float randomWeight = 1.0f;
+
+        // ── Properties ────────────────────────────────────────────────────────
 
         public string Id => id;
         public RecipeCategory Category => category;
@@ -60,9 +82,7 @@ namespace Markyu.LastKernel
                 id = System.Guid.NewGuid().ToString("N");
 
             if (requiredIngredients == null)
-            {
                 requiredIngredients = new List<Ingredient>();
-            }
 
             for (int i = 0; i < requiredIngredients.Count; i++)
             {
@@ -75,27 +95,24 @@ namespace Markyu.LastKernel
         }
 
         /// <summary>
-        /// The Core Logic. Override this in subclasses for complex behavior.
-        /// Base behavior: Standard Crafting (Consume inputs -> Spawn Output).
+        /// Core execution logic. Override in subclasses for specialized behavior.
+        /// Base: Consume inputs → Spawn output.
         /// </summary>
         public virtual void Execute(CardStack stack)
         {
             if (stack == null || stack.TopCard == null)
             {
-                Debug.LogWarning($"RecipeDefinition: Cannot execute recipe '{DisplayName}' without a valid stack.", this);
+                Debug.LogWarning($"RecipeDefinition: Cannot execute '{DisplayName}' without a valid stack.", this);
                 return;
             }
 
-            // 1. Map the rules for easy lookup
             var rules = GetIngredientRules();
 
             stack.TopCard.PlayPuffParticle();
             AudioManager.Instance?.PlaySFX(AudioId.Pop);
 
-            // 2. Consume items based on those rules
             ConsumeIngredients(stack, rules);
 
-            // 3. Spawn the result (if any)
             if (resultingCard != null)
             {
                 CardManager.Instance?.CreateCardInstance(
@@ -108,10 +125,6 @@ namespace Markyu.LastKernel
             }
         }
 
-        /// <summary>
-        /// Checks if this recipe actually destroys/consumes anything.
-        /// Used by the Manager to prevent infinite loops on "Keep" recipes.
-        /// </summary>
         public bool HasConsumableIngredients()
         {
             return requiredIngredients.Any(i =>
@@ -122,7 +135,6 @@ namespace Markyu.LastKernel
         #region Subclass Helpers
         protected Dictionary<CardDefinition, Ingredient> GetIngredientRules()
         {
-            // Groups by card definition so accidental duplicate ingredient rows still behave predictably.
             return requiredIngredients
                 .Where(i => i.card != null)
                 .GroupBy(i => i.card)
@@ -131,10 +143,8 @@ namespace Markyu.LastKernel
 
         protected void ConsumeIngredients(CardStack stack, Dictionary<CardDefinition, Ingredient> rules)
         {
-            // Create a temporary list so we can modify the stack while iterating
             var cardsToCheck = stack.Cards.ToList();
 
-            // Track how many we still need to process (for recipes requiring multiple of the same card)
             var remainingNeeds = requiredIngredients
                 .Where(i => i.card != null)
                 .GroupBy(i => i.card)
@@ -144,7 +154,6 @@ namespace Markyu.LastKernel
             {
                 if (rules.TryGetValue(card.BaseDefinition, out var rule))
                 {
-                    // Only consume if we still need this ingredient type
                     if (remainingNeeds[card.BaseDefinition] > 0)
                     {
                         ApplyConsumptionRule(card, rule.consumptionMode, stack);
@@ -177,7 +186,7 @@ namespace Markyu.LastKernel
         /// <summary>Default. Reduces uses count or durability. Destroys if empty.</summary>
         Consume = 0,
 
-        /// <summary>The card is required but is NOT modified (e.g., Nutrient Bed, Recruit).</summary>
+        /// <summary>Required but not modified (e.g., Nutrient Bed, Recruit).</summary>
         Keep = 1,
 
         /// <summary>Destroys the card instance immediately, ignoring durability/uses.</summary>
@@ -187,12 +196,11 @@ namespace Markyu.LastKernel
     public enum RecipeCategory
     {
         Misc,
-        Gathering,      // Mining, Chopping
-        Construction,   // Building
-        Cooking,        // Cooking, Baking, Frying
-        Forging,        // Crafting, Imbuing
-        Refining,       // Smelting, Sawing
-        Husbandry       // Growing, Hatching
+        Gathering,
+        Construction,
+        Cooking,
+        Forging,
+        Refining,
+        Husbandry
     }
 }
-
