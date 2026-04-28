@@ -1,4 +1,5 @@
 using System.Collections;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
@@ -7,38 +8,45 @@ namespace Markyu.LastKernel
 {
     public class CameraController : MonoBehaviour
     {
-        [Header("Object References")]
-        [SerializeField, Tooltip("The transform of the pivot camera that moves and zooms with this controller.")]
+        [BoxGroup("References")]
+        [Required, SerializeField, Tooltip("The transform of the pivot camera that moves and zooms with this controller.")]
         private Transform cameraTransform;
 
-        [Header("Pan Settings")]
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("How fast the camera moves across the board when dragging.")]
         private float panSpeed = 0.01f;
 
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("Smoothing time used when interpolating camera movement toward the target position.")]
         private float smoothTime = 0.15f;
 
+        [BoxGroup("Pan")]
         [SerializeField, Tooltip("How far past the board edge the camera can scroll.")]
         private float panPadding = 0.5f;
 
-        [Header("Zoom Settings (Distance)")]
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("How fast the camera zooms in and out when scrolling.")]
         private float zoomSpeed = 1f;
 
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("Scale applied to pinch-zoom pixel deltas. Tune per device DPI.")]
         private float pinchZoomSpeed = 0.004f;
 
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("Minimum allowed zoom-in distance from the ground.")]
         private float minDistance = 5f;
 
+        [BoxGroup("Zoom")]
         [SerializeField, Tooltip("Maximum allowed zoom-out distance from the ground.")]
         private float maxDistance = 20f;
 
-        [Header("Fallback Movement Bounds")]
-        [SerializeField, Tooltip("Default minimum X/Z pan boundary used when no Board is present (e.g. Title scene). Overridden at runtime by Board.WorldBounds.")]
+        [BoxGroup("Fallback Bounds")]
+        [InfoBox("Overridden at runtime by Board.WorldBounds when a Board is present.")]
+        [SerializeField, Tooltip("Default minimum X/Z pan boundary when no Board is present (Title scene).")]
         private Vector2 clampMin = new Vector2(-10f, -5f);
 
-        [SerializeField, Tooltip("Default maximum X/Z pan boundary used when no Board is present (e.g. Title scene). Overridden at runtime by Board.WorldBounds.")]
+        [BoxGroup("Fallback Bounds")]
+        [SerializeField, Tooltip("Default maximum X/Z pan boundary when no Board is present (Title scene).")]
         private Vector2 clampMax = new Vector2(10f, 5f);
 
         // Single-finger pan state

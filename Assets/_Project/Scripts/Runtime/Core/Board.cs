@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -11,42 +12,51 @@ namespace Markyu.LastKernel
 
         public event System.Action<Bounds> OnBoundsUpdated;
 
-        [Header("Colony Expansion")]
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Tooltip("Allows this board to grow through purchased colony row upgrades.")]
         private bool usePurchasedExpansionRows = false;
 
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Min(0), Tooltip("Maximum number of board row upgrades this board can buy.")]
         private int maxPurchasedExpansionRows = 0;
 
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Min(0f), Tooltip("Blend shape weight added by each purchased row upgrade.")]
         private float blendShapeWeightPerExpansionRow = 10f;
 
+        [BoxGroup("Colony Expansion")]
         [SerializeField, Min(0), Tooltip("Rows already purchased for this board. Runtime save state keeps this updated.")]
         private int purchasedExpansionRows = 0;
 
-        [Header("Restricted Area")]
+        [BoxGroup("Restricted Area")]
         [SerializeField, Tooltip("Space at the top (Z axis) where cards cannot be placed.")]
         private float topMargin = 1.5f;
 
-        [Header("Grid")]
+        [BoxGroup("Grid")]
         [SerializeField, Tooltip("Whether card stacks should settle onto a board grid instead of using freeform placement.")]
         private bool snapCardsToGrid = true;
 
+        [BoxGroup("Grid")]
         [SerializeField, Tooltip("World-space size of each board cell used for card placement and the visible grid overlay.")]
         private Vector2 gridCellSize = new Vector2(1f, 1.1f);
 
+        [BoxGroup("Grid")]
         [SerializeField, Tooltip("Shows a runtime-generated grid mesh on top of the board so placement slots are easier to read.")]
         private bool showGridOverlay = true;
 
+        [BoxGroup("Grid")]
         [SerializeField, Tooltip("Tint used by the inner grid lines.")]
         private Color gridLineColor = new Color(1f, 1f, 1f, 0.12f);
 
+        [BoxGroup("Grid")]
         [SerializeField, Tooltip("Tint used by the outer border of the playable grid.")]
         private Color gridBorderColor = new Color(1f, 0.85f, 0.45f, 0.28f);
 
+        [BoxGroup("Grid")]
         [SerializeField, Min(0.001f), Tooltip("Thickness of the generated grid line quads.")]
         private float gridLineThickness = 0.02f;
 
+        [BoxGroup("Grid")]
         [SerializeField, Tooltip("Small offset so the overlay renders slightly above the board surface.")]
         private float gridSurfaceOffset = 0.01f;
 

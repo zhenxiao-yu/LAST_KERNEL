@@ -32,6 +32,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
@@ -43,18 +44,20 @@ namespace Markyu.LastKernel
     public class CardInstance : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         #region Fields & Properties
-        [Header("Identification")]
-        [SerializeField, Tooltip("The TextMeshPro component used to display the card's name.")]
+        [BoxGroup("Text References")]
+        [Required, SerializeField, Tooltip("Displays the card's name.")]
         private TextMeshPro titleText;
 
-        [Header("Stat Displays")]
-        [SerializeField, Tooltip("The TextMeshPro component for displaying the card's sell price.")]
+        [BoxGroup("Text References")]
+        [SerializeField, Tooltip("Displays sell price.")]
         private TextMeshPro priceText;
 
-        [SerializeField, Tooltip("The TextMeshPro component for displaying the card's nutrition value.")]
+        [BoxGroup("Text References")]
+        [SerializeField, Tooltip("Displays nutrition value.")]
         private TextMeshPro nutritionText;
 
-        [SerializeField, Tooltip("The TextMeshPro component for displaying the card's current health.")]
+        [BoxGroup("Text References")]
+        [SerializeField, Tooltip("Displays current health.")]
         private TextMeshPro healthText;
 
         public CardDefinition Definition { get; protected set; }
