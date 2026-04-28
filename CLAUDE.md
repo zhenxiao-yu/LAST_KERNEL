@@ -1,71 +1,212 @@
-# LAST KERNEL — Claude Instructions
+# LAST KERNEL — Claude Instructions (Optimized 2026)
 
-## Before editing
+## CORE PRINCIPLES
 
-Do not scan the whole Unity project unless necessary.
+- Think before acting. Prefer planning over blind edits.
+- Minimize file reads. Load only what is necessary.
+- Optimize for correctness, not verbosity.
+- Do not hallucinate architecture—verify from code.
+- Prefer incremental, reversible changes.
 
-Start with:
+---
+
+## BEFORE ANY ACTION
+
+1. Clarify the task scope.
+2. Identify minimal required files.
+3. Search → then read → then modify.
+
+Do NOT:
+- scan entire repo
+- open large unrelated files
+- guess system behavior without reading source
+
+---
+
+## FILE SCANNING RULES
+
+### Start with:
+
 - `Assets/_Project/`
 - `Assets/StackCraft/Scripts/`
 - `Assets/StackCraft/ScriptableObjects/`
 - `Packages/manifest.json`
 - `ProjectSettings/ProjectVersion.txt`
 
-Avoid reading:
+### Only read additional files if required by the task.
+
+### NEVER scan:
+
 - `Library/`
 - `Temp/`
 - `Logs/`
 - `Obj/`
-- `Build/`
-- `Builds/`
+- `Build/` / `Builds/`
 - `UserSettings/`
-- Generated `.csproj` / `.sln` files
-- Imported asset demo folders unless directly relevant
+- `.csproj` / `.sln`
+- Asset demo/sample folders
 
-## Main architecture
+---
 
-Unity 6000.4.3f1 pixel-art card survival / auto-battler.
+## ARCHITECTURE OVERVIEW
 
-**Priorities:**
-1. Unity Localization for English + Simplified Chinese
-2. Data-driven cards, packs, recipes, quests
-3. Pixel-perfect responsive UI/camera
-4. Mobile input support
-5. Code cleanup without breaking gameplay
+Unity: **6000.4.3f1**  
+Type: **Pixel-art card survival / auto-battler**
 
-**Namespace:** `Markyu.LastKernel`
+Namespace:
+`Markyu.LastKernel`
 
-**Key assemblies:**
-- Runtime: `Assets/_Project/Scripts/Runtime/` → `_Project.Runtime`
-- Editor: `Assets/_Project/Scripts/Editor/` → `_Project.Editor`
-- EditMode tests: `Assets/_Project/Tests/EditMode/` → `_Project.Tests.EditMode`
-- PlayMode tests: `Assets/_Project/Tests/PlayMode/` → `_Project.Tests.PlayMode`
+### Assemblies
 
-**Docs to read first for context:**
-- `Assets/_Project/Docs/ARCHITECTURE.md`
-- `Assets/_Project/Docs/CONTENT_ORGANIZATION.md`
-- `Assets/_Project/Docs/DEVELOPMENT_TOOLS.md`
-- `Assets/_Project/Docs/ART_DIRECTION.md` ← **source of truth for all UI/visual decisions**
+- Runtime → `Assets/_Project/Scripts/Runtime/` → `_Project.Runtime`
+- Editor → `Assets/_Project/Scripts/Editor/` → `_Project.Editor`
+- EditMode tests → `_Project.Tests.EditMode`
+- PlayMode tests → `_Project.Tests.PlayMode`
 
-## UI design rules
+---
 
-Before writing any UI code or prefab, read `Assets/_Project/Docs/ART_DIRECTION.md`.
+## PROJECT PRIORITIES (STRICT ORDER)
 
-- Style: dark cyberpunk pixel-art terminal — functional, not decorative.
-- Palette: navy/charcoal background, cyan accent, muted magenta secondary, off-white text, amber/red-orange for warnings only.
-- Resolution: 320×180 base composition, 1920×1080 display, integer scaling, point-sampled sprites only.
-- Fonts: pixel-style, both English and Chinese legible, no hardcoded text, allow 30–40% text expansion in layouts.
-- Cards: dark terminal frame, category border, name → art → description layout.
-- Animations: short and snappy, no bouncing, no cartoon feel, respect pixel crispness.
-- Mobile: 44 px minimum touch targets, safe-area insets, collapse secondary panels.
+1. Stability (no gameplay breakage)
+2. Data-driven systems (cards, packs, recipes, quests)
+3. Localization (EN + Simplified Chinese)
+4. Mobile compatibility (touch + performance)
+5. Pixel-perfect UI & camera
+6. Code clarity & maintainability
 
-## Editing rules
+---
 
-- Search first, then edit only relevant files.
-- Prefer small targeted changes.
-- Do not duplicate existing systems.
-- Do not refactor unrelated gameplay during localization or UI work.
-- Keep mouse controls working when adding touch support.
-- After changes, summarize: files changed and any manual Unity setup required.
-- Never add sandbox or test scenes to Build Settings.
-- Run `Tools/LAST KERNEL/Validate Project` after structural changes.
+## SYSTEM ARCHITECTURE RULES
+
+Separation of concerns:
+
+- ScriptableObject → DATA ONLY
+- Service / plain C# → GAME LOGIC
+- MonoBehaviour → VIEW / INPUT / PRESENTATION
+- Editor tools → VALIDATION / AUTOMATION
+
+Do NOT:
+- put gameplay logic in ScriptableObjects
+- let UI mutate core game state directly
+- couple systems via direct singleton calls when avoidable
+
+---
+
+## ODIN INSPECTOR RULES
+
+Use Odin for:
+- editor UI
+- validation
+- debug tools
+- tables and inspectors
+
+Use Odin Serializer ONLY when Unity cannot serialize:
+- dictionaries
+- polymorphic data
+
+Do NOT:
+- convert all MonoBehaviours to SerializedMonoBehaviour
+- replace Unity serialization unnecessarily
+
+---
+
+## DOTWEEN RULES
+
+- DOTween is the ONLY tween system
+- Always use `.SetLink(gameObject)`
+- Kill tweens on destroy
+- Never tween physics state directly
+- Never use `.material` (use MaterialPropertyBlock)
+
+---
+
+## UI DESIGN RULES
+
+Before UI work, read:
+`Assets/_Project/Docs/ART_DIRECTION.md`
+
+Key constraints:
+
+- Style: dark cyberpunk terminal (functional, not decorative)
+- Resolution: 320×180 → 1920×1080 (integer scaling)
+- Fonts: EN + CN, no hardcoded text
+- Layout: allow 30–40% expansion
+- Mobile: ≥44px touch targets, safe-area aware
+- Animations: short, snappy, no bounce
+
+---
+
+## EDITING RULES
+
+- Search before editing
+- Modify only relevant files
+- Avoid duplication of systems
+- Avoid unrelated refactors
+- Keep mouse + touch compatibility
+- Preserve existing gameplay behavior
+
+---
+
+## PERFORMANCE RULES
+
+- Avoid allocations in Update loops
+- Avoid frequent GetComponent calls
+- Prefer pooling for UI/effects
+- Avoid excessive Resources.Load at runtime
+- Keep mobile performance in mind
+
+---
+
+## VALIDATION
+
+After structural changes:
+
+Run:
+`Tools → LAST KERNEL → Validate Project`
+
+Fix:
+- missing references
+- duplicate IDs
+- invalid data
+
+---
+
+## RESPONSE FORMAT
+
+When making changes, ALWAYS:
+
+1. Explain reasoning briefly
+2. Show exact code changes (diff-style if possible)
+3. List files modified
+4. Note any required Unity Editor steps
+
+---
+
+## WHAT NOT TO DO
+
+- Do not run git commands
+- Do not modify .gitignore
+- Do not delete assets blindly
+- Do not move files outside Unity context
+- Do not introduce new frameworks without justification
+- Do not over-engineer systems
+
+---
+
+## WHEN UNSURE
+
+- Ask for clarification
+- Or propose 2–3 options with tradeoffs
+- Do NOT guess and proceed blindly
+
+---
+
+## GOAL
+
+Make the project:
+
+- stable
+- clean
+- data-driven
+- AI-friendly
+- scalable for solo indie development
