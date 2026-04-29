@@ -37,8 +37,16 @@ namespace Markyu.LastKernel
         private bool snapCardsToGrid = true;
 
         [BoxGroup("Grid")]
-        [SerializeField, Tooltip("World-space size of each board cell used for card placement and the visible grid overlay.")]
-        private Vector2 gridCellSize = new Vector2(1f, 1.1f);
+        [SerializeField, Min(1), Tooltip("Number of card columns. The board mesh is scaled at runtime to fit exactly this many columns.")]
+        private int startingColumns = 9;
+
+        [BoxGroup("Grid")]
+        [SerializeField, Min(1), Tooltip("Number of rows on a fresh game. Players can purchase additional rows up to maxPurchasedExpansionRows.")]
+        private int startingRows = 9;
+
+        [BoxGroup("Grid")]
+        [SerializeField, Tooltip("World-space size of each board cell. X = column width, Y = row depth.")]
+        private Vector2 gridCellSize = new Vector2(1.0f, 1.2f);
 
         [BoxGroup("Grid")]
         [SerializeField, Tooltip("Shows a runtime-generated grid mesh on top of the board so placement slots are easier to read.")]
@@ -210,7 +218,8 @@ namespace Markyu.LastKernel
 
         private void HandleSceneDataReady(SceneData sceneData, bool wasLoaded)
         {
-            purchasedExpansionRows = wasLoaded ? sceneData.ColonyBoardPurchasedRows : 0;
+            if (wasLoaded)
+                purchasedExpansionRows = sceneData.ColonyBoardPurchasedRows;
             ClampPurchasedExpansionRows();
             ApplyBoardBoost(resolveStacks: false);
         }
@@ -232,14 +241,31 @@ namespace Markyu.LastKernel
             if (bakedMesh == null)
                 bakedMesh = new Mesh();
 
+            int totalRows    = startingRows + (usePurchasedExpansionRows ? purchasedExpansionRows : 0);
+            float boardWidth = startingColumns * gridCellSize.x;
+            float boardDepth = totalRows * gridCellSize.y + topMargin;
+
+            // Bake the mesh so we know its current local-space footprint (blend shapes included).
             skinnedMesh.BakeMesh(bakedMesh);
             bakedMesh.RecalculateBounds();
-
             var localBounds = bakedMesh.bounds;
-            var center = transform.TransformPoint(localBounds.center);
-            var extents = Vector3.Scale(localBounds.extents, transform.lossyScale);
 
-            currentBounds = new Bounds(center, extents * 2f);
+            // At runtime, scale the board transform so the mesh always fills the code-defined area.
+            // This decouples grid size from mesh dimensions — adjust startingColumns/Rows/gridCellSize
+            // without ever worrying about the underlying mesh.
+            if (Application.isPlaying && localBounds.size.x > 0f && localBounds.size.z > 0f)
+            {
+                transform.localScale = new Vector3(
+                    boardWidth / localBounds.size.x,
+                    transform.localScale.y,
+                    boardDepth / localBounds.size.z
+                );
+            }
+
+            // Bounds are authoritative from code, not derived from the mesh.
+            var center  = transform.TransformPoint(localBounds.center);
+            var extentY = localBounds.extents.y * transform.lossyScale.y;
+            currentBounds = new Bounds(center, new Vector3(boardWidth, extentY * 2f, boardDepth));
 
             if (Application.isPlaying)
             {
@@ -626,41 +652,24 @@ namespace Markyu.LastKernel
             out float bottom,
             out float top)
         {
-            columns = 0;
-            rows = 0;
+            // Grid is defined by code, not derived from physical board dimensions.
+            // This means changing startingColumns/startingRows/gridCellSize is all you need
+            // for balancing — the board mesh scales to match automatically.
+            columns = startingColumns;
+            rows    = startingRows + (usePurchasedExpansionRows ? purchasedExpansionRows : 0);
             left = right = bottom = top = 0f;
 
-            if (gridCellSize.x <= 0f || gridCellSize.y <= 0f)
-            {
+            if (columns <= 0 || rows <= 0 || gridCellSize.x <= 0f || gridCellSize.y <= 0f)
                 return false;
-            }
 
-            float playableWidth = currentBounds.size.x;
-            float playableHeight = currentBounds.size.z - topMargin;
+            float usedWidth  = columns * gridCellSize.x;
+            float usedHeight = rows    * gridCellSize.y;
 
-            if (playableWidth < gridCellSize.x || playableHeight < gridCellSize.y)
-            {
-                return false;
-            }
-
-            columns = Mathf.FloorToInt(playableWidth / gridCellSize.x);
-            rows = Mathf.FloorToInt(playableHeight / gridCellSize.y);
-
-            if (columns <= 0 || rows <= 0)
-            {
-                return false;
-            }
-
-            float usedWidth = columns * gridCellSize.x;
-            float usedHeight = rows * gridCellSize.y;
-
-            left = currentBounds.center.x - (usedWidth * 0.5f);
+            left  = currentBounds.center.x - usedWidth * 0.5f;
             right = left + usedWidth;
 
-            float playableTop = currentBounds.max.z - topMargin;
-            float verticalPadding = Mathf.Max(0f, playableHeight - usedHeight) * 0.5f;
-            bottom = currentBounds.min.z + verticalPadding;
-            top = playableTop - verticalPadding;
+            top    = currentBounds.max.z - topMargin;
+            bottom = top - usedHeight;
 
             return true;
         }
@@ -850,20 +859,17 @@ namespace Markyu.LastKernel
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if (currentBounds.extents == Vector3.zero)
-            {
-                UpdateCurrentBounds();
-            }
+            int totalRows    = startingRows + (usePurchasedExpansionRows ? purchasedExpansionRows : 0);
+            float boardWidth = startingColumns * gridCellSize.x;
+            float boardDepth = totalRows * gridCellSize.y + topMargin;
 
-            Vector3 boardCenter = currentBounds.center;
-            Vector3 boardSize = new Vector3(currentBounds.size.x, 0.01f, currentBounds.size.z);
+            Vector3 boardCenter = transform.position + new Vector3(0f, 0f, boardDepth * 0.5f);
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(boardCenter, boardSize);
+            Gizmos.DrawWireCube(boardCenter, new Vector3(boardWidth, 0.01f, boardDepth));
 
-            Vector3 marginCenter = boardCenter + new Vector3(0, 0, (currentBounds.size.z * 0.5f) - (topMargin * 0.5f));
-            Vector3 marginSize = new Vector3(currentBounds.size.x - 0.05f, 0.01f, topMargin - 0.05f);
+            Vector3 marginCenter = boardCenter + new Vector3(0f, 0f, boardDepth * 0.5f - topMargin * 0.5f);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(marginCenter, marginSize);
+            Gizmos.DrawWireCube(marginCenter, new Vector3(boardWidth - 0.05f, 0.01f, topMargin - 0.05f));
         }
 #endif
     }
