@@ -549,6 +549,11 @@ namespace Markyu.LastKernel
                 var chestLogic = newCard.gameObject.AddComponent<ChestLogic>();
                 chestLogic.Initialize(newCard);
             }
+            else if (definition is MarketDefinition)
+            {
+                var marketLogic = newCard.gameObject.AddComponent<MarketLogic>();
+                marketLogic.Initialize(newCard);
+            }
 
             NotifyStatsChanged();
             OnCardCreated?.Invoke(newCard);
