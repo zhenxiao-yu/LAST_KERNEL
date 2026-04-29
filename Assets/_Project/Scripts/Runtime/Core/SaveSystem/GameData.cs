@@ -167,6 +167,7 @@ namespace Markyu.LastKernel
         public int CurrentHealth;
         public int CurrentNutrition;
         public int StoredCoins;
+        public bool IsAILocked;
 
         public string OriginalId; // Preserves the base personnel definition after a class upgrade.
         public List<CardData> EquippedItems = new();
@@ -183,6 +184,11 @@ namespace Markyu.LastKernel
             if (card.TryGetComponent<ChestLogic>(out var chest))
             {
                 StoredCoins = chest.StoredCoins;
+            }
+
+            if (card.TryGetComponent<VillagerLockToggle>(out var lockToggle))
+            {
+                IsAILocked = lockToggle.IsLocked;
             }
 
             if (card.EquipperComponent != null && card.Definition.Category == CardCategory.Character)
