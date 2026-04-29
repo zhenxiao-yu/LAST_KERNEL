@@ -836,3 +836,90 @@ Toggle:checked .unity-toggle__checkmark {
     pointer-events: none;
     -unity-background-scale-mode: stretch-to-fill;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * HUD stat box  (groups related stat counters with a shared border)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-hud-statbox {
+    flex-direction: row;
+    align-items: center;
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.lk-hud-statbox--night {
+    border-color: rgba(215, 55, 35, 0.35);
+}
+
+/* Vertical rule between stat counters inside a statbox */
+.lk-hud-divider-v {
+    width: 1px;
+    height: 22px;
+    background-color: var(--lk-border-dim);
+    margin-left: 4px;
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * HUD icon  (pixel-art colored square — replace background-image with
+ *             sprite in C# once assets exist; color acts as fallback)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-hud-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.lk-hud-icon--food   { background-color: var(--lk-success);           }
+.lk-hud-icon--gold   { background-color: var(--lk-warning);           }
+.lk-hud-icon--cards  { background-color: var(--lk-accent);            }
+.lk-hud-icon--hp     { background-color: var(--lk-danger);            }
+.lk-hud-icon--enemy  { background-color: var(--lk-accent-secondary);  }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * HUD phase badge  (outlined label chip wrapping the DAY / NIGHT label)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-hud-badge {
+    background-color: var(--lk-accent-faint);
+    border-color: var(--lk-border);
+    border-width: 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.lk-hud-badge--night {
+    background-color: rgba(215, 55, 35, 0.1);
+    border-color: rgba(215, 55, 35, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Button active state  (toggled via EnableInClassList from C#)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-button--active {
+    border-color: var(--lk-accent);
+    color: var(--lk-accent);
+    background-color: var(--lk-accent-faint);
+}
+
+.lk-button--active:hover {
+    background-color: rgba(0, 220, 255, 0.15);
+    border-color: var(--lk-accent);
+    color: var(--lk-accent);
+}
+
+/* Speed button — slightly wider to fit "2×" text cleanly */
+.lk-hud-speed-btn {
+    min-width: 44px;
+    font-size: var(--lk-font-size-lg);
+    -unity-font-style: bold;
+}

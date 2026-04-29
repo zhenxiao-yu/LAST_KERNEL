@@ -40,6 +40,12 @@ namespace Markyu.LastKernel
         private Label         _enemiesLabel;
         private Button        _speedButton;
 
+        // ── Resource icons (optional — assigned by C# for sprite-based icons) ─
+
+        private VisualElement _nutritionIcon;
+        private VisualElement _currencyIcon;
+        private VisualElement _cardsIcon;
+
         private bool _isDoubleSpeed;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
@@ -148,6 +154,10 @@ namespace Markyu.LastKernel
             _enemiesLabel    = Root.Q<Label>        ("lbl-enemies");
             _speedButton     = Root.Q<Button>       ("btn-speed");
 
+            _nutritionIcon = Root.Q<VisualElement>("icon-nutrition");
+            _currencyIcon  = Root.Q<VisualElement>("icon-currency");
+            _cardsIcon     = Root.Q<VisualElement>("icon-cards");
+
             _startNightButton.clicked += UIEventBus.RaiseStartNightRequested;
             _paceButton.clicked       += HandlePaceToggle;
             _speedButton.clicked      += ToggleSpeed;
@@ -187,7 +197,13 @@ namespace Markyu.LastKernel
 
         private void HandlePhaseChanged(DefensePhase phase)
         {
-            ShowDay(phase == DefensePhase.Day || phase == DefensePhase.NightPrep);
+            bool isDay = phase == DefensePhase.Day || phase == DefensePhase.NightPrep;
+            ShowDay(isDay);
+            if (isDay && _isDoubleSpeed)
+            {
+                _isDoubleSpeed = false;
+                UpdateSpeedButton();
+            }
         }
 
         private void ShowDay(bool day)
@@ -209,15 +225,21 @@ namespace Markyu.LastKernel
             if (_paceButton == null) return;
             _paceButton.text = pace switch
             {
-                TimePace.Paused => GameLocalization.Get("hud.pace.paused"),
-                TimePace.Fast   => GameLocalization.Get("hud.pace.fast"),
-                _               => GameLocalization.Get("hud.pace.normal"),
+                TimePace.Paused   => "■  0×",
+                TimePace.Normal   => "▶  1×",
+                TimePace.Fast     => "▶▶  2×",
+                TimePace.VeryFast => "▶▶▶  5×",
+                _                 => "▶  1×",
             };
+            _paceButton.EnableInClassList("lk-button--active", pace != TimePace.Normal);
         }
 
         private void HandlePaceToggle()
         {
-            TimeManager.Instance?.CycleTimePace(out _);
+            TimeManager tm = TimeManager.Instance;
+            if (tm == null) return;
+            tm.CycleTimePace(out _);
+            UpdatePaceButton(tm.CurrentPace);
         }
 
         // ── Day: resources ─────────────────────────────────────────────────────
@@ -261,14 +283,19 @@ namespace Markyu.LastKernel
         private void ToggleSpeed()
         {
             _isDoubleSpeed = !_isDoubleSpeed;
-            Time.timeScale = _isDoubleSpeed ? 2f : 1f;
+            TimeManager tm = TimeManager.Instance;
+            if (tm != null)
+                tm.SetTimePace(_isDoubleSpeed ? TimePace.Fast : TimePace.Normal);
+            else
+                Time.timeScale = _isDoubleSpeed ? 2f : 1f;
             UpdateSpeedButton();
         }
 
         private void UpdateSpeedButton()
         {
-            if (_speedButton != null)
-                _speedButton.text = _isDoubleSpeed ? "2×" : "1×";
+            if (_speedButton == null) return;
+            _speedButton.text = _isDoubleSpeed ? "2×" : "1×";
+            _speedButton.EnableInClassList("lk-button--active", _isDoubleSpeed);
         }
     }
 }
