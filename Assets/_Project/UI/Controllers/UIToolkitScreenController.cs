@@ -1,3 +1,4 @@
+using System.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -49,6 +50,10 @@ namespace Markyu.LastKernel
         protected virtual void Start()
         {
             Root = Document.rootVisualElement;
+
+            var attr = GetType().GetCustomAttribute<UIScreenAttribute>(false);
+            if (attr != null) Document.sortingOrder = attr.SortingOrder;
+
             OnBind();
 
             if (rootController != null && !string.IsNullOrEmpty(screenId))

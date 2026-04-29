@@ -14,6 +14,7 @@ namespace Markyu.LastKernel
     /// Setup: add to a GameObject with a UIDocument set to GameHUDView.uxml.
     /// Also add UIEventBusBridge to the same GameObject so Start Night routes correctly.
     /// </summary>
+    [UIScreen("Assets/_Project/UI/UXML/Game/GameHUDView.uxml", sortingOrder: 0)]
     public sealed class GameHUDController : UIToolkitScreenController
     {
 

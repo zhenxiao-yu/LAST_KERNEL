@@ -715,6 +715,48 @@ Toggle:checked .unity-toggle__checkmark {
 }
 
 /* ════════════════════════════════════════════════════════════════════════
+ * Victory panel  (wave-clear reward summary)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-victory__title {
+    color: var(--lk-accent);
+    font-size: var(--lk-font-size-title);
+    -unity-font-style: bold;
+    letter-spacing: 3px;
+    -unity-text-align: middle-center;
+    margin-bottom: var(--lk-gap-medium);
+}
+
+.lk-victory__reward {
+    color: var(--lk-success);
+    font-size: var(--lk-font-size-xl);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin-bottom: var(--lk-gap-small);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Defeat panel  (game-over overlay)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-defeat__title {
+    color: var(--lk-danger);
+    font-size: var(--lk-font-size-title);
+    -unity-font-style: bold;
+    letter-spacing: 3px;
+    -unity-text-align: middle-center;
+    margin-bottom: var(--lk-gap-medium);
+}
+
+.lk-defeat__message {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-md);
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: var(--lk-gap-large);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
  * Toast / notification
  * At-rest state. Entry animation driven by DOTween in Phase 8.
  * ════════════════════════════════════════════════════════════════════════ */

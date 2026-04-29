@@ -26,7 +26,7 @@
 
         <ui:VisualElement class="lk-row lk-align-center" style="margin-left: 24px;">
             <ui:Label name="lbl-base-hp" class="lk-label lk-label--dim" />
-            <ui:VisualElement class="lk-progress-bar" style="width: 120px; margin-left: 8px; flex-shrink: 0;">
+            <ui:VisualElement class="lk-progress-bar lk-progress-bar--thick" style="width: 120px; margin-left: 8px; flex-shrink: 0;">
                 <ui:VisualElement name="fill-base-hp" class="lk-progress-bar__fill" />
             </ui:VisualElement>
         </ui:VisualElement>

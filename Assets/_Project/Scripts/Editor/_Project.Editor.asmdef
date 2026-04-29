@@ -3,6 +3,7 @@
   "rootNamespace": "Markyu.LastKernel",
   "references": [
     "_Project.Runtime",
+    "_Project.UIToolkit",
     "Unity.Localization",
     "Unity.Localization.Editor",
     "Unity.TextMeshPro"

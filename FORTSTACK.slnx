@@ -8,6 +8,7 @@
   <Project Path="Kamgam.UIToolkitScriptComponentsEditorAndRuntime.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="UnityEngine.UI.csproj" />
+  <Project Path="_Project.UIToolkit.csproj" />
   <Project Path="SingularityGroup.HotReload.Editor.csproj" />
   <Project Path="Kamgam.UIToolkitTextAutoSize.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityLocalization.Editor.csproj" />
@@ -24,7 +25,6 @@
   <Project Path="Kamgam.UIToolkitParticles.csproj" />
   <Project Path="Kamgam.UIToolkitScriptComponentsEditor.csproj" />
   <Project Path="Lofelt.NiceVibrations.csproj" />
-  <Project Path="_Project.UIToolkit.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.Unity.Addressables.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.TMP.Runtime.csproj" />
   <Project Path="Lofelt.NiceVibrations.Editor.csproj" />

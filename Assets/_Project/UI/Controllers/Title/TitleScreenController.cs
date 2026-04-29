@@ -14,6 +14,7 @@ namespace Markyu.LastKernel
     /// Setup: add this component to a GameObject that also has a UIDocument
     /// referencing TitleScreenView.uxml and the PanelSettings asset.
     /// </summary>
+    [UIScreen("Assets/_Project/UI/UXML/Title/TitleScreenView.uxml", sortingOrder: 0)]
     public sealed class TitleScreenController : UIToolkitScreenController
     {
         // ── Labels (bound to Localizer — auto-refreshed on language change) ────
@@ -77,7 +78,7 @@ namespace Markyu.LastKernel
             _savedGames = new SavedGamesController(_modal);
             _savedGames.Bind(Root.Q<VisualElement>("panel-saved-games"));
 
-            _gameOptions = new GameOptionsController(_modal);
+            _gameOptions = new GameOptionsController(_modal.Show);
             _gameOptions.Bind(Root.Q<VisualElement>("panel-options"));
         }
 

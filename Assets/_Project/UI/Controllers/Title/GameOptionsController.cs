@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,7 +11,7 @@ namespace Markyu.LastKernel
     /// </summary>
     public sealed class GameOptionsController : UIToolkitComponentController
     {
-        private readonly ModalController _modal;
+        private readonly Action<string, string, Action> _showConfirm;
 
         private Label  _titleLabel;
         private Label  _graphicsLabel;
@@ -28,9 +29,9 @@ namespace Markyu.LastKernel
         private Button _resetButton;
         private Button _closeButton;
 
-        public GameOptionsController(ModalController modal)
+        public GameOptionsController(Action<string, string, Action> showConfirm)
         {
-            _modal = modal;
+            _showConfirm = showConfirm;
         }
 
         // ── Binding ────────────────────────────────────────────────────────────
@@ -154,10 +155,11 @@ namespace Markyu.LastKernel
 
         private void ShowResetConfirmation()
         {
-            _modal.Show(
-                GameLocalization.Get("options.resetTitle"),
-                GameLocalization.Get("options.resetBody"),
-                ResetAllSettings);
+            if (_showConfirm != null)
+                _showConfirm(
+                    GameLocalization.Get("options.resetTitle"),
+                    GameLocalization.Get("options.resetBody"),
+                    ResetAllSettings);
         }
 
         private void ResetAllSettings()
