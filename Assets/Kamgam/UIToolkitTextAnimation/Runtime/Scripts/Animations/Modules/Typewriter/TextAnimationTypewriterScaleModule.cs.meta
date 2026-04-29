@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 6989eb12309f49f49fa36bb1195fa203
+timeCreated: 1742920464
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Animations/Modules/Typewriter/TextAnimationTypewriterScaleModule.cs
+  uploadId: 821104

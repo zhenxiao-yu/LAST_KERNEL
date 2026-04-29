@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 99936ffa14b84b8b97683a74318b7e9f
+timeCreated: 1742917660
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Animations/Modules/Typewriter/TextAnimationTypewriterTranslateModule.cs
+  uploadId: 821104

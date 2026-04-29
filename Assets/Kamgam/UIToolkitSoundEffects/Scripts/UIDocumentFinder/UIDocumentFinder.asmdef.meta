@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fb3e1b70b1551484e95138b6fe30d08a
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Scripts/UIDocumentFinder/UIDocumentFinder.asmdef
+  uploadId: 903736

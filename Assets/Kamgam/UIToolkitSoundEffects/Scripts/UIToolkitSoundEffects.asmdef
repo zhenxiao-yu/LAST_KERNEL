@@ -1,0 +1,14 @@
+{
+    "name": "Kamgam.UIToolkitSoundEffects",
+    "rootNamespace": "",
+    "references": ["GUID:fb3e1b70b1551484e95138b6fe30d08a"],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

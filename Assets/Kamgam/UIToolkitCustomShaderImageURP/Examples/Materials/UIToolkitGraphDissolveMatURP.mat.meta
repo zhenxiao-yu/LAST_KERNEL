@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f53ddf0c1b1a7c8459b37f89c4b37759
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Materials/UIToolkitGraphDissolveMatURP.mat
+  uploadId: 809044

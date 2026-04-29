@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0a58fb2e651310c4793f4c5bcf7dd7b4
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Materials/UIToolkitHSVURP.shader
+  uploadId: 809044

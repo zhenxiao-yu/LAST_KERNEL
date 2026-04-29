@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ea1a1d4b4dd96ee4da0522e6c2ec360b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Res/Character/UITK TextAnimation
+    Shear.asset
+  uploadId: 821104

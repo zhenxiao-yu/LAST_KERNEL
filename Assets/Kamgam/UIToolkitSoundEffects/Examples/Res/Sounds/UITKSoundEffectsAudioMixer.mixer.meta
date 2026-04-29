@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0e46ba8bb8231724db44ca0e2c206605
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 24100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/Res/Sounds/UITKSoundEffectsAudioMixer.mixer
+  uploadId: 903736

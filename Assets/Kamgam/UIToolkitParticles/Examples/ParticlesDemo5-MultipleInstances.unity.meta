@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 81ca003d6c828384a9eee185af385219
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252260
+  packageName: UI Toolkit Particles - Particle Image for UI Elements
+  packageVersion: 1.3.5
+  assetPath: Assets/Kamgam/UIToolkitParticles/Examples/ParticlesDemo5-MultipleInstances.unity
+  uploadId: 873680

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ea50ead8d46186a418816eb41b6d9ac8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/EditorAndRuntime/Components/Implementations/UIPointerEventHandler.cs
+  uploadId: 900034

@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 0ba29d198a0b480b91cc102c7c8888bf
+timeCreated: 1742919576
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Animations/Modules/Typewriter/TextAnimationTypewriterRotateModule.cs
+  uploadId: 821104

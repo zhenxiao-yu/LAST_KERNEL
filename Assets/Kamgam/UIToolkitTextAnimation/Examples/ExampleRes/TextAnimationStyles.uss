@@ -1,0 +1,9 @@
+.text-animation
+{
+    -unity-font-style: bold;
+}
+
+Label.text-animation
+{
+    color: white;
+}

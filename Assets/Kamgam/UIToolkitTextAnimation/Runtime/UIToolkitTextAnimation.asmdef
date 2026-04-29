@@ -1,0 +1,25 @@
+{
+    "name": "UIToolkitTextAnimation",
+    "rootNamespace": "",
+    "references": [
+        "Unity.Collections",
+        "UIToolkitTextAnimation.UnityInternalsBridge",
+        "Unity.TextMeshPro",
+        "UnityEngine.UI"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.collections",
+            "expression": "0",
+            "define": "UNITY_COLLECTIONS"
+        }
+    ],
+    "noEngineReferences": false
+}

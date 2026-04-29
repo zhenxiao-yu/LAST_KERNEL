@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e2e16045fe40834489cdfa03115984c0
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/UIToolkitTextAnimation.asmdef
+  uploadId: 821104

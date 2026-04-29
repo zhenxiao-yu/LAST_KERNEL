@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 19461c320b0428e43af07f69abd54a77
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Examples/ButtonClickDemo/ButtonClickDemo.unity
+  uploadId: 733146

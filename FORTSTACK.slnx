@@ -1,16 +1,28 @@
 ﻿<Solution>
   <Project Path="MoreMountains.Tools.csproj" />
   <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="UIToolkitTextAnimation.csproj" />
   <Project Path="MoreMountains.Tools.Editor.csproj" />
+  <Project Path="Kamgam.UIToolkitBlurredBackground.csproj" />
   <Project Path="_Project.Runtime.csproj" />
+  <Project Path="Kamgam.UIToolkitScriptComponentsEditorAndRuntime.csproj" />
   <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="UnityEngine.UI.csproj" />
   <Project Path="SingularityGroup.HotReload.Editor.csproj" />
+  <Project Path="Kamgam.UIToolkitTextAutoSize.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityLocalization.Editor.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.csproj" />
+  <Project Path="Kamgam.UIToolkitPlaymaker.csproj" />
+  <Project Path="Kamgam.UIToolkitGlow.csproj" />
   <Project Path="_Project.Editor.csproj" />
+  <Project Path="Kamgam.UIToolkitSoundEffects.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.Runtime.csproj" />
+  <Project Path="Kamgam.UIToolkitWorldImage.csproj" />
   <Project Path="Lofelt.NiceVibrations.Demo.csproj" />
+  <Project Path="Kamgam.UIToolkitScrollViewPro.csproj" />
   <Project Path="TGS_PackageImporter.csproj" />
+  <Project Path="Kamgam.UIToolkitParticles.csproj" />
+  <Project Path="Kamgam.UIToolkitScriptComponentsEditor.csproj" />
   <Project Path="Lofelt.NiceVibrations.csproj" />
   <Project Path="_Project.UIToolkit.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.Unity.Addressables.csproj" />
@@ -21,8 +33,11 @@
   <Project Path="_Project.Tests.PlayMode.csproj" />
   <Project Path="Febucci.Attributes.Runtime.csproj" />
   <Project Path="SingularityGroup.HotReload.Runtime.Public.csproj" />
+  <Project Path="Kamgam.UIToolkitSoundEffects.UIDocumentFinder.csproj" />
+  <Project Path="Kamgam.UIToolkitParticles.Editor.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.UITk.Runtime.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityLocalization.csproj" />
   <Project Path="_Project.Tests.EditMode.csproj" />
+  <Project Path="Kamgam.UIToolkitTextAutoSize.UIDocumentFinder.csproj" />
 </Solution>

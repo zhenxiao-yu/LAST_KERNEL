@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: ad511ed6d31e4d8ca5fbc22286f7c01a
+timeCreated: 1738698791
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Manipulator/TextAnimationManipulator.cs
+  uploadId: 821104

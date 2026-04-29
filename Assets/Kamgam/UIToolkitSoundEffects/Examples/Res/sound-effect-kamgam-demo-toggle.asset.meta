@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e0211aaa1e136b4439a1dc8754e7b345
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/Res/sound-effect-kamgam-demo-toggle.asset
+  uploadId: 903736

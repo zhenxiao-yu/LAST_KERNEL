@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 0ba5c07d6f4443db8704ca00c35a3baa
+timeCreated: 1758196779
+AssetOrigin:
+  serializedVersion: 1
+  productId: 254328
+  packageName: UI Toolkit Blurred Background - Fast translucent UI Blur image
+  packageVersion: 1.4.2
+  assetPath: Assets/Kamgam/UIToolkitBlurredBackground/Runtime/Scripts/Rendering/PanelSettingsReflectionUtils.cs
+  uploadId: 903714

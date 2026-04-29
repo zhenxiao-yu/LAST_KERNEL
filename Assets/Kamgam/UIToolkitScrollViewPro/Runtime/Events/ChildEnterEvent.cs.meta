@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 504c5fe2f25142adb85b769cced9caee
+timeCreated: 1768999214
+AssetOrigin:
+  serializedVersion: 1
+  productId: 262334
+  packageName: UI Toolkit Scroll View Pro - Infinite Scrolling, Snapping, Paging
+  packageVersion: 1.6.8
+  assetPath: Assets/Kamgam/UIToolkitScrollViewPro/Runtime/Events/ChildEnterEvent.cs
+  uploadId: 877234

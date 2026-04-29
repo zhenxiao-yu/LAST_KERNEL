@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e37da6ec42e9d241a39ecd875b102cf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Examples/GlowExamplesPanel.asset
+  uploadId: 906916

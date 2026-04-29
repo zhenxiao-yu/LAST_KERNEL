@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6f0fc6bdc44cb454e9b23be711fad37c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/Res/sound-effect-kamgam-demo-move.asset
+  uploadId: 903736

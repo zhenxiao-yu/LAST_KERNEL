@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 863733613df8e19479238ef8d1096573
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252260
+  packageName: UI Toolkit Particles - Particle Image for UI Elements
+  packageVersion: 1.3.5
+  assetPath: Assets/Kamgam/UIToolkitParticles/Examples/ParticlesDemo7Scripting.cs
+  uploadId: 873680

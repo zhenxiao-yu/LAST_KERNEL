@@ -1,0 +1,14 @@
+<linker>
+  <assembly fullname="UnityEngine.UIElementsModule" ignoreIfMissing="1">
+    <type fullname="UnityEngine.UIElements.UITKTextHandle" preserve="all"/>
+    <type fullname="UnityEngine.UIElements.UIR.Implementation.UIRStylePainter" preserve="all"/>
+    <type fullname="UnityEngine.UIElements.TextureId" preserve="all"/>
+  </assembly>
+  <assembly fullname="UnityEngine.TextCoreTextEngineModule" ignoreIfMissing="1">
+    <type fullname="UnityEngine.TextCore.Text.TextInfo" preserve="all"/>
+    <type fullname="UnityEngine.TextCore.Text.TextElementInfo" preserve="all"/>
+    <type fullname="UnityEngine.TextCore.Text.LinkInfo" preserve="all"/>
+    <type fullname="UnityEngine.TextCore.Text.MeshInfo" preserve="all"/>
+    <type fullname="UnityEngine.TextCore.Text.TextCoreVertex" preserve="all"/>
+  </assembly>
+</linker>

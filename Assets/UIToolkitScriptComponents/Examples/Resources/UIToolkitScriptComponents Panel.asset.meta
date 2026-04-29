@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c9215c7457b6db3498427dc3d34c2137
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/Examples/Resources/UIToolkitScriptComponents
+    Panel.asset
+  uploadId: 900034

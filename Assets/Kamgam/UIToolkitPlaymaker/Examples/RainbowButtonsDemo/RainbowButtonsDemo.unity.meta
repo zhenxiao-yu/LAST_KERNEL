@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 587c1b0665da7d54c9331efc16445abb
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Examples/RainbowButtonsDemo/RainbowButtonsDemo.unity
+  uploadId: 733146

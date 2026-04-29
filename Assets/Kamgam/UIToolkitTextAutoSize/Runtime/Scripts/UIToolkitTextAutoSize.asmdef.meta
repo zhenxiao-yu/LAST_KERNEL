@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5a25098cef08c1c4684222796aaf7c80
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 320865
+  packageName: Text Auto Size for UI Toolkit - Best Fit Text
+  packageVersion: 1.0.2
+  assetPath: Assets/Kamgam/UIToolkitTextAutoSize/Runtime/Scripts/UIToolkitTextAutoSize.asmdef
+  uploadId: 903740

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: bc1cc03fe34a13548a274e4e79af66bd
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Runtime/Scripts/Actions/Attributes/Styles/UITKGetFlexWrap.cs
+  uploadId: 733146

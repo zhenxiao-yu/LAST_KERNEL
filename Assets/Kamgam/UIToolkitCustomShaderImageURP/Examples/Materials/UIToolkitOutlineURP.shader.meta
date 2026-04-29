@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 947c47f0ce344e4eb7cb465359d225cf
+timeCreated: 1748869009
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Materials/UIToolkitOutlineURP.shader
+  uploadId: 809044

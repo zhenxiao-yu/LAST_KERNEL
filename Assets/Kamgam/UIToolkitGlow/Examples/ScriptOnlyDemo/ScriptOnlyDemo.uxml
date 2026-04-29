@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Kamgam/UIToolkitGlow/Examples/GlowExamplesStyle.uss?fileID=7433441132597879392&amp;guid=541245f5923b2ca469b72c31ad0cbd5d&amp;type=3#GlowExamplesStyle" />
+    <ui:Label text="Glow and shadow added via code." display-tooltip-when-elided="true" name="TestLabel" style="background-color: rgb(255, 255, 255); border-left-width: 10px; border-right-width: 10px; border-top-width: 10px; border-bottom-width: 10px; margin-left: 20px; margin-right: 20px; margin-top: 20px; margin-bottom: 20px; border-top-left-radius: 11px; border-bottom-left-radius: 11px; border-top-right-radius: 11px; border-bottom-right-radius: 11px;" />
+</ui:UXML>

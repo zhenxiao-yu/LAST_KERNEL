@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e454a4325aef78644aa40840c8a79c1a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Runtime/Scripts/Helpers/UIElementTypeUtils.cs
+  uploadId: 733146

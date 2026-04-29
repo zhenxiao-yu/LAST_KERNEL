@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b6d9a744315ba5444bd6c57d968185c8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Examples/UIToolkitPlaymakerDemoPanelSettings.asset
+  uploadId: 733146

@@ -1,0 +1,17 @@
+.unity-property-field__label
+{
+    min-width: 20px;
+}
+
+#unity-list-Events
+{
+    max-height: none;
+}
+/*
+Does not work in USS, see: https://discussions.unity.com/t/why-does-unity-use-colons-in-class-names-how-to-style-them/1624120
+#PropertyField\:m_Script,
+#PropertyField\:Id
+{
+    display: none;
+}
+*/

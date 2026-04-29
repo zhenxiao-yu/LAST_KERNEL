@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4a96f8fda5a1ada498386a65a2c976ce
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/EventsDemo/CustomScriptReceivingAMessage.cs
+  uploadId: 903736

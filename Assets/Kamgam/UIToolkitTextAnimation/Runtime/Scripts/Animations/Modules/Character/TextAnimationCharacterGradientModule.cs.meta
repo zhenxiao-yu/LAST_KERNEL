@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: e7b8d0483a894876be114b2df4252357
+timeCreated: 1742835464
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Animations/Modules/Character/TextAnimationCharacterGradientModule.cs
+  uploadId: 821104

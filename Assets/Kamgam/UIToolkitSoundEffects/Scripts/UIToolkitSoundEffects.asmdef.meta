@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0675b5d5ac42cd140b295cbefcfa9a71
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Scripts/UIToolkitSoundEffects.asmdef
+  uploadId: 903736

@@ -1,0 +1,1 @@
+These scripts are used both at runtime and in the editor. That's why they are NOT in the Editor only assembly.

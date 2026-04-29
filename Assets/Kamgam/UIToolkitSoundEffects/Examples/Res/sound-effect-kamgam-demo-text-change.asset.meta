@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5b391d0a9b3f9974a8b85a5e7ceb6cb9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/Res/sound-effect-kamgam-demo-text-change.asset
+  uploadId: 903736

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 57e89d0009b0f4a46a12a861edb34b5a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Runtime/Res/UITK Glow BlobAnimation.asset
+  uploadId: 906916
