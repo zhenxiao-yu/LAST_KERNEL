@@ -923,3 +923,118 @@ Toggle:checked .unity-toggle__checkmark {
     font-size: var(--lk-font-size-lg);
     -unity-font-style: bold;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Progress bar — success fill variant
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-progress-bar__fill--success { background-color: var(--lk-success); }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Side menu drawer  (SideMenuController.cs + SideMenuView.uxml)
+ * Right-edge slide panel; toggle tab protrudes left when closed.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-side-menu-panel {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    bottom: 0;
+    width: 300px;
+    background-color: var(--lk-panel);
+    border-left-color: var(--lk-border);
+    border-left-width: 2px;
+    flex-direction: column;
+    overflow: visible;
+}
+
+/* Pull tab — protrudes 44 px left of the panel, always on screen */
+.lk-side-menu-toggle {
+    position: absolute;
+    left: -44px;
+    top: 0;
+    width: 44px;
+    min-height: 88px;
+    background-color: var(--lk-panel);
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    border-right-width: 0;
+    border-radius: 0;
+    color: var(--lk-accent);
+    font-size: var(--lk-font-size-lg);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    transition-property: color, background-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
+}
+
+.lk-side-menu-toggle:hover {
+    background-color: var(--lk-accent-faint);
+    color: var(--lk-text-header);
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────── */
+
+.lk-tab-bar {
+    flex-direction: row;
+    border-bottom-color: var(--lk-border-dim);
+    border-bottom-width: 1px;
+    flex-shrink: 0;
+}
+
+.lk-tab {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-sm);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    min-height: var(--lk-touch-min);
+    letter-spacing: 1px;
+    transition-property: color, border-bottom-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
+}
+
+.lk-tab:hover {
+    color: var(--lk-text);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.lk-tab--active {
+    color: var(--lk-accent);
+    border-bottom-color: var(--lk-accent);
+}
+
+.lk-tab--active:hover {
+    color: var(--lk-accent);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* ── Footer strip (quest completion summary) ─────────────────────────── */
+
+.lk-side-menu-footer {
+    border-top-color: var(--lk-border-dim);
+    border-top-width: 1px;
+    padding: var(--lk-padding-small);
+    flex-shrink: 0;
+    background-color: var(--lk-panel-overlay);
+    flex-direction: row;
+    align-items: center;
+}
+
+/* "New" indicator dot — child VisualElement injected from C# */
+.lk-new-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--lk-danger);
+    flex-shrink: 0;
+    margin-left: var(--lk-gap-small);
+    align-self: center;
+}
