@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 65114195fb1b40d419d08c8a59b5e557
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/EditorAndRuntime/_readme.txt
+  uploadId: 900034

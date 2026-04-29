@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
+
+    <!-- Full-screen overlay. Controller toggles lk-hidden to show or hide. -->
+    <ui:VisualElement name="victory-backdrop" class="lk-screen lk-screen--overlay lk-hidden lk-center">
+
+        <ui:VisualElement class="lk-panel" style="width: 520px;">
+
+            <!-- Title — filled by RewardData.RewardTitle or fallback key -->
+            <ui:Label name="lbl-victory-title" class="lk-victory__title" />
+
+            <ui:VisualElement class="lk-divider lk-divider--accent" style="margin-bottom: 24px;" />
+
+            <!-- Description — filled by RewardData.RewardDescription -->
+            <ui:Label name="lbl-victory-desc" class="lk-label lk-label--body lk-mb-md"
+                      style="-unity-text-align: middle-center; white-space: normal;" />
+
+            <!-- Scrap reward — "+N Scrap" -->
+            <ui:Label name="lbl-victory-scrap" class="lk-victory__reward" />
+
+            <ui:VisualElement class="lk-panel__footer lk-justify-center" style="margin-top: 32px;">
+                <ui:Button name="btn-victory-continue" class="lk-button lk-button--primary"
+                           style="min-width: 200px;" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 530af5a099270c747ab40657cf92efc9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/EditorAndRuntime/Helpers/EditorGUIHelpers.cs
+  uploadId: 900034

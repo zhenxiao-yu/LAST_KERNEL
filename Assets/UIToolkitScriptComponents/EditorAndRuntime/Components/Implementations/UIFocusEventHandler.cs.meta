@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 36a3dbd3b1c2e0c41a78c11dea50058d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/EditorAndRuntime/Components/Implementations/UIFocusEventHandler.cs
+  uploadId: 900034

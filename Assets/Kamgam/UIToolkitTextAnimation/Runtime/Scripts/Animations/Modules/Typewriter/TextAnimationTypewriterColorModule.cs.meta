@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: 3ced04a742e44d9785c14cfa2f3904e0
+timeCreated: 1742919197
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Animations/Modules/Typewriter/TextAnimationTypewriterColorModule.cs
+  uploadId: 821104

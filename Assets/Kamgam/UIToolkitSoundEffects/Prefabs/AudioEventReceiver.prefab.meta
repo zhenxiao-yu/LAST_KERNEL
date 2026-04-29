@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 98b94f3fd1d181b43b0ff602e3128f35
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Prefabs/AudioEventReceiver.prefab
+  uploadId: 903736

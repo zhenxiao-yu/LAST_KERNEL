@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 27e0f875d354f314ea4c259930ca1013
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/UIToolkitPlaymaker.asmdef
+  uploadId: 733146

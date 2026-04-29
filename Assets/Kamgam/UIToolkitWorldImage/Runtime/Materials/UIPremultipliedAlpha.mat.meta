@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 0f10f98aee53b3343b2169f420b37f01
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Runtime/Materials/UIPremultipliedAlpha.mat
+  uploadId: 899760

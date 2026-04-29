@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e3d09bd5566a9d14f94adae11b5a3263
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Scripts/Editor/UIBuilderWindowWrapper.cs
+  uploadId: 903736

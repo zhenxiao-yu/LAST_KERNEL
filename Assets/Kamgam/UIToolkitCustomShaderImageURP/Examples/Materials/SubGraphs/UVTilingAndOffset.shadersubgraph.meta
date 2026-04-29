@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7e0b20d1cca1c8349898e0186e93d0b4
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 60072b568d64c40a485e0fc55012dc9f, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Materials/SubGraphs/UVTilingAndOffset.shadersubgraph
+  uploadId: 809044

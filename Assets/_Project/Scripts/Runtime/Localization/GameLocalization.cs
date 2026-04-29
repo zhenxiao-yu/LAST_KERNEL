@@ -135,11 +135,12 @@ namespace Markyu.LastKernel
             ["title.versionDraft"] = new("版本：未发布", "Version: Unreleased"),
             ["title.loadHeader"] = new("读取存档", "Load Saves"),
             ["title.gameplayHeader"] = new("生存偏好设置", "Game Setup"),
-            ["title.clearSaves"] = new("[清除全部存档]", "[Delete All Saves]"),
+            ["title.clearSaves"] = new("清除全部存档", "Delete All Saves"),
+            ["title.noSaves"]    = new("暂无存档", "No saved games"),
 
             ["pause.header"] = new("已暂停", "Paused"),
             ["pause.resume"] = new("继续游戏", "Resume"),
-            ["pause.backToTitle"] = new("保存并返回标题", "Save & Title"),
+            ["pause.backToTitle"] = new("返回主菜单", "Back to Title"),
 
             ["menu.quests"] = new("任务", "Quests"),
             ["menu.blueprints"] = new("蓝图", "Blueprints"),
@@ -226,6 +227,12 @@ namespace Markyu.LastKernel
             ["night.laneDefenders"] = new("防守者", "DEFENDERS"),
             ["night.laneEnemies"] = new("敌人", "ENEMIES"),
             ["night.laneDead"] = new("倒下", "DEAD"),
+            ["night.waveLabel"] = new("第 {0} 波", "Wave {0}"),
+            ["night.enemyCount"] = new("敌方：{0}", "Enemies: {0}"),
+            ["night.speedNormal"] = new("正常", "Normal"),
+            ["night.speedFast"] = new("快速", "Fast"),
+            ["night.scrapReward"] = new("回收废料：{0}", "Scrap salvaged: {0}"),
+            ["defeat.message"] = new("地堡已失守。", "The bunker has fallen."),
 
             ["stat.maxHealth"] = new("最大生命值", "Max Health"),
             ["stat.attack"] = new("攻击", "Attack"),
@@ -258,12 +265,12 @@ namespace Markyu.LastKernel
             ["tooltip.stack_cards"] = L("Stack cards to combine workers resources and structures.", "堆叠卡牌来组合工人、资源与结构。", "堆疊卡牌來組合工人、資源與結構。", "カードを重ねて作業員、資源、施設を組み合わせます。", "카드를 쌓아 작업자와 자원 및 구조물을 결합하세요.", "Empilez les cartes pour combiner ouvriers ressources et structures.", "Stapelt Karten um Arbeiter Ressourcen und Bauten zu kombinieren.", "Apila cartas para combinar trabajadores recursos y estructuras."),
             ["tooltip.defense_grid"] = L("Place defenses to hold the grid.", "布置防御来守住网格。", "佈置防禦來守住網格。", "防衛を配置してグリッドを守ります。", "방어를 배치해 격자를 지키세요.", "Placez des defenses pour tenir la grille.", "Platziert Verteidigung um das Raster zu halten.", "Coloca defensas para sostener la cuadricula."),
 
-            ["common.confirmButton"] = new("[确认]", "[Confirm]"),
-            ["common.cancelButton"] = new("[取消]", "[Cancel]"),
-            ["common.closeButton"] = new("[关闭]", "[Close]"),
-            ["common.resetButton"] = new("[重置]", "[Reset]"),
-            ["common.loadButton"] = new("[读取]", "[Load]"),
-            ["common.deleteButton"] = new("[删除]", "[Delete]"),
+            ["common.confirmButton"] = new("确认",    "Confirm"),
+            ["common.cancelButton"]  = new("取消",    "Cancel"),
+            ["common.closeButton"]   = new("关闭",    "Close"),
+            ["common.resetButton"]   = new("重置全部", "Reset All"),
+            ["common.loadButton"]    = new("读取",    "Load"),
+            ["common.deleteButton"]  = new("删除",    "Delete"),
 
             ["options.header"] = new("运行设置", "Options"),
             ["options.sfx"] = new("音效 {0}%", "SFX {0}%"),
@@ -273,13 +280,22 @@ namespace Markyu.LastKernel
                 "这会把全部图形与音频参数恢复为默认值，且无法撤销。",
                 "This resets all graphics and audio settings to their defaults and cannot be undone."),
 
-            ["gameplay.dayDuration"] = new("白昼时长：{0} 秒", "Day Length: {0}s"),
-            ["gameplay.friendlyOn"] = new(
-                "友好模式：开启\n<size=23>（敌对目标不会出现）",
-                "Friendly Mode: On\n<size=23>(Hostile targets will not appear)"),
-            ["gameplay.friendlyOff"] = new(
-                "友好模式：关闭\n<size=23>（敌对目标可能出现）",
-                "Friendly Mode: Off\n<size=23>(Hostile targets may appear)"),
+            ["gameplay.dayDuration"]       = new("白昼时长：{0} 秒", "Day Length: {0}s"),
+            ["gameplay.friendlyModeLabel"] = new("友好模式", "Friendly Mode"),
+            ["gameplay.friendlyMode.on"]  = new("开启", "On"),
+            ["gameplay.friendlyMode.off"] = new("关闭", "Off"),
+            ["gameplay.friendlyOn"]  = new("（敌对目标不会出现）", "(No hostile targets will appear)"),
+            ["gameplay.friendlyOff"] = new("（敌对目标可能出现）", "(Hostile targets may appear)"),
+
+            ["gameplay.difficultyLabel"]         = new("难度",     "Difficulty"),
+            ["gameplay.difficulty.easy"]         = L("Easy",    "简单", "簡單", "かんたん",   "쉬움",   "Facile",    "Einfach",      "Facil"),
+            ["gameplay.difficulty.normal"]       = L("Normal",  "普通", "普通", "ふつう",     "보통",   "Normal",    "Normal",       "Normal"),
+            ["gameplay.difficulty.hard"]         = L("Hard",    "困难", "困難", "むずかしい", "어려움", "Difficile", "Schwer",       "Dificil"),
+
+            ["gameplay.startResourcesLabel"]     = new("起始资源", "Starting Resources"),
+            ["gameplay.startResources.minimal"]  = L("Minimal",  "最少", "最少", "最小", "최소", "Minimal",   "Minimal",      "Minimo"),
+            ["gameplay.startResources.standard"] = L("Standard", "标准", "標準", "標準", "기본", "Standard",  "Standard",     "Estandar"),
+            ["gameplay.startResources.generous"] = L("Generous", "充裕", "充裕", "豊富", "풍족", "Genereux",  "Grosszuegig",  "Generoso"),
 
             ["save.clearTitle"] = new("清除全部存档？", "Delete All Saves?"),
             ["save.clearBody"] = new(

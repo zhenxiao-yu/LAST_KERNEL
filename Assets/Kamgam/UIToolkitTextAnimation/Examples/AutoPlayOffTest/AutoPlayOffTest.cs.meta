@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4ff484506c5b16840a338fafd49a6865
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Examples/AutoPlayOffTest/AutoPlayOffTest.cs
+  uploadId: 821104

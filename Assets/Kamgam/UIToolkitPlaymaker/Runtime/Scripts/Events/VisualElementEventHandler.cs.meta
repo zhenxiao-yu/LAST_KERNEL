@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 1174fffe47e5f8945b56466b8c666cdb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Runtime/Scripts/Events/VisualElementEventHandler.cs
+  uploadId: 733146

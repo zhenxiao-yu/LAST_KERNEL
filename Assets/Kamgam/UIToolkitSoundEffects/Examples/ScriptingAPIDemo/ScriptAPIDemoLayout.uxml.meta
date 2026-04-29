@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 309e7303a2ca7f2499e2efd36a3ec706
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 13804, guid: 0000000000000000e000000000000000, type: 0}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/ScriptingAPIDemo/ScriptAPIDemoLayout.uxml
+  uploadId: 903736

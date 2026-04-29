@@ -31,6 +31,8 @@ namespace Markyu.LastKernel
     /// </summary>
     public class NightBattlefieldController : MonoBehaviour
     {
+        public static NightBattlefieldController Instance { get; private set; }
+
         // ── Inspector wiring ──────────────────────────────────────────────────
 
         [BoxGroup("Scene References")]
@@ -81,6 +83,11 @@ namespace Markyu.LastKernel
         public event System.Action<int, int> OnEnemyCountChanged; // (alive, total)
 
         // ── Phase integration ─────────────────────────────────────────────────
+
+        private void Awake()
+        {
+            Instance = this;
+        }
 
         private void OnEnable()
         {

@@ -14,6 +14,8 @@ namespace Markyu.LastKernel
     /// </summary>
     public class BaseCoreController : MonoBehaviour
     {
+        public static BaseCoreController Instance { get; private set; }
+
         [SerializeField, Min(1)] private int maxHP = 20;
 
         public int MaxHP => maxHP;
@@ -28,6 +30,7 @@ namespace Markyu.LastKernel
 
         private void Awake()
         {
+            Instance = this;
             CurrentHP = maxHP;
         }
 

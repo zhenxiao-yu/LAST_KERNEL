@@ -113,6 +113,8 @@ namespace Markyu.LastKernel
             }
         }
 
+        public IReadOnlyList<CardStack> AllStacks => stacks;
+
         private Dictionary<CardCategory, CardInstance> prefabLookup;
         private CardDefinitionCatalog definitionCatalog;
 
@@ -548,6 +550,17 @@ namespace Markyu.LastKernel
             {
                 var chestLogic = newCard.gameObject.AddComponent<ChestLogic>();
                 chestLogic.Initialize(newCard);
+            }
+            else if (definition is MarketDefinition)
+            {
+                var marketLogic = newCard.gameObject.AddComponent<MarketLogic>();
+                marketLogic.Initialize(newCard);
+            }
+
+            if (definition.Category == CardCategory.Character)
+            {
+                newCard.gameObject.AddComponent<CardAI>();
+                newCard.gameObject.AddComponent<VillagerLockToggle>();
             }
 
             NotifyStatsChanged();

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: afca68a4a08e1d5448f660f5b97e108e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/UIToolkitCustomShaderImageURPDemoPanel.asset
+  uploadId: 809044

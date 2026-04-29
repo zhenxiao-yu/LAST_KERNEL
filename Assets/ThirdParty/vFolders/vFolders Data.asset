@@ -18,6 +18,13 @@ MonoBehaviour:
     - b23cf845323b9fa449f2be63e85a61ef
     - 642c08f041a8e994cb086b52e6c35bf9
     - 0328a8b6cc3efb048b389f56d11eb74d
+    - c5f416abe667ece40a274468137ee887
+    - 212b9f38d38f4c199bb148cb5f8bfa43
+    - 3a98927978f21e04d9f13663cd12a136
+    - 1bb96ca903ff17e4fb68976aba553f10
+    - cf62ff3d157ada44c887ac1207e94e73
+    - 2e47ac346d807dc49b07d28ce6aca023
+    - 4432fb2a72b126842a60d2cb8a22e839
     values:
     - iconNameOrGuid: 
       colorIndex: 7
@@ -27,7 +34,7 @@ MonoBehaviour:
       colorIndex: 8
       isIconRecursive: 0
       isColorRecursive: 0
-    - iconNameOrGuid: 
+    - iconNameOrGuid: AudioClip Icon
       colorIndex: 2
       isIconRecursive: 0
       isColorRecursive: 0
@@ -35,7 +42,39 @@ MonoBehaviour:
       colorIndex: 6
       isIconRecursive: 0
       isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 3
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 9
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 4
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 1
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 3
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 10
+      isIconRecursive: 0
+      isColorRecursive: 0
+    - iconNameOrGuid: 
+      colorIndex: 5
+      isIconRecursive: 0
+      isColorRecursive: 0
   bookmarks:
   - guid: c8d35256c58d3864484eda85283be9d3
   - guid: 4432fb2a72b126842a60d2cb8a22e839
   - guid: 2e47ac346d807dc49b07d28ce6aca023
+  - guid: 212b9f38d38f4c199bb148cb5f8bfa43
+  - guid: cf62ff3d157ada44c887ac1207e94e73
+  - guid: b23cf845323b9fa449f2be63e85a61ef
+  - guid: 0328a8b6cc3efb048b389f56d11eb74d

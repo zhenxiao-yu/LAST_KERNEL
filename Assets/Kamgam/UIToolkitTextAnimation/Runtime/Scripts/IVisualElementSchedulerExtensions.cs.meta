@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: c8465535b0da451db124282aa50c59eb
+timeCreated: 1739531700
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/IVisualElementSchedulerExtensions.cs
+  uploadId: 821104

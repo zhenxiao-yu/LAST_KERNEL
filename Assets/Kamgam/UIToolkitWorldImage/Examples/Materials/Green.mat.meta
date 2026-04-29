@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 998c094a232f2ac42891dacc615fc27e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Examples/Materials/Green.mat
+  uploadId: 899760

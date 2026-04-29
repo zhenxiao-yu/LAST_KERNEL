@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: ea04b4d7698901f45898150b966283f5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Scripts/Editor/BuildProcessObserver.cs
+  uploadId: 903736

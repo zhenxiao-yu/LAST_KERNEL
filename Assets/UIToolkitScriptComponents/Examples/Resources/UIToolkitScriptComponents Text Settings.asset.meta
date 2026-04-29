@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e510fdc596537bc4c835a16ef89e67b1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/Examples/Resources/UIToolkitScriptComponents
+    Text Settings.asset
+  uploadId: 900034

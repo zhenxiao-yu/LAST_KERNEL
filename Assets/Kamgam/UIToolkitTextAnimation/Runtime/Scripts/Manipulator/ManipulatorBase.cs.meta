@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f8e6f11e7f66e0543aa3922c939ac593
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/Manipulator/ManipulatorBase.cs
+  uploadId: 821104

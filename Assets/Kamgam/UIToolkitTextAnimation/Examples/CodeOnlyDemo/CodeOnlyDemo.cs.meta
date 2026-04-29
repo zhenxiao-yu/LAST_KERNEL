@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 8d707a19f868d1c4ab9449791f712046
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Examples/CodeOnlyDemo/CodeOnlyDemo.cs
+  uploadId: 821104

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 14a2c2ca74b7a6b4e8f352a0f1f174dc
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Textures/license.txt
+  uploadId: 809044

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 078ac0c141dded24cb21412880c62774
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Runtime/GlowConfigRoot.cs
+  uploadId: 906916

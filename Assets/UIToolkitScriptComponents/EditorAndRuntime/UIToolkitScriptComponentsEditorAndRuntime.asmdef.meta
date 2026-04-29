@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0d149275d4b021c479c60b6a767d4fa6
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/EditorAndRuntime/UIToolkitScriptComponentsEditorAndRuntime.asmdef
+  uploadId: 900034

@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Button text="Button A (Sound on Click)" display-tooltip-when-elided="true" name="ButtonA" />
+    <ui:Button text="Button B (Looping on Click)" display-tooltip-when-elided="true" name="ButtonB" class="kamgam-sfx kamgam-sfx-id-hello" />
+</ui:UXML>

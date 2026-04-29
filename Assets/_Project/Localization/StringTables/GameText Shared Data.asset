@@ -490,6 +490,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497158023282807
+  - m_Id: 1116294589722624
+    m_Key: pause.save
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286608
   - m_Id: 7029403657
     m_Key: pause.backToTitle
     m_Metadata:
@@ -730,6 +735,36 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497158023282855
+  - m_Id: 1116294623277056
+    m_Key: save.saveHeader
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286609
+  - m_Id: 1116294623277057
+    m_Key: save.overwrite
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286610
+  - m_Id: 1116294623277058
+    m_Key: save.overwriteTitle
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286611
+  - m_Id: 1116294623277059
+    m_Key: save.overwriteBody
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286612
+  - m_Id: 1116294623277060
+    m_Key: save.newSlot
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286613
+  - m_Id: 1116294623277061
+    m_Key: save.currentSlot
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286614
   - m_Id: 7037792274
     m_Key: save.slotLabel
     m_Metadata:
@@ -980,6 +1015,41 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497158023282905
+  - m_Id: 1116294627471360
+    m_Key: "quest.group.\u65B0\u624B\u5F15\u5BFC"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286615
+  - m_Id: 1116294627471361
+    m_Key: "quest.group.\u5F02\u754C\u5347\u683C"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286616
+  - m_Id: 1116294627471362
+    m_Key: "quest.group.\u6218\u6597\u8BAD\u7EC3"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286617
+  - m_Id: 1116294627471363
+    m_Key: "quest.group.\u6B96\u6C11\u8FDB\u9636"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286618
+  - m_Id: 1116294627471364
+    m_Key: "quest.group.\u540E\u52E4\u708A\u4E8B"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286619
+  - m_Id: 1116294627471365
+    m_Key: "quest.group.\u533A\u57DF\u63A2\u7D22"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286620
+  - m_Id: 1116294627471366
+    m_Key: "quest.group.\u6D77\u5C9B\u57FA\u7840"
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286621
   - m_Id: 7041986577
     m_Key: recipe.blueprint
     m_Metadata:
@@ -3325,6 +3395,181 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497158023283374
+  - m_Id: 1116294656831488
+    m_Key: hud.day
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286622
+  - m_Id: 1116294656831489
+    m_Key: hud.night
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286623
+  - m_Id: 1116294656831490
+    m_Key: hud.startNight
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286624
+  - m_Id: 1116294656831491
+    m_Key: hud.wave
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286625
+  - m_Id: 1116294656831492
+    m_Key: hud.baseHP
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286626
+  - m_Id: 1116294656831493
+    m_Key: hud.enemies
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286627
+  - m_Id: 1116294656831494
+    m_Key: hud.nutrition
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286628
+  - m_Id: 1116294656831495
+    m_Key: hud.currency
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286629
+  - m_Id: 1116294656831496
+    m_Key: hud.cards
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286630
+  - m_Id: 1116294656831497
+    m_Key: hud.pace.paused
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286631
+  - m_Id: 1116294656831498
+    m_Key: hud.pace.normal
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286632
+  - m_Id: 1116294656831499
+    m_Key: hud.pace.fast
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286633
+  - m_Id: 1116294656831500
+    m_Key: victory.title
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286634
+  - m_Id: 1116294656831501
+    m_Key: victory.continue
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286635
+  - m_Id: 1116294656831502
+    m_Key: victory.scrap
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286636
+  - m_Id: 1116294656831503
+    m_Key: defeat.title
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286637
+  - m_Id: 1116294656831504
+    m_Key: defeat.message
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286638
+  - m_Id: 1116294656831505
+    m_Key: defeat.retry
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286639
+  - m_Id: 1116297404100608
+    m_Key: title.noSaves
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286640
+  - m_Id: 1116297408294912
+    m_Key: night.waveLabel
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286641
+  - m_Id: 1116297408294913
+    m_Key: night.enemyCount
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286642
+  - m_Id: 1116297408294914
+    m_Key: night.speedNormal
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286643
+  - m_Id: 1116297408294915
+    m_Key: night.speedFast
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286644
+  - m_Id: 1116297408294916
+    m_Key: night.scrapReward
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286645
+  - m_Id: 1116297412489216
+    m_Key: gameplay.friendlyModeLabel
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286646
+  - m_Id: 1116297412489217
+    m_Key: gameplay.friendlyMode.on
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286647
+  - m_Id: 1116297412489218
+    m_Key: gameplay.friendlyMode.off
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286648
+  - m_Id: 1116297412489219
+    m_Key: gameplay.difficultyLabel
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286649
+  - m_Id: 1116297412489220
+    m_Key: gameplay.difficulty.easy
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286650
+  - m_Id: 1116297412489221
+    m_Key: gameplay.difficulty.normal
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286651
+  - m_Id: 1116297412489222
+    m_Key: gameplay.difficulty.hard
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286652
+  - m_Id: 1116297412489223
+    m_Key: gameplay.startResourcesLabel
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286653
+  - m_Id: 1116297412489224
+    m_Key: gameplay.startResources.minimal
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286654
+  - m_Id: 1116297412489225
+    m_Key: gameplay.startResources.standard
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286655
+  - m_Id: 1116297412489226
+    m_Key: gameplay.startResources.generous
+    m_Metadata:
+      m_Items:
+      - rid: 8800497223980286656
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -3725,8 +3970,7 @@ MonoBehaviour:
     - rid: 8800497158023282805
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Title screen saved games panel clear-all button
     - rid: 8800497158023282806
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
@@ -3740,8 +3984,7 @@ MonoBehaviour:
     - rid: 8800497158023282808
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Back to Title button label used in pause menu and defeat screen
     - rid: 8800497158023282809
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
@@ -3890,33 +4133,27 @@ MonoBehaviour:
     - rid: 8800497158023282838
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Shared confirm action button label
     - rid: 8800497158023282839
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Shared cancel action button label
     - rid: 8800497158023282840
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Shared close / dismiss button label
     - rid: 8800497158023282841
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Shared reset-to-defaults button label
     - rid: 8800497158023282842
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Shared load button label
     - rid: 8800497158023282843
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: Shared delete button label
     - rid: 8800497158023282844
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
@@ -6572,3 +6809,223 @@ MonoBehaviour:
       data:
         m_CommentText: Source English from Assets/Fortstack/Resources/Encounters/Encounter_Weekly_Slime.asset.
           Non-English values are placeholders until reviewed.
+    - rid: 8800497223980286608
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286609
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286610
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286611
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286612
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286613
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286614
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Placeholder translation - needs native review
+    - rid: 8800497223980286615
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286616
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286617
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286618
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286619
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286620
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286621
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Quest group header \u2014 set in QuestManager inspector.
+          zh-Hans is the authoritative source; other locales are placeholders."
+    - rid: 8800497223980286622
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD phase label \u2014 day phase"
+    - rid: 8800497223980286623
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD phase label \u2014 night combat"
+    - rid: 8800497223980286624
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD button \u2014 end day and begin night combat"
+    - rid: 8800497223980286625
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD label \u2014 current wave number, {0}=wave"
+    - rid: 8800497223980286626
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD label \u2014 base HP current/max, {0}=current {1}=max"
+    - rid: 8800497223980286627
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD label \u2014 enemy count alive/total, {0}=alive {1}=total"
+    - rid: 8800497223980286628
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD resource \u2014 food nutrition {0}=current {1}=need"
+    - rid: 8800497223980286629
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD resource \u2014 gold coins {0}=amount"
+    - rid: 8800497223980286630
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD resource \u2014 cards owned/limit {0}=owned {1}=limit"
+    - rid: 8800497223980286631
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD time pace button \u2014 paused state"
+    - rid: 8800497223980286632
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD time pace button \u2014 normal speed"
+    - rid: 8800497223980286633
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD time pace button \u2014 fast speed"
+    - rid: 8800497223980286634
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Victory panel header
+    - rid: 8800497223980286635
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Victory panel continue button
+    - rid: 8800497223980286636
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Victory panel scrap reward \u2014 {0}=amount"
+    - rid: 8800497223980286637
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Defeat panel header
+    - rid: 8800497223980286638
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Defeat panel body message
+    - rid: 8800497223980286639
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Defeat panel retry button
+    - rid: 8800497223980286640
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286641
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286642
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286643
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286644
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286645
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286646
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286647
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286648
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286649
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286650
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286651
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286652
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286653
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286654
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286655
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497223980286656
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.

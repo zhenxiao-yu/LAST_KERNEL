@@ -1,3 +1,4 @@
+using System.Reflection;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -31,23 +32,42 @@ namespace Markyu.LastKernel
 
         public bool IsVisible => Document != null && Document.enabled;
 
+        /// <summary>
+        /// Label → localization-key registry. Call Localizer.Bind/BindFormat in OnBind().
+        /// RefreshAll() is called automatically on language change and after Show().
+        /// </summary>
+        protected LKLocalizedBinder Localizer { get; } = new LKLocalizedBinder();
+
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
         protected virtual void Awake()
         {
             Document = GetComponent<UIDocument>();
-            Root     = Document.rootVisualElement;
+        }
+
+        // UIDocument.rootVisualElement is only ready after UIDocument.OnEnable() runs.
+        // Start() is the first safe point to query it (all Awake + OnEnable have completed).
+        protected virtual void Start()
+        {
+            Root = Document.rootVisualElement;
+
+            var attr = GetType().GetCustomAttribute<UIScreenAttribute>(false);
+            if (attr != null) Document.sortingOrder = attr.SortingOrder;
 
             OnBind();
 
             if (rootController != null && !string.IsNullOrEmpty(screenId))
                 rootController.RegisterScreen(screenId, this);
+
+            OnLocalizationRefresh();
         }
 
         protected virtual void OnEnable()
         {
             GameLocalization.LanguageChanged += HandleLanguageChanged;
-            OnLocalizationRefresh();
+            // OnLocalizationRefresh is deferred to Start() on first run.
+            // On subsequent enable/disable cycles Root is already bound, so refresh immediately.
+            if (Root != null) OnLocalizationRefresh();
         }
 
         protected virtual void OnDisable()
@@ -89,7 +109,9 @@ namespace Markyu.LastKernel
 
         /// <summary>
         /// Update all visible localized labels. Called on language change and after Show().
+        /// Base implementation calls Localizer.RefreshAll(); subclasses should call base
+        /// before updating any additional dynamic labels.
         /// </summary>
-        public virtual void OnLocalizationRefresh() { }
+        public virtual void OnLocalizationRefresh() => Localizer.RefreshAll();
     }
 }

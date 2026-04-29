@@ -167,6 +167,7 @@ namespace Markyu.LastKernel
         public int CurrentHealth;
         public int CurrentNutrition;
         public int StoredCoins;
+        public bool IsAILocked;
 
         public string OriginalId; // Preserves the base personnel definition after a class upgrade.
         public List<CardData> EquippedItems = new();
@@ -183,6 +184,11 @@ namespace Markyu.LastKernel
             if (card.TryGetComponent<ChestLogic>(out var chest))
             {
                 StoredCoins = chest.StoredCoins;
+            }
+
+            if (card.TryGetComponent<VillagerLockToggle>(out var lockToggle))
+            {
+                IsAILocked = lockToggle.IsLocked;
             }
 
             if (card.EquipperComponent != null && card.Definition.Category == CardCategory.Character)
@@ -294,17 +300,33 @@ namespace Markyu.LastKernel
         }
     }
 
+    public enum DifficultyPreset
+    {
+        Easy   = 0,
+        Normal = 1,
+        Hard   = 2
+    }
+
+    public enum StartingResourcesPreset
+    {
+        Minimal  = 0,
+        Standard = 1,
+        Generous = 2
+    }
+
     [System.Serializable]
     public class GameplayPrefs
     {
-        public int DayDuration;
-        public bool IsFriendlyMode;
+        public int                    DayDuration    = 120;
+        public bool                   IsFriendlyMode = false;
+        public DifficultyPreset       Difficulty     = DifficultyPreset.Normal;
+        public StartingResourcesPreset StartResources = StartingResourcesPreset.Standard;
 
         public GameplayPrefs() { }
 
         public GameplayPrefs(int dayDuration, bool isFriendlyMode)
         {
-            DayDuration = dayDuration;
+            DayDuration    = dayDuration;
             IsFriendlyMode = isFriendlyMode;
         }
     }

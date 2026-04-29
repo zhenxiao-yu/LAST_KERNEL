@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d5d86ac429254d442b4799aebacd892c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Examples/Scripts/Rotate.cs
+  uploadId: 899760

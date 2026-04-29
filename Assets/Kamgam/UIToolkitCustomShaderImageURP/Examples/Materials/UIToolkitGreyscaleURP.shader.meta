@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: da043a3697e03e64caac69f7ce8a616c
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Materials/UIToolkitGreyscaleURP.shader
+  uploadId: 809044

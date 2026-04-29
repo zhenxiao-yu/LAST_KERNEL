@@ -20,6 +20,8 @@ namespace Markyu.LastKernel
         public static event Action OnClearAllSaves;
 
         // ── In-game ───────────────────────────────────────────────────────────
+        public static event Action OnSaveRequested;
+        public static event Action<int> OnSaveToSlotRequested;
         public static event Action OnResumeRequested;
         public static event Action OnBackToTitleRequested;
         public static event Action OnStartNightRequested;
@@ -40,6 +42,8 @@ namespace Markyu.LastKernel
         public static void RaiseLoadGame(GameData d)            => OnLoadGame?.Invoke(d);
         public static void RaiseDeleteGame(GameData d)          => OnDeleteGame?.Invoke(d);
         public static void RaiseClearAllSaves()                 => OnClearAllSaves?.Invoke();
+        public static void RaiseSaveRequested()                 => OnSaveRequested?.Invoke();
+        public static void RaiseSaveToSlotRequested(int slot)   => OnSaveToSlotRequested?.Invoke(slot);
         public static void RaiseResumeRequested()               => OnResumeRequested?.Invoke();
         public static void RaiseBackToTitleRequested()          => OnBackToTitleRequested?.Invoke();
         public static void RaiseStartNightRequested()           => OnStartNightRequested?.Invoke();

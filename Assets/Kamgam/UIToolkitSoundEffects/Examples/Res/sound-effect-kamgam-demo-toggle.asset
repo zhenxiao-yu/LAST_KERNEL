@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db132c1c5d0a80141bca666ec148e2f3, type: 3}
+  m_Name: sound-effect-kamgam-demo-toggle
+  m_EditorClassIdentifier: 
+  Id: kamgam-demo-toggle
+  Events:
+  - eventType: 29
+    RepeatDelay: 0.05
+    ClipOrder: 0
+    Clips:
+    - {fileID: 8300000, guid: d1c55036767f64f46ac3fd58a771fcea, type: 3}
+    AudioSourceSettings:
+      Output: {fileID: 0}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      LoopDuration: 2
+      Priority: 128
+      Volume: 1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 0
+      ReverbZoneMix: 1
+    Messages: []
+  - eventType: 30
+    RepeatDelay: 0.05
+    ClipOrder: 0
+    Clips:
+    - {fileID: 8300000, guid: d1d3c7e99f1339741b0e181343cf72cb, type: 3}
+    AudioSourceSettings:
+      Output: {fileID: 0}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      LoopDuration: 2
+      Priority: 128
+      Volume: 1
+      Pitch: 1
+      StereoPan: 0
+      SpatialBlend: 0
+      ReverbZoneMix: 1
+    Messages: []
+  _editorInitialized: 1
+  UIBuilderUsedByCount: 1

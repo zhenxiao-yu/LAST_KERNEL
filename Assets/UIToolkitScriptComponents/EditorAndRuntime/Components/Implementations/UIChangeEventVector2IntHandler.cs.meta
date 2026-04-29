@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 64510bb7f9956164ba622ac0b4e19fbf
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 248976
+  packageName: UI Toolkit Script Components
+  packageVersion: 1.3.0
+  assetPath: Assets/UIToolkitScriptComponents/EditorAndRuntime/Components/Implementations/UIChangeEventVector2IntHandler.cs
+  uploadId: 900034

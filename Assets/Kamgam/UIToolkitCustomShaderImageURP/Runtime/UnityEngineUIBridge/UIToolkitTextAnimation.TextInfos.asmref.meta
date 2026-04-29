@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9e359dca84ca41f448369dabcc14e1d9
+AssemblyDefinitionReferenceImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Runtime/UnityEngineUIBridge/UIToolkitTextAnimation.TextInfos.asmref
+  uploadId: 809044

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7c563538219cdf84a96c36190575b3c5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 264903
+  packageName: UI Toolkit Playmaker Integration
+  packageVersion: 1.3.0
+  assetPath: Assets/Kamgam/UIToolkitPlaymaker/Runtime/Scripts/Actions/Attributes/UITKMoveChild.cs
+  uploadId: 733146

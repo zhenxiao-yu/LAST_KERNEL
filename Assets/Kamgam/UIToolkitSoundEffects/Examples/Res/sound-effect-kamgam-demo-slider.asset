@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db132c1c5d0a80141bca666ec148e2f3, type: 3}
+  m_Name: sound-effect-kamgam-demo-slider
+  m_EditorClassIdentifier: 
+  Id: kamgam-demo-slider
+  Events:
+  - eventType: 5
+    RepeatDelay: 0.05
+    ClipOrder: 0
+    Clips:
+    - {fileID: 8300000, guid: f59ab4b287b548844a92c7bba53e8a1b, type: 3}
+    AudioSourceSettings:
+      Output: {fileID: 0}
+      Mute: 0
+      BypassEffects: 0
+      BypassListenerEffects: 0
+      BypassReverbZones: 0
+      Loop: 0
+      LoopDuration: 2
+      Priority: 128
+      Volume: 0.7
+      Pitch: 0.8
+      StereoPan: 0
+      SpatialBlend: 0
+      ReverbZoneMix: 1
+    Messages: []
+  _editorInitialized: 1
+  UIBuilderUsedByCount: 3

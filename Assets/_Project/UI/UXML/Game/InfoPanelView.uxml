@@ -1,0 +1,26 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+
+    <!-- Bottom-left anchored info panel. Controller adds/removes lk-hidden based on active requests. -->
+    <ui:VisualElement name="info-panel-anchor" class="lk-hud-bottom lk-hidden"
+                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 360px;">
+
+        <ui:VisualElement name="info-panel-root" class="lk-info-panel">
+
+            <!-- Header — shown only when non-empty -->
+            <ui:Label name="lbl-info-header" class="lk-info-panel__header lk-hidden" />
+
+            <!-- Body -->
+            <ui:Label name="lbl-info-body" class="lk-info-panel__body" />
+
+            <!-- Optional action button — hidden until a request provides one -->
+            <ui:Button name="btn-info-action" class="lk-button lk-button--primary lk-hidden"
+                       style="margin-top: 8px; align-self: flex-start;" />
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

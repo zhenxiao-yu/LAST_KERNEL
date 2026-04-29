@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: fe42b394ba1903a43b1cb5f61a3985f7
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/EventsDemo/EventsDemo.unity
+  uploadId: 903736

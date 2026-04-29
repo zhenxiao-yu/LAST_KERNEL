@@ -6,7 +6,8 @@ namespace Markyu.LastKernel
     {
         Paused,
         Normal,
-        Fast
+        Fast,
+        VeryFast
     }
 
     public class TimeManager : MonoBehaviour
@@ -105,16 +106,18 @@ namespace Markyu.LastKernel
             UpdateTimeScale();
         }
 
+        private static float PaceToTimeScale(TimePace pace) => pace switch
+        {
+            TimePace.Paused   => 0f,
+            TimePace.Normal   => 1f,
+            TimePace.Fast     => 2f,
+            TimePace.VeryFast => 5f,
+            _                 => 1f,
+        };
+
         private void UpdateTimeScale()
         {
-            if (externalPauseLocks > 0)
-            {
-                Time.timeScale = 0f;
-            }
-            else
-            {
-                Time.timeScale = (float)CurrentPace;
-            }
+            Time.timeScale = externalPauseLocks > 0 ? 0f : PaceToTimeScale(CurrentPace);
         }
 
         /// <summary>
@@ -132,6 +135,16 @@ namespace Markyu.LastKernel
 
             OnTimePaceChanged?.Invoke(CurrentPace);
             timePaceIndex = (int)CurrentPace;
+        }
+
+        /// <summary>
+        /// Directly sets the time pace without cycling. Fires OnTimePaceChanged.
+        /// </summary>
+        public void SetTimePace(TimePace pace)
+        {
+            CurrentPace = pace;
+            UpdateTimeScale();
+            OnTimePaceChanged?.Invoke(CurrentPace);
         }
 
         /// <summary>

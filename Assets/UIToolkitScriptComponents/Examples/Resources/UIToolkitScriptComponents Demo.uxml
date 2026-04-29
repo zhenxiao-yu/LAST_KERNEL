@@ -1,0 +1,27 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Background" style="height: 100%; width: 100%; background-image: resource(&apos;Sky&apos;); background-color: rgb(255, 255, 255);">
+        <ui:ScrollView scroll-deceleration-rate="0,135" elasticity="0,1" horizontal-scroller-visibility="Hidden" style="height: 100%; width: 100%;">
+            <ui:VisualElement name="Body" style="padding-left: 37px; padding-right: 37px; padding-top: 37px; padding-bottom: 37px; background-color: rgba(255, 255, 255, 0.73); -unity-background-image-tint-color: rgb(255, 255, 255);">
+                <ui:Label text="Welcome to UI Toolkit Script Components" display-tooltip-when-elided="true" name="Title" style="-unity-font-style: bold; font-size: 26px; transform-origin: center; white-space: normal;" />
+                <ui:Label text="This asset will help you to connect your visal elements to scripts (MonoBehaviours)." display-tooltip-when-elided="true" name="Text" style="font-size: 16px; white-space: normal;" />
+                <ui:Button text="Change my Background" display-tooltip-when-elided="true" name="Button1" />
+                <ui:Slider picking-mode="Ignore" label="Slider (all upper case)" value="42" high-value="1" name="Slider1" />
+                <ui:Button text="Toggle the slider below me." display-tooltip-when-elided="true" name="Button2" style="transform-origin: left top;" />
+                <ui:Slider picking-mode="Ignore" label="Check the console :D" value="42" high-value="100" name="Slider2" style="transform-origin: center; display: flex; visibility: visible; overflow: visible;" />
+                <ui:Label text="This is some text that is controlled by a UITypewriter script.&#10;It simulates typing on a keyboard. You can do much more with custom components ;-)" display-tooltip-when-elided="true" name="TypewriterText" style="font-size: 16px; white-space: normal;" />
+                <ui:Button text="This Button has no Script Component&#10;(add one via &quot;Tools &gt; UI Toolkit Script Components &gt; Add or Select Script&quot;&#10;or use the &quot;Create Script for ..&quot; button in the Inspector." display-tooltip-when-elided="true" name="Button3" style="transform-origin: left top;" />
+                <ui:VisualElement name="Inputs" style="margin-top: 30px;">
+                    <ui:Label text="Inputs" display-tooltip-when-elided="true" style="-unity-font-style: bold; font-size: 26px; transform-origin: center; white-space: normal;" />
+                    <ui:Toggle label="Test Toggle" name="InputTitle" />
+                    <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" text="filler text" name="Text1" />
+                    <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" name="Slider3" />
+                    <ui:SliderInt picking-mode="Ignore" label="SliderInt" value="42" high-value="100" name="SliderInt1" />
+                    <ui:MinMaxSlider picking-mode="Ignore" label="Min/Max Slider" min-value="10" max-value="12" low-limit="-10" high-limit="40" name="MinMaxSlider1" style="cursor: resource(&apos;Sky&apos;);" />
+                    <ui:DropdownField label="Dropdown" index="0" choices="Choice A,Choice B,Choice C" name="DropDown1" />
+                </ui:VisualElement>
+                <ui:RadioButton label="Radio Button" name="RadioBtn1" />
+                <ui:RadioButtonGroup label="Radio Button Group" value="-1" choices="Choice 1,Choice 2,Choice 3" name="RadioGroup1" />
+            </ui:VisualElement>
+        </ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

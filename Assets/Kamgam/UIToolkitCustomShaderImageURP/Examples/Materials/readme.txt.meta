@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: db8979e28bb367e46837a352acc73448
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Examples/Materials/readme.txt
+  uploadId: 809044

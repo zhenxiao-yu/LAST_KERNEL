@@ -16,6 +16,11 @@
     background-color: var(--lk-bg);
 }
 
+/* Semi-transparent overlay — use with .lk-screen for in-game overlays (e.g. pause) */
+.lk-screen--overlay {
+    background-color: var(--lk-overlay-bg);
+}
+
 /* ════════════════════════════════════════════════════════════════════════
  * Panel
  * ════════════════════════════════════════════════════════════════════════ */
@@ -134,7 +139,6 @@
     padding-bottom: var(--lk-padding-small);
     min-height: var(--lk-touch-min);
     -unity-text-align: middle-center;
-    cursor: link;
     transition-property: border-color, color, background-color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
@@ -183,25 +187,33 @@
     color: var(--lk-warning);
 }
 
-/* Text-only — matches the current TextButton (underline on hover in C#) */
+/* Text-only nav button — left-border accent slides in on hover */
 .lk-button--text {
     border-width: 0;
+    border-left-width: 3px;
+    border-left-color: rgba(0, 0, 0, 0);
     background-color: rgba(0, 0, 0, 0);
     color: var(--lk-text);
-    padding-left: 0;
+    padding-left: var(--lk-padding-small);
     padding-right: 0;
+    min-width: 180px;
+    font-size: var(--lk-font-size-lg);
     -unity-text-align: middle-left;
+    transition-property: color, border-left-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
 }
 
 .lk-button--text:hover {
     color: var(--lk-accent);
     background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
+    border-left-color: var(--lk-accent);
 }
 
 .lk-button--text:active {
     color: var(--lk-text-header);
     background-color: rgba(0, 0, 0, 0);
+    border-left-color: var(--lk-accent-dim);
 }
 
 /* Icon-only square button */
@@ -217,7 +229,6 @@
     border-color: var(--lk-disabled);
     color: var(--lk-disabled);
     background-color: rgba(0, 0, 0, 0);
-    cursor: arrow;
     opacity: 0.55;
     transition-duration: 0ms;
 }
@@ -237,6 +248,29 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-md);
     white-space: normal;
+}
+
+/* Logo icon — sprite slot above logo text, hidden until assigned in C# */
+.lk-logo-icon {
+    display: none;
+    width: 72px;
+    height: 72px;
+    -unity-background-scale-mode: scale-to-fit;
+    margin-bottom: var(--lk-gap-small);
+    flex-shrink: 0;
+}
+
+.lk-logo-icon--visible {
+    display: flex;
+}
+
+/* Game logo — title screen only */
+.lk-label--logo {
+    color: var(--lk-accent);
+    font-size: var(--lk-font-size-logo);
+    -unity-font-style: bold;
+    letter-spacing: 4px;
+    white-space: nowrap;
 }
 
 /* Screen / section title */
@@ -271,6 +305,15 @@
 .lk-label--dim {
     color: var(--lk-text-dim);
     font-size: var(--lk-font-size-sm);
+}
+
+/* Fine-print hint — sits below an interactive control as a context note */
+.lk-hint {
+    font-size: var(--lk-font-size-xs);
+    color: var(--lk-text-dim);
+    white-space: normal;
+    padding-left: 4px;
+    padding-bottom: 4px;
 }
 
 /* High-contrast numeric value (HUD counters, costs) */
@@ -420,8 +463,11 @@
     background-color: var(--lk-panel-overlay);
     border-color: var(--lk-border-dim);
     border-width: 1px;
+    border-left-color: var(--lk-accent);
+    border-left-width: 3px;
     border-radius: 0;
-    padding: var(--lk-padding-medium);
+    padding: var(--lk-padding-small);
+    padding-left: var(--lk-padding-medium);
     flex-direction: column;
 }
 
@@ -429,7 +475,7 @@
     color: var(--lk-accent);
     font-size: var(--lk-font-size-md);
     -unity-font-style: bold;
-    margin-bottom: var(--lk-gap-small);
+    margin-bottom: 4px;
     white-space: nowrap;
 }
 
@@ -437,6 +483,7 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-sm);
     white-space: normal;
+    line-height: 1.4;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -458,7 +505,6 @@
     background-color: var(--lk-panel-overlay);
     border-bottom-color: var(--lk-border-dim);
     border-bottom-width: 1px;
-    cursor: link;
     transition-property: color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
@@ -483,7 +529,6 @@
     padding-right: var(--lk-padding-medium);
     border-bottom-color: var(--lk-border-dim);
     border-bottom-width: 1px;
-    cursor: link;
     transition-property: background-color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
@@ -508,7 +553,9 @@
     color: var(--lk-text-dim);
 }
 
-.lk-list__item--new .lk-list__item-label::after {
+/* .lk-list__item--new: add a danger-colored child VisualElement from C# to mark new items.
+   USS ::after is not supported — pseudo-elements must be real child elements in UI Toolkit. */
+.lk-list__item--new .lk-list__item-label {
     color: var(--lk-danger);
 }
 
@@ -558,7 +605,6 @@ Toggle {
     flex-direction: row;
     align-items: center;
     min-height: var(--lk-touch-min);
-    cursor: link;
 }
 
 .unity-toggle__label {
@@ -660,9 +706,11 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-save-slot {
     flex-direction: row;
     align-items: center;
-    min-height: 56px;
+    min-height: 64px;
     padding-left: var(--lk-padding-medium);
     padding-right: var(--lk-padding-medium);
+    padding-top: var(--lk-padding-small);
+    padding-bottom: var(--lk-padding-small);
     border-bottom-color: var(--lk-border-dim);
     border-bottom-width: 1px;
 }
@@ -679,6 +727,59 @@ Toggle:checked .unity-toggle__checkmark {
     align-items: center;
     flex-shrink: 0;
     margin-left: var(--lk-gap-medium);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Victory panel  (wave-clear reward summary)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-victory__title {
+    color: var(--lk-accent);
+    font-size: var(--lk-font-size-title);
+    -unity-font-style: bold;
+    letter-spacing: 3px;
+    -unity-text-align: middle-center;
+    margin-bottom: var(--lk-gap-medium);
+}
+
+.lk-victory__reward {
+    color: var(--lk-success);
+    font-size: var(--lk-font-size-xl);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    margin-bottom: var(--lk-gap-small);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Defeat panel  (game-over overlay)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-defeat__title {
+    color: var(--lk-danger);
+    font-size: var(--lk-font-size-title);
+    -unity-font-style: bold;
+    letter-spacing: 3px;
+    -unity-text-align: middle-center;
+    margin-bottom: var(--lk-gap-medium);
+}
+
+.lk-defeat__message {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-md);
+    -unity-text-align: middle-center;
+    white-space: normal;
+    margin-bottom: var(--lk-gap-large);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Watermark  (version / build label, bottom-left of title screen)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-watermark {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-sm);
+    opacity: 0.5;
+    white-space: nowrap;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -717,4 +818,223 @@ Toggle:checked .unity-toggle__checkmark {
 
 .lk-toast--danger {
     border-color: var(--lk-danger);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Scanline overlay  (title screen pixel-art CRT effect, UI layer)
+ * pointer-events: none so it never blocks clicks.
+ * Assign background-image from C# if you have a scanline tile sprite.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-scanline {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.06;
+    pointer-events: none;
+    -unity-background-scale-mode: stretch-to-fill;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * HUD stat box  (groups related stat counters with a shared border)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-hud-statbox {
+    flex-direction: row;
+    align-items: center;
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.lk-hud-statbox--night {
+    border-color: rgba(215, 55, 35, 0.35);
+}
+
+/* Vertical rule between stat counters inside a statbox */
+.lk-hud-divider-v {
+    width: 1px;
+    height: 22px;
+    background-color: var(--lk-border-dim);
+    margin-left: 4px;
+    margin-right: 4px;
+    flex-shrink: 0;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * HUD icon  (pixel-art colored square — replace background-image with
+ *             sprite in C# once assets exist; color acts as fallback)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-hud-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.lk-hud-icon--food   { background-color: var(--lk-success);           }
+.lk-hud-icon--gold   { background-color: var(--lk-warning);           }
+.lk-hud-icon--cards  { background-color: var(--lk-accent);            }
+.lk-hud-icon--hp     { background-color: var(--lk-danger);            }
+.lk-hud-icon--enemy  { background-color: var(--lk-accent-secondary);  }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * HUD phase badge  (outlined label chip wrapping the DAY / NIGHT label)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-hud-badge {
+    background-color: var(--lk-accent-faint);
+    border-color: var(--lk-border);
+    border-width: 1px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.lk-hud-badge--night {
+    background-color: rgba(215, 55, 35, 0.1);
+    border-color: rgba(215, 55, 35, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Button active state  (toggled via EnableInClassList from C#)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-button--active {
+    border-color: var(--lk-accent);
+    color: var(--lk-accent);
+    background-color: var(--lk-accent-faint);
+}
+
+.lk-button--active:hover {
+    background-color: rgba(0, 220, 255, 0.15);
+    border-color: var(--lk-accent);
+    color: var(--lk-accent);
+}
+
+/* Speed button — slightly wider to fit "2×" text cleanly */
+.lk-hud-speed-btn {
+    min-width: 44px;
+    font-size: var(--lk-font-size-lg);
+    -unity-font-style: bold;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Progress bar — success fill variant
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-progress-bar__fill--success { background-color: var(--lk-success); }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Side menu drawer  (SideMenuController.cs + SideMenuView.uxml)
+ * Right-edge slide panel; toggle tab protrudes left when closed.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-side-menu-panel {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    bottom: 0;
+    width: 300px;
+    background-color: var(--lk-panel);
+    border-left-color: var(--lk-border);
+    border-left-width: 2px;
+    flex-direction: column;
+    overflow: visible;
+}
+
+/* Pull tab — protrudes 44 px left of the panel, always on screen */
+.lk-side-menu-toggle {
+    position: absolute;
+    left: -44px;
+    top: 0;
+    width: 44px;
+    min-height: 88px;
+    background-color: var(--lk-panel);
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    border-right-width: 0;
+    border-radius: 0;
+    color: var(--lk-accent);
+    font-size: var(--lk-font-size-lg);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    transition-property: color, background-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
+}
+
+.lk-side-menu-toggle:hover {
+    background-color: var(--lk-accent-faint);
+    color: var(--lk-text-header);
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────── */
+
+.lk-tab-bar {
+    flex-direction: row;
+    border-bottom-color: var(--lk-border-dim);
+    border-bottom-width: 1px;
+    flex-shrink: 0;
+}
+
+.lk-tab {
+    flex-grow: 1;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    border-radius: 0;
+    border-bottom-width: 2px;
+    border-bottom-color: rgba(0, 0, 0, 0);
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-sm);
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    min-height: var(--lk-touch-min);
+    letter-spacing: 1px;
+    transition-property: color, border-bottom-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
+}
+
+.lk-tab:hover {
+    color: var(--lk-text);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.lk-tab--active {
+    color: var(--lk-accent);
+    border-bottom-color: var(--lk-accent);
+}
+
+.lk-tab--active:hover {
+    color: var(--lk-accent);
+    background-color: rgba(0, 0, 0, 0);
+}
+
+/* ── Footer strip (quest completion summary) ─────────────────────────── */
+
+.lk-side-menu-footer {
+    border-top-color: var(--lk-border-dim);
+    border-top-width: 1px;
+    padding: var(--lk-padding-small);
+    flex-shrink: 0;
+    background-color: var(--lk-panel-overlay);
+    flex-direction: row;
+    align-items: center;
+}
+
+/* "New" indicator dot — child VisualElement injected from C# */
+.lk-new-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--lk-danger);
+    flex-shrink: 0;
+    margin-left: var(--lk-gap-small);
+    align-self: center;
 }

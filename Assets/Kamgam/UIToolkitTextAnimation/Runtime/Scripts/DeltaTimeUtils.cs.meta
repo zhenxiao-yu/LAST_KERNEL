@@ -1,0 +1,10 @@
+﻿fileFormatVersion: 2
+guid: ca33257053b043ba9150b5b90374ced0
+timeCreated: 1740661000
+AssetOrigin:
+  serializedVersion: 1
+  productId: 308173
+  packageName: UI Toolkit Text Animation 1
+  packageVersion: 1.0.4
+  assetPath: Assets/Kamgam/UIToolkitTextAnimation/Runtime/Scripts/DeltaTimeUtils.cs
+  uploadId: 821104

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 68c0e73ee6b37694097d870db10d8beb
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Examples/Prefabs/Magic Staff.prefab
+  uploadId: 899760

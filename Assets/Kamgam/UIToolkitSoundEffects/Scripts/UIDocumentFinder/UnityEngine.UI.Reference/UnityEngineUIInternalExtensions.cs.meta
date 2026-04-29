@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6dca1120446faa24098f669d8abcd1fa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Scripts/UIDocumentFinder/UnityEngine.UI.Reference/UnityEngineUIInternalExtensions.cs
+  uploadId: 903736

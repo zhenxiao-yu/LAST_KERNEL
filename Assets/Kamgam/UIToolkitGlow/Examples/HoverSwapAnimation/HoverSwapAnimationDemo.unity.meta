@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 869ace0c83c3f7648a034573c32d6f21
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Examples/HoverSwapAnimation/HoverSwapAnimationDemo.unity
+  uploadId: 906916

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c13cf83c97c984697adaee36f0535a, type: 3}
   m_Name: UITheme
   m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.UITheme
-  themeSheet: {fileID: 0}
-  layoutSheet: {fileID: 0}
-  componentsSheet: {fileID: 0}
-  animationsSheet: {fileID: 0}
+  themeSheet: {fileID: 7433441132597879392, guid: b2cc30a98936cb64aafb91e99f96d041, type: 3}
+  layoutSheet: {fileID: 7433441132597879392, guid: 2d1296df433b4ca4da7b5d8fbac2f945, type: 3}
+  componentsSheet: {fileID: 7433441132597879392, guid: af360b202d942224e987282a996f8e79, type: 3}
+  animationsSheet: {fileID: 7433441132597879392, guid: 0edd5f8ede39041408ab237ba41967d6, type: 3}
   primaryFont: {fileID: 0}
   chineseFont: {fileID: 0}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3669eb5b02281454ea816877374ca6d7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 252260
+  packageName: UI Toolkit Particles - Particle Image for UI Elements
+  packageVersion: 1.3.5
+  assetPath: Assets/Kamgam/UIToolkitParticles/Examples/ParticlesDemoScreen1-ResourceAttractorPanel.asset
+  uploadId: 873680

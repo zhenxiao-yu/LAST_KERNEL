@@ -53,6 +53,7 @@
     --lk-gap-small:          8px;
     --lk-gap-medium:         16px;
     --lk-gap-large:          24px;
+    --lk-margin-screen:      120px; /* Title screen left inset            */
 
     /* ── Typography ───────────────────────────────────────────────────────
      * Sizes target 1920×1080 reference. Scale mode: Scale With Screen Size.
@@ -63,6 +64,7 @@
     --lk-font-size-lg:       18px;   /* Sub-header / resource values        */
     --lk-font-size-xl:       24px;   /* Panel header                        */
     --lk-font-size-title:    32px;   /* Screen title / main menu header     */
+    --lk-font-size-logo:     56px;   /* Game logo / splash title            */
 
     /* ── Touch targets — min 44 × 44 px (ART_DIRECTION.md) ───────────────*/
     --lk-touch-min:          44px;

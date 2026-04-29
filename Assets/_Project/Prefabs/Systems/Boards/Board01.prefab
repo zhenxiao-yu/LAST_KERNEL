@@ -50,6 +50,11 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -72,9 +77,11 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 1
@@ -105,3 +112,12 @@ MonoBehaviour:
   blendShapeWeightPerExpansionRow: 10
   purchasedExpansionRows: 0
   topMargin: 1.5
+  snapCardsToGrid: 1
+  startingColumns: 12
+  startingRows: 5
+  gridCellSize: {x: 1, y: 1.2}
+  showGridOverlay: 1
+  gridLineColor: {r: 1, g: 1, b: 1, a: 0.12}
+  gridBorderColor: {r: 1, g: 0.85, b: 0.45, a: 0.28}
+  gridLineThickness: 0.02
+  gridSurfaceOffset: 0.01

@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement style="flex-grow: 1; background-color: rgba(185, 222, 255, 0.82); flex-direction: row;">
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%;">
+            <ui:Button display-tooltip-when-elided="true" text="Button" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-click-submit" />
+            <ui:Slider picking-mode="Ignore" label="Slider" value="42" high-value="100" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-slider" />
+            <ui:SliderInt picking-mode="Ignore" label="SliderInt" value="42" high-value="100" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-slider" />
+            <ui:MinMaxSlider picking-mode="Ignore" label="Min/Max Slider" min-value="10" max-value="12" low-limit="-10" high-limit="40" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-slider" />
+            <ui:DropdownField label="Dropdown" index="0" choices="Option A,Option B,Option C" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-click-submit" />
+            <ui:Toggle label="Toggle" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-toggle" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); width: 50%;">
+            <ui:Label tabindex="-1" text="There is a sound that plays if the mouse is moved inside this label. Sounds like someone is typing really fast." display-tooltip-when-elided="true" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-move" style="height: 155px; white-space: normal; flex-shrink: 1; background-color: rgba(0, 115, 255, 0.2); padding-left: 10px; padding-right: 10px; padding-top: 10px; padding-bottom: 10px;" />
+            <ui:TextField picking-mode="Ignore" label="Text Field" value="filler text" multiline="true" class="kamgam-sfx kamgam-sfx-id-kamgam-demo-text-change" style="height: 108px; white-space: normal;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

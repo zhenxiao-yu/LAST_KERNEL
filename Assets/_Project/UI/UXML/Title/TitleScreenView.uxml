@@ -1,0 +1,173 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
+
+    <ui:VisualElement name="title-root" class="lk-screen lk-screen-bg">
+
+        <!-- ── Main menu ─────────────────────────────────────────────────────── -->
+        <!-- Left-aligned column: logo in upper third, buttons below centre -->
+        <ui:VisualElement name="title-main" class="lk-screen lk-column lk-justify-center"
+                          style="padding-left: 120px; padding-bottom: 80px;">
+
+            <!-- Logo + subtitle -->
+            <ui:VisualElement name="title-header" class="lk-column">
+                <!-- Sprite slot: assign background-image in C#, add class lk-logo-icon-visible to show -->
+                <ui:VisualElement name="logo-icon" class="lk-logo-icon" />
+                <ui:Label name="lbl-logo"     class="lk-label lk-label--logo" text="LAST KERNEL" />
+                <ui:Label name="lbl-subtitle" class="lk-label lk-label--dim"
+                          style="margin-top: 8px; margin-bottom: 40px;" />
+            </ui:VisualElement>
+
+            <!-- Accent rule between logo and nav -->
+            <ui:VisualElement class="lk-divider lk-divider--accent"
+                              style="width: 240px; margin-bottom: 32px;" />
+
+            <!-- Nav buttons -->
+            <ui:VisualElement name="title-buttons" class="lk-column">
+                <ui:Button name="btn-new-game"  class="lk-button lk-button--text lk-mb-sm" text="New Game" />
+                <ui:Button name="btn-load-game" class="lk-button lk-button--text lk-mb-sm" text="Load Game" />
+                <ui:Button name="btn-options"   class="lk-button lk-button--text lk-mb-sm" text="Options" />
+                <ui:Button name="btn-language"  class="lk-button lk-button--text lk-mb-sm" text="Language" />
+                <ui:Button name="btn-quit"      class="lk-button lk-button--text"           text="Quit" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <!-- Version footer — bottom-left -->
+        <ui:VisualElement name="title-footer" class="lk-hud-bottom lk-pad-sm"
+                          style="padding-left: 120px;">
+            <ui:Label name="lbl-version" class="lk-watermark" />
+        </ui:VisualElement>
+
+        <!-- ── Gameplay Prefs panel ───────────────────────────────────────────── -->
+        <ui:VisualElement name="panel-gameplay-prefs" class="lk-screen lk-hidden lk-center">
+            <ui:VisualElement class="lk-panel" style="width: 480px;">
+
+                <ui:VisualElement class="lk-panel__header">
+                    <ui:Label name="lbl-prefs-title" class="lk-panel__title" />
+                </ui:VisualElement>
+
+                <ui:ScrollView name="prefs-scroll" style="max-height: 420px;">
+                    <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
+
+                        <!-- Difficulty: cycling button -->
+                        <ui:Button name="btn-difficulty" class="lk-button lk-full-width lk-mb-sm" />
+
+                        <ui:VisualElement class="lk-divider lk-mb-sm" />
+
+                        <!-- Day duration -->
+                        <ui:Label name="lbl-duration" class="lk-label lk-label--body lk-mb-sm" />
+                        <ui:Slider name="slider-duration" low-value="30" high-value="300" value="120"
+                                   class="lk-mb-sm" />
+
+                        <ui:VisualElement class="lk-divider lk-mb-sm" />
+
+                        <!-- Starting resources: cycling button -->
+                        <ui:Button name="btn-start-resources" class="lk-button lk-full-width lk-mb-sm" />
+
+                        <ui:VisualElement class="lk-divider lk-mb-sm" />
+
+                        <!-- Friendly mode: cycling button -->
+                        <ui:Button name="btn-friendly-mode" class="lk-button lk-full-width lk-mb-sm" />
+
+                    </ui:VisualElement>
+                </ui:ScrollView>
+
+                <ui:VisualElement class="lk-panel__footer lk-justify-between">
+                    <ui:Button name="btn-prefs-cancel"  class="lk-button lk-mr-sm" />
+                    <ui:Button name="btn-prefs-confirm" class="lk-button lk-button--primary" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ── Saved Games panel ─────────────────────────────────────────────── -->
+        <ui:VisualElement name="panel-saved-games" class="lk-screen lk-hidden lk-center">
+            <ui:VisualElement class="lk-panel" style="width: 600px;">
+
+                <ui:VisualElement class="lk-panel__header">
+                    <ui:Label name="lbl-saves-title" class="lk-panel__title" />
+                </ui:VisualElement>
+
+                <ui:ScrollView name="saves-scroll" style="max-height: 480px;">
+                    <ui:Label name="lbl-saves-empty" class="lk-label lk-label--dim lk-hidden"
+                              style="padding: 24px; -unity-text-align: middle-center;" />
+                    <ui:VisualElement name="saves-container" class="lk-list" style="padding-bottom: 8px;" />
+                </ui:ScrollView>
+
+                <ui:VisualElement class="lk-panel__footer lk-justify-between">
+                    <ui:Button name="btn-saves-clear" class="lk-button lk-button--danger" />
+                    <ui:Button name="btn-saves-close" class="lk-button" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ── Options panel ─────────────────────────────────────────────────── -->
+        <ui:VisualElement name="panel-options" class="lk-screen lk-hidden lk-center">
+            <ui:VisualElement class="lk-panel" style="width: 520px;">
+
+                <ui:VisualElement class="lk-panel__header">
+                    <ui:Label name="lbl-opts-title" class="lk-panel__title" />
+                </ui:VisualElement>
+
+                <ui:ScrollView name="opts-scroll" style="max-height: 560px;">
+                    <ui:VisualElement class="lk-column" style="padding: 2px;">
+
+                        <!-- Graphics -->
+                        <ui:Label name="lbl-opts-graphics" class="lk-label lk-label--subheader lk-mb-sm" />
+                        <ui:Button name="btn-opt-resolution" class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-fullscreen" class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-vsync"      class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-fps"        class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-shadows"    class="lk-button lk-full-width lk-mb-sm" />
+
+                        <ui:VisualElement class="lk-divider lk-mb-sm" />
+
+                        <!-- Audio -->
+                        <ui:Label name="lbl-opts-audio" class="lk-label lk-label--subheader lk-mb-sm" />
+                        <ui:VisualElement class="lk-column lk-mb-sm">
+                            <ui:Label name="lbl-sfx" class="lk-label lk-label--body lk-mb-sm" />
+                            <ui:Slider name="slider-sfx" low-value="0" high-value="1" value="1" />
+                        </ui:VisualElement>
+                        <ui:VisualElement class="lk-column lk-mb-md">
+                            <ui:Label name="lbl-bgm" class="lk-label lk-label--body lk-mb-sm" />
+                            <ui:Slider name="slider-bgm" low-value="0" high-value="1" value="1" />
+                        </ui:VisualElement>
+
+                        <ui:VisualElement class="lk-divider lk-mb-sm" />
+
+                        <!-- Language -->
+                        <ui:Button name="btn-opt-language" class="lk-button lk-full-width lk-mb-sm" />
+
+                    </ui:VisualElement>
+                </ui:ScrollView>
+
+                <ui:VisualElement class="lk-panel__footer lk-justify-between">
+                    <ui:Button name="btn-opt-reset" class="lk-button lk-button--danger" />
+                    <ui:Button name="btn-opt-close" class="lk-button" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ── Confirmation modal ─────────────────────────────────────────────── -->
+        <ui:VisualElement name="panel-modal" class="lk-modal-backdrop lk-hidden">
+            <ui:VisualElement class="lk-modal">
+                <ui:Label name="lbl-modal-title" class="lk-modal__title" />
+                <ui:Label name="lbl-modal-body"  class="lk-modal__body" />
+                <ui:VisualElement class="lk-modal__actions">
+                    <ui:Button name="btn-modal-decline" class="lk-button lk-mr-sm" />
+                    <ui:Button name="btn-modal-accept"  class="lk-button lk-button--primary" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Scanline overlay — assign background-image from TitleBackgroundController; lk-hidden until texture set -->
+        <ui:VisualElement name="scanline-overlay" class="lk-scanline lk-hidden" />
+
+    </ui:VisualElement>
+
+</ui:UXML>

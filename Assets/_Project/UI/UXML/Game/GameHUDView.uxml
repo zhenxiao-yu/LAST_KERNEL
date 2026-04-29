@@ -1,0 +1,91 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Day strip: [DAY badge | Day N | time bar | pace]  ←spacer→
+                    [food | gold | cards stat box]  ←spacer→  [Start Night]
+         ══════════════════════════════════════════════════════════════════ -->
+    <ui:VisualElement name="hud-day" class="lk-hud-top lk-hud-strip lk-hud-strip--top">
+
+        <!-- Left: phase badge + day counter + time progress -->
+        <ui:Label name="lbl-phase" class="lk-phase-label lk-hud-badge" />
+        <ui:Label name="lbl-day" class="lk-label lk-label--value" style="margin-left: 10px; margin-right: 6px;" />
+        <ui:VisualElement class="lk-row lk-align-center">
+            <ui:VisualElement class="lk-progress-bar" style="width: 72px; flex-shrink: 0;">
+                <ui:VisualElement name="fill-time" class="lk-progress-bar__fill" />
+            </ui:VisualElement>
+            <ui:Button name="btn-pace" class="lk-button lk-button--icon" style="margin-left: 4px; width: 80px; font-size: 11px;" />
+        </ui:VisualElement>
+
+        <ui:VisualElement class="lk-grow" />
+
+        <!-- Centre: resource stat box with icon + value pairs -->
+        <ui:VisualElement class="lk-hud-statbox">
+            <!-- Nutrition / Food -->
+            <ui:VisualElement class="lk-resource-counter">
+                <ui:VisualElement name="icon-nutrition" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--food" />
+                <ui:Label name="lbl-nutrition" class="lk-resource-counter__value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="lk-hud-divider-v" />
+            <!-- Currency / Gold -->
+            <ui:VisualElement class="lk-resource-counter">
+                <ui:VisualElement name="icon-currency" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--gold" />
+                <ui:Label name="lbl-currency" class="lk-resource-counter__value" />
+            </ui:VisualElement>
+            <ui:VisualElement class="lk-hud-divider-v" />
+            <!-- Cards -->
+            <ui:VisualElement class="lk-resource-counter">
+                <ui:VisualElement name="icon-cards" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--cards" />
+                <ui:Label name="lbl-cards" class="lk-resource-counter__value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement class="lk-grow" />
+
+        <!-- Right: start night CTA -->
+        <ui:Button name="btn-start-night" class="lk-button lk-button--primary" />
+
+    </ui:VisualElement>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         Night strip: [NIGHT badge | Wave N]  ←spacer→
+                      [HP stat box: shield icon | HP label | HP bar | divider | skull icon | enemies]
+                      ←spacer→  [1×/2× speed button]
+         ══════════════════════════════════════════════════════════════════ -->
+    <ui:VisualElement name="hud-night" class="lk-hud-top lk-hud-strip lk-hud-strip--top lk-hud-strip--night lk-hidden">
+
+        <!-- Left: phase badge + wave counter -->
+        <ui:Label name="lbl-night-phase" class="lk-phase-label lk-phase-label--night lk-hud-badge lk-hud-badge--night" />
+        <ui:Label name="lbl-wave" class="lk-label lk-label--value" style="margin-left: 14px;" />
+
+        <ui:VisualElement class="lk-grow" />
+
+        <!-- Centre: HP + enemy stat box -->
+        <ui:VisualElement class="lk-hud-statbox lk-hud-statbox--night">
+            <!-- Base HP: icon + value text + bar -->
+            <ui:VisualElement class="lk-resource-counter">
+                <ui:VisualElement class="lk-hud-icon lk-hud-icon--hp" style="margin-right: 6px;" />
+                <ui:Label name="lbl-base-hp" class="lk-resource-counter__value" />
+                <ui:VisualElement class="lk-progress-bar lk-progress-bar--thick" style="width: 96px; margin-left: 8px; flex-shrink: 0;">
+                    <ui:VisualElement name="fill-base-hp" class="lk-progress-bar__fill" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement class="lk-hud-divider-v" />
+            <!-- Enemy count: icon + value -->
+            <ui:VisualElement class="lk-resource-counter">
+                <ui:VisualElement class="lk-hud-icon lk-hud-icon--enemy" style="margin-right: 6px;" />
+                <ui:Label name="lbl-enemies" class="lk-resource-counter__value" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <ui:VisualElement class="lk-grow" />
+
+        <!-- Right: speed toggle button -->
+        <ui:Button name="btn-speed" class="lk-button lk-button--icon lk-hud-speed-btn" style="min-width: 44px;" />
+
+    </ui:VisualElement>
+
+</ui:UXML>

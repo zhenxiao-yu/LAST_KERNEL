@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e11c4c5c4b449a812a3770fde37513, type: 3}
+  m_Name: UITK TextAnimation Sketchy
+  m_EditorClassIdentifier: 
+  m_id: sketchy
+  Delay: 0
+  Speed: 4
+  Modules:
+  - rid: 5019814298739016100
+  references:
+    version: 2
+    RefIds:
+    - rid: 5019814298739016100
+      type: {class: TextAnimationCharacterSketchyModule, ns: Kamgam.UIToolkitTextAnimation,
+        asm: UIToolkitTextAnimation}
+      data:
+        MaxDisplacement: {x: 0.15, y: 0.15}
+        MaxRotation: 5
+        Speed: 1
+        AffectedCorners:
+          BottomLeft: 1
+          TopLeft: 1
+          TopRight: 1
+          BottomRight: 1

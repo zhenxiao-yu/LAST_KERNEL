@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6eb7192b660542841b7c088d2d661849
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Runtime/EditorScripts/UIBuilderWindowWrapper.cs
+  uploadId: 906916

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d4733891581021443a62219882ee0a76
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Examples/WorldImageDemo.unity
+  uploadId: 899760

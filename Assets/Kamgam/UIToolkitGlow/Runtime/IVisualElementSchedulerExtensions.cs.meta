@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 9ea54c819c234d1488813fbfaed31a9e
+timeCreated: 1742308848
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Runtime/IVisualElementSchedulerExtensions.cs
+  uploadId: 906916

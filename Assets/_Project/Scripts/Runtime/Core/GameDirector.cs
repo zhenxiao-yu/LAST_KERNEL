@@ -140,6 +140,34 @@ namespace Markyu.LastKernel
         }
 
         /// <summary>
+        /// Saves the current game to a specific slot.
+        /// Pass 0 to auto-select the next available slot number.
+        /// If the target differs from the current slot, the current slot file is removed.
+        /// </summary>
+        public void SaveToSlot(int targetSlot)
+        {
+            if (GameData == null) return;
+
+            if (targetSlot <= 0)
+            {
+                var taken = new HashSet<int>();
+                foreach (var d in SavedGames.Values) taken.Add(d.SlotNumber);
+                targetSlot = 1;
+                while (taken.Contains(targetSlot)) targetSlot++;
+            }
+
+            if (GameData.SlotNumber != targetSlot)
+            {
+                string oldKey = $"SaveSlot{GameData.SlotNumber:D3}";
+                SavedGames.Remove(oldKey);
+                SaveSystem.DeleteSave(oldKey);
+                GameData.SlotNumber = targetSlot;
+            }
+
+            SaveGame();
+        }
+
+        /// <summary>
         /// Loads a previously saved game session.
         /// </summary>
         /// <param name="gameData">The GameData object loaded from a save file.</param>

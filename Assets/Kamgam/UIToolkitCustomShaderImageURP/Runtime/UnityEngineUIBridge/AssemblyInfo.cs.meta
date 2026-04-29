@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 7f622779c3e3fe343b275ad3dc911661
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 321399
+  packageName: UI Toolkit Custom Shader Image URP
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitCustomShaderImageURP/Runtime/UnityEngineUIBridge/AssemblyInfo.cs
+  uploadId: 809044

@@ -661,6 +661,11 @@ namespace Markyu.LastKernel
             {
                 chest.RestoreCoins(cardData.StoredCoins);
             }
+
+            if (cardData.IsAILocked && gameObject.TryGetComponent<VillagerLockToggle>(out var lockToggle))
+            {
+                lockToggle.RestoreLocked(true);
+            }
         }
         #endregion
 
@@ -675,6 +680,8 @@ namespace Markyu.LastKernel
             RefreshLocalizedPresentation();
         }
 
+        public void RefreshDisplay() => RefreshLocalizedPresentation();
+
         private void RefreshLocalizedPresentation()
         {
             if (Definition == null)
@@ -682,12 +689,17 @@ namespace Markyu.LastKernel
                 return;
             }
 
+            var lockToggle = GetComponent<VillagerLockToggle>();
+            string title = lockToggle != null && lockToggle.IsLocked
+                ? $"[#] {Definition.DisplayName}"
+                : Definition.DisplayName;
+
             if (titleText != null)
             {
-                titleText.text = Definition.DisplayName;
+                titleText.text = title;
             }
 
-            View?.SetTitle(Definition.DisplayName);
+            View?.SetTitle(title);
 
             if (_isHovered)
             {

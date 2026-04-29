@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 9f8d4520cc8b6984682b13cb9edaf6e5
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265521
+  packageName: UI Toolkit Shadows, Outlines & Glow
+  packageVersion: 1.3.6
+  assetPath: Assets/Kamgam/UIToolkitGlow/Examples/GlowDocumentDemo/GlowDocumentDemo.unity
+  uploadId: 906916

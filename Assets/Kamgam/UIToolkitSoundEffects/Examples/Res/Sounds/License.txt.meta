@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0a80e4add8fa02d4a8531eac660c0bfa
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 315956
+  packageName: UI Toolkit Sound Effects & Audio Events
+  packageVersion: 1.0.3
+  assetPath: Assets/Kamgam/UIToolkitSoundEffects/Examples/Res/Sounds/License.txt
+  uploadId: 903736

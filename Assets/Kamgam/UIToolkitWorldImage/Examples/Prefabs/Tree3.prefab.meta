@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f539be8d27f2f8f409c2bd969748e3b9
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Examples/Prefabs/Tree3.prefab
+  uploadId: 899760

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eeabc4a5ce9202246ae5f309268a833c
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276468
+  packageName: 3D Object Image for UI Toolkit - World objects, Mini-Maps, Inventory,
+    Portraits
+  packageVersion: 1.1.4
+  assetPath: Assets/Kamgam/UIToolkitWorldImage/Examples/Prefabs/Sword.prefab
+  uploadId: 899760
