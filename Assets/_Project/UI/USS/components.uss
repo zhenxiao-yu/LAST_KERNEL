@@ -819,3 +819,20 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-toast--danger {
     border-color: var(--lk-danger);
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Scanline overlay  (title screen pixel-art CRT effect, UI layer)
+ * pointer-events: none so it never blocks clicks.
+ * Assign background-image from C# if you have a scanline tile sprite.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-scanline {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.06;
+    pointer-events: none;
+    -unity-background-scale-mode: stretch-to-fill;
+}

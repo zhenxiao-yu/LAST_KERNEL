@@ -29,6 +29,7 @@
                 <ui:Button name="btn-new-game"  class="lk-button lk-button--text lk-mb-sm" text="New Game" />
                 <ui:Button name="btn-load-game" class="lk-button lk-button--text lk-mb-sm" text="Load Game" />
                 <ui:Button name="btn-options"   class="lk-button lk-button--text lk-mb-sm" text="Options" />
+                <ui:Button name="btn-language"  class="lk-button lk-button--text lk-mb-sm" text="Language" />
                 <ui:Button name="btn-quit"      class="lk-button lk-button--text"           text="Quit" />
             </ui:VisualElement>
 
@@ -163,6 +164,9 @@
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
+
+        <!-- Scanline overlay — assign background-image from TitleBackgroundController; lk-hidden until texture set -->
+        <ui:VisualElement name="scanline-overlay" class="lk-scanline lk-hidden" />
 
     </ui:VisualElement>
 

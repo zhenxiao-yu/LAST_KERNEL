@@ -28,6 +28,7 @@ namespace Markyu.LastKernel
         private Button _newGameButton;
         private Button _loadGameButton;
         private Button _optionsButton;
+        private Button _languageButton;
         private Button _quitButton;
 
         // ── Sub-panel controllers ──────────────────────────────────────────────
@@ -50,6 +51,7 @@ namespace Markyu.LastKernel
             _newGameButton  = Root.Q<Button>("btn-new-game");
             _loadGameButton = Root.Q<Button>("btn-load-game");
             _optionsButton  = Root.Q<Button>("btn-options");
+            _languageButton = Root.Q<Button>("btn-language");
             _quitButton     = Root.Q<Button>("btn-quit");
 
             if (_newGameButton == null)
@@ -61,6 +63,7 @@ namespace Markyu.LastKernel
             _newGameButton.clicked  += OpenGameplayPrefs;
             _loadGameButton.clicked += OpenSavedGames;
             _optionsButton.clicked  += OpenOptions;
+            _languageButton.clicked += CycleLanguage;
             _quitButton.clicked     += ShowQuitConfirmation;
 
             // Static labels → Localizer (auto-refreshed by base.OnLocalizationRefresh)
@@ -92,6 +95,7 @@ namespace Markyu.LastKernel
             if (_newGameButton  != null) _newGameButton.text  = GameLocalization.Get("title.newGame");
             if (_loadGameButton != null) _loadGameButton.text = GameLocalization.Get("title.loadGame");
             if (_optionsButton  != null) _optionsButton.text  = GameLocalization.Get("title.options");
+            if (_languageButton != null) _languageButton.text = GameLocalization.GetLanguageButtonLabel();
             if (_quitButton     != null) _quitButton.text     = GameLocalization.Get("title.quitGame");
 
             // Propagate to sub-panels (keeps hidden panels in sync for instant display)
@@ -102,6 +106,11 @@ namespace Markyu.LastKernel
         }
 
         // ── Button handlers ────────────────────────────────────────────────────
+
+        private void CycleLanguage()
+        {
+            GameLocalization.CycleLanguage();
+        }
 
         private void OpenGameplayPrefs()
         {
