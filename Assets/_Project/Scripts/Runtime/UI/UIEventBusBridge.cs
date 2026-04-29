@@ -22,6 +22,12 @@ namespace Markyu.LastKernel
             UIEventBus.OnLanguageCycleRequested += HandleLanguageCycle;
             UIEventBus.OnSettingsResetRequested += HandleSettingsReset;
             UIEventBus.OnStartNightRequested    += HandleStartNight;
+            UIEventBus.OnSaveRequested          += HandleSave;
+            UIEventBus.OnSaveToSlotRequested    += HandleSaveToSlot;
+            UIEventBus.OnOptionsRequested       += HandleOptions;
+            UIEventBus.OnBackToTitleRequested   += HandleBackToTitle;
+            UIEventBus.OnContinueToDayRequested += HandleContinueToDay;
+            UIEventBus.OnRetryRequested         += HandleRetry;
         }
 
         private void OnDisable()
@@ -33,28 +39,35 @@ namespace Markyu.LastKernel
             UIEventBus.OnLanguageCycleRequested -= HandleLanguageCycle;
             UIEventBus.OnSettingsResetRequested -= HandleSettingsReset;
             UIEventBus.OnStartNightRequested    -= HandleStartNight;
+            UIEventBus.OnSaveRequested          -= HandleSave;
+            UIEventBus.OnSaveToSlotRequested    -= HandleSaveToSlot;
+            UIEventBus.OnOptionsRequested       -= HandleOptions;
+            UIEventBus.OnBackToTitleRequested   -= HandleBackToTitle;
+            UIEventBus.OnContinueToDayRequested -= HandleContinueToDay;
+            UIEventBus.OnRetryRequested         -= HandleRetry;
         }
 
-        private static void HandleStartNewGame(GameplayPrefs prefs)
-        {
-            GameDirector.Instance?.NewGame(prefs);
-        }
+        private static void HandleStartNewGame(GameplayPrefs prefs) => GameDirector.Instance?.NewGame(prefs);
+        private static void HandleLoadGame(GameData data)           => GameDirector.Instance?.LoadGame(data);
+        private static void HandleDeleteGame(GameData data)         => GameDirector.Instance?.DeleteGame(data);
+        private static void HandleStartNight()                      => DefensePhaseController.Instance?.StartNight();
+        private static void HandleSave()                            => GameDirector.Instance?.SaveGame();
+        private static void HandleSaveToSlot(int slot)              => GameDirector.Instance?.SaveToSlot(slot);
+        private static void HandleOptions()                         => GameOptionsUI.Instance?.Open();
+        private static void HandleBackToTitle()                     => GameDirector.Instance?.BackToTitle();
+        private static void HandleContinueToDay()                   => DefensePhaseController.Instance?.ReturnToDay();
 
-        private static void HandleLoadGame(GameData data)
+        private static void HandleRetry()
         {
-            GameDirector.Instance?.LoadGame(data);
-        }
-
-        private static void HandleDeleteGame(GameData data)
-        {
-            GameDirector.Instance?.DeleteGame(data);
+            Time.timeScale = 1f;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(
+                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
 
         private static void HandleClearAllSaves()
         {
             GameDirector director = GameDirector.Instance;
             if (director == null) return;
-
             var snapshot = new List<GameData>(director.SavedGames.Values);
             foreach (GameData save in snapshot)
                 director.DeleteGame(save);
@@ -72,11 +85,6 @@ namespace Markyu.LastKernel
             GameLocalization.SetLanguageByCode(localeCode, force: true);
             GraphicsManager.Instance?.InitGraphicsSettings();
             AudioManager.Instance?.InitAudioMixerVolumes();
-        }
-
-        private static void HandleStartNight()
-        {
-            DefensePhaseController.Instance?.StartNight();
         }
     }
 }

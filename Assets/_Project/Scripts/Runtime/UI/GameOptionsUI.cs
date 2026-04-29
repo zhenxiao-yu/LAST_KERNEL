@@ -8,6 +8,8 @@ namespace Markyu.LastKernel
 {
     public class GameOptionsUI : LocalizedUIBehaviour
     {
+        public static GameOptionsUI Instance { get; private set; }
+
         private TextButton languageButton;
         private UnityAction<float> sfxSliderChangedHandler;
         private UnityAction<float> bgmSliderChangedHandler;
@@ -62,6 +64,7 @@ namespace Markyu.LastKernel
 
         private void Awake()
         {
+            Instance = this;
             EnsureLanguageButton();
             BindButtonEvents();
             BindSliderEvents();

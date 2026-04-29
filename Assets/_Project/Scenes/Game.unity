@@ -497,6 +497,89 @@ MonoBehaviour:
   spacing: 1.1
   zoneScale: {x: 1.125, y: 1, z: 1.125}
   spawnOffset: {x: 0, y: 0, z: -1.4}
+--- !u!1 &942625802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 942625806}
+  - component: {fileID: 942625805}
+  - component: {fileID: 942625804}
+  - component: {fileID: 942625803}
+  m_Layer: 0
+  m_Name: PauseMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &942625803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942625802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e904f1e414b25429f1a1a781dbc42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.UiToolkitSafeAreaAdapter
+--- !u!114 &942625804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942625802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fead5697276d0254695b0d8c8a9cdea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.PauseMenuController
+  rootController: {fileID: 0}
+  screenId: 
+--- !u!114 &942625805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942625802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 47cfb19dba122da40a6c5198dc72d7cc, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: b38ae8766411601478f8f1039ea45cd3, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!4 &942625806
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942625802}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6739.1084, y: 4600.6465, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1093070148
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,8 +831,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.GameHUDController
   rootController: {fileID: 0}
   screenId: 
-  baseCoreController: {fileID: 0}
-  battlefield: {fileID: 0}
 --- !u!114 &1315288013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1419,6 +1500,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8547574447435325085, guid: 5e2985d7789c5254b831d166e6931134, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6645959174885055648, guid: 5e2985d7789c5254b831d166e6931134, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1621,3 +1706,4 @@ SceneRoots:
   - {fileID: 1211518933}
   - {fileID: 2604837606948666750}
   - {fileID: 1315288014}
+  - {fileID: 942625806}

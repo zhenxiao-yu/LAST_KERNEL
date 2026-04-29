@@ -24,18 +24,21 @@ namespace Markyu.LastKernel
 
         public IEnumerator Fade(float startAlpha, float endAlpha, float fadeDuration = 1.0f)
         {
-            if (canvasGroup == null) yield break;
+            if (this == null || canvasGroup == null) yield break;
 
             float elapsed = 0f;
             canvasGroup.blocksRaycasts = (endAlpha > 0.01f);
 
             while (elapsed < fadeDuration)
             {
+                if (this == null) yield break;
                 elapsed += Time.unscaledDeltaTime;
                 canvasGroup.alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / fadeDuration);
                 yield return null;
             }
-            canvasGroup.alpha = endAlpha;
+
+            if (this != null)
+                canvasGroup.alpha = endAlpha;
         }
     }
 }

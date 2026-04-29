@@ -16,6 +16,11 @@
     background-color: var(--lk-bg);
 }
 
+/* Semi-transparent overlay — use with .lk-screen for in-game overlays (e.g. pause) */
+.lk-screen--overlay {
+    background-color: var(--lk-overlay-bg);
+}
+
 /* ════════════════════════════════════════════════════════════════════════
  * Panel
  * ════════════════════════════════════════════════════════════════════════ */

@@ -1,0 +1,65 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
+
+    <!-- Full-screen overlay. Controller toggles lk-hidden to show or hide. -->
+    <ui:VisualElement name="pause-backdrop" class="lk-screen lk-screen--overlay lk-hidden">
+
+        <!-- Left column nav (matches title screen layout) -->
+        <ui:VisualElement name="pause-main" class="lk-screen lk-column lk-justify-center"
+                          style="padding-left: 120px; padding-bottom: 80px;">
+
+            <ui:Label name="lbl-pause-title" class="lk-label lk-label--logo"
+                      style="margin-bottom: 40px;" />
+
+            <ui:VisualElement class="lk-divider lk-divider--accent"
+                              style="width: 240px; margin-bottom: 32px;" />
+
+            <ui:VisualElement name="pause-buttons" class="lk-column">
+                <ui:Button name="btn-resume"        class="lk-button lk-button--text lk-mb-sm" />
+                <ui:Button name="btn-save"          class="lk-button lk-button--text lk-mb-sm" />
+                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-mb-sm" />
+                <ui:Button name="btn-back-to-title" class="lk-button lk-button--text" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <!-- Save slots panel: shown when Save is clicked -->
+        <ui:VisualElement name="panel-save-slots" class="lk-screen lk-hidden lk-center">
+            <ui:VisualElement class="lk-panel" style="width: 560px; max-height: 600px;">
+
+                <ui:VisualElement class="lk-panel__header">
+                    <ui:Label name="lbl-save-panel-title" class="lk-panel__title" />
+                </ui:VisualElement>
+
+                <ui:ScrollView name="save-scroll" class="lk-grow">
+                    <ui:Label name="lbl-save-empty" class="lk-label lk-label--dim lk-hidden"
+                              style="padding: 24px; -unity-text-align: middle-center;" />
+                    <ui:VisualElement name="save-slots-container" class="lk-list" />
+                </ui:ScrollView>
+
+                <ui:VisualElement class="lk-panel__footer lk-justify-between">
+                    <ui:Button name="btn-new-save-slot" class="lk-button" />
+                    <ui:Button name="btn-save-close"    class="lk-button" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- Confirm modal: rendered last so it layers above the save panel -->
+        <ui:VisualElement name="panel-confirm" class="lk-modal-backdrop lk-hidden">
+            <ui:VisualElement class="lk-modal">
+                <ui:Label name="lbl-confirm-title" class="lk-modal__title" />
+                <ui:Label name="lbl-confirm-body"  class="lk-modal__body" />
+                <ui:VisualElement class="lk-modal__actions">
+                    <ui:Button name="btn-confirm-cancel" class="lk-button lk-mr-sm" />
+                    <ui:Button name="btn-confirm-accept" class="lk-button lk-button--primary" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

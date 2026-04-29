@@ -94,6 +94,7 @@
 "title.clearSaves","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","[Delete All Saves]","[清除全部存档]","[Delete All Saves]","[Delete All Saves]","[Delete All Saves]","[Delete All Saves]","[Delete All Saves]","[Delete All Saves]"
 "pause.header","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","Paused","已暂停","Paused","Paused","Paused","Paused","Paused","Paused"
 "pause.resume","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","Resume","继续游戏","Resume","Resume","Resume","Resume","Resume","Resume"
+"pause.save","Placeholder translation - needs native review","Save Game","保存游戏","Save Game","Save Game","Save Game","Save Game","Save Game","Save Game"
 "pause.backToTitle","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","Save & Title","保存并返回标题","Save & Title","Save & Title","Save & Title","Save & Title","Save & Title","Save & Title"
 "menu.quests","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","Quests","任务","Quests","Quests","Quests","Quests","Quests","Quests"
 "menu.blueprints","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","Blueprints","蓝图","Blueprints","Blueprints","Blueprints","Blueprints","Blueprints","Blueprints"
@@ -222,6 +223,12 @@ This action cannot be undone.","Are you sure you want to delete save slot {0}?
 This action cannot be undone.","Are you sure you want to delete save slot {0}?
 This action cannot be undone.","Are you sure you want to delete save slot {0}?
 This action cannot be undone."
+"save.saveHeader","Placeholder translation - needs native review","Save Game","保存游戏","Save Game","Save Game","Save Game","Save Game","Save Game","Save Game"
+"save.overwrite","Placeholder translation - needs native review","Overwrite","覆盖","Overwrite","Overwrite","Overwrite","Overwrite","Overwrite","Overwrite"
+"save.overwriteTitle","Placeholder translation - needs native review","Overwrite Save?","覆盖存档？","Overwrite Save?","Overwrite Save?","Overwrite Save?","Overwrite Save?","Overwrite Save?","Overwrite Save?"
+"save.overwriteBody","Placeholder translation - needs native review","Overwrite Slot {0}? This cannot be undone.","覆盖存档槽 {0}？此操作无法撤销。","Overwrite Slot {0}? This cannot be undone.","Overwrite Slot {0}? This cannot be undone.","Overwrite Slot {0}? This cannot be undone.","Overwrite Slot {0}? This cannot be undone.","Overwrite Slot {0}? This cannot be undone.","Overwrite Slot {0}? This cannot be undone."
+"save.newSlot","Placeholder translation - needs native review","New Save","新存档","New Save","New Save","New Save","New Save","New Save","New Save"
+"save.currentSlot","Placeholder translation - needs native review","(current)","（当前）","(current)","(current)","(current)","(current)","(current)","(current)"
 "save.slotLabel","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","[Slot {0:D3}] {1}{2}","[存档 {0:D3}] {1}{2}","[Slot {0:D3}] {1}{2}","[Slot {0:D3}] {1}{2}","[Slot {0:D3}] {1}{2}","[Slot {0:D3}] {1}{2}","[Slot {0:D3}] {1}{2}","[Slot {0:D3}] {1}{2}"
 "save.progressSuffix","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated."," ({0}%)"," ({0}%)"," ({0}%)"," ({0}%)"," ({0}%)"," ({0}%)"," ({0}%)"," ({0}%)"
 "save.lastSaved","Legacy GameLocalization compatibility row. Keep until all direct GameLocalization.Get calls are migrated.","
