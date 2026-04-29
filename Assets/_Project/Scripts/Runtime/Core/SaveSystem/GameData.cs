@@ -294,17 +294,33 @@ namespace Markyu.LastKernel
         }
     }
 
+    public enum DifficultyPreset
+    {
+        Easy   = 0,
+        Normal = 1,
+        Hard   = 2
+    }
+
+    public enum StartingResourcesPreset
+    {
+        Minimal  = 0,
+        Standard = 1,
+        Generous = 2
+    }
+
     [System.Serializable]
     public class GameplayPrefs
     {
-        public int DayDuration;
-        public bool IsFriendlyMode;
+        public int                    DayDuration    = 120;
+        public bool                   IsFriendlyMode = false;
+        public DifficultyPreset       Difficulty     = DifficultyPreset.Normal;
+        public StartingResourcesPreset StartResources = StartingResourcesPreset.Standard;
 
         public GameplayPrefs() { }
 
         public GameplayPrefs(int dayDuration, bool isFriendlyMode)
         {
-            DayDuration = dayDuration;
+            DayDuration    = dayDuration;
             IsFriendlyMode = isFriendlyMode;
         }
     }

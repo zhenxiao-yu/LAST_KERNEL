@@ -5,19 +5,29 @@ namespace Markyu.LastKernel
 {
     /// <summary>
     /// Controls the Gameplay Preferences sub-panel (#panel-gameplay-prefs).
+    /// All settings use cycling buttons for visual consistency.
     /// On confirm, raises UIEventBus.OnStartNewGame with the selected settings.
     /// </summary>
     public sealed class GameplayPrefsController : UIToolkitComponentController
     {
         private readonly ModalController _modal;
 
-        private Label   _titleLabel;
-        private Label   _durationLabel;
-        private Slider  _durationSlider;
-        private Toggle  _friendlyToggle;
-        private Label   _friendlyLabel;
-        private Button  _cancelButton;
-        private Button  _confirmButton;
+        // ── Bound elements ─────────────────────────────────────────────────────
+
+        private Label  _titleLabel;
+        private Button _difficultyButton;
+        private Label  _durationLabel;
+        private Slider _durationSlider;
+        private Button _startResourcesButton;
+        private Button _friendlyButton;
+        private Button _cancelButton;
+        private Button _confirmButton;
+
+        // ── Runtime state ──────────────────────────────────────────────────────
+
+        private DifficultyPreset        _difficulty     = DifficultyPreset.Normal;
+        private StartingResourcesPreset _startResources = StartingResourcesPreset.Standard;
+        private bool                    _isFriendly     = false;
 
         public GameplayPrefsController(ModalController modal)
         {
@@ -28,22 +38,23 @@ namespace Markyu.LastKernel
 
         protected override void OnBind()
         {
-            _titleLabel     = Root.Q<Label>  ("lbl-prefs-title");
-            _durationLabel  = Root.Q<Label>  ("lbl-duration");
-            _durationSlider = Root.Q<Slider> ("slider-duration");
-            _friendlyToggle = Root.Q<Toggle> ("toggle-friendly");
-            _friendlyLabel  = Root.Q<Label>  ("lbl-friendly");
-            _cancelButton   = Root.Q<Button> ("btn-prefs-cancel");
-            _confirmButton  = Root.Q<Button> ("btn-prefs-confirm");
+            _titleLabel           = Root.Q<Label>  ("lbl-prefs-title");
+            _difficultyButton     = Root.Q<Button> ("btn-difficulty");
+            _durationLabel        = Root.Q<Label>  ("lbl-duration");
+            _durationSlider       = Root.Q<Slider> ("slider-duration");
+            _startResourcesButton = Root.Q<Button> ("btn-start-resources");
+            _friendlyButton       = Root.Q<Button> ("btn-friendly-mode");
+            _cancelButton         = Root.Q<Button> ("btn-prefs-cancel");
+            _confirmButton        = Root.Q<Button> ("btn-prefs-confirm");
 
-            _durationSlider.RegisterValueChangedCallback(evt =>
-                UpdateDurationLabel(Mathf.RoundToInt(evt.newValue)));
+            _durationSlider.RegisterValueChangedCallback(
+                evt => UpdateDurationLabel(Mathf.RoundToInt(evt.newValue)));
 
-            _friendlyToggle.RegisterValueChangedCallback(evt =>
-                UpdateFriendlyLabel(evt.newValue));
-
-            _cancelButton.clicked  += Hide;
-            _confirmButton.clicked += StartNewGame;
+            _difficultyButton.clicked     += CycleDifficulty;
+            _startResourcesButton.clicked += CycleStartResources;
+            _friendlyButton.clicked       += CycleFriendlyMode;
+            _cancelButton.clicked         += Hide;
+            _confirmButton.clicked        += StartNewGame;
         }
 
         // ── API ────────────────────────────────────────────────────────────────
@@ -54,7 +65,10 @@ namespace Markyu.LastKernel
             OnLocalizationRefresh();
         }
 
-        public void Hide() => Root.AddToClassList("lk-hidden");
+        public void Hide()
+        {
+            Root.AddToClassList("lk-hidden");
+        }
 
         // ── Localization ───────────────────────────────────────────────────────
 
@@ -64,15 +78,59 @@ namespace Markyu.LastKernel
             if (_cancelButton  != null) _cancelButton.text  = GameLocalization.Get("common.cancelButton");
             if (_confirmButton != null) _confirmButton.text = GameLocalization.Get("common.confirmButton");
 
-            if (_friendlyToggle != null)
-            {
-                _friendlyToggle.label = GameLocalization.Get("gameplay.friendlyModeLabel");
-                UpdateFriendlyLabel(_friendlyToggle.value);
-            }
-            if (_durationSlider != null) UpdateDurationLabel(Mathf.RoundToInt(_durationSlider.value));
+            UpdateDifficultyButton();
+            UpdateStartResourcesButton();
+            UpdateFriendlyButton();
+
+            if (_durationSlider != null)
+                UpdateDurationLabel(Mathf.RoundToInt(_durationSlider.value));
         }
 
-        // ── Private ────────────────────────────────────────────────────────────
+        // ── Difficulty ─────────────────────────────────────────────────────────
+
+        private void CycleDifficulty()
+        {
+            _difficulty = (DifficultyPreset)(((int)_difficulty + 1) % 3);
+            UpdateDifficultyButton();
+        }
+
+        private void UpdateDifficultyButton()
+        {
+            if (_difficultyButton == null) return;
+            string valueKey = _difficulty switch
+            {
+                DifficultyPreset.Easy => "gameplay.difficulty.easy",
+                DifficultyPreset.Hard => "gameplay.difficulty.hard",
+                _                     => "gameplay.difficulty.normal",
+            };
+            _difficultyButton.text =
+                GameLocalization.Get("gameplay.difficultyLabel") + ": " +
+                GameLocalization.Get(valueKey);
+        }
+
+        // ── Starting resources ─────────────────────────────────────────────────
+
+        private void CycleStartResources()
+        {
+            _startResources = (StartingResourcesPreset)(((int)_startResources + 1) % 3);
+            UpdateStartResourcesButton();
+        }
+
+        private void UpdateStartResourcesButton()
+        {
+            if (_startResourcesButton == null) return;
+            string valueKey = _startResources switch
+            {
+                StartingResourcesPreset.Minimal  => "gameplay.startResources.minimal",
+                StartingResourcesPreset.Generous => "gameplay.startResources.generous",
+                _                                => "gameplay.startResources.standard",
+            };
+            _startResourcesButton.text =
+                GameLocalization.Get("gameplay.startResourcesLabel") + ": " +
+                GameLocalization.Get(valueKey);
+        }
+
+        // ── Day duration ───────────────────────────────────────────────────────
 
         private void UpdateDurationLabel(int duration)
         {
@@ -80,19 +138,35 @@ namespace Markyu.LastKernel
                 _durationLabel.text = GameLocalization.Format("gameplay.dayDuration", duration);
         }
 
-        private void UpdateFriendlyLabel(bool isFriendly)
+        // ── Friendly mode ──────────────────────────────────────────────────────
+
+        private void CycleFriendlyMode()
         {
-            if (_friendlyLabel != null)
-                _friendlyLabel.text = isFriendly
-                    ? GameLocalization.Get("gameplay.friendlyOn")
-                    : GameLocalization.Get("gameplay.friendlyOff");
+            _isFriendly = !_isFriendly;
+            UpdateFriendlyButton();
         }
+
+        private void UpdateFriendlyButton()
+        {
+            if (_friendlyButton == null) return;
+            string stateKey = _isFriendly ? "gameplay.friendlyMode.on" : "gameplay.friendlyMode.off";
+            _friendlyButton.text =
+                GameLocalization.Get("gameplay.friendlyModeLabel") + ": " +
+                GameLocalization.Get(stateKey);
+        }
+
+        // ── Confirm ────────────────────────────────────────────────────────────
 
         private void StartNewGame()
         {
-            int  dayDuration = Mathf.RoundToInt(_durationSlider.value);
-            bool isFriendly  = _friendlyToggle.value;
-            UIEventBus.RaiseStartNewGame(new GameplayPrefs(dayDuration, isFriendly));
+            var prefs = new GameplayPrefs(
+                Mathf.RoundToInt(_durationSlider.value),
+                _isFriendly)
+            {
+                Difficulty     = _difficulty,
+                StartResources = _startResources
+            };
+            UIEventBus.RaiseStartNewGame(prefs);
             Hide();
         }
     }

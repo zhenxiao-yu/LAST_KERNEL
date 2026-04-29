@@ -307,6 +307,15 @@
     font-size: var(--lk-font-size-sm);
 }
 
+/* Fine-print hint — sits below an interactive control as a context note */
+.lk-hint {
+    font-size: var(--lk-font-size-xs);
+    color: var(--lk-text-dim);
+    white-space: normal;
+    padding-left: 4px;
+    padding-bottom: 4px;
+}
+
 /* High-contrast numeric value (HUD counters, costs) */
 .lk-label--value {
     color: var(--lk-text-header);
@@ -454,8 +463,11 @@
     background-color: var(--lk-panel-overlay);
     border-color: var(--lk-border-dim);
     border-width: 1px;
+    border-left-color: var(--lk-accent);
+    border-left-width: 3px;
     border-radius: 0;
-    padding: var(--lk-padding-medium);
+    padding: var(--lk-padding-small);
+    padding-left: var(--lk-padding-medium);
     flex-direction: column;
 }
 
@@ -463,7 +475,7 @@
     color: var(--lk-accent);
     font-size: var(--lk-font-size-md);
     -unity-font-style: bold;
-    margin-bottom: var(--lk-gap-small);
+    margin-bottom: 4px;
     white-space: nowrap;
 }
 
@@ -471,6 +483,7 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-sm);
     white-space: normal;
+    line-height: 1.4;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -693,9 +706,11 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-save-slot {
     flex-direction: row;
     align-items: center;
-    min-height: 56px;
+    min-height: 64px;
     padding-left: var(--lk-padding-medium);
     padding-right: var(--lk-padding-medium);
+    padding-top: var(--lk-padding-small);
+    padding-bottom: var(--lk-padding-small);
     border-bottom-color: var(--lk-border-dim);
     border-bottom-width: 1px;
 }
@@ -754,6 +769,17 @@ Toggle:checked .unity-toggle__checkmark {
     -unity-text-align: middle-center;
     white-space: normal;
     margin-bottom: var(--lk-gap-large);
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Watermark  (version / build label, bottom-left of title screen)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-watermark {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-sm);
+    opacity: 0.5;
+    white-space: nowrap;
 }
 
 /* ════════════════════════════════════════════════════════════════════════

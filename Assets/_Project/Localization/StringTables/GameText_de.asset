@@ -387,7 +387,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7029403654
-    m_Localized: '[Delete All Saves]'
+    m_Localized: Alle Speicherstaende loeschen
     m_Metadata:
       m_Items: []
   - m_Id: 7029403655
@@ -399,7 +399,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7029403657
-    m_Localized: Save & Title
+    m_Localized: Zurueck zum Titel
     m_Metadata:
       m_Items: []
   - m_Id: 7029403658
@@ -434,12 +434,14 @@ MonoBehaviour:
   - m_Id: 7033597953
     m_Localized: '{0}
 
+      
 
       {1}
 
+      
 
-      {2} defender(s) deployed against {3} enemy
-      unit(s).'
+      {2} defender(s) deployed
+      against {3} enemy unit(s).'
     m_Metadata:
       m_Items: []
   - m_Id: 7033597954
@@ -531,27 +533,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7037792256
-    m_Localized: '[Confirm]'
+    m_Localized: Bestaetigen
     m_Metadata:
       m_Items: []
   - m_Id: 7037792257
-    m_Localized: '[Cancel]'
+    m_Localized: Abbrechen
     m_Metadata:
       m_Items: []
   - m_Id: 7037792258
-    m_Localized: '[Close]'
+    m_Localized: Schliessen
     m_Metadata:
       m_Items: []
   - m_Id: 7037792259
-    m_Localized: '[Reset]'
+    m_Localized: Alles zuruecksetzen
     m_Metadata:
       m_Items: []
   - m_Id: 7037792260
-    m_Localized: '[Load]'
+    m_Localized: Laden
     m_Metadata:
       m_Items: []
   - m_Id: 7037792261
-    m_Localized: '[Delete]'
+    m_Localized: Loeschen
     m_Metadata:
       m_Items: []
   - m_Id: 7037792262
@@ -2758,6 +2760,202 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 9231413249
     m_Localized: A Null Anomaly leaks through the outer grid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294589722624
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277056
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277057
+    m_Localized: Overwrite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277058
+    m_Localized: Overwrite Save?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277059
+    m_Localized: Overwrite Slot {0}? This cannot be undone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277060
+    m_Localized: New Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277061
+    m_Localized: (current)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471360
+    m_Localized: Beginner's Guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471361
+    m_Localized: Otherworldly Ascension
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471362
+    m_Localized: Combat Training
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471363
+    m_Localized: Settlement Advancement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471364
+    m_Localized: Logistics & Supplies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471365
+    m_Localized: Area Exploration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471366
+    m_Localized: Island Basics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831488
+    m_Localized: TAG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831489
+    m_Localized: NACHT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831490
+    m_Localized: Nacht beginnen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831491
+    m_Localized: Nacht {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831492
+    m_Localized: HP {0} / {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831493
+    m_Localized: 'Feinde: {0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831494
+    m_Localized: Nahrung {0}/{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831495
+    m_Localized: G {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831496
+    m_Localized: Karten {0}/{1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831497
+    m_Localized: "0\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831498
+    m_Localized: "1\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831499
+    m_Localized: "2\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831500
+    m_Localized: Welle geloescht!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831501
+    m_Localized: Fortfahren
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831502
+    m_Localized: +{0} Schrott
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831503
+    m_Localized: "Der St\xFCtzpunkt ist gefallen"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831504
+    m_Localized: Alle Abwehr wurde ueberwunden.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831505
+    m_Localized: Erneut versuchen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297404100608
+    m_Localized: No saved games
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294912
+    m_Localized: Wave {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294913
+    m_Localized: 'Enemies: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294914
+    m_Localized: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294915
+    m_Localized: Fast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294916
+    m_Localized: 'Scrap salvaged: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489216
+    m_Localized: Friendly Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489217
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489218
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489219
+    m_Localized: Difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489220
+    m_Localized: Einfach
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489221
+    m_Localized: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489222
+    m_Localized: Schwer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489223
+    m_Localized: Starting Resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489224
+    m_Localized: Minimal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489225
+    m_Localized: Standard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489226
+    m_Localized: Grosszuegig
     m_Metadata:
       m_Items: []
   references:

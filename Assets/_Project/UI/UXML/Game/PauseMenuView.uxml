@@ -28,16 +28,16 @@
 
         <!-- Save slots panel: shown when Save is clicked -->
         <ui:VisualElement name="panel-save-slots" class="lk-screen lk-hidden lk-center">
-            <ui:VisualElement class="lk-panel" style="width: 560px; max-height: 600px;">
+            <ui:VisualElement class="lk-panel" style="width: 560px;">
 
                 <ui:VisualElement class="lk-panel__header">
                     <ui:Label name="lbl-save-panel-title" class="lk-panel__title" />
                 </ui:VisualElement>
 
-                <ui:ScrollView name="save-scroll" class="lk-grow">
+                <ui:ScrollView name="save-scroll" style="max-height: 480px;">
                     <ui:Label name="lbl-save-empty" class="lk-label lk-label--dim lk-hidden"
                               style="padding: 24px; -unity-text-align: middle-center;" />
-                    <ui:VisualElement name="save-slots-container" class="lk-list" />
+                    <ui:VisualElement name="save-slots-container" class="lk-list" style="padding-bottom: 8px;" />
                 </ui:ScrollView>
 
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
@@ -50,13 +50,13 @@
 
         <!-- Options panel: same structure as TitleScreen, layered above save panel -->
         <ui:VisualElement name="panel-options" class="lk-screen lk-hidden lk-center">
-            <ui:VisualElement class="lk-panel" style="width: 520px; max-height: 700px;">
+            <ui:VisualElement class="lk-panel" style="width: 520px;">
 
                 <ui:VisualElement class="lk-panel__header">
                     <ui:Label name="lbl-opts-title" class="lk-panel__title" />
                 </ui:VisualElement>
 
-                <ui:ScrollView name="opts-scroll" class="lk-grow">
+                <ui:ScrollView name="opts-scroll" style="max-height: 560px;">
                     <ui:VisualElement class="lk-column" style="padding: 2px;">
 
                         <!-- Graphics -->

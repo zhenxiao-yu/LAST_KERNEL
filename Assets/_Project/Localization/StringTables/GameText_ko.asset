@@ -391,7 +391,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7029403654
-    m_Localized: '[Delete All Saves]'
+    m_Localized: "\uC804\uCCB4 \uC800\uC7A5 \uC0AD\uC81C"
     m_Metadata:
       m_Items: []
   - m_Id: 7029403655
@@ -403,7 +403,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7029403657
-    m_Localized: Save & Title
+    m_Localized: "\uD0C0\uC774\uD2C0\uB85C \uB3CC\uC544\uAC00\uAE30"
     m_Metadata:
       m_Items: []
   - m_Id: 7029403658
@@ -438,12 +438,14 @@ MonoBehaviour:
   - m_Id: 7033597953
     m_Localized: '{0}
 
+      
 
       {1}
 
+      
 
-      {2} defender(s) deployed against {3} enemy
-      unit(s).'
+      {2} defender(s) deployed
+      against {3} enemy unit(s).'
     m_Metadata:
       m_Items: []
   - m_Id: 7033597954
@@ -535,27 +537,27 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7037792256
-    m_Localized: '[Confirm]'
+    m_Localized: "\uD655\uC778"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792257
-    m_Localized: '[Cancel]'
+    m_Localized: "\uCDE8\uC18C"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792258
-    m_Localized: '[Close]'
+    m_Localized: "\uB2EB\uAE30"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792259
-    m_Localized: '[Reset]'
+    m_Localized: "\uC804\uCCB4 \uCD08\uAE30\uD654"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792260
-    m_Localized: '[Load]'
+    m_Localized: "\uBD88\uB7EC\uC624\uAE30"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792261
-    m_Localized: '[Delete]'
+    m_Localized: "\uC0AD\uC81C"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792262
@@ -2762,6 +2764,202 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 9231413249
     m_Localized: A Null Anomaly leaks through the outer grid.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294589722624
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277056
+    m_Localized: Save Game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277057
+    m_Localized: Overwrite
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277058
+    m_Localized: Overwrite Save?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277059
+    m_Localized: Overwrite Slot {0}? This cannot be undone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277060
+    m_Localized: New Save
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294623277061
+    m_Localized: (current)
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471360
+    m_Localized: Beginner's Guide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471361
+    m_Localized: Otherworldly Ascension
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471362
+    m_Localized: Combat Training
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471363
+    m_Localized: Settlement Advancement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471364
+    m_Localized: Logistics & Supplies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471365
+    m_Localized: Area Exploration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294627471366
+    m_Localized: Island Basics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831488
+    m_Localized: "\uB0AE"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831489
+    m_Localized: "\uBC24"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831490
+    m_Localized: "\uBC24 \uC2DC\uC791"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831491
+    m_Localized: "\uBC24 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831492
+    m_Localized: HP {0} / {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831493
+    m_Localized: "\uC801\uFF1A{0} / {1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831494
+    m_Localized: "\uC74C\uC2DD {0}/{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831495
+    m_Localized: "\uAE08 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831496
+    m_Localized: "\uCE74\uB4DC {0}/{1}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831497
+    m_Localized: "0\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831498
+    m_Localized: "1\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831499
+    m_Localized: "2\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831500
+    m_Localized: "\uC6E8\uC774\uBE0C \uD074\uB9AC\uC5B4\uFF01"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831501
+    m_Localized: "\uACC4\uC18D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831502
+    m_Localized: "+{0} \uACE0\uCCA0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831503
+    m_Localized: "\uAE30\uC9C0\uAC00 \uD568\uB77D\uB418\uC5C8\uC2B5\uB2C8\uB2E4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831504
+    m_Localized: "\uBAA8\uB4E0 \uBC29\uC5B4\uC120\uC774 \uBB34\uB108\uC84C\uC2B5\uB2C8\uB2E4."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116294656831505
+    m_Localized: "\uB2E4\uC2DC \uC2DC\uB3C4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297404100608
+    m_Localized: No saved games
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294912
+    m_Localized: Wave {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294913
+    m_Localized: 'Enemies: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294914
+    m_Localized: Normal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294915
+    m_Localized: Fast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297408294916
+    m_Localized: 'Scrap salvaged: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489216
+    m_Localized: Friendly Mode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489217
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489218
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489219
+    m_Localized: Difficulty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489220
+    m_Localized: "\uC26C\uC6C0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489221
+    m_Localized: "\uBCF4\uD1B5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489222
+    m_Localized: "\uC5B4\uB824\uC6C0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489223
+    m_Localized: Starting Resources
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489224
+    m_Localized: "\uCD5C\uC18C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489225
+    m_Localized: "\uAE30\uBCF8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116297412489226
+    m_Localized: "\uD48D\uC871"
     m_Metadata:
       m_Items: []
   references:

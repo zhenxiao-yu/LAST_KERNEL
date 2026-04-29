@@ -95,21 +95,33 @@ namespace Markyu.LastKernel
             if (_quitButton     != null) _quitButton.text     = GameLocalization.Get("title.quitGame");
 
             // Propagate to sub-panels (keeps hidden panels in sync for instant display)
-            _modal?.OnLocalizationRefresh();
-            _gameplayPrefs?.OnLocalizationRefresh();
-            _savedGames?.OnLocalizationRefresh();
-            _gameOptions?.OnLocalizationRefresh();
+            if (_modal         != null) _modal.OnLocalizationRefresh();
+            if (_gameplayPrefs != null) _gameplayPrefs.OnLocalizationRefresh();
+            if (_savedGames    != null) _savedGames.OnLocalizationRefresh();
+            if (_gameOptions   != null) _gameOptions.OnLocalizationRefresh();
         }
 
         // ── Button handlers ────────────────────────────────────────────────────
 
-        private void OpenGameplayPrefs() => _gameplayPrefs?.Show();
-        private void OpenSavedGames()    => _savedGames?.Show();
-        private void OpenOptions()       => _gameOptions?.Show();
+        private void OpenGameplayPrefs()
+        {
+            if (_gameplayPrefs != null) _gameplayPrefs.Show();
+        }
+
+        private void OpenSavedGames()
+        {
+            if (_savedGames != null) _savedGames.Show();
+        }
+
+        private void OpenOptions()
+        {
+            if (_gameOptions != null) _gameOptions.Show();
+        }
 
         private void ShowQuitConfirmation()
         {
-            _modal?.Show(
+            if (_modal == null) return;
+            _modal.Show(
                 GameLocalization.Get("title.quitConfirmTitle"),
                 GameLocalization.Get("title.quitConfirmBody"),
                 Application.Quit);
