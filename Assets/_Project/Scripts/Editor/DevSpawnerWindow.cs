@@ -35,7 +35,7 @@ namespace Markyu.LastKernel
 
         // ─── Menu Item ───────────────────────────────────────────────────────
 
-        [MenuItem("Tools/LAST KERNEL/Dev Spawner")]
+        [MenuItem("LAST KERNEL/Dev/Dev Spawner", false, 1)]
         public static void Open()
         {
             var window = GetWindow<DevSpawnerWindow>("Dev Spawner");
@@ -53,7 +53,7 @@ namespace Markyu.LastKernel
             string[] guids = AssetDatabase.FindAssets("t:CardDefinition", new[] { "Assets/_Project" });
             _allDefinitions = guids
                 .Select(g => AssetDatabase.LoadAssetAtPath<CardDefinition>(AssetDatabase.GUIDToAssetPath(g)))
-                .Where(d => d != null)
+                .Where(d => d != null && d is not PackDefinition && d.Category != CardCategory.None)
                 .OrderBy(d => d.name)
                 .ToArray();
         }

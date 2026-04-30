@@ -8,11 +8,11 @@ namespace Markyu.LastKernel
 {
     /// <summary>
     /// Validates GameLocalization.TextEntries for EN and Simplified Chinese coverage.
-    /// Run via Tools → LAST KERNEL → Validate UI Localization Keys.
+    /// Run via LAST KERNEL → Validate → Inline Strings.
     /// </summary>
     public static class UILocalizationValidator
     {
-        [MenuItem("Tools/LAST KERNEL/Validate UI Localization Keys")]
+        [MenuItem("LAST KERNEL/Validate/Inline Strings", false, 101)]
         public static void ValidateKeys()
         {
             GameLocalization.Initialize();

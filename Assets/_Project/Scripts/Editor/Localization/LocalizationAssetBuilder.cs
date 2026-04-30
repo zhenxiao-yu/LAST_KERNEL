@@ -37,7 +37,7 @@ namespace Markyu.LastKernel.Localization.EditorTools
             new("Spanish", "es")
         };
 
-        [MenuItem("Last Kernel/Localization/Rebuild GameText Tables")]
+        [MenuItem("LAST KERNEL/Localization/Rebuild GameText Tables", false, 1)]
         public static void RebuildGameTextTables()
         {
             EnsureFolders();

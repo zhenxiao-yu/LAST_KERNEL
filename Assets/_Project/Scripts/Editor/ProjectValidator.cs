@@ -35,7 +35,7 @@ namespace Markyu.LastKernel
 
         // ─── Entry Points ─────────────────────────────────────────────────────
 
-        [MenuItem("Tools/LAST KERNEL/Validate Project")]
+        [MenuItem("LAST KERNEL/Validate/Full Validate", false, 1)]
         public static void ValidateProject()
         {
             var summary = new ValidationSummary();
@@ -75,7 +75,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== ProjectValidator: Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Validate All Game Data")]
+        [MenuItem("LAST KERNEL/Validate/Game Data", false, 50)]
         public static void ValidateAllGameData()
         {
             var summary = new ValidationSummary();
@@ -88,7 +88,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Detect Duplicate IDs")]
+        [MenuItem("LAST KERNEL/Validate/Duplicate IDs", false, 51)]
         public static void DetectDuplicateIds()
         {
             var summary = new ValidationSummary();
@@ -99,7 +99,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Find Missing References")]
+        [MenuItem("LAST KERNEL/Validate/Missing References", false, 52)]
         public static void FindMissingReferences()
         {
             var summary = new ValidationSummary();
@@ -109,7 +109,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Validate Card Prefabs")]
+        [MenuItem("LAST KERNEL/Validate/Card Prefabs", false, 53)]
         public static void ValidateCardPrefabsOnly()
         {
             var summary = new ValidationSummary();
@@ -119,7 +119,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Validate Recipes")]
+        [MenuItem("LAST KERNEL/Validate/Recipes", false, 54)]
         public static void ValidateRecipesOnly()
         {
             var summary = new ValidationSummary();
@@ -128,7 +128,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Validate Localization Keys")]
+        [MenuItem("LAST KERNEL/Validate/Addressable Strings", false, 100)]
         public static void ValidateLocalizationKeysOnly()
         {
             var summary = new ValidationSummary();
@@ -137,7 +137,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Validate Audio IDs")]
+        [MenuItem("LAST KERNEL/Validate/Audio IDs", false, 55)]
         public static void ValidateAudioIdsOnly()
         {
             var summary = new ValidationSummary();
@@ -146,7 +146,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Audit Odin Migration")]
+        [MenuItem("LAST KERNEL/Validate/Odin Migration", false, 56)]
         public static void AuditOdinMigrationOnly()
         {
             var summary = new ValidationSummary();
@@ -155,7 +155,7 @@ namespace Markyu.LastKernel
             Debug.Log($"=== Done — Errors: {summary.ErrorCount}, Warnings: {summary.WarningCount} ===");
         }
 
-        [MenuItem("Tools/LAST KERNEL/Open Game Database")]
+        [MenuItem("LAST KERNEL/Data/Open Game Database", false, 1)]
         public static void OpenGameDatabase()
         {
             string[] guids = AssetDatabase.FindAssets("t:GameDatabase", new[] { "Assets/_Project" });
