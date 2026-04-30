@@ -7,7 +7,8 @@
       "WebFetch(domain:stacklands.fandom.com)",
       "WebSearch",
       "WebFetch(domain:steamcommunity.com)",
-      "WebFetch(domain:kosgames.com)"
+      "WebFetch(domain:kosgames.com)",
+      "Bash(git commit -m ' *)"
     ],
     "deny": [
       "Read(Library/**)",

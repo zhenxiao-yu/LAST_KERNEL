@@ -18,6 +18,10 @@ namespace Markyu.LastKernel
 
         public bool OnClick(Vector3 clickPosition)
         {
+            var mgr = ColonyAIManager.Instance;
+            if (mgr == null || mgr.Settings == null || !mgr.Settings.EnableColonyAutopilot)
+                return false;
+
             SetLocked(!IsLocked);
             return true;
         }

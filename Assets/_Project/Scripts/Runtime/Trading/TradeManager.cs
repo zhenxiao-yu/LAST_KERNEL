@@ -57,6 +57,10 @@ namespace Markyu.LastKernel
 
         public CardDefinition CurrencyCard => currencyCard;
 
+        // Read by ColonyAIManager / AIPlanner for sell and buy-pack jobs.
+        public CardBuyer Buyer { get; private set; }
+        public IReadOnlyList<PackVendor> ActiveVendors => vendors;
+
         private readonly List<TradeZone> zones = new();
         private readonly List<PackVendor> vendors = new();
         private readonly List<TradeZone> highlightedZones = new();
@@ -86,6 +90,7 @@ namespace Markyu.LastKernel
             var buyer = Instantiate(buyerPrefab, transform);
             buyer.Initialize(currencyCard, spawnOffset);
             zones.Add(buyer);
+            Buyer = buyer;
 
             // Instantiate Vendors
             for (int i = 0; i < offeredPacks.Count; i++)
