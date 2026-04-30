@@ -31,6 +31,7 @@ namespace Markyu.LastKernel
 
         // ── Settings ──────────────────────────────────────────────────────────
         public static event Action OnLanguageCycleRequested;
+        public static event Action<GameLanguage> OnLanguageSelectRequested;
         public static event Action OnSettingsResetRequested;
 
         // ── Raise helpers ─────────────────────────────────────────────────────
@@ -50,7 +51,8 @@ namespace Markyu.LastKernel
         public static void RaiseSpeedToggleRequested()          => OnSpeedToggleRequested?.Invoke();
         public static void RaiseContinueToDayRequested()        => OnContinueToDayRequested?.Invoke();
         public static void RaiseRetryRequested()                => OnRetryRequested?.Invoke();
-        public static void RaiseLanguageCycleRequested()        => OnLanguageCycleRequested?.Invoke();
-        public static void RaiseSettingsResetRequested()        => OnSettingsResetRequested?.Invoke();
+        public static void RaiseLanguageCycleRequested()              => OnLanguageCycleRequested?.Invoke();
+        public static void RaiseLanguageSelectRequested(GameLanguage l) => OnLanguageSelectRequested?.Invoke(l);
+        public static void RaiseSettingsResetRequested()               => OnSettingsResetRequested?.Invoke();
     }
 }

@@ -265,10 +265,14 @@ namespace Markyu.LastKernel
 
             GUI.enabled = Application.isPlaying;
 
-            if (GUILayout.Button("English"))
-                GameLocalization.SetLanguage(GameLanguage.English);
-            if (GUILayout.Button("Simplified Chinese"))
-                GameLocalization.SetLanguage(GameLanguage.SimplifiedChinese);
+            if (GUILayout.Button("English"))           GameLocalization.SetLanguage(GameLanguage.English);
+            if (GUILayout.Button("简体中文"))           GameLocalization.SetLanguage(GameLanguage.SimplifiedChinese);
+            if (GUILayout.Button("繁體中文"))           GameLocalization.SetLanguage(GameLanguage.TraditionalChinese);
+            if (GUILayout.Button("日本語"))             GameLocalization.SetLanguage(GameLanguage.Japanese);
+            if (GUILayout.Button("한국어"))             GameLocalization.SetLanguage(GameLanguage.Korean);
+            if (GUILayout.Button("Français"))          GameLocalization.SetLanguage(GameLanguage.French);
+            if (GUILayout.Button("Deutsch"))           GameLocalization.SetLanguage(GameLanguage.German);
+            if (GUILayout.Button("Español"))           GameLocalization.SetLanguage(GameLanguage.Spanish);
 
             GUI.enabled = true;
         }

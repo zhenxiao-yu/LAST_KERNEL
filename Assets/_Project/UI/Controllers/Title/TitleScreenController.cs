@@ -33,10 +33,11 @@ namespace Markyu.LastKernel
 
         // ── Sub-panel controllers ──────────────────────────────────────────────
 
-        private ModalController        _modal;
-        private GameplayPrefsController _gameplayPrefs;
-        private SavedGamesController   _savedGames;
-        private GameOptionsController  _gameOptions;
+        private ModalController          _modal;
+        private GameplayPrefsController  _gameplayPrefs;
+        private SavedGamesController     _savedGames;
+        private GameOptionsController    _gameOptions;
+        private LanguageModalController  _langModal;
 
         // ── OnBind ─────────────────────────────────────────────────────────────
 
@@ -63,7 +64,7 @@ namespace Markyu.LastKernel
             _newGameButton.clicked  += OpenGameplayPrefs;
             _loadGameButton.clicked += OpenSavedGames;
             _optionsButton.clicked  += OpenOptions;
-            _languageButton.clicked += CycleLanguage;
+            if (_languageButton != null) _languageButton.clicked += OpenLanguageModal;
             _quitButton.clicked     += ShowQuitConfirmation;
 
             // Static labels → Localizer (auto-refreshed by base.OnLocalizationRefresh)
@@ -75,13 +76,16 @@ namespace Markyu.LastKernel
             _modal = new ModalController();
             _modal.Bind(Root.Q<VisualElement>("panel-modal"));
 
+            _langModal = new LanguageModalController();
+            _langModal.Bind(Root.Q<VisualElement>("panel-language"));
+
             _gameplayPrefs = new GameplayPrefsController(_modal);
             _gameplayPrefs.Bind(Root.Q<VisualElement>("panel-gameplay-prefs"));
 
             _savedGames = new SavedGamesController(_modal);
             _savedGames.Bind(Root.Q<VisualElement>("panel-saved-games"));
 
-            _gameOptions = new GameOptionsController(_modal.Show);
+            _gameOptions = new GameOptionsController(_modal.Show, OpenLanguageModal);
             _gameOptions.Bind(Root.Q<VisualElement>("panel-options"));
         }
 
@@ -95,11 +99,12 @@ namespace Markyu.LastKernel
             if (_newGameButton  != null) _newGameButton.text  = GameLocalization.Get("title.newGame");
             if (_loadGameButton != null) _loadGameButton.text = GameLocalization.Get("title.loadGame");
             if (_optionsButton  != null) _optionsButton.text  = GameLocalization.Get("title.options");
-            if (_languageButton != null) _languageButton.text = GameLocalization.GetLanguageButtonLabel();
+            if (_languageButton != null) _languageButton.text = GameLocalization.Get("ui.language");
             if (_quitButton     != null) _quitButton.text     = GameLocalization.Get("title.quitGame");
 
             // Propagate to sub-panels (keeps hidden panels in sync for instant display)
             if (_modal         != null) _modal.OnLocalizationRefresh();
+            if (_langModal     != null) _langModal.OnLocalizationRefresh();
             if (_gameplayPrefs != null) _gameplayPrefs.OnLocalizationRefresh();
             if (_savedGames    != null) _savedGames.OnLocalizationRefresh();
             if (_gameOptions   != null) _gameOptions.OnLocalizationRefresh();
@@ -107,10 +112,7 @@ namespace Markyu.LastKernel
 
         // ── Button handlers ────────────────────────────────────────────────────
 
-        private void CycleLanguage()
-        {
-            GameLocalization.CycleLanguage();
-        }
+        private void OpenLanguageModal() => _langModal?.Show();
 
         private void OpenGameplayPrefs()
         {

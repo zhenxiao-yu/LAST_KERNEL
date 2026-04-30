@@ -29,7 +29,7 @@
                 <ui:Button name="btn-new-game"  class="lk-button lk-button--text lk-mb-sm" text="New Game" />
                 <ui:Button name="btn-load-game" class="lk-button lk-button--text lk-mb-sm" text="Load Game" />
                 <ui:Button name="btn-options"   class="lk-button lk-button--text lk-mb-sm" text="Options" />
-                <ui:Button name="btn-language"  class="lk-button lk-button--text lk-mb-sm" text="Language" />
+                <ui:Button name="btn-language"  class="lk-button lk-button--text lk-mb-sm" />
                 <ui:Button name="btn-quit"      class="lk-button lk-button--text"           text="Quit" />
             </ui:VisualElement>
 
@@ -168,6 +168,37 @@
                     <ui:Button name="btn-modal-decline" class="lk-button lk-mr-sm" />
                     <ui:Button name="btn-modal-accept"  class="lk-button lk-button--primary" />
                 </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ── Language picker modal ─────────────────────────────────────────── -->
+        <ui:VisualElement name="panel-language" class="lk-modal-backdrop lk-hidden">
+            <ui:VisualElement class="lk-panel" style="width: 580px;">
+
+                <ui:VisualElement class="lk-panel__header">
+                    <ui:Label name="lbl-lang-title" class="lk-panel__title" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="lk-column" style="gap: 8px; padding-top: 4px; padding-bottom: 8px;">
+                    <ui:VisualElement class="lk-row" style="gap: 8px;">
+                        <ui:Button name="btn-lang-zh"  class="lk-button lk-lang-btn" />
+                        <ui:Button name="btn-lang-en"  class="lk-button lk-lang-btn" />
+                        <ui:Button name="btn-lang-zht" class="lk-button lk-lang-btn" />
+                        <ui:Button name="btn-lang-ja"  class="lk-button lk-lang-btn" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="lk-row" style="gap: 8px;">
+                        <ui:Button name="btn-lang-ko"  class="lk-button lk-lang-btn" />
+                        <ui:Button name="btn-lang-fr"  class="lk-button lk-lang-btn" />
+                        <ui:Button name="btn-lang-de"  class="lk-button lk-lang-btn" />
+                        <ui:Button name="btn-lang-es"  class="lk-button lk-lang-btn" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <ui:VisualElement class="lk-panel__footer lk-justify-between">
+                    <ui:Button name="btn-lang-cancel" class="lk-button" />
+                    <ui:Button name="btn-lang-apply"  class="lk-button lk-button--primary" />
+                </ui:VisualElement>
+
             </ui:VisualElement>
         </ui:VisualElement>
 

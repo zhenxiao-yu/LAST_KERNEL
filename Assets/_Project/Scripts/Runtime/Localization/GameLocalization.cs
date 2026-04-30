@@ -267,8 +267,10 @@ namespace Markyu.LastKernel
 
             ["common.confirmButton"] = new("确认",    "Confirm"),
             ["common.cancelButton"]  = new("取消",    "Cancel"),
+            ["common.applyButton"]   = new("应用",    "Apply"),
             ["common.closeButton"]   = new("关闭",    "Close"),
             ["common.resetButton"]   = new("重置全部", "Reset All"),
+            ["options.language.title"] = L("选择语言", "Select Language", "選擇語言", "言語を選択", "언어 선택", "Choisir la langue", "Sprache wahlen", "Seleccionar idioma"),
             ["common.loadButton"]    = new("读取",    "Load"),
             ["common.deleteButton"]  = new("删除",    "Delete"),
 

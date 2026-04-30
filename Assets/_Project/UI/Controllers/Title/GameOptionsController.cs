@@ -6,12 +6,13 @@ namespace Markyu.LastKernel
 {
     /// <summary>
     /// Controls the Options sub-panel (#panel-options): graphics cycles, audio
-    /// sliders, language toggle, and reset.  Mirrors GameOptionsUI logic but
-    /// routes intent through UIEventBus where applicable.
+    /// sliders, language button, and reset.  The language button delegates to a
+    /// LanguageModalController owned by the parent screen controller.
     /// </summary>
     public sealed class GameOptionsController : UIToolkitComponentController
     {
         private readonly Action<string, string, Action> _showConfirm;
+        private readonly Action _showLangModal;
 
         private Label  _titleLabel;
         private Label  _graphicsLabel;
@@ -31,9 +32,10 @@ namespace Markyu.LastKernel
         private Button _resetButton;
         private Button _closeButton;
 
-        public GameOptionsController(Action<string, string, Action> showConfirm)
+        public GameOptionsController(Action<string, string, Action> showConfirm, Action showLangModal)
         {
-            _showConfirm = showConfirm;
+            _showConfirm  = showConfirm;
+            _showLangModal = showLangModal;
         }
 
         // ── Binding ────────────────────────────────────────────────────────────
@@ -63,8 +65,8 @@ namespace Markyu.LastKernel
             _vSyncButton.clicked      += () => { GraphicsManager.Instance?.CycleVSync();            RefreshGraphicsLabels(); };
             _fpsButton.clicked        += () => { GraphicsManager.Instance?.CycleFrameRateCap();     RefreshGraphicsLabels(); };
             _shadowButton.clicked     += () => { GraphicsManager.Instance?.CycleShadowPreset();     RefreshGraphicsLabels(); };
-            if (_uiScaleButton != null) _uiScaleButton.clicked += () => { UIScaleManager.CycleScale(); UpdateUIScaleButton(); };
-            _languageButton.clicked   += UIEventBus.RaiseLanguageCycleRequested;
+            if (_uiScaleButton  != null) _uiScaleButton.clicked  += () => { UIScaleManager.CycleScale(); UpdateUIScaleButton(); };
+            if (_languageButton != null) _languageButton.clicked += () => _showLangModal?.Invoke();
             _resetButton.clicked      += ShowResetConfirmation;
             _closeButton.clicked      += Hide;
 
@@ -100,13 +102,13 @@ namespace Markyu.LastKernel
 
         public override void OnLocalizationRefresh()
         {
-            if (_titleLabel     != null) _titleLabel.text     = GameLocalization.Get("options.header");
-            if (_graphicsLabel  != null) _graphicsLabel.text  = GameLocalization.Get("ui.video");
-            if (_uiLabel        != null) _uiLabel.text        = GameLocalization.Get("options.uiScale");
-            if (_audioLabel     != null) _audioLabel.text     = GameLocalization.Get("ui.audio");
-            if (_resetButton    != null) _resetButton.text    = GameLocalization.Get("common.resetButton");
-            if (_closeButton    != null) _closeButton.text    = GameLocalization.Get("common.closeButton");
-            if (_languageButton != null) _languageButton.text = GameLocalization.GetLanguageButtonLabel();
+            if (_titleLabel      != null) _titleLabel.text      = GameLocalization.Get("options.header");
+            if (_graphicsLabel   != null) _graphicsLabel.text   = GameLocalization.Get("ui.video");
+            if (_uiLabel         != null) _uiLabel.text         = GameLocalization.Get("options.uiScale");
+            if (_audioLabel      != null) _audioLabel.text      = GameLocalization.Get("ui.audio");
+            if (_languageButton  != null) _languageButton.text  = GameLocalization.GetLanguageButtonLabel();
+            if (_resetButton     != null) _resetButton.text     = GameLocalization.Get("common.resetButton");
+            if (_closeButton     != null) _closeButton.text     = GameLocalization.Get("common.closeButton");
 
             RefreshGraphicsLabels();
             UpdateUIScaleButton();

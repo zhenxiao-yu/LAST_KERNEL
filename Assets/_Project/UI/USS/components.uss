@@ -934,6 +934,17 @@ Toggle:checked .unity-toggle__checkmark {
     color: var(--lk-accent);
 }
 
+/* Language selector button — equal-width tile in a 2×4 grid inside the language modal */
+.lk-lang-btn {
+    flex: 1;
+    min-height: 52px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-size: var(--lk-font-size-sm);
+    white-space: normal;
+    -unity-text-align: middle-center;
+}
+
 /* Speed button — slightly wider to fit "2×" text cleanly */
 .lk-hud-speed-btn {
     min-width: 44px;
