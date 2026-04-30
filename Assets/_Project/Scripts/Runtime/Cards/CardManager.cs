@@ -134,7 +134,7 @@ namespace Markyu.LastKernel
         #endregion
 
         #region ICardEventSink
-        public void NotifyCardKilled(CardInstance card) => OnCardKilled?.Invoke(card);
+        public void NotifyCardKilled(CardInstance card) { OnCardKilled?.Invoke(card); NotifyStatsChanged(); }
         public void NotifyCardEquipped(CardDefinition card) => OnCardEquipped?.Invoke(card);
         public void NotifyStatsChanged() => OnStatsChanged?.Invoke(GetStatsSnapshot());
         #endregion
