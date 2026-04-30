@@ -29,7 +29,7 @@ MonoBehaviour:
   sellPrice: 5
   hasDurability: 0
   uses: 1
-  nutrition: 10
+  nutrition: 5
   maxHealth: 15
   attack: 2
   defense: 1
