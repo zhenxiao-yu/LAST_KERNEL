@@ -73,7 +73,7 @@ namespace Markyu.LastKernel
             SavedTime = new TimeData();
         }
 
-        public void SaveStacks(List<CardStack> stacks)
+        public void SaveStacks(IReadOnlyList<CardStack> stacks)
         {
             SavedStacks.Clear();
 
