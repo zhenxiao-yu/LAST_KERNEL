@@ -16,6 +16,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Michsky.LSS;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -74,10 +75,13 @@ namespace Markyu.LastKernel
 
         private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
         {
+            if (TimeManager.Instance != null)
+                TimeManager.Instance.SetExternalPause(false);
+
+            StartCoroutine(FadeInAfterLoad());
+
             if (incomingTravelers.Count > 0)
-            {
                 SpawnTravelers();
-            }
 
             if (scene.name != titleScene)
             {
@@ -91,6 +95,13 @@ namespace Markyu.LastKernel
                 bool wasLoaded = GameData.TryGetScene(out SceneData sceneData);
                 OnSceneDataReady?.Invoke(sceneData, wasLoaded);
             }
+        }
+
+        private IEnumerator FadeInAfterLoad()
+        {
+            // One frame grace period so the new scene's Awake/Start complete first.
+            yield return null;
+            yield return ScreenFader.Instance?.Fade(1f, 0f);
         }
 
         #region Core Game Flow
@@ -286,6 +297,8 @@ namespace Markyu.LastKernel
             StartCoroutine(TravelSequence(targetScene, travelersData));
         }
 
+        private const string LssPreset = "LastKernel";
+
         private IEnumerator TravelSequence(string sceneName, List<CardData> travelers)
         {
             if (TimeManager.Instance != null)
@@ -296,12 +309,9 @@ namespace Markyu.LastKernel
             if (travelers != null)
                 incomingTravelers = new List<CardData>(travelers);
 
-            yield return SceneManager.LoadSceneAsync(ResolveSceneName(sceneName));
-
-            if (TimeManager.Instance != null)
-                TimeManager.Instance.SetExternalPause(false);
-
-            yield return ScreenFader.Instance?.Fade(1f, 0f);
+            // LSS instantiates the loading screen overlay, then async-loads the scene
+            // and controls scene activation. HandleSceneLoaded picks up from there.
+            LSS_LoadingScreen.LoadScene(ResolveSceneName(sceneName), LssPreset);
         }
 
         private void SpawnTravelers()

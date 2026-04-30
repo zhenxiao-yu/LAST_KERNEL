@@ -17,6 +17,7 @@
   <Project Path="Kamgam.UIToolkitGlow.csproj" />
   <Project Path="_Project.Editor.csproj" />
   <Project Path="Kamgam.UIToolkitSoundEffects.csproj" />
+  <Project Path="Michsky.LSS.csproj" />
   <Project Path="Febucci.TextAnimatorForUnity.Runtime.csproj" />
   <Project Path="Kamgam.UIToolkitWorldImage.csproj" />
   <Project Path="Lofelt.NiceVibrations.Demo.csproj" />

@@ -1,15 +1,10 @@
 {
-  "name": "_Project.Runtime",
-  "rootNamespace": "Markyu.LastKernel",
+  "name": "Michsky.LSS",
+  "rootNamespace": "Michsky.LSS",
   "references": [
-    "DOTween",
-    "Michsky.LSS",
-    "Unity.InputSystem",
-    "Unity.Localization",
-    "Unity.RenderPipelines.Core.Runtime",
-    "Unity.RenderPipelines.Universal.Runtime",
     "Unity.TextMeshPro",
-    "UnityEngine.UI"
+    "UnityEngine.UI",
+    "Unity.InputSystem"
   ],
   "includePlatforms": [],
   "excludePlatforms": [],
