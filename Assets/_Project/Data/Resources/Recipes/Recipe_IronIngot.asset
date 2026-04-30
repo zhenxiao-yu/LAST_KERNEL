@@ -28,5 +28,5 @@ MonoBehaviour:
   resultingCard: {fileID: 11400000, guid: 8ca68e344bcdba54dabca7cbcc29f565, type: 2}
   isContinuous: 0
   allowExcessIngredients: 1
-  craftingDuration: 10
+  craftingDuration: 20
   randomWeight: 1

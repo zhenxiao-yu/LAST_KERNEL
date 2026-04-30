@@ -10,7 +10,11 @@
       "WebFetch(domain:kosgames.com)",
       "Bash(git commit -m ' *)",
       "Bash(py -3 -)",
-      "Bash(grep -v \"m_Name: $\")"
+      "Bash(grep -v \"m_Name: $\")",
+      "WebFetch(domain:modding.stacklands.co)",
+      "WebFetch(domain:yuridll.github.io)",
+      "WebFetch(domain:deltazulusigma.github.io)",
+      "WebFetch(domain:halfglassgaming.com)"
     ],
     "deny": [
       "Read(Library/**)",

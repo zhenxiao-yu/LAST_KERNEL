@@ -51,6 +51,10 @@ MonoBehaviour:
       Weight: 25
     - Card: {fileID: 11400000, guid: fd23682f1349fb942936e3125f7bf01d, type: 2}
       Weight: 25
+    - Card: {fileID: 11400000, guid: 7a3f9d2e15b804c68f1a2d3e4f5a6b7c, type: 2}
+      Weight: 12
+    - Card: {fileID: 11400000, guid: 0d6a2e5b48eb37f91b4d5a6b7c8d9e0f, type: 2}
+      Weight: 12
     PossibleRecipes:
     - {fileID: 11400000, guid: 206fa0c96e6272d42bc3bb3592d90125, type: 2}
     - {fileID: 11400000, guid: 4a6b6b8eb118af548a77334a2a9d198c, type: 2}
@@ -64,6 +68,10 @@ MonoBehaviour:
       Weight: 25
     - Card: {fileID: 11400000, guid: fd23682f1349fb942936e3125f7bf01d, type: 2}
       Weight: 25
+    - Card: {fileID: 11400000, guid: 7a3f9d2e15b804c68f1a2d3e4f5a6b7c, type: 2}
+      Weight: 12
+    - Card: {fileID: 11400000, guid: 0d6a2e5b48eb37f91b4d5a6b7c8d9e0f, type: 2}
+      Weight: 12
     PossibleRecipes:
     - {fileID: 11400000, guid: 206fa0c96e6272d42bc3bb3592d90125, type: 2}
     - {fileID: 11400000, guid: 4a6b6b8eb118af548a77334a2a9d198c, type: 2}
@@ -77,6 +85,10 @@ MonoBehaviour:
       Weight: 25
     - Card: {fileID: 11400000, guid: fd23682f1349fb942936e3125f7bf01d, type: 2}
       Weight: 25
+    - Card: {fileID: 11400000, guid: 7a3f9d2e15b804c68f1a2d3e4f5a6b7c, type: 2}
+      Weight: 12
+    - Card: {fileID: 11400000, guid: 0d6a2e5b48eb37f91b4d5a6b7c8d9e0f, type: 2}
+      Weight: 12
     PossibleRecipes:
     - {fileID: 11400000, guid: 206fa0c96e6272d42bc3bb3592d90125, type: 2}
     - {fileID: 11400000, guid: 4a6b6b8eb118af548a77334a2a9d198c, type: 2}

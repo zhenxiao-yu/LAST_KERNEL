@@ -3570,6 +3570,141 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497223980286656
+  - m_Id: 1523472685346816
+    m_Key: card.card_algaewafer.description
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543956
+  - m_Id: 1523472752455680
+    m_Key: card.card_signaljerky.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543957
+  - m_Id: 1523472752455681
+    m_Key: card.card_signaljerky.description
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543958
+  - m_Id: 1523472752455682
+    m_Key: card.card_coreration.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543959
+  - m_Id: 1523472752455683
+    m_Key: card.card_coreration.description
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543960
+  - m_Id: 1523472752455684
+    m_Key: card.card_mycochip.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543961
+  - m_Id: 1523472752455685
+    m_Key: card.card_mycochip.description
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543962
+  - m_Id: 1523472752455686
+    m_Key: card.card_vatbroth.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543963
+  - m_Id: 1523472752455687
+    m_Key: card.card_vatbroth.description
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543964
+  - m_Id: 1523472752455688
+    m_Key: recipe.recipe_algaewafer.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543965
+  - m_Id: 1523472752455689
+    m_Key: recipe.recipe_signaljerky.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543966
+  - m_Id: 1523472752455690
+    m_Key: recipe.recipe_mycochip.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543967
+  - m_Id: 1523472752455691
+    m_Key: recipe.recipe_coreration.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543968
+  - m_Id: 1523472752455692
+    m_Key: recipe.recipe_vatbroth.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543969
+  - m_Id: 1523475420033024
+    m_Key: common.applyButton
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543970
+  - m_Id: 1523475420033025
+    m_Key: options.language.title
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543971
+  - m_Id: 1523475420033026
+    m_Key: options.uiScale
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543972
+  - m_Id: 1523475420033027
+    m_Key: options.uiScale.label
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543973
+  - m_Id: 1523475420033028
+    m_Key: options.uiScale.small
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543974
+  - m_Id: 1523475420033029
+    m_Key: options.uiScale.medium
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543975
+  - m_Id: 1523475420033030
+    m_Key: options.uiScale.large
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543976
+  - m_Id: 1523475420033031
+    m_Key: options.uiScale.xlarge
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543977
+  - m_Id: 1523475424227328
+    m_Key: quest.footer.progress
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543978
+  - m_Id: 1523475533279232
+    m_Key: card.card_algaewafer.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543979
+  - m_Id: 1523475558445056
+    m_Key: card.card_market.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543980
+  - m_Id: 1523475558445057
+    m_Key: card.card_market.description
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543981
+  - m_Id: 1523475583610880
+    m_Key: recipe.recipe_market.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543982
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -7029,3 +7164,124 @@ MonoBehaviour:
       data:
         m_CommentText: Legacy GameLocalization compatibility row. Keep until all
           direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543956
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543957
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543958
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543959
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543960
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543961
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543962
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543963
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543964
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New card - needs art
+    - rid: 8800497247455543965
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New recipe
+    - rid: 8800497247455543966
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New recipe
+    - rid: 8800497247455543967
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New recipe
+    - rid: 8800497247455543968
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New recipe
+    - rid: 8800497247455543969
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New recipe
+    - rid: 8800497247455543970
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543971
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543972
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543973
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543974
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543975
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543976
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543977
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543978
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 8800497247455543979
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Consumables/Card_AlgaeWafer.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 8800497247455543980
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_Market.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 8800497247455543981
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_Market.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 8800497247455543982
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_Market.asset.
+          Non-English values are placeholders until reviewed.

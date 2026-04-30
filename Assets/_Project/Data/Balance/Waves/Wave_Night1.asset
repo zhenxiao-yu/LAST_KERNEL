@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Wave_Night1
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.NightWaveDefinition
   waveName: Night 1
-  flavorText: 
+  flavorText: Signal anomaly at the perimeter. Three crawler-class processes moving
+    toward the core. Run standard suppression protocol.
   enemies:
   - Enemy: {fileID: 11400000, guid: e1e7c1f58ee0f904db806fa6c6d2ba64, type: 2}
-    Count: 2
-  - Enemy: {fileID: 11400000, guid: cb7ef7527d6fef940956f509786c43c2, type: 2}
-    Count: 1
-  victoryMoraleDelta: 5
-  defeatMoraleDelta: -10
-  fatigueCostPerDefender: 2
+    Count: 3
+  victoryMoraleDelta: 8
+  defeatMoraleDelta: -5
+  fatigueCostPerDefender: 1
   salvagePerKill: 1

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f7fb60f81c4a649a9a909539c0bdb6, type: 3}
+  m_Name: Recipe_VatBroth
+  m_EditorClassIdentifier:
+  id: e5f6a7b8c9d00bc536e7f8a9b0c1d205
+  category: 3
+  displayName: 'Render Vat Broth'
+  requiredIngredients:
+  - card: {fileID: 11400000, guid: e8ac81eea747f3e4793f2930a3cb1246, type: 2}
+    count: 1
+    consumptionMode: 1
+  - card: {fileID: 11400000, guid: 1f1fe259feb05b14182a44039ff20c6b, type: 2}
+    count: 1
+    consumptionMode: 0
+  - card: {fileID: 11400000, guid: 9cc9900ae3f8a544abec849bb392bf73, type: 2}
+    count: 1
+    consumptionMode: 0
+  resultingCard: {fileID: 11400000, guid: 1e7b3f6c59fc48a02c5e6b7c8d9e0f1a, type: 2}
+  isContinuous: 0
+  allowExcessIngredients: 0
+  craftingDuration: 55
+  randomWeight: 1

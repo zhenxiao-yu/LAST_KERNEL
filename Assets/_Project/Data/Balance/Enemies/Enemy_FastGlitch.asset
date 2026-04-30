@@ -16,13 +16,13 @@ MonoBehaviour:
   maxHP: 5
   attack: 1
   defense: 0
-  attackSpeed: 80
-  accuracy: 90
-  dodge: 0
+  attackSpeed: 140
+  accuracy: 82
+  dodge: 15
   critChance: 5
   critMultiplier: 150
   artTexture: {fileID: 0}
   sprite: {fileID: 0}
   moveSpeed: 3.5
   damageToBase: 1
-  rewardAmount: 2
+  rewardAmount: 1

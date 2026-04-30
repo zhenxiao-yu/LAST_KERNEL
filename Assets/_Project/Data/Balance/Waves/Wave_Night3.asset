@@ -13,13 +13,16 @@ MonoBehaviour:
   m_Name: Wave_Night3
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.NightWaveDefinition
   waveName: Night 3
-  flavorText: 
+  flavorText: Heavy assault pattern confirmed. Armored bug-class units flanked by
+    fast fragments. They are testing the core directly.
   enemies:
   - Enemy: {fileID: 11400000, guid: e1e7c1f58ee0f904db806fa6c6d2ba64, type: 2}
+    Count: 2
+  - Enemy: {fileID: 11400000, guid: 0eef349d1f36bf3418933132323476ed, type: 2}
     Count: 3
-  - Enemy: {fileID: 11400000, guid: e1e7c1f58ee0f904db806fa6c6d2ba64, type: 2}
-    Count: 4
+  - Enemy: {fileID: 11400000, guid: cb7ef7527d6fef940956f509786c43c2, type: 2}
+    Count: 2
   victoryMoraleDelta: 5
-  defeatMoraleDelta: -10
+  defeatMoraleDelta: -15
   fatigueCostPerDefender: 2
-  salvagePerKill: 1
+  salvagePerKill: 2

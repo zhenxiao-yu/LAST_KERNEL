@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97f7fb60f81c4a649a9a909539c0bdb6, type: 3}
+  m_Name: Recipe_CoreRation
+  m_EditorClassIdentifier:
+  id: d4e5f6a7b8c90ab425d6e7f8a9b0c104
+  category: 3
+  displayName: 'Compress Core Ration'
+  requiredIngredients:
+  - card: {fileID: 11400000, guid: e8ac81eea747f3e4793f2930a3cb1246, type: 2}
+    count: 1
+    consumptionMode: 1
+  - card: {fileID: 11400000, guid: 7a3f9d2e15b804c68f1a2d3e4f5a6b7c, type: 2}
+    count: 1
+    consumptionMode: 0
+  - card: {fileID: 11400000, guid: 9cc9900ae3f8a544abec849bb392bf73, type: 2}
+    count: 1
+    consumptionMode: 0
+  resultingCard: {fileID: 11400000, guid: 9c5f1d4a37da26e80a3c4f5a6b7c8d9e, type: 2}
+  isContinuous: 0
+  allowExcessIngredients: 0
+  craftingDuration: 60
+  randomWeight: 1

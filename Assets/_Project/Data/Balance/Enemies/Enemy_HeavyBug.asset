@@ -16,11 +16,11 @@ MonoBehaviour:
   maxHP: 25
   attack: 4
   defense: 2
-  attackSpeed: 80
-  accuracy: 90
+  attackSpeed: 60
+  accuracy: 85
   dodge: 0
-  critChance: 5
-  critMultiplier: 150
+  critChance: 10
+  critMultiplier: 175
   artTexture: {fileID: 0}
   sprite: {fileID: 0}
   moveSpeed: 0.9

@@ -2955,7 +2955,121 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1116297412489226
-    m_Localized: Generoso
+    m_Localized: Generoso"card.card_algaewafer.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472685346816
+    m_Localized: Pressed algae matting from the hydroponic vats. Barely food, technically
+      sufficient. The district runs on worse.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455680
+    m_Localized: Dried Protein Strip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455681
+    m_Localized: Strips of printed protein cured with mineral salts. Shelf-stable,
+      dense, and tastes exactly like nothing.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455682
+    m_Localized: Core Ration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455683
+    m_Localized: High-density paste from compressed organics and binding agents.
+      No flavor. No texture. Full caloric load. Designed for emergencies that never
+      end.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455684
+    m_Localized: Myco Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455685
+    m_Localized: Dried fungal growth cultivated in the ventilation shafts. Earthy,
+      bitter, and surprisingly dense with nutrients. The vents provide.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455686
+    m_Localized: Vat Broth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455687
+    m_Localized: Protein-enriched broth rendered from mixed organics in the communal
+      processing vats. Standard district meal when supplies allow. Hot, barely.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455688
+    m_Localized: Press Vat Plating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455689
+    m_Localized: Cure Protein Strip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455690
+    m_Localized: Cultivate Myco Chip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455691
+    m_Localized: Compress Core Ration
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523472752455692
+    m_Localized: Render Vat Broth
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033024
+    m_Localized: Apply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033025
+    m_Localized: Seleccionar idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033026
+    m_Localized: UI Scale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033027
+    m_Localized: 'UI Scale: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033028
+    m_Localized: "Peque\xF1o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033029
+    m_Localized: Mediano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033030
+    m_Localized: Grande
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475420033031
+    m_Localized: Muy grande
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475424227328
+    m_Localized: 'Quests: {0} / {1}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475533279232
+    m_Localized: Vat Plating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475558445056
+    m_Localized: Market
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475558445057
+    m_Localized: Spend coins to buy cards. Click to cycle available listings.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1523475583610880
+    m_Localized: Build Market Stall
     m_Metadata:
       m_Items: []
   references:
