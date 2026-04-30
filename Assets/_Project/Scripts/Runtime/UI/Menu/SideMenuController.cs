@@ -28,6 +28,8 @@ namespace Markyu.LastKernel
 
         // ── UI elements ──────────────────────────────────────────────────
 
+        private UIDocument   _doc;
+        private VisualElement _root;
         private VisualElement _panel;
         private Button        _btnToggle;
         private Button        _btnTabQuests;
@@ -67,19 +69,19 @@ namespace Markyu.LastKernel
 
         private void Awake()
         {
-            var doc  = GetComponent<UIDocument>();
-            var root = doc.rootVisualElement;
+            _doc  = GetComponent<UIDocument>();
+            _root = _doc.rootVisualElement;
 
-            _panel           = root.Q("side-menu-panel");
-            _btnToggle       = root.Q<Button>("btn-toggle");
-            _btnTabQuests    = root.Q<Button>("btn-tab-quests");
-            _btnTabRecipes   = root.Q<Button>("btn-tab-recipes");
-            _questsTab       = root.Q("quests-tab");
-            _recipesTab      = root.Q("recipes-tab");
-            _questsList      = root.Q("quests-list");
-            _recipesList     = root.Q("recipes-list");
-            _lblQuestProgress  = root.Q<Label>("lbl-quest-progress");
-            _fillQuestProgress = root.Q("fill-quest-progress");
+            _panel           = _root.Q("side-menu-panel");
+            _btnToggle       = _root.Q<Button>("btn-toggle");
+            _btnTabQuests    = _root.Q<Button>("btn-tab-quests");
+            _btnTabRecipes   = _root.Q<Button>("btn-tab-recipes");
+            _questsTab       = _root.Q("quests-tab");
+            _recipesTab      = _root.Q("recipes-tab");
+            _questsList      = _root.Q("quests-list");
+            _recipesList     = _root.Q("recipes-list");
+            _lblQuestProgress  = _root.Q<Label>("lbl-quest-progress");
+            _fillQuestProgress = _root.Q("fill-quest-progress");
 
             // Start fully closed (off-screen to the right)
             SetTranslateX(PANEL_WIDTH);
@@ -94,6 +96,7 @@ namespace Markyu.LastKernel
 
         private void Start()
         {
+            UIScaleManager.Register(_doc, _root);
             BuildQuestGroupMap();
             PopulateQuests();
             PopulateRecipes();
@@ -103,6 +106,7 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
+            UIScaleManager.Unregister(_doc);
             _slideTween?.Kill();
             UnsubscribeEvents();
         }
@@ -219,6 +223,14 @@ namespace Markyu.LastKernel
 
             header.RegisterCallback<PointerUpEvent>(_ => ToggleGroup(group, chevron, countLabel));
 
+            bool hasActiveQuests = QuestManager.Instance?.AllQuests
+                .Any(qi => _questToGroup.TryGetValue(qi.QuestData, out var g) && g == group) ?? false;
+            if (!hasActiveQuests)
+            {
+                header.style.display = DisplayStyle.None;
+                body.style.display   = DisplayStyle.None;
+            }
+
             _questsList.Add(header);
             _questsList.Add(body);
         }
@@ -296,6 +308,13 @@ namespace Markyu.LastKernel
 
         private void HandleQuestActivated(QuestInstance quest)
         {
+            if (_questToGroup.TryGetValue(quest.QuestData, out var group))
+            {
+                if (_groupHeaders.TryGetValue(group, out var header))
+                    header.style.display = DisplayStyle.Flex;
+                if (_groupBodies.TryGetValue(group, out var body))
+                    body.style.display   = DisplayStyle.Flex;
+            }
             CreateQuestItem(quest);
             RefreshGroupCount(quest.QuestData);
             UpdateQuestProgress();
@@ -331,7 +350,7 @@ namespace Markyu.LastKernel
             int done  = QuestManager.Instance.CompletedQuestsCount;
 
             if (_lblQuestProgress != null)
-                _lblQuestProgress.text = $"{done} / {total}";
+                _lblQuestProgress.text = GameLocalization.Format("quest.footer.progress", done, total);
 
             if (_fillQuestProgress != null && total > 0)
                 _fillQuestProgress.style.width = new StyleLength(
