@@ -3076,6 +3076,71 @@ MonoBehaviour:
     m_Localized: Build Market Stall
     m_Metadata:
       m_Items: []
+  - m_Id: 1728643617009664
+    m_Localized: Basic Crawler
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341312
+    m_Localized: Fast Glitch
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341313
+    m_Localized: Heavy Bug
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341314
+    m_Localized: Void Sentinel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341315
+    m_Localized: Cascade Virus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341316
+    m_Localized: Night 1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341317
+    m_Localized: Signal anomaly at the perimeter. Three crawler-class processes moving
+      toward the core. Run standard suppression protocol.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341318
+    m_Localized: Night 2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341319
+    m_Localized: Mixed intrusion pattern. Fast-signal fragments outpacing the primary
+      crawlers. Prioritize the runners before they reach the core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341320
+    m_Localized: Night 3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341321
+    m_Localized: Heavy assault pattern confirmed. Armored bug-class units flanked
+      by fast fragments. They are testing the core directly.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341322
+    m_Localized: Night 4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341323
+    m_Localized: Something new on the grid. Slower. Heavier. It doesn't panic when
+      you hit it. Get your defenders in position before it reaches the core.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341324
+    m_Localized: Night 5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341325
+    m_Localized: Full breach attempt. Cascade-class fragments flooding every channel,
+      Sentinels on the main line. They know where the core is. This is not a probe.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

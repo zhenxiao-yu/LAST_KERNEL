@@ -3570,6 +3570,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497223980286656
+  - m_Id: 1523475533279232
+    m_Key: card.card_algaewafer.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497247455543979
   - m_Id: 1523472685346816
     m_Key: card.card_algaewafer.description
     m_Metadata:
@@ -3685,11 +3690,6 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497247455543978
-  - m_Id: 1523475533279232
-    m_Key: card.card_algaewafer.name
-    m_Metadata:
-      m_Items:
-      - rid: 8800497247455543979
   - m_Id: 1523475558445056
     m_Key: card.card_market.name
     m_Metadata:
@@ -3705,6 +3705,72 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497247455543982
+  - m_Id: 1728643617009664
+    m_Key: night.enemy.enemy_basiccrawler.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341312
+    m_Key: night.enemy.enemy_fastglitch.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341313
+    m_Key: night.enemy.enemy_heavybug.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341314
+    m_Key: night.enemy.enemy_voidsentinel.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497265337434212
+  - m_Id: 1728643667341315
+    m_Key: night.enemy.enemy_cascadevirus.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497265337434213
+  - m_Id: 1728643667341316
+    m_Key: night.wave.wave_night1.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341317
+    m_Key: night.wave.wave_night1.flavor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341318
+    m_Key: night.wave.wave_night2.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341319
+    m_Key: night.wave.wave_night2.flavor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341320
+    m_Key: night.wave.wave_night3.name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341321
+    m_Key: night.wave.wave_night3.flavor
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1728643667341322
+    m_Key: night.wave.wave_night4.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497265337434214
+  - m_Id: 1728643667341323
+    m_Key: night.wave.wave_night4.flavor
+    m_Metadata:
+      m_Items:
+      - rid: 8800497265337434215
+  - m_Id: 1728643667341324
+    m_Key: night.wave.wave_night5.name
+    m_Metadata:
+      m_Items:
+      - rid: 8800497265337434216
+  - m_Id: 1728643667341325
+    m_Key: night.wave.wave_night5.flavor
+    m_Metadata:
+      m_Items:
+      - rid: 8800497265337434217
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -7268,8 +7334,7 @@ MonoBehaviour:
     - rid: 8800497247455543979
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Consumables/Card_AlgaeWafer.asset.
-          Non-English values are placeholders until reviewed.
+        m_CommentText: New card - needs art
     - rid: 8800497247455543980
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
@@ -7285,3 +7350,27 @@ MonoBehaviour:
       data:
         m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_Market.asset.
           Non-English values are placeholders until reviewed.
+    - rid: 8800497265337434212
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New enemy - needs art
+    - rid: 8800497265337434213
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New enemy - needs art
+    - rid: 8800497265337434214
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New wave
+    - rid: 8800497265337434215
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New wave
+    - rid: 8800497265337434216
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New wave
+    - rid: 8800497265337434217
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: New wave
