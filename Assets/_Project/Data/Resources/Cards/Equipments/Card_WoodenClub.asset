@@ -27,7 +27,7 @@ MonoBehaviour:
   produceCard: {fileID: 0}
   produceInterval: 10
   isSellable: 1
-  sellPrice: 3
+  sellPrice: 5
   hasDurability: 0
   uses: 1
   nutrition: 0
