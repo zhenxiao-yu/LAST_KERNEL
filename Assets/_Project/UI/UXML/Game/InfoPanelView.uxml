@@ -2,6 +2,7 @@
     <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
     <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
     <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
 
     <!-- Bottom-left anchored info panel. Controller adds/removes lk-hidden based on active requests. -->
     <ui:VisualElement name="info-panel-anchor" class="lk-hud-bottom lk-hidden"

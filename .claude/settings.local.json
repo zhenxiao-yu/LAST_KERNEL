@@ -8,7 +8,9 @@
       "WebSearch",
       "WebFetch(domain:steamcommunity.com)",
       "WebFetch(domain:kosgames.com)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(py -3 -)",
+      "Bash(grep -v \"m_Name: $\")"
     ],
     "deny": [
       "Read(Library/**)",

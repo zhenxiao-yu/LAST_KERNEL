@@ -49,7 +49,11 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
-            if (Instance == this) Instance = null;
+            if (Instance == this)
+            {
+                Instance = null;
+                InfoPanel.Unregister();
+            }
         }
 
         // ── Binding ────────────────────────────────────────────────────────────
@@ -64,6 +68,7 @@ namespace Markyu.LastKernel
             if (_actionButton != null)
                 _actionButton.RegisterCallback<ClickEvent>(OnActionClicked);
 
+            InfoPanel.Register(RequestInfoDisplay, ClearInfoRequest, RegisterHover, UnregisterHover);
             RefreshDisplay();
         }
 

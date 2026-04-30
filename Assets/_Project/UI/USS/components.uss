@@ -16,6 +16,17 @@
     background-color: var(--lk-bg);
 }
 
+/* Full-screen black overlay for scene transitions. Opacity driven by ScreenFaderController. */
+.lk-screen-fader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(0, 0, 0);
+    opacity: 0;
+}
+
 /* Semi-transparent overlay — use with .lk-screen for in-game overlays (e.g. pause) */
 .lk-screen--overlay {
     background-color: var(--lk-overlay-bg);
@@ -128,6 +139,8 @@
 
 .lk-button {
     background-color: rgba(0, 0, 0, 0);
+    background-image: none;
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
     border-color: var(--lk-border-dim);
     border-width: 1px;
     border-radius: 0;
@@ -148,12 +161,16 @@
     border-color: var(--lk-border);
     color: var(--lk-text-header);
     background-color: var(--lk-accent-faint);
+    background-image: none;
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
 }
 
 .lk-button:active {
     border-color: var(--lk-accent);
     color: var(--lk-accent);
     background-color: rgba(0, 140, 170, 0.2);
+    background-image: none;
+    -unity-background-image-tint-color: rgba(0, 0, 0, 0);
 }
 
 /* Primary — filled accent, main call-to-action */

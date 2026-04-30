@@ -46,6 +46,7 @@ namespace Markyu.LastKernel
         private VisualElement _currencyIcon;
         private VisualElement _cardsIcon;
 
+        private Label _watermarkLabel;
         private bool _isDoubleSpeed;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
@@ -157,6 +158,10 @@ namespace Markyu.LastKernel
             _nutritionIcon = Root.Q<VisualElement>("icon-nutrition");
             _currencyIcon  = Root.Q<VisualElement>("icon-currency");
             _cardsIcon     = Root.Q<VisualElement>("icon-cards");
+
+            _watermarkLabel = Root.Q<Label>("lbl-watermark");
+            if (_watermarkLabel != null)
+                _watermarkLabel.text = "Last Kernel 堡垒街区试作 / 作者 Markyu";
 
             _startNightButton.clicked += UIEventBus.RaiseStartNightRequested;
             _paceButton.clicked       += HandlePaceToggle;
