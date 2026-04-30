@@ -15,6 +15,9 @@ namespace Markyu.LastKernel
         public event System.Action<PackDefinition> OnPackPurchased;
         public void NotifyPackPurchased(PackDefinition pack) => OnPackPurchased?.Invoke(pack);
 
+        public event System.Action<PackDefinition> OnPackOpened;
+        public void NotifyPackOpened(PackDefinition pack) => OnPackOpened?.Invoke(pack);
+
         [BoxGroup("Buyer")]
         [SerializeField, Tooltip("Prefab for the Card Buyer trade zone.")]
         private CardBuyer buyerPrefab;

@@ -2662,15 +2662,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 9227218944
-    m_Localized: A lost Recruit signals from the district edge.
+    m_Localized: "\u5931\u8E2A\u7684\u65B0\u52DF\u5458\u4ECE\u8857\u533A\u8FB9\u7F18\u53D1\u6765\u4FE1\u53F7\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 9231413248
-    m_Localized: A Glitched Raider crew is closing on the outer barricades.
+    m_Localized: "\u4E00\u7FA4\u6545\u969C\u63A0\u593A\u8005\u6B63\u5411\u5916\u56F4\u9632\u7EBF\u903C\u8FD1\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 9231413249
-    m_Localized: A Null Anomaly leaks through the outer grid.
+    m_Localized: "\u4E00\u4E2A\u7A7A\u503C\u5F02\u5E38\u4F53\u4ECE\u5916\u56F4\u7F51\u683C\u6E17\u6F0F\u800C\u5165\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 1116294589722624
@@ -2966,15 +2966,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1523475558445056
-    m_Localized: Market
+    m_Localized: "\u96C6\u5E02\u644A\u4F4D"
     m_Metadata:
       m_Items: []
   - m_Id: 1523475558445057
-    m_Localized: Spend coins to buy cards. Click to cycle available listings.
+    m_Localized: "\u82B1\u8D39\u4FE1\u7528\u70B9\u8D2D\u4E70\u5361\u724C\u3002\u70B9\u51FB\u6D4F\u89C8\u5F53\u524D\u5546\u54C1\u5217\u8868\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 1523475583610880
-    m_Localized: Build Market Stall
+    m_Localized: "\u5EFA\u9020\u96C6\u5E02\u644A\u4F4D"
     m_Metadata:
       m_Items: []
   - m_Id: 1728643617009664

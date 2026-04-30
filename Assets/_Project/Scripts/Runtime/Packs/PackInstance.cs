@@ -46,6 +46,7 @@ namespace Markyu.LastKernel
 
             if (UsesLeft <= 0)
             {
+                TradeManager.Instance?.NotifyPackOpened(Definition);
                 Kill();
             }
         }

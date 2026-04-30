@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8ae9fc9e89de42e4a72aeef2f935ea6d
   displayName: 'Kernel Research Crate'
-  description: 'Encrypted leads, archive fragments, and volatile access pieces. Buy when the district can survive a bad draw.'
+  description: 'Refined materials, mid-tier fabrication stock, and occasional workers. High recipe rate — buy this when expanding production.'
   artTexture: {fileID: 2800000, guid: 575f8d8a400ea97429cfefd688ca806e, type: 3}
   category: 0
   faction: 0

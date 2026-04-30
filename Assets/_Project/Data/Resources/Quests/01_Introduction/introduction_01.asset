@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 30a535c1d7c84b27ba7dfebebe3fd1dc
   title: 'Open Survivor Intake'
   description: 'Open the free intake crate. The district starts with whatever survived the drop.'
-  type: 3
+  type: 6
   targetCard: {fileID: 11400000, guid: 51c2d41ab5d413649adfbe0e3bb29d85, type: 2}
   targetRecipe: {fileID: 0}
   targetAmount: 1

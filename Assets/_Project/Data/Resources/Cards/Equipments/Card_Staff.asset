@@ -40,8 +40,8 @@ MonoBehaviour:
   criticalMultiplier: 150
   equipmentSlot: 0
   statModifiers:
-  - Stat: 0
-    value: 2
   - Stat: 1
-    value: 1
+    value: 2
+  - Stat: 0
+    value: 3
   classChangeResult: {fileID: 11400000, guid: 1f43e740a8b65554c84bd5888659eb25, type: 2}

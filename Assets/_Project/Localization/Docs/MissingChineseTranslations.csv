@@ -1,6 +1,7 @@
 group,key,en,zh-Hans
-encounter,encounter.encounter_villager.notification,A lost Recruit signals from the district edge.,A lost Recruit signals from the district edge.
-encounter,encounter.encounter_weekly_goblin.notification,A Glitched Raider crew is closing on the outer barricades.,A Glitched Raider crew is closing on the outer barricades.
-encounter,encounter.encounter_weekly_slime.notification,A Null Anomaly leaks through the outer grid.,A Null Anomaly leaks through the outer grid.
+ui,hud.baseHP,HP {0} / {1},HP {0} / {1}
+ui,hud.pace.fast,2×,2×
+ui,hud.pace.normal,1×,1×
+ui,hud.pace.paused,0×,0×
 ui,menu.title,Last Kernel,Last Kernel
 ui,save.progressSuffix, ({0}%), ({0}%)

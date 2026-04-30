@@ -95,6 +95,7 @@ namespace Markyu.LastKernel
             {
                 TradeManager.Instance.OnCardsSold += HandleCardsSold;
                 TradeManager.Instance.OnPackPurchased += HandlePackPurchased;
+                TradeManager.Instance.OnPackOpened += HandlePackPurchased;
             }
 
             if (TimeManager.Instance != null)
@@ -132,6 +133,7 @@ namespace Markyu.LastKernel
             {
                 TradeManager.Instance.OnCardsSold -= HandleCardsSold;
                 TradeManager.Instance.OnPackPurchased -= HandlePackPurchased;
+                TradeManager.Instance.OnPackOpened -= HandlePackPurchased;
             }
 
             if (TimeManager.Instance != null)
