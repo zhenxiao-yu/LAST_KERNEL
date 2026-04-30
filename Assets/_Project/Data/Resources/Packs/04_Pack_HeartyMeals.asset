@@ -42,7 +42,7 @@ MonoBehaviour:
   statModifiers: []
   classChangeResult: {fileID: 0}
   buyPrice: 10
-  minQuests: 18
+  minQuests: 12
   slots:
   - Entries:
     - Card: {fileID: 11400000, guid: f0816f0dc611c524c94410abbd34628c, type: 2}

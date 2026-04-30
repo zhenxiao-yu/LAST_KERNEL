@@ -32,7 +32,7 @@ MonoBehaviour:
   produceCard: {fileID: 0}
   produceInterval: 10
   isSellable: 0
-  sellPrice: 1
+  sellPrice: 3
   hasDurability: 0
   uses: 1
   nutrition: 0

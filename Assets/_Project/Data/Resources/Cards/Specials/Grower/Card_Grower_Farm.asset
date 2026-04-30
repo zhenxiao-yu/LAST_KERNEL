@@ -31,7 +31,7 @@ MonoBehaviour:
   hasDurability: 0
   uses: 1
   nutrition: 0
-  maxHealth: 15
+  maxHealth: 40
   attack: 2
   defense: 1
   attackSpeed: 100
