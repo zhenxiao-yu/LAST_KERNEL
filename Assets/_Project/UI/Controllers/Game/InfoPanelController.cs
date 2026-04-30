@@ -11,6 +11,8 @@ namespace Markyu.LastKernel
     {
         public static InfoPanelController Instance { get; private set; }
 
+        protected override bool AffectedByUIScale => true;
+
         // ── Private state ──────────────────────────────────────────────────────
 
         private static int s_requestCounter;

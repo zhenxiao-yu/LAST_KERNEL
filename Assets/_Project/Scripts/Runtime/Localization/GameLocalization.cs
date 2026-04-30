@@ -275,6 +275,12 @@ namespace Markyu.LastKernel
             ["options.header"] = new("运行设置", "Options"),
             ["options.sfx"] = new("音效 {0}%", "SFX {0}%"),
             ["options.bgm"] = new("背景音乐 {0}%", "BGM {0}%"),
+            ["options.uiScale"]        = new("界面文字大小", "UI Scale"),
+            ["options.uiScale.label"]  = new("界面文字大小：{0}", "UI Scale: {0}"),
+            ["options.uiScale.small"]  = L("Small",      "小",   "小",   "小",   "작음",   "Petit",      "Klein",     "Pequeño"),
+            ["options.uiScale.medium"] = L("Medium",     "中",   "中",   "中",   "보통",   "Moyen",      "Mittel",    "Mediano"),
+            ["options.uiScale.large"]  = L("Large",      "大",   "大",   "大",   "큼",     "Grand",      "Groß",      "Grande"),
+            ["options.uiScale.xlarge"] = L("Super Large","特大", "特大", "特大", "매우 큼","Très grand", "Sehr groß", "Muy grande"),
             ["options.resetTitle"] = new("重置系统设置？", "Reset Settings?"),
             ["options.resetBody"] = new(
                 "这会把全部图形与音频参数恢复为默认值，且无法撤销。",
@@ -374,7 +380,8 @@ namespace Markyu.LastKernel
             ["trade.expansionComplete"] = new("<color=#FFD700>空间已满</color>", "<color=#FFD700>Fully Expanded</color>"),
             ["trade.expansionCompleteBody"] = new("街区棋盘已经扩建到当前上限。", "The district board has reached its current expansion limit."),
 
-            ["quest.progress"] = new("进度：{0} / {1}", "Progress: {0} / {1}"),
+            ["quest.progress"]        = new("进度：{0} / {1}", "Progress: {0} / {1}"),
+            ["quest.footer.progress"] = new("任务：{0} / {1}", "Quests: {0} / {1}"),
 
             ["quest.group.新手引导"] = new("新手引导", "Beginner's Guide"),
             ["quest.group.异界升格"] = new("异界升格", "Otherworldly Ascension"),

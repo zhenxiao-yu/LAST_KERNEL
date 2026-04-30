@@ -20,6 +20,8 @@ namespace Markyu.LastKernel
         private Button _vSyncButton;
         private Button _fpsButton;
         private Button _shadowButton;
+        private Label  _uiLabel;
+        private Button _uiScaleButton;
         private Label  _audioLabel;
         private Label  _sfxLabel;
         private Slider _sfxSlider;
@@ -45,6 +47,8 @@ namespace Markyu.LastKernel
             _vSyncButton      = Root.Q<Button> ("btn-opt-vsync");
             _fpsButton        = Root.Q<Button> ("btn-opt-fps");
             _shadowButton     = Root.Q<Button> ("btn-opt-shadows");
+            _uiLabel          = Root.Q<Label>  ("lbl-opts-ui");
+            _uiScaleButton    = Root.Q<Button> ("btn-opt-ui-scale");
             _audioLabel       = Root.Q<Label>  ("lbl-opts-audio");
             _sfxLabel         = Root.Q<Label>  ("lbl-sfx");
             _sfxSlider        = Root.Q<Slider> ("slider-sfx");
@@ -59,6 +63,7 @@ namespace Markyu.LastKernel
             _vSyncButton.clicked      += () => { GraphicsManager.Instance?.CycleVSync();            RefreshGraphicsLabels(); };
             _fpsButton.clicked        += () => { GraphicsManager.Instance?.CycleFrameRateCap();     RefreshGraphicsLabels(); };
             _shadowButton.clicked     += () => { GraphicsManager.Instance?.CycleShadowPreset();     RefreshGraphicsLabels(); };
+            if (_uiScaleButton != null) _uiScaleButton.clicked += () => { UIScaleManager.CycleScale(); UpdateUIScaleButton(); };
             _languageButton.clicked   += UIEventBus.RaiseLanguageCycleRequested;
             _resetButton.clicked      += ShowResetConfirmation;
             _closeButton.clicked      += Hide;
@@ -97,12 +102,14 @@ namespace Markyu.LastKernel
         {
             if (_titleLabel     != null) _titleLabel.text     = GameLocalization.Get("options.header");
             if (_graphicsLabel  != null) _graphicsLabel.text  = GameLocalization.Get("ui.video");
+            if (_uiLabel        != null) _uiLabel.text        = GameLocalization.Get("options.uiScale");
             if (_audioLabel     != null) _audioLabel.text     = GameLocalization.Get("ui.audio");
             if (_resetButton    != null) _resetButton.text    = GameLocalization.Get("common.resetButton");
             if (_closeButton    != null) _closeButton.text    = GameLocalization.Get("common.closeButton");
             if (_languageButton != null) _languageButton.text = GameLocalization.GetLanguageButtonLabel();
 
             RefreshGraphicsLabels();
+            UpdateUIScaleButton();
             if (_sfxSlider != null) UpdateSfxLabel(_sfxSlider.value);
             if (_bgmSlider != null) UpdateBgmLabel(_bgmSlider.value);
         }
@@ -112,6 +119,7 @@ namespace Markyu.LastKernel
         private void RefreshFromManagers()
         {
             RefreshGraphicsLabels();
+            UpdateUIScaleButton();
             RefreshVolumeSliders();
         }
 
@@ -153,6 +161,13 @@ namespace Markyu.LastKernel
                 _bgmLabel.text = GameLocalization.Format("options.bgm", Mathf.RoundToInt(value * 100f));
         }
 
+        private void UpdateUIScaleButton()
+        {
+            if (_uiScaleButton == null) return;
+            string sizeLabel = GameLocalization.Get(UIScaleManager.GetScaleLabelKey(UIScaleManager.CurrentScale));
+            _uiScaleButton.text = GameLocalization.Format("options.uiScale.label", sizeLabel);
+        }
+
         private void ShowResetConfirmation()
         {
             if (_showConfirm != null)
@@ -169,6 +184,7 @@ namespace Markyu.LastKernel
             GameLocalization.SetLanguageByCode(localeCode, force: true);
             GraphicsManager.Instance?.InitGraphicsSettings();
             AudioManager.Instance?.InitAudioMixerVolumes();
+            UIScaleManager.SetScale(UIScale.Medium);
             RefreshFromManagers();
             OnLocalizationRefresh();
         }

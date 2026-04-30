@@ -69,6 +69,12 @@
 
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
+                        <!-- UI Scale -->
+                        <ui:Label name="lbl-opts-ui" class="lk-label lk-label--subheader lk-mb-sm" />
+                        <ui:Button name="btn-opt-ui-scale" class="lk-button lk-full-width lk-mb-sm" />
+
+                        <ui:VisualElement class="lk-divider lk-mb-sm" />
+
                         <!-- Audio -->
                         <ui:Label name="lbl-opts-audio" class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:VisualElement class="lk-column lk-mb-sm">

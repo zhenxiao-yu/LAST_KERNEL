@@ -49,6 +49,8 @@ namespace Markyu.LastKernel
         private Label _watermarkLabel;
         private bool _isDoubleSpeed;
 
+        protected override bool AffectedByUIScale => true;
+
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
         protected override void OnEnable()
