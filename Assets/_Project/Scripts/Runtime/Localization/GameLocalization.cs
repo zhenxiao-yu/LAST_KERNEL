@@ -512,13 +512,6 @@ namespace Markyu.LastKernel
         public static void CycleLanguage()
         {
             Initialize();
-
-            if (UnityLocalizationBridge.Initialize())
-            {
-                UnityLocalizationBridge.CycleLocale();
-                return;
-            }
-
             int currentIndex = Array.IndexOf(LanguageCycle, CurrentLanguage);
             int nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % LanguageCycle.Length;
             SetLanguage(LanguageCycle[nextIndex]);
