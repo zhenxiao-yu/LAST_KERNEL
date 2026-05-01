@@ -122,7 +122,7 @@ Material:
     - _Color: {r: 0.21226417, g: 0.2830189, b: 0.24008226, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OverlayOffset: {r: 0.1, g: 0, b: 0, a: 0}
-    - _OverlayTint: {r: 0.2015842, g: 0.2830189, b: 0.24001405, a: 1}
+    - _OverlayTint: {r: 0.12, g: 0.17, b: 0.26, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5744842796242487012

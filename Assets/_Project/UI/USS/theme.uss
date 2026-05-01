@@ -13,14 +13,14 @@
     /* ── Backgrounds ──────────────────────────────────────────────────────
      * Dark navy/charcoal — "underground command terminal, server core"     */
     --lk-bg:                 rgb(10, 12, 22);      /* Scene / screen fill   */
-    --lk-panel:              rgb(18, 24, 40);      /* Panel / card surface  */
+    --lk-panel:              rgb(20, 26, 40);      /* Panel / card surface  */
     --lk-panel-overlay:      rgb(8, 10, 18);       /* Inset / deep surface  */
     --lk-overlay-bg:         rgba(4, 6, 14, 0.88); /* Modal backdrop        */
     --lk-hud-bg:             rgba(10, 12, 22, 0.9);/* HUD strips            */
 
     /* ── Primary accent — cyan terminal glow ─────────────────────────────*/
     --lk-accent:             rgb(0, 220, 255);
-    --lk-accent-dim:         rgb(0, 140, 170);
+    --lk-accent-dim:         rgb(0, 122, 140);
     --lk-accent-faint:       rgba(0, 220, 255, 0.08);
 
     /* ── Secondary accent — muted magenta ────────────────────────────────*/
@@ -34,13 +34,13 @@
 
     /* ── Status ───────────────────────────────────────────────────────────*/
     --lk-warning:            rgb(255, 160, 40);    /* Amber — threat / HP   */
-    --lk-danger:             rgb(215, 55, 35);     /* Red-orange — defeat   */
-    --lk-success:            rgb(55, 195, 95);     /* Completion / confirm  */
+    --lk-danger:             rgb(204, 46, 46);     /* Red — defeat / threat */
+    --lk-success:            rgb(63, 175, 111);   /* Green — completion    */
     --lk-disabled:           rgb(60, 72, 88);      /* Locked / inactive     */
 
     /* ── Borders ──────────────────────────────────────────────────────────*/
-    --lk-border:             rgb(0, 175, 205);     /* Active / accent edge  */
-    --lk-border-dim:         rgb(25, 42, 60);      /* Passive / structural  */
+    --lk-border:             rgb(0, 122, 140);     /* Active / accent edge  */
+    --lk-border-dim:         rgb(42, 51, 71);      /* Passive / structural  */
     --lk-border-width:       1px;
 
     /* ── Shape — pixel art: hard corners only ─────────────────────────────*/
@@ -55,16 +55,20 @@
     --lk-gap-large:          24px;
     --lk-margin-screen:      120px; /* Title screen left inset            */
 
+    /* ── HUD strip height — consumed by .lk-hud-strip (min-height) and
+     *    .lk-side-menu-panel (top). Override per scale tier below.          */
+    --lk-hud-height:         48px;
+
     /* ── Typography ───────────────────────────────────────────────────────
      * Sizes target 1920×1080 reference. Scale mode: Scale With Screen Size.
      * All text must be legible in Simplified Chinese — allocate 30-40% wrap. */
-    --lk-font-size-xs:       10px;   /* Fine print                          */
-    --lk-font-size-sm:       12px;   /* Tooltip / label / secondary         */
-    --lk-font-size-md:       14px;   /* Body / button                       */
-    --lk-font-size-lg:       18px;   /* Sub-header / resource values        */
-    --lk-font-size-xl:       24px;   /* Panel header                        */
-    --lk-font-size-title:    32px;   /* Screen title / main menu header     */
-    --lk-font-size-logo:     56px;   /* Game logo / splash title            */
+    --lk-font-size-xs:       15px;   /* Fine print                          */
+    --lk-font-size-sm:       18px;   /* Tooltip / label / secondary         */
+    --lk-font-size-md:       21px;   /* Body / button                       */
+    --lk-font-size-lg:       27px;   /* Sub-header / resource values        */
+    --lk-font-size-xl:       36px;   /* Panel header                        */
+    --lk-font-size-title:    48px;   /* Screen title / main menu header     */
+    --lk-font-size-logo:     84px;   /* Game logo / splash title            */
 
     /* ── Touch targets — min 44 × 44 px (ART_DIRECTION.md) ───────────────*/
     --lk-touch-min:          44px;
@@ -129,13 +133,53 @@ TextField,
  * Medium is the :root baseline — no class needed.
  * ════════════════════════════════════════════════════════════════════════ */
 
-/* ── Small  (×0.85) ──────────────────────────────────────────────────── */
-.lk-ui-scale--small .lk-hint                                  { font-size: 8px; }
+/* ── XSmall (×0.67 = old base values) ───────────────────────────────── */
+.lk-ui-scale--xsmall .lk-hint,
+.lk-ui-scale--xsmall .lk-info-badge,
+.lk-ui-scale--xsmall .lk-info-panel__stats                    { font-size: 10px; }
+
+.lk-ui-scale--xsmall .lk-label--dim,
+.lk-ui-scale--xsmall .lk-info-panel__body,
+.lk-ui-scale--xsmall .lk-watermark,
+.lk-ui-scale--xsmall .lk-tab                                  { font-size: 12px; }
+
+.lk-ui-scale--xsmall .lk-button,
+.lk-ui-scale--xsmall .lk-label,
+.lk-ui-scale--xsmall .lk-label--body,
+.lk-ui-scale--xsmall .lk-resource-counter__value,
+.lk-ui-scale--xsmall .lk-info-panel__header,
+.lk-ui-scale--xsmall .lk-list__header-label,
+.lk-ui-scale--xsmall .lk-list__item-label,
+.lk-ui-scale--xsmall .lk-defeat__message,
+.lk-ui-scale--xsmall .lk-toast__label                         { font-size: 14px; }
+
+.lk-ui-scale--xsmall .lk-button--text,
+.lk-ui-scale--xsmall .lk-label--subheader,
+.lk-ui-scale--xsmall .lk-label--value,
+.lk-ui-scale--xsmall .lk-phase-label,
+.lk-ui-scale--xsmall .lk-hud-speed-btn,
+.lk-ui-scale--xsmall .lk-side-menu-toggle                     { font-size: 18px; }
+
+.lk-ui-scale--xsmall .lk-panel__title,
+.lk-ui-scale--xsmall .lk-modal__title,
+.lk-ui-scale--xsmall .lk-label--header,
+.lk-ui-scale--xsmall .lk-victory__reward                      { font-size: 24px; }
+
+.lk-ui-scale--xsmall .lk-label--title,
+.lk-ui-scale--xsmall .lk-victory__title,
+.lk-ui-scale--xsmall .lk-defeat__title                        { font-size: 32px; }
+
+.lk-ui-scale--xsmall .lk-label--logo                          { font-size: 56px; }
+
+/* ── Small (×0.83 = old Large values) ───────────────────────────────── */
+.lk-ui-scale--small .lk-hint,
+.lk-ui-scale--small .lk-info-badge,
+.lk-ui-scale--small .lk-info-panel__stats                     { font-size: 12px; }
 
 .lk-ui-scale--small .lk-label--dim,
 .lk-ui-scale--small .lk-info-panel__body,
 .lk-ui-scale--small .lk-watermark,
-.lk-ui-scale--small .lk-tab                                   { font-size: 10px; }
+.lk-ui-scale--small .lk-tab                                   { font-size: 15px; }
 
 .lk-ui-scale--small .lk-button,
 .lk-ui-scale--small .lk-label,
@@ -145,33 +189,37 @@ TextField,
 .lk-ui-scale--small .lk-list__header-label,
 .lk-ui-scale--small .lk-list__item-label,
 .lk-ui-scale--small .lk-defeat__message,
-.lk-ui-scale--small .lk-toast__label                          { font-size: 12px; }
+.lk-ui-scale--small .lk-toast__label                          { font-size: 18px; }
 
 .lk-ui-scale--small .lk-button--text,
 .lk-ui-scale--small .lk-label--subheader,
 .lk-ui-scale--small .lk-label--value,
 .lk-ui-scale--small .lk-phase-label,
 .lk-ui-scale--small .lk-hud-speed-btn,
-.lk-ui-scale--small .lk-side-menu-toggle                      { font-size: 15px; }
+.lk-ui-scale--small .lk-side-menu-toggle                      { font-size: 22px; }
 
 .lk-ui-scale--small .lk-panel__title,
 .lk-ui-scale--small .lk-modal__title,
 .lk-ui-scale--small .lk-label--header,
-.lk-ui-scale--small .lk-victory__reward                       { font-size: 20px; }
+.lk-ui-scale--small .lk-victory__reward                       { font-size: 30px; }
 
 .lk-ui-scale--small .lk-label--title,
 .lk-ui-scale--small .lk-victory__title,
-.lk-ui-scale--small .lk-defeat__title                         { font-size: 27px; }
+.lk-ui-scale--small .lk-defeat__title                         { font-size: 40px; }
 
-.lk-ui-scale--small .lk-label--logo                           { font-size: 48px; }
+.lk-ui-scale--small .lk-label--logo                           { font-size: 70px; }
 
-/* ── Large  (×1.25) ──────────────────────────────────────────────────── */
-.lk-ui-scale--large .lk-hint                                  { font-size: 12px; }
+/* ── Medium (×1.0 = new base) — no class, uses :root vars ───────────── */
+
+/* ── Large (×1.20) ───────────────────────────────────────────────────── */
+.lk-ui-scale--large .lk-hint,
+.lk-ui-scale--large .lk-info-badge,
+.lk-ui-scale--large .lk-info-panel__stats                     { font-size: 18px; }
 
 .lk-ui-scale--large .lk-label--dim,
 .lk-ui-scale--large .lk-info-panel__body,
 .lk-ui-scale--large .lk-watermark,
-.lk-ui-scale--large .lk-tab                                   { font-size: 15px; }
+.lk-ui-scale--large .lk-tab                                   { font-size: 22px; }
 
 .lk-ui-scale--large .lk-button,
 .lk-ui-scale--large .lk-label,
@@ -181,33 +229,37 @@ TextField,
 .lk-ui-scale--large .lk-list__header-label,
 .lk-ui-scale--large .lk-list__item-label,
 .lk-ui-scale--large .lk-defeat__message,
-.lk-ui-scale--large .lk-toast__label                          { font-size: 18px; }
+.lk-ui-scale--large .lk-toast__label                          { font-size: 25px; }
 
 .lk-ui-scale--large .lk-button--text,
 .lk-ui-scale--large .lk-label--subheader,
 .lk-ui-scale--large .lk-label--value,
 .lk-ui-scale--large .lk-phase-label,
 .lk-ui-scale--large .lk-hud-speed-btn,
-.lk-ui-scale--large .lk-side-menu-toggle                      { font-size: 22px; }
+.lk-ui-scale--large .lk-side-menu-toggle                      { font-size: 32px; }
 
 .lk-ui-scale--large .lk-panel__title,
 .lk-ui-scale--large .lk-modal__title,
 .lk-ui-scale--large .lk-label--header,
-.lk-ui-scale--large .lk-victory__reward                       { font-size: 30px; }
+.lk-ui-scale--large .lk-victory__reward                       { font-size: 43px; }
 
 .lk-ui-scale--large .lk-label--title,
 .lk-ui-scale--large .lk-victory__title,
-.lk-ui-scale--large .lk-defeat__title                         { font-size: 40px; }
+.lk-ui-scale--large .lk-defeat__title                         { font-size: 58px; }
 
-.lk-ui-scale--large .lk-label--logo                           { font-size: 70px; }
+.lk-ui-scale--large .lk-label--logo                           { font-size: 100px; }
 
-/* ── Super Large  (×1.5) ─────────────────────────────────────────────── */
-.lk-ui-scale--xlarge .lk-hint                                 { font-size: 15px; }
+.lk-ui-scale--large                                            { --lk-hud-height: 60px; }
+
+/* ── XLarge (×1.40) ──────────────────────────────────────────────────── */
+.lk-ui-scale--xlarge .lk-hint,
+.lk-ui-scale--xlarge .lk-info-badge,
+.lk-ui-scale--xlarge .lk-info-panel__stats                    { font-size: 21px; }
 
 .lk-ui-scale--xlarge .lk-label--dim,
 .lk-ui-scale--xlarge .lk-info-panel__body,
 .lk-ui-scale--xlarge .lk-watermark,
-.lk-ui-scale--xlarge .lk-tab                                  { font-size: 18px; }
+.lk-ui-scale--xlarge .lk-tab                                  { font-size: 25px; }
 
 .lk-ui-scale--xlarge .lk-button,
 .lk-ui-scale--xlarge .lk-label,
@@ -217,23 +269,25 @@ TextField,
 .lk-ui-scale--xlarge .lk-list__header-label,
 .lk-ui-scale--xlarge .lk-list__item-label,
 .lk-ui-scale--xlarge .lk-defeat__message,
-.lk-ui-scale--xlarge .lk-toast__label                         { font-size: 21px; }
+.lk-ui-scale--xlarge .lk-toast__label                         { font-size: 30px; }
 
 .lk-ui-scale--xlarge .lk-button--text,
 .lk-ui-scale--xlarge .lk-label--subheader,
 .lk-ui-scale--xlarge .lk-label--value,
 .lk-ui-scale--xlarge .lk-phase-label,
 .lk-ui-scale--xlarge .lk-hud-speed-btn,
-.lk-ui-scale--xlarge .lk-side-menu-toggle                     { font-size: 27px; }
+.lk-ui-scale--xlarge .lk-side-menu-toggle                     { font-size: 38px; }
 
 .lk-ui-scale--xlarge .lk-panel__title,
 .lk-ui-scale--xlarge .lk-modal__title,
 .lk-ui-scale--xlarge .lk-label--header,
-.lk-ui-scale--xlarge .lk-victory__reward                      { font-size: 36px; }
+.lk-ui-scale--xlarge .lk-victory__reward                      { font-size: 50px; }
 
 .lk-ui-scale--xlarge .lk-label--title,
 .lk-ui-scale--xlarge .lk-victory__title,
-.lk-ui-scale--xlarge .lk-defeat__title                        { font-size: 48px; }
+.lk-ui-scale--xlarge .lk-defeat__title                        { font-size: 67px; }
 
-.lk-ui-scale--xlarge .lk-label--logo                          { font-size: 84px; }
+.lk-ui-scale--xlarge .lk-label--logo                          { font-size: 118px; }
+
+.lk-ui-scale--xlarge                                           { --lk-hud-height: 72px; }
 

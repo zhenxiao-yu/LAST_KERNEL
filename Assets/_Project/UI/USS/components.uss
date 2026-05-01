@@ -437,7 +437,7 @@
 .lk-hud-strip {
     flex-direction: row;
     align-items: center;
-    min-height: 48px;
+    min-height: var(--lk-hud-height);
     background-color: var(--lk-hud-bg);
     padding-left: var(--lk-padding-medium);
     padding-right: var(--lk-padding-medium);
@@ -966,7 +966,7 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-side-menu-panel {
     position: absolute;
     right: 0;
-    top: 48px;
+    top: var(--lk-hud-height);
     bottom: 0;
     width: 300px;
     background-color: var(--lk-panel);

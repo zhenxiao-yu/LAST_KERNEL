@@ -10,19 +10,19 @@
         <ui:VisualElement class="lk-panel" style="width: 520px;">
 
             <!-- Title — filled by RewardData.RewardTitle or fallback key -->
-            <ui:Label name="lbl-victory-title" class="lk-victory__title" />
+            <ui:Label name="lbl-victory-title" class="lk-victory__title text-auto-size text-auto-size-min-12 text-auto-size-max-32" />
 
             <ui:VisualElement class="lk-divider lk-divider--accent" style="margin-bottom: 24px;" />
 
             <!-- Description — filled by RewardData.RewardDescription -->
-            <ui:Label name="lbl-victory-desc" class="lk-label lk-label--body lk-mb-md"
+            <ui:Label name="lbl-victory-desc" class="lk-label lk-label--body lk-mb-md text-auto-size text-auto-size-min-8 text-auto-size-max-14"
                       style="-unity-text-align: middle-center; white-space: normal;" />
 
             <!-- Scrap reward — "+N Scrap" -->
-            <ui:Label name="lbl-victory-scrap" class="lk-victory__reward" />
+            <ui:Label name="lbl-victory-scrap" class="lk-victory__reward text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
 
             <ui:VisualElement class="lk-panel__footer lk-justify-center" style="margin-top: 32px;">
-                <ui:Button name="btn-victory-continue" class="lk-button lk-button--primary"
+                <ui:Button name="btn-victory-continue" class="lk-button lk-button--primary text-auto-size text-auto-size-min-8 text-auto-size-max-14"
                            style="min-width: 200px;" />
             </ui:VisualElement>
 

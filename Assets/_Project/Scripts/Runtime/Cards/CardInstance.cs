@@ -50,6 +50,10 @@ namespace Markyu.LastKernel
 
         public bool IsBeingDragged { get; set; }
 
+        // Optional additive VFX overlay (All In 1 Sprite Shader). Assign in prefab inspector.
+        // Null-safe — card works fully without it.
+        [SerializeField] private CardFeedbackController _feedbackController;
+
         private Camera _mainCam;
         private MeshRenderer _renderer;
         private BoxCollider _col;
@@ -144,12 +148,14 @@ namespace Markyu.LastKernel
         public void OnPointerEnter(PointerEventData eventData)
         {
             _isHovered = true;
+            _feedbackController?.SetHover(true);
             InfoPanel.Instance?.RegisterHover(GetInfo());
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
             _isHovered = false;
+            _feedbackController?.SetHover(false);
             InfoPanel.Instance?.UnregisterHover();
         }
 
@@ -483,6 +489,7 @@ namespace Markyu.LastKernel
                 ? Mathf.Min(Stats.MaxHealth.Value, CurrentHealth + Mathf.Max(0, healAmount))
                 : CurrentHealth + Mathf.Max(0, healAmount);
             UpdateStatDisplays();
+            _feedbackController?.PlayHealingPulse();
         }
 
         public void TakeDamage(int damage)
@@ -494,6 +501,7 @@ namespace Markyu.LastKernel
             _hurtTween = null;
 
             bool handledByFeel = FeelPresenter != null && FeelPresenter.OnDamageTaken();
+            _feedbackController?.PlayDamageFlash();
             if (handledByFeel)
             {
                 return;
