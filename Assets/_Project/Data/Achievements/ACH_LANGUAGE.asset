@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdc35918c26be1745a96de8048fec8c5, type: 3}
+  m_Name: ACH_LANGUAGE
+  m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.Achievements.AchievementDefinition
+  Id: ACH_LANGUAGE
+  LocalizationKey: ach.language
+  Icon: {fileID: 0}
+  Trigger: 70
+  FilterId: 
+  CountMode: 0
+  TargetCount: 1
+  ShowProgressBar: 0
+  IsSecret: 0

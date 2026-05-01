@@ -106,6 +106,15 @@ namespace Markyu.LastKernel.Achievements
                 crafting.OnRecipeDiscovered += OnRecipeDiscovered;
                 crafting.OnCraftingFinished += OnCraftingFinished;
             }
+
+            if (TradeManager.Instance != null)
+                TradeManager.Instance.OnPackOpened += OnPackOpened;
+
+            UIEventBus.OnLanguageSelectRequested += OnLanguageChanged;
+            UIEventBus.OnLanguageCycleRequested  += OnLanguageCycled;
+
+            NightPhaseManager.OnNightComplete += OnNightComplete;
+            GameDirector.OnGameOver           += OnGameOverFired;
         }
 
         private void UnsubscribeFromServices()
@@ -125,6 +134,15 @@ namespace Markyu.LastKernel.Achievements
                 crafting.OnRecipeDiscovered -= OnRecipeDiscovered;
                 crafting.OnCraftingFinished -= OnCraftingFinished;
             }
+
+            if (TradeManager.Instance != null)
+                TradeManager.Instance.OnPackOpened -= OnPackOpened;
+
+            UIEventBus.OnLanguageSelectRequested -= OnLanguageChanged;
+            UIEventBus.OnLanguageCycleRequested  -= OnLanguageCycled;
+
+            NightPhaseManager.OnNightComplete -= OnNightComplete;
+            GameDirector.OnGameOver           -= OnGameOverFired;
         }
 
         private void OnCardCreated(CardInstance card)
@@ -144,6 +162,22 @@ namespace Markyu.LastKernel.Achievements
 
         private void OnCraftingFinished(CardDefinition def)
             => EvaluateTrigger(AchievementTrigger.RecipeCrafted, def.Id);
+
+        private void OnPackOpened(PackDefinition pack)
+            => EvaluateTrigger(AchievementTrigger.PackOpened, pack.Id);
+
+        private void OnLanguageChanged(GameLanguage _)
+            => EvaluateTrigger(AchievementTrigger.LanguageChanged, string.Empty);
+
+        private void OnLanguageCycled()
+            => EvaluateTrigger(AchievementTrigger.LanguageChanged, string.Empty);
+
+        private void OnNightComplete(NightCombatResult result)
+        {
+            if (result.PlayerWon) NotifyNightSurvived();
+        }
+
+        private void OnGameOverFired() => NotifyGameLost();
 
         #endregion
 

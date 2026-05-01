@@ -17,6 +17,8 @@ namespace Markyu.LastKernel.Achievements
         DayReached      = 41,
         GameWon         = 50,
         GameLost        = 51,
+        PackOpened      = 60,
+        LanguageChanged = 70,
     }
 
     // Cumulative: progress accumulates (craft 10 things, kill 50 enemies).

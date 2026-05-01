@@ -12,4 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2cb2e4ae1d8ddd4a888f0056ce57c55, type: 3}
   m_Name: AchievementDatabase
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.Achievements.AchievementDatabase
-  Achievements: []
+  Achievements:
+  - {fileID: 11400000, guid: 8901579b2e2abef478b3eb5c77683d0d, type: 2}
+  - {fileID: 11400000, guid: 028265191ed6bae42942d8d40bc53e22, type: 2}
+  - {fileID: 11400000, guid: ac02f73c22af4b14d8cb51a331d1b772, type: 2}
+  - {fileID: 11400000, guid: d591c3b94784b024c803438675cc143c, type: 2}
+  - {fileID: 11400000, guid: 7333e703e953fee40bdde218543428c5, type: 2}
+  - {fileID: 11400000, guid: b66c0a63c860b16428e8d6e76fd8b562, type: 2}
+  - {fileID: 11400000, guid: baa159be5c5cfa944aac46ceda8371d5, type: 2}
+  - {fileID: 11400000, guid: 5b0a71cdd2f42074c828bf844de5352e, type: 2}
