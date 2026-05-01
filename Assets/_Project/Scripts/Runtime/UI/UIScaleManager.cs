@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace Markyu.LastKernel
 {
-    public enum UIScale { Small = 0, Medium = 1, Large = 2, XLarge = 3 }
+    public enum UIScale { XSmall = 0, Small = 1, Medium = 2, Large = 3, XLarge = 4 }
 
     /// <summary>
     /// Applies a CSS class to the root VisualElement of registered (game-HUD) UIDocuments.
@@ -20,15 +20,16 @@ namespace Markyu.LastKernel
         // Medium uses no class — the :root defaults in theme.uss are the baseline.
         private static readonly string[] ScaleClasses =
         {
-            "lk-ui-scale--small",   // 0 Small
-            "",                      // 1 Medium — no class, use :root defaults
-            "lk-ui-scale--large",   // 2 Large
-            "lk-ui-scale--xlarge",  // 3 Super Large
+            "lk-ui-scale--xsmall",  // 0 XSmall
+            "lk-ui-scale--small",   // 1 Small
+            "",                      // 2 Medium — no class, use :root defaults
+            "lk-ui-scale--large",   // 3 Large
+            "lk-ui-scale--xlarge",  // 4 XLarge
         };
 
         private static readonly List<(UIDocument doc, VisualElement root)> Registrations = new();
 
-        public static UIScale CurrentScale { get; private set; } = UIScale.Medium;
+        public static UIScale CurrentScale { get; private set; } = UIScale.Medium; // Medium = old XLarge, new default
 
         public static event Action<UIScale> ScaleChanged;
 
@@ -37,7 +38,7 @@ namespace Markyu.LastKernel
         {
             CurrentScale = (UIScale)Mathf.Clamp(
                 PlayerPrefs.GetInt(PrefKey, (int)UIScale.Medium),
-                (int)UIScale.Small, (int)UIScale.XLarge);
+                (int)UIScale.XSmall, (int)UIScale.XLarge);
             Registrations.Clear();
         }
 
@@ -79,11 +80,12 @@ namespace Markyu.LastKernel
 
         public static void CycleScale()
         {
-            SetScale((UIScale)(((int)CurrentScale + 1) % 4));
+            SetScale((UIScale)(((int)CurrentScale + 1) % 5));
         }
 
         public static string GetScaleLabelKey(UIScale scale) => scale switch
         {
+            UIScale.XSmall => "options.uiScale.xsmall",
             UIScale.Small  => "options.uiScale.small",
             UIScale.Medium => "options.uiScale.medium",
             UIScale.Large  => "options.uiScale.large",

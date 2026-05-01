@@ -279,6 +279,7 @@ namespace Markyu.LastKernel
             ["options.bgm"] = new("背景音乐 {0}%", "BGM {0}%"),
             ["options.uiScale"]        = new("界面文字大小", "UI Scale"),
             ["options.uiScale.label"]  = new("界面文字大小：{0}", "UI Scale: {0}"),
+            ["options.uiScale.xsmall"] = L("Tiny",       "极小", "極小", "極小", "아주 작음", "Minuscule", "Winzig",    "Muy pequeño"),
             ["options.uiScale.small"]  = L("Small",      "小",   "小",   "小",   "작음",   "Petit",      "Klein",     "Pequeño"),
             ["options.uiScale.medium"] = L("Medium",     "中",   "中",   "中",   "보통",   "Moyen",      "Mittel",    "Mediano"),
             ["options.uiScale.large"]  = L("Large",      "大",   "大",   "大",   "큼",     "Grand",      "Groß",      "Grande"),
