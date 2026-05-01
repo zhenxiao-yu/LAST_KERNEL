@@ -73,6 +73,7 @@ namespace Markyu.LastKernel
                 return;
             }
             Instance = this;
+            VillagerBrain.DevBrainEnabled = settings != null && settings.EnableColonyAutopilot;
         }
 
         private void OnDestroy()
@@ -80,6 +81,7 @@ namespace Markyu.LastKernel
             if (Instance == this)
             {
                 Instance = null;
+                VillagerBrain.DevBrainEnabled = false;
                 // Clear all reservations so a fresh session starts clean.
                 AIReservationSystem.Instance.Reset();
             }
