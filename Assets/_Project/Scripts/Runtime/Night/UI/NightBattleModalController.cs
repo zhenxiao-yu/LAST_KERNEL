@@ -72,6 +72,9 @@ namespace Markyu.LastKernel
         private Label         _goldLabel, _assignHint, _shopHint;
         private VisualElement _resultPanel;
         private Label         _resultTitle, _resultSummary;
+        // Static section headers (named in UXML so localization can update them)
+        private Label         _lblEnemySection, _lblColonySection;
+        private Label         _lblDefendersHeader, _lblLogHeader, _lblShopHeader;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
 
@@ -119,11 +122,18 @@ namespace Markyu.LastKernel
             _resultTitle     = root.Q<Label>("nbm-result-title");
             _resultSummary   = root.Q<Label>("nbm-result-summary");
 
+            _lblEnemySection     = root.Q<Label>("nbm-lbl-enemy-section");
+            _lblColonySection    = root.Q<Label>("nbm-lbl-colony-section");
+            _lblDefendersHeader  = root.Q<Label>("nbm-lbl-defenders-header");
+            _lblLogHeader        = root.Q<Label>("nbm-lbl-log-header");
+            _lblShopHeader       = root.Q<Label>("nbm-lbl-shop-header");
+
             _btnStart?.RegisterCallback<ClickEvent>(_ => OnStartBattleClicked());
             _btnFast?.RegisterCallback<ClickEvent>(_ => OnFastResolveClicked());
             _btnCancel?.RegisterCallback<ClickEvent>(_ => OnCancelClicked());
             _btnReturn?.RegisterCallback<ClickEvent>(_ => OnReturnDayClicked());
 
+            BindStaticText();
             SetVisible(false);
         }
 
@@ -159,11 +169,10 @@ namespace Markyu.LastKernel
 
             // Night / threat info
             int day = TimeManager.Instance?.CurrentDay ?? 1;
-            if (_nightLabel  != null) _nightLabel.text  = $"NIGHT {day}";
-            if (_threatLabel != null) _threatLabel.text = ComputeThreatLabel(ctx.Wave, day);
-            if (_incomingLabel != null)
-                _incomingLabel.text = $"{ctx.Wave?.BuildEnemyList().Count ?? 0} ENEMIES INCOMING";
-            if (_goldLabel != null) _goldLabel.text = $"◈ {ctx.StartingGold}";
+            if (_nightLabel    != null) _nightLabel.text    = GameLocalization.Format("night.modal.nightTitle", day);
+            if (_threatLabel   != null) _threatLabel.text   = ComputeThreatLabel(ctx.Wave);
+            if (_incomingLabel != null) _incomingLabel.text = GameLocalization.Format("night.modal.incoming", ctx.Wave?.BuildEnemyList().Count ?? 0);
+            if (_goldLabel     != null) _goldLabel.text     = GameLocalization.Format("night.modal.gold", ctx.StartingGold);
 
             // Enemy preview
             BuildEnemyPreview(ctx.Wave);
@@ -201,12 +210,12 @@ namespace Markyu.LastKernel
             _btnCancel?.RemoveFromClassList("lk-hidden");
             _btnReturn?.AddToClassList("lk-hidden");
 
-            SetStatus("PREP PHASE");
+            SetStatus(GameLocalization.Get("night.modal.phase.prep"));
             UpdatePlayerCountLabel();
 
-            AddLog($"Night {day} begins. Choose your defenders.", "nbm-log-entry--system");
+            AddLog(GameLocalization.Format("night.modal.log.begin", day), "nbm-log-entry--system");
             if (ctx.EligibleDefenders.Count == 0)
-                AddLog("WARNING: No eligible defenders found.", "nbm-log-entry--death");
+                AddLog(GameLocalization.Get("night.modal.log.noDefenders"), "nbm-log-entry--death");
 
             SetVisible(true);
         }
@@ -236,8 +245,8 @@ namespace Markyu.LastKernel
             _btnFast?.SetEnabled(true);
             _btnCancel?.AddToClassList("lk-hidden");
 
-            SetStatus("COMBAT ACTIVE");
-            AddLog("Battle commences.", "nbm-log-entry--system");
+            SetStatus(GameLocalization.Get("night.modal.phase.battle"));
+            AddLog(GameLocalization.Get("night.modal.log.battleStart"), "nbm-log-entry--system");
         }
 
         private void HandleBattleComplete(NightCombatResult result)
@@ -247,7 +256,7 @@ namespace Markyu.LastKernel
             bool won = result.PlayerWon;
             if (_resultTitle != null)
             {
-                _resultTitle.text = won ? "SYSTEM HELD" : "SYSTEM BREACHED";
+                _resultTitle.text = won ? GameLocalization.Get("night.modal.result.win") : GameLocalization.Get("night.modal.result.loss");
                 _resultTitle.RemoveFromClassList("nbm-result-title--victory");
                 _resultTitle.RemoveFromClassList("nbm-result-title--defeat");
                 _resultTitle.AddToClassList(won ? "nbm-result-title--victory" : "nbm-result-title--defeat");
@@ -257,14 +266,14 @@ namespace Markyu.LastKernel
             _resultPanel?.RemoveFromClassList("lk-hidden");
             _btnFast?.SetEnabled(false);
 
-            SetStatus(won ? "VICTORY" : "DEFEAT");
-            AddLog(won ? "Colony survived the night." : "Colony defenses breached.",
+            SetStatus(won ? GameLocalization.Get("night.modal.phase.victory") : GameLocalization.Get("night.modal.phase.defeat"));
+            AddLog(won ? GameLocalization.Get("night.modal.log.victoryLog") : GameLocalization.Get("night.modal.log.defeatLog"),
                    won ? "nbm-log-entry--victory" : "nbm-log-entry--defeat");
         }
 
         private void HandleGoldChanged(int newGold)
         {
-            if (_goldLabel != null) _goldLabel.text = $"◈ {newGold}";
+            if (_goldLabel != null) _goldLabel.text = GameLocalization.Format("night.modal.gold", newGold);
             foreach (var sv in _shopViews)
                 sv.SetAffordable(!sv.Purchased && newGold >= sv.Definition.goldCost);
         }
@@ -277,10 +286,10 @@ namespace Markyu.LastKernel
             CancelCurrentSelection();
 
             if (_team.FilledSlotCount == 0)
-                AddLog("WARNING: Starting with no defenders — colony is undefended.", "nbm-log-entry--death");
+                AddLog(GameLocalization.Get("night.modal.log.undefended"), "nbm-log-entry--death");
 
             _btnStart?.SetEnabled(false);
-            AddLog("Formation locked. Initiating combat.", "nbm-log-entry--system");
+            AddLog(GameLocalization.Get("night.modal.log.formation"), "nbm-log-entry--system");
             NightBattleManager.Instance?.ConfirmBattle(_team);
         }
 
@@ -288,7 +297,7 @@ namespace Markyu.LastKernel
         {
             _btnFast?.SetEnabled(false);
             NightBattleManager.Instance?.SetFastResolve();
-            AddLog("Fast resolve activated.", "nbm-log-entry--system");
+            AddLog(GameLocalization.Get("night.modal.log.fastResolve"), "nbm-log-entry--system");
         }
 
         private void OnCancelClicked()
@@ -307,7 +316,7 @@ namespace Markyu.LastKernel
                 AssignFighterToSlot(slot);
             }
 
-            AddLog("Auto-deployed all available defenders.", "nbm-log-entry--system");
+            AddLog(GameLocalization.Get("night.modal.log.autoDeploy"), "nbm-log-entry--system");
             OnStartBattleClicked();
         }
 
@@ -411,7 +420,7 @@ namespace Markyu.LastKernel
             int gold = NightBattleManager.Instance?.PlayerGold ?? 0;
             if (gold < def.goldCost)
             {
-                AddLog($"Not enough gold. Need {def.goldCost}, have {gold}.", "nbm-log-entry--system");
+                AddLog(GameLocalization.Format("night.modal.log.noGold", def.goldCost, gold), "nbm-log-entry--system");
                 return;
             }
 
@@ -423,7 +432,7 @@ namespace Markyu.LastKernel
                     def.Apply(null, _team);
                     MarkShopItemPurchased(def);
                     RefreshTeamSlots();
-                    AddLog($"Purchased: {def.DisplayName}.", "nbm-log-entry--system");
+                    AddLog(GameLocalization.Format("night.modal.log.purchased", def.DisplayName), "nbm-log-entry--system");
                 }
                 return;
             }
@@ -446,7 +455,7 @@ namespace Markyu.LastKernel
             foreach (var sv in _shopViews)
                 sv.SetSelected(sv.Definition == def);
 
-            AddLog($"Selected: {def.DisplayName}. Click a fighter to apply.", "nbm-log-entry--system");
+            AddLog(GameLocalization.Format("night.modal.log.itemSelected", def.DisplayName), "nbm-log-entry--system");
         }
 
         private void ApplyShopItemToSlot(int slotIndex)
@@ -459,7 +468,7 @@ namespace Markyu.LastKernel
                 _pendingItem.Apply(fighter, _team);
                 MarkShopItemPurchased(_pendingItem);
                 _slotViews[slotIndex].RefreshDisplay(fighter);
-                AddLog($"Applied {_pendingItem.DisplayName} to {fighter.DisplayName}.", "nbm-log-entry--system");
+                AddLog(GameLocalization.Format("night.modal.log.itemApplied", _pendingItem.DisplayName, fighter.DisplayName), "nbm-log-entry--system");
             }
 
             CancelCurrentSelection();
@@ -477,7 +486,9 @@ namespace Markyu.LastKernel
             if (badge != null)
             {
                 int slot = _team.SlotOf(f);
-                badge.text = slot == 0 ? "FRONT" : $"#{slot + 1}";
+                badge.text = slot == 0
+                    ? GameLocalization.Get("night.modal.slot.front")
+                    : GameLocalization.Format("night.modal.slot.n", slot + 1);
                 badge.RemoveFromClassList("lk-hidden");
             }
         }
@@ -549,11 +560,11 @@ namespace Markyu.LastKernel
         private void HandleAttack(CombatUnit attacker, CombatUnit target, int damage, bool isCrit)
         {
             if (damage == 0)
-                AddLog($"{attacker.DisplayName} attacks {target.DisplayName} — MISSED.");
+                AddLog(GameLocalization.Format("night.modal.log.missed", attacker.DisplayName, target.DisplayName));
             else
             {
-                string crit = isCrit ? " [CRIT]" : "";
-                AddLog($"{attacker.DisplayName} hits {target.DisplayName} for {damage}{crit}.", "nbm-log-entry--damage");
+                string crit = isCrit ? GameLocalization.Get("night.modal.log.crit") : "";
+                AddLog(GameLocalization.Format("night.modal.log.hit", attacker.DisplayName, target.DisplayName, damage, crit), "nbm-log-entry--damage");
             }
 
             if (_battleMap.TryGetValue(target, out var sv))
@@ -562,7 +573,7 @@ namespace Markyu.LastKernel
 
         private void HandleUnitDied(CombatUnit unit)
         {
-            AddLog($"{unit.DisplayName} is destroyed.", "nbm-log-entry--death");
+            AddLog(GameLocalization.Format("night.modal.log.unitDied", unit.DisplayName), "nbm-log-entry--death");
             if (_battleMap.TryGetValue(unit, out var sv)) sv.RefreshBattle(unit);
             UpdateFrontHighlights();
         }
@@ -611,7 +622,7 @@ namespace Markyu.LastKernel
                 var name = new Label(def.DisplayName.ToUpper());
                 name.AddToClassList("nbm-enemy-card__name");
 
-                var stats = new Label($"ATK {def.Attack}  |  HP {def.MaxHP}");
+                var stats = new Label(GameLocalization.Format("night.modal.stats.enemy", def.Attack, def.MaxHP));
                 stats.AddToClassList("nbm-enemy-card__stats");
 
                 card.Add(name);
@@ -619,7 +630,7 @@ namespace Markyu.LastKernel
 
                 if (front)
                 {
-                    var badge = new Label("FRONT");
+                    var badge = new Label(GameLocalization.Get("night.modal.slot.front"));
                     badge.AddToClassList("nbm-enemy-card__front-badge");
                     card.Add(badge);
                 }
@@ -637,7 +648,7 @@ namespace Markyu.LastKernel
             }
 
             if (_enemyCountLabel != null)
-                _enemyCountLabel.text = $"{enemies.Count} UNITS";
+                _enemyCountLabel.text = GameLocalization.Format("night.modal.units", enemies.Count);
         }
 
         private void BuildPlayerSlots()
@@ -660,10 +671,10 @@ namespace Markyu.LastKernel
             var nameLabel = new Label(fighter.DisplayName);
             nameLabel.AddToClassList("nbm-villager-entry__name");
 
-            var statsLabel = new Label($"ATK {fighter.FinalAttack}  HP {fighter.FinalMaxHealth}");
+            var statsLabel = new Label(GameLocalization.Format("night.modal.stats.fighter", fighter.FinalAttack, fighter.FinalMaxHealth));
             statsLabel.AddToClassList("nbm-villager-entry__stats");
 
-            var badge = new Label("FRONT");
+            var badge = new Label(GameLocalization.Get("night.modal.slot.front"));
             badge.name = "nbm-villager-badge";
             badge.AddToClassList("nbm-villager-entry__badge");
             badge.AddToClassList("lk-hidden");
@@ -701,6 +712,25 @@ namespace Markyu.LastKernel
             ).StartingIn(0);
         }
 
+        // ── Localization ──────────────────────────────────────────────────────────
+
+        private void BindStaticText()
+        {
+            if (_btnStart  != null) _btnStart.text  = GameLocalization.Get("night.modal.btn.start");
+            if (_btnFast   != null) _btnFast.text   = GameLocalization.Get("night.modal.btn.fast");
+            if (_btnCancel != null) _btnCancel.text = GameLocalization.Get("night.modal.btn.autoDeploy");
+            if (_btnReturn != null) _btnReturn.text = GameLocalization.Get("night.modal.btn.return");
+
+            if (_lblEnemySection    != null) _lblEnemySection.text    = GameLocalization.Get("night.modal.section.enemy");
+            if (_lblColonySection   != null) _lblColonySection.text   = GameLocalization.Get("night.modal.section.colony");
+            if (_lblDefendersHeader != null) _lblDefendersHeader.text = GameLocalization.Get("night.modal.section.defenders");
+            if (_lblLogHeader       != null) _lblLogHeader.text       = GameLocalization.Get("night.modal.section.log");
+            if (_lblShopHeader      != null) _lblShopHeader.text      = GameLocalization.Get("night.modal.section.shop");
+
+            if (_assignHint != null) _assignHint.text = GameLocalization.Get("night.modal.hint.assign");
+            if (_shopHint   != null) _shopHint.text   = GameLocalization.Get("night.modal.hint.shop");
+        }
+
         // ── Misc UI helpers ───────────────────────────────────────────────────────
 
         private void SetVisible(bool visible)
@@ -717,7 +747,7 @@ namespace Markyu.LastKernel
         private void UpdatePlayerCountLabel()
         {
             if (_playerCountLabel != null)
-                _playerCountLabel.text = $"{_team.FilledSlotCount} / {NightTeam.MaxSlots} SLOTS FILLED";
+                _playerCountLabel.text = GameLocalization.Format("night.modal.slotsStatus", _team.FilledSlotCount, NightTeam.MaxSlots);
         }
 
         private void LockVillagerList(bool locked)
@@ -726,14 +756,17 @@ namespace Markyu.LastKernel
                 kv.Value.SetEnabled(!locked);
         }
 
-        private static string ComputeThreatLabel(NightWaveDefinition wave, int day)
+        private static string ComputeThreatLabel(NightWaveDefinition wave)
         {
             int totalAtk = 0;
             if (wave != null)
                 foreach (var e in wave.BuildEnemyList()) totalAtk += e.Attack;
 
-            string tier = totalAtk <= 3 ? "LOW" : totalAtk <= 8 ? "MODERATE" : totalAtk <= 15 ? "HIGH" : "CRITICAL";
-            return $"THREAT: {tier}";
+            string tierKey = totalAtk <= 3 ? "night.modal.threat.low"
+                           : totalAtk <= 8 ? "night.modal.threat.moderate"
+                           : totalAtk <= 15 ? "night.modal.threat.high"
+                           : "night.modal.threat.critical";
+            return GameLocalization.Format("night.modal.threat", GameLocalization.Get(tierKey));
         }
 
         // ── Debug hotkeys ─────────────────────────────────────────────────────────

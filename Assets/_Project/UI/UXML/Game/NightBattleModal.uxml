@@ -50,7 +50,7 @@
 
                 <!-- Enemy section -->
                 <ui:VisualElement class="nbm-section-header nbm-section-header--enemy">
-                    <ui:Label text="ENEMY LINE" class="nbm-section-title nbm-section-title--enemy" />
+                    <ui:Label name="nbm-lbl-enemy-section" text="ENEMY LINE" class="nbm-section-title nbm-section-title--enemy" />
                     <ui:Label name="nbm-enemy-count-label" class="nbm-section-count" text="" />
                 </ui:VisualElement>
                 <!-- Enemy card elements injected here by NightBattleModalController -->
@@ -67,7 +67,7 @@
                 <!-- NightPrepSlotView elements injected here by NightBattleModalController -->
                 <ui:VisualElement name="nbm-player-row" class="nbm-team-row nbm-team-row--player" />
                 <ui:VisualElement class="nbm-section-header nbm-section-header--player">
-                    <ui:Label text="COLONY LINE" class="nbm-section-title nbm-section-title--player" />
+                    <ui:Label name="nbm-lbl-colony-section" text="COLONY LINE" class="nbm-section-title nbm-section-title--player" />
                     <ui:Label name="nbm-player-count-label" class="nbm-section-count" text="0 / 5 SLOTS FILLED" />
                 </ui:VisualElement>
 
@@ -82,7 +82,7 @@
 
                     <!-- Villagers panel -->
                     <ui:VisualElement class="nbm-panel nbm-villagers-panel">
-                        <ui:Label class="nbm-panel-header" text="AVAILABLE DEFENDERS" />
+                        <ui:Label name="nbm-lbl-defenders-header" class="nbm-panel-header" text="AVAILABLE DEFENDERS" />
                         <ui:Label name="nbm-assign-hint" class="nbm-hint-label"
                                   text="Click a defender, then click a slot to assign." />
                         <!-- VillagerEntry elements injected here -->
@@ -93,7 +93,7 @@
 
                     <!-- Combat log -->
                     <ui:VisualElement class="nbm-panel nbm-log-panel">
-                        <ui:Label class="nbm-panel-header" text="COMBAT LOG" />
+                        <ui:Label name="nbm-lbl-log-header" class="nbm-panel-header" text="COMBAT LOG" />
                         <ui:ScrollView name="nbm-battle-log" class="nbm-log"
                                        vertical-scroller-visibility="AlwaysVisible"
                                        horizontal-scroller-visibility="Hidden" />
@@ -107,7 +107,7 @@
                     <ui:VisualElement class="nbm-panel nbm-shop-panel">
 
                         <ui:VisualElement class="nbm-shop-header">
-                            <ui:Label class="nbm-panel-header" text="NIGHT SHOP" />
+                            <ui:Label name="nbm-lbl-shop-header" class="nbm-panel-header" text="NIGHT SHOP" />
                             <ui:VisualElement class="lk-grow" />
                             <ui:Label name="nbm-gold-label" class="nbm-gold-label" text="◈ 30" />
                         </ui:VisualElement>
