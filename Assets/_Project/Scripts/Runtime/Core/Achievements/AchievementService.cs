@@ -7,7 +7,18 @@ namespace Markyu.LastKernel.Achievements
 {
     public class AchievementService : MonoBehaviour, IAchievementService
     {
-        public static AchievementService Instance { get; private set; }
+        private static AchievementService _instance;
+        public static AchievementService Instance
+        {
+            get
+            {
+                // Fallback for domain reloads that clear static fields during play mode.
+                if (_instance == null)
+                    _instance = FindFirstObjectByType<AchievementService>(FindObjectsInactive.Include);
+                return _instance;
+            }
+            private set => _instance = value;
+        }
 
         public event System.Action<AchievementDefinition> OnAchievementUnlocked;
 
@@ -228,11 +239,12 @@ namespace Markyu.LastKernel.Achievements
         // Bypasses trigger evaluation — used by the debug window and editor tooling only.
         public void ForceUnlock(string id)
         {
-            if (database == null) return;
+            if (database == null) { Debug.LogWarning("[Achievements] ForceUnlock: database is null"); return; }
             var def = database.GetById(id);
-            if (def == null) { Debug.LogWarning($"[Achievements] ForceUnlock: no definition found for id '{id}'"); return; }
+            if (def == null) { Debug.LogWarning($"[Achievements] ForceUnlock: no definition for '{id}'"); return; }
             var data = GetOrCreate(def.Id);
-            if (!data.IsUnlocked) Unlock(def, data);
+            if (data.IsUnlocked) { Debug.Log($"[Achievements] '{id}' already unlocked — reset via Debug button first"); return; }
+            Unlock(def, data);
         }
 
         #endregion
@@ -272,7 +284,7 @@ namespace Markyu.LastKernel.Achievements
             _platform.Unlock(def.Id);
             _platform.StoreStats();
 
-            Debug.Log($"[Achievements] Unlocked: {def.Id}");
+            Debug.Log($"<color=yellow>★ Achievement Unlocked: <b>{def.Id}</b></color>");
             OnAchievementUnlocked?.Invoke(def);
         }
 
@@ -324,7 +336,7 @@ namespace Markyu.LastKernel.Achievements
 
 #if UNITY_EDITOR
         [Button("Debug — Unlock All"), BoxGroup("Debug")]
-        private void DebugUnlockAll()
+        public void DebugUnlockAll()
         {
             foreach (var def in database.All)
             {
@@ -335,7 +347,7 @@ namespace Markyu.LastKernel.Achievements
         }
 
         [Button("Debug — Reset All"), BoxGroup("Debug")]
-        private void DebugResetAll() => _progress.Clear();
+        public void DebugResetAll() => _progress.Clear();
 #endif
     }
 }

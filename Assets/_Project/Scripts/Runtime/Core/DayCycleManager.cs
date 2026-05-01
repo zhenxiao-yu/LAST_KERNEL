@@ -178,27 +178,29 @@ namespace Markyu.LastKernel
             // Clear any lingering day-cycle InfoPanel message before the deployment UI opens.
             InfoPanel.Instance?.ClearInfoRequest(dayCycleRequester);
 
-            if (NightPhaseManager.Instance != null)
-            {
-                // Collect living Character cards — these are the only eligible defenders.
-                var eligibleDefenders = CardManager.Instance.AllCards
-                    .Where(c => c != null
-                             && c.Definition != null
-                             && c.Definition.Category == CardCategory.Character
-                             && c.CurrentHealth > 0)
-                    .OrderBy(c => c.name)
-                    .ToList();
+            // Collect living Character cards — eligible to defend this night.
+            var eligibleDefenders = CardManager.Instance.AllCards
+                .Where(c => c != null
+                         && c.Definition != null
+                         && c.Definition.Category == CardCategory.Character
+                         && c.CurrentHealth > 0)
+                .OrderBy(c => c.name)
+                .ToList();
 
-                // --- PLAYER DEPLOYMENT ---
-                // Let the player choose which defenders to commit and in what lane order.
-                // Falls back to auto-deploy if NightDeploymentController is not in the scene.
+            if (NightBattleManager.Instance != null)
+            {
+                // PRIMARY PATH: unified Night Battle Modal (prep + shop + battle in one overlay).
+                yield return NightBattleManager.Instance.RunNight(eligibleDefenders);
+                RunStateManager.Instance?.ApplyNightCombatResult(NightBattleManager.Instance.LastResult);
+            }
+            else if (NightPhaseManager.Instance != null)
+            {
+                // FALLBACK PATH: legacy two-step flow (deployment panel → combat simulation).
                 NightDeploymentPlan plan;
 
                 if (NightDeploymentController.Instance != null)
                 {
                     yield return NightDeploymentController.Instance.RunDeploymentPhase(eligibleDefenders);
-
-                    // ConfirmedPlan is always non-null after RunDeploymentPhase completes.
                     plan = NightDeploymentController.Instance.ConfirmedPlan
                         ?? NightDeploymentPlan.BuildAutomatic(eligibleDefenders);
                 }
@@ -209,11 +211,7 @@ namespace Markyu.LastKernel
                     plan = NightDeploymentPlan.BuildAutomatic(eligibleDefenders);
                 }
 
-                // --- NIGHT COMBAT ---
-                // Run night combat (blocks until combat simulation + aftermath are fully done).
                 yield return NightPhaseManager.Instance.RunNight(plan);
-
-                // Apply run-state consequences from the combat result.
                 RunStateManager.Instance?.ApplyNightCombatResult(NightPhaseManager.Instance.LastResult);
             }
             else
@@ -234,6 +232,14 @@ namespace Markyu.LastKernel
             }
 
             InputManager.Instance.RemoveLock(dayCycleInputLock);
+
+            // Night combat may have killed the last colonists — end the run before starting a new day.
+            if (CardManager.Instance.GetStatsSnapshot().TotalCharacters <= 0)
+            {
+                HandleGameOver();
+                yield break;
+            }
+
             PrepareForNewDay();
         }
 
