@@ -475,7 +475,9 @@ namespace Markyu.LastKernel
                 {
                     enter = false;
                     if (it.propertyType != SerializedPropertyType.ObjectReference) continue;
+#pragma warning disable CS0618
                     if (it.objectReferenceValue == null && it.objectReferenceInstanceIDValue != 0)
+#pragma warning restore CS0618
                         summary.Error($"Prefab '{path}' missing ref '{comp.GetType().Name}.{it.propertyPath}' on '{HierarchyPath(comp.transform)}'.");
                 }
             }

@@ -121,8 +121,9 @@ namespace Markyu.LastKernel
                 UpdateResources(CardManager.Instance.GetStatsSnapshot());
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             Time.timeScale = 1f;
         }
 

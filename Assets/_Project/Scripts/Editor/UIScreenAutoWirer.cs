@@ -119,7 +119,7 @@ namespace Markyu.LastKernel
         private static MonoBehaviour FindExistingInstance(Type controllerType)
         {
             var all = UnityEngine.Object.FindObjectsByType(
-                controllerType, FindObjectsSortMode.None);
+                controllerType, FindObjectsInactive.Include);
             return all.Length > 0 ? all[0] as MonoBehaviour : null;
         }
 
@@ -166,7 +166,7 @@ namespace Markyu.LastKernel
                 if (sp == null || sp.objectReferenceValue != null) continue;
 
                 var found = UnityEngine.Object
-                    .FindObjectsByType(field.FieldType, FindObjectsSortMode.None)
+                    .FindObjectsByType(field.FieldType, FindObjectsInactive.Include)
                     .FirstOrDefault() as Component;
 
                 if (found == null) continue;

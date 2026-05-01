@@ -68,12 +68,12 @@ namespace Markyu.LastKernel
         private void HandlePhaseChanged(DefensePhase phase)
         {
             if (phase == DefensePhase.Defeat)
-                Show();
+                ShowBackdrop();
             else
-                Hide();
+                HideBackdrop();
         }
 
-        private void Show()
+        private void ShowBackdrop()
         {
             Time.timeScale = 1f;
 
@@ -87,7 +87,7 @@ namespace Markyu.LastKernel
                 _backdrop.RemoveFromClassList("lk-hidden");
         }
 
-        private void Hide()
+        private void HideBackdrop()
         {
             if (_backdrop != null)
                 _backdrop.AddToClassList("lk-hidden");
@@ -95,14 +95,14 @@ namespace Markyu.LastKernel
 
         private void OnRetryClicked()
         {
-            Hide();
+            HideBackdrop();
             UIEventBus.RaiseRetryRequested();
         }
 
         private void OnBackTitleClicked()
         {
             Time.timeScale = 1f;
-            Hide();
+            HideBackdrop();
             UIEventBus.RaiseBackToTitleRequested();
         }
     }

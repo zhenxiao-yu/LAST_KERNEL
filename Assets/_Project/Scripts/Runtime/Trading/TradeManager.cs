@@ -116,7 +116,7 @@ namespace Markyu.LastKernel
 
         private void Start()
         {
-            cameraController = FindFirstObjectByType<CameraController>();
+            cameraController = FindAnyObjectByType<CameraController>();
 
             if (Board.Instance != null)
             {

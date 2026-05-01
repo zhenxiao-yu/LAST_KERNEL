@@ -186,7 +186,7 @@ namespace Markyu.LastKernel
                              && c.Definition != null
                              && c.Definition.Category == CardCategory.Character
                              && c.CurrentHealth > 0)
-                    .OrderBy(c => c.GetInstanceID())   // stable order for list presentation
+                    .OrderBy(c => c.name)
                     .ToList();
 
                 // --- PLAYER DEPLOYMENT ---

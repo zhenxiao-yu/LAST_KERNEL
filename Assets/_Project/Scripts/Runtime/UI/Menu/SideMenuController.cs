@@ -6,15 +6,6 @@ using UnityEngine.UIElements;
 
 namespace Markyu.LastKernel
 {
-    /// <summary>
-    /// UI Toolkit controller for the right-side slide drawer that hosts
-    /// the Quests and Recipes panels.  Replaces the Canvas-based
-    /// QuestsView + RecipesView pair.
-    ///
-    /// Setup: Add this component alongside a UIDocument whose Source Asset
-    /// is SideMenuView.uxml.  Assign the same PanelSettings used for the
-    /// game HUD so the draw order is consistent.
-    /// </summary>
     [RequireComponent(typeof(UIDocument))]
     public class SideMenuController : MonoBehaviour
     {

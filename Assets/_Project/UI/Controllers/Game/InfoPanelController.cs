@@ -49,8 +49,9 @@ namespace Markyu.LastKernel
             Instance = this;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             if (Instance == this)
             {
                 Instance = null;

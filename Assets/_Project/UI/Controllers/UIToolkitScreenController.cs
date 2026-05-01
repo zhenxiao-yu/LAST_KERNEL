@@ -5,17 +5,6 @@ using UnityEngine.UIElements;
 
 namespace Markyu.LastKernel
 {
-    /// <summary>
-    /// Base class for all UI Toolkit screen and panel controllers.
-    ///
-    /// Each concrete subclass:
-    ///   1. Overrides OnBind() to query and cache child VisualElements.
-    ///   2. Overrides OnLocalizationRefresh() to update visible labels.
-    ///   3. Raises UIEventBus events for all user-intent signals (no direct singleton calls).
-    ///
-    /// Show/Hide enable or disable the UIDocument so panels are fully removed
-    /// from the render tree when not in use. Subclasses can override for animation.
-    /// </summary>
     [RequireComponent(typeof(UIDocument))]
     public abstract class UIToolkitScreenController : MonoBehaviour
     {
@@ -32,16 +21,8 @@ namespace Markyu.LastKernel
 
         public bool IsVisible => Document != null && Document.enabled;
 
-        /// <summary>
-        /// Label → localization-key registry. Call Localizer.Bind/BindFormat in OnBind().
-        /// RefreshAll() is called automatically on language change and after Show().
-        /// </summary>
         protected LKLocalizedBinder Localizer { get; } = new LKLocalizedBinder();
 
-        /// <summary>
-        /// Override to true in game-world screens (HUD, panels, results) that should
-        /// respond to the player's UI scale preference. Title and menu screens return false.
-        /// </summary>
         protected virtual bool AffectedByUIScale => false;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
@@ -89,10 +70,6 @@ namespace Markyu.LastKernel
 
         // ── Binding ────────────────────────────────────────────────────────────
 
-        /// <summary>
-        /// Query and store child VisualElement references, and register event callbacks.
-        /// Called once in Start after the UIDocument is ready.
-        /// </summary>
         protected abstract void OnBind();
 
         // ── Visibility ─────────────────────────────────────────────────────────
@@ -124,11 +101,6 @@ namespace Markyu.LastKernel
             OnLocalizationRefresh();
         }
 
-        /// <summary>
-        /// Update all visible localized labels. Called on language change and after Show().
-        /// Base implementation calls Localizer.RefreshAll(); subclasses should call base
-        /// before updating any additional dynamic labels.
-        /// </summary>
         public virtual void OnLocalizationRefresh() => Localizer.RefreshAll();
     }
 }

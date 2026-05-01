@@ -58,7 +58,7 @@ namespace Markyu.LastKernel
             // CardInstance is a MonoBehaviour — FindObjectsByType works fine.
             // CardStack / CraftingTask / CombatTask are plain C# classes;
             // query them through their manager singletons instead.
-            CardInstance[] allCards = FindObjectsByType<CardInstance>(FindObjectsSortMode.None);
+            CardInstance[] allCards = FindObjectsByType<CardInstance>(FindObjectsInactive.Exclude);
             int cardCount = allCards.Length;
             int stackCount = allCards.Select(c => c.Stack).Where(s => s != null).Distinct().Count();
 
