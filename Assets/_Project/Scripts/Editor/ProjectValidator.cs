@@ -702,9 +702,10 @@ namespace Markyu.LastKernel
                 {
                     ValidateProjectScript(path, summary);
                 }
-                else if (path.StartsWith("Assets/ThirdParty/", StringComparison.Ordinal))
+                else if (path.StartsWith("Assets/ThirdParty/", StringComparison.Ordinal)
+                      || path.StartsWith("Assets/UIToolkitScriptComponents/", StringComparison.Ordinal))
                 {
-                    // expected — skip
+                    // expected third-party — skip
                 }
                 else if (path.StartsWith("Assets/_Project/", StringComparison.Ordinal))
                 {

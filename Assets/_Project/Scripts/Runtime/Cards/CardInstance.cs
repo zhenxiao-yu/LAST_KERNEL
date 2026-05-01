@@ -189,9 +189,28 @@ namespace Markyu.LastKernel
 
         #region Information & Visuals
 
-        public void ShowInspectInfo() => InfoPanel.Instance?.RegisterHover(GetInfo());
+        public void ShowInspectInfo() => InfoPanel.Instance?.RegisterCardHover(GetInfo(), GetCardInfo());
 
         public void HideInspectInfo() => InfoPanel.Instance?.UnregisterHover();
+
+        private CardInfoData? GetCardInfo()
+        {
+            if (Stack == null || Stack.IsCrafting || Stack.Cards.Count > 1 || Stack.TopCard == null)
+                return null;
+
+            var def   = Stack.TopCard.Definition;
+            var stats = Stack.TopCard.Stats;
+            return new CardInfoData(
+                category:       def.Category,
+                combat:         def.CombatType,
+                currentHP:      CurrentHealth,
+                maxHP:          (int)stats.MaxHealth.Value,
+                formattedStats: def.CombatType != CombatType.None ? stats.GetFormattedStats() : null,
+                sellPrice:      def.SellPrice,
+                nutrition:      CurrentNutrition,
+                usesLeft:       UsesLeft
+            );
+        }
 
         private (string, string) GetInfo()
         {

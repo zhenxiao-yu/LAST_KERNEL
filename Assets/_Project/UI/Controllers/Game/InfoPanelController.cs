@@ -25,6 +25,7 @@ namespace Markyu.LastKernel
             public string        Body;
             public string        ButtonLabel;
             public Action        ButtonAction;
+            public CardInfoData? CardInfo;
         }
 
         private readonly object _hoverRequester = new object();
@@ -35,6 +36,17 @@ namespace Markyu.LastKernel
         private Label         _bodyLabel;
         private Button        _actionButton;
         private Action        _currentButtonAction;
+
+        // Card detail section
+        private VisualElement _cardSection;
+        private Label         _categoryBadge;
+        private VisualElement _hpRow;
+        private Label         _hpLabel;
+        private VisualElement _hpFill;
+        private Label         _statsLabel;
+        private VisualElement _resourceRow;
+        private Label         _sellLabel;
+        private Label         _nutritionInfoLabel;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
@@ -71,7 +83,17 @@ namespace Markyu.LastKernel
             if (_actionButton != null)
                 _actionButton.RegisterCallback<ClickEvent>(OnActionClicked);
 
-            InfoPanel.Register(RequestInfoDisplay, ClearInfoRequest, RegisterHover, UnregisterHover);
+            _cardSection      = Root.Q<VisualElement>("info-card-section");
+            _categoryBadge    = Root.Q<Label>        ("lbl-info-category");
+            _hpRow            = Root.Q<VisualElement>("info-hp-row");
+            _hpLabel          = Root.Q<Label>        ("lbl-info-hp");
+            _hpFill           = Root.Q<VisualElement>("fill-info-hp");
+            _statsLabel       = Root.Q<Label>        ("lbl-info-stats");
+            _resourceRow      = Root.Q<VisualElement>("info-resource-row");
+            _sellLabel        = Root.Q<Label>        ("lbl-info-sell");
+            _nutritionInfoLabel = Root.Q<Label>      ("lbl-info-nutrition");
+
+            InfoPanel.Register(RequestInfoDisplay, ClearInfoRequest, RegisterHover, UnregisterHover, RegisterCardHover);
             RefreshDisplay();
         }
 
@@ -116,6 +138,19 @@ namespace Markyu.LastKernel
             ClearInfoRequest(_hoverRequester);
         }
 
+        public void RegisterCardHover((string header, string body) info, CardInfoData? cardInfo)
+        {
+            _activeRequests[_hoverRequester] = new InfoRequest
+            {
+                RequestId    = s_requestCounter++,
+                Priority     = InfoPriority.Hover,
+                Header       = info.header,
+                Body         = info.body,
+                CardInfo     = cardInfo,
+            };
+            RefreshDisplay();
+        }
+
         // ── Display ────────────────────────────────────────────────────────────
 
         private void RefreshDisplay()
@@ -152,7 +187,89 @@ namespace Markyu.LastKernel
                 _currentButtonAction = hasButton ? top.ButtonAction : null;
             }
 
+            // Card detail section
+            bool hasCard = top.CardInfo.HasValue;
+            _cardSection?.EnableInClassList("lk-hidden", !hasCard);
+            if (hasCard)
+                UpdateCardSection(top.CardInfo.Value);
+
             _anchor.RemoveFromClassList("lk-hidden");
+        }
+
+        private void UpdateCardSection(CardInfoData card)
+        {
+            if (_categoryBadge != null)
+            {
+                _categoryBadge.text = card.Category.ToString().ToUpperInvariant();
+                SetCategoryBadgeModifier(_categoryBadge, card.Category);
+            }
+
+            if (_hpRow != null)
+            {
+                bool show = card.HasHP;
+                _hpRow.EnableInClassList("lk-hidden", !show);
+                if (show)
+                {
+                    if (_hpLabel != null)
+                        _hpLabel.text = $"{card.CurrentHP}/{card.MaxHP}";
+                    if (_hpFill != null)
+                    {
+                        float pct = card.MaxHP > 0 ? (float)card.CurrentHP / card.MaxHP : 0f;
+                        _hpFill.style.width = UnityEngine.UIElements.Length.Percent(pct * 100f);
+                        _hpFill.EnableInClassList("lk-progress-bar__fill--warning", pct is > 0.2f and <= 0.5f);
+                        _hpFill.EnableInClassList("lk-progress-bar__fill--danger",  pct <= 0.2f);
+                    }
+                }
+            }
+
+            if (_statsLabel != null)
+            {
+                bool show = card.HasCombat;
+                _statsLabel.EnableInClassList("lk-hidden", !show);
+                if (show)
+                    _statsLabel.text = card.FormattedStats;
+            }
+
+            if (_resourceRow != null)
+            {
+                bool show = card.HasSell || card.HasNutrition;
+                _resourceRow.EnableInClassList("lk-hidden", !show);
+                if (show)
+                {
+                    if (_sellLabel != null)
+                        _sellLabel.text = card.HasSell
+                            ? GameLocalization.Format("card.sell", card.SellPrice)
+                            : string.Empty;
+                    if (_nutritionInfoLabel != null)
+                        _nutritionInfoLabel.text = card.HasNutrition
+                            ? GameLocalization.Format("card.nutritionValue", card.Nutrition)
+                            : string.Empty;
+                }
+            }
+        }
+
+        private static void SetCategoryBadgeModifier(Label badge, CardCategory category)
+        {
+            badge.RemoveFromClassList("lk-info-badge--character");
+            badge.RemoveFromClassList("lk-info-badge--consumable");
+            badge.RemoveFromClassList("lk-info-badge--resource");
+            badge.RemoveFromClassList("lk-info-badge--material");
+            badge.RemoveFromClassList("lk-info-badge--equipment");
+            badge.RemoveFromClassList("lk-info-badge--structure");
+            badge.RemoveFromClassList("lk-info-badge--mob");
+
+            string mod = category switch
+            {
+                CardCategory.Character  => "lk-info-badge--character",
+                CardCategory.Consumable => "lk-info-badge--consumable",
+                CardCategory.Resource   => "lk-info-badge--resource",
+                CardCategory.Material   => "lk-info-badge--material",
+                CardCategory.Equipment  => "lk-info-badge--equipment",
+                CardCategory.Structure  => "lk-info-badge--structure",
+                CardCategory.Mob        => "lk-info-badge--mob",
+                _                       => null,
+            };
+            if (mod != null) badge.AddToClassList(mod);
         }
 
         private void OnActionClicked(ClickEvent evt)

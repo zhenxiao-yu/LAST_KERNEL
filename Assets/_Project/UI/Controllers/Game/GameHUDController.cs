@@ -38,6 +38,7 @@ namespace Markyu.LastKernel
         private VisualElement _hpFill;
         private Label         _hpLabel;
         private Label         _enemiesLabel;
+        private VisualElement _enemyProgressFill;
         private Button        _speedButton;
 
         // ── Resource icons (optional — assigned by C# for sprite-based icons) ─
@@ -155,8 +156,9 @@ namespace Markyu.LastKernel
             _waveLabel       = Root.Q<Label>        ("lbl-wave");
             _hpFill          = Root.Q<VisualElement>("fill-base-hp");
             _hpLabel         = Root.Q<Label>        ("lbl-base-hp");
-            _enemiesLabel    = Root.Q<Label>        ("lbl-enemies");
-            _speedButton     = Root.Q<Button>       ("btn-speed");
+            _enemiesLabel      = Root.Q<Label>        ("lbl-enemies");
+            _enemyProgressFill = Root.Q<VisualElement>("fill-wave-enemies");
+            _speedButton       = Root.Q<Button>       ("btn-speed");
 
             _nutritionIcon = Root.Q<VisualElement>("icon-nutrition");
             _currencyIcon  = Root.Q<VisualElement>("icon-currency");
@@ -284,6 +286,9 @@ namespace Markyu.LastKernel
         {
             if (_enemiesLabel != null)
                 _enemiesLabel.text = GameLocalization.Format("hud.enemies", alive, total);
+
+            if (_enemyProgressFill != null && total > 0)
+                _enemyProgressFill.style.width = Length.Percent((float)alive / total * 100f);
         }
 
         // ── Night: speed toggle ────────────────────────────────────────────────

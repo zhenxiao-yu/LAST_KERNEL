@@ -16,6 +16,22 @@
             <!-- Body -->
             <ui:Label name="lbl-info-body" class="lk-info-panel__body" />
 
+            <!-- Card detail section — shown when InfoRequest carries CardInfoData -->
+            <ui:VisualElement name="info-card-section" class="lk-hidden" style="margin-top: 6px;">
+                <ui:Label name="lbl-info-category" class="lk-info-badge" />
+                <ui:VisualElement name="info-hp-row" class="lk-row lk-align-center lk-hidden" style="margin-top: 4px;">
+                    <ui:Label name="lbl-info-hp" class="lk-label--dim" style="min-width: 56px;" />
+                    <ui:VisualElement class="lk-progress-bar" style="flex-grow: 1; margin-left: 6px;">
+                        <ui:VisualElement name="fill-info-hp" class="lk-progress-bar__fill" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <ui:Label name="lbl-info-stats" class="lk-info-panel__stats lk-hidden" style="margin-top: 4px;" />
+                <ui:VisualElement name="info-resource-row" class="lk-row lk-hidden" style="margin-top: 4px;">
+                    <ui:Label name="lbl-info-sell" class="lk-label--dim" style="margin-right: 8px;" />
+                    <ui:Label name="lbl-info-nutrition" class="lk-label--dim" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
             <!-- Optional action button — hidden until a request provides one -->
             <ui:Button name="btn-info-action" class="lk-button lk-button--primary lk-hidden"
                        style="margin-top: 8px; align-self: flex-start;" />
