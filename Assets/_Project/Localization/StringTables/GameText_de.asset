@@ -3493,6 +3493,22 @@ MonoBehaviour:
     m_Localized: "Schlie\xDFe 20 Quests ab."
     m_Metadata:
       m_Items: []
+  - m_Id: 2106983230222336
+    m_Localized: EINSTELLUNGEN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165376
+    m_Localized: STEUERUNG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165377
+    m_Localized: "ALLES ZUR\xDCCKSETZEN"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165378
+    m_Localized: "Steuerung ist nur w\xE4hrend des Spiels verf\xFCgbar."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

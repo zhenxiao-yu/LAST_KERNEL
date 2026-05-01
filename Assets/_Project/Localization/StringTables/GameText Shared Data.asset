@@ -4216,6 +4216,26 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 2581770992171876527
+  - m_Id: 2106983230222336
+    m_Key: options.tab.settings
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876588
+  - m_Id: 2106983272165376
+    m_Key: options.tab.controls
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876589
+  - m_Id: 2106983272165377
+    m_Key: options.controls.resetAll
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876590
+  - m_Id: 2106983272165378
+    m_Key: options.controls.unavailable
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876591
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -4632,6 +4652,23 @@ MonoBehaviour:
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_CommentText: "Achievement description \u2014 complete 20 quests"
+    - rid: 2581770992171876588
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Settings tab label"
+    - rid: 2581770992171876589
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Controls tab label"
+    - rid: 2581770992171876590
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel Controls tab \u2014 reset all keybinds button"
+    - rid: 2581770992171876591
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel Controls tab \u2014 shown when Input System
+          is absent"
     - rid: 8800497158023282712
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:

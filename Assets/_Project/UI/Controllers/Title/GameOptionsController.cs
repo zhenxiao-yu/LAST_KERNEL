@@ -9,17 +9,16 @@ namespace Markyu.LastKernel
 {
     public sealed class GameOptionsController : UIToolkitComponentController
     {
+        private enum OptionsTab { Settings, Video, Language, Controls, Accessibility }
+
+        private const string KeyScreenShake = "accessibility.screenshake";
+        private const string KeyFlash       = "accessibility.flash";
+
         private readonly Action<string, string, Action> _showConfirm;
         private readonly Action _showLangModal;
 
-        // ── Settings tab elements ──────────────────────────────────────────────
+        // ── Settings tab ───────────────────────────────────────────────────────
         private Label  _titleLabel;
-        private Label  _graphicsLabel;
-        private Button _resolutionButton;
-        private Button _fullscreenButton;
-        private Button _vSyncButton;
-        private Button _fpsButton;
-        private Button _shadowButton;
         private Label  _uiLabel;
         private Button _uiScaleButton;
         private Label  _audioLabel;
@@ -27,15 +26,36 @@ namespace Markyu.LastKernel
         private Slider _sfxSlider;
         private Label  _bgmLabel;
         private Slider _bgmSlider;
+
+        // ── Video tab ──────────────────────────────────────────────────────────
+        private Label  _graphicsLabel;
+        private Button _resolutionButton;
+        private Button _fullscreenButton;
+        private Button _vSyncButton;
+        private Button _fpsButton;
+        private Button _shadowButton;
+
+        // ── Language tab ───────────────────────────────────────────────────────
         private Button _languageButton;
 
-        // ── Tab ────────────────────────────────────────────────────────────────
-        private Button       _tabSettings;
-        private Button       _tabControls;
-        private ScrollView   _settingsScroll;
-        private ScrollView   _controlsScroll;
+        // ── Accessibility tab ──────────────────────────────────────────────────
+        private Label  _accessibilityLabel;
+        private Button _screenShakeButton;
+        private Button _flashEffectsButton;
+
+        // ── Tab bar ────────────────────────────────────────────────────────────
+        private Button      _tabSettings;
+        private Button      _tabVideo;
+        private Button      _tabLanguage;
+        private Button      _tabControls;
+        private Button      _tabAccessibility;
+        private ScrollView  _settingsScroll;
+        private ScrollView  _videoScroll;
+        private ScrollView  _languageScroll;
+        private ScrollView  _controlsScroll;
+        private ScrollView  _accessibilityScroll;
         private VisualElement _keybindList;
-        private bool         _isControlsTab;
+        private OptionsTab  _currentTab;
 
         // ── Footer ─────────────────────────────────────────────────────────────
         private Button _resetButton;
@@ -47,19 +67,14 @@ namespace Markyu.LastKernel
 
         public GameOptionsController(Action<string, string, Action> showConfirm, Action showLangModal)
         {
-            _showConfirm  = showConfirm;
+            _showConfirm   = showConfirm;
             _showLangModal = showLangModal;
         }
 
         protected override void OnBind()
         {
+            // Settings
             _titleLabel       = Root.Q<Label>      ("lbl-opts-title");
-            _graphicsLabel    = Root.Q<Label>      ("lbl-opts-graphics");
-            _resolutionButton = Root.Q<Button>     ("btn-opt-resolution");
-            _fullscreenButton = Root.Q<Button>     ("btn-opt-fullscreen");
-            _vSyncButton      = Root.Q<Button>     ("btn-opt-vsync");
-            _fpsButton        = Root.Q<Button>     ("btn-opt-fps");
-            _shadowButton     = Root.Q<Button>     ("btn-opt-shadows");
             _uiLabel          = Root.Q<Label>      ("lbl-opts-ui");
             _uiScaleButton    = Root.Q<Button>     ("btn-opt-ui-scale");
             _audioLabel       = Root.Q<Label>      ("lbl-opts-audio");
@@ -67,24 +82,64 @@ namespace Markyu.LastKernel
             _sfxSlider        = Root.Q<Slider>     ("slider-sfx");
             _bgmLabel         = Root.Q<Label>      ("lbl-bgm");
             _bgmSlider        = Root.Q<Slider>     ("slider-bgm");
-            _languageButton   = Root.Q<Button>     ("btn-opt-language");
-            _tabSettings      = Root.Q<Button>     ("btn-tab-settings");
-            _tabControls      = Root.Q<Button>     ("btn-tab-controls");
-            _settingsScroll   = Root.Q<ScrollView> ("opts-scroll");
-            _controlsScroll   = Root.Q<ScrollView> ("controls-scroll");
-            _keybindList      = Root.Q<VisualElement>("keybind-list");
-            _resetButton      = Root.Q<Button>     ("btn-opt-reset");
-            _closeButton      = Root.Q<Button>     ("btn-opt-close");
 
+            // Video
+            _graphicsLabel    = Root.Q<Label>      ("lbl-opts-graphics");
+            _resolutionButton = Root.Q<Button>     ("btn-opt-resolution");
+            _fullscreenButton = Root.Q<Button>     ("btn-opt-fullscreen");
+            _vSyncButton      = Root.Q<Button>     ("btn-opt-vsync");
+            _fpsButton        = Root.Q<Button>     ("btn-opt-fps");
+            _shadowButton     = Root.Q<Button>     ("btn-opt-shadows");
+
+            // Language
+            _languageButton   = Root.Q<Button>     ("btn-opt-language");
+
+            // Accessibility
+            _accessibilityLabel  = Root.Q<Label>   ("lbl-opts-accessibility");
+            _screenShakeButton   = Root.Q<Button>  ("btn-opt-screenshake");
+            _flashEffectsButton  = Root.Q<Button>  ("btn-opt-flash");
+
+            // Tabs
+            _tabSettings      = Root.Q<Button>     ("btn-tab-settings");
+            _tabVideo         = Root.Q<Button>     ("btn-tab-video");
+            _tabLanguage      = Root.Q<Button>     ("btn-tab-language");
+            _tabControls      = Root.Q<Button>     ("btn-tab-controls");
+            _tabAccessibility = Root.Q<Button>     ("btn-tab-accessibility");
+            _settingsScroll      = Root.Q<ScrollView>("opts-scroll");
+            _videoScroll         = Root.Q<ScrollView>("video-scroll");
+            _languageScroll      = Root.Q<ScrollView>("language-scroll");
+            _controlsScroll      = Root.Q<ScrollView>("controls-scroll");
+            _accessibilityScroll = Root.Q<ScrollView>("accessibility-scroll");
+            _keybindList         = Root.Q<VisualElement>("keybind-list");
+
+            // Footer
+            _resetButton = Root.Q<Button>("btn-opt-reset");
+            _closeButton = Root.Q<Button>("btn-opt-close");
+
+            // Video
             _resolutionButton.clicked += () => { GraphicsManager.Instance?.CycleScreenResolution(); RefreshGraphicsLabels(); };
             _fullscreenButton.clicked += () => { GraphicsManager.Instance?.CycleFullscreenMode();   RefreshGraphicsLabels(); };
             _vSyncButton.clicked      += () => { GraphicsManager.Instance?.CycleVSync();            RefreshGraphicsLabels(); };
             _fpsButton.clicked        += () => { GraphicsManager.Instance?.CycleFrameRateCap();     RefreshGraphicsLabels(); };
             _shadowButton.clicked     += () => { GraphicsManager.Instance?.CycleShadowPreset();     RefreshGraphicsLabels(); };
-            if (_uiScaleButton  != null) _uiScaleButton.clicked  += () => { UIScaleManager.CycleScale(); UpdateUIScaleButton(); };
-            if (_languageButton != null) _languageButton.clicked += () => _showLangModal?.Invoke();
-            if (_tabSettings    != null) _tabSettings.clicked    += () => SwitchTab(false);
-            if (_tabControls    != null) _tabControls.clicked    += () => SwitchTab(true);
+
+            // Settings
+            if (_uiScaleButton   != null) _uiScaleButton.clicked   += () => { UIScaleManager.CycleScale(); UpdateUIScaleButton(); };
+
+            // Language
+            if (_languageButton  != null) _languageButton.clicked  += () => _showLangModal?.Invoke();
+
+            // Accessibility
+            if (_screenShakeButton  != null) _screenShakeButton.clicked  += OnScreenShakeClicked;
+            if (_flashEffectsButton != null) _flashEffectsButton.clicked += OnFlashClicked;
+
+            // Tabs
+            if (_tabSettings      != null) _tabSettings.clicked      += () => SwitchTab(OptionsTab.Settings);
+            if (_tabVideo         != null) _tabVideo.clicked         += () => SwitchTab(OptionsTab.Video);
+            if (_tabLanguage      != null) _tabLanguage.clicked      += () => SwitchTab(OptionsTab.Language);
+            if (_tabControls      != null) _tabControls.clicked      += () => SwitchTab(OptionsTab.Controls);
+            if (_tabAccessibility != null) _tabAccessibility.clicked += () => SwitchTab(OptionsTab.Accessibility);
+
             _resetButton.clicked += OnResetClicked;
             _closeButton.clicked += Hide;
 
@@ -103,7 +158,7 @@ namespace Markyu.LastKernel
         public void Show()
         {
             Root.RemoveFromClassList("lk-hidden");
-            SwitchTab(false);
+            SwitchTab(OptionsTab.Settings);
             RefreshFromManagers();
             OnLocalizationRefresh();
         }
@@ -121,50 +176,72 @@ namespace Markyu.LastKernel
 
         public override void OnLocalizationRefresh()
         {
-            if (_titleLabel      != null) _titleLabel.text      = GameLocalization.Get("options.header");
-            if (_graphicsLabel   != null) _graphicsLabel.text   = GameLocalization.Get("ui.video");
-            if (_uiLabel         != null) _uiLabel.text         = GameLocalization.Get("options.uiScale");
-            if (_audioLabel      != null) _audioLabel.text      = GameLocalization.Get("ui.audio");
-            if (_languageButton  != null) _languageButton.text  = GameLocalization.GetLanguageButtonLabel();
-            if (_tabSettings     != null) _tabSettings.text     = GameLocalization.GetOptional("options.tab.settings", "SETTINGS");
-            if (_tabControls     != null) _tabControls.text     = GameLocalization.GetOptional("options.tab.controls", "CONTROLS");
-            if (_closeButton     != null) _closeButton.text     = GameLocalization.Get("common.closeButton");
+            if (_titleLabel         != null) _titleLabel.text         = GameLocalization.Get("options.header");
+            if (_graphicsLabel      != null) _graphicsLabel.text      = GameLocalization.Get("ui.video");
+            if (_uiLabel            != null) _uiLabel.text            = GameLocalization.Get("options.uiScale");
+            if (_audioLabel         != null) _audioLabel.text         = GameLocalization.Get("ui.audio");
+            if (_accessibilityLabel != null) _accessibilityLabel.text = GameLocalization.GetOptional("options.accessibility", "Accessibility");
+            if (_languageButton     != null) _languageButton.text     = GameLocalization.GetLanguageButtonLabel();
+            if (_tabSettings        != null) _tabSettings.text        = GameLocalization.GetOptional("options.tab.settings",     "Settings");
+            if (_tabVideo           != null) _tabVideo.text           = GameLocalization.GetOptional("options.tab.video",        "Video");
+            if (_tabLanguage        != null) _tabLanguage.text        = GameLocalization.GetOptional("options.tab.language",     "Language");
+            if (_tabControls        != null) _tabControls.text        = GameLocalization.GetOptional("options.tab.controls",     "Controls");
+            if (_tabAccessibility   != null) _tabAccessibility.text   = GameLocalization.GetOptional("options.tab.accessibility","Access.");
+            if (_closeButton        != null) _closeButton.text        = GameLocalization.Get("common.closeButton");
 
             UpdateResetButtonLabel();
             RefreshGraphicsLabels();
             UpdateUIScaleButton();
+            RefreshAccessibilityButtons();
             if (_sfxSlider != null) UpdateSfxLabel(_sfxSlider.value);
             if (_bgmSlider != null) UpdateBgmLabel(_bgmSlider.value);
         }
 
         // ── Tab switching ──────────────────────────────────────────────────────
 
-        private void SwitchTab(bool toControls)
+        private void SwitchTab(OptionsTab tab)
         {
-            _isControlsTab = toControls;
+            _currentTab = tab;
 
-            _settingsScroll?.EnableInClassList("lk-hidden",  toControls);
-            _controlsScroll?.EnableInClassList("lk-hidden", !toControls);
+            _settingsScroll?.EnableInClassList     ("lk-hidden", tab != OptionsTab.Settings);
+            _videoScroll?.EnableInClassList        ("lk-hidden", tab != OptionsTab.Video);
+            _languageScroll?.EnableInClassList     ("lk-hidden", tab != OptionsTab.Language);
+            _controlsScroll?.EnableInClassList     ("lk-hidden", tab != OptionsTab.Controls);
+            _accessibilityScroll?.EnableInClassList("lk-hidden", tab != OptionsTab.Accessibility);
 
-            _tabSettings?.EnableInClassList("lk-tab--active", !toControls);
-            _tabControls?.EnableInClassList("lk-tab--active",  toControls);
+            _tabSettings?.EnableInClassList     ("lk-tab--active", tab == OptionsTab.Settings);
+            _tabVideo?.EnableInClassList        ("lk-tab--active", tab == OptionsTab.Video);
+            _tabLanguage?.EnableInClassList     ("lk-tab--active", tab == OptionsTab.Language);
+            _tabControls?.EnableInClassList     ("lk-tab--active", tab == OptionsTab.Controls);
+            _tabAccessibility?.EnableInClassList("lk-tab--active", tab == OptionsTab.Accessibility);
 
-            if (toControls) BuildKeybindRows();
+            if (tab == OptionsTab.Controls) BuildKeybindRows();
             UpdateResetButtonLabel();
         }
 
         private void UpdateResetButtonLabel()
         {
             if (_resetButton == null) return;
-            _resetButton.text = _isControlsTab
-                ? GameLocalization.GetOptional("options.controls.resetAll", "RESET ALL")
+            _resetButton.EnableInClassList("lk-hidden", _currentTab == OptionsTab.Language);
+            _resetButton.text = _currentTab == OptionsTab.Controls
+                ? GameLocalization.GetOptional("options.controls.resetAll", "Reset All")
                 : GameLocalization.Get("common.resetButton");
         }
 
         private void OnResetClicked()
         {
-            if (_isControlsTab) ResetAllKeybinds();
-            else                ShowResetConfirmation();
+            switch (_currentTab)
+            {
+                case OptionsTab.Controls:
+                    ResetAllKeybinds();
+                    break;
+                case OptionsTab.Accessibility:
+                    ResetAccessibilitySettings();
+                    break;
+                default:
+                    ShowResetConfirmation();
+                    break;
+            }
         }
 
         // ── Keybind rows ───────────────────────────────────────────────────────
@@ -318,6 +395,51 @@ namespace Markyu.LastKernel
         private void ResetAllKeybinds() { }
 #endif
 
+        // ── Accessibility ──────────────────────────────────────────────────────
+
+        private void OnScreenShakeClicked()
+        {
+            bool current = PlayerPrefs.GetInt(KeyScreenShake, 1) != 0;
+            PlayerPrefs.SetInt(KeyScreenShake, current ? 0 : 1);
+            UpdateScreenShakeButton();
+        }
+
+        private void OnFlashClicked()
+        {
+            bool current = PlayerPrefs.GetInt(KeyFlash, 1) != 0;
+            PlayerPrefs.SetInt(KeyFlash, current ? 0 : 1);
+            UpdateFlashButton();
+        }
+
+        private void RefreshAccessibilityButtons()
+        {
+            UpdateScreenShakeButton();
+            UpdateFlashButton();
+        }
+
+        private void UpdateScreenShakeButton()
+        {
+            if (_screenShakeButton == null) return;
+            bool on = PlayerPrefs.GetInt(KeyScreenShake, 1) != 0;
+            string state = GameLocalization.GetOptional(on ? "common.on" : "common.off", on ? "On" : "Off");
+            _screenShakeButton.text = $"{GameLocalization.GetOptional("options.screenshake", "Screen Shake")}: {state}";
+        }
+
+        private void UpdateFlashButton()
+        {
+            if (_flashEffectsButton == null) return;
+            bool on = PlayerPrefs.GetInt(KeyFlash, 1) != 0;
+            string state = GameLocalization.GetOptional(on ? "common.on" : "common.off", on ? "On" : "Off");
+            _flashEffectsButton.text = $"{GameLocalization.GetOptional("options.flash", "Flash Effects")}: {state}";
+        }
+
+        private void ResetAccessibilitySettings()
+        {
+            PlayerPrefs.DeleteKey(KeyScreenShake);
+            PlayerPrefs.DeleteKey(KeyFlash);
+            RefreshAccessibilityButtons();
+        }
+
         // ── Settings helpers ───────────────────────────────────────────────────
 
         private void RefreshFromManagers()
@@ -325,6 +447,7 @@ namespace Markyu.LastKernel
             RefreshGraphicsLabels();
             UpdateUIScaleButton();
             RefreshVolumeSliders();
+            RefreshAccessibilityButtons();
         }
 
         private void RefreshGraphicsLabels()

@@ -130,7 +130,14 @@ namespace Markyu.LastKernel
             }
 
             _card.Stack.KillAllTweens();
-            _dragOffset = transform.position - GetMouseWorldPosition();
+
+            // When grabbing the whole stack, anchor the drag to TopCard (Cards[0]) so that
+            // SetDragTargetPosition tracks the cursor correctly regardless of which card was clicked.
+            var topCard = grabWholeStack ? _card.Stack.TopCard : null;
+            _dragOffset = (topCard != null && topCard != _card)
+                ? topCard.transform.position - GetMouseWorldPosition()
+                : transform.position - GetMouseWorldPosition();
+
             _feelPresenter?.OnPickup();
 
             CardManager.Instance?.HighlightStackableStacks(_card);

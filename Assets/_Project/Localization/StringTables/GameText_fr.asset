@@ -3493,6 +3493,22 @@ MonoBehaviour:
     m_Localized: "Terminez 20 qu\xEAtes."
     m_Metadata:
       m_Items: []
+  - m_Id: 2106983230222336
+    m_Localized: "R\xC9GLAGES"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165376
+    m_Localized: COMMANDES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165377
+    m_Localized: "TOUT R\xC9INITIALISER"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165378
+    m_Localized: Les commandes sont disponibles uniquement pendant le jeu.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

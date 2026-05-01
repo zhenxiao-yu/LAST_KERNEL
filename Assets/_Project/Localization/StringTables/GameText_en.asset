@@ -3493,6 +3493,22 @@ MonoBehaviour:
     m_Localized: Complete 20 quests.
     m_Metadata:
       m_Items: []
+  - m_Id: 2106983230222336
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165376
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165377
+    m_Localized: RESET ALL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165378
+    m_Localized: Controls are only available during gameplay.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

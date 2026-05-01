@@ -3493,6 +3493,22 @@ MonoBehaviour:
     m_Localized: Completa 20 misiones.
     m_Metadata:
       m_Items: []
+  - m_Id: 2106983230222336
+    m_Localized: AJUSTES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165376
+    m_Localized: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165377
+    m_Localized: RESTABLECER TODO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2106983272165378
+    m_Localized: "Los controles solo est\xE1n disponibles durante el juego."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
