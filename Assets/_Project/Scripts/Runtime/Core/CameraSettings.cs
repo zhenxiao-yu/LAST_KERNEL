@@ -26,10 +26,6 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("Intended target resolution. Used when configuring Canvas Scalers.")]
         private Vector2Int referenceResolution = new Vector2Int(1920, 1080);
 
-        [BoxGroup("Design Reference")]
-        [SerializeField, Tooltip("Aspect ratio the game is primarily designed for.")]
-        private string targetAspect = "16:9";
-
         [BoxGroup("Camera Rig")]
         [SerializeField, Tooltip("Starting distance from the board when a scene loads.")]
         private float defaultDistance = 12f;

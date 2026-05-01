@@ -68,6 +68,10 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("Small offset so the overlay renders slightly above the board surface.")]
         private float gridSurfaceOffset = 0.01f;
 
+        [BoxGroup("Grid")]
+        [SerializeField, Tooltip("Shader used by the grid overlay mesh. Assign 'Sprites/Default' or 'Unlit/Color'.")]
+        private Shader gridOverlayShader;
+
         public float TopMargin => topMargin;
         public Bounds WorldBounds => currentBounds;
         public bool SnapCardsToGrid => snapCardsToGrid;
@@ -184,11 +188,6 @@ namespace Markyu.LastKernel
             bool isBoardShrinking = nextBoost < appliedBoost;
             appliedBoost = nextBoost;
 
-            if (skinnedMesh == null)
-            {
-                skinnedMesh = GetComponent<SkinnedMeshRenderer>();
-            }
-
             skinnedMesh.SetBlendShapeWeight(0, appliedBoost);
             UpdateCurrentBounds();
 
@@ -235,9 +234,6 @@ namespace Markyu.LastKernel
         [ContextMenu("Update Current Bounds")]
         private void UpdateCurrentBounds()
         {
-            if (skinnedMesh == null)
-                skinnedMesh = GetComponent<SkinnedMeshRenderer>();
-
             if (bakedMesh == null)
                 bakedMesh = new Mesh();
 
@@ -275,19 +271,6 @@ namespace Markyu.LastKernel
             OnBoundsUpdated?.Invoke(currentBounds);
         }
 
-        /// <summary>
-        /// Constrains the movement of a CardStack's root position to ensure its entire physical footprint
-        /// remains within the playable world boundaries of the board.
-        /// </summary>
-        /// <remarks>
-        /// The method calculates the effective minimum and maximum coordinates by factoring in the stack's
-        /// width and depth relative to the board's Bounds, and then clamps the requested position.
-        /// This check enforces the X and Z boundaries of the board but does not specifically handle the
-        /// restricted top margin (header area).
-        /// </remarks>
-        /// <param name="position">The desired world position for the stack.</param>
-        /// <param name="stack">The <see cref="CardStack"/> whose dimensions are used for the clamping offset.</param>
-        /// <returns>A Vector3 that is guaranteed to be within the board's physical boundaries.</returns>
         public Vector3 ClampToBounds(Vector3 position, CardStack stack)
         {
             if (stack == null) return position;
@@ -306,18 +289,6 @@ namespace Markyu.LastKernel
             );
         }
 
-        /// <summary>
-        /// Applies the complete set of placement rules to a CardStack's potential position, 
-        /// ensuring it is both within the board's physical boundaries and outside the restricted top margin.
-        /// </summary>
-        /// <remarks>
-        /// This method first uses ClampToBounds to handle the lateral and bottom bounds. 
-        /// It then checks if the card's top edge overlaps the restricted margin area and snaps 
-        /// the position down (negative Z) if necessary. The result is also flattened to Y=0.
-        /// </remarks>
-        /// <param name="position">The desired world position for the stack.</param>
-        /// <param name="stack">The <see cref="CardStack"/> whose dimensions are used for the placement check.</param>
-        /// <returns>A corrected, final Vector3 position that adheres to all board placement rules.</returns>
         public Vector3 EnforcePlacementRules(Vector3 position, CardStack stack)
         {
             if (stack == null) return position;
@@ -335,9 +306,6 @@ namespace Markyu.LastKernel
             return clamped.Flatten();
         }
 
-        /// <summary>
-        /// Returns the nearest valid grid anchor for a card stack, ignoring other stacks.
-        /// </summary>
         public Vector3 SnapToNearestGridPosition(Vector3 desiredPosition, CardStack stack)
         {
             if (TryFindNearestGridPosition(desiredPosition, stack, null, null, out var snappedPosition))
@@ -348,10 +316,6 @@ namespace Markyu.LastKernel
             return EnforcePlacementRules(desiredPosition, stack);
         }
 
-        /// <summary>
-        /// Finds the nearest valid board cell for a stack while respecting the board limits,
-        /// reserved areas, and already-occupied stack footprints.
-        /// </summary>
         public bool TryFindNearestGridPosition(
             Vector3 desiredPosition,
             CardStack stack,
@@ -406,9 +370,6 @@ namespace Markyu.LastKernel
             );
         }
 
-        /// <summary>
-        /// Returns the world-space footprint a stack occupies on the board when anchored at the given position.
-        /// </summary>
         public Rect GetStackRect(Vector3 anchorPosition, CardStack stack)
         {
             if (stack == null || stack.TopCard == null)
@@ -426,9 +387,6 @@ namespace Markyu.LastKernel
             return Rect.MinMaxRect(xMin, zMin, xMax, zMax);
         }
 
-        /// <summary>
-        /// Converts a combat rect into a world-space X/Z footprint for grid avoidance.
-        /// </summary>
         public Rect GetCombatRectWorldRect(CombatRect combatRect)
         {
             if (combatRect == null || combatRect.Rect == null)
@@ -449,17 +407,6 @@ namespace Markyu.LastKernel
             );
         }
 
-        /// <summary>
-        /// Checks if a given world position is a valid placement location for a card or stack on the board.
-        /// </summary>
-        /// <remarks>
-        /// A position is valid if it is entirely within the physical boundaries of the board
-        /// and does not overlap with the restricted top margin area (header). The stack's dimensions
-        /// are accounted for when performing the boundary checks.
-        /// </remarks>
-        /// <param name="position">The world position to validate.</param>
-        /// <param name="stack">The <see cref="CardStack"/> to check. If null, the check assumes a point (0 size).</param>
-        /// <returns>True if the position is a valid placement location; otherwise, false.</returns>
         public bool IsPointValid(Vector3 position, CardStack stack = null)
         {
             if (currentBounds.extents == Vector3.zero)
@@ -491,17 +438,6 @@ namespace Markyu.LastKernel
             return true;
         }
 
-        /// <summary>
-        /// Calculates a corrected world position for a RectTransform to ensure its entire area
-        /// stays within the board's playable zone.
-        /// </summary>
-        /// <remarks>
-        /// This method is primarily used for positioning UI elements like combat rectangles. It converts
-        /// the RectTransform's local dimensions to world space, clamps the resulting footprint
-        /// within the board's physical boundaries, and enforces the restricted top margin rule.
-        /// </remarks>
-        /// <param name="rect">The RectTransform whose world position needs to be corrected.</param>
-        /// <returns>A corrected Vector3 position that keeps the RectTransform fully within the valid board area.</returns>
         public Vector3 ClampRectTransformToBoard(RectTransform rect)
         {
             if (rect == null)
@@ -715,21 +651,15 @@ namespace Markyu.LastKernel
 
             if (gridMaterial == null)
             {
-                Shader shader = Shader.Find("Sprites/Default") ??
-                                Shader.Find("Unlit/Color") ??
-                                Shader.Find("Hidden/Internal-Colored");
+                var shader = gridOverlayShader != null
+                    ? gridOverlayShader
+                    : Shader.Find("Sprites/Default");
 
                 if (shader != null)
                 {
-                    gridMaterial = new Material(shader)
-                    {
-                        hideFlags = HideFlags.DontSave
-                    };
-
+                    gridMaterial = new Material(shader) { hideFlags = HideFlags.DontSave };
                     if (gridMaterial.HasProperty("_Color"))
-                    {
                         gridMaterial.color = Color.white;
-                    }
                 }
             }
 

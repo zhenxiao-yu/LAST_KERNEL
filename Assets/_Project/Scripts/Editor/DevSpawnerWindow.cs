@@ -214,7 +214,7 @@ namespace Markyu.LastKernel
 
             // Base HP controls
             EditorGUILayout.LabelField("Base Core", EditorStyles.miniLabel);
-            var baseCore = Object.FindFirstObjectByType<BaseCoreController>();
+            var baseCore = Object.FindAnyObjectByType<BaseCoreController>();
             if (baseCore != null)
             {
                 EditorGUILayout.LabelField("Base HP", $"{baseCore.CurrentHP} / {baseCore.MaxHP}", EditorStyles.miniLabel);
@@ -240,7 +240,7 @@ namespace Markyu.LastKernel
 
             if (GUILayout.Button("Start New Day (TimeManager)"))
             {
-                var tm = Object.FindFirstObjectByType<TimeManager>();
+                var tm = Object.FindAnyObjectByType<TimeManager>();
                 if (tm != null)
                     tm.StartNewDay();
                 else

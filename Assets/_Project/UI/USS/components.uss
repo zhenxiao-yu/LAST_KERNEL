@@ -1066,3 +1066,36 @@ Toggle:checked .unity-toggle__checkmark {
     margin-left: var(--lk-gap-small);
     align-self: center;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Info panel card detail  (category badge + stat block for card hover)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-info-badge {
+    font-size: var(--lk-font-size-xs);
+    -unity-font-style: bold;
+    color: var(--lk-text-dim);
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    align-self: flex-start;
+    letter-spacing: 1px;
+}
+
+.lk-info-badge--character  { color: var(--lk-success);          border-color: var(--lk-success);          }
+.lk-info-badge--consumable { color: var(--lk-success);          border-color: var(--lk-success);          }
+.lk-info-badge--resource   { color: var(--lk-warning);          border-color: var(--lk-warning);          }
+.lk-info-badge--material   { color: var(--lk-warning);          border-color: var(--lk-warning);          }
+.lk-info-badge--equipment  { color: var(--lk-accent-secondary); border-color: var(--lk-accent-secondary); }
+.lk-info-badge--structure  { color: var(--lk-accent);           border-color: var(--lk-accent);           }
+.lk-info-badge--mob        { color: var(--lk-danger);           border-color: var(--lk-danger);           }
+
+.lk-info-panel__stats {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-xs);
+    white-space: normal;
+    line-height: 1.4;
+}

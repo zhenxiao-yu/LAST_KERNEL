@@ -475,7 +475,9 @@ namespace Markyu.LastKernel
                 {
                     enter = false;
                     if (it.propertyType != SerializedPropertyType.ObjectReference) continue;
+#pragma warning disable CS0618
                     if (it.objectReferenceValue == null && it.objectReferenceInstanceIDValue != 0)
+#pragma warning restore CS0618
                         summary.Error($"Prefab '{path}' missing ref '{comp.GetType().Name}.{it.propertyPath}' on '{HierarchyPath(comp.transform)}'.");
                 }
             }
@@ -700,9 +702,10 @@ namespace Markyu.LastKernel
                 {
                     ValidateProjectScript(path, summary);
                 }
-                else if (path.StartsWith("Assets/ThirdParty/", StringComparison.Ordinal))
+                else if (path.StartsWith("Assets/ThirdParty/", StringComparison.Ordinal)
+                      || path.StartsWith("Assets/UIToolkitScriptComponents/", StringComparison.Ordinal))
                 {
-                    // expected — skip
+                    // expected third-party — skip
                 }
                 else if (path.StartsWith("Assets/_Project/", StringComparison.Ordinal))
                 {

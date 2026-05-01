@@ -3,12 +3,6 @@ using UnityEngine.UIElements;
 
 namespace Markyu.LastKernel
 {
-    /// <summary>
-    /// UI Toolkit replacement for the legacy UGUI VictoryPanel.
-    /// Shows the wave-clear reward summary and routes Continue via UIEventBus.
-    /// Setup: add to a GameObject with a UIDocument set to VictoryPanelView.uxml.
-    /// Assign the scene RewardController in the inspector.
-    /// </summary>
     [UIScreen("Assets/_Project/UI/UXML/Game/VictoryPanelView.uxml", sortingOrder: 90)]
     public sealed class VictoryPanelController : UIToolkitScreenController
     {
@@ -72,7 +66,7 @@ namespace Markyu.LastKernel
         private void HandlePhaseChanged(DefensePhase phase)
         {
             if (phase != DefensePhase.Victory)
-                Hide();
+                HideBackdrop();
         }
 
         private void ShowRewards(RewardData reward)
@@ -95,7 +89,7 @@ namespace Markyu.LastKernel
             if (_backdrop != null) _backdrop.RemoveFromClassList("lk-hidden");
         }
 
-        private void Hide()
+        private void HideBackdrop()
         {
             if (_backdrop != null) _backdrop.AddToClassList("lk-hidden");
         }

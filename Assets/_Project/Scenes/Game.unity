@@ -461,7 +461,7 @@ Transform:
   m_GameObject: {fileID: 866460966}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.25}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -740,6 +740,7 @@ Transform:
   - {fileID: 1232332847}
   - {fileID: 255972787}
   - {fileID: 1531804010}
+  - {fileID: 2200000032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1211518934
@@ -809,7 +810,6 @@ GameObject:
   - component: {fileID: 1315288014}
   - component: {fileID: 1315288013}
   - component: {fileID: 1315288012}
-  - component: {fileID: 1315288015}
   m_Layer: 0
   m_Name: GameHUD
   m_TagString: Untagged
@@ -869,18 +869,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1315288015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1315288011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bffa305a611823d4083951c1a0a3464f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.UIEventBusBridge
 --- !u!1 &1493042207
 GameObject:
   m_ObjectHideFlags: 0
@@ -1331,12 +1319,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2200000031}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1211518933}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2200000033
 MonoBehaviour:
@@ -1417,7 +1405,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.SideMenuController
 --- !u!1 &2200000051
 GameObject:
@@ -1462,7 +1450,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: 47cfb19dba122da40a6c5198dc72d7cc, type: 2}
   m_ParentUI: {fileID: 0}
@@ -1485,10 +1473,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.ScreenFaderController
   rootController: {fileID: 0}
-  screenId:
+  screenId: 
 --- !u!1001 &2056759083933773671
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2104,5 +2092,5 @@ SceneRoots:
   - {fileID: 2200000002}
   - {fileID: 2200000012}
   - {fileID: 2200000022}
-  - {fileID: 2200000032}
   - {fileID: 2200000042}
+  - {fileID: 2200000052}

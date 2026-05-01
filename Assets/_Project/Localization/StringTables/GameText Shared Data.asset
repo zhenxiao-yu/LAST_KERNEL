@@ -1110,6 +1110,16 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497158023282917
+  - m_Id: 1794876651614208
+    m_Key: card.sell
+    m_Metadata:
+      m_Items:
+      - rid: 2581770973012820158
+  - m_Id: 1794876701945856
+    m_Key: card.nutritionValue
+    m_Metadata:
+      m_Items:
+      - rid: 2581770973012820159
   - m_Id: 7041986589
     m_Key: placeholder.packName
     m_Metadata:
@@ -3778,6 +3788,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2581770973012820158
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Card sell price label {0}=amount
+    - rid: 2581770973012820159
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Card nutrition value label {0}=amount
     - rid: 8800497158023282712
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:

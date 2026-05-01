@@ -31,7 +31,7 @@ namespace Markyu.LastKernel
                          && c.Definition != null
                          && c.Definition.Category == CardCategory.Character
                          && c.CurrentHealth > 0)
-                .OrderBy(c => c.GetInstanceID())
+                .OrderBy(c => c.name)
                 .ToList();
 
             return new NightDeploymentPlan(defenders);

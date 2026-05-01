@@ -3137,6 +3137,14 @@ MonoBehaviour:
       Sentinels on the main line. They know where the core is. This is not a probe.
     m_Metadata:
       m_Items: []
+  - m_Id: 1794876651614208
+    m_Localized: G {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1794876701945856
+    m_Localized: Nahr. {0}
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

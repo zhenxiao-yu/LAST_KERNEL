@@ -49,6 +49,11 @@ namespace Markyu.LastKernel
         public string DebugDescription =>
             CurrentJob != null ? $"{CurrentJob.Type}: {CurrentJob.Description}" : "Idle";
 
+        // ── Dev toggle ────────────────────────────────────────────────────────
+        // Off by default — villagers have no autonomous brain in normal play.
+        // ColonyAIManager sets this to true when EnableColonyAutopilot is on.
+        public static bool DevBrainEnabled = false;
+
         // ── Construction ──────────────────────────────────────────────────────
         public VillagerBrain(CardAI owner, CardInstance card)
         {
@@ -107,6 +112,8 @@ namespace Markyu.LastKernel
         // Called by CardAI.AutoMove once per MoveInterval.
         public void Tick()
         {
+            if (!DevBrainEnabled) return;
+
             // Check for timeout or external cancellation.
             if (CurrentJob != null)
             {

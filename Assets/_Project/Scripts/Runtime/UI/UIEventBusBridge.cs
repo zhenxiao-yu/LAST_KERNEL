@@ -3,14 +3,7 @@ using UnityEngine;
 
 namespace Markyu.LastKernel
 {
-    /// <summary>
-    /// Subscribes to UIEventBus and routes intent events to the appropriate
-    /// game systems (GameDirector, GameLocalization, etc.).
-    ///
-    /// Add one instance to the MainMenu scene and one to the Game scene.
-    /// This is the only component allowed to call game-system singletons in
-    /// response to UI events — keeps UIToolkit controllers free of runtime deps.
-    /// </summary>
+    // One instance per scene only — routes UIEventBus intents to game systems.
     public sealed class UIEventBusBridge : MonoBehaviour
     {
         private void OnEnable()

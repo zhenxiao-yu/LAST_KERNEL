@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Object = UnityEngine.Object;
 
 namespace Markyu.LastKernel
 {
@@ -11,7 +10,7 @@ namespace Markyu.LastKernel
     {
         private static TMPThemeController instance;
 
-        private readonly Dictionary<int, string> originalTextByInstanceId = new();
+        private readonly Dictionary<TMP_Text, string> originalTextByInstance = new();
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Bootstrap()
@@ -76,20 +75,17 @@ namespace Markyu.LastKernel
 
             ConfigureFontFallbacks(defaultFont);
 
-            TMP_Text[] allText = Object.FindObjectsOfType<TMP_Text>(true);
+            TMP_Text[] allText = FindObjectsByType<TMP_Text>(FindObjectsInactive.Include);
             foreach (TMP_Text text in allText)
             {
                 if (text == null)
                     continue;
 
-                int instanceId = text.GetInstanceID();
-                if (!originalTextByInstanceId.ContainsKey(instanceId))
-                {
-                    originalTextByInstanceId[instanceId] = text.text;
-                }
+                if (!originalTextByInstance.ContainsKey(text))
+                    originalTextByInstance[text] = text.text;
 
                 ApplyFont(text, defaultFont);
-                ApplyInspectorTranslation(text, originalTextByInstanceId[instanceId]);
+                ApplyInspectorTranslation(text, originalTextByInstance[text]);
             }
         }
 

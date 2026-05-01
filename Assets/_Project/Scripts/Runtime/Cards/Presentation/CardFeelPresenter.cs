@@ -307,10 +307,6 @@ namespace Markyu.LastKernel
             }
 
             visualRoot = transform;
-            Debug.LogWarning(
-                $"CardFeelPresenter: '{name}' has no child named 'Visual'. " +
-                "Using root as fallback — create a Visual child for best results.",
-                this);
         }
 
         private void ResolveRenderer()

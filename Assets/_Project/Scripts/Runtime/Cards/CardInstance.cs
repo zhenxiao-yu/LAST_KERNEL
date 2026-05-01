@@ -1,34 +1,3 @@
-// CardInstance — Runtime representation of a single card on the board.
-//
-// Owns the card's identity (Definition, Stats), mutable runtime state
-// (CurrentHealth, CurrentNutrition, UsesLeft), and visual presentation.
-// Acts as the integration point for optional capability components:
-//   CardCombatant    — combat attack/defense logic
-//   CardEquipper     — equipping items onto this card (class change)
-//   CardEquipment    — this card IS an item that can be equipped onto another
-//   CardFeelPresenter — hover/pickup/damage visual feedback (shaders, tweens)
-//
-// Regions:
-//   Fields & Properties      — serialized text refs, runtime state, component refs
-//   Lifecycle & Initialization — Initialize, pointer hover, OnEnable/Disable, Update
-//   Information & Visuals    — hover tooltip, stat text, highlight, art texture
-//   World Interactions       — Consume (feeding animation), TryAttachToNearbyStack
-//   State Management         — Heal, TakeDamage, Kill, SetDefinition, RestoreSavedStats
-//   Localization & Presentation — language change handler, localized text refresh
-//   Movement & Animation     — tween-based movement, damped drag trailing, combat tweens
-//
-// Future refactor candidates:
-//   • TryAttachToNearbyStack — merge + validation logic; natural home is CardController
-//     once CardController owns the full drag-drop lifecycle end-to-end.
-//   • SetTargetAnimated/Instant/Damped + tween fields — natural CardMovement component;
-//     requires CardStack to cache the component instead of calling through CardInstance.
-//
-// Key dependencies:
-//   CardManager      — stack registration, overlap resolution, stats notification
-//   CraftingManager  — crafting task queries in TryAttachToNearbyStack
-//   CardFeelPresenter — damage and hover visual feedback delegation
-//   GameLocalization — display name and description refresh on language change
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -107,13 +76,6 @@ namespace Markyu.LastKernel
             RefreshLocalizedPresentation();
         }
 
-        /// <summary>
-        /// Fully initializes the card: setting definitions, generating stats, applying visuals,
-        /// creating and registering its stack, and attempting to merge with any nearby compatible stack.
-        /// </summary>
-        /// <param name="definition">The data definition for this card.</param>
-        /// <param name="settings">Runtime movement and behavior settings.</param>
-        /// <param name="stackToIgnore">A specific stack to ignore when searching for nearby merge candidates.</param>
         public void Initialize(CardDefinition definition, CardSettings settings = null, CardStack stackToIgnore = null)
         {
             if (definition == null)
@@ -227,16 +189,28 @@ namespace Markyu.LastKernel
 
         #region Information & Visuals
 
-        /// <summary>
-        /// Pushes this card's info into the InfoPanel as a hover entry.
-        /// Called by CardLongPressHandler so touch players can inspect without hover.
-        /// </summary>
-        public void ShowInspectInfo() => InfoPanel.Instance?.RegisterHover(GetInfo());
+        public void ShowInspectInfo() => InfoPanel.Instance?.RegisterCardHover(GetInfo(), GetCardInfo());
 
-        /// <summary>
-        /// Clears the hover info entry that was pushed by ShowInspectInfo.
-        /// </summary>
         public void HideInspectInfo() => InfoPanel.Instance?.UnregisterHover();
+
+        private CardInfoData? GetCardInfo()
+        {
+            if (Stack == null || Stack.IsCrafting || Stack.Cards.Count > 1 || Stack.TopCard == null)
+                return null;
+
+            var def   = Stack.TopCard.Definition;
+            var stats = Stack.TopCard.Stats;
+            return new CardInfoData(
+                category:       def.Category,
+                combat:         def.CombatType,
+                currentHP:      CurrentHealth,
+                maxHP:          (int)stats.MaxHealth.Value,
+                formattedStats: def.CombatType != CombatType.None ? stats.GetFormattedStats() : null,
+                sellPrice:      def.SellPrice,
+                nutrition:      CurrentNutrition,
+                usesLeft:       UsesLeft
+            );
+        }
 
         private (string, string) GetInfo()
         {
@@ -291,10 +265,6 @@ namespace Markyu.LastKernel
             return info;
         }
 
-        /// <summary>
-        /// Updates the visible TextMeshPro displays (price, nutrition, and health)
-        /// to reflect the card's current stat values.
-        /// </summary>
         public void UpdateStatDisplays()
         {
             if (Definition == null)
@@ -312,9 +282,6 @@ namespace Markyu.LastKernel
                 CurrentHealth.ToString());
         }
 
-        /// <summary>
-        /// Allows external components to safely update the price text.
-        /// </summary>
         public void UpdatePriceText(string text)
         {
             if (priceText != null)
@@ -323,11 +290,6 @@ namespace Markyu.LastKernel
             }
         }
 
-        /// <summary>
-        /// Controls the visual highlighting state of the card.
-        /// Creates the necessary <see cref="Highlight"/> component if it does not already exist.
-        /// </summary>
-        /// <param name="value">If true, the card is highlighted; otherwise, the highlight is hidden.</param>
         public void SetHighlighted(bool value)
         {
             if (Settings == null || Settings.OutlineMaterial == null)
@@ -346,10 +308,6 @@ namespace Markyu.LastKernel
             View?.SetHighlighted(value);
         }
 
-        /// <summary>
-        /// Instantiates the <see cref="PuffParticle"/> visual effect at the card's position.
-        /// This effect typically plays when the card performs an action or is destroyed.
-        /// </summary>
         public void PlayPuffParticle()
         {
             if (Settings?.PuffParticle != null)
@@ -360,13 +318,6 @@ namespace Markyu.LastKernel
         #endregion
 
         #region World Interactions
-        /// <summary>
-        /// Executes the process of consuming this card as food for a character.
-        /// </summary>
-        /// <param name="character">The <see cref="CardInstance"/> performing the consumption.</param>
-        /// <param name="amountNeeded">The total amount of nutrition the character requires.</param>
-        /// <param name="onConsumed">Action invoked with the actual amount of nutrition consumed.</param>
-        /// <returns>An IEnumerator for use in a coroutine, handling animations and delays.</returns>
         public IEnumerator Consume(CardInstance character, int amountNeeded, System.Action<int> onConsumed)
         {
             CardStack oldStack = null;
@@ -427,13 +378,6 @@ namespace Markyu.LastKernel
             }
         }
 
-        /// <summary>
-        /// Searches for a nearby compatible <see cref="CardStack"/> and merges into it.
-        /// Validates stacking rules, crafting ingredient safety, and board placement.
-        /// </summary>
-        /// <param name="radius">Sphere radius to search for candidate stacks.</param>
-        /// <param name="stackToIgnore">Stack to exclude from consideration (e.g. the stack just split from).</param>
-        /// <returns>The stack the card merged into, or null if no compatible candidate was found.</returns>
         public CardStack TryAttachToNearbyStack(float radius, CardStack stackToIgnore = null)
         {
             if (stackToIgnore == CardStack.RefuseAll)
@@ -531,15 +475,8 @@ namespace Markyu.LastKernel
         #endregion
 
         #region State Management
-        /// <summary>
-        /// Decrements the <see cref="UsesLeft"/> counter for the card.
-        /// </summary>
         public void Use() => UsesLeft--;
 
-        /// <summary>
-        /// Increases the card's <see cref="CurrentHealth"/> by the specified amount and updates the stat displays.
-        /// </summary>
-        /// <param name="healAmount">The amount of health to restore.</param>
         public void Heal(int healAmount)
         {
             CurrentHealth = Stats != null
@@ -548,11 +485,6 @@ namespace Markyu.LastKernel
             UpdateStatDisplays();
         }
 
-        /// <summary>
-        /// Reduces the card's <see cref="CurrentHealth"/> by the specified damage amount,
-        /// ensuring health does not drop below zero, and triggers visual effects (flash and shake).
-        /// </summary>
-        /// <param name="damage">The amount of damage to inflict.</param>
         public void TakeDamage(int damage)
         {
             CurrentHealth = Mathf.Max(0, CurrentHealth - damage);
@@ -576,10 +508,6 @@ namespace Markyu.LastKernel
             _hurtTween = null;
         }
 
-        /// <summary>
-        /// Destroys the card instance, notifying the <see cref="CardManager"/>, cleaning up combat status and equipment, 
-        /// spawning loot if applicable, playing the puff particle effect, and finally destroying the card/stack.
-        /// </summary>
         public void Kill()
         {
             CardManager.Instance?.NotifyCardKilled(this);
@@ -608,10 +536,6 @@ namespace Markyu.LastKernel
             else GameObject.Destroy(gameObject);
         }
 
-        /// <summary>
-        /// Toggles the visibility and collision state of the card and all its display components.
-        /// </summary>
-        /// <param name="value">If true<, the card is visible and collidable; otherwise, it is hidden.</param>
         public void SetVisible(bool value)
         {
             if (_renderer != null) _renderer.enabled = value;
@@ -623,11 +547,6 @@ namespace Markyu.LastKernel
             if (healthText != null) healthText.enabled = value;
         }
 
-        /// <summary>
-        /// Force-sets the card's definition, updates its combat stats, name, and art texture.
-        /// Used primarily by <see cref="CardEquipper"/> when a card's class or type changes.
-        /// </summary>
-        /// <param name="newDefinition">The new definition to assign to the card.</param>
         public void SetDefinition(CardDefinition newDefinition)
         {
             if (newDefinition == null)
@@ -644,11 +563,6 @@ namespace Markyu.LastKernel
             FeelPresenter?.RefreshMaterialState();
         }
 
-        /// <summary>
-        /// Overwrites the card's current dynamic stats (UsesLeft, CurrentHealth, CurrentNutrition) 
-        /// with values loaded from saved data and updates the displays.
-        /// </summary>
-        /// <param name="cardData">The data object containing the saved stat values.</param>
         public void RestoreSavedStats(CardData cardData)
         {
             UsesLeft = cardData.UsesLeft;
@@ -724,12 +638,6 @@ namespace Markyu.LastKernel
         #endregion
 
         #region Movement & Animation
-        /// <summary>
-        /// Moves the card to a specified target position using a DOTween animation,
-        /// overriding any existing movement tweens.
-        /// </summary>
-        /// <param name="target">The world position to move the card to.</param>
-        /// <param name="forceGround">If true, forces the Y position of the target to 0f.</param>
         public void SetTargetAnimated(Vector3 target, bool forceGround = false)
         {
             _isFollowingDamped = false;
@@ -747,11 +655,6 @@ namespace Markyu.LastKernel
             }
         }
 
-        /// <summary>
-        /// Immediately sets the card's position to the specified target, cancelling any active move tweens.
-        /// </summary>
-        /// <param name="target">The world position to place the card at.</param>
-        /// <param name="forceGround">If true, forces the Y position of the target to 0f.</param>
         public void SetTargetInstant(Vector3 target, bool forceGround = false)
         {
             _isFollowingDamped = false;
@@ -763,10 +666,6 @@ namespace Markyu.LastKernel
             if (Time.timeScale == 0f) Physics.SyncTransforms();
         }
 
-        /// <summary>
-        /// Sets the target for the card to move towards using SmoothDamp.
-        /// Used specifically for trailing cards during a drag.
-        /// </summary>
         public void SetTargetDamped(Vector3 target)
         {
             KillMoveTween();
@@ -780,21 +679,10 @@ namespace Markyu.LastKernel
             return Vector3.LerpUnclamped(current, target, t);
         }
 
-        /// <summary>
-        /// Checks if the given card is categorized as a Character or a Mob,
-        /// indicating it is a combat-capable entity.
-        /// </summary>
-        /// <param name="c">The <see cref="CardInstance"/> to check.</param>
-        /// <returns>True if the card is a Character or Mob; otherwise, false.</returns>
         public bool IsCombatant(CardInstance c) =>
             c.Definition.Category == CardCategory.Character ||
             c.Definition.Category == CardCategory.Mob;
 
-        /// <summary>
-        /// Sets a new combat-related DOTween animation, first clearing any existing move or combat tweens.
-        /// </summary>
-        /// <param name="tween">The new DOTween animation to execute for combat visuals.</param>
-        /// <returns>The combat Tween that was started.</returns>
         public Tween StartCombatTween(Tween tween)
         {
             KillMotionTweens();
@@ -803,10 +691,6 @@ namespace Markyu.LastKernel
             return _combatTween;
         }
 
-        /// <summary>
-        /// Stops card movement/combat tweens without touching the presentation tweens.
-        /// Stack layout uses this frequently; killing feel here would cancel hover/spawn feedback.
-        /// </summary>
         public void KillMotionTweens()
         {
             KillMoveTween();
@@ -821,9 +705,6 @@ namespace Markyu.LastKernel
             _moveTween = null;
         }
 
-        /// <summary>
-        /// Safely stops and cleans up all active DOTween animations on this card, including feel tweens.
-        /// </summary>
         public void KillTweens()
         {
             KillMotionTweens();
