@@ -292,11 +292,22 @@ namespace Markyu.LastKernel
 
         private void OnCancelClicked()
         {
-            // Only valid during prep — this dismisses the modal early.
-            // NightBattleManager keeps waiting for ConfirmBattle, so we auto-confirm with empty team.
+            // Auto-Deploy: fill every empty slot with the next unassigned eligible fighter, then start.
+            // Night is never skippable — this just removes the manual step.
             if (_phase != Phase.Prep) return;
-            AddLog("Deployment cancelled — auto-resolving with empty team.", "nbm-log-entry--system");
-            NightBattleManager.Instance?.ConfirmBattle(new NightTeam());
+
+            foreach (var fighter in _availableFighters)
+            {
+                if (_team.Contains(fighter)) continue;
+                int slot = _team.FirstEmptySlot();
+                if (slot < 0) break;
+                _pendingFighter = fighter;
+                _interaction    = PrepInteraction.AwaitingSlot;
+                AssignFighterToSlot(slot);
+            }
+
+            AddLog("Auto-deployed all available defenders.", "nbm-log-entry--system");
+            OnStartBattleClicked();
         }
 
         private void OnReturnDayClicked()
