@@ -268,6 +268,8 @@ GameObject:
   - component: {fileID: 1736289746}
   - component: {fileID: 1736289748}
   - component: {fileID: 1736289749}
+  - component: {fileID: 1736289750}
+  - component: {fileID: 1736289751}
   m_Layer: 0
   m_Name: TitleScreenUI
   m_TagString: Untagged
@@ -339,6 +341,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffa305a611823d4083951c1a0a3464f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.UIEventBusBridge
+--- !u!114 &1736289750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736289745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae67eafb737595146a4d88902bceec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Kamgam.UIToolkitTextAutoSize::Kamgam.UIToolkitTextAutoSize.TextAutoSizeDocument
+--- !u!114 &1736289751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736289745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b2a24adebe81142969c22fd51d865b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.LKUISoundBridge
+  config: {fileID: 11400000, guid: 1a1e29ca0af0f5a43b880dd47200e4d6, type: 2}
 --- !u!1001 &2040047475189026649
 PrefabInstance:
   m_ObjectHideFlags: 0

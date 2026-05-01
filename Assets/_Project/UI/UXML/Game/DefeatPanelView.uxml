@@ -10,17 +10,17 @@
         <ui:VisualElement class="lk-panel lk-panel--accent" style="width: 480px; border-color: rgba(215,55,35,0.6);">
 
             <!-- Title -->
-            <ui:Label name="lbl-defeat-title" class="lk-defeat__title" />
+            <ui:Label name="lbl-defeat-title" class="lk-defeat__title text-auto-size text-auto-size-min-12 text-auto-size-max-32" />
 
             <ui:VisualElement class="lk-divider" style="background-color: rgba(215,55,35,0.4); margin-bottom: 24px;" />
 
             <!-- Message -->
-            <ui:Label name="lbl-defeat-message" class="lk-defeat__message" />
+            <ui:Label name="lbl-defeat-message" class="lk-defeat__message text-auto-size text-auto-size-min-8 text-auto-size-max-14" />
 
             <!-- Buttons -->
             <ui:VisualElement class="lk-panel__footer lk-justify-center" style="gap: 16px;">
-                <ui:Button name="btn-defeat-retry"    class="lk-button lk-button--primary" style="min-width: 160px;" />
-                <ui:Button name="btn-defeat-backtitle" class="lk-button" style="min-width: 160px;" />
+                <ui:Button name="btn-defeat-retry"    class="lk-button lk-button--primary text-auto-size text-auto-size-min-8 text-auto-size-max-14" style="min-width: 160px;" />
+                <ui:Button name="btn-defeat-backtitle" class="lk-button text-auto-size text-auto-size-min-8 text-auto-size-max-14" style="min-width: 160px;" />
             </ui:VisualElement>
 
         </ui:VisualElement>

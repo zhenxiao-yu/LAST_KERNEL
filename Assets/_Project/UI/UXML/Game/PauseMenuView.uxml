@@ -31,7 +31,7 @@
             <ui:VisualElement class="lk-panel" style="width: 560px;">
 
                 <ui:VisualElement class="lk-panel__header">
-                    <ui:Label name="lbl-save-panel-title" class="lk-panel__title" />
+                    <ui:Label name="lbl-save-panel-title" class="lk-panel__title text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
                 </ui:VisualElement>
 
                 <ui:ScrollView name="save-scroll" style="max-height: 480px;">
@@ -53,7 +53,7 @@
             <ui:VisualElement class="lk-panel" style="width: 520px;">
 
                 <ui:VisualElement class="lk-panel__header">
-                    <ui:Label name="lbl-opts-title" class="lk-panel__title" />
+                    <ui:Label name="lbl-opts-title" class="lk-panel__title text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
                 </ui:VisualElement>
 
                 <ui:ScrollView name="opts-scroll" style="max-height: 560px;">
@@ -107,7 +107,7 @@
             <ui:VisualElement class="lk-panel" style="width: 580px;">
 
                 <ui:VisualElement class="lk-panel__header">
-                    <ui:Label name="lbl-lang-title" class="lk-panel__title" />
+                    <ui:Label name="lbl-lang-title" class="lk-panel__title text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
                 </ui:VisualElement>
 
                 <ui:VisualElement class="lk-column" style="gap: 8px; padding-top: 4px; padding-bottom: 8px;">
@@ -136,8 +136,8 @@
         <!-- Confirm modal: rendered last so it layers above the save panel -->
         <ui:VisualElement name="panel-confirm" class="lk-modal-backdrop lk-hidden">
             <ui:VisualElement class="lk-modal">
-                <ui:Label name="lbl-confirm-title" class="lk-modal__title" />
-                <ui:Label name="lbl-confirm-body"  class="lk-modal__body" />
+                <ui:Label name="lbl-confirm-title" class="lk-modal__title text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
+                <ui:Label name="lbl-confirm-body"  class="lk-modal__body text-auto-size text-auto-size-min-8 text-auto-size-max-14" />
                 <ui:VisualElement class="lk-modal__actions">
                     <ui:Button name="btn-confirm-cancel" class="lk-button lk-mr-sm" />
                     <ui:Button name="btn-confirm-accept" class="lk-button lk-button--primary" />
