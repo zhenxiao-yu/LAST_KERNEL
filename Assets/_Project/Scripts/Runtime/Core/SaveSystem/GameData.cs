@@ -15,6 +15,7 @@ namespace Markyu.LastKernel
         public HashSet<string> SeenItems = new();
         public RunStateData RunState = new();
         public System.DateTime LastSaved;
+        public Dictionary<string, AchievementSaveData> Achievements = new();
 
         public GameData() { }
 
