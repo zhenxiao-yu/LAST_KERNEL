@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Markyu.LastKernel.Achievements
 {
@@ -19,13 +20,18 @@ namespace Markyu.LastKernel.Achievements
         private IAchievementPlatform _platform;
         private Dictionary<string, AchievementSaveData> _progress = new();
 
+        // Stored refs so we can unsubscribe even after scene objects are destroyed.
+        private ICardService    _cardSvc;
+        private IQuestService   _questSvc;
+        private ICraftingService _craftingSvc;
+        private TradeManager    _tradeSvc;
+
         #region Unity Lifecycle
 
         private void Awake()
         {
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
-            // If parented under GameDirector it's already DDOL — only call on root objects.
             if (transform.parent == null)
                 DontDestroyOnLoad(gameObject);
         }
@@ -36,114 +42,118 @@ namespace Markyu.LastKernel.Achievements
             _platform.Initialize();
 
             LoadProgress();
-            SubscribeToServices();
 
+            // Static events — safe to subscribe immediately regardless of scene.
+            NightPhaseManager.OnNightComplete    += OnNightComplete;
+            GameDirector.OnGameOver              += OnGameOverFired;
+            UIEventBus.OnLanguageSelectRequested += OnLanguageChanged;
+            UIEventBus.OnLanguageCycleRequested  += OnLanguageCycled;
+
+            // Scene-local singletons (CardManager, QuestManager, etc.) only exist in
+            // the Game scene. Subscribe when that scene is ready, clean up when it unloads.
             if (GameDirector.Instance != null)
-                GameDirector.Instance.OnBeforeSave += HandleBeforeSave;
+            {
+                GameDirector.Instance.OnBeforeSave    += HandleBeforeSave;
+                GameDirector.Instance.OnSceneDataReady += HandleSceneDataReady;
+            }
+
+            SceneManager.sceneUnloaded += HandleSceneUnloaded;
         }
 
         private void OnDestroy()
         {
-            UnsubscribeFromServices();
-            if (GameDirector.Instance != null)
-                GameDirector.Instance.OnBeforeSave -= HandleBeforeSave;
-        }
-
-        #endregion
-
-        #region IAchievementService
-
-        public bool IsUnlocked(AchievementDefinition definition)
-            => _progress.TryGetValue(definition.Id, out var d) && d.IsUnlocked;
-
-        public float GetProgressNormalized(AchievementDefinition definition)
-        {
-            if (!_progress.TryGetValue(definition.Id, out var d)) return 0f;
-            return definition.TargetCount <= 1
-                ? (d.IsUnlocked ? 1f : 0f)
-                : Mathf.Clamp01((float)d.CurrentProgress / definition.TargetCount);
-        }
-
-        public int GetProgressCount(AchievementDefinition definition)
-            => _progress.TryGetValue(definition.Id, out var d) ? d.CurrentProgress : 0;
-
-        public void NotifyCustom(string achievementId)
-            => EvaluateTrigger(AchievementTrigger.Custom, achievementId);
-
-        public void NotifyNightSurvived()
-            => EvaluateTrigger(AchievementTrigger.NightSurvived, string.Empty);
-
-        public void NotifyDayReached(int day)
-            => EvaluateTrigger(AchievementTrigger.DayReached, string.Empty, value: day);
-
-        public void NotifyGameWon()
-            => EvaluateTrigger(AchievementTrigger.GameWon, string.Empty);
-
-        public void NotifyGameLost()
-            => EvaluateTrigger(AchievementTrigger.GameLost, string.Empty);
-
-        public void NotifyCardDiscovered(string cardId)
-            => EvaluateTrigger(AchievementTrigger.CardDiscovered, cardId);
-
-        #endregion
-
-        #region Service Event Subscriptions
-
-        private void SubscribeToServices()
-        {
-            if (CardManager.Instance is ICardService cards)
-            {
-                cards.OnCardCreated  += OnCardCreated;
-                cards.OnCardKilled   += OnCardKilled;
-                cards.OnCardEquipped += OnCardEquipped;
-            }
-
-            if (QuestManager.Instance is IQuestService quests)
-                quests.OnQuestCompleted += OnQuestCompleted;
-
-            if (CraftingManager.Instance is ICraftingService crafting)
-            {
-                crafting.OnRecipeDiscovered += OnRecipeDiscovered;
-                crafting.OnCraftingFinished += OnCraftingFinished;
-            }
-
-            if (TradeManager.Instance != null)
-                TradeManager.Instance.OnPackOpened += OnPackOpened;
-
-            UIEventBus.OnLanguageSelectRequested += OnLanguageChanged;
-            UIEventBus.OnLanguageCycleRequested  += OnLanguageCycled;
-
-            NightPhaseManager.OnNightComplete += OnNightComplete;
-            GameDirector.OnGameOver           += OnGameOverFired;
-        }
-
-        private void UnsubscribeFromServices()
-        {
-            if (CardManager.Instance is ICardService cards)
-            {
-                cards.OnCardCreated  -= OnCardCreated;
-                cards.OnCardKilled   -= OnCardKilled;
-                cards.OnCardEquipped -= OnCardEquipped;
-            }
-
-            if (QuestManager.Instance is IQuestService quests)
-                quests.OnQuestCompleted -= OnQuestCompleted;
-
-            if (CraftingManager.Instance is ICraftingService crafting)
-            {
-                crafting.OnRecipeDiscovered -= OnRecipeDiscovered;
-                crafting.OnCraftingFinished -= OnCraftingFinished;
-            }
-
-            if (TradeManager.Instance != null)
-                TradeManager.Instance.OnPackOpened -= OnPackOpened;
-
+            NightPhaseManager.OnNightComplete    -= OnNightComplete;
+            GameDirector.OnGameOver              -= OnGameOverFired;
             UIEventBus.OnLanguageSelectRequested -= OnLanguageChanged;
             UIEventBus.OnLanguageCycleRequested  -= OnLanguageCycled;
 
-            NightPhaseManager.OnNightComplete -= OnNightComplete;
-            GameDirector.OnGameOver           -= OnGameOverFired;
+            UnsubscribeFromSceneServices();
+
+            if (GameDirector.Instance != null)
+            {
+                GameDirector.Instance.OnBeforeSave     -= HandleBeforeSave;
+                GameDirector.Instance.OnSceneDataReady -= HandleSceneDataReady;
+            }
+
+            SceneManager.sceneUnloaded -= HandleSceneUnloaded;
         }
+
+        #endregion
+
+        #region Scene Service Subscriptions
+
+        private void HandleSceneDataReady(SceneData _, bool __)
+        {
+            // Called every time a game scene finishes loading — re-bind scene singletons.
+            UnsubscribeFromSceneServices();
+            SubscribeToSceneServices();
+        }
+
+        private void HandleSceneUnloaded(Scene _)
+        {
+            // Called when any scene unloads. Safe because we use stored refs, not Instance.
+            UnsubscribeFromSceneServices();
+        }
+
+        private void SubscribeToSceneServices()
+        {
+            _cardSvc = CardManager.Instance;
+            if (_cardSvc != null)
+            {
+                _cardSvc.OnCardCreated  += OnCardCreated;
+                _cardSvc.OnCardKilled   += OnCardKilled;
+                _cardSvc.OnCardEquipped += OnCardEquipped;
+            }
+
+            _questSvc = QuestManager.Instance;
+            if (_questSvc != null)
+                _questSvc.OnQuestCompleted += OnQuestCompleted;
+
+            _craftingSvc = CraftingManager.Instance;
+            if (_craftingSvc != null)
+            {
+                _craftingSvc.OnRecipeDiscovered += OnRecipeDiscovered;
+                _craftingSvc.OnCraftingFinished += OnCraftingFinished;
+            }
+
+            _tradeSvc = TradeManager.Instance;
+            if (_tradeSvc != null)
+                _tradeSvc.OnPackOpened += OnPackOpened;
+        }
+
+        private void UnsubscribeFromSceneServices()
+        {
+            if (_cardSvc != null)
+            {
+                _cardSvc.OnCardCreated  -= OnCardCreated;
+                _cardSvc.OnCardKilled   -= OnCardKilled;
+                _cardSvc.OnCardEquipped -= OnCardEquipped;
+                _cardSvc = null;
+            }
+
+            if (_questSvc != null)
+            {
+                _questSvc.OnQuestCompleted -= OnQuestCompleted;
+                _questSvc = null;
+            }
+
+            if (_craftingSvc != null)
+            {
+                _craftingSvc.OnRecipeDiscovered -= OnRecipeDiscovered;
+                _craftingSvc.OnCraftingFinished -= OnCraftingFinished;
+                _craftingSvc = null;
+            }
+
+            if (_tradeSvc != null)
+            {
+                _tradeSvc.OnPackOpened -= OnPackOpened;
+                _tradeSvc = null;
+            }
+        }
+
+        #endregion
+
+        #region Event Handlers
 
         private void OnCardCreated(CardInstance card)
             => EvaluateTrigger(AchievementTrigger.CardCreated, card.Definition.Id);
@@ -181,9 +191,54 @@ namespace Markyu.LastKernel.Achievements
 
         #endregion
 
+        #region IAchievementService
+
+        public bool IsUnlocked(AchievementDefinition definition)
+            => _progress.TryGetValue(definition.Id, out var d) && d.IsUnlocked;
+
+        public float GetProgressNormalized(AchievementDefinition definition)
+        {
+            if (!_progress.TryGetValue(definition.Id, out var d)) return 0f;
+            return definition.TargetCount <= 1
+                ? (d.IsUnlocked ? 1f : 0f)
+                : Mathf.Clamp01((float)d.CurrentProgress / definition.TargetCount);
+        }
+
+        public int GetProgressCount(AchievementDefinition definition)
+            => _progress.TryGetValue(definition.Id, out var d) ? d.CurrentProgress : 0;
+
+        public void NotifyCustom(string achievementId)
+            => EvaluateTrigger(AchievementTrigger.Custom, achievementId);
+
+        public void NotifyNightSurvived()
+            => EvaluateTrigger(AchievementTrigger.NightSurvived, string.Empty);
+
+        public void NotifyDayReached(int day)
+            => EvaluateTrigger(AchievementTrigger.DayReached, string.Empty, value: day);
+
+        public void NotifyGameWon()
+            => EvaluateTrigger(AchievementTrigger.GameWon, string.Empty);
+
+        public void NotifyGameLost()
+            => EvaluateTrigger(AchievementTrigger.GameLost, string.Empty);
+
+        public void NotifyCardDiscovered(string cardId)
+            => EvaluateTrigger(AchievementTrigger.CardDiscovered, cardId);
+
+        // Bypasses trigger evaluation — used by the debug window and editor tooling only.
+        public void ForceUnlock(string id)
+        {
+            if (database == null) return;
+            var def = database.GetById(id);
+            if (def == null) { Debug.LogWarning($"[Achievements] ForceUnlock: no definition found for id '{id}'"); return; }
+            var data = GetOrCreate(def.Id);
+            if (!data.IsUnlocked) Unlock(def, data);
+        }
+
+        #endregion
+
         #region Core Evaluation
 
-        // value: for Cumulative = amount to add; for Threshold = the current absolute value to compare.
         private void EvaluateTrigger(AchievementTrigger trigger, string filterId, int value = 1)
         {
             if (database == null) return;
@@ -217,6 +272,7 @@ namespace Markyu.LastKernel.Achievements
             _platform.Unlock(def.Id);
             _platform.StoreStats();
 
+            Debug.Log($"[Achievements] Unlocked: {def.Id}");
             OnAchievementUnlocked?.Invoke(def);
         }
 
@@ -231,7 +287,6 @@ namespace Markyu.LastKernel.Achievements
 
             _progress = new Dictionary<string, AchievementSaveData>(gameData.Achievements);
 
-            // Re-push unlocked state to platform (handles reinstalls / account changes).
             foreach (var kvp in _progress)
             {
                 if (kvp.Value.IsUnlocked)

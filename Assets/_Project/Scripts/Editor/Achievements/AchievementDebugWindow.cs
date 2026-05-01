@@ -76,7 +76,7 @@ namespace Markyu.LastKernel.EditorTools
                     using (new EditorGUI.DisabledScope(unlocked))
                     {
                         if (GUILayout.Button("Unlock", GUILayout.Width(70)))
-                            service.NotifyCustom(def.Id);
+                            service.ForceUnlock(def.Id);
                     }
                 }
             }
@@ -85,8 +85,13 @@ namespace Markyu.LastKernel.EditorTools
 
             using (new EditorGUILayout.HorizontalScope())
             {
-                if (GUILayout.Button("Unlock All")) service.NotifyCustom("__all__"); // use Debug button on service instead
-                if (GUILayout.Button("Reset All"))  Debug.LogWarning("[AchievementDebugger] Use 'Debug — Reset All' button on AchievementService component.");
+                if (GUILayout.Button("Unlock All"))
+                {
+                    foreach (var d in db.All)
+                        if (d != null) service.ForceUnlock(d.Id);
+                }
+                if (GUILayout.Button("Reset All"))
+                    Debug.LogWarning("[AchievementDebugger] Use 'Debug — Reset All' on the AchievementService Inspector instead.");
             }
 
             Repaint();

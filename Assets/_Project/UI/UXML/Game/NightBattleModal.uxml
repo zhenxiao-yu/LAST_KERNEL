@@ -1,0 +1,141 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="../../USS/theme.uss" />
+    <Style src="../../USS/layout.uss" />
+    <Style src="../../USS/components.uss" />
+    <Style src="../../USS/NightBattleModal.uss" />
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         NightBattleModal — full-screen overlay.
+         Shown by NightBattleModalController when NightBattleManager fires
+         OnNightModalOpened. Hidden after AcknowledgeResult.
+
+         Layout:
+           [TOP BAR]  Night N | Threat | incoming count | buttons
+           [BATTLE ZONE]  enemy row  |VS|  player slots row
+           [BOTTOM AREA]  [Left: villagers + log] [Right: shop]
+           [RESULT PANEL]  absolute overlay shown when battle ends
+         ══════════════════════════════════════════════════════════════════════ -->
+    <ui:VisualElement name="nbm-root" class="nbm-root lk-hidden">
+
+        <!-- ── MODAL CARD ───────────────────────────────────────────────────── -->
+        <ui:VisualElement class="nbm-modal">
+
+            <!-- ── TOP BAR ─────────────────────────────────────────────────── -->
+            <ui:VisualElement class="nbm-topbar">
+
+                <!-- Left: night info -->
+                <ui:VisualElement class="nbm-topbar-info">
+                    <ui:Label name="nbm-night-label"  class="nbm-night-title"  text="NIGHT 1" />
+                    <ui:Label name="nbm-threat-label" class="nbm-threat-label" text="THREAT: LOW" />
+                </ui:VisualElement>
+
+                <!-- Centre: incoming enemies summary -->
+                <ui:VisualElement class="lk-grow" />
+                <ui:Label name="nbm-incoming-label" class="nbm-incoming-label" text="3 ENEMIES INCOMING" />
+                <ui:VisualElement class="lk-grow" />
+
+                <!-- Right: action buttons -->
+                <ui:VisualElement class="nbm-topbar-buttons">
+                    <ui:Button name="nbm-btn-fast"   class="lk-button nbm-btn nbm-btn--fast"   text="[ RESOLVE FAST ]" />
+                    <ui:Button name="nbm-btn-start"  class="lk-button nbm-btn nbm-btn--start"  text="[ START BATTLE ]" />
+                    <ui:Button name="nbm-btn-cancel" class="lk-button nbm-btn nbm-btn--cancel" text="[ CANCEL ]" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+            <!-- END TOP BAR -->
+
+            <!-- ── BATTLE ZONE ─────────────────────────────────────────────── -->
+            <ui:VisualElement class="nbm-battle-zone">
+
+                <!-- Enemy section -->
+                <ui:VisualElement class="nbm-section-header nbm-section-header--enemy">
+                    <ui:Label text="ENEMY LINE" class="nbm-section-title nbm-section-title--enemy" />
+                    <ui:Label name="nbm-enemy-count-label" class="nbm-section-count" text="" />
+                </ui:VisualElement>
+                <!-- Enemy card elements injected here by NightBattleModalController -->
+                <ui:VisualElement name="nbm-enemy-row" class="nbm-team-row nbm-team-row--enemy" />
+
+                <!-- VS bar -->
+                <ui:VisualElement class="nbm-vs-bar">
+                    <ui:VisualElement class="nbm-vs-line" />
+                    <ui:Label name="nbm-status-label" class="nbm-status-label" text="PREP PHASE" />
+                    <ui:VisualElement class="nbm-vs-line" />
+                </ui:VisualElement>
+
+                <!-- Player section -->
+                <!-- NightPrepSlotView elements injected here by NightBattleModalController -->
+                <ui:VisualElement name="nbm-player-row" class="nbm-team-row nbm-team-row--player" />
+                <ui:VisualElement class="nbm-section-header nbm-section-header--player">
+                    <ui:Label text="COLONY LINE" class="nbm-section-title nbm-section-title--player" />
+                    <ui:Label name="nbm-player-count-label" class="nbm-section-count" text="0 / 5 SLOTS FILLED" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+            <!-- END BATTLE ZONE -->
+
+            <!-- ── BOTTOM AREA ─────────────────────────────────────────────── -->
+            <ui:VisualElement class="nbm-bottom-area">
+
+                <!-- Left column: villagers list + combat log -->
+                <ui:VisualElement class="nbm-left-col">
+
+                    <!-- Villagers panel -->
+                    <ui:VisualElement class="nbm-panel nbm-villagers-panel">
+                        <ui:Label class="nbm-panel-header" text="AVAILABLE DEFENDERS" />
+                        <ui:Label name="nbm-assign-hint" class="nbm-hint-label"
+                                  text="Click a defender, then click a slot to assign." />
+                        <!-- VillagerEntry elements injected here -->
+                        <ui:ScrollView name="nbm-villagers-list" class="nbm-villagers-list"
+                                       vertical-scroller-visibility="AlwaysVisible"
+                                       horizontal-scroller-visibility="Hidden" />
+                    </ui:VisualElement>
+
+                    <!-- Combat log -->
+                    <ui:VisualElement class="nbm-panel nbm-log-panel">
+                        <ui:Label class="nbm-panel-header" text="COMBAT LOG" />
+                        <ui:ScrollView name="nbm-battle-log" class="nbm-log"
+                                       vertical-scroller-visibility="AlwaysVisible"
+                                       horizontal-scroller-visibility="Hidden" />
+                    </ui:VisualElement>
+
+                </ui:VisualElement>
+                <!-- END LEFT COL -->
+
+                <!-- Right column: night shop -->
+                <ui:VisualElement class="nbm-right-col">
+                    <ui:VisualElement class="nbm-panel nbm-shop-panel">
+
+                        <ui:VisualElement class="nbm-shop-header">
+                            <ui:Label class="nbm-panel-header" text="NIGHT SHOP" />
+                            <ui:VisualElement class="lk-grow" />
+                            <ui:Label name="nbm-gold-label" class="nbm-gold-label" text="◈ 30" />
+                        </ui:VisualElement>
+
+                        <ui:Label name="nbm-shop-hint" class="nbm-hint-label"
+                                  text="Buy items with gold. Click item, then click a fighter." />
+
+                        <!-- NightShopItemView elements injected here -->
+                        <ui:VisualElement name="nbm-shop-items" class="nbm-shop-items" />
+
+                    </ui:VisualElement>
+                </ui:VisualElement>
+                <!-- END RIGHT COL -->
+
+            </ui:VisualElement>
+            <!-- END BOTTOM AREA -->
+
+        </ui:VisualElement>
+        <!-- END MODAL CARD -->
+
+        <!-- ── RESULT PANEL (absolute overlay, shown when battle ends) ─────── -->
+        <ui:VisualElement name="nbm-result-panel" class="nbm-result-panel lk-hidden">
+            <ui:Label name="nbm-result-title"   class="nbm-result-title"   text="SYSTEM HELD" />
+            <ui:Label name="nbm-result-summary" class="nbm-result-summary" text="" />
+            <ui:Button name="nbm-btn-return" class="lk-button nbm-btn nbm-btn--return"
+                       text="[ RETURN TO DAY ]" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+    <!-- END NBM ROOT -->
+
+</ui:UXML>
