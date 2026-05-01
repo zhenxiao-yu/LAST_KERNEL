@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "unity-mcp": {
+      "command": "C:\\Users\\YZX06\\AppData\\Roaming\\Python\\Python312\\Scripts\\mcp-for-unity.exe",
+      "args": [
+        "--transport", "http",
+        "--http-url", "http://127.0.0.1:8080",
+        "--project-scoped-tools"
+      ],
+      "env": {
+        "MCP_TOOL_TIMEOUT": "720000"
+      }
+    }
+  }
+}

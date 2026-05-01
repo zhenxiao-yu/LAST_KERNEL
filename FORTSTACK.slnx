@@ -37,8 +37,8 @@
   <Project Path="Sirenix.OdinInspector.Modules.UnityMathematics.csproj" />
   <Project Path="Sirenix.OdinInspector.Modules.UnityLocalization.csproj" />
   <Project Path="Michsky.LSS.csproj" />
-  <Project Path="_Project.Tests.EditMode.csproj" />
   <Project Path="Kamgam.UIToolkitParticles.Editor.csproj" />
+  <Project Path="_Project.Tests.EditMode.csproj" />
   <Project Path="Kamgam.UIToolkitTextAutoSize.UIDocumentFinder.csproj" />
   <Project Path="Kamgam.UIToolkitSoundEffects.UIDocumentFinder.csproj" />
 </Solution>

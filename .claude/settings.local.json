@@ -14,7 +14,11 @@
       "WebFetch(domain:modding.stacklands.co)",
       "WebFetch(domain:yuridll.github.io)",
       "WebFetch(domain:deltazulusigma.github.io)",
-      "WebFetch(domain:halfglassgaming.com)"
+      "WebFetch(domain:halfglassgaming.com)",
+      "Read(//c/Users/YZX06/AppData/Roaming/Python/Python312/Scripts/**)",
+      "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 8080 -InformationLevel Quiet 2>&1)",
+      "Bash(curl -s --max-time 3 http://127.0.0.1:8080 -o /dev/null -w \"%{http_code}\")",
+      "Bash(curl -s --max-time 3 http://127.0.0.1:8080)"
     ],
     "deny": [
       "Read(Library/**)",
@@ -28,5 +32,8 @@
       "Read(*.csproj)",
       "Read(*.sln)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "unity-mcp"
+  ]
 }
