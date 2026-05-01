@@ -1175,6 +1175,14 @@ Toggle:checked .unity-toggle__checkmark {
     -unity-font-style: normal;
 }
 
+/* Description — small body text below name, hidden for secret/locked */
+.lk-ach-card__desc {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-xs);
+    white-space: normal;
+    margin-bottom: 4px;
+}
+
 /* Status line below name */
 .lk-ach-card__status {
     font-size: var(--lk-font-size-sm);

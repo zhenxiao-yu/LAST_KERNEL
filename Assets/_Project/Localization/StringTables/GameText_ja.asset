@@ -3145,6 +3145,290 @@ MonoBehaviour:
     m_Localized: "\u6804\u990A {0}"
     m_Metadata:
       m_Items: []
+  - m_Id: 2084246063427584
+    m_Localized: "\u30AF\u30A8\u30B9\u30C8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536448
+    m_Localized: "\u30EC\u30B7\u30D4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536449
+    m_Localized: "\u5B9F\u7E3E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536450
+    m_Localized: "\u6700\u521D\u306E\u30C9\u30ED\u30C3\u30D7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536451
+    m_Localized: "\u6700\u521D\u306E\u30AB\u30FC\u30C9\u30D1\u30C3\u30AF\u3092\u958B\u304F\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536452
+    m_Localized: "\u6700\u5F8C\u306E\u751F\u5B58\u8005"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536453
+    m_Localized: "\u6700\u521D\u306E\u30B2\u30FC\u30E0\u306B\u52DD\u5229\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536454
+    m_Localized: "\u591C\u9593\u30B7\u30D5\u30C8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536455
+    m_Localized: "\u6700\u521D\u306E\u591C\u306E\u653B\u6483\u3092\u751F\u304D\u5EF6\u3073\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536456
+    m_Localized: "\u30D5\u30A1\u30D6\u30EA\u30B1\u30FC\u30BF\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536457
+    m_Localized: "\u521D\u3081\u3066\u30A2\u30A4\u30C6\u30E0\u3092\u88FD\u4F5C\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536458
+    m_Localized: "\u4EFB\u52D9\u9042\u884C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536459
+    m_Localized: "\u6700\u521D\u306E\u30AF\u30A8\u30B9\u30C8\u3092\u5B8C\u4E86\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536460
+    m_Localized: "\u30E6\u30FC\u30EC\u30AB"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536461
+    m_Localized: "\u65B0\u3057\u3044\u30EC\u30B7\u30D4\u3092\u767A\u898B\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536462
+    m_Localized: "\u30DD\u30EA\u30B0\u30ED\u30C3\u30C8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536463
+    m_Localized: "\u30B2\u30FC\u30E0\u306E\u8A00\u8A9E\u3092\u5909\u66F4\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536464
+    m_Localized: "\u30D9\u30C6\u30E9\u30F3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536465
+    m_Localized: "5\u56DE\u306E\u591C\u3092\u751F\u304D\u5EF6\u3073\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246134730752
+    m_Localized: "\u6975\u5C0F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999872
+    m_Localized: "\u6E96\u5099\u30D5\u30A7\u30FC\u30BA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999873
+    m_Localized: "\u6226\u95D8\u4E2D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999874
+    m_Localized: "\u52DD\u5229"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999875
+    m_Localized: "\u9632\u885B\u7A81\u7834"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999876
+    m_Localized: NIGHT {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999877
+    m_Localized: '{0} ENEMIES INCOMING'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999878
+    m_Localized: '{0} UNITS'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999879
+    m_Localized: '{0} / {1} SLOTS FILLED'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999880
+    m_Localized: 'THREAT: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999881
+    m_Localized: "\u4F4E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999882
+    m_Localized: "\u4E2D\u7A0B\u5EA6"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999883
+    m_Localized: "\u9AD8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999884
+    m_Localized: "\u5371\u6A5F\u7684"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999885
+    m_Localized: "\u25C8 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999886
+    m_Localized: "\u30B7\u30B9\u30C6\u30E0\u9632\u885B\u6210\u529F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999887
+    m_Localized: "\u30B7\u30B9\u30C6\u30E0\u7A81\u7834"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999888
+    m_Localized: "[ \u6226\u95D8\u958B\u59CB ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999889
+    m_Localized: "[ \u9AD8\u901F\u89E3\u6C7A ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999890
+    m_Localized: "[ \u81EA\u52D5\u914D\u7F6E ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999891
+    m_Localized: "[ \u663C\u3078\u623B\u308B ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999892
+    m_Localized: "\u6575\u6226\u7DDA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999893
+    m_Localized: "\u690D\u6C11\u5730\u6226\u7DDA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999894
+    m_Localized: "\u5229\u7528\u53EF\u80FD\u306A\u5B88\u8B77\u8005"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999895
+    m_Localized: "\u6226\u95D8\u30ED\u30B0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999896
+    m_Localized: "\u591C\u9593\u30B7\u30E7\u30C3\u30D7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999897
+    m_Localized: Click a defender, then click a slot to assign.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999898
+    m_Localized: Buy items with gold. Click item, then click a fighter.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999899
+    m_Localized: "\u6700\u524D\u5217"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999900
+    m_Localized: '#{0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999901
+    m_Localized: ATK {0}  |  HP {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194176
+    m_Localized: ATK {0}  HP {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194177
+    m_Localized: Night {0} begins. Choose your defenders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194178
+    m_Localized: 'WARNING: No eligible defenders found.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194179
+    m_Localized: Battle commences.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194180
+    m_Localized: Colony survived the night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194181
+    m_Localized: Colony defenses breached.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194182
+    m_Localized: "WARNING: No defenders \u2014 colony is undefended."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194183
+    m_Localized: Formation locked. Initiating combat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194184
+    m_Localized: Fast resolve activated.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194185
+    m_Localized: Auto-deployed all available defenders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194186
+    m_Localized: Not enough gold. Need {0}, have {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194187
+    m_Localized: 'Purchased: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194188
+    m_Localized: 'Selected: {0}. Click a fighter to apply.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194189
+    m_Localized: Applied {0} to {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194190
+    m_Localized: "{0} attacks {1} \u2014 MISSED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194191
+    m_Localized: '{0} hits {1} for {2}{3}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194192
+    m_Localized: ' [CRIT]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194193
+    m_Localized: '{0} is destroyed.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194194
+    m_Localized: Scavenger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194195
+    m_Localized: Nightly Incursion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194196
+    m_Localized: Scavengers probe the perimeter under cover of dark.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

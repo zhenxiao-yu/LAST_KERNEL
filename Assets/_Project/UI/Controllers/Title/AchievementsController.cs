@@ -109,11 +109,25 @@ namespace Markyu.LastKernel
             topRow.Add(textCol);
 
             // Name
-            string displayName = secret ? "???" : def.Id;
+            string displayName = secret
+                ? "???"
+                : GameLocalization.GetOptional(def.LocalizationKey + ".name", def.Id);
             var nameLabel = new Label(displayName);
             nameLabel.AddToClassList("lk-ach-card__name");
             if (!isUnlocked) nameLabel.AddToClassList("lk-ach-card__name--dim");
             textCol.Add(nameLabel);
+
+            // Description (hidden for secrets)
+            if (!secret)
+            {
+                string desc = GameLocalization.GetOptional(def.LocalizationKey + ".description", "");
+                if (!string.IsNullOrEmpty(desc))
+                {
+                    var descLabel = new Label(desc);
+                    descLabel.AddToClassList("lk-ach-card__desc");
+                    textCol.Add(descLabel);
+                }
+            }
 
             // Status line
             var status = BuildStatusLabel(def, svc, isUnlocked, secret);

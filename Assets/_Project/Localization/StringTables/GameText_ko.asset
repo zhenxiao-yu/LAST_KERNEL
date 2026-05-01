@@ -3149,6 +3149,290 @@ MonoBehaviour:
     m_Localized: "\uC601\uC591 {0}"
     m_Metadata:
       m_Items: []
+  - m_Id: 2084246063427584
+    m_Localized: "\uD018\uC2A4\uD2B8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536448
+    m_Localized: "\uB808\uC2DC\uD53C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536449
+    m_Localized: "\uC5C5\uC801"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536450
+    m_Localized: "\uCCAB \uBC88\uC9F8 \uB4DC\uB86D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536451
+    m_Localized: "\uCCAB \uBC88\uC9F8 \uCE74\uB4DC \uD329\uC744 \uC5EC\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536452
+    m_Localized: "\uB9C8\uC9C0\uB9C9 \uC0DD\uC874\uC790"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536453
+    m_Localized: "\uCCAB \uBC88\uC9F8 \uAC8C\uC784\uC744 \uC774\uAE30\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536454
+    m_Localized: "\uC57C\uAC04 \uADFC\uBB34"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536455
+    m_Localized: "\uCCAB \uBC88\uC9F8 \uC57C\uAC04 \uACF5\uACA9\uC744 \uBC84\uD2F0\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536456
+    m_Localized: "\uC81C\uC791\uC790"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536457
+    m_Localized: "\uCC98\uC74C\uC73C\uB85C \uC544\uC774\uD15C\uC744 \uC81C\uC791\uD558\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536458
+    m_Localized: "\uC784\uBB34 \uC218\uD589"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536459
+    m_Localized: "\uCCAB \uBC88\uC9F8 \uD018\uC2A4\uD2B8\uB97C \uC644\uB8CC\uD558\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536460
+    m_Localized: "\uC720\uB808\uCE74"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536461
+    m_Localized: "\uC0C8\uB85C\uC6B4 \uB808\uC2DC\uD53C\uB97C \uBC1C\uACAC\uD558\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536462
+    m_Localized: "\uB2E4\uAD6D\uC5B4 \uC0AC\uC6A9\uC790"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536463
+    m_Localized: "\uAC8C\uC784 \uC5B8\uC5B4\uB97C \uBCC0\uACBD\uD558\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536464
+    m_Localized: "\uBCA0\uD14C\uB791"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536465
+    m_Localized: "\uBC24 5\uBC88\uC744 \uBC84\uD2F0\uC138\uC694."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246134730752
+    m_Localized: "\uC544\uC8FC \uC791\uC74C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999872
+    m_Localized: "\uC900\uBE44 \uB2E8\uACC4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999873
+    m_Localized: "\uC804\uD22C \uC9C4\uD589 \uC911"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999874
+    m_Localized: "\uC2B9\uB9AC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999875
+    m_Localized: "\uBC29\uC5B4\uC120 \uBD95\uAD34"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999876
+    m_Localized: NIGHT {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999877
+    m_Localized: '{0} ENEMIES INCOMING'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999878
+    m_Localized: '{0} UNITS'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999879
+    m_Localized: '{0} / {1} SLOTS FILLED'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999880
+    m_Localized: 'THREAT: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999881
+    m_Localized: "\uB0AE\uC74C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999882
+    m_Localized: "\uBCF4\uD1B5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999883
+    m_Localized: "\uB192\uC74C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999884
+    m_Localized: "\uC704\uD5D8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999885
+    m_Localized: "\u25C8 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999886
+    m_Localized: "\uC2DC\uC2A4\uD15C \uC720\uC9C0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999887
+    m_Localized: "\uC2DC\uC2A4\uD15C \uB3CC\uD30C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999888
+    m_Localized: "[ \uC804\uD22C \uC2DC\uC791 ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999889
+    m_Localized: "[ \uBE60\uB978 \uD574\uACB0 ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999890
+    m_Localized: "[ \uC790\uB3D9 \uBC30\uCE58 ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999891
+    m_Localized: "[ \uB0AE\uC73C\uB85C \uBCF5\uADC0 ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999892
+    m_Localized: "\uC801 \uC804\uC120"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999893
+    m_Localized: "\uC2DD\uBBFC\uC9C0 \uC804\uC120"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999894
+    m_Localized: "\uAC00\uC6A9 \uC218\uBE44\uC790"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999895
+    m_Localized: "\uC804\uD22C \uAE30\uB85D"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999896
+    m_Localized: "\uC57C\uAC04 \uC0C1\uC810"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999897
+    m_Localized: Click a defender, then click a slot to assign.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999898
+    m_Localized: Buy items with gold. Click item, then click a fighter.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999899
+    m_Localized: "\uC55E\uC904"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999900
+    m_Localized: '#{0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999901
+    m_Localized: ATK {0}  |  HP {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194176
+    m_Localized: ATK {0}  HP {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194177
+    m_Localized: Night {0} begins. Choose your defenders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194178
+    m_Localized: 'WARNING: No eligible defenders found.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194179
+    m_Localized: Battle commences.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194180
+    m_Localized: Colony survived the night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194181
+    m_Localized: Colony defenses breached.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194182
+    m_Localized: "WARNING: No defenders \u2014 colony is undefended."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194183
+    m_Localized: Formation locked. Initiating combat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194184
+    m_Localized: Fast resolve activated.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194185
+    m_Localized: Auto-deployed all available defenders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194186
+    m_Localized: Not enough gold. Need {0}, have {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194187
+    m_Localized: 'Purchased: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194188
+    m_Localized: 'Selected: {0}. Click a fighter to apply.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194189
+    m_Localized: Applied {0} to {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194190
+    m_Localized: "{0} attacks {1} \u2014 MISSED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194191
+    m_Localized: '{0} hits {1} for {2}{3}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194192
+    m_Localized: ' [CRIT]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194193
+    m_Localized: '{0} is destroyed.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194194
+    m_Localized: Scavenger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194195
+    m_Localized: Nightly Incursion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194196
+    m_Localized: Scavengers probe the perimeter under cover of dark.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

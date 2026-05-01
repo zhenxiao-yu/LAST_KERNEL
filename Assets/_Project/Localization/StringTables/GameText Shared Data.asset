@@ -3445,6 +3445,101 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497223980286629
+  - m_Id: 2084246063427584
+    m_Key: menu.tab.quests
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876457
+  - m_Id: 2084246130536448
+    m_Key: menu.tab.recipes
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876458
+  - m_Id: 2084246130536449
+    m_Key: title.achievements
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876459
+  - m_Id: 2084246130536450
+    m_Key: ach.first_pack.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876460
+  - m_Id: 2084246130536451
+    m_Key: ach.first_pack.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876461
+  - m_Id: 2084246130536452
+    m_Key: ach.first_win.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876462
+  - m_Id: 2084246130536453
+    m_Key: ach.first_win.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876463
+  - m_Id: 2084246130536454
+    m_Key: ach.first_night.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876464
+  - m_Id: 2084246130536455
+    m_Key: ach.first_night.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876465
+  - m_Id: 2084246130536456
+    m_Key: ach.first_craft.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876466
+  - m_Id: 2084246130536457
+    m_Key: ach.first_craft.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876467
+  - m_Id: 2084246130536458
+    m_Key: ach.first_quest.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876468
+  - m_Id: 2084246130536459
+    m_Key: ach.first_quest.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876469
+  - m_Id: 2084246130536460
+    m_Key: ach.eureka.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876470
+  - m_Id: 2084246130536461
+    m_Key: ach.eureka.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876471
+  - m_Id: 2084246130536462
+    m_Key: ach.language.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876472
+  - m_Id: 2084246130536463
+    m_Key: ach.language.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876473
+  - m_Id: 2084246130536464
+    m_Key: ach.veteran.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876474
+  - m_Id: 2084246130536465
+    m_Key: ach.veteran.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876475
   - m_Id: 1116294656831496
     m_Key: hud.cards
     m_Metadata:
@@ -3675,6 +3770,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497247455543973
+  - m_Id: 2084246134730752
+    m_Key: options.uiScale.xsmall
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876476
   - m_Id: 1523475420033028
     m_Key: options.uiScale.small
     m_Metadata:
@@ -3781,6 +3881,261 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497265337434217
+  - m_Id: 2084248881999872
+    m_Key: night.modal.phase.prep
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876477
+  - m_Id: 2084248881999873
+    m_Key: night.modal.phase.battle
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876478
+  - m_Id: 2084248881999874
+    m_Key: night.modal.phase.victory
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876479
+  - m_Id: 2084248881999875
+    m_Key: night.modal.phase.defeat
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876480
+  - m_Id: 2084248881999876
+    m_Key: night.modal.nightTitle
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876481
+  - m_Id: 2084248881999877
+    m_Key: night.modal.incoming
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876482
+  - m_Id: 2084248881999878
+    m_Key: night.modal.units
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876483
+  - m_Id: 2084248881999879
+    m_Key: night.modal.slotsStatus
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876484
+  - m_Id: 2084248881999880
+    m_Key: night.modal.threat
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876485
+  - m_Id: 2084248881999881
+    m_Key: night.modal.threat.low
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876486
+  - m_Id: 2084248881999882
+    m_Key: night.modal.threat.moderate
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876487
+  - m_Id: 2084248881999883
+    m_Key: night.modal.threat.high
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876488
+  - m_Id: 2084248881999884
+    m_Key: night.modal.threat.critical
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876489
+  - m_Id: 2084248881999885
+    m_Key: night.modal.gold
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876490
+  - m_Id: 2084248881999886
+    m_Key: night.modal.result.win
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876491
+  - m_Id: 2084248881999887
+    m_Key: night.modal.result.loss
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876492
+  - m_Id: 2084248881999888
+    m_Key: night.modal.btn.start
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876493
+  - m_Id: 2084248881999889
+    m_Key: night.modal.btn.fast
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876494
+  - m_Id: 2084248881999890
+    m_Key: night.modal.btn.autoDeploy
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876495
+  - m_Id: 2084248881999891
+    m_Key: night.modal.btn.return
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876496
+  - m_Id: 2084248881999892
+    m_Key: night.modal.section.enemy
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876497
+  - m_Id: 2084248881999893
+    m_Key: night.modal.section.colony
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876498
+  - m_Id: 2084248881999894
+    m_Key: night.modal.section.defenders
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876499
+  - m_Id: 2084248881999895
+    m_Key: night.modal.section.log
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876500
+  - m_Id: 2084248881999896
+    m_Key: night.modal.section.shop
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876501
+  - m_Id: 2084248881999897
+    m_Key: night.modal.hint.assign
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876502
+  - m_Id: 2084248881999898
+    m_Key: night.modal.hint.shop
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876503
+  - m_Id: 2084248881999899
+    m_Key: night.modal.slot.front
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876504
+  - m_Id: 2084248881999900
+    m_Key: night.modal.slot.n
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876505
+  - m_Id: 2084248881999901
+    m_Key: night.modal.stats.enemy
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876506
+  - m_Id: 2084248886194176
+    m_Key: night.modal.stats.fighter
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876507
+  - m_Id: 2084248886194177
+    m_Key: night.modal.log.begin
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876508
+  - m_Id: 2084248886194178
+    m_Key: night.modal.log.noDefenders
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876509
+  - m_Id: 2084248886194179
+    m_Key: night.modal.log.battleStart
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876510
+  - m_Id: 2084248886194180
+    m_Key: night.modal.log.victoryLog
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876511
+  - m_Id: 2084248886194181
+    m_Key: night.modal.log.defeatLog
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876512
+  - m_Id: 2084248886194182
+    m_Key: night.modal.log.undefended
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876513
+  - m_Id: 2084248886194183
+    m_Key: night.modal.log.formation
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876514
+  - m_Id: 2084248886194184
+    m_Key: night.modal.log.fastResolve
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876515
+  - m_Id: 2084248886194185
+    m_Key: night.modal.log.autoDeploy
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876516
+  - m_Id: 2084248886194186
+    m_Key: night.modal.log.noGold
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876517
+  - m_Id: 2084248886194187
+    m_Key: night.modal.log.purchased
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876518
+  - m_Id: 2084248886194188
+    m_Key: night.modal.log.itemSelected
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876519
+  - m_Id: 2084248886194189
+    m_Key: night.modal.log.itemApplied
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876520
+  - m_Id: 2084248886194190
+    m_Key: night.modal.log.missed
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876521
+  - m_Id: 2084248886194191
+    m_Key: night.modal.log.hit
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876522
+  - m_Id: 2084248886194192
+    m_Key: night.modal.log.crit
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876523
+  - m_Id: 2084248886194193
+    m_Key: night.modal.log.unitDied
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876524
+  - m_Id: 2084248886194194
+    m_Key: night.enemy.scavenger
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876525
+  - m_Id: 2084248886194195
+    m_Key: night.wave.procedural.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876526
+  - m_Id: 2084248886194196
+    m_Key: night.wave.procedural.flavor
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876527
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -3796,6 +4151,342 @@ MonoBehaviour:
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
         m_CommentText: Card nutrition value label {0}=amount
+    - rid: 2581770992171876457
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "In-game side panel \u2014 quests tab label"
+    - rid: 2581770992171876458
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "In-game side panel \u2014 recipes tab label"
+    - rid: 2581770992171876459
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Title screen \u2014 achievements button and panel title"
+    - rid: 2581770992171876460
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 opened first card pack"
+    - rid: 2581770992171876461
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 opened first card pack"
+    - rid: 2581770992171876462
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 win first game (secret)"
+    - rid: 2581770992171876463
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 win first game (secret)"
+    - rid: 2581770992171876464
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 survive first night"
+    - rid: 2581770992171876465
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 survive first night"
+    - rid: 2581770992171876466
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 craft item for first time"
+    - rid: 2581770992171876467
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 craft item for first time"
+    - rid: 2581770992171876468
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 complete first quest"
+    - rid: 2581770992171876469
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 complete first quest"
+    - rid: 2581770992171876470
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 discover first recipe"
+    - rid: 2581770992171876471
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 discover first recipe"
+    - rid: 2581770992171876472
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 changed game language"
+    - rid: 2581770992171876473
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 changed game language"
+    - rid: 2581770992171876474
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 survive 5 nights"
+    - rid: 2581770992171876475
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 survive 5 nights"
+    - rid: 2581770992171876476
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876477
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876478
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876479
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876480
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876481
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876482
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876483
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876484
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876485
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876486
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876487
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876488
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876489
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876490
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876491
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876492
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876493
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876494
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876495
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876496
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876497
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876498
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876499
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876500
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876501
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876502
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876503
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876504
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876505
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876506
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876507
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876508
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876509
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876510
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876511
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876512
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876513
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876514
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876515
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876516
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876517
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876518
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876519
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876520
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876521
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876522
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876523
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876524
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876525
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876526
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876527
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
     - rid: 8800497158023282712
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:

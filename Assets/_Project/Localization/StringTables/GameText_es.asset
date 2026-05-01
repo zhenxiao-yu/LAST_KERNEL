@@ -3145,6 +3145,290 @@ MonoBehaviour:
     m_Localized: Nutr. {0}
     m_Metadata:
       m_Items: []
+  - m_Id: 2084246063427584
+    m_Localized: MISIONES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536448
+    m_Localized: RECETAS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536449
+    m_Localized: LOGROS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536450
+    m_Localized: "Primer Bot\xEDn"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536451
+    m_Localized: Abre tu primer sobre de cartas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536452
+    m_Localized: "El \xDAltimo en Pie"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536453
+    m_Localized: Gana tu primera partida.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536454
+    m_Localized: Turno de Noche
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536455
+    m_Localized: Sobrevive tu primer ataque nocturno.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536456
+    m_Localized: Fabricador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536457
+    m_Localized: Fabrica un objeto por primera vez.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536458
+    m_Localized: En Servicio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536459
+    m_Localized: "Completa tu primera misi\xF3n."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536460
+    m_Localized: Eureka
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536461
+    m_Localized: Descubre una nueva receta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536462
+    m_Localized: "Pol\xEDglota"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536463
+    m_Localized: Cambia el idioma del juego.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536464
+    m_Localized: Veterano
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246130536465
+    m_Localized: Sobrevive 5 noches.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084246134730752
+    m_Localized: "Muy peque\xF1o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999872
+    m_Localized: FASE PREP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999873
+    m_Localized: COMBATE ACTIVO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999874
+    m_Localized: VICTORIA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999875
+    m_Localized: DERROTA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999876
+    m_Localized: NIGHT {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999877
+    m_Localized: '{0} ENEMIES INCOMING'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999878
+    m_Localized: '{0} UNITS'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999879
+    m_Localized: '{0} / {1} SLOTS FILLED'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999880
+    m_Localized: 'THREAT: {0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999881
+    m_Localized: BAJO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999882
+    m_Localized: MODERADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999883
+    m_Localized: ALTO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999884
+    m_Localized: "CR\xCDTICO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999885
+    m_Localized: "\u25C8 {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999886
+    m_Localized: SISTEMA MANTENIDO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999887
+    m_Localized: SISTEMA FALLADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999888
+    m_Localized: '[ INICIAR BATALLA ]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999889
+    m_Localized: "[ RESOLVER R\xC1PIDO ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999890
+    m_Localized: '[ DESPLIEGUE AUTO ]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999891
+    m_Localized: "[ VOLVER AL D\xCDA ]"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999892
+    m_Localized: "L\xCDNEA ENEMIGA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999893
+    m_Localized: "L\xCDNEA COLONIA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999894
+    m_Localized: DEFENSORES DISPONIBLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999895
+    m_Localized: REGISTRO DE COMBATE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999896
+    m_Localized: TIENDA NOCTURNA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999897
+    m_Localized: Click a defender, then click a slot to assign.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999898
+    m_Localized: Buy items with gold. Click item, then click a fighter.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999899
+    m_Localized: FRENTE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999900
+    m_Localized: '#{0}'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248881999901
+    m_Localized: ATK {0}  |  HP {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194176
+    m_Localized: ATK {0}  HP {1}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194177
+    m_Localized: Night {0} begins. Choose your defenders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194178
+    m_Localized: 'WARNING: No eligible defenders found.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194179
+    m_Localized: Battle commences.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194180
+    m_Localized: Colony survived the night.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194181
+    m_Localized: Colony defenses breached.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194182
+    m_Localized: "WARNING: No defenders \u2014 colony is undefended."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194183
+    m_Localized: Formation locked. Initiating combat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194184
+    m_Localized: Fast resolve activated.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194185
+    m_Localized: Auto-deployed all available defenders.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194186
+    m_Localized: Not enough gold. Need {0}, have {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194187
+    m_Localized: 'Purchased: {0}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194188
+    m_Localized: 'Selected: {0}. Click a fighter to apply.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194189
+    m_Localized: Applied {0} to {1}.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194190
+    m_Localized: "{0} attacks {1} \u2014 MISSED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194191
+    m_Localized: '{0} hits {1} for {2}{3}.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194192
+    m_Localized: ' [CRIT]'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194193
+    m_Localized: '{0} is destroyed.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194194
+    m_Localized: Scavenger
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194195
+    m_Localized: Nightly Incursion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084248886194196
+    m_Localized: Scavengers probe the perimeter under cover of dark.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
