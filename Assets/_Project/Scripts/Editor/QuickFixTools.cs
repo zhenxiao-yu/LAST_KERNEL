@@ -11,7 +11,7 @@ namespace Markyu.LastKernel
     /// </summary>
     public static class QuickFixTools
     {
-        [MenuItem("Tools/LAST KERNEL/Fix Safe Issues")]
+        [MenuItem("LAST KERNEL/Dev/Fix Card Issues", false, 20)]
         public static void FixSafeIssues()
         {
             Debug.Log("=== QuickFixTools: Running safe fixes ===");
@@ -165,7 +165,7 @@ namespace Markyu.LastKernel
         /// asset that is missing one (when exactly one profile exists in the project).
         /// Safe to run multiple times — skips objects that already have the component.
         /// </summary>
-        [MenuItem("Tools/LAST KERNEL/Fix All Card Prefabs")]
+        [MenuItem("LAST KERNEL/Dev/Fix All Card Prefabs", false, 21)]
         public static void FixAllCardPrefabs()
         {
             Debug.Log("=== QuickFixTools: Fix All Card Prefabs ===");

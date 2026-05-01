@@ -8,7 +8,7 @@ namespace Markyu.LastKernel
     {
         private const string URP_ASSET_PATH = "Assets/_Project/Settings/URP/URP_Asset.asset";
 
-        [MenuItem("Tools/Markyu/Switch to URP")]
+        [MenuItem("LAST KERNEL/Pipeline/Switch to URP", false, 1)]
         public static void SwitchToURP()
         {
             var urpAsset = AssetDatabase.LoadAssetAtPath<RenderPipelineAsset>(URP_ASSET_PATH);
@@ -29,7 +29,7 @@ namespace Markyu.LastKernel
             Debug.Log("Switched to URP");
         }
 
-        [MenuItem("Tools/Markyu/Switch to Built-in")]
+        [MenuItem("LAST KERNEL/Pipeline/Switch to Built-in", false, 2)]
         public static void SwitchToBuiltIn()
         {
             GraphicsSettings.defaultRenderPipeline = null;

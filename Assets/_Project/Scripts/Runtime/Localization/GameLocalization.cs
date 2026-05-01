@@ -267,14 +267,22 @@ namespace Markyu.LastKernel
 
             ["common.confirmButton"] = new("确认",    "Confirm"),
             ["common.cancelButton"]  = new("取消",    "Cancel"),
+            ["common.applyButton"]   = new("应用",    "Apply"),
             ["common.closeButton"]   = new("关闭",    "Close"),
             ["common.resetButton"]   = new("重置全部", "Reset All"),
+            ["options.language.title"] = L("选择语言", "Select Language", "選擇語言", "言語を選択", "언어 선택", "Choisir la langue", "Sprache wahlen", "Seleccionar idioma"),
             ["common.loadButton"]    = new("读取",    "Load"),
             ["common.deleteButton"]  = new("删除",    "Delete"),
 
             ["options.header"] = new("运行设置", "Options"),
             ["options.sfx"] = new("音效 {0}%", "SFX {0}%"),
             ["options.bgm"] = new("背景音乐 {0}%", "BGM {0}%"),
+            ["options.uiScale"]        = new("界面文字大小", "UI Scale"),
+            ["options.uiScale.label"]  = new("界面文字大小：{0}", "UI Scale: {0}"),
+            ["options.uiScale.small"]  = L("Small",      "小",   "小",   "小",   "작음",   "Petit",      "Klein",     "Pequeño"),
+            ["options.uiScale.medium"] = L("Medium",     "中",   "中",   "中",   "보통",   "Moyen",      "Mittel",    "Mediano"),
+            ["options.uiScale.large"]  = L("Large",      "大",   "大",   "大",   "큼",     "Grand",      "Groß",      "Grande"),
+            ["options.uiScale.xlarge"] = L("Super Large","特大", "特大", "特大", "매우 큼","Très grand", "Sehr groß", "Muy grande"),
             ["options.resetTitle"] = new("重置系统设置？", "Reset Settings?"),
             ["options.resetBody"] = new(
                 "这会把全部图形与音频参数恢复为默认值，且无法撤销。",
@@ -311,6 +319,19 @@ namespace Markyu.LastKernel
 
             ["day.placeholder"] = new("第 N 天", "Day N"),
             ["day.current"] = new("第 {0} 天", "Day {0}"),
+
+            ["hud.day"]         = L("DAY",   "白昼", "白晝", "昼",   "낮",    "JOUR",  "TAG",    "DÍA"),
+            ["hud.night"]       = L("NIGHT", "夜间", "夜間", "夜",   "밤",    "NUIT",  "NACHT",  "NOCHE"),
+            ["hud.startNight"]  = L("Start Night", "开始夜间", "開始夜間", "夜開始", "밤 시작", "Début de nuit", "Nacht beginnen", "Iniciar noche"),
+            ["hud.wave"]        = L("Night {0}",   "第 {0} 夜", "第 {0} 夜", "夜 {0}", "밤 {0}", "Nuit {0}", "Nacht {0}", "Noche {0}"),
+            ["hud.baseHP"]      = L("HP {0}/{1}", "HP {0}/{1}", "HP {0}/{1}", "HP {0}/{1}", "HP {0}/{1}", "HP {0}/{1}", "HP {0}/{1}", "HP {0}/{1}"),
+            ["hud.enemies"]     = L("Enemies {0}/{1}", "敌人 {0}/{1}", "敵人 {0}/{1}", "敵 {0}/{1}", "적 {0}/{1}", "Ennemis {0}/{1}", "Feinde {0}/{1}", "Enemigos {0}/{1}"),
+            ["hud.nutrition"]   = L("{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}"),
+            ["hud.currency"]    = L("{0}",     "{0}",     "{0}",     "{0}",     "{0}",     "{0}",     "{0}",     "{0}"),
+            ["hud.cards"]       = L("{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}"),
+            ["hud.pace.paused"] = L("■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×"),
+            ["hud.pace.normal"] = L("▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×"),
+            ["hud.pace.fast"]   = L("▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×"),
 
             ["daycycle.dayEndedTitle"] = new("第 {0} 天结束", "Day {0} Complete"),
             ["daycycle.dayEndedBody"] = new("街区需要补充口粮。", "The district needs rations."),
@@ -361,7 +382,8 @@ namespace Markyu.LastKernel
             ["trade.expansionComplete"] = new("<color=#FFD700>空间已满</color>", "<color=#FFD700>Fully Expanded</color>"),
             ["trade.expansionCompleteBody"] = new("街区棋盘已经扩建到当前上限。", "The district board has reached its current expansion limit."),
 
-            ["quest.progress"] = new("进度：{0} / {1}", "Progress: {0} / {1}"),
+            ["quest.progress"]        = new("进度：{0} / {1}", "Progress: {0} / {1}"),
+            ["quest.footer.progress"] = new("任务：{0} / {1}", "Quests: {0} / {1}"),
 
             ["quest.group.新手引导"] = new("新手引导", "Beginner's Guide"),
             ["quest.group.异界升格"] = new("异界升格", "Otherworldly Ascension"),
@@ -512,13 +534,6 @@ namespace Markyu.LastKernel
         public static void CycleLanguage()
         {
             Initialize();
-
-            if (UnityLocalizationBridge.Initialize())
-            {
-                UnityLocalizationBridge.CycleLocale();
-                return;
-            }
-
             int currentIndex = Array.IndexOf(LanguageCycle, CurrentLanguage);
             int nextIndex = currentIndex < 0 ? 0 : (currentIndex + 1) % LanguageCycle.Length;
             SetLanguage(LanguageCycle[nextIndex]);

@@ -15,6 +15,9 @@ namespace Markyu.LastKernel
         public event System.Action<PackDefinition> OnPackPurchased;
         public void NotifyPackPurchased(PackDefinition pack) => OnPackPurchased?.Invoke(pack);
 
+        public event System.Action<PackDefinition> OnPackOpened;
+        public void NotifyPackOpened(PackDefinition pack) => OnPackOpened?.Invoke(pack);
+
         [BoxGroup("Buyer")]
         [SerializeField, Tooltip("Prefab for the Card Buyer trade zone.")]
         private CardBuyer buyerPrefab;
@@ -57,6 +60,10 @@ namespace Markyu.LastKernel
 
         public CardDefinition CurrencyCard => currencyCard;
 
+        // Read by ColonyAIManager / AIPlanner for sell and buy-pack jobs.
+        public CardBuyer Buyer { get; private set; }
+        public IReadOnlyList<PackVendor> ActiveVendors => vendors;
+
         private readonly List<TradeZone> zones = new();
         private readonly List<PackVendor> vendors = new();
         private readonly List<TradeZone> highlightedZones = new();
@@ -86,6 +93,7 @@ namespace Markyu.LastKernel
             var buyer = Instantiate(buyerPrefab, transform);
             buyer.Initialize(currencyCard, spawnOffset);
             zones.Add(buyer);
+            Buyer = buyer;
 
             // Instantiate Vendors
             for (int i = 0; i < offeredPacks.Count; i++)

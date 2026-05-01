@@ -50,6 +50,11 @@
 
     </ui:VisualElement>
 
+    <!-- Watermark — bottom-centre, always visible -->
+    <ui:VisualElement class="lk-hud-bottom lk-pad-sm" style="align-items: center; pointer-events: none;">
+        <ui:Label name="lbl-watermark" class="lk-watermark" />
+    </ui:VisualElement>
+
     <!-- ══════════════════════════════════════════════════════════════════
          Night strip: [NIGHT badge | Wave N]  ←spacer→
                       [HP stat box: shield icon | HP label | HP bar | divider | skull icon | enemies]

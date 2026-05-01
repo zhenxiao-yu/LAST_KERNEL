@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8ae9fc9e89de42e4a72aeef2f935ea6d
   displayName: 'Kernel Research Crate'
-  description: 'Encrypted leads, archive fragments, and volatile access pieces. Buy when the district can survive a bad draw.'
+  description: 'Refined materials, mid-tier fabrication stock, and occasional workers. High recipe rate — buy this when expanding production.'
   artTexture: {fileID: 2800000, guid: 575f8d8a400ea97429cfefd688ca806e, type: 3}
   category: 0
   faction: 0
@@ -80,13 +80,13 @@ MonoBehaviour:
     PossibleRecipes: []
     RecipeChance: 0
   - Entries:
-    - Card: {fileID: 11400000, guid: f7d0d2080bf68dc48885e8d4f6381af2, type: 2}
+    - Card: {fileID: 11400000, guid: 8ac674a56ad01e64fb1f8c9bddb2b50e, type: 2}
       Weight: 25
-    - Card: {fileID: 11400000, guid: 819eb0291ba0479448286c2ec007085d, type: 2}
+    - Card: {fileID: 11400000, guid: 26aeb0eb260e6064dacc12cbc2cf226a, type: 2}
       Weight: 25
-    - Card: {fileID: 11400000, guid: ff332e75fb8842942a379e7397816f5a, type: 2}
+    - Card: {fileID: 11400000, guid: 499e594ed9683634ba40cc3c9ace2c90, type: 2}
       Weight: 25
-    - Card: {fileID: 11400000, guid: 4a5dc3b171013e847960209c993ad6bf, type: 2}
+    - Card: {fileID: 11400000, guid: ff958ed6e79eda44baff0c3862d262e9, type: 2}
       Weight: 25
     PossibleRecipes:
     - {fileID: 11400000, guid: ecb9e01026f013a4c8272d951d027b84, type: 2}
@@ -98,13 +98,13 @@ MonoBehaviour:
     - {fileID: 11400000, guid: dcfda4afdaa313147b42ca3a7c573f9c, type: 2}
     RecipeChance: 0.3
   - Entries:
-    - Card: {fileID: 11400000, guid: f7d0d2080bf68dc48885e8d4f6381af2, type: 2}
+    - Card: {fileID: 11400000, guid: 2756aa51cb0a746459632482b91cc0d5, type: 2}
       Weight: 25
-    - Card: {fileID: 11400000, guid: 819eb0291ba0479448286c2ec007085d, type: 2}
+    - Card: {fileID: 11400000, guid: ff958ed6e79eda44baff0c3862d262e9, type: 2}
       Weight: 25
-    - Card: {fileID: 11400000, guid: ff332e75fb8842942a379e7397816f5a, type: 2}
+    - Card: {fileID: 11400000, guid: 71995e795738a0849a04d5c6f0f6804f, type: 2}
       Weight: 25
-    - Card: {fileID: 11400000, guid: 4a5dc3b171013e847960209c993ad6bf, type: 2}
+    - Card: {fileID: 11400000, guid: 8ca68e344bcdba54dabca7cbcc29f565, type: 2}
       Weight: 25
     PossibleRecipes:
     - {fileID: 11400000, guid: 2bfeb346ae6b1cb4a861d38735715a61, type: 2}

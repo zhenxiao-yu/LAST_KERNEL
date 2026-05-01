@@ -33,12 +33,12 @@ MonoBehaviour:
   produceCard: {fileID: 11400000, guid: c91a5c6773f466941a0d4ae2ff3cf4a2, type: 2}
   produceInterval: 60
   isSellable: 0
-  sellPrice: 1
+  sellPrice: 3
   hasDurability: 0
   uses: 1
   nutrition: 0
   maxHealth: 10
-  attack: 5
+  attack: 2
   defense: 3
   attackSpeed: 75
   accuracy: 80

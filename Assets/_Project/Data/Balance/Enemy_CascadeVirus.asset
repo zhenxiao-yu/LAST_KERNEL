@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df99ea7311e69d044b0803839e917171, type: 3}
+  m_Name: Enemy_CascadeVirus
+  m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.EnemyDefinition
+  displayName: Cascade Virus
+  maxHP: 4
+  attack: 2
+  defense: 0
+  attackSpeed: 160
+  accuracy: 72
+  dodge: 20
+  critChance: 0
+  critMultiplier: 150
+  artTexture: {fileID: 0}
+  sprite: {fileID: 0}
+  moveSpeed: 4.5
+  damageToBase: 2
+  rewardAmount: 2

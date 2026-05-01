@@ -117,3 +117,123 @@ TextField,
     margin: 0;
     border-radius: var(--lk-radius);
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * UI Scale — game-HUD only.
+ * Applied by UIScaleManager to the rootVisualElement of registered
+ * UIDocuments (GameHUD, InfoPanel, Defeat, Victory).
+ * Menus and title screen are never registered and never receive the class.
+ *
+ * Specificity: .scale-class .component-class = (0,2,0)
+ *              beats single-class rules in components.uss at (0,1,0). ✓
+ * Medium is the :root baseline — no class needed.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Small  (×0.85) ──────────────────────────────────────────────────── */
+.lk-ui-scale--small .lk-hint                                  { font-size: 8px; }
+
+.lk-ui-scale--small .lk-label--dim,
+.lk-ui-scale--small .lk-info-panel__body,
+.lk-ui-scale--small .lk-watermark,
+.lk-ui-scale--small .lk-tab                                   { font-size: 10px; }
+
+.lk-ui-scale--small .lk-button,
+.lk-ui-scale--small .lk-label,
+.lk-ui-scale--small .lk-label--body,
+.lk-ui-scale--small .lk-resource-counter__value,
+.lk-ui-scale--small .lk-info-panel__header,
+.lk-ui-scale--small .lk-list__header-label,
+.lk-ui-scale--small .lk-list__item-label,
+.lk-ui-scale--small .lk-defeat__message,
+.lk-ui-scale--small .lk-toast__label                          { font-size: 12px; }
+
+.lk-ui-scale--small .lk-button--text,
+.lk-ui-scale--small .lk-label--subheader,
+.lk-ui-scale--small .lk-label--value,
+.lk-ui-scale--small .lk-phase-label,
+.lk-ui-scale--small .lk-hud-speed-btn,
+.lk-ui-scale--small .lk-side-menu-toggle                      { font-size: 15px; }
+
+.lk-ui-scale--small .lk-panel__title,
+.lk-ui-scale--small .lk-modal__title,
+.lk-ui-scale--small .lk-label--header,
+.lk-ui-scale--small .lk-victory__reward                       { font-size: 20px; }
+
+.lk-ui-scale--small .lk-label--title,
+.lk-ui-scale--small .lk-victory__title,
+.lk-ui-scale--small .lk-defeat__title                         { font-size: 27px; }
+
+.lk-ui-scale--small .lk-label--logo                           { font-size: 48px; }
+
+/* ── Large  (×1.25) ──────────────────────────────────────────────────── */
+.lk-ui-scale--large .lk-hint                                  { font-size: 12px; }
+
+.lk-ui-scale--large .lk-label--dim,
+.lk-ui-scale--large .lk-info-panel__body,
+.lk-ui-scale--large .lk-watermark,
+.lk-ui-scale--large .lk-tab                                   { font-size: 15px; }
+
+.lk-ui-scale--large .lk-button,
+.lk-ui-scale--large .lk-label,
+.lk-ui-scale--large .lk-label--body,
+.lk-ui-scale--large .lk-resource-counter__value,
+.lk-ui-scale--large .lk-info-panel__header,
+.lk-ui-scale--large .lk-list__header-label,
+.lk-ui-scale--large .lk-list__item-label,
+.lk-ui-scale--large .lk-defeat__message,
+.lk-ui-scale--large .lk-toast__label                          { font-size: 18px; }
+
+.lk-ui-scale--large .lk-button--text,
+.lk-ui-scale--large .lk-label--subheader,
+.lk-ui-scale--large .lk-label--value,
+.lk-ui-scale--large .lk-phase-label,
+.lk-ui-scale--large .lk-hud-speed-btn,
+.lk-ui-scale--large .lk-side-menu-toggle                      { font-size: 22px; }
+
+.lk-ui-scale--large .lk-panel__title,
+.lk-ui-scale--large .lk-modal__title,
+.lk-ui-scale--large .lk-label--header,
+.lk-ui-scale--large .lk-victory__reward                       { font-size: 30px; }
+
+.lk-ui-scale--large .lk-label--title,
+.lk-ui-scale--large .lk-victory__title,
+.lk-ui-scale--large .lk-defeat__title                         { font-size: 40px; }
+
+.lk-ui-scale--large .lk-label--logo                           { font-size: 70px; }
+
+/* ── Super Large  (×1.5) ─────────────────────────────────────────────── */
+.lk-ui-scale--xlarge .lk-hint                                 { font-size: 15px; }
+
+.lk-ui-scale--xlarge .lk-label--dim,
+.lk-ui-scale--xlarge .lk-info-panel__body,
+.lk-ui-scale--xlarge .lk-watermark,
+.lk-ui-scale--xlarge .lk-tab                                  { font-size: 18px; }
+
+.lk-ui-scale--xlarge .lk-button,
+.lk-ui-scale--xlarge .lk-label,
+.lk-ui-scale--xlarge .lk-label--body,
+.lk-ui-scale--xlarge .lk-resource-counter__value,
+.lk-ui-scale--xlarge .lk-info-panel__header,
+.lk-ui-scale--xlarge .lk-list__header-label,
+.lk-ui-scale--xlarge .lk-list__item-label,
+.lk-ui-scale--xlarge .lk-defeat__message,
+.lk-ui-scale--xlarge .lk-toast__label                         { font-size: 21px; }
+
+.lk-ui-scale--xlarge .lk-button--text,
+.lk-ui-scale--xlarge .lk-label--subheader,
+.lk-ui-scale--xlarge .lk-label--value,
+.lk-ui-scale--xlarge .lk-phase-label,
+.lk-ui-scale--xlarge .lk-hud-speed-btn,
+.lk-ui-scale--xlarge .lk-side-menu-toggle                     { font-size: 27px; }
+
+.lk-ui-scale--xlarge .lk-panel__title,
+.lk-ui-scale--xlarge .lk-modal__title,
+.lk-ui-scale--xlarge .lk-label--header,
+.lk-ui-scale--xlarge .lk-victory__reward                      { font-size: 36px; }
+
+.lk-ui-scale--xlarge .lk-label--title,
+.lk-ui-scale--xlarge .lk-victory__title,
+.lk-ui-scale--xlarge .lk-defeat__title                        { font-size: 48px; }
+
+.lk-ui-scale--xlarge .lk-label--logo                          { font-size: 84px; }
+

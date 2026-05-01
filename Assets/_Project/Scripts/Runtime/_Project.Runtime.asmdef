@@ -3,6 +3,7 @@
   "rootNamespace": "Markyu.LastKernel",
   "references": [
     "DOTween",
+    "Michsky.LSS",
     "Unity.InputSystem",
     "Unity.Localization",
     "Unity.RenderPipelines.Core.Runtime",

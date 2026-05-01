@@ -20,8 +20,10 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("Displays card/recipe discovery progress.")]
         private TextMeshPro trackerText;
 
-        public string PackId => offeredPack != null ? offeredPack.Id : "";
-        public int PaidAmount => paidAmount;
+        public string PackId    => offeredPack != null ? offeredPack.Id : "";
+        public int PaidAmount   => paidAmount;
+        // Gold still needed to complete this purchase; int.MaxValue when inactive.
+        public int RemainingCost => isActive ? buyPrice - paidAmount : int.MaxValue;
 
         private PackDefinition offeredPack;
 

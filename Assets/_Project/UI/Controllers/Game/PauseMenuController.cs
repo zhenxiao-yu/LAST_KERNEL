@@ -20,6 +20,7 @@ namespace Markyu.LastKernel
 
         private PauseSavePanelController  _savePanel;
         private GameOptionsController     _optionsPanel;
+        private LanguageModalController   _langModal;
 
         // ── Confirm modal ──────────────────────────────────────────────────────
 
@@ -96,10 +97,17 @@ namespace Markyu.LastKernel
                 _savePanel.Bind(savePanelRoot);
             }
 
+            VisualElement langRoot = Root.Q<VisualElement>("panel-language");
+            if (langRoot != null)
+            {
+                _langModal = new LanguageModalController();
+                _langModal.Bind(langRoot);
+            }
+
             VisualElement optionsRoot = Root.Q<VisualElement>("panel-options");
             if (optionsRoot != null)
             {
-                _optionsPanel = new GameOptionsController(ShowConfirm);
+                _optionsPanel = new GameOptionsController(ShowConfirm, () => _langModal?.Show());
                 _optionsPanel.Bind(optionsRoot);
             }
 
@@ -121,6 +129,7 @@ namespace Markyu.LastKernel
             if (_confirmAccept     != null) _confirmAccept.text     = GameLocalization.Get("common.confirmButton");
 
             if (_savePanel    != null) _savePanel.OnLocalizationRefresh();
+            if (_langModal    != null) _langModal.OnLocalizationRefresh();
             if (_optionsPanel != null) _optionsPanel.OnLocalizationRefresh();
         }
 
@@ -164,6 +173,7 @@ namespace Markyu.LastKernel
         {
             if (_savePanel    != null) _savePanel.Close();
             if (_optionsPanel != null) _optionsPanel.Hide();
+            if (_langModal    != null) _langModal.Hide();
             CloseConfirm();
         }
 

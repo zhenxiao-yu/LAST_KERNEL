@@ -33,7 +33,7 @@ namespace Markyu.LastKernel.Localization.EditorTools
             "night.wave.",
         };
 
-        [MenuItem("Last Kernel/Localization/Report Missing Chinese Translations")]
+        [MenuItem("LAST KERNEL/Localization/Report Missing CN Translations", false, 2)]
         public static void ReportMissingChineseTranslations()
         {
             StringTableCollection collection =

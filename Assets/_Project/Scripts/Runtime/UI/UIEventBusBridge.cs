@@ -19,8 +19,9 @@ namespace Markyu.LastKernel
             UIEventBus.OnLoadGame               += HandleLoadGame;
             UIEventBus.OnDeleteGame             += HandleDeleteGame;
             UIEventBus.OnClearAllSaves          += HandleClearAllSaves;
-            UIEventBus.OnLanguageCycleRequested += HandleLanguageCycle;
-            UIEventBus.OnSettingsResetRequested += HandleSettingsReset;
+            UIEventBus.OnLanguageCycleRequested  += HandleLanguageCycle;
+            UIEventBus.OnLanguageSelectRequested  += HandleLanguageSelect;
+            UIEventBus.OnSettingsResetRequested   += HandleSettingsReset;
             UIEventBus.OnStartNightRequested    += HandleStartNight;
             UIEventBus.OnSaveRequested          += HandleSave;
             UIEventBus.OnSaveToSlotRequested    += HandleSaveToSlot;
@@ -36,8 +37,9 @@ namespace Markyu.LastKernel
             UIEventBus.OnLoadGame               -= HandleLoadGame;
             UIEventBus.OnDeleteGame             -= HandleDeleteGame;
             UIEventBus.OnClearAllSaves          -= HandleClearAllSaves;
-            UIEventBus.OnLanguageCycleRequested -= HandleLanguageCycle;
-            UIEventBus.OnSettingsResetRequested -= HandleSettingsReset;
+            UIEventBus.OnLanguageCycleRequested  -= HandleLanguageCycle;
+            UIEventBus.OnLanguageSelectRequested  -= HandleLanguageSelect;
+            UIEventBus.OnSettingsResetRequested   -= HandleSettingsReset;
             UIEventBus.OnStartNightRequested    -= HandleStartNight;
             UIEventBus.OnSaveRequested          -= HandleSave;
             UIEventBus.OnSaveToSlotRequested    -= HandleSaveToSlot;
@@ -73,10 +75,8 @@ namespace Markyu.LastKernel
                 director.DeleteGame(save);
         }
 
-        private static void HandleLanguageCycle()
-        {
-            GameLocalization.CycleLanguage();
-        }
+        private static void HandleLanguageCycle()                    => GameLocalization.CycleLanguage();
+        private static void HandleLanguageSelect(GameLanguage lang)   => GameLocalization.SetLanguage(lang);
 
         private static void HandleSettingsReset()
         {

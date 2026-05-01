@@ -38,6 +38,12 @@ namespace Markyu.LastKernel
         /// </summary>
         protected LKLocalizedBinder Localizer { get; } = new LKLocalizedBinder();
 
+        /// <summary>
+        /// Override to true in game-world screens (HUD, panels, results) that should
+        /// respond to the player's UI scale preference. Title and menu screens return false.
+        /// </summary>
+        protected virtual bool AffectedByUIScale => false;
+
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
         protected virtual void Awake()
@@ -55,6 +61,7 @@ namespace Markyu.LastKernel
             if (attr != null) Document.sortingOrder = attr.SortingOrder;
 
             OnBind();
+            if (AffectedByUIScale) UIScaleManager.Register(Document, Root);
 
             if (rootController != null && !string.IsNullOrEmpty(screenId))
                 rootController.RegisterScreen(screenId, this);
@@ -65,21 +72,26 @@ namespace Markyu.LastKernel
         protected virtual void OnEnable()
         {
             GameLocalization.LanguageChanged += HandleLanguageChanged;
-            // OnLocalizationRefresh is deferred to Start() on first run.
-            // On subsequent enable/disable cycles Root is already bound, so refresh immediately.
+            UIScaleManager.ScaleChanged      += HandleScaleChanged;
             if (Root != null) OnLocalizationRefresh();
         }
 
         protected virtual void OnDisable()
         {
             GameLocalization.LanguageChanged -= HandleLanguageChanged;
+            UIScaleManager.ScaleChanged      -= HandleScaleChanged;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            if (AffectedByUIScale) UIScaleManager.Unregister(Document);
         }
 
         // ── Binding ────────────────────────────────────────────────────────────
 
         /// <summary>
         /// Query and store child VisualElement references, and register event callbacks.
-        /// Called once in Awake after the UIDocument is ready.
+        /// Called once in Start after the UIDocument is ready.
         /// </summary>
         protected abstract void OnBind();
 
@@ -106,6 +118,11 @@ namespace Markyu.LastKernel
         // ── Localization ───────────────────────────────────────────────────────
 
         private void HandleLanguageChanged(GameLanguage _) => OnLocalizationRefresh();
+        private void HandleScaleChanged(UIScale _)
+        {
+            if (AffectedByUIScale) UIScaleManager.Register(Document, Root);
+            OnLocalizationRefresh();
+        }
 
         /// <summary>
         /// Update all visible localized labels. Called on language change and after Show().

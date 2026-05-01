@@ -15,13 +15,13 @@ namespace Markyu.LastKernel
     /// subclasses decorated with [UIScreen], then creates any missing GameObjects
     /// in the active scene and auto-wires [SerializeField] Component dependencies.
     ///
-    /// Run via: Tools → LAST KERNEL → Wire UI Screens
+    /// Run via: LAST KERNEL → Dev → Wire UI Screens
     /// </summary>
     public static class UIScreenAutoWirer
     {
         // ── Menu entry ─────────────────────────────────────────────────────────
 
-        [MenuItem("Tools/LAST KERNEL/Wire UI Screens")]
+        [MenuItem("LAST KERNEL/Dev/Wire UI Screens", false, 2)]
         public static void WireActiveScene()
         {
             var report = new StringBuilder();

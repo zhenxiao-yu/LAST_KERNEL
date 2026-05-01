@@ -33,7 +33,7 @@ MonoBehaviour:
   produceCard: {fileID: 11400000, guid: f0816f0dc611c524c94410abbd34628c, type: 2}
   produceInterval: 30
   isSellable: 0
-  sellPrice: 0
+  sellPrice: 1
   hasDurability: 0
   uses: 1
   nutrition: 0

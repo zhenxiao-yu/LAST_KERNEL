@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 502669b2b38e4623b9db898442942d04
   title: 'Open Floodline Crate'
   description: 'Open the Floodline Salvage Crate and inspect the drowned-sector supplies.'
-  type: 3
+  type: 6
   targetCard: {fileID: 11400000, guid: 413f08c4a1c64ed46a8b1aac38a088f6, type: 2}
   targetRecipe: {fileID: 0}
   targetAmount: 1

@@ -32,14 +32,14 @@ MonoBehaviour:
   hasDurability: 0
   uses: 1
   nutrition: 0
-  maxHealth: 16
-  attack: 1
-  defense: 1
-  attackSpeed: 90
-  accuracy: 80
-  dodge: 5
-  criticalChance: 10
-  criticalMultiplier: 150
+  maxHealth: 18
+  attack: 3
+  defense: 0
+  attackSpeed: 80
+  accuracy: 85
+  dodge: 10
+  criticalChance: 20
+  criticalMultiplier: 200
   equipmentSlot: 0
   statModifiers: []
   classChangeResult: {fileID: 0}

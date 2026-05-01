@@ -12,6 +12,8 @@ namespace Markyu.LastKernel
     [UIScreen("Assets/_Project/UI/UXML/Game/VictoryPanelView.uxml", sortingOrder: 90)]
     public sealed class VictoryPanelController : UIToolkitScreenController
     {
+        protected override bool AffectedByUIScale => true;
+
         [SerializeField] private RewardController rewardController;
 
         private VisualElement _backdrop;

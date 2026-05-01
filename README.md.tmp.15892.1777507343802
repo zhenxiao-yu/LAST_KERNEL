@@ -1,0 +1,195 @@
+# LAST KERNEL
+
+> Pixel-art cyberpunk colony survival  
+> Build the system. Watch it run. Survive the night.
+
+---
+
+## Overview
+
+**LAST KERNEL** is a card-based colony survival game.
+
+During the day you stack cards to gather resources, craft gear, and build a colony that runs itself. At night, the system fights back — enemies raid autonomously and your preparation determines whether anyone survives.
+
+You don't micromanage. You design a self-sustaining machine.
+
+---
+
+## Core Loop
+
+```
+Start Run
+  ↓
+Day Phase  →  Stack cards → trigger recipes → craft & build
+  ↓
+Assign villagers, lock roles, manage resources
+  ↓
+Night Phase  →  Auto-battler combat, no input needed
+  ↓
+Resolve → loot → harder next wave
+  ↓
+Repeat
+```
+
+---
+
+## Systems
+
+### Card System
+
+Every entity is a card: resources, characters, structures, mobs, equipment, consumables.
+
+Cards interact through **stacking** — placing cards on top of each other triggers recipes, equips items, or activates structures.
+
+```
+CardDefinition  (ScriptableObject — data only)
+    └── CardInstance  (MonoBehaviour — view + state)
+            └── CardStack  (positional group, owns crafting state)
+```
+
+**Card categories:** Resource · Character · Structure · Mob · Consumable · Equipment · Recipe · Pack
+
+---
+
+### Crafting System
+
+Recipes define required ingredient stacks. When a `CardStack` matches a recipe, a timed crafting task starts and produces an output card.
+
+```
+Stack cards together
+  ↓
+RecipeMatcher checks composition
+  ↓
+CraftingTask runs (timed)
+  ↓
+Output card spawned, ingredients consumed
+```
+
+Special recipe types: standard crafting · exploration · growth · research · travel
+
+---
+
+### Villager AI
+
+Villagers autonomously work the board without player input. Each tick they evaluate the board state and pick the highest-priority task:
+
+| Priority | Behavior |
+|---|---|
+| 1 | Walk to a stack and join it to immediately complete a recipe |
+| 2 | Fetch a card from one stack and deliver it to another to enable a recipe — de-stacking idle mixed piles as needed |
+| 3 | Roam randomly |
+
+Villagers can be **locked** (tap to toggle) to keep them in place. Lock state persists through save/load and shows a `[#]` prefix on the card title.
+
+---
+
+### Combat System
+
+Night phase: deterministic, tick-based auto-battler.
+
+- Enemy mobs aggro, hunt player cards, and join nearby combats
+- Combat tasks track attacker/defender groups
+- Outcome is fully determined by card stats and equipment
+
+---
+
+### Market
+
+On-board structure card. Drop coins onto it to purchase items from a rotating listing. Click to cycle the active listing. Built as an `IOnStackable` + `IClickable` component on the Market card.
+
+---
+
+### Save / Load
+
+Full JSON save system via Newtonsoft. Saves per-slot and per-scene:
+
+- All card stacks and their positions
+- Active crafting progress
+- Villager lock state
+- Quest progress
+- Vendor state
+- Day/time
+
+---
+
+### Other Systems
+
+- **Pack system** — card packs opened to expand the player's available cards
+- **Vendor / Trade** — sidebar trade zones for selling cards and buying pack expansions
+- **Quest system** — active/completed quest tracking with amount progress
+- **Enclosure** — structures that contain and restrict animal card movement
+- **Equipment** — characters can equip item cards; class upgrades supported
+- **Day cycle** — configurable day length; feeding phase at end of day; hunger kills unfed characters
+- **Localization** — English + Simplified Chinese, runtime switching
+
+---
+
+## Project Structure
+
+```
+Assets/_Project/
+ ├── Scripts/
+ │   ├── Runtime/
+ │   │   ├── Cards/           # CardInstance, CardManager, CardStack, CardAI
+ │   │   ├── Crafting/        # RecipeMatcher, CraftingManager, RecipeDefinition
+ │   │   ├── Combat/          # CombatManager, CombatTask
+ │   │   ├── Core/            # GameDirector, SaveSystem, DayCycleManager
+ │   │   ├── Quest/
+ │   │   ├── Trading/
+ │   │   ├── UI/
+ │   │   └── Audio/
+ │   └── Editor/
+ ├── Data/
+ │   └── Resources/
+ │       ├── Cards/           # CardDefinition assets
+ │       └── Recipes/         # RecipeDefinition assets
+ ├── Art/
+ ├── Audio/
+ └── Scenes/
+```
+
+---
+
+## Tech Stack
+
+| | |
+|---|---|
+| Engine | Unity 6000.4.3f1 |
+| Language | C# |
+| Serialization | Newtonsoft JSON |
+| Inspector | Odin Inspector |
+| Tweening | DOTween |
+| Input | Unity New Input System |
+| Localization | Unity Localization |
+| Render | URP — pixel-art, 320×180 → integer scaled |
+
+---
+
+## Setup
+
+**Requirements:** Unity 6000.4.x · Git
+
+```bash
+git clone https://github.com/zhenxiao-yu/LAST_KERNEL.git
+```
+
+Open in Unity Hub → Add Project → select folder.
+
+Entry scene: `Assets/_Project/Scenes/Main.unity`
+
+---
+
+## Roadmap
+
+- More cards, recipes, and synergies
+- Enemy variety and night scaling
+- Events / encounter system
+- Meta progression (unlocks between runs)
+- Mobile (touch + safe area)
+- UI polish pass
+
+---
+
+## Author
+
+Zhenxiao (Mark) Yu

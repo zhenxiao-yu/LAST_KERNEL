@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 844be2f5bbac480db883bc5fbdc2281c
   title: 'Hold Four Rations'
   description: 'Keep four Ration Packs on the board before the next hunger cycle.'
-  type: 1
+  type: 0
   targetCard: {fileID: 11400000, guid: 2ac53164cb5efa24c857c2d32d1057c1, type: 2}
   targetRecipe: {fileID: 0}
   targetAmount: 4

@@ -41,5 +41,5 @@ MonoBehaviour:
   equipmentSlot: 2
   statModifiers:
   - Stat: 0
-    value: 5
+    value: 10
   classChangeResult: {fileID: 0}

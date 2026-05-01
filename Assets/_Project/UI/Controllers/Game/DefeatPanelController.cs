@@ -6,6 +6,8 @@ namespace Markyu.LastKernel
     [UIScreen("Assets/_Project/UI/UXML/Game/DefeatPanelView.uxml", sortingOrder: 95)]
     public sealed class DefeatPanelController : UIToolkitScreenController
     {
+        protected override bool AffectedByUIScale => true;
+
         private VisualElement _backdrop;
         private Label         _titleLabel;
         private Label         _messageLabel;

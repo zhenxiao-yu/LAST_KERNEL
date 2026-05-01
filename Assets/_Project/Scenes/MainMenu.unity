@@ -687,7 +687,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
-
 --- !u!1 &1736289745
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +879,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6953141964985102649, guid: d7d83f6ce030f224faf8b19bcccc0827, type: 3}
+      propertyPath: _BGMClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2a10e67f79b37bb4daeb80e6bf4912d9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

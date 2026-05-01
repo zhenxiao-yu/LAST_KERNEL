@@ -35,7 +35,7 @@ namespace Markyu.LastKernel
 
         // ─── Menu Item ───────────────────────────────────────────────────────
 
-        [MenuItem("Tools/LAST KERNEL/Dev Spawner")]
+        [MenuItem("LAST KERNEL/Dev/Dev Spawner", false, 1)]
         public static void Open()
         {
             var window = GetWindow<DevSpawnerWindow>("Dev Spawner");
@@ -53,7 +53,7 @@ namespace Markyu.LastKernel
             string[] guids = AssetDatabase.FindAssets("t:CardDefinition", new[] { "Assets/_Project" });
             _allDefinitions = guids
                 .Select(g => AssetDatabase.LoadAssetAtPath<CardDefinition>(AssetDatabase.GUIDToAssetPath(g)))
-                .Where(d => d != null)
+                .Where(d => d != null && d is not PackDefinition && d.Category != CardCategory.None)
                 .OrderBy(d => d.name)
                 .ToArray();
         }
@@ -265,10 +265,14 @@ namespace Markyu.LastKernel
 
             GUI.enabled = Application.isPlaying;
 
-            if (GUILayout.Button("English"))
-                GameLocalization.SetLanguage(GameLanguage.English);
-            if (GUILayout.Button("Simplified Chinese"))
-                GameLocalization.SetLanguage(GameLanguage.SimplifiedChinese);
+            if (GUILayout.Button("English"))           GameLocalization.SetLanguage(GameLanguage.English);
+            if (GUILayout.Button("简体中文"))           GameLocalization.SetLanguage(GameLanguage.SimplifiedChinese);
+            if (GUILayout.Button("繁體中文"))           GameLocalization.SetLanguage(GameLanguage.TraditionalChinese);
+            if (GUILayout.Button("日本語"))             GameLocalization.SetLanguage(GameLanguage.Japanese);
+            if (GUILayout.Button("한국어"))             GameLocalization.SetLanguage(GameLanguage.Korean);
+            if (GUILayout.Button("Français"))          GameLocalization.SetLanguage(GameLanguage.French);
+            if (GUILayout.Button("Deutsch"))           GameLocalization.SetLanguage(GameLanguage.German);
+            if (GUILayout.Button("Español"))           GameLocalization.SetLanguage(GameLanguage.Spanish);
 
             GUI.enabled = true;
         }

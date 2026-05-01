@@ -11,6 +11,8 @@ namespace Markyu.LastKernel
     {
         public static InfoPanelController Instance { get; private set; }
 
+        protected override bool AffectedByUIScale => true;
+
         // ── Private state ──────────────────────────────────────────────────────
 
         private static int s_requestCounter;
@@ -49,7 +51,11 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
-            if (Instance == this) Instance = null;
+            if (Instance == this)
+            {
+                Instance = null;
+                InfoPanel.Unregister();
+            }
         }
 
         // ── Binding ────────────────────────────────────────────────────────────
@@ -64,6 +70,7 @@ namespace Markyu.LastKernel
             if (_actionButton != null)
                 _actionButton.RegisterCallback<ClickEvent>(OnActionClicked);
 
+            InfoPanel.Register(RequestInfoDisplay, ClearInfoRequest, RegisterHover, UnregisterHover);
             RefreshDisplay();
         }
 

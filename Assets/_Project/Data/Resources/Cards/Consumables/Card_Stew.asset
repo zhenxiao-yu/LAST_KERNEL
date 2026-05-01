@@ -26,14 +26,14 @@ MonoBehaviour:
   produceCard: {fileID: 0}
   produceInterval: 10
   isSellable: 1
-  sellPrice: 10
+  sellPrice: 5
   hasDurability: 0
   uses: 1
-  nutrition: 10
+  nutrition: 5
   maxHealth: 15
   attack: 2
   defense: 1
-  attackSpeed: 100
+  attackSpeed: 0
   accuracy: 95
   dodge: 5
   criticalChance: 5
