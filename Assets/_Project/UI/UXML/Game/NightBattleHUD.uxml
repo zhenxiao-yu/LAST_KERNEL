@@ -1,0 +1,70 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="../../USS/theme.uss" />
+    <Style src="../../USS/layout.uss" />
+    <Style src="../../USS/components.uss" />
+    <Style src="../../USS/NightBattleHUD.uss" />
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         NightBattleHUD — full-screen overlay, hidden by default.
+         Shown by NightBattleHUDController when NightPhaseManager fires
+         OnNightPrepared. Hidden after player confirms AcknowledgeResult.
+         ══════════════════════════════════════════════════════════════════ -->
+    <ui:VisualElement name="night-battle-root" class="nb-root lk-hidden">
+
+        <!-- ── TOP BAR ───────────────────────────────────────────────── -->
+        <ui:VisualElement class="nb-topbar">
+            <ui:Label name="night-title-label" class="nb-title" text="NIGHT 1" />
+            <ui:VisualElement class="lk-grow" />
+            <ui:Label name="wave-label" class="nb-wave-label" text="SYSTEM BREACH DETECTED" />
+        </ui:VisualElement>
+
+        <!-- ── BATTLE AREA ───────────────────────────────────────────── -->
+        <ui:VisualElement class="nb-battle-area">
+
+            <!-- Enemy section -->
+            <ui:VisualElement class="nb-section-header nb-section-header--enemy">
+                <ui:Label text="ENEMY LINE" class="nb-section-title nb-section-title--enemy" />
+                <ui:Label name="enemy-count-label" class="nb-section-count" text="0 UNITS" />
+            </ui:VisualElement>
+            <!-- Fighter cards injected here by NightBattleHUDController -->
+            <ui:VisualElement name="enemy-team-row" class="nb-team-row nb-team-row--enemy" />
+
+            <!-- VS divider -->
+            <ui:VisualElement class="nb-vs-bar">
+                <ui:VisualElement class="nb-vs-line" />
+                <ui:Label name="battle-status-label" class="nb-status-label" text="STANDBY" />
+                <ui:VisualElement class="nb-vs-line" />
+            </ui:VisualElement>
+
+            <!-- Player section -->
+            <!-- Fighter cards injected here by NightBattleHUDController -->
+            <ui:VisualElement name="player-team-row" class="nb-team-row nb-team-row--player" />
+            <ui:VisualElement class="nb-section-header nb-section-header--player">
+                <ui:Label text="COLONY LINE" class="nb-section-title nb-section-title--player" />
+                <ui:Label name="player-count-label" class="nb-section-count" text="0 DEFENDERS" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+        <!-- ── BATTLE LOG ─────────────────────────────────────────────── -->
+        <ui:VisualElement class="nb-log-container">
+            <ui:Label class="nb-log-header" text="COMBAT LOG" />
+            <ui:ScrollView name="battle-log" class="nb-log" vertical-scroller-visibility="AlwaysVisible" horizontal-scroller-visibility="Hidden" />
+        </ui:VisualElement>
+
+        <!-- ── CONTROL BAR ────────────────────────────────────────────── -->
+        <ui:VisualElement class="nb-controls">
+            <ui:Button name="start-battle-button"  class="lk-button nb-btn nb-btn--start"  text="[ START BATTLE ]" />
+            <ui:Button name="fast-resolve-button"  class="lk-button nb-btn nb-btn--fast"   text="[ RESOLVE FAST ]" />
+            <ui:Button name="return-day-button"    class="lk-button nb-btn nb-btn--return lk-hidden" text="[ RETURN TO DAY ]" />
+        </ui:VisualElement>
+
+        <!-- ── RESULT PANEL (positioned over battle area) ─────────────── -->
+        <ui:VisualElement name="battle-result-panel" class="nb-result-panel lk-hidden">
+            <ui:Label name="battle-result-label"   class="nb-result-title" text="SYSTEM HELD" />
+            <ui:Label name="battle-result-summary" class="nb-result-summary" text="" />
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>

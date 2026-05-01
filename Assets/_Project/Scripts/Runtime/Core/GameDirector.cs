@@ -28,6 +28,7 @@ namespace Markyu.LastKernel
 
         public event System.Action<SceneData, bool> OnSceneDataReady;
         public event System.Action<GameData> OnBeforeSave;
+        public static event System.Action OnGameOver;
 
         [SerializeField, Tooltip("The name of the scene that serves as the game's main menu or entry point.")]
         private string titleScene = "MainMenu";
@@ -236,6 +237,8 @@ namespace Markyu.LastKernel
         /// </remarks>
         public void GameOver()
         {
+            OnGameOver?.Invoke();
+
             if (GameData == null)
             {
                 StartCoroutine(TravelSequence(titleScene, null));

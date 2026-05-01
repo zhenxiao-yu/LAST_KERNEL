@@ -234,6 +234,82 @@ namespace Markyu.LastKernel
             ["night.scrapReward"] = new("回收废料：{0}", "Scrap salvaged: {0}"),
             ["defeat.message"] = new("地堡已失守。", "The bunker has fallen."),
 
+            // ── Night Battle Modal ─────────────────────────────────────────────────
+            // Phase status labels
+            ["night.modal.phase.prep"]     = L("PREP PHASE",    "准备阶段",  "準備階段",  "準備フェーズ", "준비 단계",   "PHASE PREP",    "VORBEREITUNGSPHASE", "FASE PREP"),
+            ["night.modal.phase.battle"]   = L("COMBAT ACTIVE", "战斗进行中","戰鬥進行中","戦闘中",       "전투 진행 중","COMBAT EN COURS","KAMPF AKTIV",        "COMBATE ACTIVO"),
+            ["night.modal.phase.victory"]  = L("VICTORY",       "胜利",      "勝利",      "勝利",         "승리",        "VICTOIRE",      "SIEG",               "VICTORIA"),
+            ["night.modal.phase.defeat"]   = L("DEFEAT",        "防线失守",  "防線失守",  "防衛突破",     "방어선 붕괴", "DÉFAITE",       "NIEDERLAGE",         "DERROTA"),
+
+            // Night header / counts
+            ["night.modal.nightTitle"]     = new("第 {0} 夜",          "NIGHT {0}"),
+            ["night.modal.incoming"]       = new("{0} 名敌人来袭",      "{0} ENEMIES INCOMING"),
+            ["night.modal.units"]          = new("{0} 个单位",          "{0} UNITS"),
+            ["night.modal.slotsStatus"]    = new("{0} / {1} 格位已分配", "{0} / {1} SLOTS FILLED"),
+
+            // Threat
+            ["night.modal.threat"]         = new("威胁等级：{0}", "THREAT: {0}"),
+            ["night.modal.threat.low"]     = L("LOW",      "低",   "低",   "低",     "낮음", "FAIBLE",  "NIEDRIG",  "BAJO"),
+            ["night.modal.threat.moderate"]= L("MODERATE", "中等", "中等", "中程度", "보통", "MODÉRÉ",  "MODERAT",  "MODERADO"),
+            ["night.modal.threat.high"]    = L("HIGH",     "高",   "高",   "高",     "높음", "ÉLEVÉ",   "HOCH",     "ALTO"),
+            ["night.modal.threat.critical"]= L("CRITICAL", "极危", "極危", "危機的", "위험", "CRITIQUE", "KRITISCH", "CRÍTICO"),
+
+            // Gold display
+            ["night.modal.gold"]           = new("◈ {0}", "◈ {0}"),
+
+            // Result panel
+            ["night.modal.result.win"]     = L("SYSTEM HELD",     "系统守住", "系統守住", "システム防衛成功", "시스템 유지", "SYSTÈME TENU",    "SYSTEM GEHALTEN",  "SISTEMA MANTENIDO"),
+            ["night.modal.result.loss"]    = L("SYSTEM BREACHED", "系统失守", "系統失守", "システム突破",     "시스템 돌파", "SYSTÈME PERCÉ",   "SYSTEM VERLETZT",  "SISTEMA FALLADO"),
+
+            // Action buttons
+            ["night.modal.btn.start"]      = L("[ START BATTLE ]",  "[ 开始战斗 ]", "[ 開始戰鬥 ]", "[ 戦闘開始 ]", "[ 전투 시작 ]", "[ LANCER LA BATAILLE ]", "[ KAMPF STARTEN ]",    "[ INICIAR BATALLA ]"),
+            ["night.modal.btn.fast"]       = L("[ RESOLVE FAST ]",  "[ 快速结算 ]", "[ 快速結算 ]", "[ 高速解決 ]", "[ 빠른 해결 ]", "[ RÉSOUDRE VITE ]",      "[ SCHNELL LÖSEN ]",    "[ RESOLVER RÁPIDO ]"),
+            ["night.modal.btn.autoDeploy"] = L("[ AUTO-DEPLOY ]",   "[ 自动部署 ]", "[ 自動部署 ]", "[ 自動配置 ]", "[ 자동 배치 ]", "[ DÉPLOIEMENT AUTO ]",   "[ AUTO-EINSETZEN ]",   "[ DESPLIEGUE AUTO ]"),
+            ["night.modal.btn.return"]     = L("[ RETURN TO DAY ]", "[ 返回白天 ]", "[ 返回白天 ]", "[ 昼へ戻る ]", "[ 낮으로 복귀 ]","[ RETOUR AU JOUR ]",    "[ RÜCK ZUM TAG ]",     "[ VOLVER AL DÍA ]"),
+
+            // Section headers
+            ["night.modal.section.enemy"]    = L("ENEMY LINE",          "敌方战线",   "敵方戰線",   "敵戦線",   "적 전선",     "LIGNE ENNEMIE",   "FEINDREIHE",       "LÍNEA ENEMIGA"),
+            ["night.modal.section.colony"]   = L("COLONY LINE",         "殖民地战线", "殖民地戰線", "植民地戦線","식민지 전선", "LIGNE COLONIE",   "KOLONIEREIHE",     "LÍNEA COLONIA"),
+            ["night.modal.section.defenders"]= L("AVAILABLE DEFENDERS", "可用防守者", "可用防守者", "利用可能な守護者","가용 수비자","DÉFENSEURS DISPOS.","VERFÜGBARE VERTEIDIGER","DEFENSORES DISPONIBLES"),
+            ["night.modal.section.log"]      = L("COMBAT LOG",  "战斗日志", "戰鬥日誌", "戦闘ログ",   "전투 기록", "JOURNAL DE COMBAT", "KAMPFPROTOKOLL", "REGISTRO DE COMBATE"),
+            ["night.modal.section.shop"]     = L("NIGHT SHOP",  "夜间商店", "夜間商店", "夜間ショップ","야간 상점", "BOUTIQUE DE NUIT",  "NACHTLADEN",     "TIENDA NOCTURNA"),
+
+            // Hints
+            ["night.modal.hint.assign"] = new("点击防守者，再点击格位以分配。", "Click a defender, then click a slot to assign."),
+            ["night.modal.hint.shop"]   = new("用金币购买道具，点击道具再点击战士以使用。", "Buy items with gold. Click item, then click a fighter."),
+
+            // Slot / unit labels
+            ["night.modal.slot.front"] = L("FRONT", "前排", "前排", "最前列", "앞줄", "AVANT", "VORNE", "FRENTE"),
+            ["night.modal.slot.n"]     = new("#{0}", "#{0}"),
+
+            // Stats formats
+            ["night.modal.stats.enemy"]   = new("攻击 {0}  生命 {1}", "ATK {0}  |  HP {1}"),
+            ["night.modal.stats.fighter"] = new("攻击 {0}  生命 {1}", "ATK {0}  HP {1}"),
+
+            // Combat log messages
+            ["night.modal.log.begin"]       = new("第 {0} 夜开始。选择你的防守者。",       "Night {0} begins. Choose your defenders."),
+            ["night.modal.log.noDefenders"] = new("警告：没有找到可用防守者。",             "WARNING: No eligible defenders found."),
+            ["night.modal.log.battleStart"] = new("战斗开始。",                             "Battle commences."),
+            ["night.modal.log.victoryLog"]  = new("殖民地度过了这一夜。",                   "Colony survived the night."),
+            ["night.modal.log.defeatLog"]   = new("殖民地防线被突破。",                     "Colony defenses breached."),
+            ["night.modal.log.undefended"]  = new("警告：无防守者出战——殖民地无防护。",     "WARNING: No defenders — colony is undefended."),
+            ["night.modal.log.formation"]   = new("阵形锁定。战斗即将开始。",               "Formation locked. Initiating combat."),
+            ["night.modal.log.fastResolve"] = new("快速结算模式已激活。",                   "Fast resolve activated."),
+            ["night.modal.log.autoDeploy"]  = new("已自动部署全部可用防守者。",             "Auto-deployed all available defenders."),
+            ["night.modal.log.noGold"]      = new("金币不足。需要 {0}，现有 {1}。",         "Not enough gold. Need {0}, have {1}."),
+            ["night.modal.log.purchased"]   = new("已购买：{0}。",                          "Purchased: {0}."),
+            ["night.modal.log.itemSelected"]= new("已选择：{0}。点击战士以使用。",          "Selected: {0}. Click a fighter to apply."),
+            ["night.modal.log.itemApplied"] = new("已将 {0} 用于 {1}。",                    "Applied {0} to {1}."),
+            ["night.modal.log.missed"]      = new("{0} 攻击 {1}——未命中。",                 "{0} attacks {1} — MISSED."),
+            ["night.modal.log.hit"]         = new("{0} 对 {1} 造成 {2}{3} 点伤害。",         "{0} hits {1} for {2}{3}."),
+            ["night.modal.log.crit"]        = new("【暴击】",                               " [CRIT]"),
+            ["night.modal.log.unitDied"]    = new("{0} 已倒下。",                            "{0} is destroyed."),
+
+            // Procedural wave / enemy names (used with GetOptional)
+            ["night.enemy.scavenger"]          = new("拾荒者",             "Scavenger"),
+            ["night.wave.procedural.name"]     = new("夜间突袭",           "Nightly Incursion"),
+            ["night.wave.procedural.flavor"]   = new("拾荒者趁着黑夜探查防线。", "Scavengers probe the perimeter under cover of dark."),
+
             ["stat.maxHealth"] = new("最大生命值", "Max Health"),
             ["stat.attack"] = new("攻击", "Attack"),
             ["stat.defense"] = new("防御", "Defense"),

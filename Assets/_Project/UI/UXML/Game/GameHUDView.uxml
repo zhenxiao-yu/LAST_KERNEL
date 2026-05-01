@@ -14,7 +14,7 @@
         <ui:Label name="lbl-phase" class="lk-phase-label lk-hud-badge" />
         <ui:Label name="lbl-day" class="lk-label lk-label--value" style="margin-left: 10px; margin-right: 6px;" />
         <ui:VisualElement class="lk-row lk-align-center">
-            <ui:VisualElement class="lk-progress-bar" style="flex-grow: 1; max-width: 120px;">
+            <ui:VisualElement class="lk-progress-bar" style="width: 120px;">
                 <ui:VisualElement name="fill-time" class="lk-progress-bar__fill" />
             </ui:VisualElement>
             <ui:Button name="btn-pace" class="lk-button lk-button--icon" style="margin-left: 4px; width: 80px; font-size: 11px;" />

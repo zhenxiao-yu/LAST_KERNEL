@@ -27,6 +27,7 @@ namespace Markyu.LastKernel
 
         private Button _newGameButton;
         private Button _loadGameButton;
+        private Button _achievementsButton;
         private Button _optionsButton;
         private Button _languageButton;
         private Button _quitButton;
@@ -38,6 +39,7 @@ namespace Markyu.LastKernel
         private SavedGamesController     _savedGames;
         private GameOptionsController    _gameOptions;
         private LanguageModalController  _langModal;
+        private AchievementsController   _achievements;
 
         // ── OnBind ─────────────────────────────────────────────────────────────
 
@@ -49,11 +51,12 @@ namespace Markyu.LastKernel
             _versionLabel  = Root.Q<Label>("lbl-version");
 
             // Buttons
-            _newGameButton  = Root.Q<Button>("btn-new-game");
-            _loadGameButton = Root.Q<Button>("btn-load-game");
-            _optionsButton  = Root.Q<Button>("btn-options");
-            _languageButton = Root.Q<Button>("btn-language");
-            _quitButton     = Root.Q<Button>("btn-quit");
+            _newGameButton      = Root.Q<Button>("btn-new-game");
+            _loadGameButton     = Root.Q<Button>("btn-load-game");
+            _achievementsButton = Root.Q<Button>("btn-achievements");
+            _optionsButton      = Root.Q<Button>("btn-options");
+            _languageButton     = Root.Q<Button>("btn-language");
+            _quitButton         = Root.Q<Button>("btn-quit");
 
             if (_newGameButton == null)
             {
@@ -63,6 +66,7 @@ namespace Markyu.LastKernel
 
             _newGameButton.clicked  += OpenGameplayPrefs;
             _loadGameButton.clicked += OpenSavedGames;
+            if (_achievementsButton != null) _achievementsButton.clicked += OpenAchievements;
             _optionsButton.clicked  += OpenOptions;
             if (_languageButton != null) _languageButton.clicked += OpenLanguageModal;
             _quitButton.clicked     += ShowQuitConfirmation;
@@ -87,6 +91,9 @@ namespace Markyu.LastKernel
 
             _gameOptions = new GameOptionsController(_modal.Show, OpenLanguageModal);
             _gameOptions.Bind(Root.Q<VisualElement>("panel-options"));
+
+            _achievements = new AchievementsController();
+            _achievements.Bind(Root.Q<VisualElement>("panel-achievements"));
         }
 
         // ── Localization ───────────────────────────────────────────────────────
@@ -96,11 +103,12 @@ namespace Markyu.LastKernel
             base.OnLocalizationRefresh(); // Localizer.RefreshAll() → logo, subtitle, version
 
             // Buttons are TextElement but not Label — set directly
-            if (_newGameButton  != null) _newGameButton.text  = GameLocalization.Get("title.newGame");
-            if (_loadGameButton != null) _loadGameButton.text = GameLocalization.Get("title.loadGame");
-            if (_optionsButton  != null) _optionsButton.text  = GameLocalization.Get("title.options");
-            if (_languageButton != null) _languageButton.text = GameLocalization.Get("ui.language");
-            if (_quitButton     != null) _quitButton.text     = GameLocalization.Get("title.quitGame");
+            if (_newGameButton      != null) _newGameButton.text      = GameLocalization.Get("title.newGame");
+            if (_loadGameButton     != null) _loadGameButton.text     = GameLocalization.Get("title.loadGame");
+            if (_achievementsButton != null) _achievementsButton.text = GameLocalization.GetOptional("title.achievements", "Achievements");
+            if (_optionsButton      != null) _optionsButton.text      = GameLocalization.Get("title.options");
+            if (_languageButton     != null) _languageButton.text     = GameLocalization.Get("ui.language");
+            if (_quitButton         != null) _quitButton.text         = GameLocalization.Get("title.quitGame");
 
             // Propagate to sub-panels (keeps hidden panels in sync for instant display)
             if (_modal         != null) _modal.OnLocalizationRefresh();
@@ -108,11 +116,14 @@ namespace Markyu.LastKernel
             if (_gameplayPrefs != null) _gameplayPrefs.OnLocalizationRefresh();
             if (_savedGames    != null) _savedGames.OnLocalizationRefresh();
             if (_gameOptions   != null) _gameOptions.OnLocalizationRefresh();
+            if (_achievements  != null) _achievements.OnLocalizationRefresh();
         }
 
         // ── Button handlers ────────────────────────────────────────────────────
 
-        private void OpenLanguageModal() => _langModal?.Show();
+        private void OpenLanguageModal()   => _langModal?.Show();
+
+        private void OpenAchievements()    => _achievements?.Show();
 
         private void OpenGameplayPrefs()
         {

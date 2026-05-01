@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Markyu.LastKernel
     /// Responsibilities:
     ///   - Build CombatUnits from the deployment plan and wave definition
     ///   - Run CombatLane simulation tick-by-tick
-    ///   - Show/hide the CombatLaneView
+    ///   - Expose events so NightBattleHUDController can bind to the active lane
     ///   - Apply aftermath: kill dead defender cards
     ///   - Expose LastResult for DayCycleManager to apply to RunState
     ///
@@ -24,6 +25,12 @@ namespace Markyu.LastKernel
     public class NightPhaseManager : MonoBehaviour
     {
         public static NightPhaseManager Instance { get; private set; }
+
+        // ── HUD events ────────────────────────────────────────────────────────────
+        // Fired before ticks begin. HUD subscribes, shows itself, then calls ConfirmBattleStart().
+        public static event Action<CombatLane, NightWaveDefinition> OnNightPrepared;
+        // Fired after all ticks resolve. HUD shows result, then calls AcknowledgeResult().
+        public static event Action<NightCombatResult> OnNightComplete;
 
         [BoxGroup("Wave")]
         [SerializeField, Tooltip("Wave definition spawned each night. Create via Right-click > LastKernel > Night Wave.")]
@@ -38,11 +45,16 @@ namespace Markyu.LastKernel
         private int maxTicks = 300;
 
         [BoxGroup("View")]
-        [SerializeField, Tooltip("Optional CombatLaneView — combat runs without it.")]
+        [SerializeField, Tooltip("Legacy uGUI combat overlay. Used only when no HUD subscribers are present.")]
         private CombatLaneView laneView;
 
         /// <summary>Available after RunNight() coroutine completes.</summary>
         public NightCombatResult LastResult { get; private set; }
+
+        // Wait-state flags — set internally, cleared by HUD via the public methods below.
+        private bool _awaitingBattleStart;
+        private bool _awaitingResultAck;
+        private bool _fastResolve;
 
         private void Awake()
         {
@@ -54,6 +66,17 @@ namespace Markyu.LastKernel
             Instance = this;
         }
 
+        // ── Public control API (called by NightBattleHUDController) ──────────────
+
+        /// <summary>Call when the player clicks "Start Battle". Unblocks the tick loop.</summary>
+        public void ConfirmBattleStart() => _awaitingBattleStart = false;
+
+        /// <summary>Call when the player clicks "Return to Day". Unblocks aftermath.</summary>
+        public void AcknowledgeResult() => _awaitingResultAck = false;
+
+        /// <summary>Collapses remaining tick delay to one frame per tick — battle resolves in seconds.</summary>
+        public void SetFastResolve() => _fastResolve = true;
+
         // ── Public entry point ────────────────────────────────────────────────────
 
         /// <summary>
@@ -63,6 +86,7 @@ namespace Markyu.LastKernel
         public IEnumerator RunNight(NightDeploymentPlan plan)
         {
             LastResult = null;
+            _fastResolve = false;
 
             NightWaveDefinition wave = ResolveWave();
 
@@ -73,9 +97,8 @@ namespace Markyu.LastKernel
                 yield break;
             }
 
-            // 1. Build runtime units
             var defenderUnits = BuildDefenderUnits(plan);
-            var enemyUnits = BuildEnemyUnits(wave);
+            var enemyUnits    = BuildEnemyUnits(wave);
 
             if (defenderUnits.Count == 0)
             {
@@ -84,53 +107,74 @@ namespace Markyu.LastKernel
                 yield break;
             }
 
-            // 2. Build lane
             var lane = new CombatLane(defenderUnits, enemyUnits, wave);
 
-            // 3. Activate view
-            laneView?.Bind(lane);
-            laneView?.Show();
+            // Determine display path: rich HUD if someone subscribed, else legacy laneView + modal.
+            bool hudActive = OnNightPrepared != null;
 
-            // 4. Announce night start
-            yield return ShowModal(
-                GameLocalization.Get("night.incursionTitle"),
-                GameLocalization.Format("night.startBody", wave.WaveName, wave.FlavorText, defenderUnits.Count, enemyUnits.Count),
-                GameLocalization.Get("ui.play")
-            );
+            if (hudActive)
+            {
+                _awaitingBattleStart = true;
+                OnNightPrepared.Invoke(lane, wave);
+                yield return new WaitUntil(() => !_awaitingBattleStart);
+            }
+            else
+            {
+                laneView?.Bind(lane);
+                laneView?.Show();
+                yield return ShowModal(
+                    GameLocalization.Get("night.incursionTitle"),
+                    GameLocalization.Format("night.startBody", wave.WaveName, wave.FlavorText, defenderUnits.Count, enemyUnits.Count),
+                    GameLocalization.Get("ui.play")
+                );
+            }
 
-            // 5. Run simulation
+            // ── Simulation tick loop ──────────────────────────────────────────────
             int ticks = 0;
             while (lane.IsOngoing && ticks < maxTicks)
             {
                 lane.Tick(tickInterval);
-                laneView?.RefreshDisplay();
+
+                if (!hudActive)
+                    laneView?.RefreshDisplay();
+
                 ticks++;
 
                 if (lane.IsOngoing)
-                    yield return new WaitForSeconds(tickInterval);
+                {
+                    if (_fastResolve)
+                        yield return null; // one frame — keeps UI responsive
+                    else
+                        yield return new WaitForSeconds(tickInterval);
+                }
             }
 
             if (lane.IsOngoing)
             {
                 Debug.LogWarning("NightPhaseManager: Max tick limit reached, forcing end.");
                 lane.ForceEnd();
-                laneView?.RefreshDisplay();
+                if (!hudActive) laneView?.RefreshDisplay();
             }
 
-            // 6. Collect result
             LastResult = lane.BuildResult();
 
-            // 7. Announce result
-            yield return ShowModal(
-                GameLocalization.Get(LastResult.PlayerWon ? "night.resultVictory" : "night.resultDefeat"),
-                LastResult.GetSummaryText(),
-                GameLocalization.Get("ui.continue")
-            );
+            // ── Present result ────────────────────────────────────────────────────
+            if (hudActive)
+            {
+                _awaitingResultAck = true;
+                OnNightComplete.Invoke(LastResult);
+                yield return new WaitUntil(() => !_awaitingResultAck);
+            }
+            else
+            {
+                yield return ShowModal(
+                    GameLocalization.Get(LastResult.PlayerWon ? "night.resultVictory" : "night.resultDefeat"),
+                    LastResult.GetSummaryText(),
+                    GameLocalization.Get("ui.continue")
+                );
+                laneView?.Hide();
+            }
 
-            // 8. Hide view
-            laneView?.Hide();
-
-            // 9. Apply aftermath: kill dead defender cards on the board
             yield return ApplyAftermath(LastResult);
         }
 
@@ -164,9 +208,7 @@ namespace Markyu.LastKernel
         {
             var units = new List<CombatUnit>();
             foreach (var enemyDef in wave.BuildEnemyList())
-            {
                 units.Add(CombatUnit.FromEnemyDefinition(enemyDef));
-            }
             return units;
         }
 
@@ -188,7 +230,7 @@ namespace Markyu.LastKernel
 
         /// <summary>
         /// Generates a runtime wave when no NightWaveDefinition asset is configured.
-        /// Scavenger count and stats scale with the current day so the challenge grows
+        /// Scavenger count and stats scale with the current day so challenge grows
         /// without requiring hand-authored wave assets for every night.
         ///
         /// Scaling (approximate):
@@ -219,11 +261,23 @@ namespace Markyu.LastKernel
 
         private IEnumerator HandleUndefendedNight(NightWaveDefinition wave)
         {
-            yield return ShowModal(
-                GameLocalization.Get("night.undefendedTitle"),
-                GameLocalization.Get("night.undefendedBody"),
-                GameLocalization.Get("ui.continue")
-            );
+            // Notify HUD if active, else fall back to modal.
+            if (OnNightPrepared != null)
+            {
+                // Pass an empty lane so the HUD can still display the enemy lineup.
+                var emptyLane = new CombatLane(new List<CombatUnit>(), BuildEnemyUnits(wave), wave);
+                _awaitingBattleStart = true;
+                OnNightPrepared.Invoke(emptyLane, wave);
+                yield return new WaitUntil(() => !_awaitingBattleStart);
+            }
+            else
+            {
+                yield return ShowModal(
+                    GameLocalization.Get("night.undefendedTitle"),
+                    GameLocalization.Get("night.undefendedBody"),
+                    GameLocalization.Get("ui.continue")
+                );
+            }
 
             LastResult = new NightCombatResult(
                 playerWon: false,
@@ -236,6 +290,13 @@ namespace Markyu.LastKernel
                 fatigueDelta: 0,
                 salvageDelta: 0
             );
+
+            if (OnNightComplete != null)
+            {
+                _awaitingResultAck = true;
+                OnNightComplete.Invoke(LastResult);
+                yield return new WaitUntil(() => !_awaitingResultAck);
+            }
         }
 
         private NightCombatResult BuildSkipResult()
