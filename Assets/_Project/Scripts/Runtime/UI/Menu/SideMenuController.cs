@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
-using Markyu.LastKernel.Achievements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -26,17 +25,12 @@ namespace Markyu.LastKernel
         private Button        _btnToggle;
         private Button        _btnTabQuests;
         private Button        _btnTabRecipes;
-        private Button        _btnTabAchievements;
         private VisualElement _questsTab;
         private VisualElement _recipesTab;
-        private VisualElement _achievementsTab;
         private VisualElement _questsList;
         private VisualElement _recipesList;
-        private VisualElement _achievementsList;
         private Label         _lblQuestProgress;
         private VisualElement _fillQuestProgress;
-        private Label         _lblAchProgress;
-        private VisualElement _fillAchProgress;
 
         // ── Slide state ──────────────────────────────────────────────────
 
@@ -60,10 +54,6 @@ namespace Markyu.LastKernel
         private readonly Dictionary<string, RecipeCategory>        _recipeCategories = new();
         private readonly Dictionary<RecipeCategory, bool>          _categoryExpanded = new();
 
-        // ── Achievement tracking ─────────────────────────────────────────
-
-        private readonly Dictionary<string, VisualElement> _achievementItems = new();
-
         // ────────────────────────────────────────────────────────────────
         // Unity lifecycle
         // ────────────────────────────────────────────────────────────────
@@ -73,33 +63,26 @@ namespace Markyu.LastKernel
             _doc  = GetComponent<UIDocument>();
             _root = _doc.rootVisualElement;
 
-            _panel              = _root.Q("side-menu-panel");
-            _btnToggle          = _root.Q<Button>("btn-toggle");
-            _btnTabQuests       = _root.Q<Button>("btn-tab-quests");
-            _btnTabRecipes      = _root.Q<Button>("btn-tab-recipes");
-            _btnTabAchievements = _root.Q<Button>("btn-tab-achievements");
-            _questsTab          = _root.Q("quests-tab");
-            _recipesTab         = _root.Q("recipes-tab");
-            _achievementsTab    = _root.Q("achievements-tab");
-            _questsList         = _root.Q("quests-list");
-            _recipesList        = _root.Q("recipes-list");
-            _achievementsList   = _root.Q("achievements-list");
-            _lblQuestProgress   = _root.Q<Label>("lbl-quest-progress");
-            _fillQuestProgress  = _root.Q("fill-quest-progress");
-            _lblAchProgress     = _root.Q<Label>("lbl-ach-progress");
-            _fillAchProgress    = _root.Q("fill-ach-progress");
+            _panel           = _root.Q("side-menu-panel");
+            _btnToggle       = _root.Q<Button>("btn-toggle");
+            _btnTabQuests    = _root.Q<Button>("btn-tab-quests");
+            _btnTabRecipes   = _root.Q<Button>("btn-tab-recipes");
+            _questsTab       = _root.Q("quests-tab");
+            _recipesTab      = _root.Q("recipes-tab");
+            _questsList      = _root.Q("quests-list");
+            _recipesList     = _root.Q("recipes-list");
+            _lblQuestProgress  = _root.Q<Label>("lbl-quest-progress");
+            _fillQuestProgress = _root.Q("fill-quest-progress");
 
             // Start fully closed (off-screen to the right)
             SetTranslateX(PANEL_WIDTH);
 
-            _btnToggle.clicked          += OnToggle;
-            _btnTabQuests.clicked       += () => ShowTab(0);
-            _btnTabRecipes.clicked      += () => ShowTab(1);
-            _btnTabAchievements.clicked += () => ShowTab(2);
+            _btnToggle.clicked     += OnToggle;
+            _btnTabQuests.clicked  += () => ShowTab(quests: true);
+            _btnTabRecipes.clicked += () => ShowTab(quests: false);
 
-            _btnTabQuests.text       = GameLocalization.GetOptional("menu.tab.quests",        "QUESTS");
-            _btnTabRecipes.text      = GameLocalization.GetOptional("menu.tab.recipes",       "RECIPES");
-            _btnTabAchievements.text = GameLocalization.GetOptional("menu.tab.achievements",  "ACHIEV");
+            _btnTabQuests.text  = GameLocalization.GetOptional("menu.tab.quests",  "QUESTS");
+            _btnTabRecipes.text = GameLocalization.GetOptional("menu.tab.recipes", "RECIPES");
         }
 
         private void Start()
@@ -108,7 +91,6 @@ namespace Markyu.LastKernel
             BuildQuestGroupMap();
             PopulateQuests();
             PopulateRecipes();
-            PopulateAchievements();
             UpdateQuestProgress();
             SubscribeEvents();
         }
@@ -164,16 +146,12 @@ namespace Markyu.LastKernel
         // Tab switching
         // ────────────────────────────────────────────────────────────────
 
-        // tab: 0=Quests  1=Recipes  2=Achievements
-        private void ShowTab(int tab)
+        private void ShowTab(bool quests)
         {
-            _questsTab.EnableInClassList("lk-hidden",       tab != 0);
-            _recipesTab.EnableInClassList("lk-hidden",      tab != 1);
-            _achievementsTab.EnableInClassList("lk-hidden", tab != 2);
-
-            _btnTabQuests.EnableInClassList("lk-tab--active",       tab == 0);
-            _btnTabRecipes.EnableInClassList("lk-tab--active",      tab == 1);
-            _btnTabAchievements.EnableInClassList("lk-tab--active", tab == 2);
+            _questsTab.EnableInClassList("lk-hidden",  !quests);
+            _recipesTab.EnableInClassList("lk-hidden",  quests);
+            _btnTabQuests.EnableInClassList("lk-tab--active",   quests);
+            _btnTabRecipes.EnableInClassList("lk-tab--active", !quests);
         }
 
         // ────────────────────────────────────────────────────────────────
@@ -526,108 +504,6 @@ namespace Markyu.LastKernel
         }
 
         // ────────────────────────────────────────────────────────────────
-        // Achievement population
-        // ────────────────────────────────────────────────────────────────
-
-        private void PopulateAchievements()
-        {
-            _achievementsList.Clear();
-            _achievementItems.Clear();
-
-            var svc = AchievementService.Instance;
-            if (svc == null || svc.Database == null) return;
-
-            foreach (var def in svc.Database.All)
-            {
-                if (def == null) continue;
-                CreateAchievementItem(def, svc);
-            }
-
-            UpdateAchievementProgress();
-        }
-
-        private void CreateAchievementItem(AchievementDefinition def, AchievementService svc)
-        {
-            bool unlocked = svc.IsUnlocked(def);
-            bool secret   = def.IsSecret && !unlocked;
-            bool hasBar   = !unlocked && !secret && def.TargetCount > 1;
-
-            var container = new VisualElement();
-            container.AddToClassList("lk-list__item");
-            if (unlocked)
-                container.AddToClassList("lk-list__item--completed");
-
-            // For progressive achievements: stack row + bar vertically inside the item
-            if (hasBar)
-                container.style.flexDirection = FlexDirection.Column;
-
-            var row = hasBar ? new VisualElement() : container;
-            if (hasBar)
-            {
-                row.style.flexDirection = FlexDirection.Row;
-                row.style.alignItems    = Align.Center;
-                container.Add(row);
-            }
-
-            var icon = MakeLabel(unlocked ? "✓" : "○", unlocked ? "lk-label--accent" : "lk-label--dim");
-            icon.style.marginRight = 6;
-            icon.style.flexShrink  = 0;
-            row.Add(icon);
-
-            string displayName = secret ? "???" : def.Id;
-            var nameLabel = MakeLabel($"• {displayName}", "lk-list__item-label");
-            nameLabel.style.flexGrow = 1;
-            row.Add(nameLabel);
-
-            if (!unlocked && !secret && def.TargetCount > 1)
-            {
-                int count = svc.GetProgressCount(def);
-                var prog  = MakeLabel($"{count}/{def.TargetCount}", "lk-label--dim");
-                prog.style.flexShrink = 0;
-                row.Add(prog);
-            }
-
-            if (hasBar)
-            {
-                var outer = new VisualElement();
-                outer.AddToClassList("lk-progress-bar");
-                outer.style.marginTop  = 3;
-                outer.style.flexShrink = 0;
-
-                var fill = new VisualElement();
-                fill.AddToClassList("lk-progress-bar__fill");
-                float norm = svc.GetProgressNormalized(def);
-                fill.style.width = new StyleLength(new Length(norm * 100f, LengthUnit.Percent));
-                outer.Add(fill);
-                container.Add(outer);
-            }
-
-            _achievementItems[def.Id] = container;
-            _achievementsList.Add(container);
-        }
-
-        private void HandleAchievementUnlocked(AchievementDefinition _)
-        {
-            PopulateAchievements();
-        }
-
-        private void UpdateAchievementProgress()
-        {
-            var svc = AchievementService.Instance;
-            if (svc == null || svc.Database == null) return;
-
-            int total    = svc.Database.All.Count(d => d != null);
-            int unlocked = svc.Database.All.Count(d => d != null && svc.IsUnlocked(d));
-
-            if (_lblAchProgress != null)
-                _lblAchProgress.text = $"{unlocked} / {total}";
-
-            if (_fillAchProgress != null && total > 0)
-                _fillAchProgress.style.width = new StyleLength(
-                    new Length((float)unlocked / total * 100f, LengthUnit.Percent));
-        }
-
-        // ────────────────────────────────────────────────────────────────
         // Info panel
         // ────────────────────────────────────────────────────────────────
 
@@ -682,9 +558,6 @@ namespace Markyu.LastKernel
             if (CraftingManager.Instance != null)
                 CraftingManager.Instance.OnRecipeDiscovered += HandleRecipeDiscovered;
 
-            if (AchievementService.Instance != null)
-                AchievementService.Instance.OnAchievementUnlocked += HandleAchievementUnlocked;
-
             if (TimeManager.Instance != null)
                 TimeManager.Instance.OnDayEnded += HandleDayEnded;
         }
@@ -699,9 +572,6 @@ namespace Markyu.LastKernel
 
             if (CraftingManager.Instance != null)
                 CraftingManager.Instance.OnRecipeDiscovered -= HandleRecipeDiscovered;
-
-            if (AchievementService.Instance != null)
-                AchievementService.Instance.OnAchievementUnlocked -= HandleAchievementUnlocked;
 
             if (TimeManager.Instance != null)
                 TimeManager.Instance.OnDayEnded -= HandleDayEnded;

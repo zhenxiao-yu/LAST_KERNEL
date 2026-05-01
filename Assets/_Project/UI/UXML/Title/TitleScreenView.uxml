@@ -26,11 +26,12 @@
 
             <!-- Nav buttons -->
             <ui:VisualElement name="title-buttons" class="lk-column">
-                <ui:Button name="btn-new-game"  class="lk-button lk-button--text lk-mb-sm" text="New Game" />
-                <ui:Button name="btn-load-game" class="lk-button lk-button--text lk-mb-sm" text="Load Game" />
-                <ui:Button name="btn-options"   class="lk-button lk-button--text lk-mb-sm" text="Options" />
-                <ui:Button name="btn-language"  class="lk-button lk-button--text lk-mb-sm" />
-                <ui:Button name="btn-quit"      class="lk-button lk-button--text"           text="Quit" />
+                <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-mb-sm" text="New Game" />
+                <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-mb-sm" text="Load Game" />
+                <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-mb-sm" text="Achievements" />
+                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-mb-sm" text="Options" />
+                <ui:Button name="btn-language"      class="lk-button lk-button--text lk-mb-sm" />
+                <ui:Button name="btn-quit"          class="lk-button lk-button--text"           text="Quit" />
             </ui:VisualElement>
 
         </ui:VisualElement>
@@ -154,6 +155,36 @@
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
                     <ui:Button name="btn-opt-reset" class="lk-button lk-button--danger" />
                     <ui:Button name="btn-opt-close" class="lk-button" />
+                </ui:VisualElement>
+
+            </ui:VisualElement>
+        </ui:VisualElement>
+
+        <!-- ── Achievements panel ────────────────────────────────────────────── -->
+        <ui:VisualElement name="panel-achievements" class="lk-screen lk-hidden lk-center">
+            <ui:VisualElement class="lk-panel" style="width: 860px; max-height: 720px;">
+
+                <!-- Header: title row + full-width progress bar -->
+                <ui:VisualElement class="lk-panel__header" style="flex-direction: column; align-items: stretch;">
+                    <ui:VisualElement style="flex-direction: row; align-items: center; margin-bottom: 10px;">
+                        <ui:Label name="lbl-ach-title" class="lk-panel__title" style="flex-grow: 1;" />
+                        <ui:Label name="lbl-ach-progress" class="lk-label--dim" style="margin-right: 0;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="lk-progress-bar" style="align-self: stretch; height: 6px;">
+                        <ui:VisualElement name="fill-ach-progress" class="lk-progress-bar__fill lk-progress-bar__fill--success" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+
+                <!-- Dashboard grid in scrollview -->
+                <ui:ScrollView name="ach-scroll" style="flex-grow: 1; max-height: 560px;">
+                    <ui:Label name="lbl-ach-empty" class="lk-label lk-label--dim lk-hidden"
+                              style="padding: 32px; -unity-text-align: middle-center;" />
+                    <ui:VisualElement name="ach-list" class="lk-ach-grid" />
+                </ui:ScrollView>
+
+                <!-- Footer: close button only -->
+                <ui:VisualElement class="lk-panel__footer">
+                    <ui:Button name="btn-ach-close" class="lk-button" />
                 </ui:VisualElement>
 
             </ui:VisualElement>
