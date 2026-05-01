@@ -3429,6 +3429,70 @@ MonoBehaviour:
     m_Localized: Scavengers probe the perimeter under cover of dark.
     m_Metadata:
       m_Items: []
+  - m_Id: 2103355765436416
+    m_Localized: "\u88DC\u7D66\u30CF\u30F3\u30BF\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768064
+    m_Localized: "\u30AB\u30FC\u30C9\u30D1\u30C3\u30AF\u309210\u500B\u958B\u304F\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768065
+    m_Localized: "\u6B66\u5668\u5EAB"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768066
+    m_Localized: "\u4EFB\u610F\u306E\u30AB\u30FC\u30C9\u306B20\u500B\u30A2\u30A4\u30C6\u30E0\u3092\u88C5\u5099\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768067
+    m_Localized: "\u30C7\u30FC\u30BF\u30D0\u30F3\u30AF"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768068
+    m_Localized: "20\u7A2E\u985E\u306E\u7570\u306A\u308B\u30AB\u30FC\u30C9\u3092\u767A\u898B\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768069
+    m_Localized: "\u9577\u8DDD\u96E2\u8D70"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768070
+    m_Localized: "30\u65E5\u76EE\u306B\u5230\u9054\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768071
+    m_Localized: "\u591C\u66F4\u304B\u3057"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768072
+    m_Localized: "20\u56DE\u306E\u591C\u3092\u751F\u304D\u5EF6\u3073\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768073
+    m_Localized: "\u30A8\u30AF\u30B9\u30BF\u30FC\u30DF\u30CD\u30FC\u30BF\u30FC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768074
+    m_Localized: "100\u306E\u8105\u5A01\u3092\u6392\u9664\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768075
+    m_Localized: "\u4E09\u90E8\u4F5C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768076
+    m_Localized: "3\u56DE\u306E\u30E9\u30F3\u306B\u52DD\u5229\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768077
+    m_Localized: "\u30D5\u30A3\u30FC\u30EB\u30C9\u30A8\u30FC\u30B8\u30A7\u30F3\u30C8"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768078
+    m_Localized: "\u30AF\u30A8\u30B9\u30C8\u309220\u500B\u5B8C\u4E86\u3059\u308B\u3002"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

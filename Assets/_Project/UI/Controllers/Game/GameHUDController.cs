@@ -114,6 +114,12 @@ namespace Markyu.LastKernel
             TimeManager tm = TimeManager.Instance;
             if (tm != null)
             {
+                // Guarantee subscription even if TimeManager wasn't ready during OnEnable.
+                tm.OnDayStarted      -= UpdateDayLabel;
+                tm.OnDayStarted      += UpdateDayLabel;
+                tm.OnTimePaceChanged -= UpdatePaceButton;
+                tm.OnTimePaceChanged += UpdatePaceButton;
+
                 UpdateDayLabel(tm.CurrentDay);
                 UpdatePaceButton(tm.CurrentPace);
             }
@@ -238,7 +244,7 @@ namespace Markyu.LastKernel
                 TimePace.Paused   => "■  0×",
                 TimePace.Normal   => "▶  1×",
                 TimePace.Fast     => "▶▶  2×",
-                TimePace.VeryFast => "▶▶▶  5×",
+                TimePace.VeryFast => "▶▶▶  3×",
                 _                 => "▶  1×",
             };
             _paceButton.EnableInClassList("lk-button--active", pace != TimePace.Normal);

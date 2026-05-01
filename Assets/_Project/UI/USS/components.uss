@@ -71,6 +71,7 @@
     color: var(--lk-accent);
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
+    text-transform: uppercase;
 }
 
 .lk-panel__footer {
@@ -113,6 +114,7 @@
     color: var(--lk-text-header);
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
+    text-transform: uppercase;
     margin-bottom: var(--lk-gap-medium);
 }
 
@@ -152,6 +154,7 @@
     padding-bottom: var(--lk-padding-small);
     min-height: var(--lk-touch-min);
     -unity-text-align: middle-center;
+    text-transform: uppercase;
     transition-property: border-color, color, background-color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
@@ -287,6 +290,7 @@
     font-size: var(--lk-font-size-logo);
     -unity-font-style: bold;
     letter-spacing: 4px;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
@@ -295,6 +299,7 @@
     color: var(--lk-accent);
     font-size: var(--lk-font-size-title);
     -unity-font-style: bold;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
@@ -303,12 +308,14 @@
     color: var(--lk-text-header);
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
+    text-transform: uppercase;
 }
 
 /* Sub-section / category header */
 .lk-label--subheader {
     color: var(--lk-accent);
     font-size: var(--lk-font-size-lg);
+    text-transform: uppercase;
 }
 
 /* Body copy — default */
@@ -1025,6 +1032,7 @@ Toggle:checked .unity-toggle__checkmark {
     -unity-text-align: middle-center;
     min-height: var(--lk-touch-min);
     letter-spacing: 1px;
+    text-transform: uppercase;
     transition-property: color, border-bottom-color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
@@ -1109,7 +1117,7 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-ach-grid {
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-items: stretch;
     align-content: flex-start;
     padding: 4px;
 }
@@ -1206,4 +1214,73 @@ Toggle:checked .unity-toggle__checkmark {
     transition-property: width;
     transition-duration: var(--lk-transition-normal);
     transition-timing-function: linear;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Keybind list  (GameOptionsController.cs — Controls tab)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-keybind-row {
+    flex-direction: row;
+    align-items: center;
+    min-height: var(--lk-touch-min);
+    padding-left: 8px;
+    padding-right: 8px;
+    border-bottom-color: var(--lk-border-dim);
+    border-bottom-width: 1px;
+    transition-property: background-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
+}
+
+.lk-keybind-row:hover {
+    background-color: var(--lk-accent-faint);
+}
+
+.lk-keybind-row__name {
+    color: var(--lk-text);
+    font-size: var(--lk-font-size-sm);
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 100px;
+}
+
+/* Keyboard key badge — binding display */
+.lk-keybind-badge {
+    color: var(--lk-text-header);
+    font-size: var(--lk-font-size-sm);
+    -unity-font-style: bold;
+    text-transform: uppercase;
+    background-color: var(--lk-panel-overlay);
+    border-color: var(--lk-border);
+    border-width: 1px;
+    border-bottom-width: 3px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    -unity-text-align: middle-center;
+    min-width: 64px;
+    letter-spacing: 1px;
+    flex-shrink: 0;
+    margin-right: 6px;
+}
+
+.lk-keybind-badge--conflict {
+    color: var(--lk-warning);
+    border-color: var(--lk-warning);
+}
+
+/* Centered placeholder when controls are unavailable */
+.lk-keybind-unavailable {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-sm);
+    -unity-text-align: middle-center;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-left: 16px;
+    padding-right: 16px;
+    white-space: normal;
+    align-self: stretch;
 }

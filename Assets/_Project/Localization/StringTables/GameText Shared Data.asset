@@ -3635,6 +3635,86 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497223980286648
+  - m_Id: 2103355765436416
+    m_Key: ach.supply_run.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876567
+  - m_Id: 2103355815768064
+    m_Key: ach.supply_run.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876568
+  - m_Id: 2103355815768065
+    m_Key: ach.armoury.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876569
+  - m_Id: 2103355815768066
+    m_Key: ach.armoury.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876570
+  - m_Id: 2103355815768067
+    m_Key: ach.databank.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876571
+  - m_Id: 2103355815768068
+    m_Key: ach.databank.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876572
+  - m_Id: 2103355815768069
+    m_Key: ach.long_haul.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876573
+  - m_Id: 2103355815768070
+    m_Key: ach.long_haul.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876574
+  - m_Id: 2103355815768071
+    m_Key: ach.night_owl.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876575
+  - m_Id: 2103355815768072
+    m_Key: ach.night_owl.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876576
+  - m_Id: 2103355815768073
+    m_Key: ach.exterminator.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876577
+  - m_Id: 2103355815768074
+    m_Key: ach.exterminator.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876578
+  - m_Id: 2103355815768075
+    m_Key: ach.trilogy.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876579
+  - m_Id: 2103355815768076
+    m_Key: ach.trilogy.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876580
+  - m_Id: 2103355815768077
+    m_Key: ach.field_agent.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876581
+  - m_Id: 2103355815768078
+    m_Key: ach.field_agent.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876582
   - m_Id: 1116297412489219
     m_Key: gameplay.difficultyLabel
     m_Metadata:
@@ -4487,6 +4567,71 @@ MonoBehaviour:
       data:
         m_CommentText: Legacy GameLocalization compatibility row. Keep until all
           direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876567
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 open 10 card packs"
+    - rid: 2581770992171876568
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 open 10 card packs"
+    - rid: 2581770992171876569
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 equip 20 items total"
+    - rid: 2581770992171876570
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 equip 20 items total"
+    - rid: 2581770992171876571
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 discover 20 different card types"
+    - rid: 2581770992171876572
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 discover 20 different card
+          types"
+    - rid: 2581770992171876573
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 reach day 30"
+    - rid: 2581770992171876574
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 reach day 30"
+    - rid: 2581770992171876575
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 survive 20 nights"
+    - rid: 2581770992171876576
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 survive 20 nights"
+    - rid: 2581770992171876577
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 eliminate 100 enemies (secret)"
+    - rid: 2581770992171876578
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 eliminate 100 enemies (secret)"
+    - rid: 2581770992171876579
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 win 3 games (secret)"
+    - rid: 2581770992171876580
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 win 3 games (secret)"
+    - rid: 2581770992171876581
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement name \u2014 complete 20 quests"
+    - rid: 2581770992171876582
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Achievement description \u2014 complete 20 quests"
     - rid: 8800497158023282712
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:

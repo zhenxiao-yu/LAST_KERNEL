@@ -33,6 +33,7 @@ namespace Markyu.LastKernel
 
         private InputAction _toggleIdeasQuests;
         private InputAction _cycleSpeed;
+        private InputAction _setSpeed0;
         private InputAction _setSpeed1;
         private InputAction _setSpeed2;
         private InputAction _setSpeed3;
@@ -95,11 +96,12 @@ namespace Markyu.LastKernel
         {
             _map = new InputActionMap("Gameplay");
 
-            _toggleIdeasQuests = Add("ToggleIdeasQuests", "Toggle Ideas/Quests",  "<Keyboard>/q");
-            _cycleSpeed        = Add("CycleSpeed",        "Cycle Speed",          "<Keyboard>/tab");
-            _setSpeed1         = Add("SetSpeed1",         "Speed 1 — Normal",     "<Keyboard>/1");
-            _setSpeed2         = Add("SetSpeed2",         "Speed 2 — Fast",       "<Keyboard>/2");
-            _setSpeed3         = Add("SetSpeed3",         "Speed 3 — Very Fast",  "<Keyboard>/3");
+            _toggleIdeasQuests = Add("ToggleIdeasQuests", "Toggle Ideas/Quests", "<Keyboard>/q");
+            _cycleSpeed        = Add("CycleSpeed",        "Cycle Speed",         "<Keyboard>/tab");
+            _setSpeed1         = Add("SetSpeed1",         "Speed 1×",            "<Keyboard>/1");
+            _setSpeed2         = Add("SetSpeed2",         "Speed 2×",            "<Keyboard>/2");
+            _setSpeed3         = Add("SetSpeed3",         "Speed 3×",            "<Keyboard>/3");
+            _setSpeed0         = Add("SetSpeed0",         "Speed 0× (Pause)",    "<Keyboard>/4");
             _pauseOrAdvance    = Add("PauseOrAdvance",    "Pause / Advance",      "<Keyboard>/space");
             _sellHoveredCard   = Add("SellHoveredCard",   "Sell Hovered Card",    "<Keyboard>/backspace");
             _cameraUp          = Add("CameraUp",          "Camera Up",            "<Keyboard>/w");
@@ -126,6 +128,9 @@ namespace Markyu.LastKernel
 
             if (_cycleSpeed.WasPressedThisFrame())
                 TimeManager.Instance?.CycleTimePace(out _);
+
+            if (_setSpeed0.WasPressedThisFrame())
+                TimeManager.Instance?.SetTimePace(TimePace.Paused);
 
             if (_setSpeed1.WasPressedThisFrame())
                 TimeManager.Instance?.SetTimePace(TimePace.Normal);

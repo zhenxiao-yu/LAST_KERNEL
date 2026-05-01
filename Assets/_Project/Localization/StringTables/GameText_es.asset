@@ -3429,6 +3429,70 @@ MonoBehaviour:
     m_Localized: Scavengers probe the perimeter under cover of dark.
     m_Metadata:
       m_Items: []
+  - m_Id: 2103355765436416
+    m_Localized: Cazador de Suministros
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768064
+    m_Localized: Abre 10 sobres de cartas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768065
+    m_Localized: Arsenal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768066
+    m_Localized: Equipa 20 objetos en cualquier carta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768067
+    m_Localized: Base de Datos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768068
+    m_Localized: Descubre 20 tipos de cartas distintos.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768069
+    m_Localized: Recorrido Largo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768070
+    m_Localized: "Llega al d\xEDa 30."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768071
+    m_Localized: Ave Nocturna
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768072
+    m_Localized: Sobrevive 20 noches.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768073
+    m_Localized: Exterminador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768074
+    m_Localized: Elimina 100 amenazas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768075
+    m_Localized: "Trilog\xEDa"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768076
+    m_Localized: Gana tres partidas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768077
+    m_Localized: Agente de Campo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768078
+    m_Localized: Completa 20 misiones.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -3429,6 +3429,70 @@ MonoBehaviour:
     m_Localized: Scavengers probe the perimeter under cover of dark.
     m_Metadata:
       m_Items: []
+  - m_Id: 2103355765436416
+    m_Localized: "Versorgungsj\xE4ger"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768064
+    m_Localized: "\xD6ffne 10 Kartenpakete."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768065
+    m_Localized: Waffenkammer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768066
+    m_Localized: "R\xFCste 20 Gegenst\xE4nde auf Karten aus."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768067
+    m_Localized: Datenbank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768068
+    m_Localized: Entdecke 20 verschiedene Kartentypen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768069
+    m_Localized: Langstrecke
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768070
+    m_Localized: Erreiche Tag 30.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768071
+    m_Localized: Nachteule
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768072
+    m_Localized: "\xDCberlebe 20 N\xE4chte."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768073
+    m_Localized: Vernichter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768074
+    m_Localized: Vernichte 100 Bedrohungen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768075
+    m_Localized: Trilogie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768076
+    m_Localized: Gewinne drei Runs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768077
+    m_Localized: Feldeinsatz
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768078
+    m_Localized: "Schlie\xDFe 20 Quests ab."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

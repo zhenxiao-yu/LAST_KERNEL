@@ -3429,6 +3429,70 @@ MonoBehaviour:
     m_Localized: Scavengers probe the perimeter under cover of dark.
     m_Metadata:
       m_Items: []
+  - m_Id: 2103355765436416
+    m_Localized: Supply Run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768064
+    m_Localized: Open 10 card packs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768065
+    m_Localized: Armoury
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768066
+    m_Localized: Equip 20 items across any cards.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768067
+    m_Localized: Databank
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768068
+    m_Localized: Discover 20 different card types.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768069
+    m_Localized: Long Haul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768070
+    m_Localized: Reach day 30.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768071
+    m_Localized: Night Owl
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768072
+    m_Localized: Survive 20 nights.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768073
+    m_Localized: Exterminator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768074
+    m_Localized: Eliminate 100 threats.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768075
+    m_Localized: Trilogy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768076
+    m_Localized: Win three runs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768077
+    m_Localized: Field Agent
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768078
+    m_Localized: Complete 20 quests.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

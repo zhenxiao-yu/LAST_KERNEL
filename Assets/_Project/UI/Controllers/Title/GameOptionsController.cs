@@ -178,7 +178,9 @@ namespace Markyu.LastKernel
             var handler = GameInputHandler.Instance;
             if (handler == null)
             {
-                _keybindList.Add(new Label { text = GameLocalization.GetOptional("options.controls.unavailable", "Controls are only available during gameplay.") });
+                var msg = new Label { text = GameLocalization.GetOptional("options.controls.unavailable", "Controls are only available during gameplay.") };
+                msg.AddToClassList("lk-keybind-unavailable");
+                _keybindList.Add(msg);
                 return;
             }
 
@@ -193,31 +195,25 @@ namespace Markyu.LastKernel
         private VisualElement CreateKeybindRow(ActionEntry entry)
         {
             var row = new VisualElement();
-            row.style.flexDirection     = FlexDirection.Row;
-            row.style.alignItems        = Align.Center;
-            row.style.paddingTop        = row.style.paddingBottom = 6;
-            row.style.paddingLeft       = row.style.paddingRight  = 4;
-            row.style.borderBottomWidth = 1;
-            row.style.borderBottomColor = new StyleColor(new Color(1, 1, 1, 0.06f));
+            row.AddToClassList("lk-keybind-row");
 
             var nameLabel = new Label(entry.DisplayName);
-            nameLabel.AddToClassList("lk-label");
-            nameLabel.style.width = 180;
+            nameLabel.AddToClassList("lk-keybind-row__name");
 
             var bindingLabel = new Label(GetBindingDisplay(entry.Action));
-            bindingLabel.AddToClassList("lk-label");
-            bindingLabel.style.flexGrow = 1;
+            bindingLabel.AddToClassList("lk-keybind-badge");
 
             var rebindBtn = new Button { text = "✎" };
             rebindBtn.AddToClassList("lk-button");
-            rebindBtn.style.width       = 32;
-            rebindBtn.style.marginLeft  = 4;
-            rebindBtn.style.marginRight = 2;
+            rebindBtn.style.width      = 36;
+            rebindBtn.style.minHeight  = 36;
+            rebindBtn.style.marginLeft = 4;
             rebindBtn.clicked += () => StartRebind(entry, bindingLabel, rebindBtn);
 
             var resetBtn = new Button { text = "↩" };
             resetBtn.AddToClassList("lk-button");
-            resetBtn.style.width = 32;
+            resetBtn.style.width     = 36;
+            resetBtn.style.minHeight = 36;
             resetBtn.clicked += () => ResetSingleKeybind(entry, bindingLabel);
 
             row.Add(nameLabel);
@@ -234,7 +230,8 @@ namespace Markyu.LastKernel
 
             entry.Action.Disable();
             rebindBtn.SetEnabled(false);
-            bindingLabel.text = "[ press a key... ]";
+            bindingLabel.AddToClassList("lk-keybind-badge--conflict");
+            bindingLabel.text = "...";
 
             _rebindOp = entry.Action
                 .PerformInteractiveRebinding()
@@ -252,9 +249,11 @@ namespace Markyu.LastKernel
                         InputActionRebindingExtensions.RemoveAllBindingOverrides(entry.Action);
                         entry.Action.Enable();
                         string original = GetBindingDisplay(entry.Action);
+                        bindingLabel.AddToClassList("lk-keybind-badge--conflict");
                         bindingLabel.text = $"⚠ {conflictName}";
                         bindingLabel.schedule.Execute(() =>
                         {
+                            bindingLabel.RemoveFromClassList("lk-keybind-badge--conflict");
                             bindingLabel.text = original;
                             rebindBtn.SetEnabled(true);
                         }).StartingIn(1500);

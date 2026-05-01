@@ -3429,6 +3429,70 @@ MonoBehaviour:
     m_Localized: Scavengers probe the perimeter under cover of dark.
     m_Metadata:
       m_Items: []
+  - m_Id: 2103355765436416
+    m_Localized: "\u88DC\u7D66\u7375\u624B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768064
+    m_Localized: "\u6253\u958B 10 \u500B\u5361\u5305\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768065
+    m_Localized: "\u8ECD\u68B0\u5EAB"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768066
+    m_Localized: "\u70BA\u4EFB\u610F\u5361\u724C\u88DD\u5099 20 \u4EF6\u7269\u54C1\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768067
+    m_Localized: "\u8CC7\u6599\u5EAB"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768068
+    m_Localized: "\u767C\u73FE 20 \u7A2E\u4E0D\u540C\u7684\u5361\u724C\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768069
+    m_Localized: "\u6301\u4E45\u6230"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768070
+    m_Localized: "\u5805\u6301\u5230\u7B2C 30 \u5929\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768071
+    m_Localized: "\u591C\u8C93\u5B50"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768072
+    m_Localized: "\u6490\u904E 20 \u6B21\u591C\u9593\u8972\u64CA\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768073
+    m_Localized: "\u6E05\u5834\u8005"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768074
+    m_Localized: "\u6D88\u6EC5 100 \u500B\u5A01\u8105\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768075
+    m_Localized: "\u4E09\u90E8\u66F2"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768076
+    m_Localized: "\u4E09\u6B21\u904A\u6232\u4E2D\u7372\u52DD\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768077
+    m_Localized: "\u7279\u5DE5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768078
+    m_Localized: "\u5B8C\u6210 20 \u500B\u4EFB\u52D9\u3002"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

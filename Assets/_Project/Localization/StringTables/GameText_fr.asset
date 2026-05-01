@@ -3429,6 +3429,70 @@ MonoBehaviour:
     m_Localized: Scavengers probe the perimeter under cover of dark.
     m_Metadata:
       m_Items: []
+  - m_Id: 2103355765436416
+    m_Localized: Chasseur de Ravitaillement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768064
+    m_Localized: Ouvrez 10 paquets de cartes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768065
+    m_Localized: Arsenal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768066
+    m_Localized: "\xC9quipez 20 objets sur des cartes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768067
+    m_Localized: "Base de Donn\xE9es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768068
+    m_Localized: "D\xE9couvrez 20 types de cartes diff\xE9rents."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768069
+    m_Localized: Longue Haul
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768070
+    m_Localized: Atteignez le jour 30.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768071
+    m_Localized: Oiseau de Nuit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768072
+    m_Localized: "Survivez \xE0 20 nuits."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768073
+    m_Localized: Exterminateur
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768074
+    m_Localized: "\xC9liminez 100 menaces."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768075
+    m_Localized: Trilogie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768076
+    m_Localized: Gagnez trois parties.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768077
+    m_Localized: Agent de Terrain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2103355815768078
+    m_Localized: "Terminez 20 qu\xEAtes."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

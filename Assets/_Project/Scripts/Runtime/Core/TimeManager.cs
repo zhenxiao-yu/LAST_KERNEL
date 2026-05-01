@@ -111,7 +111,7 @@ namespace Markyu.LastKernel
             TimePace.Paused   => 0f,
             TimePace.Normal   => 1f,
             TimePace.Fast     => 2f,
-            TimePace.VeryFast => 5f,
+            TimePace.VeryFast => 3f,
             _                 => 1f,
         };
 

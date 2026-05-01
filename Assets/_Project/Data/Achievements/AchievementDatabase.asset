@@ -13,11 +13,19 @@ MonoBehaviour:
   m_Name: AchievementDatabase
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.Achievements.AchievementDatabase
   Achievements:
-  - {fileID: 11400000, guid: 8901579b2e2abef478b3eb5c77683d0d, type: 2}
-  - {fileID: 11400000, guid: 028265191ed6bae42942d8d40bc53e22, type: 2}
-  - {fileID: 11400000, guid: ac02f73c22af4b14d8cb51a331d1b772, type: 2}
-  - {fileID: 11400000, guid: d591c3b94784b024c803438675cc143c, type: 2}
-  - {fileID: 11400000, guid: 7333e703e953fee40bdde218543428c5, type: 2}
-  - {fileID: 11400000, guid: b66c0a63c860b16428e8d6e76fd8b562, type: 2}
+  - {fileID: 11400000, guid: e678cb523fdc2b9469a070bbef00120d, type: 2}
+  - {fileID: 11400000, guid: 9c5bc29e229c2e946a700b486c794fd1, type: 2}
   - {fileID: 11400000, guid: baa159be5c5cfa944aac46ceda8371d5, type: 2}
+  - {fileID: 11400000, guid: d83889e11aace1d488e6143be41a73b8, type: 2}
+  - {fileID: 11400000, guid: aafacd9a97b7e814bb7e50abe75ce9b1, type: 2}
+  - {fileID: 11400000, guid: b66c0a63c860b16428e8d6e76fd8b562, type: 2}
+  - {fileID: 11400000, guid: ac02f73c22af4b14d8cb51a331d1b772, type: 2}
+  - {fileID: 11400000, guid: 8901579b2e2abef478b3eb5c77683d0d, type: 2}
+  - {fileID: 11400000, guid: 7333e703e953fee40bdde218543428c5, type: 2}
   - {fileID: 11400000, guid: 5b0a71cdd2f42074c828bf844de5352e, type: 2}
+  - {fileID: 11400000, guid: 028265191ed6bae42942d8d40bc53e22, type: 2}
+  - {fileID: 11400000, guid: b2407aec6155e0f43a5f1178cc21b9d9, type: 2}
+  - {fileID: 11400000, guid: c82f26a2422fda04c9ccad9b5e75e260, type: 2}
+  - {fileID: 11400000, guid: 9004cb55df53e5d45a75544c6f981e0e, type: 2}
+  - {fileID: 11400000, guid: a65d0af8d3a52d14bb72fc44e9513540, type: 2}
+  - {fileID: 11400000, guid: d591c3b94784b024c803438675cc143c, type: 2}
