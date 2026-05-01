@@ -2,6 +2,7 @@
     <Style src="../../USS/theme.uss" />
     <Style src="../../USS/layout.uss" />
     <Style src="../../USS/components.uss" />
+    <Style src="../../USS/animations.uss" />
     <Style src="../../USS/NightBattleModal.uss" />
 
     <!-- ══════════════════════════════════════════════════════════════════════
@@ -15,7 +16,7 @@
            [BOTTOM AREA]  [Left: villagers + log] [Right: shop]
            [RESULT PANEL]  absolute overlay shown when battle ends
          ══════════════════════════════════════════════════════════════════════ -->
-    <ui:VisualElement name="nbm-root" class="nbm-root lk-hidden">
+    <ui:VisualElement name="nbm-root" class="nbm-root lk-hidden" style="display: none;">
 
         <!-- ── MODAL CARD ───────────────────────────────────────────────────── -->
         <ui:VisualElement class="nbm-modal">
@@ -38,7 +39,7 @@
                 <ui:VisualElement class="nbm-topbar-buttons">
                     <ui:Button name="nbm-btn-fast"   class="lk-button nbm-btn nbm-btn--fast"   text="[ RESOLVE FAST ]" />
                     <ui:Button name="nbm-btn-start"  class="lk-button nbm-btn nbm-btn--start"  text="[ START BATTLE ]" />
-                    <ui:Button name="nbm-btn-cancel" class="lk-button nbm-btn nbm-btn--cancel" text="[ CANCEL ]" />
+                    <ui:Button name="nbm-btn-cancel" class="lk-button nbm-btn nbm-btn--cancel" text="[ AUTO-DEPLOY ]" />
                 </ui:VisualElement>
 
             </ui:VisualElement>
@@ -115,7 +116,9 @@
                                   text="Buy items with gold. Click item, then click a fighter." />
 
                         <!-- NightShopItemView elements injected here -->
-                        <ui:VisualElement name="nbm-shop-items" class="nbm-shop-items" />
+                        <ui:ScrollView name="nbm-shop-items" class="nbm-shop-items"
+                                       vertical-scroller-visibility="Auto"
+                                       horizontal-scroller-visibility="Hidden" />
 
                     </ui:VisualElement>
                 </ui:VisualElement>

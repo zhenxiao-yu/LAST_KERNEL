@@ -21,8 +21,9 @@
 
             <!-- ── Tab bar ─────────────────────────────────────────────── -->
             <ui:VisualElement class="lk-tab-bar">
-                <ui:Button name="btn-tab-quests"  class="lk-tab lk-tab--active" />
-                <ui:Button name="btn-tab-recipes" class="lk-tab" />
+                <ui:Button name="btn-tab-quests"        class="lk-tab lk-tab--active" />
+                <ui:Button name="btn-tab-recipes"       class="lk-tab" />
+                <ui:Button name="btn-tab-achievements"  class="lk-tab" />
             </ui:VisualElement>
 
             <!-- ── Quests tab ──────────────────────────────────────────── -->
@@ -50,6 +51,24 @@
                     <!-- Recipe categories + items injected here from C# -->
                     <ui:VisualElement name="recipes-list" class="lk-list lk-full-width" />
                 </ui:ScrollView>
+
+            </ui:VisualElement>
+
+            <!-- ── Achievements tab (hidden by default) ───────────────── -->
+            <ui:VisualElement name="achievements-tab" class="lk-grow lk-column lk-hidden">
+
+                <ui:ScrollView name="achievements-scroll" class="lk-grow">
+                    <!-- Achievement items injected here from C# -->
+                    <ui:VisualElement name="achievements-list" class="lk-list lk-full-width" />
+                </ui:ScrollView>
+
+                <!-- Footer: unlocked / total + progress bar -->
+                <ui:VisualElement class="lk-side-menu-footer">
+                    <ui:Label name="lbl-ach-progress" class="lk-label--dim lk-grow" />
+                    <ui:VisualElement class="lk-progress-bar" style="width: 72px; flex-shrink: 0;">
+                        <ui:VisualElement name="fill-ach-progress" class="lk-progress-bar__fill lk-progress-bar__fill--success" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
 
             </ui:VisualElement>
 

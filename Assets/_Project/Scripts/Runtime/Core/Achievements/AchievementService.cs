@@ -24,6 +24,7 @@ namespace Markyu.LastKernel.Achievements
 
         [SerializeField, Required]
         private AchievementDatabase database;
+        public AchievementDatabase Database => database;
 
         [SerializeField]
         private AchievementPlatformType platformType = AchievementPlatformType.InGame;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 namespace Markyu.LastKernel
@@ -502,14 +503,11 @@ namespace Markyu.LastKernel
             for (int i = 0; i < NightTeam.MaxSlots; i++)
             {
                 var f = _team.GetSlot(i);
-                if (f != null && !_slotViews[i].AssignedFighter?.Id.Equals(f.Id) == true)
-                {
+                if (f == null) continue;
+                if (_slotViews[i].AssignedFighter?.Id != f.Id)
                     _slotViews[i].Assign(f);
-                }
-                else if (f != null)
-                {
+                else
                     _slotViews[i].RefreshDisplay(f);
-                }
             }
             UpdatePlayerCountLabel();
         }
@@ -708,8 +706,7 @@ namespace Markyu.LastKernel
         private void SetVisible(bool visible)
         {
             if (_root == null) return;
-            if (visible) _root.RemoveFromClassList("lk-hidden");
-            else         _root.AddToClassList("lk-hidden");
+            _root.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
         }
 
         private void SetStatus(string text)
@@ -743,17 +740,20 @@ namespace Markyu.LastKernel
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         private void HandleDebugKeys()
         {
-            if (Input.GetKeyDown(KeyCode.B) && _phase == Phase.Prep)
+            var kb = Keyboard.current;
+            if (kb == null) return;
+
+            if (kb.bKey.wasPressedThisFrame && _phase == Phase.Prep)
             {
                 Debug.Log("[DEBUG] B — force Start Battle");
                 OnStartBattleClicked();
             }
-            if (Input.GetKeyDown(KeyCode.V) && _phase == Phase.Battle)
+            if (kb.vKey.wasPressedThisFrame && _phase == Phase.Battle)
             {
                 Debug.Log("[DEBUG] V — Force Victory");
                 _activeLane?.ForceEnd();
             }
-            if (Input.GetKeyDown(KeyCode.L) && _phase == Phase.Battle && _activeLane != null)
+            if (kb.lKey.wasPressedThisFrame && _phase == Phase.Battle && _activeLane != null)
             {
                 Debug.Log("[DEBUG] L — Force Defeat");
                 foreach (var u in _activeLane.Defenders) u.TakeDamage(u.MaxHP * 99);
