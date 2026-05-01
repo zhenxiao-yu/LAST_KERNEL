@@ -34,8 +34,8 @@
 
     /* ── Status ───────────────────────────────────────────────────────────*/
     --lk-warning:            rgb(255, 160, 40);    /* Amber — threat / HP   */
-    --lk-danger:             rgb(215, 55, 35);     /* Red-orange — defeat   */
-    --lk-success:            rgb(55, 195, 95);     /* Completion / confirm  */
+    --lk-danger:             rgb(204, 46, 46);     /* Red — defeat / threat */
+    --lk-success:            rgb(63, 175, 111);   /* Green — completion    */
     --lk-disabled:           rgb(60, 72, 88);      /* Locked / inactive     */
 
     /* ── Borders ──────────────────────────────────────────────────────────*/
