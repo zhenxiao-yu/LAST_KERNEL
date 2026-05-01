@@ -32,6 +32,8 @@ namespace Markyu.LastKernel
         private Label         _lblQuestProgress;
         private VisualElement _fillQuestProgress;
 
+        public static SideMenuController Instance { get; private set; }
+
         // ── Slide state ──────────────────────────────────────────────────
 
         private bool    _isOpen;
@@ -60,6 +62,9 @@ namespace Markyu.LastKernel
 
         private void Awake()
         {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
+
             _doc  = GetComponent<UIDocument>();
             _root = _doc.rootVisualElement;
 
@@ -97,6 +102,7 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
+            if (Instance == this) Instance = null;
             UIScaleManager.Unregister(_doc);
             _slideTween?.Kill();
             UnsubscribeEvents();
@@ -106,7 +112,10 @@ namespace Markyu.LastKernel
         // Open / close
         // ────────────────────────────────────────────────────────────────
 
-        private void OnToggle()
+        private void OnToggle() => Toggle();
+
+        /// <summary>Toggles the side menu open or closed. Called by keyboard shortcut (Q).</summary>
+        public void Toggle()
         {
             if (_isOpen) Close(); else Open();
         }

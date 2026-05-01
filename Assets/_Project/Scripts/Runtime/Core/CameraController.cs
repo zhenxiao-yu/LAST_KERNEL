@@ -24,6 +24,10 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("How far past the board edge the camera can scroll.")]
         private float panPadding = 0.5f;
 
+        [BoxGroup("Pan")]
+        [SerializeField, Tooltip("World-units per second for WASD keyboard pan. Scales with zoom height.")]
+        private float wasdPanSpeed = 8f;
+
         [BoxGroup("Zoom")]
         [SerializeField, Tooltip("How fast the camera zooms in and out when scrolling.")]
         private float zoomSpeed = 1f;
@@ -173,6 +177,17 @@ namespace Markyu.LastKernel
                 ClampTargetPosition();
 
                 dragOrigin = currentPointerPosition;
+            }
+
+            if (!CardFeelPresenter.IsDraggingAny)
+            {
+                Vector2 keyMove = input.GetCameraMoveInput();
+                if (keyMove.sqrMagnitude > 0.001f)
+                {
+                    float speed = wasdPanSpeed * (transform.position.y / 10f);
+                    targetPos += new Vector3(keyMove.x, 0f, keyMove.y) * speed * Time.unscaledDeltaTime;
+                    ClampTargetPosition();
+                }
             }
         }
 

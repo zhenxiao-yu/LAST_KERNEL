@@ -145,15 +145,40 @@ namespace Markyu.LastKernel
 #endif
         }
 
-        /// <summary>
-        /// Returns true on the frame the pause shortcut is pressed.
-        /// </summary>
+        /// <summary>Returns true on the frame the pause/escape shortcut is pressed.</summary>
         public bool WasPausePressedThisFrame()
         {
 #if ENABLE_INPUT_SYSTEM
+            if (GameInputHandler.WasEscapePressedThisFrame) return true;
+            // Fallback for scenes without GameInputHandler.
             return Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
 #else
             return Input.GetKeyDown(KeyCode.Escape);
+#endif
+        }
+
+        /// <summary>Returns true while the grab-whole-stack modifier key is held.</summary>
+        public bool IsShiftHeld()
+        {
+#if ENABLE_INPUT_SYSTEM
+            if (GameInputHandler.IsShiftHeld) return true;
+            return Keyboard.current != null &&
+                   (Keyboard.current.leftShiftKey.isPressed ||
+                    Keyboard.current.rightShiftKey.isPressed);
+#else
+            return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+#endif
+        }
+
+        /// <summary>Returns a normalised WASD direction vector; X = right/left, Y = forward/back.</summary>
+        public Vector2 GetCameraMoveInput()
+        {
+#if ENABLE_INPUT_SYSTEM
+            return GameInputHandler.CameraMoveInput;
+#else
+            float x = (Input.GetKey(KeyCode.D) ? 1f : 0f) - (Input.GetKey(KeyCode.A) ? 1f : 0f);
+            float y = (Input.GetKey(KeyCode.W) ? 1f : 0f) - (Input.GetKey(KeyCode.S) ? 1f : 0f);
+            return new Vector2(x, y);
 #endif
         }
 

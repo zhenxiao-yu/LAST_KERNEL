@@ -59,6 +59,8 @@ namespace Markyu.LastKernel
                 return;
             }
             Instance = this;
+            GameInputHandler.HasActiveModal = HasActiveModal;
+            GameInputHandler.AdvanceModal   = AdvanceCurrentModal;
         }
 
         protected override void OnDestroy()
@@ -67,6 +69,8 @@ namespace Markyu.LastKernel
             if (Instance == this)
             {
                 Instance = null;
+                GameInputHandler.HasActiveModal = null;
+                GameInputHandler.AdvanceModal   = null;
                 InfoPanel.Unregister();
             }
         }
@@ -277,5 +281,10 @@ namespace Markyu.LastKernel
             if (_currentButtonAction != null)
                 _currentButtonAction();
         }
+
+        // ── Keyboard advance API (used by GameInputHandler for SPACE key) ──
+
+        public bool HasActiveModal() => _currentButtonAction != null;
+        public void AdvanceCurrentModal() => _currentButtonAction?.Invoke();
     }
 }

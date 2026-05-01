@@ -83,7 +83,7 @@ namespace Markyu.LastKernel
                 return;
             }
 
-            // 3. Handle Standard Drag (Stack Splitting)
+            // 3. Handle Standard Drag (Stack Splitting or Whole-Stack Grab)
             _card.IsBeingDragged = true;
             _dragStartPosition = GetMouseWorldPosition();
 
@@ -96,24 +96,36 @@ namespace Markyu.LastKernel
                 CardManager.Instance?.RegisterStack(_card.Stack);
             }
 
-            var oldStack = _card.Stack;
-            var newStack = oldStack.SplitAt(_card);
+            bool grabWholeStack = InputManager.Instance != null && InputManager.Instance.IsShiftHeld();
 
-            if (newStack != null)
+            if (grabWholeStack)
             {
-                _card.Stack = newStack;
-                CardManager.Instance.RegisterStack(newStack);
-                // Keep the old stack where it is visually
-                oldStack.SetTargetPosition(oldStack.TargetPosition);
-
-                if (oldStack.IsCrafting)
+                if (_card.Stack.IsCrafting)
                 {
-                    _card.OriginalCraftingStack = oldStack;
-                    CraftingManager.Instance.PauseCraftingTask(oldStack);
+                    _card.OriginalCraftingStack = _card.Stack;
+                    CraftingManager.Instance.PauseCraftingTask(_card.Stack);
                 }
-                else
+            }
+            else
+            {
+                var oldStack = _card.Stack;
+                var newStack = oldStack.SplitAt(_card);
+
+                if (newStack != null)
                 {
-                    CraftingManager.Instance.CheckForRecipe(oldStack);
+                    _card.Stack = newStack;
+                    CardManager.Instance.RegisterStack(newStack);
+                    oldStack.SetTargetPosition(oldStack.TargetPosition);
+
+                    if (oldStack.IsCrafting)
+                    {
+                        _card.OriginalCraftingStack = oldStack;
+                        CraftingManager.Instance.PauseCraftingTask(oldStack);
+                    }
+                    else
+                    {
+                        CraftingManager.Instance.CheckForRecipe(oldStack);
+                    }
                 }
             }
 

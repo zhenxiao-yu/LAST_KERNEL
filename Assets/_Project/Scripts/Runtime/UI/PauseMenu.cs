@@ -6,6 +6,8 @@ namespace Markyu.LastKernel
     [RequireComponent(typeof(CanvasGroup))]
     public class PauseMenu : LocalizedUIBehaviour
     {
+        public static PauseMenu Instance { get; private set; }
+
         [BoxGroup("Buttons")]
         [SerializeField, Tooltip("Closes the pause menu and resumes the game.")]
         private TextButton continueButton;
@@ -27,12 +29,26 @@ namespace Markyu.LastKernel
 
         private void Awake()
         {
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
+
             canvasGroup = GetComponent<CanvasGroup>();
             ApplyMenuVisibility(false, updatePauseState: false);
 
             continueButton.SetOnClick(ToggleActiveState);
             optionsButton.SetOnClick(OpenOptionsMenu);
             titleButton.SetOnClick(ReturnToTitle);
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this) Instance = null;
+        }
+
+        protected override void OnDisable()
+        {
+            ApplyMenuVisibility(false, updatePauseState: true);
+            base.OnDisable();
         }
 
         private void Update()
@@ -52,13 +68,10 @@ namespace Markyu.LastKernel
             ToggleActiveState();
         }
 
-        protected override void OnDisable()
-        {
-            ApplyMenuVisibility(false, updatePauseState: true);
-            base.OnDisable();
-        }
+        private void ToggleActiveState() => Toggle();
 
-        private void ToggleActiveState()
+        /// <summary>Toggles the pause menu. Called by keyboard shortcut (SPACE) via GameInputHandler.</summary>
+        public void Toggle()
         {
             ApplyMenuVisibility(!isActive, updatePauseState: true);
         }

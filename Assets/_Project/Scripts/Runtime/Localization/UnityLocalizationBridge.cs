@@ -89,7 +89,13 @@ namespace Markyu.LastKernel
 
             initialized = true;
             LocalizationSettings.SelectedLocaleChanged += HandleSelectedLocaleChanged;
-            ApplyStartupLocale();
+
+            var initOp = LocalizationSettings.InitializationOperation;
+            if (initOp.IsDone)
+                ApplyStartupLocale();
+            else
+                initOp.Completed += _ => ApplyStartupLocale();
+
             return true;
         }
 
@@ -288,6 +294,9 @@ namespace Markyu.LastKernel
         {
             string normalizedCode = NormalizeLocaleCode(localeCode);
             if (string.IsNullOrWhiteSpace(normalizedCode) || LocalizationSettings.AvailableLocales == null)
+                return null;
+
+            if (!LocalizationSettings.InitializationOperation.IsDone)
                 return null;
 
             foreach (Locale locale in LocalizationSettings.AvailableLocales.Locales)

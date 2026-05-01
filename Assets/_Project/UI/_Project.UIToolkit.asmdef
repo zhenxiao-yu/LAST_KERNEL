@@ -3,6 +3,7 @@
   "rootNamespace": "Markyu.LastKernel",
   "references": [
     "_Project.Runtime",
+    "Unity.InputSystem",
     "Unity.TextMeshPro"
   ],
   "includePlatforms": [],

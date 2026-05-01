@@ -53,6 +53,9 @@ namespace Markyu.LastKernel
         private bool _ownsIsDraggingAny;
 
         public static bool IsDraggingAny { get; private set; }
+
+        public static CardInstance HoveredCard { get; private set; }
+
         public bool IsInitialized => _initialized;
 
         private void ClearDraggingOwnership()
@@ -139,6 +142,7 @@ namespace Markyu.LastKernel
             if (!_initialized || _profile == null || _card.IsBeingDragged || IsDraggingAny) return;
 
             _isHovered = true;
+            HoveredCard = _card;
             _renderOrder?.SetHovered(true);
 
             ScaleTo(_profile.HoverScale, _profile.HoverScaleDuration, _profile.HoverScaleEase);
@@ -150,6 +154,7 @@ namespace Markyu.LastKernel
             if (!_initialized || _profile == null || _card.IsBeingDragged) return;
 
             _isHovered = false;
+            if (HoveredCard == _card) HoveredCard = null;
             _renderOrder?.SetHovered(false);
 
             ScaleTo(1f, _profile.HoverScaleDuration, _profile.HoverScaleEase);

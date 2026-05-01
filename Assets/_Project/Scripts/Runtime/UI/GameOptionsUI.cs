@@ -10,7 +10,11 @@ namespace Markyu.LastKernel
     {
         public static GameOptionsUI Instance { get; private set; }
 
+        // Set by KeybindSettingsController (UIToolkit) so Runtime has no circular dependency on it.
+        public static System.Action OpenControlsMenuOverride { get; set; }
+
         private TextButton languageButton;
+        private TextButton controlsButton;
         private UnityAction<float> sfxSliderChangedHandler;
         private UnityAction<float> bgmSliderChangedHandler;
 
@@ -66,6 +70,7 @@ namespace Markyu.LastKernel
         {
             Instance = this;
             EnsureLanguageButton();
+            EnsureControlsButton();
             BindButtonEvents();
             BindSliderEvents();
         }
@@ -244,6 +249,29 @@ namespace Markyu.LastKernel
             buttonObject.name = "LanguageButton";
             buttonObject.transform.SetSiblingIndex(template.transform.GetSiblingIndex() + 1);
             languageButton = buttonObject.GetComponent<TextButton>();
+        }
+
+        private void EnsureControlsButton()
+        {
+            if (controlsButton != null)
+                return;
+
+            TextButton template = closeButton;
+            if (template == null)
+                return;
+
+            GameObject go = Instantiate(template.gameObject, template.transform.parent);
+            go.name = "ControlsButton";
+            // Place it just before the close button so it reads: … | Controls | Close
+            go.transform.SetSiblingIndex(template.transform.GetSiblingIndex());
+            controlsButton = go.GetComponent<TextButton>();
+            controlsButton.SetText(GameLocalization.GetOptional("options.controls", "CONTROLS"));
+            controlsButton.SetOnClick(OpenControlsMenu);
+        }
+
+        private void OpenControlsMenu()
+        {
+            OpenControlsMenuOverride?.Invoke();
         }
 
         private void UpdateSfxLabel(float value)
