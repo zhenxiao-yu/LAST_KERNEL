@@ -55,6 +55,10 @@
     --lk-gap-large:          24px;
     --lk-margin-screen:      120px; /* Title screen left inset            */
 
+    /* ── HUD strip height — consumed by .lk-hud-strip (min-height) and
+     *    .lk-side-menu-panel (top). Override per scale tier below.          */
+    --lk-hud-height:         48px;
+
     /* ── Typography ───────────────────────────────────────────────────────
      * Sizes target 1920×1080 reference. Scale mode: Scale With Screen Size.
      * All text must be legible in Simplified Chinese — allocate 30-40% wrap. */
@@ -245,6 +249,8 @@ TextField,
 
 .lk-ui-scale--large .lk-label--logo                           { font-size: 100px; }
 
+.lk-ui-scale--large                                            { --lk-hud-height: 60px; }
+
 /* ── XLarge (×1.40) ──────────────────────────────────────────────────── */
 .lk-ui-scale--xlarge .lk-hint,
 .lk-ui-scale--xlarge .lk-info-badge,
@@ -282,4 +288,6 @@ TextField,
 .lk-ui-scale--xlarge .lk-defeat__title                        { font-size: 67px; }
 
 .lk-ui-scale--xlarge .lk-label--logo                          { font-size: 118px; }
+
+.lk-ui-scale--xlarge                                           { --lk-hud-height: 72px; }
 

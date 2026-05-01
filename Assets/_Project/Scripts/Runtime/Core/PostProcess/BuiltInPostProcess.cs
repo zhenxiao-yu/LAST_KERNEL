@@ -57,18 +57,6 @@ namespace Markyu.LastKernel
             }
         }
 
-        private void OnRenderImage(RenderTexture source, RenderTexture destination)
-        {
-            if (effectMaterial != null)
-            {
-                Graphics.Blit(source, destination, effectMaterial);
-            }
-            else
-            {
-                Graphics.Blit(source, destination);
-            }
-        }
-
         private void HandleTimePaceChanged(TimePace pace)
         {
             if (pace == TimePace.Paused) FadeInGrayscale();
