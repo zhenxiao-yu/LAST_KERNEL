@@ -47,7 +47,7 @@ namespace Markyu.LastKernel
 
         public override void OnLocalizationRefresh()
         {
-            if (_titleLabel  != null) _titleLabel.text  = GameLocalization.GetOptional("title.achievements", "ACHIEVEMENTS");
+            if (_titleLabel  != null) _titleLabel.text  = GameLocalization.GetOptional("title.achievements", "Achievements");
             if (_closeButton != null) _closeButton.text = GameLocalization.GetOptional("common.closeButton", "Close");
         }
 

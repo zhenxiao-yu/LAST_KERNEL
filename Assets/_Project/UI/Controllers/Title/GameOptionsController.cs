@@ -1,19 +1,18 @@
 using System;
 using UnityEngine;
 using UnityEngine.UIElements;
+#if ENABLE_INPUT_SYSTEM
+using UnityEngine.InputSystem;
+#endif
 
 namespace Markyu.LastKernel
 {
-    /// <summary>
-    /// Controls the Options sub-panel (#panel-options): graphics cycles, audio
-    /// sliders, language button, and reset.  The language button delegates to a
-    /// LanguageModalController owned by the parent screen controller.
-    /// </summary>
     public sealed class GameOptionsController : UIToolkitComponentController
     {
         private readonly Action<string, string, Action> _showConfirm;
         private readonly Action _showLangModal;
 
+        // ── Settings tab elements ──────────────────────────────────────────────
         private Label  _titleLabel;
         private Label  _graphicsLabel;
         private Button _resolutionButton;
@@ -29,8 +28,22 @@ namespace Markyu.LastKernel
         private Label  _bgmLabel;
         private Slider _bgmSlider;
         private Button _languageButton;
+
+        // ── Tab ────────────────────────────────────────────────────────────────
+        private Button       _tabSettings;
+        private Button       _tabControls;
+        private ScrollView   _settingsScroll;
+        private ScrollView   _controlsScroll;
+        private VisualElement _keybindList;
+        private bool         _isControlsTab;
+
+        // ── Footer ─────────────────────────────────────────────────────────────
         private Button _resetButton;
         private Button _closeButton;
+
+#if ENABLE_INPUT_SYSTEM
+        private InputActionRebindingExtensions.RebindingOperation _rebindOp;
+#endif
 
         public GameOptionsController(Action<string, string, Action> showConfirm, Action showLangModal)
         {
@@ -38,27 +51,30 @@ namespace Markyu.LastKernel
             _showLangModal = showLangModal;
         }
 
-        // ── Binding ────────────────────────────────────────────────────────────
-
         protected override void OnBind()
         {
-            _titleLabel       = Root.Q<Label>  ("lbl-opts-title");
-            _graphicsLabel    = Root.Q<Label>  ("lbl-opts-graphics");
-            _resolutionButton = Root.Q<Button> ("btn-opt-resolution");
-            _fullscreenButton = Root.Q<Button> ("btn-opt-fullscreen");
-            _vSyncButton      = Root.Q<Button> ("btn-opt-vsync");
-            _fpsButton        = Root.Q<Button> ("btn-opt-fps");
-            _shadowButton     = Root.Q<Button> ("btn-opt-shadows");
-            _uiLabel          = Root.Q<Label>  ("lbl-opts-ui");
-            _uiScaleButton    = Root.Q<Button> ("btn-opt-ui-scale");
-            _audioLabel       = Root.Q<Label>  ("lbl-opts-audio");
-            _sfxLabel         = Root.Q<Label>  ("lbl-sfx");
-            _sfxSlider        = Root.Q<Slider> ("slider-sfx");
-            _bgmLabel         = Root.Q<Label>  ("lbl-bgm");
-            _bgmSlider        = Root.Q<Slider> ("slider-bgm");
-            _languageButton   = Root.Q<Button> ("btn-opt-language");
-            _resetButton      = Root.Q<Button> ("btn-opt-reset");
-            _closeButton      = Root.Q<Button> ("btn-opt-close");
+            _titleLabel       = Root.Q<Label>      ("lbl-opts-title");
+            _graphicsLabel    = Root.Q<Label>      ("lbl-opts-graphics");
+            _resolutionButton = Root.Q<Button>     ("btn-opt-resolution");
+            _fullscreenButton = Root.Q<Button>     ("btn-opt-fullscreen");
+            _vSyncButton      = Root.Q<Button>     ("btn-opt-vsync");
+            _fpsButton        = Root.Q<Button>     ("btn-opt-fps");
+            _shadowButton     = Root.Q<Button>     ("btn-opt-shadows");
+            _uiLabel          = Root.Q<Label>      ("lbl-opts-ui");
+            _uiScaleButton    = Root.Q<Button>     ("btn-opt-ui-scale");
+            _audioLabel       = Root.Q<Label>      ("lbl-opts-audio");
+            _sfxLabel         = Root.Q<Label>      ("lbl-sfx");
+            _sfxSlider        = Root.Q<Slider>     ("slider-sfx");
+            _bgmLabel         = Root.Q<Label>      ("lbl-bgm");
+            _bgmSlider        = Root.Q<Slider>     ("slider-bgm");
+            _languageButton   = Root.Q<Button>     ("btn-opt-language");
+            _tabSettings      = Root.Q<Button>     ("btn-tab-settings");
+            _tabControls      = Root.Q<Button>     ("btn-tab-controls");
+            _settingsScroll   = Root.Q<ScrollView> ("opts-scroll");
+            _controlsScroll   = Root.Q<ScrollView> ("controls-scroll");
+            _keybindList      = Root.Q<VisualElement>("keybind-list");
+            _resetButton      = Root.Q<Button>     ("btn-opt-reset");
+            _closeButton      = Root.Q<Button>     ("btn-opt-close");
 
             _resolutionButton.clicked += () => { GraphicsManager.Instance?.CycleScreenResolution(); RefreshGraphicsLabels(); };
             _fullscreenButton.clicked += () => { GraphicsManager.Instance?.CycleFullscreenMode();   RefreshGraphicsLabels(); };
@@ -67,15 +83,16 @@ namespace Markyu.LastKernel
             _shadowButton.clicked     += () => { GraphicsManager.Instance?.CycleShadowPreset();     RefreshGraphicsLabels(); };
             if (_uiScaleButton  != null) _uiScaleButton.clicked  += () => { UIScaleManager.CycleScale(); UpdateUIScaleButton(); };
             if (_languageButton != null) _languageButton.clicked += () => _showLangModal?.Invoke();
-            _resetButton.clicked      += ShowResetConfirmation;
-            _closeButton.clicked      += Hide;
+            if (_tabSettings    != null) _tabSettings.clicked    += () => SwitchTab(false);
+            if (_tabControls    != null) _tabControls.clicked    += () => SwitchTab(true);
+            _resetButton.clicked += OnResetClicked;
+            _closeButton.clicked += Hide;
 
             _sfxSlider.RegisterValueChangedCallback(evt =>
             {
                 AudioManager.Instance?.SetSFXVolume(evt.newValue);
                 UpdateSfxLabel(evt.newValue);
             });
-
             _bgmSlider.RegisterValueChangedCallback(evt =>
             {
                 AudioManager.Instance?.SetBGMVolume(evt.newValue);
@@ -83,22 +100,24 @@ namespace Markyu.LastKernel
             });
         }
 
-        // ── API ────────────────────────────────────────────────────────────────
-
         public void Show()
         {
             Root.RemoveFromClassList("lk-hidden");
+            SwitchTab(false);
             RefreshFromManagers();
             OnLocalizationRefresh();
         }
 
         public void Hide()
         {
+#if ENABLE_INPUT_SYSTEM
+            _rebindOp?.Cancel();
+            _rebindOp?.Dispose();
+            _rebindOp = null;
+#endif
             PlayerPrefs.Save();
             Root.AddToClassList("lk-hidden");
         }
-
-        // ── Localization ───────────────────────────────────────────────────────
 
         public override void OnLocalizationRefresh()
         {
@@ -107,16 +126,200 @@ namespace Markyu.LastKernel
             if (_uiLabel         != null) _uiLabel.text         = GameLocalization.Get("options.uiScale");
             if (_audioLabel      != null) _audioLabel.text      = GameLocalization.Get("ui.audio");
             if (_languageButton  != null) _languageButton.text  = GameLocalization.GetLanguageButtonLabel();
-            if (_resetButton     != null) _resetButton.text     = GameLocalization.Get("common.resetButton");
+            if (_tabSettings     != null) _tabSettings.text     = GameLocalization.GetOptional("options.tab.settings", "SETTINGS");
+            if (_tabControls     != null) _tabControls.text     = GameLocalization.GetOptional("options.tab.controls", "CONTROLS");
             if (_closeButton     != null) _closeButton.text     = GameLocalization.Get("common.closeButton");
 
+            UpdateResetButtonLabel();
             RefreshGraphicsLabels();
             UpdateUIScaleButton();
             if (_sfxSlider != null) UpdateSfxLabel(_sfxSlider.value);
             if (_bgmSlider != null) UpdateBgmLabel(_bgmSlider.value);
         }
 
-        // ── Private ────────────────────────────────────────────────────────────
+        // ── Tab switching ──────────────────────────────────────────────────────
+
+        private void SwitchTab(bool toControls)
+        {
+            _isControlsTab = toControls;
+
+            _settingsScroll?.EnableInClassList("lk-hidden",  toControls);
+            _controlsScroll?.EnableInClassList("lk-hidden", !toControls);
+
+            _tabSettings?.EnableInClassList("lk-tab--active", !toControls);
+            _tabControls?.EnableInClassList("lk-tab--active",  toControls);
+
+            if (toControls) BuildKeybindRows();
+            UpdateResetButtonLabel();
+        }
+
+        private void UpdateResetButtonLabel()
+        {
+            if (_resetButton == null) return;
+            _resetButton.text = _isControlsTab
+                ? GameLocalization.GetOptional("options.controls.resetAll", "RESET ALL")
+                : GameLocalization.Get("common.resetButton");
+        }
+
+        private void OnResetClicked()
+        {
+            if (_isControlsTab) ResetAllKeybinds();
+            else                ShowResetConfirmation();
+        }
+
+        // ── Keybind rows ───────────────────────────────────────────────────────
+
+        private void BuildKeybindRows()
+        {
+            if (_keybindList == null) return;
+            _keybindList.Clear();
+
+#if ENABLE_INPUT_SYSTEM
+            var handler = GameInputHandler.Instance;
+            if (handler == null)
+            {
+                _keybindList.Add(new Label { text = GameLocalization.GetOptional("options.controls.unavailable", "Controls are only available during gameplay.") });
+                return;
+            }
+
+            foreach (var entry in handler.AllActions)
+                _keybindList.Add(CreateKeybindRow(entry));
+#else
+            _keybindList.Add(new Label { text = "New Input System required for rebinding." });
+#endif
+        }
+
+#if ENABLE_INPUT_SYSTEM
+        private VisualElement CreateKeybindRow(ActionEntry entry)
+        {
+            var row = new VisualElement();
+            row.style.flexDirection     = FlexDirection.Row;
+            row.style.alignItems        = Align.Center;
+            row.style.paddingTop        = row.style.paddingBottom = 6;
+            row.style.paddingLeft       = row.style.paddingRight  = 4;
+            row.style.borderBottomWidth = 1;
+            row.style.borderBottomColor = new StyleColor(new Color(1, 1, 1, 0.06f));
+
+            var nameLabel = new Label(entry.DisplayName);
+            nameLabel.AddToClassList("lk-label");
+            nameLabel.style.width = 180;
+
+            var bindingLabel = new Label(GetBindingDisplay(entry.Action));
+            bindingLabel.AddToClassList("lk-label");
+            bindingLabel.style.flexGrow = 1;
+
+            var rebindBtn = new Button { text = "✎" };
+            rebindBtn.AddToClassList("lk-button");
+            rebindBtn.style.width       = 32;
+            rebindBtn.style.marginLeft  = 4;
+            rebindBtn.style.marginRight = 2;
+            rebindBtn.clicked += () => StartRebind(entry, bindingLabel, rebindBtn);
+
+            var resetBtn = new Button { text = "↩" };
+            resetBtn.AddToClassList("lk-button");
+            resetBtn.style.width = 32;
+            resetBtn.clicked += () => ResetSingleKeybind(entry, bindingLabel);
+
+            row.Add(nameLabel);
+            row.Add(bindingLabel);
+            row.Add(rebindBtn);
+            row.Add(resetBtn);
+            return row;
+        }
+
+        private void StartRebind(ActionEntry entry, Label bindingLabel, Button rebindBtn)
+        {
+            _rebindOp?.Cancel();
+            _rebindOp?.Dispose();
+
+            entry.Action.Disable();
+            rebindBtn.SetEnabled(false);
+            bindingLabel.text = "[ press a key... ]";
+
+            _rebindOp = entry.Action
+                .PerformInteractiveRebinding()
+                .WithControlsExcluding("<Mouse>/delta")
+                .WithControlsExcluding("<Mouse>/scroll")
+                .WithControlsExcluding("<Mouse>/position")
+                .WithCancelingThrough("<Keyboard>/escape")
+                .OnComplete(op =>
+                {
+                    op.Dispose();
+                    _rebindOp = null;
+
+                    if (HasBindingConflict(entry.Action, out string conflictName))
+                    {
+                        InputActionRebindingExtensions.RemoveAllBindingOverrides(entry.Action);
+                        entry.Action.Enable();
+                        string original = GetBindingDisplay(entry.Action);
+                        bindingLabel.text = $"⚠ {conflictName}";
+                        bindingLabel.schedule.Execute(() =>
+                        {
+                            bindingLabel.text = original;
+                            rebindBtn.SetEnabled(true);
+                        }).StartingIn(1500);
+                        return;
+                    }
+
+                    entry.Action.Enable();
+                    GameInputHandler.Instance?.SaveBindings();
+                    BuildKeybindRows();
+                })
+                .OnCancel(op =>
+                {
+                    op.Dispose();
+                    _rebindOp = null;
+                    entry.Action.Enable();
+                    BuildKeybindRows();
+                })
+                .Start();
+        }
+
+        private void ResetSingleKeybind(ActionEntry entry, Label bindingLabel)
+        {
+            _rebindOp?.Cancel();
+            GameInputHandler.Instance?.ResetBinding(entry.Action);
+            bindingLabel.text = GetBindingDisplay(entry.Action);
+        }
+
+        private void ResetAllKeybinds()
+        {
+            _rebindOp?.Cancel();
+            GameInputHandler.Instance?.ResetAllBindings();
+            BuildKeybindRows();
+        }
+
+        private static string GetBindingDisplay(InputAction action)
+        {
+            if (action == null || action.bindings.Count == 0) return "—";
+            return action.GetBindingDisplayString(0);
+        }
+
+        private static bool HasBindingConflict(InputAction rebound, out string conflictName)
+        {
+            conflictName = null;
+            var handler = GameInputHandler.Instance;
+            if (handler == null) return false;
+
+            string newPath = rebound.bindings.Count > 0 ? rebound.bindings[0].effectivePath : null;
+            if (string.IsNullOrEmpty(newPath)) return false;
+
+            foreach (var e in handler.AllActions)
+            {
+                if (e.Action == rebound) continue;
+                if (e.Action.bindings.Count > 0 && e.Action.bindings[0].effectivePath == newPath)
+                {
+                    conflictName = e.DisplayName;
+                    return true;
+                }
+            }
+            return false;
+        }
+#else
+        private void ResetAllKeybinds() { }
+#endif
+
+        // ── Settings helpers ───────────────────────────────────────────────────
 
         private void RefreshFromManagers()
         {

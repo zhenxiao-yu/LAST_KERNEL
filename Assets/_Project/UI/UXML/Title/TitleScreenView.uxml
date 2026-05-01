@@ -114,7 +114,12 @@
                     <ui:Label name="lbl-opts-title" class="lk-panel__title text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
                 </ui:VisualElement>
 
-                <ui:ScrollView name="opts-scroll" style="max-height: 560px;">
+                <ui:VisualElement class="lk-tab-bar">
+                    <ui:Button name="btn-tab-settings" class="lk-tab lk-tab--active" />
+                    <ui:Button name="btn-tab-controls" class="lk-tab" />
+                </ui:VisualElement>
+
+                <ui:ScrollView name="opts-scroll" style="max-height: 480px;">
                     <ui:VisualElement class="lk-column" style="padding: 2px;">
 
                         <!-- Graphics -->
@@ -150,6 +155,10 @@
                         <ui:Button name="btn-opt-language" class="lk-button lk-full-width lk-mb-sm" />
 
                     </ui:VisualElement>
+                </ui:ScrollView>
+
+                <ui:ScrollView name="controls-scroll" class="lk-hidden" style="max-height: 480px;">
+                    <ui:VisualElement name="keybind-list" style="flex-direction: column;" />
                 </ui:ScrollView>
 
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
