@@ -40,8 +40,12 @@ namespace Markyu.LastKernel
 
         // ── Accessibility tab ──────────────────────────────────────────────────
         private Label  _accessibilityLabel;
+        private Label  _accessibilityHintLabel;
         private Button _screenShakeButton;
         private Button _flashEffectsButton;
+
+        // ── Language tab ───────────────────────────────────────────────────────
+        private Label  _languageHintLabel;
 
         // ── Tab bar ────────────────────────────────────────────────────────────
         private Button      _tabSettings;
@@ -95,9 +99,13 @@ namespace Markyu.LastKernel
             _languageButton   = Root.Q<Button>     ("btn-opt-language");
 
             // Accessibility
-            _accessibilityLabel  = Root.Q<Label>   ("lbl-opts-accessibility");
-            _screenShakeButton   = Root.Q<Button>  ("btn-opt-screenshake");
-            _flashEffectsButton  = Root.Q<Button>  ("btn-opt-flash");
+            _accessibilityLabel      = Root.Q<Label> ("lbl-opts-accessibility");
+            _accessibilityHintLabel  = Root.Q<Label> ("lbl-accessibility-hint");
+            _screenShakeButton       = Root.Q<Button>("btn-opt-screenshake");
+            _flashEffectsButton      = Root.Q<Button>("btn-opt-flash");
+
+            // Language hint
+            _languageHintLabel = Root.Q<Label>("lbl-language-hint");
 
             // Tabs
             _tabSettings      = Root.Q<Button>     ("btn-tab-settings");
@@ -136,7 +144,7 @@ namespace Markyu.LastKernel
             // Tabs
             if (_tabSettings      != null) _tabSettings.clicked      += () => SwitchTab(OptionsTab.Settings);
             if (_tabVideo         != null) _tabVideo.clicked         += () => SwitchTab(OptionsTab.Video);
-            if (_tabLanguage      != null) _tabLanguage.clicked      += () => SwitchTab(OptionsTab.Language);
+            if (_tabLanguage      != null) _tabLanguage.clicked      += () => { SwitchTab(OptionsTab.Language); RefreshLanguageHint(); };
             if (_tabControls      != null) _tabControls.clicked      += () => SwitchTab(OptionsTab.Controls);
             if (_tabAccessibility != null) _tabAccessibility.clicked += () => SwitchTab(OptionsTab.Accessibility);
 
@@ -180,8 +188,10 @@ namespace Markyu.LastKernel
             if (_graphicsLabel      != null) _graphicsLabel.text      = GameLocalization.Get("ui.video");
             if (_uiLabel            != null) _uiLabel.text            = GameLocalization.Get("options.uiScale");
             if (_audioLabel         != null) _audioLabel.text         = GameLocalization.Get("ui.audio");
-            if (_accessibilityLabel != null) _accessibilityLabel.text = GameLocalization.GetOptional("options.accessibility", "Accessibility");
-            if (_languageButton     != null) _languageButton.text     = GameLocalization.GetLanguageButtonLabel();
+            if (_accessibilityLabel     != null) _accessibilityLabel.text     = GameLocalization.GetOptional("options.accessibility", "Accessibility");
+            if (_accessibilityHintLabel != null) _accessibilityHintLabel.text = GameLocalization.GetOptional("options.accessibility.hint", "Reduce visual intensity for comfort and epilepsy safety.");
+            if (_languageButton         != null) _languageButton.text         = GameLocalization.GetLanguageButtonLabel();
+            if (_languageHintLabel      != null) _languageHintLabel.text      = GameLocalization.GetOptional("options.language.title", "Select Language");
             if (_tabSettings        != null) _tabSettings.text        = GameLocalization.GetOptional("options.tab.settings",     "Settings");
             if (_tabVideo           != null) _tabVideo.text           = GameLocalization.GetOptional("options.tab.video",        "Video");
             if (_tabLanguage        != null) _tabLanguage.text        = GameLocalization.GetOptional("options.tab.language",     "Language");
@@ -394,6 +404,14 @@ namespace Markyu.LastKernel
 #else
         private void ResetAllKeybinds() { }
 #endif
+
+        // ── Language hint ──────────────────────────────────────────────────────
+
+        private void RefreshLanguageHint()
+        {
+            if (_languageHintLabel != null)
+                _languageHintLabel.text = GameLocalization.GetOptional("options.language.title", "Select Language");
+        }
 
         // ── Accessibility ──────────────────────────────────────────────────────
 

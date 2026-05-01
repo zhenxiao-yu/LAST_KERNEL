@@ -47,6 +47,8 @@ namespace Markyu.LastKernel
         private VisualElement _resourceRow;
         private Label         _sellLabel;
         private Label         _nutritionInfoLabel;
+        private VisualElement _usesRow;
+        private Label         _usesLabel;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
@@ -93,9 +95,11 @@ namespace Markyu.LastKernel
             _hpLabel          = Root.Q<Label>        ("lbl-info-hp");
             _hpFill           = Root.Q<VisualElement>("fill-info-hp");
             _statsLabel       = Root.Q<Label>        ("lbl-info-stats");
-            _resourceRow      = Root.Q<VisualElement>("info-resource-row");
-            _sellLabel        = Root.Q<Label>        ("lbl-info-sell");
-            _nutritionInfoLabel = Root.Q<Label>      ("lbl-info-nutrition");
+            _resourceRow        = Root.Q<VisualElement>("info-resource-row");
+            _sellLabel          = Root.Q<Label>        ("lbl-info-sell");
+            _nutritionInfoLabel = Root.Q<Label>        ("lbl-info-nutrition");
+            _usesRow            = Root.Q<VisualElement>("info-uses-row");
+            _usesLabel          = Root.Q<Label>        ("lbl-info-uses");
 
             InfoPanel.Register(RequestInfoDisplay, ClearInfoRequest, RegisterHover, UnregisterHover, RegisterCardHover);
             RefreshDisplay();
@@ -177,7 +181,7 @@ namespace Markyu.LastKernel
 
             if (_headerLabel != null)
             {
-                _headerLabel.text = hasHeader ? $"[{top.Header}]" : string.Empty;
+                _headerLabel.text = hasHeader ? top.Header : string.Empty;
                 _headerLabel.EnableInClassList("lk-hidden", !hasHeader);
             }
 
@@ -214,11 +218,15 @@ namespace Markyu.LastKernel
                 _hpRow.EnableInClassList("lk-hidden", !show);
                 if (show)
                 {
+                    float pct = card.MaxHP > 0 ? (float)card.CurrentHP / card.MaxHP : 0f;
                     if (_hpLabel != null)
+                    {
                         _hpLabel.text = $"{card.CurrentHP}/{card.MaxHP}";
+                        _hpLabel.EnableInClassList("lk-label--warning", pct is > 0.2f and <= 0.5f);
+                        _hpLabel.EnableInClassList("lk-label--danger",  pct <= 0.2f);
+                    }
                     if (_hpFill != null)
                     {
-                        float pct = card.MaxHP > 0 ? (float)card.CurrentHP / card.MaxHP : 0f;
                         _hpFill.style.width = UnityEngine.UIElements.Length.Percent(pct * 100f);
                         _hpFill.EnableInClassList("lk-progress-bar__fill--warning", pct is > 0.2f and <= 0.5f);
                         _hpFill.EnableInClassList("lk-progress-bar__fill--danger",  pct <= 0.2f);
@@ -244,11 +252,22 @@ namespace Markyu.LastKernel
                         _sellLabel.text = card.HasSell
                             ? GameLocalization.Format("card.sell", card.SellPrice)
                             : string.Empty;
+                    _sellLabel?.EnableInClassList("lk-hidden", !card.HasSell);
+
                     if (_nutritionInfoLabel != null)
                         _nutritionInfoLabel.text = card.HasNutrition
                             ? GameLocalization.Format("card.nutritionValue", card.Nutrition)
                             : string.Empty;
+                    _nutritionInfoLabel?.EnableInClassList("lk-hidden", !card.HasNutrition);
                 }
+            }
+
+            if (_usesRow != null)
+            {
+                bool show = card.HasUses;
+                _usesRow.EnableInClassList("lk-hidden", !show);
+                if (show && _usesLabel != null)
+                    _usesLabel.text = GameLocalization.Format("card.usesLeft", card.UsesLeft);
             }
         }
 

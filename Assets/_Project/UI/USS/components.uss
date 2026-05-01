@@ -105,8 +105,8 @@
     border-width: 1px;
     border-radius: 0;
     padding: var(--lk-padding-large);
-    min-width: 360px;
-    max-width: 580px;
+    min-width: 480px;
+    max-width: 720px;
     flex-direction: column;
 }
 
@@ -116,12 +116,14 @@
     -unity-font-style: bold;
     text-transform: uppercase;
     margin-bottom: var(--lk-gap-medium);
+    white-space: normal;
 }
 
 .lk-modal__body {
     color: var(--lk-text);
     font-size: var(--lk-font-size-md);
     white-space: normal;
+    line-height: 1.5;
     margin-bottom: var(--lk-padding-large);
 }
 
@@ -323,6 +325,7 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-md);
     white-space: normal;
+    line-height: 1.4;
 }
 
 /* Secondary / muted */
@@ -336,8 +339,9 @@
     font-size: var(--lk-font-size-xs);
     color: var(--lk-text-dim);
     white-space: normal;
+    line-height: 1.4;
     padding-left: 4px;
-    padding-bottom: 4px;
+    padding-bottom: 8px;
 }
 
 /* High-contrast numeric value (HUD counters, costs) */
@@ -500,7 +504,8 @@
     font-size: var(--lk-font-size-md);
     -unity-font-style: bold;
     margin-bottom: 4px;
-    white-space: nowrap;
+    white-space: normal;
+    line-height: 1.3;
 }
 
 .lk-info-panel__body {
@@ -944,11 +949,14 @@ Toggle:checked .unity-toggle__checkmark {
 /* Language selector button — equal-width tile in a 2×4 grid inside the language modal */
 .lk-lang-btn {
     flex: 1;
-    min-height: 52px;
-    padding-left: 6px;
-    padding-right: 6px;
+    min-height: 56px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
     font-size: var(--lk-font-size-sm);
     white-space: normal;
+    line-height: 1.3;
     -unity-text-align: middle-center;
 }
 
@@ -1027,12 +1035,15 @@ Toggle:checked .unity-toggle__checkmark {
     border-bottom-width: 2px;
     border-bottom-color: rgba(0, 0, 0, 0);
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-sm);
+    font-size: var(--lk-font-size-xs);
     -unity-font-style: bold;
     -unity-text-align: middle-center;
     min-height: var(--lk-touch-min);
-    letter-spacing: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    letter-spacing: 0px;
     text-transform: uppercase;
+    white-space: normal;
     transition-property: color, border-bottom-color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
@@ -1241,8 +1252,7 @@ Toggle:checked .unity-toggle__checkmark {
     color: var(--lk-text);
     font-size: var(--lk-font-size-sm);
     flex-grow: 1;
-    white-space: nowrap;
-    overflow: hidden;
+    white-space: normal;
     min-width: 100px;
 }
 
@@ -1283,4 +1293,45 @@ Toggle:checked .unity-toggle__checkmark {
     padding-right: 16px;
     white-space: normal;
     align-self: stretch;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Info chip  (compact tagged value in InfoPanel card section)
+ * Variants: --sell (gold), --food (green), --uses (neutral)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-info-chip {
+    font-size: var(--lk-font-size-xs);
+    color: var(--lk-text-dim);
+    background-color: var(--lk-panel-overlay);
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    border-radius: 0;
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.lk-info-chip--sell  { color: var(--lk-warning);  border-color: rgba(230, 180, 40, 0.45); }
+.lk-info-chip--food  { color: var(--lk-success);  border-color: rgba(60, 200, 90, 0.45);  }
+.lk-info-chip--uses  { color: var(--lk-accent);   border-color: rgba(0, 180, 210, 0.40);  }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Empty state label  (side menu quests / recipes — no items to show)
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-empty-state {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-sm);
+    white-space: normal;
+    -unity-text-align: middle-center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 24px;
+    padding-right: 24px;
+    align-self: stretch;
+    opacity: 0.7;
 }

@@ -12,7 +12,10 @@
       "Bash(find e:\\\\\\\\FORTSTACK\\\\\\\\Assets\\\\\\\\_Project\\\\\\\\UI\\\\\\\\UXML -type f -name \"*.uxml\")",
       "Bash(sed -n \"270,300p\" \"e:/FORTSTACK/Assets/_Project/Scenes/MainMenu.unity\")",
       "Bash(sed -n \"2560,2610p\" \"e:/FORTSTACK/Assets/_Project/Scenes/MainMenu.unity\")",
-      "Bash(grep -n \"--- !u!1\" e:/FORTSTACK/Assets/_Project/Scenes/MainMenu.unity)"
+      "Bash(grep -n \"--- !u!1\" e:/FORTSTACK/Assets/_Project/Scenes/MainMenu.unity)",
+      "Bash(Get-ChildItem *)",
+      "mcp__unity-mcp__read_console",
+      "mcp__unity-mcp__find_gameobjects"
     ]
   },
   "enabledPlugins": {

@@ -6,7 +6,7 @@
 
     <!-- Bottom-left anchored info panel. Controller adds/removes lk-hidden based on active requests. -->
     <ui:VisualElement name="info-panel-anchor" class="lk-hud-bottom lk-hidden"
-                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 360px;">
+                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 420px;">
 
         <ui:VisualElement name="info-panel-root" class="lk-info-panel">
 
@@ -26,9 +26,12 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:Label name="lbl-info-stats" class="lk-info-panel__stats lk-hidden" style="margin-top: 4px;" />
-                <ui:VisualElement name="info-resource-row" class="lk-row lk-hidden" style="margin-top: 4px;">
-                    <ui:Label name="lbl-info-sell" class="lk-label--dim" style="margin-right: 8px;" />
-                    <ui:Label name="lbl-info-nutrition" class="lk-label--dim" />
+                <ui:VisualElement name="info-resource-row" class="lk-row lk-hidden" style="margin-top: 6px; gap: 4px;">
+                    <ui:Label name="lbl-info-sell"      class="lk-info-chip lk-info-chip--sell" />
+                    <ui:Label name="lbl-info-nutrition" class="lk-info-chip lk-info-chip--food" />
+                </ui:VisualElement>
+                <ui:VisualElement name="info-uses-row" class="lk-row lk-hidden" style="margin-top: 4px;">
+                    <ui:Label name="lbl-info-uses" class="lk-info-chip lk-info-chip--uses" />
                 </ui:VisualElement>
             </ui:VisualElement>
 

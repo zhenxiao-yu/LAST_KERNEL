@@ -31,6 +31,7 @@
                 <ui:ScrollView name="quests-scroll" class="lk-grow">
                     <!-- Quest groups + items injected here from C# -->
                     <ui:VisualElement name="quests-list" class="lk-list lk-full-width" />
+                    <ui:Label name="lbl-quests-empty" class="lk-empty-state lk-hidden" />
                 </ui:ScrollView>
 
                 <!-- Footer: completed / total + progress bar -->
@@ -49,6 +50,7 @@
                 <ui:ScrollView name="recipes-scroll" class="lk-grow">
                     <!-- Recipe categories + items injected here from C# -->
                     <ui:VisualElement name="recipes-list" class="lk-list lk-full-width" />
+                    <ui:Label name="lbl-recipes-empty" class="lk-empty-state lk-hidden" />
                 </ui:ScrollView>
 
             </ui:VisualElement>

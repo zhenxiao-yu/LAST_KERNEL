@@ -350,7 +350,7 @@ namespace Markyu.LastKernel
             ["common.loadButton"]    = new("读取",    "Load"),
             ["common.deleteButton"]  = new("删除",    "Delete"),
 
-            ["options.header"] = new("运行设置", "Options"),
+            ["options.header"] = L("Options", "选项", "選項", "オプション", "옵션", "Options", "Optionen", "Opciones"),
             ["options.sfx"] = new("音效 {0}%", "SFX {0}%"),
             ["options.bgm"] = new("背景音乐 {0}%", "BGM {0}%"),
             ["options.uiScale"]        = new("界面文字大小", "UI Scale"),
@@ -406,9 +406,13 @@ namespace Markyu.LastKernel
             ["hud.nutrition"]   = L("{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}"),
             ["hud.currency"]    = L("{0}",     "{0}",     "{0}",     "{0}",     "{0}",     "{0}",     "{0}",     "{0}"),
             ["hud.cards"]       = L("{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}", "{0}/{1}"),
-            ["hud.pace.paused"] = L("■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×",  "■ 0×"),
-            ["hud.pace.normal"] = L("▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×",  "▶ 1×"),
-            ["hud.pace.fast"]   = L("▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×", "▶▶ 2×"),
+            ["hud.pace.paused"]    = L("■ 0×",    "■ 0×",    "■ 0×",    "■ 0×",    "■ 0×",    "■ 0×",    "■ 0×",    "■ 0×"),
+            ["hud.pace.normal"]    = L("▶ 1×",    "▶ 1×",    "▶ 1×",    "▶ 1×",    "▶ 1×",    "▶ 1×",    "▶ 1×",    "▶ 1×"),
+            ["hud.pace.fast"]      = L("▶▶ 2×",   "▶▶ 2×",   "▶▶ 2×",   "▶▶ 2×",   "▶▶ 2×",   "▶▶ 2×",   "▶▶ 2×",   "▶▶ 2×"),
+            ["hud.pace.veryffast"] = L("▶▶▶ 3×",  "▶▶▶ 3×",  "▶▶▶ 3×",  "▶▶▶ 3×",  "▶▶▶ 3×",  "▶▶▶ 3×",  "▶▶▶ 3×",  "▶▶▶ 3×"),
+
+            ["common.on"]  = L("On",  "开",  "開",  "オン",  "켜짐",  "Activé",    "Ein",  "Activado"),
+            ["common.off"] = L("Off", "关",  "關",  "オフ",  "꺼짐",  "Désactivé", "Aus",  "Desactivado"),
 
             ["daycycle.dayEndedTitle"] = new("第 {0} 天结束", "Day {0} Complete"),
             ["daycycle.dayEndedBody"] = new("街区需要补充口粮。", "The district needs rations."),
@@ -461,6 +465,9 @@ namespace Markyu.LastKernel
 
             ["quest.progress"]        = new("进度：{0} / {1}", "Progress: {0} / {1}"),
             ["quest.footer.progress"] = new("任务：{0} / {1}", "Quests: {0} / {1}"),
+            ["menu.quests.empty"]     = L("No active quests.",         "暂无激活任务",      "暫無激活任務",      "クエストなし",           "활성 퀘스트 없음",   "Aucune quête active.",     "Keine aktiven Aufgaben.",  "Sin misiones activas."),
+            ["menu.recipes.empty"]    = L("No recipes discovered yet.","尚未发现任何配方。", "尚未發現任何配方。", "レシピ未発見。",         "레시피 미발견.",     "Aucune recette découverte.","Noch keine Rezepte.",       "Ninguna receta descubierta."),
+            ["recipe.no_ingredients"] = L("No ingredients required.",  "无需材料。",        "無需材料。",        "材料不要。",             "재료 불필요.",       "Aucun ingrédient.",        "Keine Zutaten.",            "Sin ingredientes."),
 
             ["quest.group.新手引导"] = new("新手引导", "Beginner's Guide"),
             ["quest.group.异界升格"] = new("异界升格", "Otherworldly Ascension"),
@@ -483,6 +490,10 @@ namespace Markyu.LastKernel
             ["card.timeLeft"] = new("剩余时间：{0:F1} 秒", "Time Left: {0:F1}s"),
             ["card.stackHeader"] = new("卡牌堆", "Stack of Cards"),
             ["card.health"] = new("生命值 ({0}/{1})", "Health ({0}/{1})"),
+            ["card.sell"]           = L("Sell: {0} cr",     "出售：{0} 信用点", "出售：{0} 信用點", "売却：{0}",     "판매：{0}",    "Vente : {0}",       "Verkauf: {0}",        "Venta: {0}"),
+            ["card.nutritionValue"] = L("Food: {0}",        "食物：{0}",       "食物：{0}",       "食料：{0}",    "식량：{0}",    "Aliment : {0}",     "Nahrung: {0}",        "Alimento: {0}"),
+            ["card.usesLeft"]       = L("{0} uses",         "剩余 {0} 次",     "剩餘 {0} 次",     "残り {0} 回",  "잔여 {0} 회",  "{0} util. rest.",   "Noch {0}×",           "{0} usos"),
+            ["quest.completed"]     = L("Completed",        "已完成",          "已完成",          "達成",         "완료",         "Complété",          "Abgeschlossen",       "Completado"),
 
             ["placeholder.packName"] = new("卡包名称", "Pack Name"),
             ["placeholder.cardName"] = new("卡牌名称", "Card Name"),
@@ -503,7 +514,7 @@ namespace Markyu.LastKernel
             ["FortStack 赛博殖民试作 / 作者 Markyu"] = "ui.footer",
             ["Last Kernel 赛博殖民试作 / 作者 Markyu"] = "ui.footer",
             ["Last Kernel 堡垒街区试作 / 作者 Markyu"] = "ui.footer",
-            ["运行设置"] = "options.header",
+            ["选项"] = "options.header",
             ["[Delete]"] = "common.deleteButton",
             ["[Load]"] = "common.loadButton",
             ["[取消]"] = "common.cancelButton",

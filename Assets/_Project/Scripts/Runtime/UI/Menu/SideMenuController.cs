@@ -31,6 +31,8 @@ namespace Markyu.LastKernel
         private VisualElement _recipesList;
         private Label         _lblQuestProgress;
         private VisualElement _fillQuestProgress;
+        private Label         _lblQuestsEmpty;
+        private Label         _lblRecipesEmpty;
 
         public static SideMenuController Instance { get; private set; }
 
@@ -78,6 +80,8 @@ namespace Markyu.LastKernel
             _recipesList     = _root.Q("recipes-list");
             _lblQuestProgress  = _root.Q<Label>("lbl-quest-progress");
             _fillQuestProgress = _root.Q("fill-quest-progress");
+            _lblQuestsEmpty    = _root.Q<Label>("lbl-quests-empty");
+            _lblRecipesEmpty   = _root.Q<Label>("lbl-recipes-empty");
 
             // Start fully closed (off-screen to the right)
             SetTranslateX(PANEL_WIDTH);
@@ -88,6 +92,9 @@ namespace Markyu.LastKernel
 
             _btnTabQuests.text  = GameLocalization.GetOptional("menu.tab.quests",  "QUESTS");
             _btnTabRecipes.text = GameLocalization.GetOptional("menu.tab.recipes", "RECIPES");
+
+            if (_lblQuestsEmpty  != null) _lblQuestsEmpty.text  = GameLocalization.GetOptional("menu.quests.empty",  "No active quests.");
+            if (_lblRecipesEmpty != null) _lblRecipesEmpty.text = GameLocalization.GetOptional("menu.recipes.empty", "No recipes discovered yet.");
         }
 
         private void Start()
@@ -97,6 +104,7 @@ namespace Markyu.LastKernel
             PopulateQuests();
             PopulateRecipes();
             UpdateQuestProgress();
+            RefreshEmptyStates();
             SubscribeEvents();
         }
 
@@ -318,6 +326,7 @@ namespace Markyu.LastKernel
             CreateQuestItem(quest);
             RefreshGroupCount(quest.QuestData);
             UpdateQuestProgress();
+            RefreshEmptyStates();
         }
 
         private void HandleQuestCompleted(QuestInstance quest)
@@ -487,6 +496,7 @@ namespace Markyu.LastKernel
                 catBody.style.display = DisplayStyle.Flex;
 
             RefreshCategoryCount(category);
+            RefreshEmptyStates();
         }
 
         private void ToggleCategory(RecipeCategory category, Label chevron)
@@ -519,21 +529,40 @@ namespace Markyu.LastKernel
         private void ShowQuestInfo(QuestInstance quest)
         {
             if (InfoPanel.Instance == null) return;
+            bool complete = quest.IsComplete();
+            string header = complete
+                ? $"√ {quest.QuestData.Title}"
+                : quest.QuestData.Title;
             string body = quest.QuestData.Description;
-            if (!quest.IsComplete())
+            if (!complete)
                 body += $"\n\n{GameLocalization.Format("quest.progress", quest.CurrentAmount, quest.QuestData.TargetAmount)}";
-            InfoPanel.Instance.RequestInfoDisplay(this, InfoPriority.Hover, (quest.QuestData.Title, body));
+            else
+                body += $"\n\n{GameLocalization.GetOptional("quest.completed", "Completed")}";
+            InfoPanel.Instance.RequestInfoDisplay(this, InfoPriority.Hover, (header, body));
         }
 
         private void ShowRecipeInfo(RecipeDefinition recipe)
         {
             if (InfoPanel.Instance == null) return;
-            string header = GameLocalization.Format("recipe.blueprint", recipe.ResultingCard.DisplayName);
-            string body   = CraftingManager.Instance?.GetFormattedIngredients(recipe) ?? string.Empty;
-            InfoPanel.Instance.RequestInfoDisplay(this, InfoPriority.Hover, (header, body));
+            string ingredients = CraftingManager.Instance?.GetFormattedIngredients(recipe) ?? string.Empty;
+            string body = string.IsNullOrEmpty(ingredients)
+                ? GameLocalization.GetOptional("recipe.no_ingredients", "No ingredients required.")
+                : ingredients;
+            InfoPanel.Instance.RequestInfoDisplay(this, InfoPriority.Hover, (recipe.ResultingCard.DisplayName, body));
         }
 
         private void HideInfo() => InfoPanel.Instance?.ClearInfoRequest(this);
+
+        private void RefreshEmptyStates()
+        {
+            bool hasQuests = QuestManager.Instance != null &&
+                             QuestManager.Instance.AllQuests.Any();
+            _lblQuestsEmpty?.EnableInClassList("lk-hidden", hasQuests);
+
+            bool hasRecipes = CraftingManager.Instance != null &&
+                              CraftingManager.Instance.AllRecipes.Any(r => CraftingManager.Instance.IsRecipeDiscovered(r.Id));
+            _lblRecipesEmpty?.EnableInClassList("lk-hidden", hasRecipes);
+        }
 
         // ────────────────────────────────────────────────────────────────
         // "New" item helpers
