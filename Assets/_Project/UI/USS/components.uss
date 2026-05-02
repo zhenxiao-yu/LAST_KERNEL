@@ -133,6 +133,7 @@
     background-color: var(--lk-overlay-bg);
     align-items: center;
     justify-content: center;
+    pointer-events: auto;
 }
 
 .lk-modal {

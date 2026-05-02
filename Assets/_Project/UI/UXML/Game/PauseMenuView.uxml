@@ -30,7 +30,7 @@
         </ui:VisualElement>
 
         <!-- Save slots panel: shown when Save is clicked -->
-        <ui:VisualElement name="panel-save-slots" class="lk-screen lk-hidden lk-center">
+        <ui:VisualElement name="panel-save-slots" class="lk-modal-backdrop lk-hidden">
             <ui:VisualElement class="lk-panel" style="width: 560px;">
 
                 <ui:VisualElement class="lk-panel__header">
@@ -52,7 +52,7 @@
         </ui:VisualElement>
 
         <!-- Options panel: same structure as TitleScreen, layered above save panel -->
-        <ui:VisualElement name="panel-options" class="lk-screen lk-hidden lk-center">
+        <ui:VisualElement name="panel-options" class="lk-modal-backdrop lk-hidden">
             <ui:VisualElement class="lk-panel" style="width: 640px;">
 
                 <ui:VisualElement class="lk-panel__header">
