@@ -78,6 +78,12 @@ namespace Markyu.LastKernel
         private Label         _lblEnemySection, _lblColonySection;
         private Label         _lblDefendersHeader, _lblLogHeader, _lblShopHeader;
 
+        // ── Battle-mode state ─────────────────────────────────────────────────
+        private VisualElement _battleZone;
+        private VisualElement _bottomArea;
+        private int           _totalEnemyCount;
+        private int           _remainingEnemyCount;
+
         // ── Lifecycle ─────────────────────────────────────────────────────────────
 
         private void Awake()
@@ -141,6 +147,9 @@ namespace Markyu.LastKernel
             _lblLogHeader        = root.Q<Label>("nbm-lbl-log-header");
             _lblShopHeader       = root.Q<Label>("nbm-lbl-shop-header");
 
+            _battleZone = root.Q("nbm-battle-zone");
+            _bottomArea = root.Q("nbm-bottom-area");
+
             _btnStart?.RegisterCallback<ClickEvent>(_ => OnStartBattleClicked());
             _btnFast?.RegisterCallback<ClickEvent>(_ => OnFastResolveClicked());
             _btnCancel?.RegisterCallback<ClickEvent>(_ => OnCancelClicked());
@@ -161,6 +170,16 @@ namespace Markyu.LastKernel
 
         private void HandleModalOpened(NightModalContext ctx)
         {
+            UnbindLane();
+
+            // Restore prep layout (clear any battle-mode overrides from last night)
+            _battleZone?.RemoveFromClassList("lk-hidden");
+            _bottomArea?.RemoveFromClassList("nbm-bottom-area--battle");
+            _statusLabel?.RemoveFromClassList("nbm-status-label--battle");
+            _assignHint?.RemoveFromClassList("lk-hidden");
+            _shopHint?.RemoveFromClassList("lk-hidden");
+            _btnFast?.RemoveFromClassList("nbm-btn--fast--active");
+
             _phase       = Phase.Prep;
             _interaction = PrepInteraction.Idle;
             _pendingFighter    = null;
@@ -215,6 +234,7 @@ namespace Markyu.LastKernel
             _resultPanel?.AddToClassList("lk-hidden");
             _rewardTitle?.AddToClassList("lk-hidden");
             _rewardOptions?.AddToClassList("lk-hidden");
+            _btnStart?.RemoveFromClassList("lk-hidden");
             _btnStart?.SetEnabled(true);
             _btnFast?.SetEnabled(false);
             _btnCancel?.RemoveFromClassList("lk-hidden");
@@ -251,7 +271,20 @@ namespace Markyu.LastKernel
             LockVillagerList(true);
 
             _btnFast?.SetEnabled(true);
+            _btnStart?.AddToClassList("lk-hidden");
             _btnCancel?.AddToClassList("lk-hidden");
+
+            // Switch layout: hide prep zone, expand log, promote status text
+            _battleZone?.AddToClassList("lk-hidden");
+            _bottomArea?.AddToClassList("nbm-bottom-area--battle");
+            _statusLabel?.AddToClassList("nbm-status-label--battle");
+            _assignHint?.AddToClassList("lk-hidden");
+            _shopHint?.AddToClassList("lk-hidden");
+
+            // Prime enemy count display
+            _totalEnemyCount     = lane.Enemies.Count;
+            _remainingEnemyCount = lane.Enemies.Count;
+            UpdateEnemyRemainingLabel();
 
             SetStatus(GameLocalization.Get("night.modal.phase.battle"));
             AddLog(GameLocalization.Get("night.modal.log.battleStart"), "nbm-log-entry--system");
@@ -259,6 +292,7 @@ namespace Markyu.LastKernel
 
         private void HandleBattleComplete(NightCombatResult result)
         {
+            if (result == null) return;
             _phase = Phase.Result;
 
             bool won = result.PlayerWon;
@@ -320,6 +354,7 @@ namespace Markyu.LastKernel
         private void OnFastResolveClicked()
         {
             _btnFast?.SetEnabled(false);
+            _btnFast?.AddToClassList("nbm-btn--fast--active");
             NightBattleManager.Instance?.SetFastResolve();
             AddLog(GameLocalization.Get("night.modal.log.fastResolve"), "nbm-log-entry--system");
         }
@@ -419,9 +454,22 @@ namespace Markyu.LastKernel
             AddLog(GameLocalization.Format("night.modal.log.unitDied", unit.DisplayName), "nbm-log-entry--death");
             if (_battleMap.TryGetValue(unit, out var sv)) sv.RefreshBattle(unit);
             UpdateFrontHighlights();
+
+            if (unit.Side == CombatUnitSide.Enemy)
+            {
+                _remainingEnemyCount = Mathf.Max(0, _remainingEnemyCount - 1);
+                UpdateEnemyRemainingLabel();
+            }
         }
 
         private void HandleCombatEnded(bool playerWon) { }
+
+        private void UpdateEnemyRemainingLabel()
+        {
+            if (_incomingLabel == null) return;
+            _incomingLabel.text = GameLocalization.Format(
+                "night.modal.enemiesRemaining", _remainingEnemyCount, _totalEnemyCount);
+        }
 
         private void UpdateFrontHighlights()
         {

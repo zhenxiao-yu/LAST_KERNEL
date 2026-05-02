@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -65,14 +66,21 @@ namespace Markyu.LastKernel
             _lane = lane;
             _events.Clear();
 
-            BuildArena(lane);
+            try
+            {
+                BuildArena(lane);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[BattleArenaView] BuildArena threw: {e.Message}");
+            }
 
             BindLane(lane);
         }
 
         private void HandleBattleComplete(NightCombatResult result)
         {
-            // Drain remaining animations, then fade out the arena after a short hold.
+            if (result == null) return;
             StartCoroutine(FinishAndFade(result.PlayerWon));
         }
 
@@ -120,8 +128,19 @@ namespace Markyu.LastKernel
             {
                 var (atk, tgt, dmg, crit) = _events.Dequeue();
                 yield return PlayAttackEvent(atk, tgt, dmg, crit);
-                if (!_fastForward)
-                    yield return new WaitForSeconds(AnimDelay);
+
+                if (_fastForward)
+                {
+                    while (_events.Count > 0)
+                    {
+                        var evt = _events.Dequeue();
+                        FindView(evt.tgt)?.AnimateHP();
+                    }
+                    UpdateFrontHighlights();
+                    break;
+                }
+
+                yield return new WaitForSeconds(AnimDelay);
             }
             _drainingQueue = false;
         }
@@ -199,7 +218,7 @@ namespace Markyu.LastKernel
             panelRT.anchorMax  = new Vector2(0.5f, 0.5f);
             panelRT.pivot      = new Vector2(0.5f, 0.5f);
             panelRT.sizeDelta  = new Vector2(PanelW, PanelH);
-            panelRT.anchoredPosition = new Vector2(0f, 60f);
+            panelRT.anchoredPosition = new Vector2(0f, 160f);
 
             var panelBg  = _panel.AddComponent<Image>();
             panelBg.color = new Color(0.03f, 0.04f, 0.07f, 0.94f);
@@ -344,8 +363,19 @@ namespace Markyu.LastKernel
 
         private IEnumerator FinishAndFade(bool playerWon)
         {
-            // Wait for any in-flight animations to drain.
-            yield return new WaitUntil(() => !_drainingQueue);
+            // Wait for in-flight animations to drain, with a safety timeout.
+            float drainTimeout = 8f;
+            float drainElapsed = 0f;
+            while (_drainingQueue && drainElapsed < drainTimeout)
+            {
+                drainElapsed += Time.deltaTime;
+                yield return null;
+            }
+            if (_drainingQueue)
+            {
+                _drainingQueue = false;
+                _events.Clear();
+            }
             yield return new WaitForSeconds(_fastForward ? 0.05f : 0.55f);
 
             // Flash the panel border green (win) or red (loss).

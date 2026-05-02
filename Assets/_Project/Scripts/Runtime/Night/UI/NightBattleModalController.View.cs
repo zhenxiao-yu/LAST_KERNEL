@@ -231,6 +231,14 @@ namespace Markyu.LastKernel
             var kb = UnityEngine.InputSystem.Keyboard.current;
             if (kb == null) return;
 
+            // Shift+N — trigger a test night immediately from any game state
+            if (kb.nKey.wasPressedThisFrame && kb.shiftKey.isPressed)
+            {
+                Debug.Log("[DEBUG] Shift+N — Trigger test night");
+                NightBattleManager.Instance?.DebugTriggerNight();
+                return;
+            }
+
             if (kb.bKey.wasPressedThisFrame && _phase == Phase.Prep)
             {
                 Debug.Log("[DEBUG] B — force Start Battle");

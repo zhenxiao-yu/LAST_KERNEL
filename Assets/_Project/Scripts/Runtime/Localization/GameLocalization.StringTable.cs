@@ -134,6 +134,7 @@ namespace Markyu.LastKernel
             // Night header / counts
             ["night.modal.nightTitle"]     = new("第 {0} 夜",          "NIGHT {0}"),
             ["night.modal.incoming"]       = new("{0} 名敌人来袭",      "{0} ENEMIES INCOMING"),
+            ["night.modal.enemiesRemaining"] = new("{0}/{1} 敌人剩余",    "{0}/{1} ENEMIES LEFT"),
             ["night.modal.units"]          = new("{0} 个单位",          "{0} UNITS"),
             ["night.modal.slotsStatus"]    = new("{0} / {1} 格位已分配", "{0} / {1} SLOTS FILLED"),
 
@@ -157,7 +158,7 @@ namespace Markyu.LastKernel
             // Action buttons
             ["night.modal.btn.start"]      = L("[ START BATTLE ]",  "[ 开始战斗 ]", "[ 開始戰鬥 ]", "[ 戦闘開始 ]", "[ 전투 시작 ]", "[ LANCER LA BATAILLE ]", "[ KAMPF STARTEN ]",    "[ INICIAR BATALLA ]"),
             ["night.modal.btn.fast"]       = L("[ RESOLVE FAST ]",  "[ 快速结算 ]", "[ 快速結算 ]", "[ 高速解決 ]", "[ 빠른 해결 ]", "[ RÉSOUDRE VITE ]",      "[ SCHNELL LÖSEN ]",    "[ RESOLVER RÁPIDO ]"),
-            ["night.modal.btn.autoDeploy"] = L("[ AUTO-DEPLOY ]",   "[ 自动部署 ]", "[ 自動部署 ]", "[ 自動配置 ]", "[ 자동 배치 ]", "[ DÉPLOIEMENT AUTO ]",   "[ AUTO-EINSETZEN ]",   "[ DESPLIEGUE AUTO ]"),
+            ["night.modal.btn.autoDeploy"] = L("[ AUTO-FIGHT ]",    "[ 自动开战 ]", "[ 自動開戰 ]", "[ 自動開戰 ]", "[ 자동 전투 ]", "[ COMBAT AUTO ]",        "[ AUTO-KAMPF ]",       "[ AUTO-COMBATE ]"),
             ["night.modal.btn.return"]     = L("[ RETURN TO DAY ]", "[ 返回白天 ]", "[ 返回白天 ]", "[ 昼へ戻る ]", "[ 낮으로 복귀 ]","[ RETOUR AU JOUR ]",    "[ RÜCK ZUM TAG ]",     "[ VOLVER AL DÍA ]"),
 
             // Section headers

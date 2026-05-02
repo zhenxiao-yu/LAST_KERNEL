@@ -46,7 +46,7 @@
             <!-- END TOP BAR -->
 
             <!-- ── BATTLE ZONE ─────────────────────────────────────────────── -->
-            <ui:VisualElement class="nbm-battle-zone">
+            <ui:VisualElement name="nbm-battle-zone" class="nbm-battle-zone">
 
                 <!-- Enemy section -->
                 <ui:VisualElement class="nbm-section-header nbm-section-header--enemy">
@@ -75,7 +75,7 @@
             <!-- END BATTLE ZONE -->
 
             <!-- ── BOTTOM AREA ─────────────────────────────────────────────── -->
-            <ui:VisualElement class="nbm-bottom-area">
+            <ui:VisualElement name="nbm-bottom-area" class="nbm-bottom-area">
 
                 <!-- Left column: villagers list + combat log -->
                 <ui:VisualElement class="nbm-left-col">

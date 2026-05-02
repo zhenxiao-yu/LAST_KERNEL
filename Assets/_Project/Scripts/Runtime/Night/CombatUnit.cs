@@ -52,7 +52,7 @@ namespace Markyu.LastKernel
             Attack = Mathf.Max(0, attack);
             Defense = Mathf.Max(0, defense);
             AttackCooldown = attackSpeedPercent > 0 ? 100f / attackSpeedPercent : 2f;
-            AttackTimer = 0f;
+            AttackTimer = AttackCooldown * 0.5f;
             AccuracyPercent = Mathf.Clamp(accuracy, 0f, 100f);
             DodgePercent = Mathf.Clamp(dodge, 0f, 100f);
             CritChancePercent = Mathf.Clamp(critChance, 0f, 100f);

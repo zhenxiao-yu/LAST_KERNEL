@@ -93,6 +93,7 @@ namespace Markyu.LastKernel
         private bool       _battleConfirmed;
         private bool       _resultAcknowledged;
         private bool       _fastResolve;
+        private bool       _isRunning;
         private readonly List<CardDefinition> _rewardChoices = new();
         private CardDefinition _selectedReward;
 
@@ -109,6 +110,13 @@ namespace Markyu.LastKernel
         /// <summary>Full night sequence coroutine. Yields until aftermath is complete.</summary>
         public IEnumerator RunNight(List<CardInstance> eligibleDefenders)
         {
+            if (_isRunning)
+            {
+                Debug.LogWarning("[NightBattleManager] RunNight re-entry blocked.");
+                yield break;
+            }
+            _isRunning = true;
+
             LastResult          = null;
             _confirmedTeam      = null;
             _battleConfirmed    = false;
@@ -131,10 +139,18 @@ namespace Markyu.LastKernel
                 StartingGold      = PlayerGold
             };
 
-            bool modalAvailable = OnNightModalOpened != null;
-            if (modalAvailable)
+            if (OnNightModalOpened != null)
             {
-                OnNightModalOpened.Invoke(context);
+                try
+                {
+                    OnNightModalOpened.Invoke(context);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[NightBattleManager] OnNightModalOpened handler threw: {e.Message}. Auto-deploying.");
+                    _confirmedTeam = BuildAutomaticTeam(eligibleDefenders);
+                    _battleConfirmed = true;
+                }
             }
             else
             {
@@ -152,6 +168,7 @@ namespace Markyu.LastKernel
             if (defenderUnits.Count == 0)
             {
                 yield return HandleUndefendedNight(wave);
+                _isRunning = false;
                 yield break;
             }
 
@@ -159,13 +176,29 @@ namespace Markyu.LastKernel
             var enemyUnits  = enemyDefs.Select(CombatUnit.FromEnemyDefinition).ToList();
             var lane        = new CombatLane(defenderUnits, enemyUnits, wave);
 
-            OnBattleStarted?.Invoke(lane, wave);
+            try
+            {
+                OnBattleStarted?.Invoke(lane, wave);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"[NightBattleManager] OnBattleStarted handler threw: {e.Message}");
+            }
+
+            yield return null; // One frame for UI to settle before ticking.
 
             // ── Tick loop ─────────────────────────────────────────────────────────
             int ticks = 0;
             while (lane.IsOngoing && ticks < maxTicks)
             {
-                lane.Tick(tickInterval);
+                try
+                {
+                    lane.Tick(tickInterval);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[NightBattleManager] lane.Tick threw (tick {ticks}): {e.Message}");
+                }
                 ticks++;
 
                 if (lane.IsOngoing)
@@ -187,7 +220,16 @@ namespace Markyu.LastKernel
             PrepareRewardChoices(LastResult);
             if (OnBattleComplete != null)
             {
-                OnBattleComplete.Invoke(LastResult);
+                try
+                {
+                    OnBattleComplete.Invoke(LastResult);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[NightBattleManager] OnBattleComplete handler threw: {e.Message}. Auto-acknowledging.");
+                    AutoSelectFirstReward();
+                    _resultAcknowledged = true;
+                }
             }
             else
             {
@@ -200,6 +242,7 @@ namespace Markyu.LastKernel
             yield return new WaitUntil(() => _resultAcknowledged);
 
             yield return ApplyAftermath(LastResult);
+            _isRunning = false;
         }
 
         // ── Public control API (called by NightBattleModalController) ─────────────
@@ -520,6 +563,37 @@ namespace Markyu.LastKernel
                                                          && c.Definition.Category == CardCategory.Character
                                                          && c.CurrentHealth > 0) == true;
         }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        // ── Debug / quick-test ────────────────────────────────────────────────────
+
+        [BoxGroup("Debug"), Button("▶ Test Night Now  [Shift+N]")]
+        public void DebugTriggerNight()
+        {
+            if (!Application.isPlaying)
+            {
+                Debug.LogWarning("[NightBattleManager] Enter Play Mode first.");
+                return;
+            }
+            if (_isRunning)
+            {
+                Debug.LogWarning("[NightBattleManager] Night is already running.");
+                return;
+            }
+
+            var defenders = CardManager.Instance?.AllCards
+                ?.Where(c => c != null
+                          && c.gameObject != null
+                          && c.Definition?.Category == CardCategory.Character
+                          && c.CurrentHealth > 0)
+                .OrderBy(c => c.name)
+                .ToList()
+                ?? new List<CardInstance>();
+
+            Debug.Log($"[NightBattleManager] Debug night triggered with {defenders.Count} eligible defender(s).");
+            StartCoroutine(RunNight(defenders));
+        }
+#endif
     }
 
     // ── Context struct passed to the modal ────────────────────────────────────────

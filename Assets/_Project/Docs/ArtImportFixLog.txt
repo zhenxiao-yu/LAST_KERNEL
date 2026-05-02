@@ -1,4 +1,4 @@
-=== Card Art Import Fix — 2026-05-02 01:03:19 ===
+=== Card Art Import Fix — 2026-05-02 15:30:31 ===
 
 --- CardArt (Portraits) ---
   OK     AbyssalCore.png
@@ -123,17 +123,17 @@
   => 0 fixed
 
 --- PackArt ---
-  FIXED  Adventure.png: type=Sprite, filter=Point, compression=None
-  FIXED  Beginning.png: type=Sprite, filter=Point, compression=None
-  FIXED  Blacksmith.png: type=Sprite, filter=Point, compression=None
-  FIXED  Construction.png: type=Sprite, filter=Point, compression=None
-  FIXED  Farmstead.png: type=Sprite, filter=Point, compression=None
-  FIXED  HeartyMeals.png: type=Sprite, filter=Point, compression=None
-  FIXED  Island.png: type=Sprite, filter=Point, compression=None
-  FIXED  Knowledge.png: type=Sprite, filter=Point, compression=None
-  FIXED  Revelations.png: type=Sprite, filter=Point, compression=None
-  FIXED  Starter.png: type=Sprite, filter=Point, compression=None
-  FIXED  Survival.png: type=Sprite, filter=Point, compression=None
-  => 11 fixed
+  OK     Adventure.png
+  OK     Beginning.png
+  OK     Blacksmith.png
+  OK     Construction.png
+  OK     Farmstead.png
+  OK     HeartyMeals.png
+  OK     Island.png
+  OK     Knowledge.png
+  OK     Revelations.png
+  OK     Starter.png
+  OK     Survival.png
+  => 0 fixed
 
-=== DONE: 11 fixed, 116 already correct ===
+=== DONE: 0 fixed, 127 already correct ===

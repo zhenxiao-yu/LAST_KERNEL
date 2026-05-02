@@ -581,3 +581,34 @@
     line-height: 1.35;
     flex-grow: 1;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * BATTLE-MODE LAYOUT SWITCHES
+ * ══════════════════════════════════════════════════════════════════════════ */
+
+/* Hide the prep/preview zone during live combat so the UGUI arena is the only view */
+.nbm-battle-zone--hidden { display: none; }
+
+/* During battle: collapse villagers + shop, expand log to fill freed space */
+.nbm-bottom-area--battle .nbm-villagers-panel { display: none; }
+.nbm-bottom-area--battle .nbm-right-col       { display: none; }
+.nbm-bottom-area--battle .nbm-log-panel {
+    height: auto;
+    flex-grow: 1;
+    border-top-width: 0;
+}
+
+/* Fast-resolve button: highlight when active */
+.nbm-btn--fast--active {
+    color: var(--lk-bg);
+    background-color: var(--lk-warning);
+    border-color: var(--lk-warning);
+}
+.nbm-btn--fast--active:disabled { opacity: 1; background-color: var(--lk-warning); }
+
+/* Battle-phase status label — larger and accented */
+.nbm-status-label--battle {
+    font-size: var(--lk-font-size-md);
+    color: var(--lk-accent);
+    letter-spacing: 5px;
+}

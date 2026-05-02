@@ -188,7 +188,10 @@ namespace Markyu.LastKernel
             {
                 yield return NightBattleManager.Instance.RunNight(eligibleDefenders);
                 nightResult = NightBattleManager.Instance.LastResult;
-                RunStateManager.Instance?.ApplyNightCombatResult(nightResult);
+                if (nightResult == null)
+                    Debug.LogWarning("[DayCycleManager] NightBattleManager returned null LastResult; skipping result application.");
+                else
+                    RunStateManager.Instance?.ApplyNightCombatResult(nightResult);
                 primaryNightBattleHandledRewards = true;
             }
             else if (NightPhaseManager.Instance != null)
