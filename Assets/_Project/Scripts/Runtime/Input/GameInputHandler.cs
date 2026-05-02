@@ -50,13 +50,23 @@ namespace Markyu.LastKernel
         public IReadOnlyList<ActionEntry> AllActions => _entries;
 
         public static bool IsShiftHeld =>
-            Instance != null && Instance._grabWholeStack.IsPressed();
+            Instance != null &&
+            Instance._grabWholeStack != null &&
+            Instance._grabWholeStack.IsPressed();
 
         public static Vector2 CameraMoveInput
         {
             get
             {
-                if (Instance == null) return Vector2.zero;
+                if (Instance == null ||
+                    Instance._cameraRight == null ||
+                    Instance._cameraLeft == null ||
+                    Instance._cameraUp == null ||
+                    Instance._cameraDown == null)
+                {
+                    return Vector2.zero;
+                }
+
                 float x = (Instance._cameraRight.IsPressed() ? 1f : 0f)
                          - (Instance._cameraLeft .IsPressed() ? 1f : 0f);
                 float y = (Instance._cameraUp   .IsPressed() ? 1f : 0f)
@@ -66,7 +76,9 @@ namespace Markyu.LastKernel
         }
 
         public static bool WasEscapePressedThisFrame =>
-            Instance != null && Instance._escapeMenu.WasPressedThisFrame();
+            Instance != null &&
+            Instance._escapeMenu != null &&
+            Instance._escapeMenu.WasPressedThisFrame();
 
         private void Awake()
         {
@@ -129,6 +141,9 @@ namespace Markyu.LastKernel
             if (_cycleSpeed.WasPressedThisFrame())
                 TimeManager.Instance?.CycleTimePace(out _);
 
+            if (_pauseOrAdvance.WasPressedThisFrame())
+                ToggleTimePause();
+
             if (_setSpeed0.WasPressedThisFrame())
                 TimeManager.Instance?.SetTimePace(TimePace.Paused);
 
@@ -152,6 +167,18 @@ namespace Markyu.LastKernel
 
             CardBuyer buyer = FindAnyObjectByType<CardBuyer>();
             buyer?.TryTradeAndConsumeStack(hovered.Stack);
+        }
+
+        private static void ToggleTimePause()
+        {
+            TimeManager timeManager = TimeManager.Instance;
+            if (timeManager == null)
+                return;
+
+            timeManager.SetTimePace(
+                timeManager.CurrentPace == TimePace.Paused
+                    ? TimePace.Normal
+                    : TimePace.Paused);
         }
 
         public void SaveBindings()

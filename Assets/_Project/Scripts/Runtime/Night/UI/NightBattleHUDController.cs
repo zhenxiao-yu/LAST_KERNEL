@@ -437,7 +437,11 @@ namespace Markyu.LastKernel
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
         private void HandleDebugKeys()
         {
-            if (Input.GetKeyDown(KeyCode.B))
+            InputManager input = InputManager.Instance;
+            if (input == null)
+                return;
+
+            if (input.WasKeyPressedThisFrame(KeyCode.B))
             {
                 if (NightPhaseManager.Instance != null)
                 {
@@ -446,14 +450,14 @@ namespace Markyu.LastKernel
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.V))
+            if (input.WasKeyPressedThisFrame(KeyCode.V))
             {
                 Debug.Log("[DEBUG] V — Force Victory (ForceEnd)");
                 _activeLane?.ForceEnd();
             }
 
             // L = force defeat: drain all defenders' HP so lane ends with enemy win.
-            if (Input.GetKeyDown(KeyCode.L))
+            if (input.WasKeyPressedThisFrame(KeyCode.L))
             {
                 Debug.Log("[DEBUG] L — Force Defeat (drain defenders)");
                 if (_activeLane != null)

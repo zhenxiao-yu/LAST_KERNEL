@@ -22,6 +22,11 @@ namespace Markyu.LastKernel
                 return;
             }
             Instance = this;
+
+#if ENABLE_INPUT_SYSTEM
+            if (GameInputHandler.Instance == null && GetComponent<GameInputHandler>() == null)
+                gameObject.AddComponent<GameInputHandler>();
+#endif
         }
 
         private void OnDestroy()
@@ -151,7 +156,7 @@ namespace Markyu.LastKernel
 #if ENABLE_INPUT_SYSTEM
             if (GameInputHandler.WasEscapePressedThisFrame) return true;
             // Fallback for scenes without GameInputHandler.
-            return Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+            return WasKeyPressedThisFrame(KeyCode.Escape);
 #else
             return Input.GetKeyDown(KeyCode.Escape);
 #endif
@@ -162,9 +167,7 @@ namespace Markyu.LastKernel
         {
 #if ENABLE_INPUT_SYSTEM
             if (GameInputHandler.IsShiftHeld) return true;
-            return Keyboard.current != null &&
-                   (Keyboard.current.leftShiftKey.isPressed ||
-                    Keyboard.current.rightShiftKey.isPressed);
+            return IsKeyHeld(KeyCode.LeftShift) || IsKeyHeld(KeyCode.RightShift);
 #else
             return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
 #endif
@@ -174,13 +177,66 @@ namespace Markyu.LastKernel
         public Vector2 GetCameraMoveInput()
         {
 #if ENABLE_INPUT_SYSTEM
-            return GameInputHandler.CameraMoveInput;
+            if (GameInputHandler.Instance != null)
+                return GameInputHandler.CameraMoveInput;
+
+            float x = (IsKeyHeld(KeyCode.D) ? 1f : 0f) - (IsKeyHeld(KeyCode.A) ? 1f : 0f);
+            float y = (IsKeyHeld(KeyCode.W) ? 1f : 0f) - (IsKeyHeld(KeyCode.S) ? 1f : 0f);
+            return new Vector2(x, y);
 #else
             float x = (Input.GetKey(KeyCode.D) ? 1f : 0f) - (Input.GetKey(KeyCode.A) ? 1f : 0f);
             float y = (Input.GetKey(KeyCode.W) ? 1f : 0f) - (Input.GetKey(KeyCode.S) ? 1f : 0f);
             return new Vector2(x, y);
 #endif
         }
+
+        /// <summary>Returns true on the frame a keyboard key is pressed across old/new input backends.</summary>
+        public bool WasKeyPressedThisFrame(KeyCode keyCode)
+        {
+#if ENABLE_INPUT_SYSTEM
+            return Keyboard.current != null &&
+                   TryConvertKeyCode(keyCode, out Key key) &&
+                   Keyboard.current[key].wasPressedThisFrame;
+#else
+            return Input.GetKeyDown(keyCode);
+#endif
+        }
+
+        /// <summary>Returns true while a keyboard key is held across old/new input backends.</summary>
+        public bool IsKeyHeld(KeyCode keyCode)
+        {
+#if ENABLE_INPUT_SYSTEM
+            return Keyboard.current != null &&
+                   TryConvertKeyCode(keyCode, out Key key) &&
+                   Keyboard.current[key].isPressed;
+#else
+            return Input.GetKey(keyCode);
+#endif
+        }
+
+#if ENABLE_INPUT_SYSTEM
+        private static bool TryConvertKeyCode(KeyCode keyCode, out Key key)
+        {
+            key = keyCode switch
+            {
+                KeyCode.A => Key.A,
+                KeyCode.B => Key.B,
+                KeyCode.D => Key.D,
+                KeyCode.F1 => Key.F1,
+                KeyCode.L => Key.L,
+                KeyCode.S => Key.S,
+                KeyCode.V => Key.V,
+                KeyCode.W => Key.W,
+                KeyCode.Escape => Key.Escape,
+                KeyCode.LeftShift => Key.LeftShift,
+                KeyCode.RightShift => Key.RightShift,
+                KeyCode.BackQuote => Key.Backquote,
+                _ => Key.None
+            };
+
+            return key != Key.None;
+        }
+#endif
 
         // ── Multi-touch ───────────────────────────────────────────────────────
 

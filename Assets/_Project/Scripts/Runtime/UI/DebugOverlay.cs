@@ -24,7 +24,20 @@ namespace Markyu.LastKernel
 
         private void Update()
         {
-            if (Input.GetKeyDown(ToggleKey1) || Input.GetKeyDown(ToggleKey2))
+            InputManager input = InputManager.Instance;
+#if ENABLE_INPUT_SYSTEM
+            var keyboard = UnityEngine.InputSystem.Keyboard.current;
+            bool togglePressed = input != null
+                ? input.WasKeyPressedThisFrame(ToggleKey1) || input.WasKeyPressedThisFrame(ToggleKey2)
+                : keyboard != null &&
+                  (keyboard.f1Key.wasPressedThisFrame || keyboard.backquoteKey.wasPressedThisFrame);
+#else
+            bool togglePressed = input != null
+                ? input.WasKeyPressedThisFrame(ToggleKey1) || input.WasKeyPressedThisFrame(ToggleKey2)
+                : Input.GetKeyDown(ToggleKey1) || Input.GetKeyDown(ToggleKey2);
+#endif
+
+            if (togglePressed)
                 _visible = !_visible;
 
             if (!_visible) return;

@@ -52,7 +52,7 @@ namespace Markyu.LastKernel
         {
             var stats = card.Stats;
             return new NightFighter(
-                id:            card.Definition.Id,
+                id:            $"{card.Definition.Id}:{card.GetInstanceID()}",
                 displayName:   card.Definition.DisplayName,
                 sourceCard:    card,
                 isTemporary:   false,

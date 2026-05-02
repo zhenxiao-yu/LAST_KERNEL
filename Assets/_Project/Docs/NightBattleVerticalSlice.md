@@ -165,7 +165,8 @@ Shop buffs accumulate in `BonusAttack` / `BonusMaxHealth`. At battle start, `Nig
 
 `NightWaveDefinition` ScriptableObjects live in `Assets/_Project/Data/Balance/Waves/`.  
 Each has a list of `EnemyEntry { EnemyDefinition enemy; int count; }`.  
-`NightBattleManager.ResolveWave()` tries: inspector-assigned → `Resources/Waves/` → procedural fallback.
+`Game.unity` wires `NightBattleManager.wavePool` to `Wave_Night1` through `Wave_Night5`.
+`NightBattleManager.ResolveWave()` tries: `defaultWave` override → `wavePool` by day → `Resources/Waves/` → procedural fallback.
 
 Enemy definitions live in `Assets/_Project/Data/Balance/Enemies/`.
 
@@ -173,9 +174,9 @@ Enemy definitions live in `Assets/_Project/Data/Balance/Enemies/`.
 
 ## Gold Economy
 
-- `startingGold` (serialized field, default 30) is awarded at the start of each night.
-- `TrySpendGold(int cost)` returns `false` if insufficient; the modal disables unaffordable items.
-- TODO: read real currency from `CardManager.GetStatsSnapshot()` when the economy is wired.
+- `startingGold` is the minimum guaranteed shop budget.
+- At night start, `PlayerGold = max(startingGold, CardManager.GetStatsSnapshot().Currency)`.
+- `TrySpendGold(int cost)` rejects negative or insufficient costs; the modal disables unaffordable items.
 
 ---
 
@@ -198,10 +199,10 @@ Enemy definitions live in `Assets/_Project/Data/Balance/Enemies/`.
 
 ## Next Steps
 
-1. **Gold integration**: read real currency from `RunStateManager` or `CardManager` snapshot instead of hardcoded `startingGold`.
+1. **Persistent shop economy**: decide whether night purchases consume board currency cards/chest coins or remain a per-night tactical budget.
 2. **Fighter sprites**: display `CardDefinition` art inside prep slots and battle cards.
 3. **Ability system**: extend `CombatUnit` with `List<string> AbilityIds`; hook `CombatLane` tick events to fire them.
 4. **Drag-to-assign**: upgrade from click-to-assign to drag-and-drop for richer UX.
 5. **Animations**: HP bar pulse on hit; slot shake on death; flash on crit.
 6. **Audio**: call `AudioManager` SFX from `HandleAttack` / `HandleUnitDied` in the controller.
-7. **Reward spawning**: on victory, spawn a reward card via `CardManager.CreateCardInstance()`.
+7. **Reward presentation**: surface salvage earned during the victory/result flow.

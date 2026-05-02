@@ -24,7 +24,7 @@ namespace Markyu.LastKernel
     ///     RunStateManager.Instance?.ApplyNightCombatResult(NightBattleManager.Instance.LastResult);
     ///
     /// Shop gold:
-    ///   MVP uses the serialized startingGold value. TODO: integrate with CardManager currency.
+    ///   Each night starts with max(serialized startingGold, current board currency).
     /// </summary>
     public class NightBattleManager : MonoBehaviour
     {
@@ -116,7 +116,17 @@ namespace Markyu.LastKernel
                 StartingGold      = PlayerGold
             };
 
-            OnNightModalOpened?.Invoke(context);
+            bool modalAvailable = OnNightModalOpened != null;
+            if (modalAvailable)
+            {
+                OnNightModalOpened.Invoke(context);
+            }
+            else
+            {
+                Debug.LogWarning("NightBattleManager: No modal controller subscribed. Auto-deploying eligible defenders.");
+                _confirmedTeam = BuildAutomaticTeam(eligibleDefenders);
+                _battleConfirmed = true;
+            }
 
             // Wait for player to assign fighters and click Start Battle.
             yield return new WaitUntil(() => _battleConfirmed);
@@ -159,7 +169,15 @@ namespace Markyu.LastKernel
             }
 
             LastResult = lane.BuildResult();
-            OnBattleComplete?.Invoke(LastResult);
+            if (OnBattleComplete != null)
+            {
+                OnBattleComplete.Invoke(LastResult);
+            }
+            else
+            {
+                Debug.LogWarning("NightBattleManager: No result controller subscribed. Continuing without result acknowledgement.");
+                _resultAcknowledged = true;
+            }
 
             // Wait for player to click "Return to Day".
             yield return new WaitUntil(() => _resultAcknowledged);
@@ -192,6 +210,7 @@ namespace Markyu.LastKernel
         /// <summary>Deduct gold for a shop purchase. Fires OnGoldChanged.</summary>
         public bool TrySpendGold(int amount)
         {
+            if (amount < 0) return false;
             if (amount > PlayerGold) return false;
             PlayerGold -= amount;
             OnGoldChanged?.Invoke(PlayerGold);
@@ -228,8 +247,15 @@ namespace Markyu.LastKernel
                 salvageDelta:      0
             );
 
-            OnBattleComplete?.Invoke(LastResult);
-            yield return new WaitUntil(() => _resultAcknowledged);
+            if (OnBattleComplete != null)
+            {
+                OnBattleComplete.Invoke(LastResult);
+                yield return new WaitUntil(() => _resultAcknowledged);
+            }
+            else
+            {
+                Debug.LogWarning("NightBattleManager: No result controller subscribed for undefended night.");
+            }
         }
 
         // ── Wave resolution ───────────────────────────────────────────────────────
@@ -304,17 +330,30 @@ namespace Markyu.LastKernel
             bool requiresTarget, int hireAtk = 0, int hireHp = 0)
         {
             var item = ScriptableObject.CreateInstance<NightShopItemDefinition>();
-            // Use reflection-free public fields (set via the ScriptableObject's serialized fields directly
-            // is not possible at runtime, so we use a helper on the SO instead).
-            item.goldCost      = cost;
-            item.effect        = effect;
-            item.effectValue   = value;
-            item.requiresTarget = requiresTarget;
-            item.hireAttack    = hireAtk;
-            item.hireHealth    = hireHp;
-            // Name + description are private with serialized backing fields — use the SO's name as fallback.
-            item.name = name; // Unity SO name (shown in the shop view via item.name)
+            item.ConfigureRuntime(name, desc, cost, effect, value, requiresTarget, hireAtk, hireHp, name);
             return item;
+        }
+
+        private static NightTeam BuildAutomaticTeam(IEnumerable<CardInstance> eligibleDefenders)
+        {
+            var team = new NightTeam();
+            if (eligibleDefenders == null)
+                return team;
+
+            int slot = 0;
+            foreach (CardInstance defender in eligibleDefenders)
+            {
+                if (defender == null || defender.CurrentHealth <= 0)
+                    continue;
+
+                team.Assign(slot, NightFighter.FromCard(defender));
+                slot++;
+
+                if (slot >= NightTeam.MaxSlots)
+                    break;
+            }
+
+            return team;
         }
     }
 

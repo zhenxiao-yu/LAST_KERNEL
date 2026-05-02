@@ -61,6 +61,31 @@ namespace Markyu.LastKernel
         public string DisplayName  => displayName;
         public string Description  => description;
 
+        public void ConfigureRuntime(
+            string displayName,
+            string description,
+            int goldCost,
+            NightShopEffect effect,
+            int effectValue,
+            bool requiresTarget,
+            int hireAttack = 0,
+            int hireHealth = 0,
+            string hireDisplayName = null)
+        {
+            this.displayName = displayName;
+            this.description = description;
+            this.goldCost = Mathf.Max(0, goldCost);
+            this.effect = effect;
+            this.effectValue = Mathf.Max(1, effectValue);
+            this.requiresTarget = requiresTarget;
+            this.hireAttack = Mathf.Max(1, hireAttack);
+            this.hireHealth = Mathf.Max(1, hireHealth);
+            this.hireDisplayName = string.IsNullOrWhiteSpace(hireDisplayName)
+                ? displayName
+                : hireDisplayName;
+            name = displayName;
+        }
+
         /// <summary>Apply this shop item's effect to a fighter and/or team.</summary>
         public void Apply(NightFighter target, NightTeam team)
         {
