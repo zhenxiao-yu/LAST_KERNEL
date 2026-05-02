@@ -35,7 +35,6 @@ namespace Markyu.LastKernel
 
             instance = this;
 
-            // Load typography profile from Resources (placed at Resources/Typography/GameTypographyProfile)
             typographyProfile = Resources.Load<GameTypographyProfile>("Typography/GameTypographyProfile");
 
             UnityLocalizationBridge.Initialize();
@@ -57,7 +56,6 @@ namespace Markyu.LastKernel
         }
 
         private void HandleSceneLoaded(Scene _, LoadSceneMode __) => StartCoroutine(RefreshNextFrame());
-
         private void HandleLanguageChanged(GameLanguage _) => RefreshAllText();
 
         private IEnumerator RefreshNextFrame()
@@ -68,9 +66,8 @@ namespace Markyu.LastKernel
 
         private void RefreshAllText()
         {
-            // Resolve the default (UI role) font: profile.uiFont → TMP_Settings default
-            TMP_FontAsset defaultFont = typographyProfile != null ? typographyProfile.uiFont : null;
-            defaultFont ??= TMP_Settings.defaultFontAsset;
+            // Default font: profile.ui.regular → TMP_Settings.defaultFontAsset
+            TMP_FontAsset defaultFont = typographyProfile?.ui.regular ?? TMP_Settings.defaultFontAsset;
             if (defaultFont == null)
                 return;
 
@@ -91,8 +88,6 @@ namespace Markyu.LastKernel
             }
         }
 
-        // Returns the correct font for a text component based on its GameTypographyApplier role.
-        // Components without a GameTypographyApplier always get the default (UI / MiSans) font.
         private TMP_FontAsset ResolveFont(TMP_Text text, TMP_FontAsset defaultFont)
         {
             if (typographyProfile == null)
@@ -101,7 +96,7 @@ namespace Markyu.LastKernel
             if (!text.TryGetComponent<GameTypographyApplier>(out var applier))
                 return defaultFont;
 
-            TMP_FontAsset roleFont = typographyProfile.GetFont(applier.role);
+            TMP_FontAsset roleFont = typographyProfile.GetFont(applier.role, applier.weight);
             return roleFont != null ? roleFont : defaultFont;
         }
 
@@ -111,7 +106,7 @@ namespace Markyu.LastKernel
 
             List<TMP_FontAsset> fallbackFonts = TMP_Settings.fallbackFontAssets ?? new List<TMP_FontAsset>();
 
-            // Ensure Noto emergency fallback is in the global fallback list
+            // Noto SC emergency fallback — last resort for any missing CJK glyphs
             TMP_FontAsset notoFallback = typographyProfile?.fallbackFont;
             if (notoFallback != null && !fallbackFonts.Contains(notoFallback))
                 fallbackFonts.Add(notoFallback);

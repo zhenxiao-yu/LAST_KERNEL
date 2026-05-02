@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd09011e80313714da9d2d5e5b22a2e5, type: 3}
+  m_Name: 13_Pack_LastKernel
+  m_EditorClassIdentifier:
+  id: f1e2d3c4b5a6f7e8d9c0b1a2f3e4d5c6
+  displayName: 'Last Kernel Directive'
+  description: 'Final directives from the core systems. Maximum recipe density and late-phase colony architecture. The colony does not survive on hope.'
+  artTexture: {fileID: 0}
+  category: 0
+  faction: 0
+  combatType: 0
+  loot: []
+  isAggressive: 0
+  aggroRadius: 5
+  attackRadius: 1.5
+  produceCard: {fileID: 0}
+  produceInterval: 10
+  isSellable: 0
+  sellPrice: 1
+  hasDurability: 0
+  uses: 1
+  nutrition: 0
+  maxHealth: 15
+  attack: 2
+  defense: 1
+  attackSpeed: 100
+  accuracy: 95
+  dodge: 5
+  criticalChance: 5
+  criticalMultiplier: 150
+  equipmentSlot: 0
+  statModifiers: []
+  classChangeResult: {fileID: 0}
+  buyPrice: 44
+  minQuests: 70
+  slots:
+  - Entries:
+    - Card: {fileID: 11400000, guid: d7a2b3c4e5f6071819202122232425a7, type: 2}
+      Weight: 100
+    PossibleRecipes: []
+    RecipeChance: 0
+  - Entries:
+    - Card: {fileID: 11400000, guid: d1a2b3c4e5f6071819202122232425a1, type: 2}
+      Weight: 30
+    - Card: {fileID: 11400000, guid: d9a2b3c4e5f6071819202122232425a9, type: 2}
+      Weight: 25
+    - Card: {fileID: 11400000, guid: d8a2b3c4e5f6071819202122232425a8, type: 2}
+      Weight: 20
+    - Card: {fileID: 11400000, guid: d7a2b3c4e5f6071819202122232425a7, type: 2}
+      Weight: 25
+    PossibleRecipes:
+    - {fileID: 11400000, guid: e1a2b3c4e5f6071819202122232425b1, type: 2}
+    - {fileID: 11400000, guid: e2a2b3c4e5f6071819202122232425b2, type: 2}
+    - {fileID: 11400000, guid: e3a2b3c4e5f6071819202122232425b3, type: 2}
+    - {fileID: 11400000, guid: e4a2b3c4e5f6071819202122232425b4, type: 2}
+    - {fileID: 11400000, guid: e5a2b3c4e5f6071819202122232425b5, type: 2}
+    - {fileID: 11400000, guid: e6a2b3c4e5f6071819202122232425b6, type: 2}
+    - {fileID: 11400000, guid: e7a2b3c4e5f6071819202122232425b7, type: 2}
+    - {fileID: 11400000, guid: e8a2b3c4e5f6071819202122232425b8, type: 2}
+    RecipeChance: 0.85
+  - Entries:
+    - Card: {fileID: 11400000, guid: d1a2b3c4e5f6071819202122232425a1, type: 2}
+      Weight: 35
+    - Card: {fileID: 11400000, guid: d9a2b3c4e5f6071819202122232425a9, type: 2}
+      Weight: 30
+    - Card: {fileID: 11400000, guid: d8a2b3c4e5f6071819202122232425a8, type: 2}
+      Weight: 35
+    PossibleRecipes:
+    - {fileID: 11400000, guid: e1a2b3c4e5f6071819202122232425b1, type: 2}
+    - {fileID: 11400000, guid: e4a2b3c4e5f6071819202122232425b4, type: 2}
+    - {fileID: 11400000, guid: e5a2b3c4e5f6071819202122232425b5, type: 2}
+    - {fileID: 11400000, guid: e6a2b3c4e5f6071819202122232425b6, type: 2}
+    - {fileID: 11400000, guid: e7a2b3c4e5f6071819202122232425b7, type: 2}
+    - {fileID: 11400000, guid: e8a2b3c4e5f6071819202122232425b8, type: 2}
+    - {fileID: 11400000, guid: a60eb16151d8f76429eceed663e20ab1, type: 2}
+    - {fileID: 11400000, guid: fdcf95c3938acc54598fd044b3f04c74, type: 2}
+    RecipeChance: 0.85
+  - Entries:
+    - Card: {fileID: 11400000, guid: d1a2b3c4e5f6071819202122232425a1, type: 2}
+      Weight: 34
+    - Card: {fileID: 11400000, guid: d9a2b3c4e5f6071819202122232425a9, type: 2}
+      Weight: 33
+    - Card: {fileID: 11400000, guid: d8a2b3c4e5f6071819202122232425a8, type: 2}
+      Weight: 33
+    PossibleRecipes:
+    - {fileID: 11400000, guid: e7a2b3c4e5f6071819202122232425b7, type: 2}
+    - {fileID: 11400000, guid: e8a2b3c4e5f6071819202122232425b8, type: 2}
+    - {fileID: 11400000, guid: e1a2b3c4e5f6071819202122232425b1, type: 2}
+    - {fileID: 11400000, guid: a60eb16151d8f76429eceed663e20ab1, type: 2}
+    - {fileID: 11400000, guid: fdcf95c3938acc54598fd044b3f04c74, type: 2}
+    RecipeChance: 0.9

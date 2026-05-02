@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6860ed2b507cc4e802abc7b7d792ba, type: 3}
+  m_Name: GameTypographyProfile
+  m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.GameTypographyProfile
+  ui:
+    regular: {fileID: 11400000, guid: 7ddc9b9d6fa0db54b86431e9e21fcee3, type: 2}
+    medium: {fileID: 11400000, guid: 33eea476411c7ef46bbca013204a39a7, type: 2}
+    semibold: {fileID: 11400000, guid: 369250b604855de4d933da48e33ac40b, type: 2}
+    bold: {fileID: 11400000, guid: 27981bf449d4c9b4eb28904765491339, type: 2}
+    heavy: {fileID: 11400000, guid: 2fe314320ca0ecb4cb1b8fedfda873a1, type: 2}
+  terminal:
+    regular: {fileID: 11400000, guid: e39d2f21753f36e47861584bc0c37e2b, type: 2}
+    medium: {fileID: 0}
+    semibold: {fileID: 11400000, guid: d7e4b7d034c6ac341af134d6e48989c5, type: 2}
+    bold: {fileID: 11400000, guid: d7e4b7d034c6ac341af134d6e48989c5, type: 2}
+    heavy: {fileID: 0}
+  accent:
+    regular: {fileID: 11400000, guid: 6c8f5a5a16fc0e24c8bd1a0a9b53561b, type: 2}
+    medium: {fileID: 11400000, guid: 80fa508f55597ce4cbe935fe4e2460ff, type: 2}
+    semibold: {fileID: 11400000, guid: 3dfa9760a0c3801458864c412712049e, type: 2}
+    bold: {fileID: 11400000, guid: a129fa5f3e617454590a83dbeffc4d71, type: 2}
+    heavy: {fileID: 11400000, guid: f3485340344a0404c8dec6f9d76fb06d, type: 2}
+  display:
+    regular: {fileID: 0}
+    medium: {fileID: 0}
+    semibold: {fileID: 0}
+    bold: {fileID: 0}
+    heavy: {fileID: 0}
+  fallbackFont: {fileID: 11400000, guid: 9e383a7f1ee1bfc4ab512959e3709b92, type: 2}

@@ -414,17 +414,17 @@ This is likely a Unity default value (1) that was never cleared on non-combat ca
 | Quest Count | Pack Unlocked | Pack Type |
 |-------------|--------------|-----------|
 | 0 | 00_Starter, 10_Island | Tutorial/Story |
-| 3 | 01_Beginning (×3), 11_Survival | Survival basics |
-| 14 | 03_Farmstead | Food production |
-| 16 | 04_HeartyMeals | Advanced food (suggested fix: move from 18→16) |
+| 3 | 01_Beginning (×3), 11_Survival (×1, 1 coin) | Survival basics |
+| 8 | 03_Farmstead | Food production |
+| 12 | 04_HeartyMeals | Advanced food |
 | 18 | 02_Revelations | Research/discovery |
 | 20 | 05_Knowledge | Signal/intel |
 | 24 | 06_Blacksmith | Combat/forging |
 | 28 | 07_Adventure | Exploration |
 | 32 | 08_Construction | Infrastructure |
-| — | (gap: 33–96) | No pack rewards past quest 32 |
-
-**Recommended:** Add 2–3 endgame packs unlocking at quests 40, 55, and 70 to fill the long tail of quest progression.
+| 40 | 09_SignalCore | Advanced processing (28 coins) |
+| 55 | 12_Overseer | Colony control (35 coins) |
+| 70 | 13_LastKernel | Final directive (44 coins) |
 
 ---
 
@@ -449,11 +449,14 @@ Every card MUST have a localized description that communicates:
 ## Part 7 — Known Gaps (Not Yet Designed)
 
 - [ ] Defender card integration with CardDefinition system (currently separate DefenderData)
-- [ ] Post-quest-32 pack content (endgame progression)
+- [x] Post-quest-32 pack content — 09_SignalCore (Q40), 12_Overseer (Q55), 13_LastKernel (Q70) added
+- [ ] Endgame pack art textures (artTexture: {fileID: 0} on all three new packs)
 - [ ] Elite enemy variants beyond Night 3
 - [ ] Boss/event wave definitions (NightWaveDefinition.flavorText unused)
 - [ ] Economy sink beyond packs (board upgrades, trader events)
-- [ ] Wave flavor text — all 3 waves have empty `flavorText` fields
+- [x] Wave flavor text — populated on all 3 waves (2026-04-30)
+- [ ] New food card art (artTexture: {fileID: 0} on AlgaeWafer, SignalJerky, MycoChip, CoreRation, VatBroth)
+- [ ] Weapon type triangle (combatType enum exists, triangle logic unimplemented)
 
 ---
 
@@ -590,3 +593,4 @@ All cards need: art texture, localization keys, and recipe definitions before th
 |------|--------|--------|
 | 2026-04-30 | Initial audit + balance model created | Claude (Systems) |
 | 2026-04-30 | v1.1: Applied all fixes; added 5 food cards; added Stacklands comparison | Claude (Systems) |
+| 2026-05-01 | v1.2: Created 3 endgame packs (09_SignalCore Q40/28c, 12_Overseer Q55/35c, 13_LastKernel Q70/44c); verified all prior fixes applied in assets; updated progression map with actual minQuests values | Claude (Systems) |

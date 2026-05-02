@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff53e602cd2085541a74f5a3c45fb3d5, type: 3}
+  m_Name: Card_Conscript
+  m_EditorClassIdentifier:
+  id: d4d5d6d7e4e5e6e7f4f5f6f7a4a5a6a7
+  displayName: Conscript
+  description: Emergency-drafted from the district underclass. Brittle but combat-capable.
+    Cheaper and faster to recruit than trained units. In the kernel's final hour,
+    everyone fights.
+  artTexture: {fileID: 0}
+  category: 2
+  faction: 1
+  combatType: 1
+  loot: []
+  isAggressive: 0
+  aggroRadius: 5
+  attackRadius: 1.5
+  produceCard: {fileID: 0}
+  produceInterval: 10
+  isSellable: 0
+  sellPrice: 1
+  hasDurability: 0
+  uses: 1
+  nutrition: 0
+  maxHealth: 14
+  attack: 2
+  defense: 0
+  attackSpeed: 110
+  accuracy: 88
+  dodge: 3
+  criticalChance: 3
+  criticalMultiplier: 140
+  equipmentSlot: 0
+  statModifiers: []
+  classChangeResult: {fileID: 0}

@@ -4,15 +4,18 @@ using UnityEngine;
 namespace Markyu.LastKernel
 {
     /// <summary>
-    /// Tags a TMP_Text component with a semantic font role.
-    /// TMPThemeController reads this at runtime to assign the correct font from GameTypographyProfile.
-    /// Default (no component) = GameTextRole.UI → MiSans.
+    /// Tags a TMP_Text with a semantic font role and weight.
+    /// TMPThemeController reads this to pick the correct font from GameTypographyProfile.
+    /// No component = GameTextRole.UI + GameFontWeight.Regular (MiSans Regular).
     /// </summary>
     [RequireComponent(typeof(TMP_Text))]
     [DisallowMultipleComponent]
     public sealed class GameTypographyApplier : MonoBehaviour
     {
-        [Tooltip("UI = MiSans (default), Terminal = Sarasa Mono, Accent = Oxanium, Display = brand font")]
+        [Tooltip("UI=MiSans, Terminal=Sarasa Gothic SC, Accent=Oxanium, Display=brand font")]
         public GameTextRole role = GameTextRole.UI;
+
+        [Tooltip("Regular=body, Medium=buttons, Semibold=sub-headers, Bold=titles, Heavy=screen titles")]
+        public GameFontWeight weight = GameFontWeight.Regular;
     }
 }

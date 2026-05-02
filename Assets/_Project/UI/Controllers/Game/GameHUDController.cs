@@ -177,6 +177,13 @@ namespace Markyu.LastKernel
             _startNightButton.clicked += UIEventBus.RaiseStartNightRequested;
             _paceButton.clicked       += HandlePaceToggle;
             _speedButton.clicked      += ToggleSpeed;
+
+            // Typography — accent font (Oxanium) on machine-identity labels
+            UIFonts.AccentSemibold(_phaseLabel);       // DAY badge
+            UIFonts.AccentBold(_nightPhaseLabel);      // NIGHT badge — bolder, more urgent
+            UIFonts.AccentSemibold(_waveLabel);        // Wave N counter
+            UIFonts.AccentBold(_speedButton);          // 1× / 2× speed toggle
+            UIFonts.AccentSemibold(_paceButton);       // ▶ 1× / ▶▶ 2× pace toggle
         }
 
         // ── Public API ─────────────────────────────────────────────────────────

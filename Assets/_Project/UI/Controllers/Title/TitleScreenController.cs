@@ -73,6 +73,9 @@ namespace Markyu.LastKernel
             Localizer.Bind(_subtitleLabel, "menu.subtitle");
             Localizer.Bind(_versionLabel,  "title.versionDraft");
 
+            // Typography — MiSans Heavy on logo (falls back gracefully if asset is missing)
+            UIFonts.DisplayHeavy(_logoLabel);
+
             // Sub-panel controllers
             _modal = new ModalController();
             _modal.Bind(Root.Q<VisualElement>("panel-modal"));

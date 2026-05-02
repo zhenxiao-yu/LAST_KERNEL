@@ -13,10 +13,17 @@ MonoBehaviour:
   m_Name: LKTextSettings
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.PanelTextSettings
   m_Version: 
-  m_DefaultFontAsset: {fileID: 11400000, guid: fe4e51653e87e9c4e964fdad5a8ef98f, type: 2}
+  m_DefaultFontAsset: {fileID: 11400000, guid: c1aa361f59bb9a04db75fefb86e9c036, type: 2}
   m_DefaultFontAssetPath: Fonts & Materials/
   m_FallbackFontAssets: []
-  m_FallbackOSFontAssets: []
+  m_FallbackOSFontAssets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_MatchMaterialPreset: 0
   m_MissingCharacterUnicode: 0
   m_ClearDynamicDataOnBuild: 1
@@ -34,4 +41,6 @@ MonoBehaviour:
     m_FollowingCharacters: {fileID: 4900000, guid: fade42e8bc714b018fac513c043d323b, type: 3}
     m_UseModernHangulLineBreakingRules: 0
   m_DisplayWarnings: 0
-  m_FontReferences: []
+  m_FontReferences:
+  - font: {fileID: 2230732570650464555, guid: d69ba10a5cfd9d748bd38f539b6646d9, type: 3}
+    fontAsset: {fileID: 0}
