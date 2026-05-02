@@ -61,6 +61,9 @@ namespace Markyu.LastKernel
 
         public static string CurrentLocaleCode => NormalizeLocaleCode(LocalizationSettings.SelectedLocale?.Identifier.Code) ?? EnglishLocaleCode;
 
+        public static bool IsInitializationComplete =>
+            LocalizationSettings.HasSettings && LocalizationSettings.InitializationOperation.IsDone;
+
         public static CultureInfo CurrentCulture
         {
             get

@@ -63,5 +63,20 @@ namespace Markyu.LastKernel.Tests
             Assert.AreEqual(fallback, result,
                 "GetOptional should return the fallback for an unknown key.");
         }
+
+        [UnityTest]
+        public IEnumerator LoadingScreenText_UsesSelectedLanguage()
+        {
+            GameLocalization.SetLanguage(GameLanguage.SimplifiedChinese);
+            yield return null;
+
+            Assert.AreEqual("\u70B9\u51FB\u7EE7\u7EED", GameLocalization.Get("loading.continue"));
+
+            string tip = GameLocalization.GetOptional("loading.tip.01", string.Empty);
+            Assert.IsFalse(string.IsNullOrWhiteSpace(tip),
+                "Loading screen tips should resolve through the active localization table.");
+            Assert.AreNotEqual("loading.tip.01", tip,
+                "Loading screen tips should not fall back to their localization keys.");
+        }
     }
 }

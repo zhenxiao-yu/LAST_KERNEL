@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
@@ -16,6 +17,7 @@ namespace Markyu.LastKernel
         private const float TypewriterCharDelay = 0.022f;
         // Brief pause before typing starts after the screen fades in
         private const float TypewriterStartDelay = 0.35f;
+        private const string DefaultTip = "Hold the bunker.";
 
         private static readonly string[] TipKeys =
         {
@@ -27,24 +29,31 @@ namespace Markyu.LastKernel
 
         private LSS_LoadingScreen _lss;
         private string            _chosenTip;
+        private string            _chosenTipKey;
         private bool              _typewriterDone;
         private bool              _continueHintShown;
+
+        private void OnEnable()
+        {
+            GameLocalization.LanguageChanged += HandleLanguageChanged;
+        }
+
+        private void OnDisable()
+        {
+            GameLocalization.LanguageChanged -= HandleLanguageChanged;
+        }
 
         private void Awake()
         {
             _lss = GetComponent<LSS_LoadingScreen>();
             if (_lss == null) return;
 
-            // Title / status
-            _lss.titleObjText    = GameLocalization.Get("menu.title");
-            _lss.titleObjDescText = GameLocalization.Get("loading.status");
-
-            // Pick one tip; clear LSS's own list so it doesn't override hintsText
-            var tips = BuildLocalizedTips();
-            _chosenTip          = tips[Random.Range(0, tips.Count)];
-            _lss.hintList       = new List<string>();   // prevent LSS from writing to hintsText
+            // Clear LSS's own list so it doesn't override the localized typewriter text.
+            _lss.hintList       = new List<string>();
             _lss.changeHintWithTimer = false;
             SetPrivateBool(_lss, "enableRandomHints", false);
+            ApplyLoadingText(GameIdentity.DisplayName, string.Empty, string.Empty);
+            if (_lss.hintsText != null) _lss.hintsText.text = string.Empty;
 
             // LSS blocks auto-activation at 0.9f, while the bridge keeps the prompt
             // inline with the tip/image page instead of using LSS's separate PAK page.
@@ -55,12 +64,73 @@ namespace Markyu.LastKernel
             HidePakPanel(_lss);
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
-            if (_lss == null || _lss.hintsText == null) return;
+            if (_lss == null || _lss.hintsText == null) yield break;
 
+            yield return WaitForLocalizationReady();
+            ApplyLocalizedText(chooseNewTip: true);
             _lss.hintsText.text = string.Empty;
             StartCoroutine(TypewriterRoutine());
+        }
+
+        private static IEnumerator WaitForLocalizationReady()
+        {
+            bool unityLocalizationAvailable = UnityLocalizationBridge.Initialize();
+            GameLocalization.Initialize();
+
+            if (!unityLocalizationAvailable)
+                yield break;
+
+            while (!UnityLocalizationBridge.IsInitializationComplete)
+                yield return null;
+        }
+
+        private void HandleLanguageChanged(GameLanguage _)
+        {
+            if (_lss == null)
+                return;
+
+            bool hadContinueHint = _continueHintShown;
+            ApplyLocalizedText(chooseNewTip: false);
+
+            if (_lss.hintsText == null || !_typewriterDone)
+                return;
+
+            _continueHintShown = false;
+            _lss.hintsText.text = _chosenTip;
+            if (hadContinueHint || IsReadyToContinue())
+                AppendContinueHint();
+        }
+
+        private void ApplyLocalizedText(bool chooseNewTip)
+        {
+            if (_lss == null)
+                return;
+
+            ApplyLoadingText(
+                GameLocalization.Get("menu.title"),
+                GameLocalization.Get("loading.status"),
+                GameLocalization.Get("loading.continue"));
+
+            if (chooseNewTip || string.IsNullOrEmpty(_chosenTip))
+                ChooseLocalizedTip();
+            else
+                RefreshChosenTipText();
+        }
+
+        private void ApplyLoadingText(string title, string status, string continueText)
+        {
+            if (_lss == null)
+                return;
+
+            _lss.titleObjText = title;
+            _lss.titleObjDescText = status;
+            _lss.pakText = continueText;
+
+            if (_lss.titleObj != null) _lss.titleObj.text = title;
+            if (_lss.descriptionObj != null) _lss.descriptionObj.text = status;
+            if (_lss.pakTextObj != null) _lss.pakTextObj.text = continueText;
         }
 
         private void Update()
@@ -162,7 +232,7 @@ namespace Markyu.LastKernel
             if (_lss == null || _lss.hintsText == null) return;
             if (_continueHintShown) return;
 
-            string hint = GameLocalization.Get("loading.continue");
+            string hint = GameLocalization.GetOptional("loading.continue", "Tap to continue");
             if (!string.IsNullOrEmpty(hint))
             {
                 _lss.hintsText.text += "\n\n" + hint;
@@ -197,13 +267,21 @@ namespace Markyu.LastKernel
 
         private static void HidePakPanel(LSS_LoadingScreen lss)
         {
-            var field = typeof(LSS_LoadingScreen).GetField("pakCanvasGroup", BindingFlags.NonPublic | BindingFlags.Instance);
-            if (field?.GetValue(lss) is CanvasGroup cg)
+            CanvasGroup cg = lss.pakCanvasGroup;
+            if (cg == null)
             {
-                cg.alpha          = 0f;
-                cg.interactable   = false;
-                cg.blocksRaycasts = false;
+                var field = typeof(LSS_LoadingScreen).GetField(
+                    "pakCanvasGroup",
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                cg = field?.GetValue(lss) as CanvasGroup;
             }
+
+            if (cg == null)
+                return;
+
+            cg.alpha          = 0f;
+            cg.interactable   = false;
+            cg.blocksRaycasts = false;
         }
 
         private static void SetPrivateBool(LSS_LoadingScreen lss, string fieldName, bool value)
@@ -212,16 +290,40 @@ namespace Markyu.LastKernel
             field?.SetValue(lss, value);
         }
 
-        private static List<string> BuildLocalizedTips()
+        private void ChooseLocalizedTip()
+        {
+            List<string> keys = BuildAvailableTipKeys();
+            if (keys.Count == 0)
+            {
+                _chosenTipKey = null;
+                _chosenTip = DefaultTip;
+                return;
+            }
+
+            _chosenTipKey = keys[UnityEngine.Random.Range(0, keys.Count)];
+            RefreshChosenTipText();
+        }
+
+        private void RefreshChosenTipText()
+        {
+            if (!string.IsNullOrEmpty(_chosenTipKey))
+                _chosenTip = GameLocalization.GetOptional(_chosenTipKey, DefaultTip);
+
+            if (string.IsNullOrEmpty(_chosenTip))
+                _chosenTip = DefaultTip;
+        }
+
+        private static List<string> BuildAvailableTipKeys()
         {
             var list = new List<string>(TipKeys.Length);
             foreach (string key in TipKeys)
             {
-                string text = GameLocalization.Get(key);
-                if (!string.IsNullOrEmpty(text))
-                    list.Add(text);
+                string text = GameLocalization.GetOptional(key, string.Empty);
+                if (!string.IsNullOrEmpty(text) && !string.Equals(text, key, StringComparison.Ordinal))
+                    list.Add(key);
             }
-            return list.Count > 0 ? list : new List<string> { "Hold the bunker." };
+
+            return list;
         }
     }
 }

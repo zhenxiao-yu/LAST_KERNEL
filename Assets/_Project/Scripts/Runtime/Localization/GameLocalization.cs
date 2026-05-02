@@ -99,17 +99,19 @@ namespace Markyu.LastKernel
 
             if (UnityLocalizationBridge.Initialize())
             {
-                SyncCurrentLanguageFromUnity(savePreference: true, notify: false);
+                if (UnityLocalizationBridge.IsInitializationComplete)
+                {
+                    SyncCurrentLanguageFromUnity(savePreference: true, notify: false);
+                }
+                else
+                {
+                    CurrentLanguage = LoadPreferredLanguage();
+                }
+
                 return;
             }
 
-            int savedValue = LoadLanguagePreference();
-            if (!Enum.IsDefined(typeof(GameLanguage), savedValue))
-            {
-                savedValue = (int)DefaultLanguage;
-            }
-
-            CurrentLanguage = (GameLanguage)savedValue;
+            CurrentLanguage = LoadPreferredLanguage();
         }
 
         public static void SetLanguage(GameLanguage language, bool force = false)
@@ -348,6 +350,23 @@ namespace Markyu.LastKernel
             PlayerPrefs.SetString(GameIdentity.LocaleCodePlayerPrefsKey, GetLocaleCode(language));
             PlayerPrefs.SetInt(GameIdentity.LanguagePlayerPrefsKey, (int)language);
             PlayerPrefs.Save();
+        }
+
+        private static GameLanguage LoadPreferredLanguage()
+        {
+            if (PlayerPrefs.HasKey(GameIdentity.LocaleCodePlayerPrefsKey))
+            {
+                string savedCode = PlayerPrefs.GetString(GameIdentity.LocaleCodePlayerPrefsKey, string.Empty);
+                if (TryGetLanguageFromCode(savedCode, out GameLanguage language))
+                {
+                    return language;
+                }
+            }
+
+            int savedValue = LoadLanguagePreference();
+            return Enum.IsDefined(typeof(GameLanguage), savedValue)
+                ? (GameLanguage)savedValue
+                : DefaultLanguage;
         }
 
         private static int LoadLanguagePreference()
