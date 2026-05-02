@@ -56,63 +56,44 @@ DELAY_SECONDS = 13           # Stay under 5 images/min rate limit
 # ============================================================
 
 MASTER_STYLE = (
-    # ── Pixel resolution — most critical, stated first ────────────────────────
-    # Art goes into _OverlayTex shader slot — subject only, no background.
-    # The card material (_Color per category) supplies the background.
-    "64x64 pixel art scaled to 1024x1024, "
-    "every pixel is a bold 16x16 block at final size, "
-    "coarse chunky pixel grid clearly visible, "
-    "pixel-perfect hard edges, every edge snaps to the grid, "
+    # ── Hard bans — stated FIRST so the model never ignores them ─────────────
+    # Previous outputs showed: color swatch panels, hex labels, fake UI chrome.
+    # All caused by hex codes + "4-6 colors" reading as "make a design doc".
+    "NO text of any kind, NO letters, NO numbers, NO words anywhere in the image, "
+    "NO color swatch panel, NO color palette grid, NO reference sheet layout, "
+    "NO sprite sheet, NO design document format, NO side panels, NO sidebars, "
+    "NO fake UI, NO health bars, NO stat boxes, NO HUD chrome, NO inventory panels, "
+    "NO card frame baked into the art, NO decorative border, NO corner ornaments, "
+    "NO drop shadow, NO glow halo behind subject, NO background rectangle, "
 
-    # ── Background — MUST be transparent ─────────────────────────────────────
-    # Pipeline: art texture goes into _OverlayTex on top of the card material's
-    # _Color. A solid background in the PNG = broken double background.
-    # dall-e-3 cannot output true transparent PNGs (no API parameter),
-    # so use pure WHITE background for easiest post-processing if needed.
-    "pure solid white background #FFFFFF, absolutely nothing else behind the subject, "
-    "subject only on flat solid white, "
-    "no scenery, no floor, no wall, no atmosphere, "
-    "no drop shadow, no ambient shadow, no glow halo behind subject, "
+    # ── Background ────────────────────────────────────────────────────────────
+    # dall-e-3 cannot output true alpha; use white so edges are easy to key.
+    "pure solid white background, subject floating on flat white and nothing else, "
+    "no scenery, no floor, no wall, no atmosphere behind the subject, "
 
-    # ── Art style ─────────────────────────────────────────────────────────────
-    "classic 16-bit RPG card sprite art, "
-    "style of GBA Fire Emblem or Slay the Spire card illustrations, "
-    "bold 2-pixel dark outline surrounding the entire subject, "
-    "flat cel-shading with dithered pixel midtones, "
-    "bright highlight pixels on top-lit surfaces, "
-    "dark shadow pixels on underside surfaces, "
-    "no smooth gradients, no anti-aliasing, no sub-pixel blending, "
+    # ── Pixel art style ───────────────────────────────────────────────────────
+    "retro pixel art style, chunky blocky pixels clearly visible, "
+    "classic 16-bit RPG card illustration, "
+    "style similar to GBA Fire Emblem or Slay the Spire card art, "
+    "bold dark outline around the entire subject, "
+    "flat cel-shading with dithered pixel shading, "
+    "hard pixel edges, no smooth gradients, no anti-aliasing, "
 
-    # ── Palette — cyberpunk LAST KERNEL colors ────────────────────────────────
-    # Card background tint is applied by the shader (_OverlayTint per mat).
-    # Subject should use the LAST KERNEL cyberpunk palette so tint blends well.
-    "subject palette strictly 4 to 6 colors, "
-    "primary outlines use dark navy #080A12, "
-    "highlight accent uses cyan #00DCFF, "
-    "secondary accent uses muted magenta #A03291, "
-    "warm highlight uses amber #FFA028, "
-    "off-white #C3D2DE for brightest highlight pixels, "
+    # ── Palette — names only, NO hex codes (hex codes trigger palette panels) ─
+    "cyberpunk color palette: dark navy outlines, cyan accent highlights, "
+    "muted magenta secondary color, warm amber for warm highlights, "
+    "off-white for brightest lit pixels, "
 
     # ── Composition ───────────────────────────────────────────────────────────
-    "subject centered horizontally and vertically in frame, "
-    "subject height fills 60 to 70 percent of canvas, "
-    "equal transparent margin on all four sides, "
-    "strong readable silhouette at 32x32 display size, "
-    "ONE strong memorable visual hook — one design detail that makes "
-    "this card instantly recognizable at a glance, "
+    "subject centered in frame, fills roughly two-thirds of the canvas height, "
+    "equal white margin on all sides, "
+    "strong readable silhouette at small display sizes, "
+    "one memorable iconic design detail that makes this card instantly recognizable, "
 
     # ── Quality ───────────────────────────────────────────────────────────────
-    "every pixel intentional, no dead pixels, no stray isolated specks, "
-    "no blurry soft edges anywhere in the image, "
-    "professional polished pixel art game card quality, "
-    "dark cyberpunk post-apocalyptic bunker survival world aesthetic, "
-
-    # ── Hard bans ─────────────────────────────────────────────────────────────
-    "ABSOLUTELY NO text, NO letters, NO numbers, NO words, "
-    "NO fake UI elements, NO health bars, NO stat panels, "
-    "NO HUD chrome, NO dialog boxes, NO game screenshot elements, "
-    "NO card frame baked into the art, NO decorative border, "
-    "NO corner ornaments, NO background rectangle, NO bounding box shadow"
+    "every pixel intentional, no stray isolated pixel specks, "
+    "professional polished pixel art quality, "
+    "dark cyberpunk post-apocalyptic bunker survival world aesthetic"
 )
 
 # Per-category prefix + background.
@@ -122,77 +103,74 @@ MASTER_STYLE = (
 CATEGORY_PREFIX: Dict[str, str] = {
 
     "Character": (
-        "64x64 pixel art RPG character card sprite, pure white background,"
-        "full body standing, facing front or very slight 3/4 right, "
-        "neutral ready stance, arms slightly away from sides, "
-        "slightly larger head proportion for sprite readability, "
-        "simple expressive face readable at 4 pixels wide, "
-        "head and feet both fully visible within the canvas, "
+        "pixel art trading card game illustration, white background, "
+        "single character, full body, facing slightly right, "
+        "neutral combat-ready stance, arms slightly away from body, "
+        "head and feet both fully in frame, "
+        "slightly large head for sprite readability, "
     ),
     "Mob": (
-        "64x64 pixel art RPG enemy creature card sprite, pure white background,"
-        "full body standing or crouching, facing front, "
-        "threatening wide stance, arms out or claws raised, "
-        "exaggerated menacing proportions for readability, "
-        "entire body from head to feet visible within the canvas, "
+        "pixel art trading card game illustration, white background, "
+        "single creature, full body, facing front, "
+        "threatening wide stance, limbs spread, aggressive posture, "
+        "exaggerated menacing proportions, entire body in frame, "
     ),
     "Material": (
-        "64x64 pixel art material item card sprite, pure white background,"
-        "single solid object centered and floating, "
-        "slight isometric tilt showing top and front face, "
+        "pixel art trading card game illustration, white background, "
+        "single raw material object floating centered, "
+        "slight isometric tilt to show depth, "
         "bold chunky pixel shapes, no fine detail, "
     ),
     "Consumable": (
-        "64x64 pixel art food or consumable card sprite, pure white background,"
-        "single food or container object centered and floating, "
+        "pixel art trading card game illustration, white background, "
+        "single food or container object floating centered, "
         "slight isometric tilt, bold readable pixel shapes, "
     ),
     "Equipment": (
-        "64x64 pixel art weapon or armor card sprite, pure white background,"
-        "single item centered and floating, "
-        "45-degree diagonal angle, tip pointing to upper-right corner, "
-        "bold chunky pixel shapes, clear blade and grip distinction, "
+        "pixel art trading card game illustration, white background, "
+        "single weapon or armor piece floating centered, "
+        "45-degree diagonal angle with tip toward upper-right, "
+        "bold chunky pixel shapes, "
     ),
     "Structure": (
-        "64x64 pixel art building or machine card sprite, pure white background,"
-        "compact isometric 3/4 view, front face and roof visible, "
-        "structure centered with equal margins, "
-        "chunky readable architecture, bold pixel shapes, "
+        "pixel art trading card game illustration, white background, "
+        "single building or machine, compact isometric 3/4 view, "
+        "front face and rooftop both visible, centered with equal margins, "
+        "chunky readable architecture, "
     ),
     "Resource": (
-        "64x64 pixel art natural resource card sprite, pure white background,"
-        "single object or plant centered and floating, "
-        "front-facing or slight 3/4 angle, bold chunky pixel silhouette, "
+        "pixel art trading card game illustration, white background, "
+        "single natural object or plant floating centered, "
+        "front-facing or slight 3/4 angle, bold chunky silhouette, "
     ),
     "Area": (
-        "64x64 pixel art zone location card sprite, pure white background,"
-        "compact isometric top-down scene, "
-        "2 to 3 key landmark silhouette elements in frame, "
-        "bold readable shapes, no fine detail, "
+        "pixel art trading card game illustration, white background, "
+        "compact isometric scene with two or three landmark silhouettes, "
+        "bold readable shapes, minimal detail, "
     ),
     "Currency": (
-        "64x64 pixel art currency token card sprite, pure white background,"
-        "single coin or credit chip centered and floating, "
-        "slight isometric tilt, glinting highlight pixel on top face, "
+        "pixel art trading card game illustration, white background, "
+        "single coin or credit chip floating centered, "
+        "slight isometric tilt, glinting highlight on top face, "
     ),
     "Valuable": (
-        "64x64 pixel art rare artifact card sprite, pure white background,"
-        "single object centered and floating, slight isometric tilt, "
-        "color contrast implies rarity — no glow halo, "
+        "pixel art trading card game illustration, white background, "
+        "single rare artifact floating centered, slight isometric tilt, "
+        "striking color contrast to imply rarity, "
     ),
     "Recipe": (
-        "64x64 pixel art schematic scroll card sprite, pure white background,"
-        "flat document or rolled scroll centered, "
-        "front-facing, folded or curled edges clearly visible, "
+        "pixel art trading card game illustration, white background, "
+        "single rolled or folded schematic scroll floating centered, "
+        "curled edges clearly visible, front-facing, "
     ),
     "Other": (
-        "64x64 pixel art object card sprite, pure white background,"
-        "single object centered and floating, "
-        "slight isometric tilt, bold chunky shapes, "
+        "pixel art trading card game illustration, white background, "
+        "single object floating centered, slight isometric tilt, "
+        "bold chunky shapes, "
     ),
     "Pack": (
-        "64x64 pixel art supply pack card sprite, pure white background,"
-        "single sealed pack or crate centered and floating, "
+        "pixel art trading card game illustration, white background, "
+        "single sealed supply pack or crate floating centered, "
         "slight isometric tilt, bold chunky silhouette, "
     ),
 }
