@@ -432,11 +432,21 @@ namespace Markyu.LastKernel
             // Runtime fallback items so the shop is functional without any assets configured.
             return new[]
             {
-                MakeItem("Scrap Blade",   "+1 ATK to fighter",          5,  NightShopEffect.AddAttack,    1, true),
-                MakeItem("Plated Vest",   "+3 Max HP to fighter",       8,  NightShopEffect.AddMaxHealth, 3, true),
-                MakeItem("Energy Drink",  "+1 ATK this battle",         4,  NightShopEffect.AddAttack,    1, true),
-                MakeItem("Repair Kit",    "Restore fighter to full HP", 12, NightShopEffect.FullHeal,     0, true),
-                MakeItem("Hired Guard",   "Add temp 3ATK/6HP fighter",  15, NightShopEffect.HireGuard,    0, false, 3, 6),
+                MakeItem(GameLocalization.Get("night.shop.default.scrapBlade.name"),
+                         GameLocalization.Get("night.shop.default.scrapBlade.desc"),
+                         5,  NightShopEffect.AddAttack,    1, true),
+                MakeItem(GameLocalization.Get("night.shop.default.platedVest.name"),
+                         GameLocalization.Get("night.shop.default.platedVest.desc"),
+                         8,  NightShopEffect.AddMaxHealth, 3, true),
+                MakeItem(GameLocalization.Get("night.shop.default.energyDrink.name"),
+                         GameLocalization.Get("night.shop.default.energyDrink.desc"),
+                         4,  NightShopEffect.AddAttack,    1, true),
+                MakeItem(GameLocalization.Get("night.shop.default.repairKit.name"),
+                         GameLocalization.Get("night.shop.default.repairKit.desc"),
+                         12, NightShopEffect.FullHeal,     0, true),
+                MakeItem(GameLocalization.Get("night.shop.default.hiredGuard.name"),
+                         GameLocalization.Get("night.shop.default.hiredGuard.desc"),
+                         15, NightShopEffect.HireGuard,    0, false, 3, 6),
             };
         }
 

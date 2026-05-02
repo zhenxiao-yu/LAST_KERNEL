@@ -202,6 +202,24 @@ namespace Markyu.LastKernel
             ["night.modal.log.crit"]        = new("【暴击】",                               " [CRIT]"),
             ["night.modal.log.unitDied"]    = new("{0} 已倒下。",                            "{0} is destroyed."),
 
+            // Night shop — effect descriptions (fallback when SO has no custom description)
+            ["night.shop.effect.addAttack"]    = new("+{0} 攻击",                        "+{0} ATK"),
+            ["night.shop.effect.addMaxHealth"] = new("+{0} 最大血量",                    "+{0} Max HP"),
+            ["night.shop.effect.fullHeal"]     = new("恢复全部血量",                      "Restore full HP"),
+            ["night.shop.effect.hireGuard"]    = new("雇佣临时战士 {0}攻/{1}血",         "Temp fighter {0}ATK/{1}HP"),
+
+            // Night shop — default runtime item names and descriptions
+            ["night.shop.default.scrapBlade.name"]    = new("废铁刀",              "Scrap Blade"),
+            ["night.shop.default.scrapBlade.desc"]    = new("为战士 +1 攻击",      "+1 ATK to fighter"),
+            ["night.shop.default.platedVest.name"]    = new("钢板背心",            "Plated Vest"),
+            ["night.shop.default.platedVest.desc"]    = new("为战士 +3 最大血量",  "+3 Max HP to fighter"),
+            ["night.shop.default.energyDrink.name"]   = new("能量饮料",            "Energy Drink"),
+            ["night.shop.default.energyDrink.desc"]   = new("+1 攻击（此战有效）", "+1 ATK this battle"),
+            ["night.shop.default.repairKit.name"]     = new("急救包",              "Repair Kit"),
+            ["night.shop.default.repairKit.desc"]     = new("将战士恢复至满血",    "Restore fighter to full HP"),
+            ["night.shop.default.hiredGuard.name"]    = new("雇佣卫兵",            "Hired Guard"),
+            ["night.shop.default.hiredGuard.desc"]    = new("添加临时战士 3攻/6血","Add temp 3ATK/6HP fighter"),
+
             // Procedural wave / enemy names (used with GetOptional)
             ["night.enemy.scavenger"]          = new("拾荒者",             "Scavenger"),
             ["night.wave.procedural.name"]     = new("夜间突袭",           "Nightly Incursion"),

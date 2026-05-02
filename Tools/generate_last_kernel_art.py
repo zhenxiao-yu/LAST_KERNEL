@@ -45,15 +45,13 @@ CARD_ART_DIR = "CardArt"
 PACK_ART_DIR = "PackArt"
 
 # Recraft model + style
-# "recraft_v3" is their latest; "pixel_art" is a native style — no extra prompting needed.
-MODEL        = "recraft_v3"
-STYLE        = "pixel_art"
+MODEL        = "recraftv3"
+STYLE        = "Pixel art"
 IMAGE_SIZE   = "1024x1024"
 
 # Generation settings
-MAX_RETRIES      = 2
-RETRY_DELAY      = 10   # seconds between retries
-DOWNLOAD_TIMEOUT = 60
+MAX_RETRIES  = 2
+RETRY_DELAY  = 10   # seconds between retries
 
 
 # ============================================================
@@ -68,29 +66,35 @@ DOWNLOAD_TIMEOUT = 60
 NEGATIVE = (
     "text, letters, numbers, watermark, multiple characters, "
     "color palette panel, reference sheet, sprite sheet, "
-    "background scenery, environment, room interior, "
+    "background scene, background environment, room interior, building interior, "
+    "outdoor scene, floor, walls, pillars, sky, landscape, gradient background, "
     "card frame, border, ui elements, hud, "
-    "drop shadow, glow halo, duplicate, split panel"
+    "drop shadow, glow halo, duplicate, split panel, "
+    "pastel colors, washed out colors, pale colors, blurry, smooth, anti-aliased"
 )
 
 # Per-category pose/composition prefix — kept short for Recraft.
 CATEGORY_PREFIX: Dict[str, str] = {
-    "Character": "full body character, facing right, combat ready stance, isolated on white, ",
-    "Mob":       "full body creature, facing front, aggressive stance, isolated on white, ",
-    "Material":  "single raw material object, floating, isometric view, isolated on white, ",
-    "Consumable":"single food or container, floating, isometric view, isolated on white, ",
-    "Equipment": "single weapon or armor piece, floating, 45 degree angle, isolated on white, ",
-    "Structure": "single building or machine, isometric 3/4 view, isolated on white, ",
-    "Resource":  "single natural object or plant, floating, isolated on white, ",
-    "Area":      "two or three bold landmark silhouettes side by side, isolated on white, ",
-    "Currency":  "single coin or chip, floating, isometric view, isolated on white, ",
-    "Valuable":  "single rare artifact, floating, isometric view, isolated on white, ",
-    "Recipe":    "single rolled paper scroll, floating, isolated on white, ",
-    "Pack":      "single sealed supply crate or pack, floating, isometric view, isolated on white, ",
-    "Other":     "single object, floating, isometric view, isolated on white, ",
+    "Character": "full body character, facing right, combat ready stance, pure white background, subject only no scene, ",
+    "Mob":       "full body creature, facing front, aggressive stance, pure white background, subject only no scene, ",
+    "Material":  "single raw material object, floating, isometric view, pure white background, subject only no scene, ",
+    "Consumable":"single food or container, floating, isometric view, pure white background, subject only no scene, ",
+    "Equipment": "single weapon or armor piece, floating, 45 degree angle, pure white background, subject only no scene, ",
+    "Structure": "single building or machine, isometric 3/4 view, pure white background, subject only no scene, ",
+    "Resource":  "single natural object or plant, floating, pure white background, subject only no scene, ",
+    "Area":      "two or three bold landmark silhouettes side by side, pure white background, subject only no scene, ",
+    "Currency":  "single coin or chip, floating, isometric view, pure white background, subject only no scene, ",
+    "Valuable":  "single rare artifact, floating, isometric view, pure white background, subject only no scene, ",
+    "Recipe":    "single rolled paper scroll, floating, pure white background, subject only no scene, ",
+    "Pack":      "single sealed supply crate or pack, floating, isometric view, pure white background, subject only no scene, ",
+    "Other":     "single object, floating, isometric view, pure white background, subject only no scene, ",
 }
 
-WORLD_SUFFIX = "cyberpunk post-apocalyptic bunker world, worn industrial technology"
+WORLD_SUFFIX = (
+    "cyberpunk post-apocalyptic bunker, dark grey metal, teal and orange accents, "
+    "high contrast dark palette, chunky 32x32 pixel art, bold pixel outlines, "
+    "pure white background, no background scene"
+)
 
 
 # ============================================================
@@ -273,6 +277,7 @@ def build_prompt(category: str, subject: str) -> str:
 
 def generate_image(prompt: str, style_id: Optional[str]) -> bytes:
     """Call Recraft API and return raw PNG bytes."""
+    import base64
     payload = {
         "prompt":          prompt,
         "negative_prompt": NEGATIVE,
@@ -280,17 +285,13 @@ def generate_image(prompt: str, style_id: Optional[str]) -> bytes:
         "style":           STYLE,
         "n":               1,
         "size":            IMAGE_SIZE,
-        "response_format": "url",
+        "response_format": "b64_json",
     }
     if style_id:
         payload["style_id"] = style_id
 
     result = api_request("POST", "images/generations", payload)
-    url    = result["data"][0]["url"]
-
-    req = urllib.request.Request(url)
-    with urllib.request.urlopen(req, timeout=DOWNLOAD_TIMEOUT) as resp:
-        return resp.read()
+    return base64.b64decode(result["data"][0]["b64_json"])
 
 
 def generate_and_save(prompt: str, filepath: str, style_id: Optional[str]) -> None:
@@ -319,6 +320,7 @@ def make_style() -> None:
 
     # Use no style_id for the first generation — pure model defaults
     prompt = build_prompt("Character", "armored enforcer holding a salvaged blade, cyberpunk")
+    import base64
     payload = {
         "prompt":          prompt,
         "negative_prompt": NEGATIVE,
@@ -326,19 +328,16 @@ def make_style() -> None:
         "style":           STYLE,
         "n":               1,
         "size":            IMAGE_SIZE,
-        "response_format": "url",
+        "response_format": "b64_json",
     }
-    result   = api_request("POST", "images/generations", payload)
-    img_url  = result["data"][0]["url"]
-    img_id   = result["data"][0].get("id") or result.get("id")
+    result    = api_request("POST", "images/generations", payload)
+    img_bytes = base64.b64decode(result["data"][0]["b64_json"])
 
     # Save preview
     os.makedirs(CARD_ART_DIR, exist_ok=True)
     preview = os.path.join(CARD_ART_DIR, "_style_reference.png")
-    req = urllib.request.Request(img_url)
-    with urllib.request.urlopen(req, timeout=DOWNLOAD_TIMEOUT) as resp:
-        with open(preview, "wb") as f:
-            f.write(resp.read())
+    with open(preview, "wb") as f:
+        f.write(img_bytes)
 
     print(f"\n  Preview saved → {preview}")
     print("  Open it and check the style. Does it look good?")

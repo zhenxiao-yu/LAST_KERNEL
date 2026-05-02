@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 50991991c8f14b698b047c2d9b860954
   displayName: 'Survivor Intake Crate'
-  description: 'A free intake drop for a cold district start. Expect one worker, one food source, and barely enough salvage.'
+  description: 'A free intake drop for a cold district start. Two workers, one food source, and barely enough salvage.'
   artTexture: {fileID: 2800000, guid: 39672eb470c87b440abfd4e32b7ab9bd, type: 3}
   category: 0
   faction: 0
@@ -59,6 +59,11 @@ MonoBehaviour:
     RecipeChance: 0
   - Entries:
     - Card: {fileID: 11400000, guid: 72aeff93ef451ea40aeadb2a0e067f97, type: 2}
+      Weight: 100
+    PossibleRecipes: []
+    RecipeChance: 0
+  - Entries:
+    - Card: {fileID: 11400000, guid: 3e0351bd595e3654d9d80dc4286c0a65, type: 2}
       Weight: 100
     PossibleRecipes: []
     RecipeChance: 0

@@ -98,10 +98,10 @@ namespace Markyu.LastKernel
         private static string EffectDescription(NightShopItemDefinition d) =>
             d.effect switch
             {
-                NightShopEffect.AddAttack    => $"+{d.effectValue} ATK",
-                NightShopEffect.AddMaxHealth => $"+{d.effectValue} Max HP",
-                NightShopEffect.FullHeal     => "Restore full HP",
-                NightShopEffect.HireGuard    => $"Temp fighter {d.hireAttack}ATK/{d.hireHealth}HP",
+                NightShopEffect.AddAttack    => GameLocalization.Format("night.shop.effect.addAttack", d.effectValue),
+                NightShopEffect.AddMaxHealth => GameLocalization.Format("night.shop.effect.addMaxHealth", d.effectValue),
+                NightShopEffect.FullHeal     => GameLocalization.Get("night.shop.effect.fullHeal"),
+                NightShopEffect.HireGuard    => GameLocalization.Format("night.shop.effect.hireGuard", d.hireAttack, d.hireHealth),
                 _                            => "—"
             };
     }

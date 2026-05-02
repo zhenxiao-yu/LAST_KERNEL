@@ -67,22 +67,54 @@ namespace Markyu.LastKernel
 
         private VisualElement BuildVillagerEntry(NightFighter fighter)
         {
+            float hpFraction = fighter.BaseMaxHealth > 0
+                ? (float)fighter.BaseHealth / fighter.BaseMaxHealth
+                : 1f;
+            bool isWounded  = hpFraction < 1f;
+            bool isCritical = hpFraction < 0.35f;
+
             var row = new VisualElement();
             row.AddToClassList("nbm-villager-entry");
+            if (isWounded) row.AddToClassList("nbm-villager-entry--wounded");
+
+            // Card art icon
+            var icon = new VisualElement();
+            icon.AddToClassList("nbm-villager-entry__icon");
+            var tex = fighter.SourceCard?.Definition?.ArtTexture;
+            if (tex != null)
+                icon.style.backgroundImage = new StyleBackground(Background.FromTexture2D(tex));
+            else
+                icon.style.opacity = 0f;
+            row.Add(icon);
+
+            // Info column: name + HP bar
+            var info = new VisualElement();
+            info.AddToClassList("nbm-villager-entry__info");
 
             var nameLabel = new Label(fighter.DisplayName);
             nameLabel.AddToClassList("nbm-villager-entry__name");
+            info.Add(nameLabel);
+
+            var hpBar = new VisualElement();
+            hpBar.AddToClassList("nbm-villager-entry__hp-bar");
+            var hpFill = new VisualElement();
+            hpFill.AddToClassList("nbm-villager-entry__hp-fill");
+            if (isCritical)      hpFill.AddToClassList("nbm-villager-entry__hp-fill--critical");
+            else if (isWounded)  hpFill.AddToClassList("nbm-villager-entry__hp-fill--wounded");
+            hpFill.style.width = Length.Percent(hpFraction * 100f);
+            hpBar.Add(hpFill);
+            info.Add(hpBar);
+
+            row.Add(info);
 
             var statsLabel = new Label(GameLocalization.Format("night.modal.stats.fighter", fighter.FinalAttack, fighter.FinalMaxHealth));
             statsLabel.AddToClassList("nbm-villager-entry__stats");
+            row.Add(statsLabel);
 
             var badge = new Label(GameLocalization.Get("night.modal.slot.front"));
             badge.name = "nbm-villager-badge";
             badge.AddToClassList("nbm-villager-entry__badge");
             badge.AddToClassList("lk-hidden");
-
-            row.Add(nameLabel);
-            row.Add(statsLabel);
             row.Add(badge);
 
             row.RegisterCallback<ClickEvent>(_ => OnVillagerClicked(fighter));
