@@ -293,6 +293,19 @@ namespace Markyu.LastKernel
         private void HandleBattleComplete(NightCombatResult result)
         {
             if (result == null) return;
+
+            // Undefended night: OnBattleStarted was never fired, so the prep layout
+            // is still showing. Switch to battle layout now so the result panel
+            // overlays a clean state rather than the prep zone.
+            if (_phase == Phase.Prep)
+            {
+                _battleZone?.AddToClassList("lk-hidden");
+                _bottomArea?.AddToClassList("nbm-bottom-area--battle");
+                _btnStart?.AddToClassList("lk-hidden");
+                _btnCancel?.AddToClassList("lk-hidden");
+                _btnFast?.SetEnabled(false);
+            }
+
             _phase = Phase.Result;
 
             bool won = result.PlayerWon;

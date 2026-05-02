@@ -319,6 +319,12 @@ namespace Markyu.LastKernel
             ["daycycle.cleanupBody"] = new(
                 "你还需要处理 {0} 张超额卡牌，系统才会推进到下一循环。",
                 "You still need to remove {0} excess cards before the next cycle can begin."),
+            ["daycycle.nightDefeatTitle"]  = new("殖民地遭到攻击",          "Colony Attacked"),
+            ["daycycle.nightDefeatBody"]   = new("防线已被突破。士气目前为 {0}。在下次入侵前重建防御。", "The perimeter was breached. Morale is now {0}. Rebuild your defenses before the next incursion."),
+            ["daycycle.nightDefeatAction"] = new("重建防御",                 "Rebuild"),
+            ["daycycle.moraleCollapseTitle"] = new("殖民地已溃散",           "Colony Abandoned"),
+            ["daycycle.moraleCollapseBody"]  = new("士气归零。殖民地已四散，再无值得守护之物。", "Morale has reached zero. The colony has dispersed — nothing remains worth defending."),
+
             ["daycycle.dayStartedTitle"] = new("第 {0} 天开始", "Day {0} Begins"),
             ["daycycle.dayStartedBody"] = new("街区节点已重新联机。", "District links are back online."),
             ["daycycle.dayStartedAction"] = new("启动新一天", "Start New Day"),

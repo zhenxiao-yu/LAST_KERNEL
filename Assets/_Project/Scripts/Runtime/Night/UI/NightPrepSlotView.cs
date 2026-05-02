@@ -52,7 +52,10 @@ namespace Markyu.LastKernel
             Root.RegisterCallback<ClickEvent>(_ => { if (!_locked) OnClicked?.Invoke(SlotIndex); });
 
             // Slot position label (shown when empty)
-            _slotLabel = new Label(IsFront ? "FRONT" : $"#{slotIndex + 1}");
+            string slotText = IsFront
+                ? GameLocalization.Get("night.modal.slot.front")
+                : GameLocalization.Format("night.modal.slot.n", slotIndex + 1);
+            _slotLabel = new Label(slotText);
             _slotLabel.AddToClassList("nb-prep-slot__label");
             Root.Add(_slotLabel);
 

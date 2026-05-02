@@ -290,10 +290,9 @@ namespace Markyu.LastKernel
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                (GameLocalization.GetOptional("daycycle.moraleCollapseTitle", "Colony Abandoned"),
-                 GameLocalization.GetOptional("daycycle.moraleCollapseBody",
-                    "Morale has reached zero. The colony has dispersed — nothing remains worth defending.")),
-                GameLocalization.GetOptional("daycycle.gameOverAction", "End Run"),
+                (GameLocalization.Get("daycycle.moraleCollapseTitle"),
+                 GameLocalization.Get("daycycle.moraleCollapseBody")),
+                GameLocalization.Get("daycycle.gameOverAction"),
                 () => GameDirector.Instance.GameOver()
             );
         }
@@ -305,10 +304,9 @@ namespace Markyu.LastKernel
             InfoPanel.Instance?.RequestInfoDisplay(
                 dayCycleRequester,
                 InfoPriority.Modal,
-                (GameLocalization.GetOptional("daycycle.nightDefeatTitle", "Colony Attacked"),
-                 GameLocalization.GetOptional("daycycle.nightDefeatBody",
-                    $"The perimeter was breached. Morale is now {morale}. Rebuild your defenses before the next incursion.")),
-                GameLocalization.GetOptional("daycycle.nightDefeatAction", "Rebuild"),
+                (GameLocalization.Get("daycycle.nightDefeatTitle"),
+                 GameLocalization.Format("daycycle.nightDefeatBody", morale)),
+                GameLocalization.Get("daycycle.nightDefeatAction"),
                 () => dismissed = true
             );
             yield return new WaitUntil(() => dismissed);

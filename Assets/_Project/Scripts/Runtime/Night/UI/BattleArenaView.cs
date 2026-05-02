@@ -40,6 +40,7 @@ namespace Markyu.LastKernel
         private readonly Queue<(CombatUnit atk, CombatUnit tgt, int dmg, bool crit)> _events = new();
         private bool _drainingQueue;
         private bool _fastForward;
+        private Coroutine _finishFadeCoroutine;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -62,6 +63,15 @@ namespace Markyu.LastKernel
 
         private void HandleBattleStarted(CombatLane lane, NightWaveDefinition wave)
         {
+            // Stop any FinishAndFade still running from a previous night before
+            // overwriting the canvas and lane references it holds.
+            if (_finishFadeCoroutine != null)
+            {
+                StopCoroutine(_finishFadeCoroutine);
+                _finishFadeCoroutine = null;
+                UnbindLane();
+            }
+
             _fastForward = false;
             _lane = lane;
             _events.Clear();
@@ -81,7 +91,10 @@ namespace Markyu.LastKernel
         private void HandleBattleComplete(NightCombatResult result)
         {
             if (result == null) return;
-            StartCoroutine(FinishAndFade(result.PlayerWon));
+            // Discard queued events so DrainQueue exits on its next iteration
+            // instead of playing out all pending animations (avoids long drain wait).
+            _events.Clear();
+            _finishFadeCoroutine = StartCoroutine(FinishAndFade(result.PlayerWon));
         }
 
         private void HandleFastResolve()
@@ -208,7 +221,8 @@ namespace Markyu.LastKernel
             scaler.uiScaleMode   = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             scaler.referenceResolution = new Vector2(1920f, 1080f);
             scaler.matchWidthOrHeight  = 0.5f;
-            canvasGO.AddComponent<GraphicRaycaster>();
+            // No GraphicRaycaster — arena has no interactive UGUI elements.
+            // Adding one would block UIToolkit clicks through the canvas overlay.
 
             // Panel
             _panel = new GameObject("ArenaPanel", typeof(RectTransform));
@@ -403,6 +417,7 @@ namespace Markyu.LastKernel
                                     .WaitForCompletion();
             }
 
+            _finishFadeCoroutine = null;
             UnbindLane();
             DestroyArena();
         }

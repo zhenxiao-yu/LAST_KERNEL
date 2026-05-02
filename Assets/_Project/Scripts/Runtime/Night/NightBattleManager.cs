@@ -241,8 +241,14 @@ namespace Markyu.LastKernel
             // Wait for player to click "Return to Day".
             yield return new WaitUntil(() => _resultAcknowledged);
 
-            yield return ApplyAftermath(LastResult);
-            _isRunning = false;
+            try
+            {
+                yield return ApplyAftermath(LastResult);
+            }
+            finally
+            {
+                _isRunning = false;
+            }
         }
 
         // ── Public control API (called by NightBattleModalController) ─────────────
@@ -332,7 +338,12 @@ namespace Markyu.LastKernel
 
             if (OnBattleComplete != null)
             {
-                OnBattleComplete.Invoke(LastResult);
+                try { OnBattleComplete.Invoke(LastResult); }
+                catch (Exception e)
+                {
+                    Debug.LogError($"[NightBattleManager] OnBattleComplete handler threw (undefended): {e.Message}. Auto-acknowledging.");
+                    _resultAcknowledged = true;
+                }
                 yield return new WaitUntil(() => _resultAcknowledged);
             }
             else
