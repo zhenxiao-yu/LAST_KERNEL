@@ -55,12 +55,27 @@ namespace Markyu.LastKernel
             Instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += HandleSceneLoaded;
-            SavedGames = SaveSystem.LoadAllValidData<GameData>();
+            SavedGames = new System.Collections.Generic.Dictionary<string, GameData>();
+            LoadSavesAsync();
         }
 
         private void OnDestroy()
         {
             SceneManager.sceneLoaded -= HandleSceneLoaded;
+        }
+
+        private async void LoadSavesAsync()
+        {
+            try
+            {
+                var saves = await System.Threading.Tasks.Task.Run(SaveSystem.LoadAllValidData<GameData>);
+                if (this != null)
+                    SavedGames = saves;
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"GameDirector: Save load failed. {ex.Message}");
+            }
         }
 
         private void OnApplicationQuit()
@@ -102,7 +117,9 @@ namespace Markyu.LastKernel
         {
             // One frame grace period so the new scene's Awake/Start complete first.
             yield return null;
-            yield return ScreenFader.Instance?.Fade(1f, 0f);
+            float startAlpha = ScreenFader.Instance?.CurrentAlpha ?? 0f;
+            if (startAlpha > 0.01f)
+                yield return ScreenFader.Instance?.Fade(startAlpha, 0f);
         }
 
         #region Core Game Flow

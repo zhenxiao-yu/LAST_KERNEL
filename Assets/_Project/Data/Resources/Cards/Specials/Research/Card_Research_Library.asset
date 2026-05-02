@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: be227bbf964143ae9994c6c6447223e5
   displayName: Kernel Archive
-  description: A secured archive node for new blueprints. Knowledge survives when
-    power does.
+  description: Most of it is corrupted. The rest is worse.
   artTexture: {fileID: 2800000, guid: 3c41a3958d5cf444d805024885d13d71, type: 3}
   category: 6
   faction: 0

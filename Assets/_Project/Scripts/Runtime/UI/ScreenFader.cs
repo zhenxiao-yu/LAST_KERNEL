@@ -10,6 +10,8 @@ namespace Markyu.LastKernel
 
         private CanvasGroup canvasGroup;
 
+        public float CurrentAlpha => canvasGroup != null ? canvasGroup.alpha : 0f;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -20,6 +22,7 @@ namespace Markyu.LastKernel
             Instance = this;
 
             canvasGroup = GetComponent<CanvasGroup>();
+            canvasGroup.blocksRaycasts = false;
         }
 
         public IEnumerator Fade(float startAlpha, float endAlpha, float fadeDuration = 1.0f)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 691b72437fbc4624aec0e9206883a3b8
   displayName: Hab Pod
-  description: A shelter pod for district civilians. Small, warm, defensible.
+  description: Holds two. Smells like four. Keeps the cold out, mostly.
   artTexture: {fileID: 2800000, guid: a67725e1018414a4286632933963b47e, type: 3}
   category: 6
   faction: 0

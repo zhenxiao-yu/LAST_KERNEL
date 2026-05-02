@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Hearth
   m_EditorClassIdentifier: 
   id: a08c49e00fde44c6b40af0f26937fff8
-  displayName: Generator
-  description: A low-power generator that keeps the hab lights honest.
+  displayName: Burn Node
+  description: It keeps the cold back. That's all it needs to do.
   artTexture: {fileID: 2800000, guid: 1a1d8971483ac4d4799dbab8f39c001b, type: 3}
   category: 6
   faction: 0

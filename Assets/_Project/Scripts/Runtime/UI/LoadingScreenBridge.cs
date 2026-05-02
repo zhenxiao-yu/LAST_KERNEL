@@ -45,12 +45,13 @@ namespace Markyu.LastKernel
             _lss.changeHintWithTimer = false;
             SetPrivateBool(_lss, "enableRandomHints", false);
 
-            // Keep waitForPlayerInput so LSS doesn't auto-activate; disable PAK panel
-            // so the separate "press any key" overlay never appears — we show the hint
-            // inline with the tip text instead.
+            // enablePressAnyKey must be true so LSS blocks auto-activation at 0.9f progress.
+            // We hide the PAK overlay by zeroing its CanvasGroup; the inline hint we append
+            // to the tip text takes its place on the same page.
             _lss.waitForPlayerInput = true;
             _lss.useCountdown       = false;
-            SetPrivateBool(_lss, "enablePressAnyKey", false);
+            SetPrivateBool(_lss, "enablePressAnyKey", true);
+            HidePakPanel(_lss);
         }
 
         private void Start()
@@ -120,6 +121,17 @@ namespace Markyu.LastKernel
 #else
             return Input.anyKeyDown;
 #endif
+        }
+
+        private static void HidePakPanel(LSS_LoadingScreen lss)
+        {
+            var field = typeof(LSS_LoadingScreen).GetField("pakCanvasGroup", BindingFlags.NonPublic | BindingFlags.Instance);
+            if (field?.GetValue(lss) is CanvasGroup cg)
+            {
+                cg.alpha          = 0f;
+                cg.interactable   = false;
+                cg.blocksRaycasts = false;
+            }
         }
 
         private static void SetPrivateBool(LSS_LoadingScreen lss, string fieldName, bool value)

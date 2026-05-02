@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 875e81c9100a481a83d4616ce92c5e6f
   displayName: Memory Casket
-  description: A sealed casket for bodies and backup drives. Closure is a system
-    need.
+  description: Not a memorial. A receipt.
   artTexture: {fileID: 2800000, guid: 2b5a6e80c68e41d438d75938372e6c02, type: 3}
   category: 6
   faction: 0

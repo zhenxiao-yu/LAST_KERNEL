@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2a3b83bd1247422a88fd769a702272a5
   displayName: Fabricator Bench
-  description: A heavy bench for weapons, plates, and field repairs.
+  description: The difference between salvage and equipment is about forty minutes.
   artTexture: {fileID: 2800000, guid: 9e558d4902d081f4aac50f92f28a4ea2, type: 3}
   category: 6
   faction: 0

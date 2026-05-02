@@ -180,7 +180,14 @@ namespace Markyu.LastKernel
         public void ConfirmResult() => _resultAcknowledged = true;
 
         /// <summary>Collapses tick delay to one frame so battle resolves immediately.</summary>
-        public void SetFastResolve() => _fastResolve = true;
+        public void SetFastResolve()
+        {
+            _fastResolve = true;
+            OnFastResolveEnabled?.Invoke();
+        }
+
+        /// <summary>Fired when the player clicks Fast Resolve. BattleArenaView collapses animation durations.</summary>
+        public static event Action OnFastResolveEnabled;
 
         /// <summary>Deduct gold for a shop purchase. Fires OnGoldChanged.</summary>
         public bool TrySpendGold(int amount)

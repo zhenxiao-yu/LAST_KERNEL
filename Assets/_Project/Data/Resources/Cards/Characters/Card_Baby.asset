@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1048bfa14d374720bbc4bbfdc206347e
   displayName: Dependent
-  description: A district child under your protection. No output yet, but the future
-    has weight.
+  description: The district counts it as a liability. The colony counts it differently.
   artTexture: {fileID: 2800000, guid: 719a72e62dafeba4b975ad96edf4c4c3, type: 3}
   category: 2
   faction: 0

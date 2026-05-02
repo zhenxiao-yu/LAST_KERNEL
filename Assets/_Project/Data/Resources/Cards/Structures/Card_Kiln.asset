@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Kiln
   m_EditorClassIdentifier: 
   id: f5ee99e9c8af4a95bdbd272f2d517c57
-  displayName: Ceramic Kiln
-  description: A hot box for curing slurry into hard construction blocks.
+  displayName: Cure Oven
+  description: Clay in. Brick out. Patience is the only input it respects.
   artTexture: {fileID: 2800000, guid: 7eb11aed635741643be1f28518a94296, type: 3}
   category: 6
   faction: 0
