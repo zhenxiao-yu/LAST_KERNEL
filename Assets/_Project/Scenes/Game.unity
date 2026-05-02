@@ -1675,8 +1675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: _Project.UIToolkit::Markyu.LastKernel.ScreenFaderController
-  rootController: {fileID: 0}
-  screenId: 
 --- !u!1001 &2056759083933773671
 PrefabInstance:
   m_ObjectHideFlags: 0

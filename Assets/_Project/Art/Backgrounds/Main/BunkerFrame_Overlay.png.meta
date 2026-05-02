@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 389c12dc6dbfedb4b92055ff51a4f697
+guid: 3940d1380ee2e9040b0f1ab4a02b37d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5720543068960466618
-    second: pixel_art_large (2)_0
+      213: -4443353624386249824
+    second: BunkerFrame_Overlay_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +24,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 1
+  isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,7 +139,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pixel_art_large (2)_0
+      name: BunkerFrame_Overlay_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 649d944336c8c90b0800000000000000
-      internalID: -5720543068960466618
+      spriteID: 0ab5307ab690652c0800000000000000
+      internalID: -4443353624386249824
       vertices: []
       indices: 
       edges: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      pixel_art_large (2)_0: -5720543068960466618
+      BunkerFrame_Overlay_0: -4443353624386249824
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

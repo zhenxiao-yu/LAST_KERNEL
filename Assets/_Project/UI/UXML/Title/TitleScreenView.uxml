@@ -35,9 +35,9 @@
 
         </ui:VisualElement>
 
-        <!-- Version footer — bottom-left -->
+        <!-- Version footer — bottom-left, pointer-events: none so it never blocks nav buttons -->
         <ui:VisualElement name="title-footer" class="lk-hud-bottom lk-pad-sm"
-                          style="padding-left: 120px;">
+                          style="padding-left: 120px; pointer-events: none;">
             <ui:Label name="lbl-version" class="lk-watermark" />
         </ui:VisualElement>
 
@@ -58,7 +58,7 @@
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
                         <!-- Day duration -->
-                        <ui:Label name="lbl-duration" class="lk-label lk-label--body lk-mb-sm" />
+                        <ui:Label name="lbl-duration" class="lk-label lk-label--dim lk-mb-sm" />
                         <ui:Slider name="slider-duration" low-value="30" high-value="300" value="120"
                                    show-fill-area="true" class="lk-mb-sm" />
 
@@ -122,7 +122,7 @@
                 </ui:VisualElement>
 
                 <!-- Settings: UI Scale + Audio -->
-                <ui:ScrollView name="opts-scroll" style="min-height: 280px; max-height: 480px;">
+                <ui:ScrollView name="opts-scroll" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-ui" class="lk-label lk-label--subheader lk-mb-sm" />
@@ -132,12 +132,12 @@
 
                         <ui:Label name="lbl-opts-audio" class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:VisualElement class="lk-column lk-mb-sm">
-                            <ui:Label name="lbl-sfx" class="lk-label lk-label--body lk-mb-sm" />
+                            <ui:Label name="lbl-sfx" class="lk-label lk-label--dim lk-mb-sm" />
                             <ui:Slider name="slider-sfx" low-value="0" high-value="1" value="1"
                                        show-fill-area="true" />
                         </ui:VisualElement>
                         <ui:VisualElement class="lk-column lk-mb-md">
-                            <ui:Label name="lbl-bgm" class="lk-label lk-label--body lk-mb-sm" />
+                            <ui:Label name="lbl-bgm" class="lk-label lk-label--dim lk-mb-sm" />
                             <ui:Slider name="slider-bgm" low-value="0" high-value="1" value="1"
                                        show-fill-area="true" />
                         </ui:VisualElement>
@@ -146,7 +146,7 @@
                 </ui:ScrollView>
 
                 <!-- Video: Graphics -->
-                <ui:ScrollView name="video-scroll" class="lk-hidden" style="min-height: 280px; max-height: 480px;">
+                <ui:ScrollView name="video-scroll" class="lk-hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-graphics" class="lk-label lk-label--subheader lk-mb-sm" />
@@ -160,7 +160,7 @@
                 </ui:ScrollView>
 
                 <!-- Language -->
-                <ui:ScrollView name="language-scroll" class="lk-hidden" style="min-height: 280px; max-height: 480px;">
+                <ui:ScrollView name="language-scroll" class="lk-hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-language-hint" class="lk-hint lk-mb-sm" />
                         <ui:Button name="btn-opt-language"  class="lk-button lk-full-width" />
@@ -168,12 +168,12 @@
                 </ui:ScrollView>
 
                 <!-- Controls -->
-                <ui:ScrollView name="controls-scroll" class="lk-hidden" style="min-height: 280px; max-height: 480px;">
+                <ui:ScrollView name="controls-scroll" class="lk-hidden" style="height: 400px;">
                     <ui:VisualElement name="keybind-list" style="flex-direction: column;" />
                 </ui:ScrollView>
 
                 <!-- Accessibility -->
-                <ui:ScrollView name="accessibility-scroll" class="lk-hidden" style="min-height: 280px; max-height: 480px;">
+                <ui:ScrollView name="accessibility-scroll" class="lk-hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-opts-accessibility"  class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:Label  name="lbl-accessibility-hint"  class="lk-hint lk-mb-md" />

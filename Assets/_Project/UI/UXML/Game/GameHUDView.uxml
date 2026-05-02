@@ -4,6 +4,11 @@
     <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
     <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
 
+    <!-- Watermark — first child = lowest z-order, never overlaps HUD strips or panels -->
+    <ui:VisualElement class="lk-hud-bottom lk-pad-sm" style="align-items: center; pointer-events: none;">
+        <ui:Label name="lbl-watermark" class="lk-watermark" />
+    </ui:VisualElement>
+
     <!-- ══════════════════════════════════════════════════════════════════
          Day strip: [DAY badge | Day N | time bar | pace]  ←spacer→
                     [food | gold | cards stat box]  ←spacer→  [Start Night]
@@ -48,11 +53,6 @@
         <!-- Right: start night CTA -->
         <ui:Button name="btn-start-night" class="lk-button lk-button--primary" />
 
-    </ui:VisualElement>
-
-    <!-- Watermark — bottom-centre, always visible -->
-    <ui:VisualElement class="lk-hud-bottom lk-pad-sm" style="align-items: center; pointer-events: none;">
-        <ui:Label name="lbl-watermark" class="lk-watermark" />
     </ui:VisualElement>
 
     <!-- ══════════════════════════════════════════════════════════════════

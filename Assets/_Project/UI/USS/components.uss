@@ -315,9 +315,11 @@
 
 /* Sub-section / category header */
 .lk-label--subheader {
-    color: var(--lk-accent);
-    font-size: var(--lk-font-size-lg);
+    color: var(--lk-accent-dim);
+    font-size: var(--lk-font-size-xs);
+    -unity-font-style: bold;
     text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* Body copy — default */
@@ -842,6 +844,7 @@ Toggle:checked .unity-toggle__checkmark {
     font-size: var(--lk-font-size-sm);
     opacity: 0.5;
     white-space: nowrap;
+    pointer-events: none;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
