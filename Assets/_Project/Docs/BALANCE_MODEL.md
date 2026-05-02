@@ -585,6 +585,68 @@ All changes applied directly to .asset files.
 
 All cards need: art texture, localization keys, and recipe definitions before they are game-ready.
 
+### New Late-Game Cards (9 added, 2026-05-01)
+
+These cards form interlocking production chains available from packs 09–13 (quest gates 40–70). All use `Card_Anvil` (Fabricator Bench) as a non-consumed tool ingredient (`consumptionMode: 1`).
+
+#### Card Catalog
+
+| Card | Display Name | Category | GUID suffix | Role |
+|------|-------------|----------|-------------|------|
+| Card_DataShard | Data Shard | Material (4) | d1...a1 | Endgame crafting currency — "information ore" used in all new recipes |
+| Card_KernelShard | Kernel Shard | Material (4) | d7...a7 | Rare endgame drop; sellPrice=25; required for Recipe_StasisPod |
+| Card_Conscript | Emergency Conscript | Character (2) | d4...a4 | Budget emergency defender; atk=2, DPS≈1.96; faction=1 |
+| Card_SurgeWeapon | Surge Weapon | Equipment (5) | d3...a3 | 3-use burst weapon: +5 atk, -15 attackSpeed |
+| Card_CombatChip | Combat Implant | Equipment (5) | d9...a9 | 5-use neural enhancer: +2 atk, +10 speed, +10 critChance |
+| Card_TapNode | Tap Node | Structure (6) | d2...a2 | Passive coin engine: 1 Coin every 90s |
+| Card_OverseerCore | Overseer Core | Structure (6) | d5...a5 | Colony management hub; maxHP=40 |
+| Card_SignalDrone | Signal Drone | Structure (6) | d6...a6 | Passive DataShard generator: 1 DataShard every 120s |
+| Card_StasisPod | Stasis Pod | Structure (6) | d8...a8 | Emergency food synthesizer: 1 AlgaeWafer every 150s |
+
+#### Production Chains
+
+**Economy loop (coin sink → passive income):**
+```
+3×Coin → [Recipe_DataShard, 20s] → DataShard
+DataShard + Construction + Anvil → [Recipe_TapNode, 90s] → TapNode → 1 Coin/90s [passive]
+```
+
+**Combat chain:**
+```
+2×Coin + Anvil → [Recipe_Conscript, 90s] → Conscript [DPS 1.96, cheap bulk defender]
+DataShard + Anvil → [Recipe_CombatChip, 60s] → CombatChip [5-use all-round buff]
+2×DataShard + Anvil → [Recipe_SurgeWeapon, 90s] → SurgeWeapon [3-use burst]
+```
+
+**Infrastructure chain:**
+```
+DataShard + Construction + Anvil → [Recipe_SignalDrone, 60s] → SignalDrone → 1 DataShard/120s [passive]
+2×DataShard + Anvil → [Recipe_OverseerCore, 120s] → OverseerCore [HP=40 hub]
+KernelShard + DataShard + Anvil → [Recipe_StasisPod, 180s] → StasisPod → 1 AlgaeWafer/150s [passive]
+```
+
+#### Recipe Summary (8 new recipes)
+
+| Recipe GUID suffix | Display Name | Ingredients | Result | Duration | Category |
+|--------------------|-------------|-------------|--------|----------|----------|
+| e1...b1 | Forge Data Shard | 3×Coin | DataShard | 20s | 4 (Materials) |
+| e2...b2 | Build Tap Node | DataShard + Construction + Anvil | TapNode | 90s | 6 (Structures) |
+| e3...b3 | Forge Surge Weapon | 2×DataShard + Anvil | SurgeWeapon | 90s | 5 (Equipment) |
+| e4...b4 | Recruit Conscript | 2×Coin + Anvil | Conscript | 90s | 2 (Characters) |
+| e5...b5 | Build Overseer Core | 2×DataShard + Anvil | OverseerCore | 120s | 6 (Structures) |
+| e6...b6 | Build Signal Drone | DataShard + Construction + Anvil | SignalDrone | 60s | 6 (Structures) |
+| e7...b7 | Build Stasis Pod | KernelShard + DataShard + Anvil | StasisPod | 180s | 6 (Structures) |
+| e8...b8 | Forge Combat Implant | DataShard + Anvil | CombatChip | 60s | 5 (Equipment) |
+
+#### Balance Notes
+
+- **Conscript DPS (1.96)** sits below Warrior (2.80) and Ranger (2.50) intentionally — it is the "floor" unit that prevents being defenseless, not a damage dealer.
+- **TapNode output** (~40 coins/hour) is slower than active selling but requires no player attention. Net positive with 2+ TapNodes running.
+- **SurgeWeapon trade-off:** +5 attack but -15 attackSpeed means lower sustained DPS — correct for a "save for the hard fight" item.
+- **StasisPod food output** (1 AlgaeWafer every 150s = ~1 nutrition per 2.5 minutes) supplements but does not replace active food production — intended as emergency buffer.
+
+All 9 cards need: art textures (artTexture: {fileID: 0} on all), localization keys, and description strings before shipping.
+
 ---
 
 ## Change Log
@@ -594,3 +656,4 @@ All cards need: art texture, localization keys, and recipe definitions before th
 | 2026-04-30 | Initial audit + balance model created | Claude (Systems) |
 | 2026-04-30 | v1.1: Applied all fixes; added 5 food cards; added Stacklands comparison | Claude (Systems) |
 | 2026-05-01 | v1.2: Created 3 endgame packs (09_SignalCore Q40/28c, 12_Overseer Q55/35c, 13_LastKernel Q70/44c); verified all prior fixes applied in assets; updated progression map with actual minQuests values | Claude (Systems) |
+| 2026-05-01 | v1.3: Created 9 new late-game cards + 8 recipes; wired all 3 endgame packs to reference new card/recipe GUIDs; added new card catalog section with production chain map | Claude (Systems) |

@@ -32,4 +32,4 @@ MonoBehaviour:
   isContinuous: 0
   allowExcessIngredients: 0
   craftingDuration: 60
-  randomWeight: 1
+  randomWeight: 0.7

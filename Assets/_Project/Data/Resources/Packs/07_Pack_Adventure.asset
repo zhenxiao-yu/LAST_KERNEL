@@ -81,3 +81,17 @@ MonoBehaviour:
       Weight: 25
     PossibleRecipes: []
     RecipeChance: 0
+  - Entries:
+    - Card: {fileID: 11400000, guid: ab518c0794a7c9f4db0ff8fcd4e6dfd5, type: 2}
+      Weight: 20
+    - Card: {fileID: 11400000, guid: 06b45747ae3922147809ae68228f5063, type: 2}
+      Weight: 20
+    - Card: {fileID: 11400000, guid: 44912e2c757985949a2be7659e7a5492, type: 2}
+      Weight: 20
+    - Card: {fileID: 11400000, guid: 36190ed2af8260946bd2b37970d56d76, type: 2}
+      Weight: 20
+    - Card: {fileID: 11400000, guid: b625f849c2653d643869269c3b431c68, type: 2}
+      Weight: 20
+    PossibleRecipes:
+    - {fileID: 11400000, guid: cb60c20e38f0d354abb784c0754eb356, type: 2}
+    RecipeChance: 0.3
