@@ -71,8 +71,18 @@ namespace Markyu.LastKernel
             bool pressed = WasAnyInputPressed();
             if (!pressed) return;
 
-            // First press while typewriter is still running → snap text, require a second press
-            if (!_typewriterDone)
+            bool pakPromptVisible =
+                _lss.isPAKFadeInRunning ||
+                _lss.isPAKFadeInCompleted ||
+                (_lss.pakCanvasGroup != null && _lss.pakCanvasGroup.alpha > 0.01f);
+
+            bool contentStillVisible =
+                _lss.contentCanvasGroup != null &&
+                _lss.contentCanvasGroup.alpha > 0.1f;
+
+            // First press while the tip page is still visible snaps the typewriter.
+            // Once LSS has moved to the PAK page, the same press should activate.
+            if (!_typewriterDone && !pakPromptVisible && contentStillVisible)
             {
                 StopAllCoroutines();
                 if (_lss.hintsText != null) _lss.hintsText.text = _chosenTip;
@@ -81,12 +91,40 @@ namespace Markyu.LastKernel
                 return;
             }
 
-            // Second press (or first if typewriter already finished) → activate scene
+            // Second press, or the first press on the PAK page, activates and dismisses.
+            ActivateSceneAndDismissLoadingScreen();
+        }
+
+        private void ActivateSceneAndDismissLoadingScreen()
+        {
             _lss.loadingProcess.allowSceneActivation = true;
-            _lss.canvasGroup.interactable   = false;
-            _lss.canvasGroup.blocksRaycasts = false;
+
+            if (_lss.canvasGroup != null)
+            {
+                _lss.canvasGroup.interactable   = false;
+                _lss.canvasGroup.blocksRaycasts = false;
+            }
+
+            bool pakPromptVisible =
+                _lss.isPAKFadeInRunning ||
+                _lss.isPAKFadeInCompleted ||
+                (_lss.pakCanvasGroup != null && _lss.pakCanvasGroup.alpha > 0.01f);
+
             _lss.StopCoroutine("FadeOutBackgroundScreen");
             _lss.StartCoroutine("FadeOutBackgroundScreen");
+
+            if (pakPromptVisible)
+            {
+                _lss.StopCoroutine("FadeInPAKScreen");
+                _lss.StopCoroutine("FadeOutPAKScreen");
+                _lss.StartCoroutine("FadeOutPAKScreen", true);
+            }
+            else
+            {
+                _lss.StopCoroutine("FadeInContentScreen");
+                _lss.StopCoroutine("FadeOutContentScreen");
+                _lss.StartCoroutine("FadeOutContentScreen", true);
+            }
         }
 
         private IEnumerator TypewriterRoutine()
@@ -116,8 +154,15 @@ namespace Markyu.LastKernel
         {
 #if ENABLE_INPUT_SYSTEM
             bool pointer  = UnityEngine.InputSystem.Pointer.current?.press.wasPressedThisFrame ?? false;
-            bool keyboard = UnityEngine.InputSystem.Keyboard.current?.anyKey.wasPressedThisFrame ?? false;
-            return pointer || keyboard;
+            bool mouse    = Mouse.current?.leftButton.wasPressedThisFrame ?? false;
+            bool touch    = Touchscreen.current?.primaryTouch.press.wasPressedThisFrame ?? false;
+            bool pen      = Pen.current?.tip.wasPressedThisFrame ?? false;
+            bool keyboard = Keyboard.current?.anyKey.wasPressedThisFrame ?? false;
+            bool gamepad  =
+                (Gamepad.current?.buttonSouth.wasPressedThisFrame ?? false) ||
+                (Gamepad.current?.startButton.wasPressedThisFrame ?? false);
+
+            return pointer || mouse || touch || pen || keyboard || gamepad;
 #else
             return Input.anyKeyDown;
 #endif
