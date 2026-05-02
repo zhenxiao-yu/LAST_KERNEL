@@ -32,6 +32,27 @@
     background-color: var(--lk-overlay-bg);
 }
 
+/* Pause menu overlay — deeper than generic overlay, nearly opaque */
+.lk-screen--pause {
+    background-color: rgba(2, 3, 8, 0.97);
+}
+
+/* Vignette — inset border darkening on all edges; first child of its container for lowest z-order */
+.lk-vignette {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-top-width: 120px;
+    border-bottom-width: 120px;
+    border-left-width: 80px;
+    border-right-width: 80px;
+    border-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0);
+    pointer-events: none;
+}
+
 /* ════════════════════════════════════════════════════════════════════════
  * Panel
  * ════════════════════════════════════════════════════════════════════════ */
@@ -72,6 +93,7 @@
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
     text-transform: uppercase;
+    text-shadow: 0px 0px 8px rgba(0, 220, 255, 0.45);
 }
 
 .lk-panel__footer {
@@ -117,6 +139,7 @@
     text-transform: uppercase;
     margin-bottom: var(--lk-gap-medium);
     white-space: normal;
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.9);
 }
 
 .lk-modal__body {
@@ -294,6 +317,7 @@
     letter-spacing: 4px;
     text-transform: uppercase;
     white-space: nowrap;
+    text-shadow: 0px 0px 24px rgba(0, 220, 255, 0.55), 0px 2px 6px rgba(0, 0, 0, 0.95);
 }
 
 /* Screen / section title */
@@ -303,6 +327,7 @@
     -unity-font-style: bold;
     text-transform: uppercase;
     white-space: nowrap;
+    text-shadow: 0px 0px 12px rgba(0, 220, 255, 0.4), 0px 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 /* Panel or section header */
@@ -311,6 +336,7 @@
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
     text-transform: uppercase;
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.85);
 }
 
 /* Sub-section / category header */
@@ -353,6 +379,7 @@
     -unity-font-style: bold;
     -unity-text-align: middle-right;
     white-space: nowrap;
+    text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 /* Status variants — swap in via C# when threshold crossed */
@@ -457,8 +484,8 @@
 }
 
 .lk-hud-strip--top {
-    border-bottom-color: var(--lk-border-dim);
-    border-bottom-width: 1px;
+    border-bottom-color: var(--lk-border);
+    border-bottom-width: 2px;
 }
 
 .lk-hud-strip--bottom {
@@ -480,6 +507,7 @@
     -unity-text-align: middle-center;
     letter-spacing: 2px;
     white-space: nowrap;
+    text-shadow: 0px 0px 10px rgba(0, 220, 255, 0.5);
 }
 
 .lk-phase-label--night   { color: var(--lk-accent-secondary); }
@@ -494,7 +522,7 @@
     border-color: var(--lk-border-dim);
     border-width: 1px;
     border-left-color: var(--lk-accent);
-    border-left-width: 3px;
+    border-left-width: 4px;
     border-radius: 0;
     padding: var(--lk-padding-small);
     padding-left: var(--lk-padding-medium);
@@ -503,7 +531,7 @@
 
 .lk-info-panel__header {
     color: var(--lk-accent);
-    font-size: var(--lk-font-size-md);
+    font-size: var(--lk-font-size-lg);
     -unity-font-style: bold;
     margin-bottom: 4px;
     white-space: normal;
@@ -512,7 +540,7 @@
 
 .lk-info-panel__body {
     color: var(--lk-text);
-    font-size: var(--lk-font-size-sm);
+    font-size: var(--lk-font-size-md);
     white-space: normal;
     line-height: 1.4;
 }
@@ -1127,7 +1155,7 @@ Toggle:checked .unity-toggle__checkmark {
  * ════════════════════════════════════════════════════════════════════════ */
 
 .lk-info-badge {
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     -unity-font-style: bold;
     color: var(--lk-text-dim);
     border-color: var(--lk-border-dim);
@@ -1150,7 +1178,7 @@ Toggle:checked .unity-toggle__checkmark {
 
 .lk-info-panel__stats {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     white-space: normal;
     line-height: 1.4;
 }
@@ -1337,7 +1365,7 @@ Toggle:checked .unity-toggle__checkmark {
  * ════════════════════════════════════════════════════════════════════════ */
 
 .lk-info-chip {
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     color: var(--lk-text-dim);
     background-color: var(--lk-panel-overlay);
     border-color: var(--lk-border-dim);

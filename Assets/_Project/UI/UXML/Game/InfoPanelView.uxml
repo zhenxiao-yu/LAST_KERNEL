@@ -6,7 +6,7 @@
 
     <!-- Bottom-left anchored info panel. Controller adds/removes lk-hidden based on active requests. -->
     <ui:VisualElement name="info-panel-anchor" class="lk-hud-bottom lk-hidden"
-                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 420px;">
+                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 520px;">
 
         <ui:VisualElement name="info-panel-root" class="lk-info-panel">
 

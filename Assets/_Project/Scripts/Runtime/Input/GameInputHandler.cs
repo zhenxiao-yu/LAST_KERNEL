@@ -141,12 +141,6 @@ namespace Markyu.LastKernel
             if (_setSpeed3.WasPressedThisFrame())
                 TimeManager.Instance?.SetTimePace(TimePace.VeryFast);
 
-            if (_pauseOrAdvance.WasPressedThisFrame())
-            {
-                if (DayCycleManager.Instance == null || !DayCycleManager.Instance.IsEndingCycle)
-                    PauseMenu.Instance?.Toggle();
-            }
-
             if (_sellHoveredCard.WasPressedThisFrame())
                 TrySellHoveredCard();
         }

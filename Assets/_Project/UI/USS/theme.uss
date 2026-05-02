@@ -12,11 +12,11 @@
 
     /* ── Backgrounds ──────────────────────────────────────────────────────
      * Dark navy/charcoal — "underground command terminal, server core"     */
-    --lk-bg:                 rgb(10, 12, 22);      /* Scene / screen fill   */
-    --lk-panel:              rgb(20, 26, 40);      /* Panel / card surface  */
-    --lk-panel-overlay:      rgb(8, 10, 18);       /* Inset / deep surface  */
-    --lk-overlay-bg:         rgba(4, 6, 14, 0.88); /* Modal backdrop        */
-    --lk-hud-bg:             rgba(10, 12, 22, 0.9);/* HUD strips            */
+    --lk-bg:                 rgb(8, 10, 18);       /* Scene / screen fill   */
+    --lk-panel:              rgb(22, 30, 48);      /* Panel / card surface  */
+    --lk-panel-overlay:      rgb(12, 16, 28);      /* Inset / deep surface  */
+    --lk-overlay-bg:         rgba(4, 6, 14, 0.92); /* Modal backdrop        */
+    --lk-hud-bg:             rgba(16, 20, 36, 0.97);/* HUD strips           */
 
     /* ── Primary accent — cyan terminal glow ─────────────────────────────*/
     --lk-accent:             rgb(0, 220, 255);
@@ -39,8 +39,8 @@
     --lk-disabled:           rgb(60, 72, 88);      /* Locked / inactive     */
 
     /* ── Borders ──────────────────────────────────────────────────────────*/
-    --lk-border:             rgb(0, 122, 140);     /* Active / accent edge  */
-    --lk-border-dim:         rgb(42, 51, 71);      /* Passive / structural  */
+    --lk-border:             rgb(0, 140, 165);     /* Active / accent edge  */
+    --lk-border-dim:         rgb(52, 64, 88);      /* Passive / structural  */
     --lk-border-width:       1px;
 
     /* ── Shape — pixel art: hard corners only ─────────────────────────────*/

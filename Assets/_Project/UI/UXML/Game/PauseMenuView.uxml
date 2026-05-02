@@ -5,7 +5,10 @@
     <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
 
     <!-- Full-screen overlay. Controller toggles lk-hidden to show or hide. -->
-    <ui:VisualElement name="pause-backdrop" class="lk-screen lk-screen--overlay lk-hidden">
+    <ui:VisualElement name="pause-backdrop" class="lk-screen lk-screen--pause lk-hidden">
+
+        <!-- Vignette — first child so it renders behind all nav and panel content -->
+        <ui:VisualElement class="lk-vignette" />
 
         <!-- Left column nav (matches title screen layout) -->
         <ui:VisualElement name="pause-main" class="lk-screen lk-column lk-justify-center"
