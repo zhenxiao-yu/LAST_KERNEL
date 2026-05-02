@@ -33,26 +33,31 @@ API_KEY = os.getenv("OPENAI_API_KEY", "")
 CARD_ART_DIR = "CardArt"
 PACK_ART_DIR = "PackArt"
 
-MODEL         = "dall-e-3"   # Universally available; use gpt-image-1 if your project has access
-SIZE          = "1024x1024"
-QUALITY       = "standard"   # standard (~$0.04) or hd (~$0.08)
-DELAY_SECONDS = 13           # Stay under 5 images/min rate limit
+MODEL            = "dall-e-3"  # Universally available; use gpt-image-1 if your project has access
+SIZE             = "1024x1024"
+QUALITY          = "standard"  # standard (~$0.04) or hd (~$0.08)
+DELAY_SECONDS    = 13          # Stay under 5 images/min rate limit (60s / 5 = 12s min)
+MAX_RETRIES      = 1           # Automatic retries on transient errors
+RETRY_DELAY      = 60          # Extra wait on rate-limit retry
+DOWNLOAD_TIMEOUT = 60          # Seconds before download is considered hung
+MAX_PROMPT_CHARS = 4000        # dall-e-3 hard limit
 
 
 # ============================================================
 # STYLE
 #
-# Target: 64x64 pixel art card sprites WITH category backgrounds.
-# Each card art = subject sprite + atmospheric background in one image.
-# Background color is defined by category, pulled from theme.uss palette.
-# Style reference: bold chunky GBA/SNES RPG card sprites.
+# Each card = isolated subject on flat white background.
+# Background tint/color is applied by the Unity shader (_OverlayTex slot)
+# layered on top of each card's material _Color per category.
+# Do NOT bake backgrounds into the PNG — it breaks the shader pipeline.
 #
-# LAST KERNEL palette (from theme.uss):
-#   Dark bg:   #080A12   Panel:     #161E30
-#   Cyan:      #00DCFF   Cyan dim:  #007A8C
-#   Magenta:   #A03291   Amber:     #FFA028
-#   Red:       #CC2E2E   Green:     #3FAF6F
-#   Disabled:  #3C4858   Border:    #008CA5
+# Style: 16-bit SNES/GBA era pixel art, bold dark outlines, cel-shading.
+# Palette reference (names only — hex codes are BANNED from prompt strings
+# because they cause the model to generate color swatch reference panels):
+#   outlines:   dark navy       panels:     dark charcoal
+#   accent:     electric cyan   dim accent: muted teal
+#   secondary:  muted magenta   warm:       amber
+#   danger:     muted red       success:    muted green
 # ============================================================
 
 MASTER_STYLE = (
@@ -138,7 +143,8 @@ MASTER_STYLE = (
 
     # ── Background ────────────────────────────────────────────────────────────
     # dall-e-3 cannot output true alpha; white is easiest to chroma-key later.
-    "pure flat white background #FFFFFF, subject floating on solid white and nothing else, "
+    # NOTE: no hex codes here — hex codes trigger color swatch panel generation.
+    "pure flat white background, subject floating on solid white and nothing else, "
     "absolutely nothing behind the subject except white, "
 
     # ── Pixel art style [12][13][14] ──────────────────────────────────────────
@@ -300,7 +306,7 @@ CARDS: List[Tuple[str, str, str]] = [
     ("Egg",            "Consumable", "a single egg in a small wire containment tray"),
     ("RawMeat",        "Consumable", "a raw protein slab on a flat surface, vacuum-sealed edge"),
     ("Steak",          "Consumable", "a thick cooked steak on a metal mess tray"),
-    ("Milk",           "Consumable", "a sealed cylindrical flask with drop icon on label"),
+    ("Milk",           "Consumable", "a sealed cylindrical flask with a drop marking on the side"),
     ("Milkshake",      "Consumable", "a sealed canister with straw poking from sealed top"),
     ("Soup",           "Consumable", "a sealed thermal pouch with steam vent nozzle"),
     ("FruitSalad",     "Consumable", "a sealed ration cup with fruit pieces visible through clear lid"),
@@ -316,7 +322,7 @@ CARDS: List[Tuple[str, str, str]] = [
     ("WoodenClub",     "Equipment", "a thick wooden club with a heavy rounded end"),
     ("WoodenStick",    "Equipment", "a sharpened straight wooden staff, pointed tip"),
     ("Slingshot",      "Equipment", "a Y-shaped slingshot with elastic band"),
-    ("Staff",          "Equipment", "a tall staff with a glowing circuit-node at the top"),
+    ("Staff",          "Equipment", "a tall staff with a bright glowing tech orb at the top"),
     ("Quiver",         "Equipment", "a cylindrical arrow quiver with three arrow flights visible"),
     ("Tunic",          "Equipment", "a sleeveless vest with patch repairs and buckled straps"),
     ("LeatherArmor",   "Equipment", "a chest plate of layered leather with shoulder rivets"),
@@ -360,7 +366,7 @@ CARDS: List[Tuple[str, str, str]] = [
     ("PalmTree",       "Resource", "a tall thin palm tree with splayed fronds at the top"),
 
     # ── Valuables ─────────────────────────────────────────────
-    ("GoldenKey",      "Valuable", "an ornate key with circuit-board etchings on the bow"),
+    ("GoldenKey",      "Valuable", "an ornate key with abstract circuit etchings on the bow"),
     ("TreasureChest",  "Valuable", "a military-style supply crate with heavy clasps and a glowing seal"),
     ("WoodenChest",    "Valuable", "a small wooden box with a metal latch and hinged lid"),
     ("GlowingDust",    "Valuable", "a sealed vial of glowing bioluminescent particle dust"),
@@ -402,14 +408,20 @@ def ensure_dirs() -> None:
 
 
 def build_prompt(category: str, subject: str) -> str:
+    if category not in CATEGORY_PREFIX:
+        print(f"  WARN unknown category '{category}' — falling back to 'Other' prefix")
     prefix = CATEGORY_PREFIX.get(category, CATEGORY_PREFIX["Other"])
-    return (
+    prompt = (
         f"{prefix}"
         f"subject: {subject}, "
         f"post-apocalyptic survival bunker world, worn industrial technology, "
         f"not fantasy not medieval not painterly, "
         f"{MASTER_STYLE}"
     )
+    if len(prompt) > MAX_PROMPT_CHARS:
+        print(f"  WARN prompt is {len(prompt)} chars (API limit {MAX_PROMPT_CHARS}) — truncating")
+        prompt = prompt[:MAX_PROMPT_CHARS]
+    return prompt
 
 
 def generate_and_save(client: openai.OpenAI, prompt: str, filepath: str) -> None:
@@ -421,7 +433,20 @@ def generate_and_save(client: openai.OpenAI, prompt: str, filepath: str) -> None
         n=1,
     )
     url = result.data[0].url
-    urllib.request.urlretrieve(url, filepath)
+
+    # Atomic write: download to .tmp first, then rename.
+    # A crash mid-download never leaves a corrupt file that would be skipped on rerun.
+    tmp = filepath + ".tmp"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "LastKernelArtGen/1.0"})
+        with urllib.request.urlopen(req, timeout=DOWNLOAD_TIMEOUT) as resp:
+            with open(tmp, "wb") as f:
+                f.write(resp.read())
+        os.replace(tmp, filepath)
+    except Exception:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        raise
 
 
 def process_batch(
@@ -432,6 +457,7 @@ def process_batch(
     total: int,
 ) -> Tuple[int, int, int]:
     generated = skipped = failed = 0
+    needs_delay = False  # Only delay between actual API calls, not after the last one
 
     for i, (name, category, subject) in enumerate(items, start=start_index):
         filepath = os.path.join(output_dir, f"{name}.png")
@@ -441,16 +467,34 @@ def process_batch(
             skipped += 1
             continue
 
-        print(f"  gen  [{i}/{total}] {name}...")
-        try:
-            generate_and_save(client, build_prompt(category, subject), filepath)
-            print(f"       saved → {filepath}")
-            generated += 1
-        except Exception as e:
-            print(f"       FAILED: {e}")
-            failed += 1
+        if needs_delay:
+            time.sleep(DELAY_SECONDS)
 
-        time.sleep(DELAY_SECONDS)
+        print(f"  gen  [{i}/{total}] {name}...")
+        prompt = build_prompt(category, subject)
+        needs_delay = True  # An API call is about to happen
+
+        for attempt in range(MAX_RETRIES + 1):
+            try:
+                generate_and_save(client, prompt, filepath)
+                print(f"       saved → {filepath}")
+                generated += 1
+                break
+            except openai.RateLimitError as e:
+                if attempt < MAX_RETRIES:
+                    wait = DELAY_SECONDS + RETRY_DELAY
+                    print(f"       Rate limited — waiting {wait}s then retrying...")
+                    time.sleep(wait)
+                else:
+                    print(f"       FAILED (rate limit): {e}")
+                    failed += 1
+            except Exception as e:
+                if attempt < MAX_RETRIES:
+                    print(f"       Error (attempt {attempt + 1}) — retrying: {e}")
+                    time.sleep(5)
+                else:
+                    print(f"       FAILED: {e}")
+                    failed += 1
 
     return generated, skipped, failed
 
