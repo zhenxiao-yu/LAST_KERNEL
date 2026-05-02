@@ -15,7 +15,7 @@ MonoBehaviour:
   id: e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9
   displayName: 'Overseer Protocol'
   description: 'Colony-wide control packages. High-density recipes and infrastructure protocols for second-tier expansion.'
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: 8b70703700e99714cb39fe5cf5d195e6, type: 3}
   category: 0
   faction: 0
   combatType: 0

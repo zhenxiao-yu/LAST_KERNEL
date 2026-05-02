@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Brick
   m_EditorClassIdentifier: 
   id: 068c6b1328f44478aab14b947d7f7a8c
-  displayName: Heat Brick
-  description: Compressed ceramic block for heat, walls, and hard repairs.
+  displayName: Fired Block
+  description: Slag, heat, time. In that order.
   artTexture: {fileID: 2800000, guid: 3a08cffa6dfa9454ba5fa05d7a0b011a, type: 3}
   category: 4
   faction: 0

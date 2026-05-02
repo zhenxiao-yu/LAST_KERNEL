@@ -60,15 +60,25 @@ namespace Markyu.LastKernel
         /// Loads all JSON files in the directory and returns a Dictionary of valid data.
         /// Key = File Name (without extension), Value = The Data Object.
         /// </summary>
-        public static Dictionary<string, T> LoadAllValidData<T>()
+        public static Dictionary<string, T> LoadAllValidData<T>() =>
+            LoadAllValidData<T>(Application.persistentDataPath);
+
+        /// <summary>
+        /// Thread-safe overload: pass Application.persistentDataPath captured on the main thread.
+        /// </summary>
+        public static Dictionary<string, T> LoadAllValidData<T>(string primaryPath)
         {
             Dictionary<string, T> validDataDict = new Dictionary<string, T>();
-            foreach (string directoryPath in GetCandidateSaveDirectories())
+
+            string legacyPath = TryGetLegacyPersistentDataPath(primaryPath);
+            string[] dirs = (legacyPath != null && legacyPath != primaryPath)
+                ? new[] { primaryPath, legacyPath }
+                : new[] { primaryPath };
+
+            foreach (string directoryPath in dirs)
             {
-                if (!Directory.Exists(directoryPath))
-                {
+                if (string.IsNullOrWhiteSpace(directoryPath) || !Directory.Exists(directoryPath))
                     continue;
-                }
 
                 foreach (string filePath in Directory.GetFiles(directoryPath, "*.json"))
                 {
@@ -79,9 +89,7 @@ namespace Markyu.LastKernel
                         string fileName = Path.GetFileNameWithoutExtension(filePath);
 
                         if (data != null && !validDataDict.ContainsKey(fileName))
-                        {
                             validDataDict.Add(fileName, data);
-                        }
                     }
                     catch (System.Exception ex)
                     {

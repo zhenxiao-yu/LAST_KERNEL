@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Dried Protein Strip
   description: Strips of printed protein cured with mineral salts. Shelf-stable,
     dense, and tastes exactly like nothing.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 3
   faction: 0
   combatType: 0

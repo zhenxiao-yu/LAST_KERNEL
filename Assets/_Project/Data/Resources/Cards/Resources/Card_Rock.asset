@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Rock
   m_EditorClassIdentifier: 
   id: 3083d44f30ab4721a539da80d422108b
-  displayName: Rubble Slab
-  description: Broken concrete, device shells, and rebar. Slow work, dependable parts.
+  displayName: Stone Deposit
+  description: Slower than ore. Free. That's the tradeoff.
   artTexture: {fileID: 2800000, guid: e887d86c34beb4947aa049fa11814ad4, type: 3}
   category: 1
   faction: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   produceCard: {fileID: 0}
   produceInterval: 10
   isSellable: 1
-  sellPrice: 0
+  sellPrice: 1
   hasDurability: 1
   uses: 3
   nutrition: 0

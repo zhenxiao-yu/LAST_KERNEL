@@ -60,7 +60,7 @@ namespace Markyu.LastKernel.Tests
         public void AllRecipes_HaveOutput()
         {
             var failing = _allRecipes
-                .Where(r => r.ResultingCard == null)
+                .Where(r => r.RequiresResultingCard && r.ResultingCard == null)
                 .Select(r => AssetDatabase.GetAssetPath(r))
                 .ToList();
 

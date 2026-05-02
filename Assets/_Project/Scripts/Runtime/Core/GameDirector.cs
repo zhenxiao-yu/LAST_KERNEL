@@ -68,7 +68,9 @@ namespace Markyu.LastKernel
         {
             try
             {
-                var saves = await System.Threading.Tasks.Task.Run(SaveSystem.LoadAllValidData<GameData>);
+                string savePath = Application.persistentDataPath; // Must capture on main thread
+                var saves = await System.Threading.Tasks.Task.Run(
+                    () => SaveSystem.LoadAllValidData<GameData>(savePath));
                 if (this != null)
                     SavedGames = saves;
             }

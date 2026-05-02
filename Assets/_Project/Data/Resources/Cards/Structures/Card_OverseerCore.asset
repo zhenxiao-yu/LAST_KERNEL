@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Overseer Core
   description: Central colony management node. Allocates fatigue recovery, defender
     rotation, and resource priority. The colony runs cleaner with this on the board.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 6
   faction: 0
   combatType: 0

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_SlimeHat
   m_EditorClassIdentifier: 
   id: 4458b969a26d4d27baa64fe3fb432f0d
-  displayName: Gel Hood
-  description: Reactive gel padding that eats impact before your skull does.
+  displayName: Null Cap
+  description: It doesn't stop hits. It stops being found.
   artTexture: {fileID: 2800000, guid: 565d469aa8f2cbf4a9f0c71702aa5f24, type: 3}
   category: 5
   faction: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Vat Broth
   description: Protein-enriched broth rendered from mixed organics in the communal
     processing vats. Standard district meal when supplies allow. Hot, barely.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 3
   faction: 0
   combatType: 0

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Emergency-drafted from the district underclass. Brittle but combat-capable.
     Cheaper and faster to recruit than trained units. In the kernel's final hour,
     everyone fights.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 2
   faction: 1
   combatType: 1

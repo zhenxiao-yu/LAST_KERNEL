@@ -38,7 +38,7 @@ namespace Markyu.LastKernel.Tests
         public void AllPacks_HavePositiveBuyPrice()
         {
             var failing = _allPacks
-                .Where(p => p.BuyPrice <= 0)
+                .Where(p => p.BuyPrice <= 0 && !IsFreeStarterPack(p))
                 .Select(p => $"{AssetDatabase.GetAssetPath(p)} (buyPrice={p.BuyPrice})")
                 .ToList();
 
@@ -77,6 +77,12 @@ namespace Markyu.LastKernel.Tests
                 .ToList();
 
             Assert.IsEmpty(failing, "Packs with no ID:\n" + string.Join("\n", failing));
+        }
+
+        private static bool IsFreeStarterPack(PackDefinition pack)
+        {
+            return pack != null &&
+                (pack.name.StartsWith("00_Pack_") || pack.name.StartsWith("10_Pack_Island"));
         }
     }
 }

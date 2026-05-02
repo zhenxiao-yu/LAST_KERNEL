@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Slingshot
   m_EditorClassIdentifier: 
   id: 878b8c7dac704b6885f3445e8515c4bb
-  displayName: Rail Sling
-  description: A compact launcher that throws scrap bearings at painful speed.
+  displayName: Pocket Launcher
+  description: Underestimated. Good.
   artTexture: {fileID: 2800000, guid: 8e87700673ca8ea469325539bc1fba7a, type: 3}
   category: 5
   faction: 0

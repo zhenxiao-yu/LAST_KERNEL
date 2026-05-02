@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_GlowingDust
   m_EditorClassIdentifier: 
   id: e9b4b82028264075ae843e734348d896
-  displayName: Data Shard
-  description: A glittering memory wafer with corrupted local data still inside.
+  displayName: Signal Dust
+  description: Nobody knows what it is. Everyone knows what it does.
   artTexture: {fileID: 2800000, guid: 8e3c45d4c8694ce43b5514c55a8ce71f, type: 3}
   category: 4
   faction: 0

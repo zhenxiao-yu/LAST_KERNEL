@@ -15,6 +15,8 @@ namespace Markyu.LastKernel
     {
         private const string PrefabsRoot = "Assets/_Project/Prefabs";
         private const string ProjectScriptsRoot = "Assets/_Project/Scripts";
+        private const string ProjectUiRoot = "Assets/_Project/UI";
+        private const string ProjectTestsRoot = "Assets/_Project/Tests";
         private const string BootScenePath = "Assets/_Project/Scenes/Boot.unity";
         private const string SandboxScenesRoot = "Assets/_Project/Scenes/Test";
         private const string AudioManagerPrefabPath = "Assets/_Project/Prefabs/Systems/Core/AudioManager.prefab";
@@ -28,7 +30,8 @@ namespace Markyu.LastKernel
 
         private static readonly string[] AllowedBootRootNames =
         {
-            "GameBootstrap", "AudioManager", "InputManager", "Localization", "SaveSystem"
+            "GameBootstrap", "AudioManager", "InputManager", "Localization", "SaveSystem",
+            "Main Camera", "Global Light 2D"
         };
 
         private static readonly string[] ProjectNamespacePrefixes = { "Markyu.LastKernel" };
@@ -276,9 +279,9 @@ namespace Markyu.LastKernel
                 if (art == null || art.objectReferenceValue == null)
                     summary.Warning($"CardDefinition '{path}' has no art texture.");
 
-                // Category — index 0 is None
+                // Category — index 0 is None. Packs are not board cards.
                 SerializedProperty cat = so.FindProperty("category");
-                if (cat != null && cat.enumValueIndex == 0)
+                if (cat != null && cat.enumValueIndex == 0 && def is not PackDefinition)
                     summary.Warning($"CardDefinition '{path}' has category None.");
 
                 // Sell price when sellable
@@ -334,13 +337,10 @@ namespace Markyu.LastKernel
                     }
                 }
 
-                // Output — TravelRecipe, ResearchRecipe, and ExplorationRecipe resolve their
-                // output through custom Execute() logic, not from resultingCard.
+                // Some special recipes resolve output through custom Execute() logic.
                 SerializedProperty output = so.FindProperty("resultingCard");
                 if ((output == null || output.objectReferenceValue == null)
-                    && recipe is not TravelRecipe
-                    && recipe is not ResearchRecipe
-                    && recipe is not ExplorationRecipe)
+                    && recipe.RequiresResultingCard)
                     summary.Error($"RecipeDefinition '{path}' has no resulting card (output).");
 
                 // Duration
@@ -378,7 +378,7 @@ namespace Markyu.LastKernel
                 }
 
                 SerializedProperty buyPrice = so.FindProperty("buyPrice");
-                if (buyPrice != null && buyPrice.intValue <= 0)
+                if (buyPrice != null && buyPrice.intValue <= 0 && !IsFreeStarterPack(pack))
                     summary.Warning($"PackDefinition '{path}' buyPrice <= 0.");
             }
         }
@@ -698,11 +698,14 @@ namespace Markyu.LastKernel
             {
                 string path = AssetDatabase.GUIDToAssetPath(guid).Replace('\\', '/');
 
-                if (path.StartsWith(ProjectScriptsRoot, StringComparison.Ordinal))
+                if (path.StartsWith(ProjectScriptsRoot, StringComparison.Ordinal)
+                    || path.StartsWith(ProjectUiRoot, StringComparison.Ordinal)
+                    || path.StartsWith(ProjectTestsRoot, StringComparison.Ordinal))
                 {
                     ValidateProjectScript(path, summary);
                 }
                 else if (path.StartsWith("Assets/ThirdParty/", StringComparison.Ordinal)
+                      || path.StartsWith("Assets/Plugins/", StringComparison.Ordinal)
                       || path.StartsWith("Assets/UIToolkitScriptComponents/", StringComparison.Ordinal))
                 {
                     // expected third-party — skip
@@ -770,6 +773,13 @@ namespace Markyu.LastKernel
             while (end < text.Length && (char.IsLetterOrDigit(text[end]) || text[end] == '_' || text[end] == '.'))
                 end++;
             return text.Substring(start, end - start).Trim();
+        }
+
+        private static bool IsFreeStarterPack(PackDefinition pack)
+        {
+            return pack != null &&
+                (pack.name.StartsWith("00_Pack_", StringComparison.Ordinal)
+                 || pack.name.StartsWith("10_Pack_Island", StringComparison.Ordinal));
         }
 
         // ─── Summary ─────────────────────────────────────────────────────────

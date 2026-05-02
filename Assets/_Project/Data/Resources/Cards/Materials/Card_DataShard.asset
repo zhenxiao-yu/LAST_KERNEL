@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Data Shard
   description: Crystallized signal fragments recovered from derelict broadcast nodes.
     The black market calls it information ore. The colony calls it leverage.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 4
   faction: 0
   combatType: 0

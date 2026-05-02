@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Reflection;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
@@ -32,6 +33,9 @@ namespace Markyu.LastKernel
 
         private static void HandleEnteringPlayMode()
         {
+            if (IsUnityTestRunActive())
+                return;
+
             Scene activeScene = SceneManager.GetActiveScene();
 
             if (activeScene.path == PlayModeScenePath)
@@ -60,6 +64,18 @@ namespace Markyu.LastKernel
 
             EditorSceneManager.OpenScene(previousScenePath);
             SessionState.EraseString(PreviousSceneKey);
+        }
+
+        private static bool IsUnityTestRunActive()
+        {
+            // Test Runner enters PlayMode through a generated scene. Forcing Boot here
+            // prevents the runner from receiving its RunStarted callback.
+            const BindingFlags Flags = BindingFlags.Static | BindingFlags.NonPublic;
+            System.Type apiType = System.Type.GetType(
+                "UnityEditor.TestTools.TestRunner.Api.TestRunnerApi, UnityEditor.TestRunner");
+            MethodInfo method = apiType?.GetMethod("IsRunActive", Flags);
+
+            return method?.Invoke(null, null) is true;
         }
     }
 }

@@ -3610,6 +3610,148 @@ MonoBehaviour:
     m_Localized: "\u70B9\u51FB\u7EE7\u7EED"
     m_Metadata:
       m_Items: []
+  - m_Id: 2218421231824896
+    m_Localized: Signal Core Array
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421282156544
+    m_Localized: Advanced processing nodes and high-density research packages. Bridges
+      the gap between survival and mastery.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421361848320
+    m_Localized: Overseer Protocol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421361848321
+    m_Localized: Colony-wide control packages. High-density recipes and infrastructure
+      protocols for second-tier expansion.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421361848322
+    m_Localized: Last Kernel Directive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421361848323
+    m_Localized: Final directives from the core systems. Maximum recipe density and
+      late-phase colony architecture. The colony does not survive on hope.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421403791360
+    m_Localized: Conscript
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421403791361
+    m_Localized: Emergency-drafted from the district underclass. Brittle but combat-capable.
+      Cheaper and faster to recruit than trained units. In the kernel's final hour,
+      everyone fights.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421437345792
+    m_Localized: Combat Implant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421437345793
+    m_Localized: Neural combat enhancement. Sharpens reaction thresholds and overclocks
+      the aggression circuit. Burns out after extended use. Worth it while it lasts.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421449928704
+    m_Localized: Surge Blade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421449928705
+    m_Localized: Magnetically overcharged melee weapon. Three pulses before the capacitors
+      burn out. Hits harder than anything the colony can sustain long-term.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421454123008
+    m_Localized: Data Shard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421454123009
+    m_Localized: Crystallized signal fragments recovered from derelict broadcast
+      nodes. The black market calls it information ore. The colony calls it leverage.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421458317312
+    m_Localized: Kernel Shard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421458317313
+    m_Localized: Fragment of the original colony process. Unknown origin. Every faction
+      in the district wants it. Sell it, or build something that makes them regret
+      wanting it.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066048
+    m_Localized: Overseer Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066049
+    m_Localized: Central colony management node. Allocates fatigue recovery, defender
+      rotation, and resource priority. The colony runs cleaner with this on the board.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066050
+    m_Localized: Signal Drone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066051
+    m_Localized: Automated broadcast probe. Patrols the node grid and extracts raw
+      signal fragments continuously. Place it and let it feed the chain.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066052
+    m_Localized: Stasis Pod
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066053
+    m_Localized: Emergency suspension unit. Synthesizes minimum-viable rations during
+      power cycles. It does not keep colonists comfortable. It keeps them alive.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066054
+    m_Localized: Signal Tap
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421496066055
+    m_Localized: Passive broadcast interceptor. Siphons encrypted traffic from the
+      district network and converts it to liquid credits. Every idle signal is currency.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421542203392
+    m_Localized: Forge Combat Implant
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421546397696
+    m_Localized: Recruit Conscript
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421546397697
+    m_Localized: Extract Data Shard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421554786304
+    m_Localized: Build Overseer Core
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421563174912
+    m_Localized: Build Signal Drone
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421567369216
+    m_Localized: Build Stasis Pod
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421571563520
+    m_Localized: Forge Surge Blade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2218421571563521
+    m_Localized: Build Signal Tap
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

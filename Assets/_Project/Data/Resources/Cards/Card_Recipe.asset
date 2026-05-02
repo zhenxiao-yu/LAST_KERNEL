@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Blueprint Packet
   description: A compressed build plan for district fabrication. Drag it into memory
     before the next blackout.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: 22323aa18d64134418f7721ae4d85510, type: 3}
   category: 8
   faction: 0
   combatType: 0

@@ -6,6 +6,8 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Research Recipe", fileName = "Recipe_Research_")]
     public class ResearchRecipe : RecipeDefinition
     {
+        public override bool RequiresResultingCard => false;
+
         public override void Execute(CardStack stack)
         {
             // 1. Consume the inputs

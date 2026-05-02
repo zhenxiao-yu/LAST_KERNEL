@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Card_Coin
   m_EditorClassIdentifier: 
   id: 4bda315463bf4b73b63f1d232fb522e4
-  displayName: Credits
-  description: Hard local credit accepted by vendors that still trust the district
-    ledger.
+  displayName: Scrap Chip
+  description: The district's preferred medium. Untraceable by design.
   artTexture: {fileID: 2800000, guid: bf5d527cb73ddee47a581f5325a211b7, type: 3}
   category: 7
   faction: 0

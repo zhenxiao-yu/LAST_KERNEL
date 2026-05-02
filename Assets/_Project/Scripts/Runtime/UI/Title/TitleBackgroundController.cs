@@ -1,4 +1,5 @@
 using UnityEngine;
+using Sirenix.OdinInspector;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -26,27 +27,37 @@ namespace Markyu.LastKernel
     {
         // ── Parallax ───────────────────────────────────────────────────────────
 
-        [Header("Parallax")]
+        [BoxGroup("Parallax")]
         [SerializeField] private ParallaxLayer[] _parallaxLayers;
+        [BoxGroup("Parallax")]
         [SerializeField, Range(0.01f, 1f)] private float _parallaxSmoothing  = 0.08f;
+        [BoxGroup("Parallax")]
         [SerializeField]                   private float _parallaxMaxOffset   = 24f;
 
         // ── Server-core pulse ──────────────────────────────────────────────────
 
-        [Header("Server Core (optional)")]
+        [BoxGroup("Server Core")]
         [SerializeField] private Transform      _serverCore;
+        [BoxGroup("Server Core")]
         [SerializeField] private SpriteRenderer _serverCoreRenderer;
+        [BoxGroup("Server Core")]
         [SerializeField] private float          _pulseSpeed    = 1.2f;
+        [BoxGroup("Server Core")]
         [SerializeField, Range(0.85f, 1f)]   private float _pulseScaleMin = 0.95f;
+        [BoxGroup("Server Core")]
         [SerializeField, Range(1f,    1.2f)] private float _pulseScaleMax = 1.05f;
+        [BoxGroup("Server Core")]
         [SerializeField, Range(0f,    1f)]   private float _pulseAlphaMin = 0.65f;
+        [BoxGroup("Server Core")]
         [SerializeField, Range(0f,    1f)]   private float _pulseAlphaMax = 1.0f;
 
         // ── Scanline scroll ────────────────────────────────────────────────────
 
-        [Header("Scanline Scroll (optional)")]
+        [BoxGroup("Scanline Scroll")]
         [SerializeField] private Transform _scanlineTransform;
+        [BoxGroup("Scanline Scroll")]
         [SerializeField] private float     _scanlineScrollSpeed = 0.4f;
+        [BoxGroup("Scanline Scroll")]
         [SerializeField] private float     _scanlineScrollWrap  = 4f;
 
         // ── Runtime state ──────────────────────────────────────────────────────

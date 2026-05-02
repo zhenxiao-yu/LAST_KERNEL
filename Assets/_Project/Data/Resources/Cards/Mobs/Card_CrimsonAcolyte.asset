@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9acaf66a110745a88f67d77a92ef5d4b
   displayName: Blackout Cultist
-  description: A human zealot wired into broken doctrine. It wants the Kernel silent.
+  description: Wired into broken doctrine. It wants the Kernel silent.
   artTexture: {fileID: 2800000, guid: 361beea9fa5c0634588568a71c221303, type: 3}
   category: 9
   faction: 2

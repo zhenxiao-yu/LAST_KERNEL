@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Quiver
   m_EditorClassIdentifier: 
   id: 0a7bcd06fc584e17b7e559a91cdf6560
-  displayName: Ammo Rig
-  description: A wearable rack for bolts, charges, and whatever still fires.
+  displayName: Bolt Cache
+  description: More shots. Simple math.
   artTexture: {fileID: 2800000, guid: cca6adfac702dd44d943a702113688f4, type: 3}
   category: 5
   faction: 0

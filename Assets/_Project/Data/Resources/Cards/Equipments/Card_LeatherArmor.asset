@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_LeatherArmor
   m_EditorClassIdentifier: 
   id: c7ca413ed07c47d0a1e8e8e717234203
-  displayName: Kevlar Wrap
-  description: Layered street armor cut from old riot gear.
+  displayName: Reclaimed Vest
+  description: Assembled from what the others left behind.
   artTexture: {fileID: 2800000, guid: 01cb690c9b981f84f81038abbb749ec3, type: 3}
   category: 5
   faction: 0

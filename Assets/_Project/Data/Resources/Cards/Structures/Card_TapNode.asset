@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Signal Tap
   description: Passive broadcast interceptor. Siphons encrypted traffic from the
     district network and converts it to liquid credits. Every idle signal is currency.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 6
   faction: 0
   combatType: 0

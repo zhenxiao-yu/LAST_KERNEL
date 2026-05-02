@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 273ce16cf1b2444b9bd4687dcc55c527
   displayName: Reclaimer
-  description: A horned salvage brute that strips living districts for parts.
+  description: It strips living districts for parts. Yours looks lived-in.
   artTexture: {fileID: 2800000, guid: c96f3cc35e9ad6243a3066ae795d45de, type: 3}
   category: 9
   faction: 2

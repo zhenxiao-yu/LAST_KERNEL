@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Fragment of the original colony process. Unknown origin. Every faction
     in the district wants it. Sell it, or build something that makes them regret wanting
     it.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 4
   faction: 0
   combatType: 0

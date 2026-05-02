@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Card_Coral
   m_EditorClassIdentifier: 
   id: 3603ca743af84709a8fc8355d8379567
-  displayName: Black Coral
-  description: A bioelectric trade crystal pulled from flooded conduit. Rare and
-    negotiable.
+  displayName: Reef Token
+  description: Island-sector tender. Worth less than you think. More than nothing.
   artTexture: {fileID: 2800000, guid: 339f4d954ba130141872747e06924861, type: 3}
   category: 7
   faction: 0

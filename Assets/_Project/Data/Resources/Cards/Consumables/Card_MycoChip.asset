@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Myco Chip
   description: Dried fungal growth cultivated in the ventilation shafts. Earthy,
     bitter, and surprisingly dense with nutrients. The vents provide.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 3
   faction: 0
   combatType: 0

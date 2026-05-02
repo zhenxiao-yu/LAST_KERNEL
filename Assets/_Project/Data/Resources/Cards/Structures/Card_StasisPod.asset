@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Stasis Pod
   description: Emergency suspension unit. Synthesizes minimum-viable rations during
     power cycles. It does not keep colonists comfortable. It keeps them alive.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 6
   faction: 0
   combatType: 0

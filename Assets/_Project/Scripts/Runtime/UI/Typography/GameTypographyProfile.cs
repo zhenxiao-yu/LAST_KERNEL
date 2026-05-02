@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Markyu.LastKernel
 {
@@ -42,19 +43,19 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(fileName = "GameTypographyProfile", menuName = "LastKernel/Typography/Profile")]
     public sealed class GameTypographyProfile : ScriptableObject
     {
-        [Header("UI — MiSans Global (all roles, full CJK)")]
+        [BoxGroup("UI - MiSans Global (all roles, full CJK)")]
         public GameFontFamily ui;
 
-        [Header("Terminal — Sarasa Gothic SC (system feed, data readouts)")]
+        [BoxGroup("Terminal - Sarasa Gothic SC (system feed, data readouts)")]
         public GameFontFamily terminal;
 
-        [Header("Accent — Oxanium (EN-only: phase labels, speed buttons, HUD badges)")]
+        [BoxGroup("Accent - Oxanium (EN-only: phase labels, speed buttons, HUD badges)")]
         public GameFontFamily accent;
 
-        [Header("Display — Paid font slot (logo, brand moments — leave null until licensed)")]
+        [BoxGroup("Display - Paid font slot (logo, brand moments - leave null until licensed)")]
         public GameFontFamily display;
 
-        [Header("Emergency CJK Fallback — Noto Sans SC (do not use as primary)")]
+        [BoxGroup("Emergency CJK Fallback - Noto Sans SC (do not use as primary)")]
         public TMP_FontAsset fallbackFont;
 
         public TMP_FontAsset GetFont(GameTextRole role, GameFontWeight weight = GameFontWeight.Regular)

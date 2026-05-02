@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Crab
   m_EditorClassIdentifier: 
   id: a1a3f8d510c14806802d25310f6fcd8a
-  displayName: Warden Drone
-  description: A low chassis patrol unit with cutting claws and old orders.
+  displayName: Shell Crawler
+  description: Hard to crack. Worth the effort.
   artTexture: {fileID: 2800000, guid: f93975edd3a4f4f4c9763f3410e41f76, type: 3}
   category: 9
   faction: 2

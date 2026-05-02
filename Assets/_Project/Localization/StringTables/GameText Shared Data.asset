@@ -1130,6 +1130,96 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 8800497158023282919
+  - m_Id: 2198257664798720
+    m_Key: loading.status
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702490
+  - m_Id: 2198257719324672
+    m_Key: loading.tip.01
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702491
+  - m_Id: 2198257719324673
+    m_Key: loading.tip.02
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702492
+  - m_Id: 2198257719324674
+    m_Key: loading.tip.03
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702493
+  - m_Id: 2198257719324675
+    m_Key: loading.tip.04
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702494
+  - m_Id: 2198257719324676
+    m_Key: loading.tip.05
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702495
+  - m_Id: 2198257719324677
+    m_Key: loading.tip.06
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702496
+  - m_Id: 2198257719324678
+    m_Key: loading.tip.07
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702497
+  - m_Id: 2198257719324679
+    m_Key: loading.tip.08
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702498
+  - m_Id: 2198257719324680
+    m_Key: loading.tip.09
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702499
+  - m_Id: 2198257719324681
+    m_Key: loading.tip.10
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702500
+  - m_Id: 2198257719324682
+    m_Key: loading.tip.11
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702501
+  - m_Id: 2198257719324683
+    m_Key: loading.tip.12
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702502
+  - m_Id: 2198257719324684
+    m_Key: loading.tip.13
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702503
+  - m_Id: 2198257719324685
+    m_Key: loading.tip.14
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702504
+  - m_Id: 2198257719324686
+    m_Key: loading.tip.15
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702505
+  - m_Id: 2198257719324687
+    m_Key: loading.tip.16
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702506
+  - m_Id: 2206234631221248
+    m_Key: loading.continue
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702507
   - m_Id: 7041986591
     m_Key: modal.title
     m_Metadata:
@@ -4311,78 +4401,166 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 2581770992171876644
-  - m_Id: 2198257664798720
-    m_Key: loading.status
+  - m_Id: 2218421231824896
+    m_Key: pack.09_pack_signalcore.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324672
-    m_Key: loading.tip.01
+      m_Items:
+      - rid: 2581770999442702508
+  - m_Id: 2218421282156544
+    m_Key: pack.09_pack_signalcore.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324673
-    m_Key: loading.tip.02
+      m_Items:
+      - rid: 2581770999442702509
+  - m_Id: 2218421361848320
+    m_Key: pack.12_pack_overseer.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324674
-    m_Key: loading.tip.03
+      m_Items:
+      - rid: 2581770999442702510
+  - m_Id: 2218421361848321
+    m_Key: pack.12_pack_overseer.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324675
-    m_Key: loading.tip.04
+      m_Items:
+      - rid: 2581770999442702511
+  - m_Id: 2218421361848322
+    m_Key: pack.13_pack_lastkernel.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324676
-    m_Key: loading.tip.05
+      m_Items:
+      - rid: 2581770999442702512
+  - m_Id: 2218421361848323
+    m_Key: pack.13_pack_lastkernel.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324677
-    m_Key: loading.tip.06
+      m_Items:
+      - rid: 2581770999442702513
+  - m_Id: 2218421403791360
+    m_Key: card.card_conscript.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324678
-    m_Key: loading.tip.07
+      m_Items:
+      - rid: 2581770999442702514
+  - m_Id: 2218421403791361
+    m_Key: card.card_conscript.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324679
-    m_Key: loading.tip.08
+      m_Items:
+      - rid: 2581770999442702515
+  - m_Id: 2218421437345792
+    m_Key: card.card_combatchip.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324680
-    m_Key: loading.tip.09
+      m_Items:
+      - rid: 2581770999442702516
+  - m_Id: 2218421437345793
+    m_Key: card.card_combatchip.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324681
-    m_Key: loading.tip.10
+      m_Items:
+      - rid: 2581770999442702517
+  - m_Id: 2218421449928704
+    m_Key: card.card_surgeweapon.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324682
-    m_Key: loading.tip.11
+      m_Items:
+      - rid: 2581770999442702518
+  - m_Id: 2218421449928705
+    m_Key: card.card_surgeweapon.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324683
-    m_Key: loading.tip.12
+      m_Items:
+      - rid: 2581770999442702519
+  - m_Id: 2218421454123008
+    m_Key: card.card_datashard.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324684
-    m_Key: loading.tip.13
+      m_Items:
+      - rid: 2581770999442702520
+  - m_Id: 2218421454123009
+    m_Key: card.card_datashard.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324685
-    m_Key: loading.tip.14
+      m_Items:
+      - rid: 2581770999442702521
+  - m_Id: 2218421458317312
+    m_Key: card.card_kernelshard.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324686
-    m_Key: loading.tip.15
+      m_Items:
+      - rid: 2581770999442702522
+  - m_Id: 2218421458317313
+    m_Key: card.card_kernelshard.description
     m_Metadata:
-      m_Items: []
-  - m_Id: 2198257719324687
-    m_Key: loading.tip.16
+      m_Items:
+      - rid: 2581770999442702523
+  - m_Id: 2218421496066048
+    m_Key: card.card_overseercore.name
     m_Metadata:
-      m_Items: []
-  - m_Id: 2206234631221248
-    m_Key: loading.continue
+      m_Items:
+      - rid: 2581770999442702524
+  - m_Id: 2218421496066049
+    m_Key: card.card_overseercore.description
     m_Metadata:
-      m_Items: []
+      m_Items:
+      - rid: 2581770999442702525
+  - m_Id: 2218421496066050
+    m_Key: card.card_signaldrone.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702526
+  - m_Id: 2218421496066051
+    m_Key: card.card_signaldrone.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702527
+  - m_Id: 2218421496066052
+    m_Key: card.card_stasispod.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702528
+  - m_Id: 2218421496066053
+    m_Key: card.card_stasispod.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702529
+  - m_Id: 2218421496066054
+    m_Key: card.card_tapnode.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702530
+  - m_Id: 2218421496066055
+    m_Key: card.card_tapnode.description
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702531
+  - m_Id: 2218421542203392
+    m_Key: recipe.recipe_combatchip.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702532
+  - m_Id: 2218421546397696
+    m_Key: recipe.recipe_conscript.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702533
+  - m_Id: 2218421546397697
+    m_Key: recipe.recipe_datashard.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702534
+  - m_Id: 2218421554786304
+    m_Key: recipe.recipe_overseercore.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702535
+  - m_Id: 2218421563174912
+    m_Key: recipe.recipe_signaldrone.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702536
+  - m_Id: 2218421567369216
+    m_Key: recipe.recipe_stasispod.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702537
+  - m_Id: 2218421571563520
+    m_Key: recipe.recipe_surgeweapon.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702538
+  - m_Id: 2218421571563521
+    m_Key: recipe.recipe_tapnode.name
+    m_Metadata:
+      m_Items:
+      - rid: 2581770999442702539
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -4882,6 +5060,238 @@ MonoBehaviour:
       data:
         m_CommentText: Legacy GameLocalization compatibility row. Keep until all
           direct GameLocalization.Get calls are migrated.
+    - rid: 2581770999442702490
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Loading screen status line shown while scene loads
+    - rid: 2581770999442702491
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 card stacking mechanic"
+    - rid: 2581770999442702492
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 build defenses early"
+    - rid: 2581770999442702493
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 food and morale"
+    - rid: 2581770999442702494
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 engineers"
+    - rid: 2581770999442702495
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 scrap resource"
+    - rid: 2581770999442702496
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 power cores"
+    - rid: 2581770999442702497
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 turrets and time"
+    - rid: 2581770999442702498
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 assign defenders before night"
+    - rid: 2581770999442702499
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 trades compound"
+    - rid: 2581770999442702500
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 crafting chains"
+    - rid: 2581770999442702501
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 night is relentless"
+    - rid: 2581770999442702502
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 shelters"
+    - rid: 2581770999442702503
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 signal towers and blind spots"
+    - rid: 2581770999442702504
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 morale collapse warning"
+    - rid: 2581770999442702505
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 the kernel is the last line"
+    - rid: 2581770999442702506
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Loading screen tip \u2014 data and strategy"
+    - rid: 2581770999442702507
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Loading screen continue prompt shown after typewriter finishes
+    - rid: 2581770999442702508
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Packs/09_Pack_SignalCore.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702509
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Packs/09_Pack_SignalCore.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702510
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Packs/12_Pack_Overseer.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702511
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Packs/12_Pack_Overseer.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702512
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Packs/13_Pack_LastKernel.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702513
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Packs/13_Pack_LastKernel.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702514
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Characters/Card_Conscript.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702515
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Characters/Card_Conscript.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702516
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Equipments/Card_CombatChip.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702517
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Equipments/Card_CombatChip.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702518
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Equipments/Card_SurgeWeapon.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702519
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Equipments/Card_SurgeWeapon.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702520
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Materials/Card_DataShard.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702521
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Materials/Card_DataShard.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702522
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Materials/Card_KernelShard.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702523
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Materials/Card_KernelShard.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702524
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_OverseerCore.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702525
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_OverseerCore.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702526
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_SignalDrone.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702527
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_SignalDrone.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702528
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_StasisPod.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702529
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_StasisPod.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702530
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_TapNode.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702531
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Cards/Structures/Card_TapNode.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702532
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_CombatChip.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702533
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_Conscript.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702534
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_DataShard.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702535
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_OverseerCore.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702536
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_SignalDrone.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702537
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_StasisPod.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702538
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_SurgeWeapon.asset.
+          Non-English values are placeholders until reviewed.
+    - rid: 2581770999442702539
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Source English from Assets/_Project/Data/Resources/Recipes/Recipe_TapNode.asset.
+          Non-English values are placeholders until reviewed.
     - rid: 8800497158023282712
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:

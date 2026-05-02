@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Card_BerryBush
   m_EditorClassIdentifier: 
   id: 1c6b7c9bc2cf4120bbf1408aa3ab1ab9
-  displayName: Supply Cache
-  description: A forgotten emergency bin tucked under street growth. Still good if
-    the seals held.
+  displayName: Cluster Vine
+  description: Nobody planted it. Nobody needs to.
   artTexture: {fileID: 2800000, guid: d70974ae4d87bbe4a927913cc832036f, type: 3}
   category: 1
   faction: 0

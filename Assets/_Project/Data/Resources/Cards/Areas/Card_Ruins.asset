@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: Card_Ruins
   m_EditorClassIdentifier: 
   id: 3aa46e0d7f7046daba8c39098b2b1f4f
-  displayName: Ruins Sector
-  description: Collapsed megastructure blocks around the Last Kernel. Valuable systems
-    are buried under hostile code.
+  displayName: Collapse Site
+  description: Valuable systems buried under hostile code.
   artTexture: {fileID: 2800000, guid: 35c4ad7985a626e4e8982a408be75720, type: 3}
   category: 10
   faction: 0

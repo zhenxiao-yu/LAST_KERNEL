@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Grass
   m_EditorClassIdentifier: 
   id: 143dbb694e774a50b749c381711416fe
-  displayName: Fiber Tangle
-  description: A mat of cable grass and synthetic roots. Cut it for flexible material.
+  displayName: Ground Cover
+  description: Not useful. Not nothing.
   artTexture: {fileID: 2800000, guid: a4fda75cd863de146aac5baac0014be3, type: 3}
   category: 1
   faction: 0
@@ -26,7 +26,7 @@ MonoBehaviour:
   produceCard: {fileID: 0}
   produceInterval: 10
   isSellable: 1
-  sellPrice: 0
+  sellPrice: 1
   hasDurability: 1
   uses: 5
   nutrition: 0

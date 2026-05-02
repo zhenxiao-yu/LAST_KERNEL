@@ -16,7 +16,7 @@ MonoBehaviour:
   displayName: Core Ration
   description: High-density paste from compressed organics and binding agents. No
     flavor. No texture. Full caloric load. Designed for emergencies that never end.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 3
   faction: 0
   combatType: 0

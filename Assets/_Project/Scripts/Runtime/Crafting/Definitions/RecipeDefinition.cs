@@ -71,6 +71,7 @@ namespace Markyu.LastKernel
             displayName);
         public List<Ingredient> RequiredIngredients => requiredIngredients;
         public CardDefinition ResultingCard => resultingCard;
+        public virtual bool RequiresResultingCard => true;
         public bool IsContinuous => isContinuous;
         public bool AllowExcessIngredients => allowExcessIngredients;
         public float CraftingDuration => craftingDuration;

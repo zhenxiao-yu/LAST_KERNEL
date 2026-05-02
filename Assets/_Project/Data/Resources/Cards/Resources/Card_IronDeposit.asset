@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_IronDeposit
   m_EditorClassIdentifier: 
   id: 50a1a5df9d3747d7b166fd0709d452c3
-  displayName: Alloy Deposit
-  description: A reinforced vein inside collapsed city bones. Drill it for raw alloy.
+  displayName: Ore Seam
+  description: The mine sees it first. The smelter sees it last.
   artTexture: {fileID: 2800000, guid: a2aba51bdd5e7fd4a8e59a464a3ba90f, type: 3}
   category: 1
   faction: 0

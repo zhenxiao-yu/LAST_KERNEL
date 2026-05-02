@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: c9f212337370485faab1cceca65ef27e
   displayName: Memory Pit
-  description: A disposal trench for bodies, drives, and erased records. Some entries
-    keep answering.
+  description: Some entries keep answering.
   artTexture: {fileID: 2800000, guid: 0baf018a03ed64f4bb0ef18112c5ddc6, type: 3}
   category: 10
   faction: 0

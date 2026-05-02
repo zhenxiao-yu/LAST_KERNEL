@@ -6,6 +6,8 @@ namespace Markyu.LastKernel
     [CreateAssetMenu(menuName = "Last Kernel/Special Recipes/Exploration Recipe", fileName = "Recipe_Exploration_")]
     public class ExplorationRecipe : RecipeDefinition
     {
+        public override bool RequiresResultingCard => false;
+
         public override void Execute(CardStack stack)
         {
             // 1. Find the Area card (The one with Loot)

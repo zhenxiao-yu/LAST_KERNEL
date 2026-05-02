@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9ed83f496aae415fa2c2bf028e6d8a1f
   displayName: Kernel Sovereign
-  description: A rogue command intelligence wearing a combat shell. The district
-    calls it the end process.
+  description: It wasn't born. It was left running.
   artTexture: {fileID: 2800000, guid: 311da7d30715d79468980c0f875a495e, type: 3}
   category: 9
   faction: 2

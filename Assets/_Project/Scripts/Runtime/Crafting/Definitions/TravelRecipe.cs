@@ -9,6 +9,8 @@ namespace Markyu.LastKernel
     {
         [SerializeField] private List<string> targetScenes;
 
+        public override bool RequiresResultingCard => false;
+
         public override void Execute(CardStack stack)
         {
             List<CardInstance> travelers = stack.Cards.ToList();

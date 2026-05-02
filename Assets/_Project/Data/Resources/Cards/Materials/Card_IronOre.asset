@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_IronOre
   m_EditorClassIdentifier: 
   id: 8d86e3bb06ab4d0ba8b6a5ce89dd9406
-  displayName: Raw Alloy
-  description: Dirty metal feedstock chipped from reinforced ruins.
+  displayName: Ferrite Vein
+  description: Pull it from the ground. Prove it's worth something.
   artTexture: {fileID: 2800000, guid: 3780b71f029504b4bbf385d8372ec87d, type: 3}
   category: 4
   faction: 0

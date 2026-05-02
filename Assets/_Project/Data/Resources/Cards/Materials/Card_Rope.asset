@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Rope
   m_EditorClassIdentifier: 
   id: 7795f7cab9b642a1b9938a52076c9060
-  displayName: Fiber Cable
-  description: Braided cable for binding, hauling, and improvised rigging.
+  displayName: Tension Cord
+  description: It either holds or it doesn't. You find out at the worst time.
   artTexture: {fileID: 2800000, guid: 9199f41a668da984c88c29006da2b539, type: 3}
   category: 4
   faction: 0

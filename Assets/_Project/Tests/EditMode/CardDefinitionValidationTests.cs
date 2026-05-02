@@ -101,6 +101,9 @@ namespace Markyu.LastKernel.Tests
             var failing = new List<string>();
             foreach (CardDefinition card in _allCards)
             {
+                if (card is PackDefinition)
+                    continue;
+
                 var so = new SerializedObject(card);
                 SerializedProperty cat = so.FindProperty("category");
                 if (cat != null && cat.enumValueIndex == 0)

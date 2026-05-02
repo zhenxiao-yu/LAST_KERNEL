@@ -15,7 +15,7 @@ MonoBehaviour:
   id: d7e4a31bc95f487082d6c5e9b012a35f
   displayName: Market
   description: Spend coins to buy cards. Click to cycle available listings.
-  artTexture: {fileID: 0}
+  artTexture: {fileID: 2800000, guid: e2c6ebc9cdc9d4746996dd96a61f52b9, type: 3}
   category: 6
   faction: 0
   combatType: 0

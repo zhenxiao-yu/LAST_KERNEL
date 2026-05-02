@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Card_Timber
   m_EditorClassIdentifier: 
   id: 37aae3b2866d4177819a925fd22621a7
-  displayName: Reinforced Scrap
-  description: Sorted beams and frame stock strong enough for construction.
+  displayName: Load Bearer
+  description: The colony stands because something holds it up.
   artTexture: {fileID: 2800000, guid: 2c7fb21b97a1e4c488839d950147278e, type: 3}
   category: 4
   faction: 0
