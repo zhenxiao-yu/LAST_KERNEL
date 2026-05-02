@@ -1,3 +1,5 @@
+using UnityEngine.UIElements;
+
 namespace Markyu.LastKernel
 {
     public partial class NightBattleModalController
@@ -149,7 +151,7 @@ namespace Markyu.LastKernel
             if (!_villagerEls.TryGetValue(f.Id, out var el)) return;
             el.AddToClassList("nbm-villager-entry--assigned");
 
-            var badge = el.Q<UnityEngine.UIElements.Label>("nbm-villager-badge");
+            var badge = el.Q<Label>("nbm-villager-badge");
             if (badge != null)
             {
                 int slot = _team.SlotOf(f);
@@ -165,7 +167,7 @@ namespace Markyu.LastKernel
             if (!_villagerEls.TryGetValue(f.Id, out var el)) return;
             el.RemoveFromClassList("nbm-villager-entry--assigned");
 
-            var badge = el.Q<UnityEngine.UIElements.Label>("nbm-villager-badge");
+            var badge = el.Q<Label>("nbm-villager-badge");
             badge?.AddToClassList("lk-hidden");
         }
 
