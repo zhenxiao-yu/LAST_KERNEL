@@ -56,44 +56,114 @@ DELAY_SECONDS = 13           # Stay under 5 images/min rate limit
 # ============================================================
 
 MASTER_STYLE = (
-    # ── Hard bans — stated FIRST so the model never ignores them ─────────────
-    # Previous outputs showed: color swatch panels, hex labels, fake UI chrome.
-    # All caused by hex codes + "4-6 colors" reading as "make a design doc".
+    # ══════════════════════════════════════════════════════════════════════════
+    # HARD BANS — stated FIRST, before any positive instruction.
+    #
+    # Each ban targets a specific observed or anticipated hallucination:
+    #
+    #  [1]  Hex codes in prompt → model generates a color swatch reference panel.
+    #       Fix: no hex codes anywhere; colors described by name only (see Palette).
+    #  [2]  "64x64 pixel art sprite" language → model produces a sprite-sheet doc.
+    #       Fix: removed from CATEGORY_PREFIX; now uses "pixel art game icon".
+    #  [3]  "palette strictly N colors" + hex codes → design-reference-card format.
+    #       Fix: removed count spec; colors described visually, never numerically.
+    #  [4]  Game title references ("Fire Emblem", "Slay the Spire") → model renders
+    #       a screenshot of that game complete with its HUD and battle UI.
+    #       Fix: removed named titles; style described by visual attributes only.
+    #  [5]  "card sprite" / "trading card" → model adds playing-card frame + border.
+    #       Fix: prefix now says "pixel art game icon" not "card sprite".
+    #  [6]  "schematic" / "blueprint" → model draws annotated technical diagrams
+    #       with dimension lines, measurement labels, and leader text.
+    #       Fix: Recipe prefix now says "rolled paper scroll", not "schematic".
+    #  [7]  "glowing X" without qualifier → model blooms a full radial halo that
+    #       floods the background instead of staying as bright pixels on the subject.
+    #       Fix: explicit ban on radial bloom; glow limited to surface pixels only.
+    #  [8]  "cyberpunk" alone → model adds neon-light atmosphere and fog behind subject.
+    #       Fix: explicit ban on neon atmosphere + reinforced white-only background.
+    #  [9]  "bunker/underground world" context → model renders a room as background.
+    #       Fix: explicit ban on room walls, floor tiles, ceiling.
+    # [10]  "transparent" anywhere in prompt text → model generates a checkerboard
+    #       (the universal PNG-transparency indicator pattern).
+    #       Fix: "transparent" word removed; background described as "flat white".
+    # [11]  "isometric scene" for multi-element cards → full landscape painting.
+    #       Fix: Area prefix now says "two or three bold shapes side by side".
+    # [12]  "retro pixel art" alone → model regresses to Atari/NES 4-color extreme.
+    #       Fix: anchored to "16-bit SNES/GBA era" and explicitly NOT Atari/NES.
+    # [13]  "dithered shading" alone → pure black-and-white 1-bit dithering, no color.
+    #       Fix: "colored dithered midtones, NOT black-and-white dithering".
+    # [14]  "cel-shading" without "2D pixel art" qualifier → 3D Borderlands-style render.
+    #       Fix: "2D pixel art cel-shading" and explicit "NOT a 3D render".
+    # [15]  "circuit glyphs" / "sigils" / "runes" in subject description → model
+    #       renders actual readable text-like symbols and letters.
+    #       Fix: card descriptions reworded to "abstract glowing markings/patterns".
+    # [16]  Named genre archetypes ("Mage", "Ranger", "Goblin") → model defaults to
+    #       medieval-fantasy look, ignoring the cyberpunk world context.
+    #       Fix: Character/Mob prefixes now explicitly say "NOT medieval fantasy".
+    # [17]  Pack cards with "emblem" description → model adds product branding text.
+    #       Fix: pack subjects reworded to avoid "emblem"; Pack prefix bans labels.
+    # [18]  Area cards: "two or three landmark elements" → full diorama/world-map.
+    #       Fix: reworded to "two or three bold isolated shapes on white".
+    # [19]  Equipment with blade+grip → model renders inventory detail panel
+    #       showing parts labeled separately.
+    #       Fix: Equipment prefix says "single unified object", bans part labels.
+    # [20]  Multiple "glowing" elements in one card → sci-fi scene with lighting FX.
+    #       Fix: ban on scene lighting; glow must stay surface-pixel level only.
+    # ══════════════════════════════════════════════════════════════════════════
+
+    # ── Layout / document bans [1][2][3][4][5][6] ─────────────────────────────
     "NO text of any kind, NO letters, NO numbers, NO words anywhere in the image, "
-    "NO color swatch panel, NO color palette grid, NO reference sheet layout, "
-    "NO sprite sheet, NO design document format, NO side panels, NO sidebars, "
+    "NO color swatch panel, NO color palette grid, NO reference sheet, "
+    "NO sprite sheet layout, NO design document, NO concept art layout, "
+    "NO side panels, NO sidebars, NO split-panel layout, "
     "NO fake UI, NO health bars, NO stat boxes, NO HUD chrome, NO inventory panels, "
-    "NO card frame baked into the art, NO decorative border, NO corner ornaments, "
-    "NO drop shadow, NO glow halo behind subject, NO background rectangle, "
+    "NO playing-card frame, NO card border baked into the art, NO corner ornaments, "
+    "NO blueprint annotations, NO dimension lines, NO measurement labels, "
+    "NO part labels, NO callout arrows, "
+
+    # ── Background bans [7][8][9][10][11][20] ─────────────────────────────────
+    "NO background scenery of any kind, NO floor, NO wall, NO ceiling, NO room interior, "
+    "NO neon glow atmosphere, NO neon light trails, NO atmospheric fog or haze, "
+    "NO radial glow bloom behind the subject, glow stays as bright surface pixels only, "
+    "NO drop shadow cast onto the background, NO ambient occlusion shadow behind subject, "
+    "NO checkerboard pattern, NO scene lighting effects, "
+
+    # ── Style bans [12][13][14] ────────────────────────────────────────────────
+    "NOT a 3D render, NOT photorealistic, NOT painterly, NOT watercolor, "
+    "NOT a game screenshot, NOT an Atari or NES 4-color style, "
+
+    # ── Subject bans [15][16][17] ──────────────────────────────────────────────
+    "NO readable rune symbols, NO readable sigil text, NO readable circuit-pattern text, "
+    "NO product branding, NO logo text, NO emblem labels, "
+    "NOT a medieval fantasy aesthetic, NOT a magic-fantasy setting, "
 
     # ── Background ────────────────────────────────────────────────────────────
-    # dall-e-3 cannot output true alpha; use white so edges are easy to key.
-    "pure solid white background, subject floating on flat white and nothing else, "
-    "no scenery, no floor, no wall, no atmosphere behind the subject, "
+    # dall-e-3 cannot output true alpha; white is easiest to chroma-key later.
+    "pure flat white background #FFFFFF, subject floating on solid white and nothing else, "
+    "absolutely nothing behind the subject except white, "
 
-    # ── Pixel art style ───────────────────────────────────────────────────────
-    "retro pixel art style, chunky blocky pixels clearly visible, "
-    "classic 16-bit RPG card illustration, "
-    "style similar to GBA Fire Emblem or Slay the Spire card art, "
-    "bold dark outline around the entire subject, "
-    "flat cel-shading with dithered pixel shading, "
-    "hard pixel edges, no smooth gradients, no anti-aliasing, "
+    # ── Pixel art style [12][13][14] ──────────────────────────────────────────
+    "16-bit era pixel art, chunky blocky pixels clearly visible, "
+    "SNES and Game Boy Advance era color depth and detail level, "
+    "bold dark two-pixel outline around the entire subject, "
+    "flat 2D pixel art cel-shading with colored dithered midtones, "
+    "NOT black-and-white dithering, NOT 3D cel-shading, "
+    "hard pixel edges only, no smooth gradients, no anti-aliasing, no sub-pixel blending, "
 
-    # ── Palette — names only, NO hex codes (hex codes trigger palette panels) ─
-    "cyberpunk color palette: dark navy outlines, cyan accent highlights, "
-    "muted magenta secondary color, warm amber for warm highlights, "
-    "off-white for brightest lit pixels, "
+    # ── Palette [1] — color names only, zero hex codes ────────────────────────
+    "cyberpunk palette: dark navy for outlines, electric cyan for accent highlights, "
+    "muted magenta for secondary details, warm amber for warm-lit surfaces, "
+    "off-white for the brightest lit pixel highlights, "
 
     # ── Composition ───────────────────────────────────────────────────────────
-    "subject centered in frame, fills roughly two-thirds of the canvas height, "
-    "equal white margin on all sides, "
+    "subject centered in frame, fills about two-thirds of canvas height, "
+    "equal white margin on all four sides, "
     "strong readable silhouette at small display sizes, "
-    "one memorable iconic design detail that makes this card instantly recognizable, "
+    "one memorable iconic design detail for instant card recognition, "
 
     # ── Quality ───────────────────────────────────────────────────────────────
     "every pixel intentional, no stray isolated pixel specks, "
-    "professional polished pixel art quality, "
-    "dark cyberpunk post-apocalyptic bunker survival world aesthetic"
+    "professional polished pixel art game icon quality, "
+    "dark cyberpunk post-apocalyptic underground bunker survival world"
 )
 
 # Per-category prefix + background.
@@ -102,76 +172,84 @@ MASTER_STYLE = (
 # derived from the LAST KERNEL theme.uss palette per category.
 CATEGORY_PREFIX: Dict[str, str] = {
 
+    # [16] "Mage"/"Ranger" → medieval fantasy: explicitly blocked per-category
     "Character": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single character, full body, facing slightly right, "
         "neutral combat-ready stance, arms slightly away from body, "
-        "head and feet both fully in frame, "
-        "slightly large head for sprite readability, "
+        "head and feet both fully in frame, slightly large head for readability, "
+        "post-apocalyptic cyberpunk survivor look, NOT medieval fantasy, "
     ),
+    # [16] same — Goblin/Satyr → fantasy monster by default
     "Mob": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single creature, full body, facing front, "
         "threatening wide stance, limbs spread, aggressive posture, "
         "exaggerated menacing proportions, entire body in frame, "
+        "post-apocalyptic mutant creature look, NOT medieval fantasy monster, "
     ),
     "Material": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single raw material object floating centered, "
-        "slight isometric tilt to show depth, "
-        "bold chunky pixel shapes, no fine detail, "
+        "slight isometric tilt to show top and front face, "
+        "bold chunky pixel shapes, no fine surface detail, "
     ),
     "Consumable": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single food or container object floating centered, "
         "slight isometric tilt, bold readable pixel shapes, "
     ),
+    # [19] Equipment: ban part labels; treat as single unified object
     "Equipment": (
-        "pixel art trading card game illustration, white background, "
-        "single weapon or armor piece floating centered, "
+        "pixel art game icon, flat white background, "
+        "single unified weapon or armor piece floating centered, "
         "45-degree diagonal angle with tip toward upper-right, "
-        "bold chunky pixel shapes, "
+        "treated as one solid object, NO labeled parts, NO component breakdown, "
     ),
     "Structure": (
-        "pixel art trading card game illustration, white background, "
-        "single building or machine, compact isometric 3/4 view, "
+        "pixel art game icon, flat white background, "
+        "single compact building or machine in isometric 3/4 view, "
         "front face and rooftop both visible, centered with equal margins, "
-        "chunky readable architecture, "
+        "chunky readable architecture, no surrounding ground or environment, "
     ),
     "Resource": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single natural object or plant floating centered, "
         "front-facing or slight 3/4 angle, bold chunky silhouette, "
     ),
+    # [11][18] Area: was "isometric scene" → landscape painting
+    # Now: two or three bold shapes side by side, NOT a scene/environment
     "Area": (
-        "pixel art trading card game illustration, white background, "
-        "compact isometric scene with two or three landmark silhouettes, "
-        "bold readable shapes, minimal detail, "
+        "pixel art game icon, flat white background, "
+        "two or three bold chunky landmark silhouette shapes arranged side by side, "
+        "NOT a scene, NOT a landscape, NOT a diorama, isolated shapes on white only, "
     ),
     "Currency": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single coin or credit chip floating centered, "
-        "slight isometric tilt, glinting highlight on top face, "
+        "slight isometric tilt, bright glint pixel on top face, "
     ),
     "Valuable": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single rare artifact floating centered, slight isometric tilt, "
         "striking color contrast to imply rarity, "
     ),
+    # [6] Recipe: "schematic" → blueprint annotations; use "rolled paper" instead
     "Recipe": (
-        "pixel art trading card game illustration, white background, "
-        "single rolled or folded schematic scroll floating centered, "
-        "curled edges clearly visible, front-facing, "
+        "pixel art game icon, flat white background, "
+        "single rolled paper scroll floating centered, "
+        "scroll curled at both ends, front-facing, no annotations, no labels, "
     ),
     "Other": (
-        "pixel art trading card game illustration, white background, "
-        "single object floating centered, slight isometric tilt, "
-        "bold chunky shapes, "
+        "pixel art game icon, flat white background, "
+        "single object floating centered, slight isometric tilt, bold chunky shapes, "
     ),
+    # [17] Pack: "emblem" in descriptions → product branding text; prefix blocks it
     "Pack": (
-        "pixel art trading card game illustration, white background, "
+        "pixel art game icon, flat white background, "
         "single sealed supply pack or crate floating centered, "
         "slight isometric tilt, bold chunky silhouette, "
+        "NO text, NO brand label, NO product text on surface, "
     ),
 }
 
@@ -192,13 +270,13 @@ CARDS: List[Tuple[str, str, str]] = [
     ("Slime",          "Mob", "a blobby acidic creature with glowing core, dripping"),
     ("Goblin",         "Mob", "a wiry scavenger humanoid with large ears and clawed hands"),
     ("Satyr",          "Mob", "a goat-legged mutant with cracked bio-mechanical hind legs"),
-    ("TrollShaman",    "Mob", "a massive hunched troll holding a totem staff with circuit glyphs"),
-    ("CrimsonAcolyte", "Mob", "a robed cultist with glowing red sigils on the chest"),
+    ("TrollShaman",    "Mob", "a massive hunched troll holding a totem staff with abstract glowing circuit markings"),
+    ("CrimsonAcolyte", "Mob", "a robed cultist with glowing red abstract markings on the chest"),
     ("DemonLord",      "Mob", "a towering horned entity with crackling dark energy in both fists"),
     ("Squirrel",       "Mob", "a feral mutant squirrel with enlarged claws"),
     ("Chicken",        "Mob", "a bio-bred mutant chicken, slightly oversized, beady eyes"),
     ("Cow",            "Mob", "a stocky bio-bred cow with metal ear tag"),
-    ("Corpse",         "Mob", "a fallen colonist body lying flat, hazard X marks nearby"),
+    ("Corpse",         "Mob", "a fallen colonist body lying flat, hazard warning markers nearby"),
 
     # ── Materials ─────────────────────────────────────────────
     ("Wood",           "Material", "a rough-cut timber log with visible grain"),
@@ -292,24 +370,24 @@ CARDS: List[Tuple[str, str, str]] = [
     ("GrandPortal",    "Valuable", "a tall arched gateway frame crackling with energy between the posts"),
 
     # ── Currency / Other ──────────────────────────────────────
-    ("Coin",           "Currency", "a round coin with a circuit-board hexagon stamped on the face"),
+    ("Coin",           "Currency", "a round coin with an abstract hexagon circuit pattern on the face"),
     ("Sign",           "Other",    "a rectangular rusted metal sign on a post, blank face"),
     ("Grave",          "Other",    "a single grave mound with a crude flat marker stone"),
-    ("Recipe",         "Recipe",   "a curled schematic scroll with gear and arrow diagrams"),
+    ("Recipe",         "Recipe",   "a curled paper scroll with abstract gear and arrow shapes printed on it"),
     ("Rock",           "Material", "a small rounded loose rock"),
 ]
 
 PACKS: List[Tuple[str, str, str]] = [
-    ("Starter",       "Pack", "a basic sealed survival kit pouch with a star emblem"),
+    ("Starter",       "Pack", "a basic sealed survival kit pouch with a star symbol stamped on it"),
     ("Knowledge",     "Pack", "a data chip slotted into an open book spine"),
-    ("Farmstead",     "Pack", "a seed packet with a sprout icon on the front"),
-    ("HeartyMeals",   "Pack", "a ration pack with a flame and bowl icon"),
-    ("Blacksmith",    "Pack", "a sealed tool pack with an anvil emblem"),
-    ("Revelations",   "Pack", "a glowing sealed envelope with broken wax seal"),
-    ("Beginning",     "Pack", "a clean new supply crate with sunrise chevron emblem"),
-    ("Adventure",     "Pack", "a scout kit roll with compass icon"),
-    ("Survival",      "Pack", "an emergency supply pack with hazard stripe border"),
-    ("Island",        "Pack", "a waterproof pack with wave and palm icon"),
+    ("Farmstead",     "Pack", "a seed packet with a sprout shape on the front"),
+    ("HeartyMeals",   "Pack", "a ration pack with a flame and bowl shape on it"),
+    ("Blacksmith",    "Pack", "a sealed tool pack with an anvil shape stamped on it"),
+    ("Revelations",   "Pack", "a glowing sealed envelope with a broken wax seal"),
+    ("Beginning",     "Pack", "a clean new supply crate with a sunrise chevron shape on it"),
+    ("Adventure",     "Pack", "a scout kit roll with a compass shape on it"),
+    ("Survival",      "Pack", "an emergency supply pack with hazard stripe markings"),
+    ("Island",        "Pack", "a waterproof pack with a wave and palm shape on it"),
     ("Construction",  "Pack", "a heavy materials pack with I-beam and hammer icon"),
 ]
 
