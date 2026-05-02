@@ -28,6 +28,7 @@ namespace Markyu.LastKernel
         private LSS_LoadingScreen _lss;
         private string            _chosenTip;
         private bool              _typewriterDone;
+        private bool              _continueHintShown;
 
         private void Awake()
         {
@@ -45,11 +46,11 @@ namespace Markyu.LastKernel
             _lss.changeHintWithTimer = false;
             SetPrivateBool(_lss, "enableRandomHints", false);
 
-            // enablePressAnyKey must be true so LSS blocks auto-activation at 0.9f progress.
-            // We hide the PAK overlay by zeroing its CanvasGroup; the inline hint we append
-            // to the tip text takes its place on the same page.
+            // LSS blocks auto-activation at 0.9f, while the bridge keeps the prompt
+            // inline with the tip/image page instead of using LSS's separate PAK page.
             _lss.waitForPlayerInput = true;
             _lss.useCountdown       = false;
+            _lss.keepPressAnyKeyOnContentPage = true;
             SetPrivateBool(_lss, "enablePressAnyKey", true);
             HidePakPanel(_lss);
         }
@@ -66,10 +67,9 @@ namespace Markyu.LastKernel
         {
             if (_lss == null || _lss.loadingProcess == null) return;
             if (_lss.loadingProcess.allowSceneActivation) return; // already activating
-            if (_lss.loadingProcess.progress < 0.9f) return;       // still loading
 
             bool pressed = WasAnyInputPressed();
-            if (!pressed) return;
+            bool readyToContinue = IsReadyToContinue();
 
             bool pakPromptVisible =
                 _lss.isPAKFadeInRunning ||
@@ -80,16 +80,20 @@ namespace Markyu.LastKernel
                 _lss.contentCanvasGroup != null &&
                 _lss.contentCanvasGroup.alpha > 0.1f;
 
-            // First press while the tip page is still visible snaps the typewriter.
-            // Once LSS has moved to the PAK page, the same press should activate.
-            if (!_typewriterDone && !pakPromptVisible && contentStillVisible)
+            // First press while the tip is still typing snaps the text into place.
+            // The inline continue prompt requires a later press after it is visible.
+            if (pressed && !_typewriterDone && !pakPromptVisible && contentStillVisible)
             {
-                StopAllCoroutines();
-                if (_lss.hintsText != null) _lss.hintsText.text = _chosenTip;
-                _typewriterDone = true;
-                AppendContinueHint();
+                CompleteTypewriter(readyToContinue);
                 return;
             }
+
+            bool continueWasVisible = _continueHintShown;
+            if (readyToContinue && _typewriterDone)
+                AppendContinueHint();
+
+            if (!pressed || !continueWasVisible)
+                return;
 
             // Second press, or the first press on the PAK page, activates and dismisses.
             ActivateSceneAndDismissLoadingScreen();
@@ -139,15 +143,38 @@ namespace Markyu.LastKernel
             }
 
             _typewriterDone = true;
-            AppendContinueHint();
+            if (IsReadyToContinue())
+                AppendContinueHint();
+        }
+
+        private void CompleteTypewriter(bool showContinueHint)
+        {
+            StopAllCoroutines();
+            if (_lss.hintsText != null) _lss.hintsText.text = _chosenTip;
+            _typewriterDone = true;
+
+            if (showContinueHint)
+                AppendContinueHint();
         }
 
         private void AppendContinueHint()
         {
             if (_lss == null || _lss.hintsText == null) return;
+            if (_continueHintShown) return;
+
             string hint = GameLocalization.Get("loading.continue");
             if (!string.IsNullOrEmpty(hint))
+            {
                 _lss.hintsText.text += "\n\n" + hint;
+                _continueHintShown = true;
+            }
+        }
+
+        private bool IsReadyToContinue()
+        {
+            return _lss != null &&
+                   _lss.loadingProcess != null &&
+                   _lss.loadingProcess.progress >= 0.9f;
         }
 
         private static bool WasAnyInputPressed()

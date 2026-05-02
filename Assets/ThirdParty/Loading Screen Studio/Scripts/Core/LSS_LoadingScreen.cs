@@ -79,6 +79,7 @@ namespace Michsky.LSS
         public bool useSpecificKey = false;
         public bool useCountdown = true;
         public bool waitForPlayerInput = false;
+        public bool keepPressAnyKeyOnContentPage = false;
         [Range(1, 30)] public int pakCountdownTimer = 5;
 #if ENABLE_LEGACY_INPUT_MANAGER
         public KeyCode keyCode = KeyCode.Space;
@@ -366,6 +367,9 @@ namespace Michsky.LSS
 
             else if (enablePressAnyKey && waitForPlayerInput && loadingProcess.progress == 0.9f)
             {
+                if (keepPressAnyKeyOnContentPage)
+                    return;
+
                 if (!isPAKFadeInRunning 
                     && !isPAKFadeInCompleted 
                     && isContentFadeInCompleted
@@ -548,6 +552,9 @@ namespace Michsky.LSS
 
                 else if (enablePressAnyKey && waitForPlayerInput && loadingProcess.progress == 0.9f)
                 {
+                    if (keepPressAnyKeyOnContentPage)
+                        return;
+
                     if (!isPAKFadeInRunning 
                         && !isPAKFadeInCompleted 
                         && isContentFadeInCompleted
