@@ -80,42 +80,81 @@ GameObject (with TextMeshProUGUI)
 
 ---
 
+## Type Scale
+
+All sizes target 1920×1080 reference. UIToolkit scales via `UIScaleManager`; the base (medium) tier needs no class.
+
+| Token | Size | Usage |
+| --- | --- | --- |
+| `--lk-font-size-meta` | 12px | Watermark, version string, micro metadata |
+| `--lk-font-size-xs` | 14px | Hints, dim labels, tabs, badges, stats |
+| `--lk-font-size-sm` | 16px | Secondary body, list items, save labels |
+| `--lk-font-size-md` | 18px | Comfortable body, buttons, toggles (default) |
+| `--lk-font-size-card` | 20px | Card titles, info-panel headers |
+| `--lk-font-size-lg` | 24px | Resource values, nav buttons, value labels |
+| `--lk-font-size-xl` | 32px | Phase headers (DAY/NIGHT), panel/modal titles |
+| `--lk-font-size-title` | 40px | Victory/defeat banners, screen titles |
+| `--lk-font-size-logo` | 72px | Game logo, brand splash |
+
+Responsive tiers (HUD only): xsmall ×0.67 · small ×0.83 · **medium (base)** · large ×1.20 · xlarge ×1.40
+
+---
+
 ## USS / UIToolkit Text
 
 UIToolkit text (UIDocument panels) uses the TextCore pipeline, separate from TMP:
 - Default font: `FA_MiSans_Regular` → wired via `LKTextSettings` → `LKPanelSettings`
-- Font-size tokens defined in `theme.uss` (`--lk-font-size-xs` through `--lk-font-size-logo`)
-- Bold is achieved via `-unity-font-style: bold` in USS — a separate Bold font asset is not needed for UIToolkit (TextCore handles synthetic bold)
-- Role-based font override for UIToolkit is NOT implemented — all UIToolkit text uses MiSans
+- Font-size tokens defined in `theme.uss` (all `--lk-font-size-*` vars)
+- Bold is achieved via `-unity-font-style: bold` in USS (TextCore synthetic bold — no separate Bold asset needed)
+- Role-based font overrides for UIToolkit via `UIFonts` static class:
+  - `UIFonts.AccentSemibold(el)` — Oxanium SemiBold — phase badges, wave label, pace button
+  - `UIFonts.AccentBold(el)` — Oxanium Bold — NIGHT badge, speed toggle
+  - `UIFonts.DisplayHeavy(el)` — paid display font (MiSans Heavy fallback) — logo label
+  - `UIFonts.TerminalRegular(el)` — Sarasa Gothic SC — HUD numeric counters (food/gold/cards/HP/enemies)
 
 ---
 
 ## Localization Safety Rules
 
-1. **Never use Oxanium (Accent) for translatable strings.** Phase names are translatable but should always render MiSans in non-EN locales.
-2. **MiSans supports**: Latin, Greek, Cyrillic, Japanese Kana (partial), Simplified Chinese, Traditional Chinese, Korean
-3. **Sarasa Mono SC supports**: Full Simplified Chinese
-4. **Oxanium supports**: Latin + extended Latin only
-5. All card text, button labels, and descriptions → always `GameTextRole.UI`
-6. Test with Chinese text before locking any layout — CJK characters are taller and wider
+1. **Never use Oxanium (Accent) for translatable strings.** Phase names are translatable; in CJK locales the string will render in MiSans automatically (Oxanium lacks CJK glyphs — it silently falls through).
+2. **Never use `text-transform: uppercase` on panel titles or modal titles** — all-caps breaks German compound words, French diacritics, and CJK scripts. Uppercase is acceptable only for short, hard-coded EN labels (logo, phase badge, button, tab).
+3. **Leave 30–40% horizontal space for CJK and 20–25% for German/French/Spanish** — these scripts are wider or have longer words than English.
+4. **Line height 1.5** for all wrappable body text (enforced in `components.uss`).
+5. Font coverage summary:
+   - **MiSans Global**: EN + CJK (Simplified, Traditional, Japanese Kana, Korean Hangul)
+   - **Sarasa Gothic SC**: EN + Simplified Chinese + Japanese + Korean
+   - **Oxanium**: Latin + extended Latin only
+   - **Noto Sans SC**: emergency CJK fallback — do not use as primary
+
+Languages to test before any layout freeze: EN · ZH-Hans · ZH-Hant · JA · KO · FR · DE · ES
 
 ---
 
 ## File Locations
 
+### TMP (TextMesh Pro — uGUI / world-space)
+
 | Asset | Path |
 |---|---|
 | GameTypographyProfile | `Assets/_Project/Resources/Typography/GameTypographyProfile.asset` |
-| MiSans TTF files | `Assets/_Project/Art/Fonts/MiSans/Source/` |
-| MiSans TMP assets | `Assets/_Project/Art/Fonts/MiSans/TMP/` |
-| Sarasa TTF files | `Assets/_Project/Art/Fonts/Sarasa/Source/` |
-| Sarasa TMP assets | `Assets/_Project/Art/Fonts/Sarasa/TMP/` |
-| Oxanium TTF files | `Assets/_Project/Art/Fonts/Oxanium/Source/` |
-| Oxanium TMP assets | `Assets/_Project/Art/Fonts/Oxanium/TMP/` |
-| Noto SC TTF | `Assets/_Project/Art/Fonts/NatoSans/Source/` |
+| MiSans TTF | `Assets/_Project/Art/Fonts/MiSans/Source/` |
+| MiSans TMP assets | `Assets/_Project/Art/Fonts/MiSans/TMP/` (5 weights) |
+| Sarasa TTF | `Assets/_Project/Art/Fonts/Sarasa/Source/` |
+| Sarasa TMP assets | `Assets/_Project/Art/Fonts/Sarasa/TMP/` (Regular, SemiBold) |
+| Oxanium TTF | `Assets/_Project/Art/Fonts/Oxanium/Source/` |
+| Oxanium TMP assets | `Assets/_Project/Art/Fonts/Oxanium/TMP/` (5 weights) |
 | Noto SC TMP fallback | `Assets/_Project/Art/Fonts/NatoSans/TMP/` |
-| UIToolkit TextCore font | `Assets/_Project/Art/Fonts/MiSans/TMP/FA_MiSans_Regular.asset` |
-| LKTextSettings | `Assets/_Project/UI/LKTextSettings.asset` |
+
+### TextCore (UIToolkit)
+
+| Asset | Path | Used for |
+| --- | --- | --- |
+| FA_MiSans_Regular | `Assets/_Project/Art/Fonts/MiSans/TMP/FA_MiSans_Regular.asset` | Default UIToolkit font via LKTextSettings |
+| FA_Oxanium_SemiBold | `Assets/_Project/Resources/Typography/` | Phase badge, wave label, pace button |
+| FA_Oxanium_Bold | `Assets/_Project/Resources/Typography/` | NIGHT badge, speed toggle |
+| FA_MiSans_Heavy | `Assets/_Project/Resources/Typography/` | Logo (fallback when display font absent) |
+| FA_Sarasa_Regular | `Assets/_Project/Resources/Typography/` | HUD numeric counters |
+| FA_Display_Regular | `Assets/_Project/Resources/Typography/` | Logo (paid font slot — drop in to activate) |
 
 ---
 
@@ -124,10 +163,11 @@ UIToolkit text (UIDocument panels) uses the TextCore pipeline, separate from TMP
 | File | Purpose |
 |---|---|
 | `Scripts/Runtime/UI/Typography/GameTextRole.cs` | Enum: UI, Terminal, Accent, Display |
-| `Scripts/Runtime/UI/Typography/GameTypographyProfile.cs` | ScriptableObject — maps roles to font assets |
-| `Scripts/Runtime/UI/Typography/GameTypographyApplier.cs` | Component — tags a TMP_Text with a role |
-| `Scripts/Runtime/Core/TMPThemeController.cs` | Runtime — loads profile, applies fonts per role |
-| `Scripts/Runtime/Localization/TMPChineseFontBootstrap.cs` | Runtime — ensures CJK fallback at boot |
+| `Scripts/Runtime/UI/Typography/GameFontWeight.cs` | Enum: Regular, Medium, Semibold, Bold, Heavy |
+| `Scripts/Runtime/UI/Typography/GameTypographyProfile.cs` | ScriptableObject — maps roles+weights to TMP assets |
+| `Scripts/Runtime/UI/Typography/GameTypographyApplier.cs` | Component — tags a TMP_Text with role+weight |
+| `Scripts/Runtime/UI/Typography/UIFonts.cs` | Static — applies TextCore fonts to UIToolkit elements |
+| `Scripts/Runtime/Core/TMPThemeController.cs` | Runtime singleton — loads profile, applies TMP fonts on scene load/language change |
 
 ---
 
@@ -135,6 +175,6 @@ UIToolkit text (UIDocument panels) uses the TextCore pipeline, separate from TMP
 
 The `Display` role is a reserved slot. When a paid display font is licensed:
 1. Drop the TTF into `Assets/_Project/Art/Fonts/DisplayFont/Source/`
-2. Create TMP Font Asset named `TMP_Display_[FontName]_Regular`
-3. Assign to `GameTypographyProfile.displayFont` in the Inspector
-4. The logo and title components tagged `GameTextRole.Display` will update automatically
+2. Create a **TextCore** FontAsset named `FA_Display_Regular` → save to `Assets/_Project/Resources/Typography/`
+3. Create a **TMP** FontAsset named `TMP_Display_Regular` → assign to `GameTypographyProfile.display.regular`
+4. Both pipelines update automatically — no code changes needed.

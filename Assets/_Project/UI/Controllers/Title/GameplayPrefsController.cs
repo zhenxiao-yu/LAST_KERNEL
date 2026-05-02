@@ -15,6 +15,7 @@ namespace Markyu.LastKernel
         // ── Bound elements ─────────────────────────────────────────────────────
 
         private Label  _titleLabel;
+        private Label  _subtitleLabel;
         private Button _difficultyButton;
         private Label  _durationLabel;
         private Slider _durationSlider;
@@ -39,6 +40,7 @@ namespace Markyu.LastKernel
         protected override void OnBind()
         {
             _titleLabel           = Root.Q<Label>  ("lbl-prefs-title");
+            _subtitleLabel        = Root.Q<Label>  ("lbl-prefs-subtitle");
             _difficultyButton     = Root.Q<Button> ("btn-difficulty");
             _durationLabel        = Root.Q<Label>  ("lbl-duration");
             _durationSlider       = Root.Q<Slider> ("slider-duration");
@@ -75,6 +77,7 @@ namespace Markyu.LastKernel
         public override void OnLocalizationRefresh()
         {
             if (_titleLabel    != null) _titleLabel.text    = GameLocalization.Get("title.gameplayHeader");
+            if (_subtitleLabel != null) _subtitleLabel.text = GameLocalization.GetOptional("title.gameplaySubtitle", "Configure Before Deployment");
             if (_cancelButton  != null) _cancelButton.text  = GameLocalization.Get("common.cancelButton");
             if (_confirmButton != null) _confirmButton.text = GameLocalization.Get("common.confirmButton");
 

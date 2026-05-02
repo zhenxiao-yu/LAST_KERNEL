@@ -13,7 +13,9 @@ namespace Markyu.LastKernel
     {
         private static FontAsset _oxaniumSemibold;
         private static FontAsset _oxaniumBold;
-        private static FontAsset _misansHeavy;
+        private static FontAsset _displayFont;   // paid font — falls back to MiSans Heavy
+        private static FontAsset _misansHeavy;   // fallback when display font isn't installed
+        private static FontAsset _sarasaRegular; // Sarasa Gothic SC — numeric HUD counters
 
         private static bool _loaded;
 
@@ -24,7 +26,9 @@ namespace Markyu.LastKernel
 
             _oxaniumSemibold = Resources.Load<FontAsset>("Typography/FA_Oxanium_SemiBold");
             _oxaniumBold     = Resources.Load<FontAsset>("Typography/FA_Oxanium_Bold");
+            _displayFont     = Resources.Load<FontAsset>("Typography/FA_Display_Regular");
             _misansHeavy     = Resources.Load<FontAsset>("Typography/FA_MiSans_Heavy");
+            _sarasaRegular   = Resources.Load<FontAsset>("Typography/FA_Sarasa_Regular");
         }
 
         // Oxanium SemiBold — HUD phase badge (DAY), wave counter, resource accent labels
@@ -33,8 +37,11 @@ namespace Markyu.LastKernel
         // Oxanium Bold — HUD night phase badge (NIGHT), speed toggle (2×), wave header
         public static void AccentBold(VisualElement el) { EnsureLoaded(); Apply(el, _oxaniumBold); }
 
-        // MiSans Heavy — logo, main title, Victory/Defeat screen titles
-        public static void DisplayHeavy(VisualElement el) { EnsureLoaded(); Apply(el, _misansHeavy); }
+        // Paid display font → MiSans Heavy fallback — logo, main title, brand splash
+        public static void DisplayHeavy(VisualElement el) { EnsureLoaded(); Apply(el, _displayFont ?? _misansHeavy); }
+
+        // Sarasa Gothic SC — numeric HUD values (food/gold/cards/HP/enemy counters)
+        public static void TerminalRegular(VisualElement el) { EnsureLoaded(); Apply(el, _sarasaRegular); }
 
         private static void Apply(VisualElement el, FontAsset fa)
         {

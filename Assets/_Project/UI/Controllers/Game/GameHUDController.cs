@@ -178,12 +178,17 @@ namespace Markyu.LastKernel
             _paceButton.clicked       += HandlePaceToggle;
             _speedButton.clicked      += ToggleSpeed;
 
-            // Typography — accent font (Oxanium) on machine-identity labels
-            UIFonts.AccentSemibold(_phaseLabel);       // DAY badge
-            UIFonts.AccentBold(_nightPhaseLabel);      // NIGHT badge — bolder, more urgent
-            UIFonts.AccentSemibold(_waveLabel);        // Wave N counter
-            UIFonts.AccentBold(_speedButton);          // 1× / 2× speed toggle
-            UIFonts.AccentSemibold(_paceButton);       // ▶ 1× / ▶▶ 2× pace toggle
+            // Typography — phase/speed labels use Oxanium (accent); numeric counters use Sarasa (terminal)
+            UIFonts.AccentSemibold(_phaseLabel);
+            UIFonts.AccentBold(_nightPhaseLabel);
+            UIFonts.AccentSemibold(_waveLabel);
+            UIFonts.AccentBold(_speedButton);
+            UIFonts.AccentSemibold(_paceButton);
+            UIFonts.TerminalRegular(_nutritionLabel);
+            UIFonts.TerminalRegular(_currencyLabel);
+            UIFonts.TerminalRegular(_cardsLabel);
+            UIFonts.TerminalRegular(_hpLabel);
+            UIFonts.TerminalRegular(_enemiesLabel);
         }
 
         // ── Public API ─────────────────────────────────────────────────────────

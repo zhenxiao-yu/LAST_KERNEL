@@ -77,23 +77,37 @@
     border-color: var(--lk-border-dim);
 }
 
-/* Panel header row — title + optional close button */
+/* Panel header — left accent bar + column layout for title + subtitle */
 .lk-panel__header {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    border-left-color: var(--lk-accent);
+    border-left-width: 4px;
     border-bottom-color: var(--lk-border-dim);
     border-bottom-width: 1px;
-    padding-bottom: var(--lk-gap-small);
+    padding-left: var(--lk-padding-medium);
+    padding-bottom: var(--lk-padding-medium);
     margin-bottom: var(--lk-gap-medium);
+    background-color: rgba(0, 220, 255, 0.04);
 }
 
 .lk-panel__title {
     color: var(--lk-accent);
-    font-size: var(--lk-font-size-xl);
+    font-size: var(--lk-font-size-title);
     -unity-font-style: bold;
+    white-space: nowrap;
+    text-shadow: 0px 0px 6px rgba(0, 220, 255, 0.35), 0px 1px 2px rgba(0, 0, 0, 0.95);
+}
+
+/* Tagline beneath the panel title — uppercase, dim, letter-spaced */
+.lk-panel__subtitle {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-xs);
+    letter-spacing: 2px;
     text-transform: uppercase;
-    text-shadow: 0px 0px 8px rgba(0, 220, 255, 0.45);
+    margin-top: 4px;
+    white-space: nowrap;
+    opacity: 0.8;
 }
 
 .lk-panel__footer {
@@ -136,7 +150,6 @@
     color: var(--lk-text-header);
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
-    text-transform: uppercase;
     margin-bottom: var(--lk-gap-medium);
     white-space: normal;
     text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.9);
@@ -335,7 +348,6 @@
     color: var(--lk-text-header);
     font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
-    text-transform: uppercase;
     text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.85);
 }
 
@@ -353,13 +365,13 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-md);
     white-space: normal;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* Secondary / muted */
 .lk-label--dim {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-sm);
+    font-size: var(--lk-font-size-xs);
 }
 
 /* Fine-print hint — sits below an interactive control as a context note */
@@ -367,7 +379,7 @@
     font-size: var(--lk-font-size-xs);
     color: var(--lk-text-dim);
     white-space: normal;
-    line-height: 1.4;
+    line-height: 1.5;
     padding-left: 4px;
     padding-bottom: 8px;
 }
@@ -460,7 +472,7 @@
 
 .lk-resource-counter__value {
     color: var(--lk-text-header);
-    font-size: var(--lk-font-size-md);
+    font-size: var(--lk-font-size-lg);
     -unity-font-style: bold;
     -unity-text-align: middle-left;
     min-width: 40px;
@@ -502,7 +514,7 @@
 /* Phase label (DAY / NIGHT) */
 .lk-phase-label {
     color: var(--lk-accent);
-    font-size: var(--lk-font-size-lg);
+    font-size: var(--lk-font-size-xl);
     -unity-font-style: bold;
     -unity-text-align: middle-center;
     letter-spacing: 2px;
@@ -531,7 +543,7 @@
 
 .lk-info-panel__header {
     color: var(--lk-accent);
-    font-size: var(--lk-font-size-lg);
+    font-size: var(--lk-font-size-card);
     -unity-font-style: bold;
     margin-bottom: 4px;
     white-space: normal;
@@ -542,7 +554,7 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-md);
     white-space: normal;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -644,6 +656,7 @@
     align-items: center;
     margin-left: 8px;
     margin-right: 8px;
+    margin-top: 8px;
 }
 
 .unity-base-slider__drag-container {
@@ -668,8 +681,8 @@
 
 .unity-base-slider__dragger {
     width: 12px;
-    height: 32px;
-    top: -10px;
+    height: 24px;
+    top: -6px;
     background-color: var(--lk-text-header);
     border-width: 1px;
     border-color: var(--lk-accent);
@@ -869,7 +882,7 @@ Toggle:checked .unity-toggle__checkmark {
 
 .lk-watermark {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-sm);
+    font-size: var(--lk-font-size-meta);
     opacity: 0.5;
     white-space: nowrap;
     pointer-events: none;
@@ -1155,7 +1168,7 @@ Toggle:checked .unity-toggle__checkmark {
  * ════════════════════════════════════════════════════════════════════════ */
 
 .lk-info-badge {
-    font-size: var(--lk-font-size-sm);
+    font-size: var(--lk-font-size-xs);
     -unity-font-style: bold;
     color: var(--lk-text-dim);
     border-color: var(--lk-border-dim);
@@ -1178,9 +1191,9 @@ Toggle:checked .unity-toggle__checkmark {
 
 .lk-info-panel__stats {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-sm);
+    font-size: var(--lk-font-size-xs);
     white-space: normal;
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* ════════════════════════════════════════════════════════════════════════

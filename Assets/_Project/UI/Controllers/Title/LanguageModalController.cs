@@ -30,6 +30,7 @@ namespace Markyu.LastKernel
               "language.korean",  "language.french",  "language.german",             "language.spanish" };
 
         private Label    _titleLabel;
+        private Label    _subtitleLabel;
         private Button   _cancelButton;
         private Button   _applyButton;
         private readonly Button[] _langButtons = new Button[8];
@@ -40,8 +41,9 @@ namespace Markyu.LastKernel
 
         protected override void OnBind()
         {
-            _titleLabel   = Root.Q<Label> ("lbl-lang-title");
-            _cancelButton = Root.Q<Button>("btn-lang-cancel");
+            _titleLabel    = Root.Q<Label> ("lbl-lang-title");
+            _subtitleLabel = Root.Q<Label> ("lbl-lang-subtitle");
+            _cancelButton  = Root.Q<Button>("btn-lang-cancel");
             _applyButton  = Root.Q<Button>("btn-lang-apply");
 
             for (int i = 0; i < LangButtonNames.Length; i++)
@@ -75,8 +77,9 @@ namespace Markyu.LastKernel
 
         public override void OnLocalizationRefresh()
         {
-            if (_titleLabel   != null) _titleLabel.text   = GameLocalization.Get("options.language.title");
-            if (_cancelButton != null) _cancelButton.text = GameLocalization.Get("common.cancelButton");
+            if (_titleLabel    != null) _titleLabel.text    = GameLocalization.Get("options.language.title");
+            if (_subtitleLabel != null) _subtitleLabel.text = GameLocalization.GetOptional("options.language.subtitle", "Interface Language");
+            if (_cancelButton  != null) _cancelButton.text  = GameLocalization.Get("common.cancelButton");
             if (_applyButton  != null) _applyButton.text  = GameLocalization.Get("common.applyButton");
             RefreshButtons();
         }

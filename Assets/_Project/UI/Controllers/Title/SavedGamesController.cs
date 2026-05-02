@@ -17,6 +17,7 @@ namespace Markyu.LastKernel
         private readonly ModalController _modal;
 
         private Label          _titleLabel;
+        private Label          _subtitleLabel;
         private VisualElement  _savesContainer;
         private Label          _emptyLabel;
         private Button         _clearButton;
@@ -34,6 +35,7 @@ namespace Markyu.LastKernel
         protected override void OnBind()
         {
             _titleLabel     = Root.Q<Label>        ("lbl-saves-title");
+            _subtitleLabel  = Root.Q<Label>        ("lbl-saves-subtitle");
             _savesContainer = Root.Q<VisualElement> ("saves-container");
             _emptyLabel     = Root.Q<Label>         ("lbl-saves-empty");
             _clearButton    = Root.Q<Button>        ("btn-saves-clear");
@@ -58,8 +60,9 @@ namespace Markyu.LastKernel
 
         public override void OnLocalizationRefresh()
         {
-            if (_titleLabel  != null) _titleLabel.text  = GameLocalization.Get("title.loadHeader");
-            if (_emptyLabel  != null) _emptyLabel.text  = GameLocalization.Get("title.noSaves");
+            if (_titleLabel    != null) _titleLabel.text    = GameLocalization.Get("title.loadHeader");
+            if (_subtitleLabel != null) _subtitleLabel.text = GameLocalization.GetOptional("title.loadSubtitle", "Select a Save File");
+            if (_emptyLabel    != null) _emptyLabel.text    = GameLocalization.Get("title.noSaves");
             if (_clearButton != null) _clearButton.text = GameLocalization.Get("title.clearSaves");
             if (_closeButton != null) _closeButton.text = GameLocalization.Get("common.closeButton");
         }

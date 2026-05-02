@@ -19,6 +19,7 @@ namespace Markyu.LastKernel
 
         // ── Settings tab ───────────────────────────────────────────────────────
         private Label  _titleLabel;
+        private Label  _subtitleLabel;
         private Label  _uiLabel;
         private Button _uiScaleButton;
         private Label  _audioLabel;
@@ -79,6 +80,7 @@ namespace Markyu.LastKernel
         {
             // Settings
             _titleLabel       = Root.Q<Label>      ("lbl-opts-title");
+            _subtitleLabel    = Root.Q<Label>      ("lbl-opts-subtitle");
             _uiLabel          = Root.Q<Label>      ("lbl-opts-ui");
             _uiScaleButton    = Root.Q<Button>     ("btn-opt-ui-scale");
             _audioLabel       = Root.Q<Label>      ("lbl-opts-audio");
@@ -185,6 +187,7 @@ namespace Markyu.LastKernel
         public override void OnLocalizationRefresh()
         {
             if (_titleLabel         != null) _titleLabel.text         = GameLocalization.Get("options.header");
+            if (_subtitleLabel      != null) _subtitleLabel.text      = GameLocalization.GetOptional("options.subtitle", "System Configuration");
             if (_graphicsLabel      != null) _graphicsLabel.text      = GameLocalization.Get("ui.video");
             if (_uiLabel            != null) _uiLabel.text            = GameLocalization.Get("options.uiScale");
             if (_audioLabel         != null) _audioLabel.text         = GameLocalization.Get("ui.audio");
