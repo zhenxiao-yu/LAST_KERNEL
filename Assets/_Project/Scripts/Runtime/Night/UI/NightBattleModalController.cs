@@ -34,6 +34,8 @@ namespace Markyu.LastKernel
     [RequireComponent(typeof(UIDocument))]
     public partial class NightBattleModalController : MonoBehaviour
     {
+        public static NightBattleModalController Instance { get; private set; }
+
         // ── Phases ────────────────────────────────────────────────────────────────
         private enum Phase { Prep, Battle, Result }
         private Phase _phase = Phase.Prep;
@@ -77,6 +79,13 @@ namespace Markyu.LastKernel
 
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+
             NightBattleManager.OnNightModalOpened += HandleModalOpened;
             NightBattleManager.OnBattleStarted    += HandleBattleStarted;
             NightBattleManager.OnBattleComplete   += HandleBattleComplete;
@@ -85,6 +94,8 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
+            if (Instance == this) Instance = null;
+
             NightBattleManager.OnNightModalOpened -= HandleModalOpened;
             NightBattleManager.OnBattleStarted    -= HandleBattleStarted;
             NightBattleManager.OnBattleComplete   -= HandleBattleComplete;

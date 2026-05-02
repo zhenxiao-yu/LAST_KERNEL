@@ -12,6 +12,8 @@ namespace Markyu.LastKernel
 
         private readonly Dictionary<TMP_Text, string> originalTextByInstance = new();
 
+        private GameTypographyProfile typographyProfile;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Bootstrap()
         {
@@ -33,6 +35,9 @@ namespace Markyu.LastKernel
 
             instance = this;
 
+            // Load typography profile from Resources (placed at Resources/Typography/GameTypographyProfile)
+            typographyProfile = Resources.Load<GameTypographyProfile>("Typography/GameTypographyProfile");
+
             UnityLocalizationBridge.Initialize();
             GameLocalization.Initialize();
             SceneManager.sceneLoaded += HandleSceneLoaded;
@@ -51,15 +56,9 @@ namespace Markyu.LastKernel
             instance = null;
         }
 
-        private void HandleSceneLoaded(Scene _, LoadSceneMode __)
-        {
-            StartCoroutine(RefreshNextFrame());
-        }
+        private void HandleSceneLoaded(Scene _, LoadSceneMode __) => StartCoroutine(RefreshNextFrame());
 
-        private void HandleLanguageChanged(GameLanguage _)
-        {
-            RefreshAllText();
-        }
+        private void HandleLanguageChanged(GameLanguage _) => RefreshAllText();
 
         private IEnumerator RefreshNextFrame()
         {
@@ -69,7 +68,9 @@ namespace Markyu.LastKernel
 
         private void RefreshAllText()
         {
-            TMP_FontAsset defaultFont = TMP_Settings.defaultFontAsset;
+            // Resolve the default (UI role) font: profile.uiFont → TMP_Settings default
+            TMP_FontAsset defaultFont = typographyProfile != null ? typographyProfile.uiFont : null;
+            defaultFont ??= TMP_Settings.defaultFontAsset;
             if (defaultFont == null)
                 return;
 
@@ -84,16 +85,37 @@ namespace Markyu.LastKernel
                 if (!originalTextByInstance.ContainsKey(text))
                     originalTextByInstance[text] = text.text;
 
-                ApplyFont(text, defaultFont);
+                TMP_FontAsset font = ResolveFont(text, defaultFont);
+                ApplyFont(text, font);
                 ApplyInspectorTranslation(text, originalTextByInstance[text]);
             }
         }
 
-        private static void ConfigureFontFallbacks(TMP_FontAsset defaultFont)
+        // Returns the correct font for a text component based on its GameTypographyApplier role.
+        // Components without a GameTypographyApplier always get the default (UI / MiSans) font.
+        private TMP_FontAsset ResolveFont(TMP_Text text, TMP_FontAsset defaultFont)
+        {
+            if (typographyProfile == null)
+                return defaultFont;
+
+            if (!text.TryGetComponent<GameTypographyApplier>(out var applier))
+                return defaultFont;
+
+            TMP_FontAsset roleFont = typographyProfile.GetFont(applier.role);
+            return roleFont != null ? roleFont : defaultFont;
+        }
+
+        private void ConfigureFontFallbacks(TMP_FontAsset defaultFont)
         {
             defaultFont.isMultiAtlasTexturesEnabled = true;
 
             List<TMP_FontAsset> fallbackFonts = TMP_Settings.fallbackFontAssets ?? new List<TMP_FontAsset>();
+
+            // Ensure Noto emergency fallback is in the global fallback list
+            TMP_FontAsset notoFallback = typographyProfile?.fallbackFont;
+            if (notoFallback != null && !fallbackFonts.Contains(notoFallback))
+                fallbackFonts.Add(notoFallback);
+
             TMP_Settings.fallbackFontAssets = fallbackFonts;
 
             foreach (TMP_FontAsset fallbackFont in fallbackFonts)
@@ -104,27 +126,21 @@ namespace Markyu.LastKernel
                 fallbackFont.isMultiAtlasTexturesEnabled = true;
 
                 if (!defaultFont.fallbackFontAssetTable.Contains(fallbackFont))
-                {
                     defaultFont.fallbackFontAssetTable.Add(fallbackFont);
-                }
             }
         }
 
-        private static void ApplyFont(TMP_Text text, TMP_FontAsset defaultFont)
+        private static void ApplyFont(TMP_Text text, TMP_FontAsset font)
         {
-            if (text.font != defaultFont)
-            {
-                text.font = defaultFont;
-            }
+            if (text.font != font)
+                text.font = font;
 
-            Material defaultMaterial = defaultFont.material;
+            Material defaultMaterial = font.material;
             if (defaultMaterial != null)
             {
                 Material currentMaterial = text.fontSharedMaterial;
                 if (currentMaterial == null || currentMaterial.mainTexture != defaultMaterial.mainTexture)
-                {
                     text.fontSharedMaterial = defaultMaterial;
-                }
             }
 
             text.havePropertiesChanged = true;
