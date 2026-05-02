@@ -86,6 +86,19 @@ namespace Markyu.LastKernel
             name = displayName;
         }
 
+        /// <summary>Returns true if this item can currently be applied without spending gold.</summary>
+        public bool CanApply(NightFighter target, NightTeam team)
+        {
+            return effect switch
+            {
+                NightShopEffect.AddAttack    => target != null,
+                NightShopEffect.AddMaxHealth => target != null,
+                NightShopEffect.FullHeal     => target != null,
+                NightShopEffect.HireGuard    => team != null && team.FirstEmptySlot() >= 0,
+                _                            => false
+            };
+        }
+
         /// <summary>Apply this shop item's effect to a fighter and/or team.</summary>
         public void Apply(NightFighter target, NightTeam team)
         {

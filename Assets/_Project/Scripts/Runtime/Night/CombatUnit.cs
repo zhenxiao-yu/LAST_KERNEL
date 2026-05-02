@@ -43,12 +43,13 @@ namespace Markyu.LastKernel
             float dodge,
             float critChance,
             float critMultiplier,
-            CardInstance sourceCard = null)
+            CardInstance sourceCard = null,
+            int startingHP = 0)
         {
             Side = side;
             DisplayName = displayName;
             MaxHP = Mathf.Max(1, maxHP);
-            CurrentHP = MaxHP;
+            CurrentHP = startingHP > 0 ? Mathf.Clamp(startingHP, 1, MaxHP) : MaxHP;
             Attack = Mathf.Max(0, attack);
             Defense = Mathf.Max(0, defense);
             AttackCooldown = attackSpeedPercent > 0 ? 100f / attackSpeedPercent : 2f;
@@ -73,7 +74,7 @@ namespace Markyu.LastKernel
             return new CombatUnit(
                 CombatUnitSide.Defender,
                 card.Definition.DisplayName,
-                card.CurrentHealth,
+                stats.MaxHealth.Value,
                 stats.Attack.Value,
                 stats.Defense.Value,
                 stats.AttackSpeed.Value,
@@ -81,7 +82,8 @@ namespace Markyu.LastKernel
                 stats.Dodge.Value,
                 stats.CriticalChance.Value,
                 stats.CriticalMultiplier.Value,
-                card
+                card,
+                card.CurrentHealth
             );
         }
 

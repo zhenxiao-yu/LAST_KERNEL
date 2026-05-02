@@ -20,11 +20,11 @@ namespace Markyu.LastKernel
 
         [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Morale change on player victory.")]
-        private int victoryMoraleDelta = 5;
+        private int victoryMoraleDelta = 7;
 
         [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Morale change on player defeat (use negative value).")]
-        private int defeatMoraleDelta = -10;
+        private int defeatMoraleDelta = -7;
 
         [BoxGroup("Run-State Consequences")]
         [SerializeField, Tooltip("Fatigue added per defender committed to the lane.")]
@@ -61,7 +61,7 @@ namespace Markyu.LastKernel
 
         public static NightWaveDefinition CreateRuntime(
             string name, string flavor, List<EnemyEntry> entries,
-            int victoryMorale = 5, int defeatMorale = -10,
+            int victoryMorale = 7, int defeatMorale = -7,
             int fatigue = 1, int salvage = 1)
         {
             var wave = ScriptableObject.CreateInstance<NightWaveDefinition>();

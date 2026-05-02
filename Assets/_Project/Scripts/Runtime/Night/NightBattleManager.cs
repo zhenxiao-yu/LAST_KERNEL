@@ -313,8 +313,29 @@ namespace Markyu.LastKernel
                 yield return new WaitForSeconds(0.3f);
             }
 
+            // Salvage: each enemy kill spawns a coin card on the board (capped at 5)
+            if (result.SalvageDelta > 0 && HasSurvivingCharacterOnBoard())
+                yield return SpawnSalvageCoins(result);
+
             if (result.PlayerWon && _selectedReward != null && HasSurvivingCharacterOnBoard())
                 yield return SpawnSelectedReward(result);
+        }
+
+        private IEnumerator SpawnSalvageCoins(NightCombatResult result)
+        {
+            var currency = TradeManager.Instance?.CurrencyCard;
+            if (currency == null || CardManager.Instance == null) yield break;
+
+            Vector3 center = ResolveRewardSpawnPosition(result);
+            int count = Mathf.Min(result.SalvageDelta, 5);
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 offset = new(
+                    UnityEngine.Random.Range(-1.5f, 1.5f), 0f, UnityEngine.Random.Range(-1.5f, 1.5f));
+                CardManager.Instance.CreateCardInstance(currency, center + offset);
+                AudioManager.Instance?.PlaySFX(AudioId.Coin);
+                yield return new WaitForSeconds(0.12f);
+            }
         }
 
         // ── Edge case: no defenders ───────────────────────────────────────────────
@@ -330,7 +351,7 @@ namespace Markyu.LastKernel
                 totalDefenders:    0,
                 enemiesKilled:     0,
                 totalEnemies:      totalEnemies,
-                moraleDelta:       wave?.DefeatMoraleDelta ?? -10,
+                moraleDelta:       wave?.DefeatMoraleDelta ?? -7,
                 fatigueDelta:      0,
                 salvageDelta:      0
             );

@@ -133,7 +133,10 @@ namespace Markyu.LastKernel
 
             _nameLabel.text  = f.DisplayName;
             _statsLabel.text = $"ATK {f.FinalAttack}  |  HP {f.FinalMaxHealth}";
-            _hpFill.style.width = Length.Percent(100f); // full at prep time
+            float hpPct = f.FinalMaxHealth > 0 ? (float)f.FinalHealth / f.FinalMaxHealth * 100f : 100f;
+            _hpFill.style.width = Length.Percent(hpPct);
+            if (hpPct < 35f) _hpFill.AddToClassList("nb-hp-fill--low");
+            else              _hpFill.RemoveFromClassList("nb-hp-fill--low");
             _hpText.text = $"{f.FinalHealth}/{f.FinalMaxHealth}";
         }
 

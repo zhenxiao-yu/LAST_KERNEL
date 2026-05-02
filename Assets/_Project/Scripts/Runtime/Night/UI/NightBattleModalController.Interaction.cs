@@ -98,6 +98,11 @@ namespace Markyu.LastKernel
 
             if (!def.requiresTarget)
             {
+                if (!def.CanApply(null, _team))
+                {
+                    AddLog(GameLocalization.Get("night.modal.log.noSlot"), "nbm-log-entry--system");
+                    return;
+                }
                 if (NightBattleManager.Instance?.TrySpendGold(def.goldCost) == true)
                 {
                     def.Apply(null, _team);
@@ -133,6 +138,12 @@ namespace Markyu.LastKernel
             if (_pendingItem == null || _team.IsSlotEmpty(slotIndex)) return;
 
             var fighter = _team.GetSlot(slotIndex);
+            if (!_pendingItem.CanApply(fighter, _team))
+            {
+                CancelCurrentSelection();
+                return;
+            }
+
             if (NightBattleManager.Instance?.TrySpendGold(_pendingItem.goldCost) == true)
             {
                 _pendingItem.Apply(fighter, _team);

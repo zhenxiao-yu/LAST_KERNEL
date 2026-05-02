@@ -319,6 +319,14 @@ namespace Markyu.LastKernel
             RunStateManager.Instance?.SetPhase(GamePhase.Dawn);
             RunStateManager.Instance?.ApplyDawnRecovery(CardManager.Instance.GetStatsSnapshot());
 
+            // Dawn recovery: surviving characters heal 15% of their max HP
+            foreach (var card in CardManager.Instance.AllCards)
+            {
+                if (card == null || card.Definition?.Category != CardCategory.Character) continue;
+                if (card.CurrentHealth <= 0) continue;
+                card.Heal(Mathf.Max(1, Mathf.RoundToInt(card.Stats.MaxHealth.Value * 0.15f)));
+            }
+
             InputManager.Instance.AddLock(dayCycleInputLock);
 
             int nextDay = TimeManager.Instance.CurrentDay + 1;

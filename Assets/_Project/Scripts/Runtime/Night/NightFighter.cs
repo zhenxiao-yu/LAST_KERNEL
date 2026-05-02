@@ -51,6 +51,12 @@ namespace Markyu.LastKernel
         public static NightFighter FromCard(CardInstance card)
         {
             var stats = card.Stats;
+
+            // High fatigue slows defenders: >50 fatigue reduces attack speed by up to 15%
+            int fatigue = RunStateManager.Instance?.State.Fatigue ?? 0;
+            float fatigueSpeedMult = fatigue > 50 ? 1f - (fatigue - 50) * 0.003f : 1f;
+            int adjustedSpeed = Mathf.Max(50, Mathf.RoundToInt(stats.AttackSpeed.Value * fatigueSpeedMult));
+
             return new NightFighter(
                 id:            $"{card.Definition.Id}:{card.GetInstanceID()}",
                 displayName:   card.Definition.DisplayName,
@@ -58,9 +64,9 @@ namespace Markyu.LastKernel
                 isTemporary:   false,
                 attack:        stats.Attack.Value,
                 defense:       stats.Defense.Value,
-                maxHealth:     card.CurrentHealth,   // effective max = current HP at prep start
-                health:        card.CurrentHealth,
-                attackSpeed:   stats.AttackSpeed.Value,
+                maxHealth:     stats.MaxHealth.Value,   // true definition max, not current HP
+                health:        card.CurrentHealth,      // current (possibly wounded) HP
+                attackSpeed:   adjustedSpeed,
                 accuracy:      stats.Accuracy.Value,
                 dodge:         stats.Dodge.Value,
                 critChance:    stats.CriticalChance.Value,
@@ -111,7 +117,8 @@ namespace Markyu.LastKernel
                 dodge:            BaseDodge,
                 critChance:       BaseCritChance,
                 critMultiplier:   BaseCritMultiplier,
-                sourceCard:       SourceCard
+                sourceCard:       SourceCard,
+                startingHP:       FinalHealth
             );
         }
 

@@ -151,11 +151,11 @@ namespace Markyu.LastKernel
 
             if (PlayerWon)
             {
-                moraleDelta = _waveDef?.VictoryMoraleDelta ?? 5;
+                moraleDelta = _waveDef?.VictoryMoraleDelta ?? 7;
             }
             else
             {
-                moraleDelta = _waveDef?.DefeatMoraleDelta ?? -10;
+                moraleDelta = _waveDef?.DefeatMoraleDelta ?? -7;
             }
 
             if (_waveDef != null)

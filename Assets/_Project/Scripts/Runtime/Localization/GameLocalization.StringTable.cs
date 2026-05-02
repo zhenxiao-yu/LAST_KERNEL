@@ -193,6 +193,7 @@ namespace Markyu.LastKernel
             ["night.modal.log.rewardRequired"] = new("先选择一张奖励卡。",                   "Choose a reward card first."),
             ["night.modal.log.rewardSelected"] = new("已选择奖励：{0}。",                    "Reward selected: {0}."),
             ["night.modal.log.noGold"]      = new("金币不足。需要 {0}，现有 {1}。",         "Not enough gold. Need {0}, have {1}."),
+            ["night.modal.log.noSlot"]      = new("没有空余槽位给雇佣卫兵。",               "No empty slot available for Hired Guard."),
             ["night.modal.log.purchased"]   = new("已购买：{0}。",                          "Purchased: {0}."),
             ["night.modal.log.itemSelected"]= new("已选择：{0}。点击战士以使用。",          "Selected: {0}. Click a fighter to apply."),
             ["night.modal.log.itemApplied"] = new("已将 {0} 用于 {1}。",                    "Applied {0} to {1}."),
