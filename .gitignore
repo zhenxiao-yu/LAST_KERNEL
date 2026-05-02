@@ -108,6 +108,12 @@ InitTestScene*.unity*
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
+# Python venvs — never committed regardless of where they land
+venv/
+.venv/
+*venv*/
+env/
+
 # Tools — generated art output (drop into Unity manually; never commit binaries here)
 /Tools/CardArt/
 /Tools/PackArt/
