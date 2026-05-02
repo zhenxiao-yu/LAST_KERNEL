@@ -434,14 +434,14 @@ MonoBehaviour:
   - m_Id: 7033597953
     m_Localized: '{0}
 
-      
+
 
       {1}
 
-      
 
-      {2} defender(s) deployed
-      against {3} enemy unit(s).'
+
+      {2} defender(s) deployed against {3}
+      enemy unit(s).'
     m_Metadata:
       m_Items: []
   - m_Id: 7033597954
@@ -3567,6 +3567,162 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2138761672273924
     m_Localized: Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575671631872
+    m_Localized: Preparing bunker systems...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157824
+    m_Localized: Stack cards to combine workers, resources, and structures. The more
+      efficient the stack, the stronger the colony.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157825
+    m_Localized: Your first wall may be your last. Build before nightfall, not after
+      the breach.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157826
+    m_Localized: Workers who go hungry lose morale. Lost morale means lost discipline.
+      Lost discipline ends runs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157827
+    m_Localized: Engineers preserve what cost you the most. Keep at least one out
+      of harm's way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157828
+    m_Localized: Scrap is everywhere. The bunker runs on what the old world threw
+      away.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157829
+    m_Localized: Power Cores are rare. Every one recovered is a second chance the
+      bunker didn't deserve.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157830
+    m_Localized: Turrets hold the front line. Time is the only resource you cannot
+      craft.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157831
+    m_Localized: Villagers left unassigned do not fight. Deploy every defender before
+      the night phase begins.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157832
+    m_Localized: Every trade has a cost. Every cost compounds over time. Choose carefully.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157833
+    m_Localized: Crafting chains unlock power. A circuit today becomes a weapon tomorrow.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157834
+    m_Localized: The night does not negotiate. Prepare, or be overrun.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157835
+    m_Localized: Shelters protect those inside. Nothing protects those left outside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157836
+    m_Localized: Signal Towers extend your reach. Blind spots are how bunkers fall.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157837
+    m_Localized: Morale collapses silently, then all at once. Watch the numbers before
+      they watch you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157838
+    m_Localized: "The kernel is the last line. If it falls, the run is over \u2014
+      everything else was just delay."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157839
+    m_Localized: Data is memory. Memory is strategy. Decode everything you find.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257664798720
+    m_Localized: Preparing bunker systems...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324672
+    m_Localized: Stack cards to combine workers, resources, and structures. The more
+      efficient the stack, the stronger the colony.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324673
+    m_Localized: Your first wall may be your last. Build before nightfall, not after
+      the breach.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324674
+    m_Localized: Workers who go hungry lose morale. Lost morale means lost discipline.
+      Lost discipline ends runs.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324675
+    m_Localized: Engineers preserve what cost you the most. Keep at least one out
+      of harm's way.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324676
+    m_Localized: Scrap is everywhere. The bunker runs on what the old world threw
+      away.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324677
+    m_Localized: Power Cores are rare. Every one recovered is a second chance the
+      bunker didn't deserve.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324678
+    m_Localized: Turrets hold the front line. Time is the only resource you cannot
+      craft.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324679
+    m_Localized: Villagers left unassigned do not fight. Deploy every defender before
+      the night phase begins.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324680
+    m_Localized: Every trade has a cost. Every cost compounds over time. Choose carefully.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324681
+    m_Localized: Crafting chains unlock power. A circuit today becomes a weapon tomorrow.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324682
+    m_Localized: The night does not negotiate. Prepare, or be overrun.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324683
+    m_Localized: Shelters protect those inside. Nothing protects those left outside.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324684
+    m_Localized: Signal Towers extend your reach. Blind spots are how bunkers fall.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324685
+    m_Localized: Morale collapses silently, then all at once. Watch the numbers before
+      they watch you.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324686
+    m_Localized: "The kernel is the last line. If it falls, the run is over \u2014
+      everything else was just delay."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324687
+    m_Localized: Data is memory. Memory is strategy. Decode everything you find.
     m_Metadata:
       m_Items: []
   references:

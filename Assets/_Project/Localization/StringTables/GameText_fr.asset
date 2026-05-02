@@ -434,14 +434,14 @@ MonoBehaviour:
   - m_Id: 7033597953
     m_Localized: '{0}
 
-      
+
 
       {1}
 
-      
 
-      {2} defender(s) deployed
-      against {3} enemy unit(s).'
+
+      {2} defender(s) deployed against {3}
+      enemy unit(s).'
     m_Metadata:
       m_Items: []
   - m_Id: 7033597954
@@ -3567,6 +3567,172 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2138761672273924
     m_Localized: "Compl\xE9t\xE9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575671631872
+    m_Localized: Preparation des systemes du bunker...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157824
+    m_Localized: Empilez des cartes pour combiner ouvriers, ressources et structures.
+      Plus la pile est efficace, plus la colonie est forte.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157825
+    m_Localized: Votre premier mur pourrait etre le dernier. Construisez avant la
+      nuit, pas apres la breche.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157826
+    m_Localized: Les ouvriers affames perdent leur moral. Un moral bas brise la discipline.
+      Une discipline brisee met fin aux parties.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157827
+    m_Localized: Les ingenieurs preservent ce qui vous a coute le plus. Gardez-en
+      au moins un a l abri.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157828
+    m_Localized: La ferraille est partout. Le bunker tourne avec les dechets de l
+      ancien monde.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157829
+    m_Localized: Les coeurs d energie sont rares. Chacun recupere est une seconde
+      chance que le bunker ne meritait pas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157830
+    m_Localized: Les tourelles tiennent la ligne de front. Le temps est la seule
+      ressource que vous ne pouvez pas fabriquer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157831
+    m_Localized: Les villageois non assignes ne combattent pas. Deployez chaque defenseur
+      avant la phase nocturne.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157832
+    m_Localized: Chaque echange a un cout. Chaque cout s accumule avec le temps.
+      Choisissez avec soin.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157833
+    m_Localized: Les chaines de fabrication liberent de la puissance. Un circuit
+      aujourd hui devient une arme demain.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157834
+    m_Localized: La nuit ne negocie pas. Preparez-vous, ou soyez submerges.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157835
+    m_Localized: Les abris protegent ceux qui sont a l interieur. Rien ne protege
+      ceux qui restent dehors.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157836
+    m_Localized: Les tours de signal etendent votre portee. Les angles morts sont
+      la raison pour laquelle les bunkers tombent.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157837
+    m_Localized: Le moral s effondre silencieusement, puis tout d un coup. Surveillez
+      les chiffres avant qu ils ne vous surveillent.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157838
+    m_Localized: "Le noyau est la derniere ligne. S il tombe, la partie est terminee
+      \u2014 tout le reste n etait que du temps gagne."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157839
+    m_Localized: Les donnees sont la memoire. La memoire est la strategie. Decodez
+      tout ce que vous trouvez.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257664798720
+    m_Localized: Preparation des systemes du bunker...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324672
+    m_Localized: Empilez des cartes pour combiner ouvriers, ressources et structures.
+      Plus la pile est efficace, plus la colonie est forte.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324673
+    m_Localized: Votre premier mur pourrait etre le dernier. Construisez avant la
+      nuit, pas apres la breche.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324674
+    m_Localized: Les ouvriers affames perdent leur moral. Un moral bas brise la discipline.
+      Une discipline brisee met fin aux parties.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324675
+    m_Localized: Les ingenieurs preservent ce qui vous a coute le plus. Gardez-en
+      au moins un a l abri.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324676
+    m_Localized: La ferraille est partout. Le bunker tourne avec les dechets de l
+      ancien monde.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324677
+    m_Localized: Les coeurs d energie sont rares. Chacun recupere est une seconde
+      chance que le bunker ne meritait pas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324678
+    m_Localized: Les tourelles tiennent la ligne de front. Le temps est la seule
+      ressource que vous ne pouvez pas fabriquer.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324679
+    m_Localized: Les villageois non assignes ne combattent pas. Deployez chaque defenseur
+      avant la phase nocturne.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324680
+    m_Localized: Chaque echange a un cout. Chaque cout s accumule avec le temps.
+      Choisissez avec soin.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324681
+    m_Localized: Les chaines de fabrication liberent de la puissance. Un circuit
+      aujourd hui devient une arme demain.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324682
+    m_Localized: La nuit ne negocie pas. Preparez-vous, ou soyez submerges.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324683
+    m_Localized: Les abris protegent ceux qui sont a l interieur. Rien ne protege
+      ceux qui restent dehors.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324684
+    m_Localized: Les tours de signal etendent votre portee. Les angles morts sont
+      la raison pour laquelle les bunkers tombent.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324685
+    m_Localized: Le moral s effondre silencieusement, puis tout d un coup. Surveillez
+      les chiffres avant qu ils ne vous surveillent.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324686
+    m_Localized: "Le noyau est la derniere ligne. S il tombe, la partie est terminee
+      \u2014 tout le reste n etait que du temps gagne."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324687
+    m_Localized: Les donnees sont la memoire. La memoire est la strategie. Decodez
+      tout ce que vous trouvez.
     m_Metadata:
       m_Items: []
   references:

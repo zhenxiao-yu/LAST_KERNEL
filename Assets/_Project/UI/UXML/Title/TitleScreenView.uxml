@@ -15,7 +15,8 @@
             <ui:VisualElement name="title-header" class="lk-column">
                 <!-- Sprite slot: assign background-image in C#, add class lk-logo-icon-visible to show -->
                 <ui:VisualElement name="logo-icon" class="lk-logo-icon" />
-                <ui:Label name="lbl-logo"     class="lk-label lk-label--logo" text="LAST KERNEL" />
+                <!-- Letter labels + ParticleImage created at runtime by TitleLogoAnimator -->
+                <ui:VisualElement name="title-logo-area" class="lk-title-logo-area" />
                 <ui:Label name="lbl-subtitle" class="lk-label lk-label--dim"
                           style="margin-top: 8px; margin-bottom: 40px;" />
             </ui:VisualElement>

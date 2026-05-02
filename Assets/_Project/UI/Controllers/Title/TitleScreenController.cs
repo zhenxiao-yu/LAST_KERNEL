@@ -19,9 +19,9 @@ namespace Markyu.LastKernel
     {
         // ── Labels (bound to Localizer — auto-refreshed on language change) ────
 
-        private Label _logoLabel;
-        private Label _subtitleLabel;
-        private Label _versionLabel;
+        private Label             _subtitleLabel;
+        private Label             _versionLabel;
+        private TitleLogoAnimator _logoAnimator;
 
         // ── Nav buttons ────────────────────────────────────────────────────────
 
@@ -45,7 +45,6 @@ namespace Markyu.LastKernel
         protected override void OnBind()
         {
             // Labels
-            _logoLabel     = Root.Q<Label>("lbl-logo");
             _subtitleLabel = Root.Q<Label>("lbl-subtitle");
             _versionLabel  = Root.Q<Label>("lbl-version");
 
@@ -69,12 +68,12 @@ namespace Markyu.LastKernel
             _quitButton.clicked     += ShowQuitConfirmation;
 
             // Static labels → Localizer (auto-refreshed by base.OnLocalizationRefresh)
-            Localizer.Bind(_logoLabel,     "menu.title");
             Localizer.Bind(_subtitleLabel, "menu.subtitle");
             Localizer.Bind(_versionLabel,  "title.versionDraft");
 
-            // Typography — MiSans Heavy on logo (falls back gracefully if asset is missing)
-            UIFonts.DisplayHeavy(_logoLabel);
+            // Animated logo — letters + particles built at runtime
+            _logoAnimator = new TitleLogoAnimator();
+            _logoAnimator.Init(Root.Q<VisualElement>("title-logo-area"));
 
             // Sub-panel controllers
             _modal = new ModalController();

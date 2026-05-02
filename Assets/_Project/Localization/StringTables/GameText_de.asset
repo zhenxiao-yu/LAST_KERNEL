@@ -434,14 +434,14 @@ MonoBehaviour:
   - m_Id: 7033597953
     m_Localized: '{0}
 
-      
+
 
       {1}
 
-      
 
-      {2} defender(s) deployed
-      against {3} enemy unit(s).'
+
+      {2} defender(s) deployed against {3}
+      enemy unit(s).'
     m_Metadata:
       m_Items: []
   - m_Id: 7033597954
@@ -3567,6 +3567,170 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2138761672273924
     m_Localized: Abgeschlossen
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575671631872
+    m_Localized: Bunkersysteme werden vorbereitet...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157824
+    m_Localized: Stapelt Karten, um Arbeiter, Ressourcen und Bauten zu verbinden.
+      Je effizienter der Stapel, desto staerker die Kolonie.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157825
+    m_Localized: Eure erste Mauer koennte die letzte sein. Baut vor der Nacht, nicht
+      nach dem Einbruch.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157826
+    m_Localized: Hungernde Arbeiter verlieren Moral. Verlorene Moral kostet Disziplin.
+      Verlorene Disziplin kostet den Lauf.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157827
+    m_Localized: Ingenieure bewahren, was euch am meisten gekostet hat. Haltet mindestens
+      einen aus der Gefahrenzone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157828
+    m_Localized: Schrott ist ueberall. Der Bunker laeuft mit dem, was die alte Welt
+      weggeworfen hat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157829
+    m_Localized: Energiekerne sind selten. Jeder geborgene ist eine zweite Chance,
+      die der Bunker nicht verdient hatte.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157830
+    m_Localized: Geschuetze halten die Front. Zeit ist die einzige Ressource, die
+      ihr nicht craften koennt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157831
+    m_Localized: Nicht eingeteilte Dorfbewohner kaempfen nicht. Alle Verteidiger
+      vor der Nachtphase einsetzen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157832
+    m_Localized: Jeder Tausch hat seinen Preis. Jeder Preis summiert sich. Waehlt
+      klug.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157833
+    m_Localized: Crafting-Ketten entfesseln Macht. Eine Schaltung heute wird morgen
+      eine Waffe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157834
+    m_Localized: Die Nacht verhandelt nicht. Bereitet euch vor, oder werdet ueberrannt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157835
+    m_Localized: Schutzraeume schuetzen jene drinnen. Nichts schuetzt jene draussen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157836
+    m_Localized: Signaltuerme erweitern eure Reichweite. Tote Winkel sind der Grund,
+      warum Bunker fallen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157837
+    m_Localized: Moral bricht lautlos ein, dann auf einmal komplett. Behaltet die
+      Zahlen im Blick, bevor sie euch im Blick behalten.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157838
+    m_Localized: "Der Kern ist die letzte Linie. Faellt er, ist der Lauf vorbei \u2014
+      alles andere war nur Zeitgewinn."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157839
+    m_Localized: Daten sind Erinnerung. Erinnerung ist Strategie. Decodiert alles,
+      was ihr findet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257664798720
+    m_Localized: Bunkersysteme werden vorbereitet...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324672
+    m_Localized: Stapelt Karten, um Arbeiter, Ressourcen und Bauten zu verbinden.
+      Je effizienter der Stapel, desto staerker die Kolonie.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324673
+    m_Localized: Eure erste Mauer koennte die letzte sein. Baut vor der Nacht, nicht
+      nach dem Einbruch.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324674
+    m_Localized: Hungernde Arbeiter verlieren Moral. Verlorene Moral kostet Disziplin.
+      Verlorene Disziplin kostet den Lauf.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324675
+    m_Localized: Ingenieure bewahren, was euch am meisten gekostet hat. Haltet mindestens
+      einen aus der Gefahrenzone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324676
+    m_Localized: Schrott ist ueberall. Der Bunker laeuft mit dem, was die alte Welt
+      weggeworfen hat.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324677
+    m_Localized: Energiekerne sind selten. Jeder geborgene ist eine zweite Chance,
+      die der Bunker nicht verdient hatte.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324678
+    m_Localized: Geschuetze halten die Front. Zeit ist die einzige Ressource, die
+      ihr nicht craften koennt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324679
+    m_Localized: Nicht eingeteilte Dorfbewohner kaempfen nicht. Alle Verteidiger
+      vor der Nachtphase einsetzen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324680
+    m_Localized: Jeder Tausch hat seinen Preis. Jeder Preis summiert sich. Waehlt
+      klug.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324681
+    m_Localized: Crafting-Ketten entfesseln Macht. Eine Schaltung heute wird morgen
+      eine Waffe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324682
+    m_Localized: Die Nacht verhandelt nicht. Bereitet euch vor, oder werdet ueberrannt.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324683
+    m_Localized: Schutzraeume schuetzen jene drinnen. Nichts schuetzt jene draussen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324684
+    m_Localized: Signaltuerme erweitern eure Reichweite. Tote Winkel sind der Grund,
+      warum Bunker fallen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324685
+    m_Localized: Moral bricht lautlos ein, dann auf einmal komplett. Behaltet die
+      Zahlen im Blick, bevor sie euch im Blick behalten.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324686
+    m_Localized: "Der Kern ist die letzte Linie. Faellt er, ist der Lauf vorbei \u2014
+      alles andere war nur Zeitgewinn."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324687
+    m_Localized: Daten sind Erinnerung. Erinnerung ist Strategie. Decodiert alles,
+      was ihr findet.
     m_Metadata:
       m_Items: []
   references:

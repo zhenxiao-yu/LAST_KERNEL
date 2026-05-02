@@ -1,0 +1,242 @@
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UIElements;
+using Kamgam.UIToolkitParticles;
+
+namespace Markyu.LastKernel
+{
+    /// <summary>
+    /// Creates the animated "LAST KERNEL" title logo at runtime.
+    /// Each letter is a separate Label so it can independently float,
+    /// respond to hover, and enter with a staggered animation.
+    /// Particle sparks are rendered via Kamgam ParticleImage.
+    /// </summary>
+    public class TitleLogoAnimator
+    {
+        private static readonly string[] Words = { "LAST", "KERNEL" };
+
+        private VisualElement       _container;
+        private VisualElement       _lettersRow;
+        private ParticleImage       _particles;
+        private readonly List<Label> _letters      = new();
+        private readonly List<float> _letterPhases = new();
+
+        // ── Init ───────────────────────────────────────────────────────────────
+
+        public void Init(VisualElement container)
+        {
+            _container = container;
+            _container.Clear();
+
+            SetupParticles();
+            BuildLettersRow();
+            RegisterParallax();
+            ScheduleEntrance();
+        }
+
+        // ── Particles ──────────────────────────────────────────────────────────
+
+        private void SetupParticles()
+        {
+            _particles = new ParticleImage();
+            _particles.AddToClassList("lk-logo-particles");
+            _particles.PlayOnShow    = true;
+            _particles.RestartOnShow = true;
+            _container.Add(_particles);
+
+            // Defer init until the element is in a live panel
+            _container.schedule.Execute(() =>
+                _particles.InitializeIfNecessary(immediate: true, onInitialized: ConfigureParticles)
+            ).StartingIn(400);
+        }
+
+        private void ConfigureParticles()
+        {
+            var ps = _particles?.ParticleSystem;
+            if (ps == null) return;
+
+            // Round soft-edged particle sprite baked from a circle gradient
+            _particles.Texture = BuildCircleTexture(16);
+
+            var main = ps.main;
+            main.loop         = true;
+            main.duration     = 5f;
+            main.startLifetime = new ParticleSystem.MinMaxCurve(1.6f, 3.2f);
+            main.startSpeed    = new ParticleSystem.MinMaxCurve(22f,  55f);
+            main.startSize     = new ParticleSystem.MinMaxCurve(1f,   3.5f);
+            main.maxParticles  = 55;
+            main.startColor    = new ParticleSystem.MinMaxGradient(
+                new Color(0f,    0.86f, 1f,    0.85f),  // cyan
+                new Color(0.63f, 0.20f, 0.57f, 0.65f)   // magenta
+            );
+
+            var emission = ps.emission;
+            emission.rateOverTime = 9f;
+
+            var shape = ps.shape;
+            shape.enabled   = true;
+            shape.shapeType = ParticleSystemShapeType.Rectangle;
+            shape.scale     = new Vector3(380f, 24f, 1f);
+            shape.position  = Vector3.zero;
+
+            var vel = ps.velocityOverLifetime;
+            vel.enabled = true;
+            vel.y = new ParticleSystem.MinMaxCurve(30f,  75f);
+            vel.x = new ParticleSystem.MinMaxCurve(-14f, 14f);
+
+            ps.Play();
+        }
+
+        // ── Letters ────────────────────────────────────────────────────────────
+
+        private void BuildLettersRow()
+        {
+            _lettersRow = new VisualElement();
+            _lettersRow.AddToClassList("lk-logo-letters-row");
+            _container.Add(_lettersRow);
+
+            // Float cycle = 2800 ms; spread 10 letters evenly across one cycle
+            const float floatCycleMs = 2800f;
+
+            for (int w = 0; w < Words.Length; w++)
+            {
+                if (w > 0)
+                {
+                    var gap = new VisualElement();
+                    gap.AddToClassList("lk-logo-word-gap");
+                    _lettersRow.Add(gap);
+                }
+
+                var wordEl = new VisualElement();
+                wordEl.AddToClassList("lk-logo-word");
+                _lettersRow.Add(wordEl);
+
+                foreach (char c in Words[w])
+                {
+                    var lbl = new Label(c.ToString());
+                    lbl.AddToClassList("lk-logo-letter");
+                    lbl.AddToClassList("lk-logo-letter--pre-enter");
+
+                    UIFonts.DisplayHeavy(lbl);
+
+                    int   idx   = _letters.Count;
+                    float phase = idx * floatCycleMs / 10f / 1000f; // seconds
+                    _letterPhases.Add(phase);
+                    _letters.Add(lbl);
+                    wordEl.Add(lbl);
+
+                    lbl.RegisterCallback<MouseEnterEvent>(_ => OnLetterEnter(lbl));
+                    lbl.RegisterCallback<MouseLeaveEvent>(_ => OnLetterLeave(lbl, idx));
+                }
+            }
+        }
+
+        private void OnLetterEnter(Label lbl)
+        {
+            lbl.RemoveFromClassList("lk-logo-letter--idle");
+            lbl.AddToClassList("lk-logo-letter--hovered");
+        }
+
+        private void OnLetterLeave(Label lbl, int idx)
+        {
+            lbl.RemoveFromClassList("lk-logo-letter--hovered");
+
+            // Wait for hover-exit transition to complete (120 ms) then resume float
+            _container.schedule.Execute(() =>
+            {
+                if (lbl.ClassListContains("lk-logo-letter--hovered")  ||
+                    lbl.ClassListContains("lk-logo-letter--entering")  ||
+                    lbl.ClassListContains("lk-logo-letter--pre-enter"))
+                    return;
+
+                lbl.AddToClassList("lk-logo-letter--idle");
+                lbl.style.animationDelay = new List<TimeValue>
+                    { new TimeValue(-_letterPhases[idx], TimeUnit.Second) };
+            }).StartingIn(130);
+        }
+
+        // ── Parallax ───────────────────────────────────────────────────────────
+
+        private void RegisterParallax()
+        {
+            _container.RegisterCallback<MouseMoveEvent>(evt =>
+            {
+                if (_lettersRow == null) return;
+                float w = _container.resolvedStyle.width;
+                float h = _container.resolvedStyle.height;
+                if (w <= 0 || h <= 0) return;
+
+                float nx = evt.localMousePosition.x / w - 0.5f;
+                float ny = evt.localMousePosition.y / h - 0.5f;
+
+                _lettersRow.style.translate = new StyleTranslate(
+                    new Translate(nx * 12f, ny * 4f));
+            });
+
+            _container.RegisterCallback<MouseLeaveEvent>(_ =>
+            {
+                if (_lettersRow != null)
+                    _lettersRow.style.translate = new StyleTranslate(new Translate(0f, 0f));
+            });
+        }
+
+        // ── Entrance sequence ──────────────────────────────────────────────────
+
+        private void ScheduleEntrance()
+        {
+            const long baseMs     = 200L;  // wait for screen-open before starting
+            const long stepMs     = 65L;   // stagger between letters
+            const long durationMs = 400L;  // entrance animation + small buffer
+
+            for (int i = 0; i < _letters.Count; i++)
+            {
+                var   lbl         = _letters[i];
+                long  entranceAt  = baseMs + i * stepMs;
+                long  idleAt      = entranceAt + durationMs;
+                float phaseOffset = _letterPhases[i];
+
+                _container.schedule.Execute(() =>
+                {
+                    lbl.RemoveFromClassList("lk-logo-letter--pre-enter");
+                    lbl.AddToClassList("lk-logo-letter--entering");
+                }).StartingIn(entranceAt);
+
+                _container.schedule.Execute(() =>
+                {
+                    // Add idle first so opacity:1 is guaranteed before removing entering
+                    lbl.AddToClassList("lk-logo-letter--idle");
+                    lbl.RemoveFromClassList("lk-logo-letter--entering");
+                    lbl.style.animationDelay = new List<TimeValue>
+                        { new TimeValue(-phaseOffset, TimeUnit.Second) };
+                }).StartingIn(idleAt);
+            }
+        }
+
+        // ── Cleanup ────────────────────────────────────────────────────────────
+
+        public void Cleanup()
+        {
+            _particles?.Stop();
+            _letters.Clear();
+            _letterPhases.Clear();
+        }
+
+        // ── Helpers ────────────────────────────────────────────────────────────
+
+        private static Texture2D BuildCircleTexture(int size)
+        {
+            var tex  = new Texture2D(size, size, TextureFormat.RGBA32, false);
+            float r  = size * 0.5f;
+            for (int y = 0; y < size; y++)
+            for (int x = 0; x < size; x++)
+            {
+                float dist = Mathf.Sqrt((x - r + 0.5f) * (x - r + 0.5f) +
+                                        (y - r + 0.5f) * (y - r + 0.5f));
+                float a = Mathf.Clamp01(1f - dist / r);
+                tex.SetPixel(x, y, new Color(1f, 1f, 1f, a * a)); // squared for softer edge
+            }
+            tex.Apply();
+            return tex;
+        }
+    }
+}

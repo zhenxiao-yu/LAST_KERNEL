@@ -3,6 +3,7 @@
   "rootNamespace": "Markyu.LastKernel",
   "references": [
     "DOTween",
+    "Kamgam.UIToolkitParticles",
     "Michsky.LSS",
     "Unity.InputSystem",
     "Unity.Localization",

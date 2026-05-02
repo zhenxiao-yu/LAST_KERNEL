@@ -1412,3 +1412,79 @@ Toggle:checked .unity-toggle__checkmark {
     align-self: stretch;
     opacity: 0.7;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Title logo — per-letter layout & hover effects
+ * Letters are created dynamically by TitleLogoAnimator.cs.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.lk-title-logo-area {
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: visible;
+    margin-bottom: 8px;
+    min-height: 120px;
+}
+
+.lk-logo-letters-row {
+    flex-direction: row;
+    align-items: flex-end;
+    overflow: visible;
+}
+
+.lk-logo-word {
+    flex-direction: row;
+    align-items: flex-end;
+    overflow: visible;
+}
+
+/* Horizontal gap between "LAST" and "KERNEL" */
+.lk-logo-word-gap {
+    width: 24px;
+}
+
+/* Individual letter — 96 px, SAIBA / MiSans Heavy, 3-D stacked shadow */
+.lk-logo-letter {
+    font-size: 96px;
+    -unity-font-style: bold;
+    color: var(--lk-text-header);
+    padding-left: 1px;
+    padding-right: 1px;
+    overflow: visible;
+    cursor: default;
+    text-shadow:
+        1px 1px 0px rgba(0, 210, 250, 0.90),
+        2px 2px 0px rgba(0, 165, 200, 0.75),
+        3px 3px 0px rgba(0, 120, 150, 0.55),
+        4px 4px 0px rgba(0, 75,  95,  0.38),
+        5px 5px 6px rgba(0, 0,   0,   0.75),
+        0px 0px 22px rgba(0, 220, 255, 0.16);
+    transition-property: translate, scale, color;
+    transition-duration: 120ms;
+    transition-timing-function: ease-out;
+}
+
+/* Per-letter hover — lift, scale, bright glow */
+.lk-logo-letter--hovered {
+    color: var(--lk-accent);
+    translate: 0px -10px;
+    scale: 1.18 1.18;
+    text-shadow:
+        0px 0px  8px rgba(0, 220, 255, 1.00),
+        0px 0px 22px rgba(0, 220, 255, 0.65),
+        0px 0px 44px rgba(0, 220, 255, 0.28),
+        1px 1px  0px rgba(0, 255, 255, 0.90),
+        2px 2px  0px rgba(0, 200, 240, 0.70),
+        3px 3px  0px rgba(0, 140, 165, 0.50),
+        4px 4px  5px rgba(0, 0,   0,   0.95);
+}
+
+/* ParticleImage overlay — absolute, fills logo area, non-interactive */
+.lk-logo-particles {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}

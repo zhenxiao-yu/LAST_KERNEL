@@ -434,14 +434,14 @@ MonoBehaviour:
   - m_Id: 7033597953
     m_Localized: '{0}
 
-      
+
 
       {1}
 
-      
 
-      {2} defender(s) deployed
-      against {3} enemy unit(s).'
+
+      {2} defender(s) deployed against {3}
+      enemy unit(s).'
     m_Metadata:
       m_Items: []
   - m_Id: 7033597954
@@ -3567,6 +3567,172 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2138761672273924
     m_Localized: Completado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575671631872
+    m_Localized: Preparando sistemas del bunker...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157824
+    m_Localized: Apila cartas para combinar trabajadores, recursos y estructuras.
+      Cuanto mas eficiente sea la pila, mas fuerte sera la colonia.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157825
+    m_Localized: Tu primer muro puede ser el ultimo. Construye antes del anochecer,
+      no despues de la brecha.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157826
+    m_Localized: Los trabajadores hambrientos pierden la moral. La moral perdida
+      rompe la disciplina. La disciplina rota termina las partidas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157827
+    m_Localized: Los ingenieros preservan lo que mas te costo. Manten al menos uno
+      a salvo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157828
+    m_Localized: La chatarra esta por todas partes. El bunker funciona con lo que
+      el viejo mundo descarto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157829
+    m_Localized: Los nucleos de energia son escasos. Cada uno recuperado es una segunda
+      oportunidad que el bunker no merecia.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157830
+    m_Localized: Las torretas sostienen la linea del frente. El tiempo es el unico
+      recurso que no puedes fabricar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157831
+    m_Localized: Los aldeanos sin asignar no luchan. Despliega cada defensor antes
+      de que comience la fase nocturna.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157832
+    m_Localized: Cada intercambio tiene un costo. Cada costo se acumula con el tiempo.
+      Elige con cuidado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157833
+    m_Localized: Las cadenas de fabricacion liberan poder. Un circuito hoy se convierte
+      en un arma manana.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157834
+    m_Localized: La noche no negocia. Preparate, o seras arrasado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157835
+    m_Localized: Los refugios protegen a quienes estan dentro. Nada protege a los
+      que quedan fuera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157836
+    m_Localized: Las torres de senal amplian tu alcance. Los puntos ciegos son la
+      razon por la que los bunkers caen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157837
+    m_Localized: La moral colapsa en silencio, luego de golpe. Vigila los numeros
+      antes de que ellos te vigilen a ti.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157838
+    m_Localized: "El nucleo es la ultima linea. Si cae, la partida termina \u2014
+      todo lo demas fue solo tiempo ganado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2195575726157839
+    m_Localized: Los datos son memoria. La memoria es estrategia. Decodifica todo
+      lo que encuentres.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257664798720
+    m_Localized: Preparando sistemas del bunker...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324672
+    m_Localized: Apila cartas para combinar trabajadores, recursos y estructuras.
+      Cuanto mas eficiente sea la pila, mas fuerte sera la colonia.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324673
+    m_Localized: Tu primer muro puede ser el ultimo. Construye antes del anochecer,
+      no despues de la brecha.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324674
+    m_Localized: Los trabajadores hambrientos pierden la moral. La moral perdida
+      rompe la disciplina. La disciplina rota termina las partidas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324675
+    m_Localized: Los ingenieros preservan lo que mas te costo. Manten al menos uno
+      a salvo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324676
+    m_Localized: La chatarra esta por todas partes. El bunker funciona con lo que
+      el viejo mundo descarto.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324677
+    m_Localized: Los nucleos de energia son escasos. Cada uno recuperado es una segunda
+      oportunidad que el bunker no merecia.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324678
+    m_Localized: Las torretas sostienen la linea del frente. El tiempo es el unico
+      recurso que no puedes fabricar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324679
+    m_Localized: Los aldeanos sin asignar no luchan. Despliega cada defensor antes
+      de que comience la fase nocturna.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324680
+    m_Localized: Cada intercambio tiene un costo. Cada costo se acumula con el tiempo.
+      Elige con cuidado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324681
+    m_Localized: Las cadenas de fabricacion liberan poder. Un circuito hoy se convierte
+      en un arma manana.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324682
+    m_Localized: La noche no negocia. Preparate, o seras arrasado.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324683
+    m_Localized: Los refugios protegen a quienes estan dentro. Nada protege a los
+      que quedan fuera.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324684
+    m_Localized: Las torres de senal amplian tu alcance. Los puntos ciegos son la
+      razon por la que los bunkers caen.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324685
+    m_Localized: La moral colapsa en silencio, luego de golpe. Vigila los numeros
+      antes de que ellos te vigilen a ti.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324686
+    m_Localized: "El nucleo es la ultima linea. Si cae, la partida termina \u2014
+      todo lo demas fue solo tiempo ganado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324687
+    m_Localized: Los datos son memoria. La memoria es estrategia. Decodifica todo
+      lo que encuentres.
     m_Metadata:
       m_Items: []
   references:

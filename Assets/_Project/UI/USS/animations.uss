@@ -136,3 +136,41 @@
     opacity: 1;
     scale: 1 1;
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Title logo — letter animations
+ * ════════════════════════════════════════════════════════════════════════ */
+
+@keyframes lk-logo-float {
+    0%   { translate: 0px 0px; }
+    50%  { translate: 0px -6px; }
+    100% { translate: 0px 0px; }
+}
+
+@keyframes lk-logo-enter {
+    from { opacity: 0; translate: 0px 24px; scale: 0.80 0.80; }
+    to   { opacity: 1; translate: 0px 0px;  scale: 1.00 1.00; }
+}
+
+/* Applied to each letter before its entrance fires — keeps it invisible */
+.lk-logo-letter--pre-enter {
+    opacity: 0;
+}
+
+/* Entrance: rise + scale in. fill-mode forwards keeps opacity:1 until --idle takes over */
+.lk-logo-letter--entering {
+    animation-name: lk-logo-enter;
+    animation-duration: 360ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+/* Idle float — infinite wave. Delay is staggered per-letter in C# */
+.lk-logo-letter--idle {
+    opacity: 1;
+    animation-name: lk-logo-float;
+    animation-duration: 2800ms;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}

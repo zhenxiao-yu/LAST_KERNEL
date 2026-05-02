@@ -4311,6 +4311,74 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 2581770992171876644
+  - m_Id: 2198257664798720
+    m_Key: loading.status
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324672
+    m_Key: loading.tip.01
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324673
+    m_Key: loading.tip.02
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324674
+    m_Key: loading.tip.03
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324675
+    m_Key: loading.tip.04
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324676
+    m_Key: loading.tip.05
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324677
+    m_Key: loading.tip.06
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324678
+    m_Key: loading.tip.07
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324679
+    m_Key: loading.tip.08
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324680
+    m_Key: loading.tip.09
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324681
+    m_Key: loading.tip.10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324682
+    m_Key: loading.tip.11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324683
+    m_Key: loading.tip.12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324684
+    m_Key: loading.tip.13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324685
+    m_Key: loading.tip.14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324686
+    m_Key: loading.tip.15
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2198257719324687
+    m_Key: loading.tip.16
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
