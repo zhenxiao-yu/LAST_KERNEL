@@ -45,10 +45,12 @@ namespace Markyu.LastKernel
             _lss.changeHintWithTimer = false;
             SetPrivateBool(_lss, "enableRandomHints", false);
 
-            // Enable tap-to-continue — waitForPlayerInput & useCountdown are public
+            // Keep waitForPlayerInput so LSS doesn't auto-activate; disable PAK panel
+            // so the separate "press any key" overlay never appears — we show the hint
+            // inline with the tip text instead.
             _lss.waitForPlayerInput = true;
             _lss.useCountdown       = false;
-            SetPrivateBool(_lss, "enablePressAnyKey", true);
+            SetPrivateBool(_lss, "enablePressAnyKey", false);
         }
 
         private void Start()
@@ -74,6 +76,7 @@ namespace Markyu.LastKernel
                 StopAllCoroutines();
                 if (_lss.hintsText != null) _lss.hintsText.text = _chosenTip;
                 _typewriterDone = true;
+                AppendContinueHint();
                 return;
             }
 
@@ -83,8 +86,6 @@ namespace Markyu.LastKernel
             _lss.canvasGroup.blocksRaycasts = false;
             _lss.StopCoroutine("FadeOutBackgroundScreen");
             _lss.StartCoroutine("FadeOutBackgroundScreen");
-            _lss.StopCoroutine("FadeOutPAKScreen");
-            _lss.StartCoroutine("FadeOutPAKScreen", true);
         }
 
         private IEnumerator TypewriterRoutine()
@@ -99,15 +100,25 @@ namespace Markyu.LastKernel
             }
 
             _typewriterDone = true;
+            AppendContinueHint();
         }
 
-        private static bool WasTapPressed()
+        private void AppendContinueHint()
+        {
+            if (_lss == null || _lss.hintsText == null) return;
+            string hint = GameLocalization.Get("loading.continue");
+            if (!string.IsNullOrEmpty(hint))
+                _lss.hintsText.text += "\n\n" + hint;
+        }
+
+        private static bool WasAnyInputPressed()
         {
 #if ENABLE_INPUT_SYSTEM
-            // Covers both touchscreen and mouse — works on desktop and mobile
-            return UnityEngine.InputSystem.Pointer.current?.press.wasPressedThisFrame ?? false;
+            bool pointer  = UnityEngine.InputSystem.Pointer.current?.press.wasPressedThisFrame ?? false;
+            bool keyboard = UnityEngine.InputSystem.Keyboard.current?.anyKey.wasPressedThisFrame ?? false;
+            return pointer || keyboard;
 #else
-            return Input.GetMouseButtonDown(0);
+            return Input.anyKeyDown;
 #endif
         }
 

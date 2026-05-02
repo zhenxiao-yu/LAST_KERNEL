@@ -47,8 +47,12 @@ namespace Markyu.LastKernel
         // ── Inspector ─────────────────────────────────────────────────────────────
 
         [BoxGroup("Wave")]
-        [SerializeField, Tooltip("Wave to run. Leave blank to use Resources/Waves/ or procedural fallback.")]
+        [SerializeField, Tooltip("Single override wave. If set, always used regardless of day. Leave blank to use wavePool or procedural fallback.")]
         private NightWaveDefinition defaultWave;
+
+        [BoxGroup("Wave")]
+        [SerializeField, Tooltip("Ordered waves by progression. Day 1 = index 0, Day 2 = index 1, etc. Loops from last entry on later days.")]
+        private NightWaveDefinition[] wavePool = Array.Empty<NightWaveDefinition>();
 
         [BoxGroup("Shop")]
         [SerializeField, Tooltip("All possible shop items. Manager picks shopSlotCount from this pool randomly.")]
@@ -58,8 +62,8 @@ namespace Markyu.LastKernel
         [SerializeField, Min(1)] private int shopSlotCount = 4;
 
         [BoxGroup("Shop")]
-        [SerializeField, Min(0), Tooltip("Gold available to spend in the shop each night. TODO: read from CardManager currency.")]
-        private int startingGold = 30;
+        [SerializeField, Min(0), Tooltip("Minimum gold guaranteed to the player each night. Actual gold = max(this, board coin count).")]
+        private int startingGold = 10;
 
         [BoxGroup("Simulation")]
         [SerializeField, Min(0.05f)] private float tickInterval = 0.7f;
@@ -96,7 +100,10 @@ namespace Markyu.LastKernel
             _battleConfirmed    = false;
             _resultAcknowledged = false;
             _fastResolve        = false;
-            PlayerGold          = startingGold; // TODO: read from CardManager currency
+            int boardCoins = CardManager.Instance != null
+                ? CardManager.Instance.GetStatsSnapshot().Currency
+                : 0;
+            PlayerGold = Mathf.Max(startingGold, boardCoins);
 
             var wave      = ResolveWave();
             var shopItems = PickShopItems();
@@ -224,8 +231,20 @@ namespace Markyu.LastKernel
         {
             if (defaultWave != null) return defaultWave;
 
+            int day = TimeManager.Instance?.CurrentDay ?? 1;
+
+            if (wavePool != null && wavePool.Length > 0)
+            {
+                int idx = Mathf.Clamp(day - 1, 0, wavePool.Length - 1);
+                return wavePool[idx];
+            }
+
             var loaded = Resources.LoadAll<NightWaveDefinition>("Waves");
-            if (loaded != null && loaded.Length > 0) return loaded[0];
+            if (loaded != null && loaded.Length > 0)
+            {
+                int idx = Mathf.Clamp(day - 1, 0, loaded.Length - 1);
+                return loaded[idx];
+            }
 
             return BuildProceduralWave();
         }

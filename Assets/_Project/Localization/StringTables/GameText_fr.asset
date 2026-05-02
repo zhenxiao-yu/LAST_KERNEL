@@ -3735,6 +3735,10 @@ MonoBehaviour:
       tout ce que vous trouvez.
     m_Metadata:
       m_Items: []
+  - m_Id: 2206234631221248
+    m_Localized: Appuyez pour continuer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

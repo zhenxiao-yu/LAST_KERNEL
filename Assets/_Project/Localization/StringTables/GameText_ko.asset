@@ -3770,6 +3770,10 @@ MonoBehaviour:
       \uC804\uB7B5\uC774\uB2E4. \uCC3E\uC740 \uAC83\uC740 \uBAA8\uB450 \uD574\uB3C5\uD558\uB77C."
     m_Metadata:
       m_Items: []
+  - m_Id: 2206234631221248
+    m_Localized: "\uD0ED\uD558\uC5EC \uACC4\uC18D"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

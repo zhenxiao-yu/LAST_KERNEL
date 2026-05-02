@@ -170,15 +170,9 @@ namespace Markyu.LastKernel
         {
             RunStateManager.Instance?.SetPhase(GamePhase.Night);
 
-            // Lock board interaction for the entire dusk-to-dawn sequence.
-            // InputManager only blocks camera pan/zoom and card drag (Update-driven).
-            // UI EventSystem is unaffected, so the deployment panel buttons work normally.
             InputManager.Instance.AddLock(dayCycleInputLock);
-
-            // Clear any lingering day-cycle InfoPanel message before the deployment UI opens.
             InfoPanel.Instance?.ClearInfoRequest(dayCycleRequester);
 
-            // Collect living Character cards — eligible to defend this night.
             var eligibleDefenders = CardManager.Instance.AllCards
                 .Where(c => c != null
                          && c.Definition != null
@@ -187,15 +181,16 @@ namespace Markyu.LastKernel
                 .OrderBy(c => c.name)
                 .ToList();
 
+            NightCombatResult nightResult = null;
+
             if (NightBattleManager.Instance != null)
             {
-                // PRIMARY PATH: unified Night Battle Modal (prep + shop + battle in one overlay).
                 yield return NightBattleManager.Instance.RunNight(eligibleDefenders);
-                RunStateManager.Instance?.ApplyNightCombatResult(NightBattleManager.Instance.LastResult);
+                nightResult = NightBattleManager.Instance.LastResult;
+                RunStateManager.Instance?.ApplyNightCombatResult(nightResult);
             }
             else if (NightPhaseManager.Instance != null)
             {
-                // FALLBACK PATH: legacy two-step flow (deployment panel → combat simulation).
                 NightDeploymentPlan plan;
 
                 if (NightDeploymentController.Instance != null)
@@ -212,11 +207,11 @@ namespace Markyu.LastKernel
                 }
 
                 yield return NightPhaseManager.Instance.RunNight(plan);
-                RunStateManager.Instance?.ApplyNightCombatResult(NightPhaseManager.Instance.LastResult);
+                nightResult = NightPhaseManager.Instance.LastResult;
+                RunStateManager.Instance?.ApplyNightCombatResult(nightResult);
             }
             else
             {
-                // Fallback: legacy encounter path if NightPhaseManager is not in the scene.
                 Debug.LogWarning("DayCycleManager: NightPhaseManager not found. Running legacy encounter fallback.");
 
                 int currentDay = TimeManager.Instance.CurrentDay;
@@ -231,16 +226,82 @@ namespace Markyu.LastKernel
                 RunStateManager.Instance?.RecordNightContact(hostileContact);
             }
 
+            // Spawn coin rewards on the board for every salvage point earned this night.
+            if (nightResult != null && nightResult.PlayerWon && nightResult.SalvageDelta > 0)
+                yield return SpawnSalvageRewards(nightResult.SalvageDelta);
+
             InputManager.Instance.RemoveLock(dayCycleInputLock);
 
-            // Night combat may have killed the last colonists — end the run before starting a new day.
+            // All colonists dead → hard game over.
             if (CardManager.Instance.GetStatsSnapshot().TotalCharacters <= 0)
             {
                 HandleGameOver();
                 yield break;
             }
 
+            // Morale collapse → colony abandons the run.
+            if (RunStateManager.Instance != null && RunStateManager.Instance.State.Morale <= 0)
+            {
+                HandleMoraleCollapse();
+                yield break;
+            }
+
+            // Defeat but colony survived — show consequence panel so player understands their situation.
+            if (nightResult != null && !nightResult.PlayerWon)
+                yield return ShowDefeatConsequencePanel(nightResult);
+
             PrepareForNewDay();
+        }
+
+        private IEnumerator SpawnSalvageRewards(int salvageDelta)
+        {
+            var currency = TradeManager.Instance?.CurrencyCard;
+            if (currency == null || CardManager.Instance == null) yield break;
+
+            var anchor = CardManager.Instance.AllCards
+                .FirstOrDefault(c => c?.Definition?.Category == CardCategory.Character && c.CurrentHealth > 0);
+            Vector3 center = anchor != null ? anchor.transform.position : Vector3.zero;
+
+            int count = Mathf.Min(salvageDelta, 8);
+            for (int i = 0; i < count; i++)
+            {
+                Vector3 offset = new Vector3(
+                    UnityEngine.Random.Range(-2f, 2f), 0f, UnityEngine.Random.Range(-2f, 2f));
+                CardManager.Instance.CreateCardInstance(currency, center + offset);
+                AudioManager.Instance?.PlaySFX(AudioId.Coin);
+                yield return new WaitForSeconds(0.12f);
+            }
+        }
+
+        private void HandleMoraleCollapse()
+        {
+            InputManager.Instance.AddLock(dayCycleInputLock);
+            InfoPanel.Instance?.RequestInfoDisplay(
+                dayCycleRequester,
+                InfoPriority.Modal,
+                (GameLocalization.GetOptional("daycycle.moraleCollapseTitle", "Colony Abandoned"),
+                 GameLocalization.GetOptional("daycycle.moraleCollapseBody",
+                    "Morale has reached zero. The colony has dispersed — nothing remains worth defending.")),
+                GameLocalization.GetOptional("daycycle.gameOverAction", "End Run"),
+                () => GameDirector.Instance.GameOver()
+            );
+        }
+
+        private IEnumerator ShowDefeatConsequencePanel(NightCombatResult result)
+        {
+            int morale = RunStateManager.Instance?.State.Morale ?? 0;
+            bool dismissed = false;
+            InfoPanel.Instance?.RequestInfoDisplay(
+                dayCycleRequester,
+                InfoPriority.Modal,
+                (GameLocalization.GetOptional("daycycle.nightDefeatTitle", "Colony Attacked"),
+                 GameLocalization.GetOptional("daycycle.nightDefeatBody",
+                    $"The perimeter was breached. Morale is now {morale}. Rebuild your defenses before the next incursion.")),
+                GameLocalization.GetOptional("daycycle.nightDefeatAction", "Rebuild"),
+                () => dismissed = true
+            );
+            yield return new WaitUntil(() => dismissed);
+            InfoPanel.Instance?.ClearInfoRequest(dayCycleRequester);
         }
 
         // --- PHASE 5: NEW DAY ---

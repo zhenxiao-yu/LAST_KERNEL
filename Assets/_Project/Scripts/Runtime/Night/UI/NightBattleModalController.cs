@@ -288,6 +288,7 @@ namespace Markyu.LastKernel
         private void OnStartBattleClicked()
         {
             if (_phase != Phase.Prep) return;
+            AudioManager.Instance?.PlaySFX(AudioId.Click);
             CancelCurrentSelection();
 
             if (_team.FilledSlotCount == 0)
@@ -325,6 +326,7 @@ namespace Markyu.LastKernel
 
         private void OnReturnDayClicked()
         {
+            AudioManager.Instance?.PlaySFX(AudioId.Click);
             SetVisible(false);
             NightBattleManager.Instance?.ConfirmResult();
         }
@@ -350,11 +352,20 @@ namespace Markyu.LastKernel
         private void HandleAttack(CombatUnit attacker, CombatUnit target, int damage, bool isCrit)
         {
             if (damage == 0)
+            {
+                AudioManager.Instance?.PlaySFX(AudioId.Miss);
                 AddLog(GameLocalization.Format("night.modal.log.missed", attacker.DisplayName, target.DisplayName));
+            }
+            else if (isCrit)
+            {
+                AudioManager.Instance?.PlaySFX(AudioId.Critical, interruptBGM: true);
+                string crit = GameLocalization.Get("night.modal.log.crit");
+                AddLog(GameLocalization.Format("night.modal.log.hit", attacker.DisplayName, target.DisplayName, damage, crit), "nbm-log-entry--damage");
+            }
             else
             {
-                string crit = isCrit ? GameLocalization.Get("night.modal.log.crit") : "";
-                AddLog(GameLocalization.Format("night.modal.log.hit", attacker.DisplayName, target.DisplayName, damage, crit), "nbm-log-entry--damage");
+                AudioManager.Instance?.PlaySFX(AudioId.HitMelee);
+                AddLog(GameLocalization.Format("night.modal.log.hit", attacker.DisplayName, target.DisplayName, damage, ""), "nbm-log-entry--damage");
             }
 
             if (_battleMap.TryGetValue(target, out var sv))
@@ -363,6 +374,7 @@ namespace Markyu.LastKernel
 
         private void HandleUnitDied(CombatUnit unit)
         {
+            AudioManager.Instance?.PlaySFX(AudioId.Pop);
             AddLog(GameLocalization.Format("night.modal.log.unitDied", unit.DisplayName), "nbm-log-entry--death");
             if (_battleMap.TryGetValue(unit, out var sv)) sv.RefreshBattle(unit);
             UpdateFrontHighlights();

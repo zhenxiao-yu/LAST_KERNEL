@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace Markyu.LastKernel
@@ -29,6 +30,7 @@ namespace Markyu.LastKernel
 
         // ── Child elements ────────────────────────────────────────────────────────
         private readonly Label         _slotLabel;   // "FRONT" / "#2" when empty
+        private readonly VisualElement _icon;        // card art thumbnail
         private readonly Label         _nameLabel;
         private readonly Label         _statsLabel;
         private readonly VisualElement _hpBar;
@@ -53,6 +55,12 @@ namespace Markyu.LastKernel
             _slotLabel = new Label(IsFront ? "FRONT" : $"#{slotIndex + 1}");
             _slotLabel.AddToClassList("nb-prep-slot__label");
             Root.Add(_slotLabel);
+
+            // Card art icon (hidden when empty, shown when a fighter is assigned)
+            _icon = new VisualElement();
+            _icon.AddToClassList("nb-prep-slot__icon");
+            _icon.AddToClassList("lk-hidden");
+            Root.Add(_icon);
 
             // Fighter content (hidden when empty)
             _nameLabel = new Label();
@@ -90,6 +98,17 @@ namespace Markyu.LastKernel
             _statsLabel.RemoveFromClassList("lk-hidden");
             _hpBar.RemoveFromClassList("lk-hidden");
             _hpText.RemoveFromClassList("lk-hidden");
+
+            var tex = fighter.SourceCard?.Definition?.ArtTexture;
+            if (tex != null)
+            {
+                _icon.style.backgroundImage = new StyleBackground(Background.FromTexture2D(tex));
+                _icon.RemoveFromClassList("lk-hidden");
+            }
+            else
+            {
+                _icon.AddToClassList("lk-hidden");
+            }
 
             Root.RemoveFromClassList("nb-prep-slot--empty");
             Root.AddToClassList("nb-prep-slot--filled");
@@ -155,6 +174,7 @@ namespace Markyu.LastKernel
         private void ShowEmpty()
         {
             _slotLabel.RemoveFromClassList("lk-hidden");
+            _icon.AddToClassList("lk-hidden");
             _nameLabel.AddToClassList("lk-hidden");
             _statsLabel.AddToClassList("lk-hidden");
             _hpBar.AddToClassList("lk-hidden");

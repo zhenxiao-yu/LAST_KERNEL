@@ -260,6 +260,17 @@
     -unity-text-align: upper-center;
     letter-spacing: 1px;
 }
+.nb-prep-slot__icon {
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    background-position: center;
+    border-width: 1px;
+    border-color: var(--lk-border-dim);
+    margin-bottom: 4px;
+    align-self: center;
+    image-rendering: pixelated;
+}
 .nb-prep-slot__name {
     color: var(--lk-accent);
     font-size: var(--lk-font-size-sm);

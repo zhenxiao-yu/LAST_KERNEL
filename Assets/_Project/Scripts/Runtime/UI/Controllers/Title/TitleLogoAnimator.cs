@@ -15,11 +15,10 @@ namespace Markyu.LastKernel
     {
         private static readonly string[] Words = { "LAST", "KERNEL" };
 
-        private VisualElement       _container;
-        private VisualElement       _lettersRow;
-        private ParticleImage       _particles;
-        private readonly List<Label> _letters      = new();
-        private readonly List<float> _letterPhases = new();
+        private VisualElement        _container;
+        private VisualElement        _lettersRow;
+        private ParticleImage        _particles;
+        private readonly List<Label> _letters = new();
 
         // ── Init ───────────────────────────────────────────────────────────────
 
@@ -55,19 +54,21 @@ namespace Markyu.LastKernel
             var ps = _particles?.ParticleSystem;
             if (ps == null) return;
 
-            // Round soft-edged particle sprite baked from a circle gradient
+            // Must stop before editing main.duration on an already-playing system
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+
             _particles.Texture = BuildCircleTexture(16);
 
             var main = ps.main;
-            main.loop         = true;
-            main.duration     = 5f;
+            main.loop          = true;
+            main.duration      = 5f;
             main.startLifetime = new ParticleSystem.MinMaxCurve(1.6f, 3.2f);
             main.startSpeed    = new ParticleSystem.MinMaxCurve(22f,  55f);
             main.startSize     = new ParticleSystem.MinMaxCurve(1f,   3.5f);
             main.maxParticles  = 55;
             main.startColor    = new ParticleSystem.MinMaxGradient(
-                new Color(0f,    0.86f, 1f,    0.85f),  // cyan
-                new Color(0.63f, 0.20f, 0.57f, 0.65f)   // magenta
+                new Color(0f,    0.86f, 1f,    0.85f),
+                new Color(0.63f, 0.20f, 0.57f, 0.65f)
             );
 
             var emission = ps.emission;
@@ -79,10 +80,12 @@ namespace Markyu.LastKernel
             shape.scale     = new Vector3(380f, 24f, 1f);
             shape.position  = Vector3.zero;
 
+            // All three axes must use the same MinMaxCurve mode
             var vel = ps.velocityOverLifetime;
             vel.enabled = true;
-            vel.y = new ParticleSystem.MinMaxCurve(30f,  75f);
             vel.x = new ParticleSystem.MinMaxCurve(-14f, 14f);
+            vel.y = new ParticleSystem.MinMaxCurve(30f,  75f);
+            vel.z = new ParticleSystem.MinMaxCurve(0f,   0f);
 
             ps.Play();
         }
@@ -94,9 +97,6 @@ namespace Markyu.LastKernel
             _lettersRow = new VisualElement();
             _lettersRow.AddToClassList("lk-logo-letters-row");
             _container.Add(_lettersRow);
-
-            // Float cycle = 2800 ms; spread 10 letters evenly across one cycle
-            const float floatCycleMs = 2800f;
 
             for (int w = 0; w < Words.Length; w++)
             {
@@ -118,15 +118,11 @@ namespace Markyu.LastKernel
                     lbl.AddToClassList("lk-logo-letter--pre-enter");
 
                     UIFonts.DisplayHeavy(lbl);
-
-                    int   idx   = _letters.Count;
-                    float phase = idx * floatCycleMs / 10f / 1000f; // seconds
-                    _letterPhases.Add(phase);
                     _letters.Add(lbl);
                     wordEl.Add(lbl);
 
                     lbl.RegisterCallback<MouseEnterEvent>(_ => OnLetterEnter(lbl));
-                    lbl.RegisterCallback<MouseLeaveEvent>(_ => OnLetterLeave(lbl, idx));
+                    lbl.RegisterCallback<MouseLeaveEvent>(_ => OnLetterLeave(lbl));
                 }
             }
         }
@@ -137,11 +133,11 @@ namespace Markyu.LastKernel
             lbl.AddToClassList("lk-logo-letter--hovered");
         }
 
-        private void OnLetterLeave(Label lbl, int idx)
+        private void OnLetterLeave(Label lbl)
         {
             lbl.RemoveFromClassList("lk-logo-letter--hovered");
 
-            // Wait for hover-exit transition to complete (120 ms) then resume float
+            // Wait for hover-exit transition (120 ms) then resume float from current position
             _container.schedule.Execute(() =>
             {
                 if (lbl.ClassListContains("lk-logo-letter--hovered")  ||
@@ -150,8 +146,6 @@ namespace Markyu.LastKernel
                     return;
 
                 lbl.AddToClassList("lk-logo-letter--idle");
-                lbl.style.animationDelay = new List<TimeValue>
-                    { new TimeValue(-_letterPhases[idx], TimeUnit.Second) };
             }).StartingIn(130);
         }
 
@@ -184,16 +178,22 @@ namespace Markyu.LastKernel
 
         private void ScheduleEntrance()
         {
-            const long baseMs     = 200L;  // wait for screen-open before starting
-            const long stepMs     = 65L;   // stagger between letters
-            const long durationMs = 400L;  // entrance animation + small buffer
+            // Letters enter left-to-right with a 65 ms stagger (360 ms rise animation each).
+            // Idle float starts at idleBaseMs + i * waveStepMs, which staggers each letter's
+            // start point in the 2800 ms cycle by ~155 ms — roughly 50% phase spread total.
+            // This creates a visible wave without needing CSS animationDelay (not in IStyle).
+            const long baseMs      = 200L;
+            const long stepMs      = 65L;
+            const long durationMs  = 400L;  // entrance anim 360 ms + small buffer
+            const long idleBaseMs  = 600L;  // earliest a letter transitions to idle
+            const long waveStepMs  = 155L;  // phase offset per letter across 2800 ms cycle
 
             for (int i = 0; i < _letters.Count; i++)
             {
-                var   lbl         = _letters[i];
-                long  entranceAt  = baseMs + i * stepMs;
-                long  idleAt      = entranceAt + durationMs;
-                float phaseOffset = _letterPhases[i];
+                var  lbl        = _letters[i];
+                long entranceAt = baseMs + i * stepMs;
+                long idleAt     = System.Math.Max(entranceAt + durationMs,
+                                                  idleBaseMs  + i * waveStepMs);
 
                 _container.schedule.Execute(() =>
                 {
@@ -203,11 +203,9 @@ namespace Markyu.LastKernel
 
                 _container.schedule.Execute(() =>
                 {
-                    // Add idle first so opacity:1 is guaranteed before removing entering
+                    // Add idle before removing entering so opacity:1 is never interrupted
                     lbl.AddToClassList("lk-logo-letter--idle");
                     lbl.RemoveFromClassList("lk-logo-letter--entering");
-                    lbl.style.animationDelay = new List<TimeValue>
-                        { new TimeValue(-phaseOffset, TimeUnit.Second) };
                 }).StartingIn(idleAt);
             }
         }
@@ -218,13 +216,17 @@ namespace Markyu.LastKernel
         {
             _particles?.Stop();
             _letters.Clear();
-            _letterPhases.Clear();
         }
 
         // ── Helpers ────────────────────────────────────────────────────────────
 
+        private static Texture2D _circleTexture16;
+
         private static Texture2D BuildCircleTexture(int size)
         {
+            if (_circleTexture16 != null)
+                return _circleTexture16;
+
             var tex  = new Texture2D(size, size, TextureFormat.RGBA32, false);
             float r  = size * 0.5f;
             for (int y = 0; y < size; y++)
@@ -233,9 +235,10 @@ namespace Markyu.LastKernel
                 float dist = Mathf.Sqrt((x - r + 0.5f) * (x - r + 0.5f) +
                                         (y - r + 0.5f) * (y - r + 0.5f));
                 float a = Mathf.Clamp01(1f - dist / r);
-                tex.SetPixel(x, y, new Color(1f, 1f, 1f, a * a)); // squared for softer edge
+                tex.SetPixel(x, y, new Color(1f, 1f, 1f, a * a));
             }
             tex.Apply();
+            _circleTexture16 = tex;
             return tex;
         }
     }

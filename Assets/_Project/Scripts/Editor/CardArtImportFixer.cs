@@ -18,6 +18,7 @@ namespace Markyu.LastKernel
             {
                 ("Assets/_Project/Art/Sprites/CardArt",    TextureImporterType.Default, "CardArt (Portraits)"),
                 ("Assets/_Project/Art/Sprites/CardFrames", TextureImporterType.Sprite,  "CardFrames"),
+                ("Assets/_Project/Art/Sprites/PackArt",    TextureImporterType.Sprite,  "PackArt"),
             };
 
             int totalFixed = 0, totalSkipped = 0;

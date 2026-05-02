@@ -5170,15 +5170,11 @@ MonoBehaviour:
   - Scarcity breeds creativity. What can you build with what you have?
   - "Some threats cannot be outfought \u2014 they must be outlasted."
   - A single well-placed card can change the tide of a cycle.
-  enableRandomImages: 1
+  enableRandomImages: 0
   imageObject: {fileID: 7021417065756049596}
   imageList:
-  - {fileID: 21300000, guid: b9304fc66c9b8ee4d9a6557c81e3d39a, type: 3}
-  - {fileID: 21300000, guid: 2da2d65ba233d904cb3f2cb2aeae95b7, type: 3}
-  - {fileID: 21300000, guid: 4baade627ae3fe14fb94cdfae9fbf16e, type: 3}
-  - {fileID: 21300000, guid: 28872c6204617d14e8ba7e9f3e7e2223, type: 3}
-  - {fileID: 21300000, guid: 6cc40bca54585084db994d1e37b8c765, type: 3}
-  changeImageWithTimer: 1
+  - {fileID: 7728676646300565482, guid: 189cb995ae70883479526962af7cbba6, type: 3}
+  changeImageWithTimer: 0
   imageTimerValue: 5
   imageFadingSpeed: 4
   pakTextObj: {fileID: 8432467187623789883}

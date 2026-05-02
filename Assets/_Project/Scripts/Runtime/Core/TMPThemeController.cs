@@ -73,7 +73,8 @@ namespace Markyu.LastKernel
 
             ConfigureFontFallbacks(defaultFont);
 
-            TMP_Text[] allText = FindObjectsByType<TMP_Text>(FindObjectsInactive.Include);
+            TMP_Text[] allText = FindObjectsByType<TMP_Text>(
+                FindObjectsInactive.Include, FindObjectsSortMode.None);
             foreach (TMP_Text text in allText)
             {
                 if (text == null)
@@ -127,20 +128,31 @@ namespace Markyu.LastKernel
 
         private static void ApplyFont(TMP_Text text, TMP_FontAsset font)
         {
+            bool changed = false;
+
             if (text.font != font)
+            {
                 text.font = font;
+                changed = true;
+            }
 
             Material defaultMaterial = font.material;
             if (defaultMaterial != null)
             {
                 Material currentMaterial = text.fontSharedMaterial;
                 if (currentMaterial == null || currentMaterial.mainTexture != defaultMaterial.mainTexture)
+                {
                     text.fontSharedMaterial = defaultMaterial;
+                    changed = true;
+                }
             }
 
-            text.havePropertiesChanged = true;
-            text.UpdateMeshPadding();
-            text.ForceMeshUpdate(ignoreActiveState: true, forceTextReparsing: true);
+            if (changed)
+            {
+                text.havePropertiesChanged = true;
+                text.UpdateMeshPadding();
+                text.ForceMeshUpdate(ignoreActiveState: true, forceTextReparsing: true);
+            }
         }
 
         private static void ApplyInspectorTranslation(TMP_Text text, string source)
