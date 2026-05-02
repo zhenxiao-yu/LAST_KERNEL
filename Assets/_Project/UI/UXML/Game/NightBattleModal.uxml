@@ -134,6 +134,8 @@
         <ui:VisualElement name="nbm-result-panel" class="nbm-result-panel lk-hidden">
             <ui:Label name="nbm-result-title"   class="nbm-result-title"   text="SYSTEM HELD" />
             <ui:Label name="nbm-result-summary" class="nbm-result-summary" text="" />
+            <ui:Label name="nbm-reward-title" class="nbm-reward-title lk-hidden" text="CHOOSE ONE REWARD" />
+            <ui:VisualElement name="nbm-reward-options" class="nbm-reward-options lk-hidden" />
             <ui:Button name="nbm-btn-return" class="lk-button nbm-btn nbm-btn--return"
                        text="[ RETURN TO DAY ]" />
         </ui:VisualElement>

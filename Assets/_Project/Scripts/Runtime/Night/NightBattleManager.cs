@@ -65,6 +65,14 @@ namespace Markyu.LastKernel
         [SerializeField, Min(0), Tooltip("Minimum gold guaranteed to the player each night. Actual gold = max(this, board coin count).")]
         private int startingGold = 10;
 
+        [BoxGroup("Rewards")]
+        [SerializeField, Tooltip("Cards offered after a victorious night. Leave empty to build choices from Resources/Cards.")]
+        private CardDefinition[] rewardPool = Array.Empty<CardDefinition>();
+
+        [BoxGroup("Rewards")]
+        [SerializeField, Min(1), Tooltip("How many cards the player chooses from after a win.")]
+        private int rewardChoiceCount = 3;
+
         [BoxGroup("Simulation")]
         [SerializeField, Min(0.05f)] private float tickInterval = 0.7f;
 
@@ -75,12 +83,18 @@ namespace Markyu.LastKernel
 
         public NightCombatResult LastResult { get; private set; }
         public int PlayerGold { get; private set; }
+        public IReadOnlyList<CardDefinition> CurrentRewardChoices => _rewardChoices;
+        public CardDefinition SelectedReward => _selectedReward;
+        public bool IsRewardSelectionPending =>
+            LastResult != null && LastResult.PlayerWon && _rewardChoices.Count > 0 && _selectedReward == null;
 
         // ── Internal wait-state flags ─────────────────────────────────────────────
         private NightTeam  _confirmedTeam;
         private bool       _battleConfirmed;
         private bool       _resultAcknowledged;
         private bool       _fastResolve;
+        private readonly List<CardDefinition> _rewardChoices = new();
+        private CardDefinition _selectedReward;
 
         // ── Lifecycle ─────────────────────────────────────────────────────────────
 
@@ -100,6 +114,7 @@ namespace Markyu.LastKernel
             _battleConfirmed    = false;
             _resultAcknowledged = false;
             _fastResolve        = false;
+            ClearRewardState();
             int boardCoins = CardManager.Instance != null
                 ? CardManager.Instance.GetStatsSnapshot().Currency
                 : 0;
@@ -169,6 +184,7 @@ namespace Markyu.LastKernel
             }
 
             LastResult = lane.BuildResult();
+            PrepareRewardChoices(LastResult);
             if (OnBattleComplete != null)
             {
                 OnBattleComplete.Invoke(LastResult);
@@ -176,6 +192,7 @@ namespace Markyu.LastKernel
             else
             {
                 Debug.LogWarning("NightBattleManager: No result controller subscribed. Continuing without result acknowledgement.");
+                AutoSelectFirstReward();
                 _resultAcknowledged = true;
             }
 
@@ -195,7 +212,26 @@ namespace Markyu.LastKernel
         }
 
         /// <summary>Called when the player clicks "Return to Day". Begins aftermath.</summary>
-        public void ConfirmResult() => _resultAcknowledged = true;
+        public void ConfirmResult()
+        {
+            if (IsRewardSelectionPending)
+            {
+                Debug.LogWarning("NightBattleManager: Result confirmation blocked until a reward is selected.");
+                return;
+            }
+
+            _resultAcknowledged = true;
+        }
+
+        /// <summary>Called when the player selects one of the post-victory card rewards.</summary>
+        public bool SelectReward(CardDefinition reward)
+        {
+            if (reward == null || !_rewardChoices.Contains(reward))
+                return false;
+
+            _selectedReward = reward;
+            return true;
+        }
 
         /// <summary>Collapses tick delay to one frame so battle resolves immediately.</summary>
         public void SetFastResolve()
@@ -227,6 +263,9 @@ namespace Markyu.LastKernel
                 dead.Kill();
                 yield return new WaitForSeconds(0.3f);
             }
+
+            if (result.PlayerWon && _selectedReward != null && HasSurvivingCharacterOnBoard())
+                yield return SpawnSelectedReward(result);
         }
 
         // ── Edge case: no defenders ───────────────────────────────────────────────
@@ -246,6 +285,7 @@ namespace Markyu.LastKernel
                 fatigueDelta:      0,
                 salvageDelta:      0
             );
+            ClearRewardState();
 
             if (OnBattleComplete != null)
             {
@@ -354,6 +394,131 @@ namespace Markyu.LastKernel
             }
 
             return team;
+        }
+
+        // ── Victory rewards ──────────────────────────────────────────────────────
+
+        private void ClearRewardState()
+        {
+            _rewardChoices.Clear();
+            _selectedReward = null;
+        }
+
+        private void PrepareRewardChoices(NightCombatResult result)
+        {
+            ClearRewardState();
+
+            if (result == null || !result.PlayerWon)
+                return;
+
+            // If every real character card died, the day cycle will end the run.
+            // Do not let a reward choice soften that loss or repopulate the colony.
+            if (result.SurvivorDefenders == null || result.SurvivorDefenders.Count == 0)
+                return;
+
+            var pool = ResolveRewardPool();
+            if (pool.Count == 0)
+                return;
+
+            int count = Mathf.Min(Mathf.Max(1, rewardChoiceCount), pool.Count);
+            _rewardChoices.AddRange(pool.OrderBy(_ => UnityEngine.Random.value).Take(count));
+        }
+
+        private List<CardDefinition> ResolveRewardPool()
+        {
+            IEnumerable<CardDefinition> configured = rewardPool != null
+                ? rewardPool.Where(IsSelectableReward)
+                : Enumerable.Empty<CardDefinition>();
+
+            var configuredList = configured.Distinct().ToList();
+            if (configuredList.Count > 0)
+                return configuredList;
+
+            return Resources.LoadAll<CardDefinition>("Cards")
+                .Where(IsDefaultRewardCandidate)
+                .Distinct()
+                .ToList();
+        }
+
+        private static bool IsSelectableReward(CardDefinition definition)
+        {
+            if (definition == null)
+                return false;
+
+            return definition.Category is not CardCategory.None
+                and not CardCategory.Character
+                and not CardCategory.Mob
+                and not CardCategory.Recipe
+                and not CardCategory.Area;
+        }
+
+        private static bool IsDefaultRewardCandidate(CardDefinition definition)
+        {
+            if (definition == null)
+                return false;
+
+            return definition.Category is CardCategory.Resource
+                or CardCategory.Consumable
+                or CardCategory.Material
+                or CardCategory.Equipment
+                or CardCategory.Structure
+                or CardCategory.Valuable;
+        }
+
+        private void AutoSelectFirstReward()
+        {
+            if (_selectedReward == null && _rewardChoices.Count > 0)
+                _selectedReward = _rewardChoices[0];
+        }
+
+        private IEnumerator SpawnSelectedReward(NightCombatResult result)
+        {
+            if (_selectedReward == null)
+                yield break;
+
+            if (CardManager.Instance == null)
+            {
+                Debug.LogWarning("NightBattleManager: CardManager missing; selected night reward could not be spawned.");
+                yield break;
+            }
+
+            Vector3 center = ResolveRewardSpawnPosition(result);
+            Vector3 offset = new(
+                UnityEngine.Random.Range(-1.5f, 1.5f),
+                0f,
+                UnityEngine.Random.Range(-1.5f, 1.5f));
+
+            CardManager.Instance.CreateCardInstance(_selectedReward, center + offset);
+            AudioManager.Instance?.PlaySFX(AudioId.Coin);
+            Debug.Log($"NightBattleManager: Spawned selected reward '{_selectedReward.DisplayName}'.");
+            yield return new WaitForSeconds(0.12f);
+        }
+
+        private static Vector3 ResolveRewardSpawnPosition(NightCombatResult result)
+        {
+            CardInstance survivor = result?.SurvivorDefenders?
+                .FirstOrDefault(c => c != null && c.gameObject != null);
+
+            if (survivor != null)
+                return survivor.transform.position;
+
+            CardInstance liveCharacter = CardManager.Instance?.AllCards?
+                .FirstOrDefault(c => c != null
+                                     && c.gameObject != null
+                                     && c.Definition != null
+                                     && c.Definition.Category == CardCategory.Character
+                                     && c.CurrentHealth > 0);
+
+            return liveCharacter != null ? liveCharacter.transform.position : Vector3.zero;
+        }
+
+        private static bool HasSurvivingCharacterOnBoard()
+        {
+            return CardManager.Instance?.AllCards?.Any(c => c != null
+                                                         && c.gameObject != null
+                                                         && c.Definition != null
+                                                         && c.Definition.Category == CardCategory.Character
+                                                         && c.CurrentHealth > 0) == true;
         }
     }
 

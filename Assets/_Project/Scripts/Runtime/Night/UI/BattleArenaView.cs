@@ -192,9 +192,9 @@ namespace Markyu.LastKernel
             canvasGO.AddComponent<GraphicRaycaster>();
 
             // Panel
-            _panel = new GameObject("ArenaPanel");
+            _panel = new GameObject("ArenaPanel", typeof(RectTransform));
             _panel.transform.SetParent(canvasGO.transform, false);
-            var panelRT = _panel.AddComponent<RectTransform>();
+            var panelRT = _panel.GetComponent<RectTransform>();
             panelRT.anchorMin  = new Vector2(0.5f, 0.5f);
             panelRT.anchorMax  = new Vector2(0.5f, 0.5f);
             panelRT.pivot      = new Vector2(0.5f, 0.5f);
@@ -205,9 +205,9 @@ namespace Markyu.LastKernel
             panelBg.color = new Color(0.03f, 0.04f, 0.07f, 0.94f);
 
             // VS divider
-            var vs = new GameObject("VS");
+            var vs = new GameObject("VS", typeof(RectTransform));
             vs.transform.SetParent(_panel.transform, false);
-            var vsRT  = vs.AddComponent<RectTransform>();
+            var vsRT  = vs.GetComponent<RectTransform>();
             vsRT.anchorMin = new Vector2(0.5f, 0.12f);
             vsRT.anchorMax = new Vector2(0.5f, 0.88f);
             vsRT.sizeDelta = new Vector2(2f, 0f);
@@ -281,10 +281,10 @@ namespace Markyu.LastKernel
         {
             if (_panel == null) return;
 
-            var go = new GameObject("DmgNum");
+            var go = new GameObject("DmgNum", typeof(RectTransform));
             go.transform.SetParent(_panel.transform, false);
 
-            var rt = go.AddComponent<RectTransform>();
+            var rt = go.GetComponent<RectTransform>();
             rt.sizeDelta = new Vector2(80f, 36f);
             rt.anchoredPosition = target.Root.anchoredPosition + new Vector2(0f, 55f);
             rt.pivot = new Vector2(0.5f, 0.5f);
@@ -316,10 +316,10 @@ namespace Markyu.LastKernel
         {
             if (_panel == null) return;
 
-            var go = new GameObject("MissTxt");
+            var go = new GameObject("MissTxt", typeof(RectTransform));
             go.transform.SetParent(_panel.transform, false);
 
-            var rt = go.AddComponent<RectTransform>();
+            var rt = go.GetComponent<RectTransform>();
             rt.sizeDelta = new Vector2(60f, 28f);
             rt.anchoredPosition = target.Root.anchoredPosition + new Vector2(0f, 45f);
             rt.pivot = new Vector2(0.5f, 0.5f);
@@ -407,10 +407,10 @@ namespace Markyu.LastKernel
 
         private static void MakeHeaderLabel(Transform parent, string text, Vector2 anchorMin, Vector2 anchorMax)
         {
-            var go = new GameObject("Header");
+            var go = new GameObject("Header", typeof(RectTransform));
             go.transform.SetParent(parent, false);
 
-            var rt = go.AddComponent<RectTransform>();
+            var rt = go.GetComponent<RectTransform>();
             rt.anchorMin = anchorMin;
             rt.anchorMax = anchorMax;
             rt.offsetMin = rt.offsetMax = Vector2.zero;

@@ -150,6 +150,9 @@ namespace Markyu.LastKernel
             // Result panel
             ["night.modal.result.win"]     = L("SYSTEM HELD",     "系统守住", "系統守住", "システム防衛成功", "시스템 유지", "SYSTÈME TENU",    "SYSTEM GEHALTEN",  "SISTEMA MANTENIDO"),
             ["night.modal.result.loss"]    = L("SYSTEM BREACHED", "系统失守", "系統失守", "システム突破",     "시스템 돌파", "SYSTÈME PERCÉ",   "SYSTEM VERLETZT",  "SISTEMA FALLADO"),
+            ["night.modal.reward.title"]   = new("选择一张奖励卡", "Choose one reward card"),
+            ["night.modal.reward.category"]= new("类型：{0}", "TYPE: {0}"),
+            ["night.modal.reward.noDescription"] = new("回收所得的可用卡牌。", "Recovered usable card."),
 
             // Action buttons
             ["night.modal.btn.start"]      = L("[ START BATTLE ]",  "[ 开始战斗 ]", "[ 開始戰鬥 ]", "[ 戦闘開始 ]", "[ 전투 시작 ]", "[ LANCER LA BATAILLE ]", "[ KAMPF STARTEN ]",    "[ INICIAR BATALLA ]"),
@@ -186,6 +189,8 @@ namespace Markyu.LastKernel
             ["night.modal.log.formation"]   = new("阵形锁定。战斗即将开始。",               "Formation locked. Initiating combat."),
             ["night.modal.log.fastResolve"] = new("快速结算模式已激活。",                   "Fast resolve activated."),
             ["night.modal.log.autoDeploy"]  = new("已自动部署全部可用防守者。",             "Auto-deployed all available defenders."),
+            ["night.modal.log.rewardRequired"] = new("先选择一张奖励卡。",                   "Choose a reward card first."),
+            ["night.modal.log.rewardSelected"] = new("已选择奖励：{0}。",                    "Reward selected: {0}."),
             ["night.modal.log.noGold"]      = new("金币不足。需要 {0}，现有 {1}。",         "Not enough gold. Need {0}, have {1}."),
             ["night.modal.log.purchased"]   = new("已购买：{0}。",                          "Purchased: {0}."),
             ["night.modal.log.itemSelected"]= new("已选择：{0}。点击战士以使用。",          "Selected: {0}. Click a fighter to apply."),

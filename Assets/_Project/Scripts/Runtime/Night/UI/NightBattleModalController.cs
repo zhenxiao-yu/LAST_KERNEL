@@ -56,6 +56,7 @@ namespace Markyu.LastKernel
         private readonly NightPrepSlotView[]                   _slotViews         = new NightPrepSlotView[NightTeam.MaxSlots];
         private readonly Dictionary<CombatUnit, NightPrepSlotView> _battleMap     = new();
         private readonly List<NightShopItemView>               _shopViews         = new();
+        private readonly Dictionary<CardDefinition, VisualElement> _rewardChoiceEls = new();
 
         [SerializeField, Min(10)] private int maxLogLines = 50;
         private int _logLineCount;
@@ -72,6 +73,8 @@ namespace Markyu.LastKernel
         private Label         _goldLabel, _assignHint, _shopHint;
         private VisualElement _resultPanel;
         private Label         _resultTitle, _resultSummary;
+        private Label         _rewardTitle;
+        private VisualElement _rewardOptions;
         private Label         _lblEnemySection, _lblColonySection;
         private Label         _lblDefendersHeader, _lblLogHeader, _lblShopHeader;
 
@@ -129,6 +132,8 @@ namespace Markyu.LastKernel
             _resultPanel      = root.Q("nbm-result-panel");
             _resultTitle      = root.Q<Label>("nbm-result-title");
             _resultSummary    = root.Q<Label>("nbm-result-summary");
+            _rewardTitle      = root.Q<Label>("nbm-reward-title");
+            _rewardOptions    = root.Q("nbm-reward-options");
 
             _lblEnemySection     = root.Q<Label>("nbm-lbl-enemy-section");
             _lblColonySection    = root.Q<Label>("nbm-lbl-colony-section");
@@ -168,12 +173,14 @@ namespace Markyu.LastKernel
             _shopViews.Clear();
             _battleMap.Clear();
             _logLineCount = 0;
+            _rewardChoiceEls.Clear();
 
             _villagersList?.Clear();
             _enemyRow?.Clear();
             _playerRow?.Clear();
             _shopItems?.Clear();
             _battleLog?.Clear();
+            _rewardOptions?.Clear();
 
             int day = TimeManager.Instance?.CurrentDay ?? 1;
             if (_nightLabel    != null) _nightLabel.text    = GameLocalization.Format("night.modal.nightTitle", day);
@@ -206,6 +213,8 @@ namespace Markyu.LastKernel
             }
 
             _resultPanel?.AddToClassList("lk-hidden");
+            _rewardTitle?.AddToClassList("lk-hidden");
+            _rewardOptions?.AddToClassList("lk-hidden");
             _btnStart?.SetEnabled(true);
             _btnFast?.SetEnabled(false);
             _btnCancel?.RemoveFromClassList("lk-hidden");
@@ -265,7 +274,16 @@ namespace Markyu.LastKernel
             if (_resultSummary != null) _resultSummary.text = result.GetSummaryText();
 
             _resultPanel?.RemoveFromClassList("lk-hidden");
+            _btnReturn?.RemoveFromClassList("lk-hidden");
             _btnFast?.SetEnabled(false);
+
+            var rewards = won
+                ? NightBattleManager.Instance?.CurrentRewardChoices
+                : null;
+            BuildRewardChoices(rewards);
+
+            bool mustChooseReward = NightBattleManager.Instance?.IsRewardSelectionPending == true;
+            _btnReturn?.SetEnabled(!mustChooseReward);
 
             SetStatus(won
                 ? GameLocalization.Get("night.modal.phase.victory")
@@ -327,8 +345,31 @@ namespace Markyu.LastKernel
         private void OnReturnDayClicked()
         {
             AudioManager.Instance?.PlaySFX(AudioId.Click);
+
+            if (NightBattleManager.Instance?.IsRewardSelectionPending == true)
+            {
+                AddLog(GameLocalization.Get("night.modal.log.rewardRequired"), "nbm-log-entry--system");
+                return;
+            }
+
             SetVisible(false);
             NightBattleManager.Instance?.ConfirmResult();
+        }
+
+        private void OnRewardChoiceClicked(CardDefinition reward)
+        {
+            if (_phase != Phase.Result || reward == null)
+                return;
+
+            if (NightBattleManager.Instance?.SelectReward(reward) != true)
+                return;
+
+            foreach (var kv in _rewardChoiceEls)
+                kv.Value.EnableInClassList("nbm-reward-card--selected", kv.Key == reward);
+
+            _btnReturn?.SetEnabled(true);
+            AudioManager.Instance?.PlaySFX(AudioId.Click);
+            AddLog(GameLocalization.Format("night.modal.log.rewardSelected", reward.DisplayName), "nbm-log-entry--victory");
         }
 
         // ── CombatLane event handling (battle phase) ──────────────────────────────

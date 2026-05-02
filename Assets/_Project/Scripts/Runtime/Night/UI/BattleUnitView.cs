@@ -56,9 +56,9 @@ namespace Markyu.LastKernel
         private void Build(RectTransform parent, CombatUnit unit)
         {
             // Root
-            var go = new GameObject($"Unit_{unit.DisplayName}");
+            var go = new GameObject($"Unit_{unit.DisplayName}", typeof(RectTransform));
             go.transform.SetParent(parent, false);
-            Root         = go.AddComponent<RectTransform>();
+            Root         = go.GetComponent<RectTransform>();
             Root.sizeDelta = CardSize;
             Root.pivot     = new Vector2(0.5f, 0.5f);
             Root.anchorMin = Root.anchorMax = new Vector2(0.5f, 0.5f);
@@ -209,14 +209,24 @@ namespace Markyu.LastKernel
 
         private static GameObject Child(GameObject parent, string name)
         {
-            var go = new GameObject(name);
+            var go = new GameObject(name, typeof(RectTransform));
             go.transform.SetParent(parent.transform, false);
             return go;
         }
 
         private static void Anchored(GameObject go, Vector2 min, Vector2 max)
         {
-            var rt       = go.GetComponent<RectTransform>() ?? go.AddComponent<RectTransform>();
+            var rt = go.transform as RectTransform;
+            if (rt == null)
+                rt = go.GetComponent<RectTransform>();
+            if (rt == null)
+                rt = go.AddComponent<RectTransform>();
+            if (rt == null)
+            {
+                Debug.LogError($"BattleUnitView: '{go.name}' could not create a RectTransform.");
+                return;
+            }
+
             rt.anchorMin = min;
             rt.anchorMax = max;
             rt.offsetMin = rt.offsetMax = Vector2.zero;

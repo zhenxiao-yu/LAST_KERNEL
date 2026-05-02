@@ -182,12 +182,14 @@ namespace Markyu.LastKernel
                 .ToList();
 
             NightCombatResult nightResult = null;
+            bool primaryNightBattleHandledRewards = false;
 
             if (NightBattleManager.Instance != null)
             {
                 yield return NightBattleManager.Instance.RunNight(eligibleDefenders);
                 nightResult = NightBattleManager.Instance.LastResult;
                 RunStateManager.Instance?.ApplyNightCombatResult(nightResult);
+                primaryNightBattleHandledRewards = true;
             }
             else if (NightPhaseManager.Instance != null)
             {
@@ -226,9 +228,15 @@ namespace Markyu.LastKernel
                 RunStateManager.Instance?.RecordNightContact(hostileContact);
             }
 
-            // Spawn coin rewards on the board for every salvage point earned this night.
-            if (nightResult != null && nightResult.PlayerWon && nightResult.SalvageDelta > 0)
+            // Legacy night flow still converts salvage into coins. The unified night battle
+            // manager handles its own choose-one-card reward before returning control here.
+            if (!primaryNightBattleHandledRewards &&
+                nightResult != null &&
+                nightResult.PlayerWon &&
+                nightResult.SalvageDelta > 0)
+            {
                 yield return SpawnSalvageRewards(nightResult.SalvageDelta);
+            }
 
             InputManager.Instance.RemoveLock(dayCycleInputLock);
 

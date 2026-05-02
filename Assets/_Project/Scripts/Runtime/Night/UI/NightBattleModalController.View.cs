@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -87,6 +88,59 @@ namespace Markyu.LastKernel
             row.RegisterCallback<ClickEvent>(_ => OnVillagerClicked(fighter));
 
             return row;
+        }
+
+        private void BuildRewardChoices(IReadOnlyList<CardDefinition> choices)
+        {
+            _rewardChoiceEls.Clear();
+            _rewardOptions?.Clear();
+
+            bool hasChoices = choices != null && choices.Count > 0;
+            _rewardTitle?.EnableInClassList("lk-hidden", !hasChoices);
+            _rewardOptions?.EnableInClassList("lk-hidden", !hasChoices);
+
+            if (!hasChoices)
+                return;
+
+            if (_rewardTitle != null)
+                _rewardTitle.text = GameLocalization.Get("night.modal.reward.title");
+
+            foreach (CardDefinition reward in choices)
+            {
+                if (reward == null)
+                    continue;
+
+                VisualElement card = BuildRewardCard(reward);
+                _rewardChoiceEls[reward] = card;
+                _rewardOptions?.Add(card);
+            }
+        }
+
+        private VisualElement BuildRewardCard(CardDefinition reward)
+        {
+            var card = new VisualElement();
+            card.AddToClassList("nbm-reward-card");
+
+            var name = new Label(reward.DisplayName);
+            name.AddToClassList("nbm-reward-card__name");
+
+            var category = new Label(GameLocalization.Format(
+                "night.modal.reward.category",
+                reward.Category.ToString().ToUpperInvariant()));
+            category.AddToClassList("nbm-reward-card__category");
+
+            string description = string.IsNullOrWhiteSpace(reward.Description)
+                ? GameLocalization.Get("night.modal.reward.noDescription")
+                : reward.Description;
+            var desc = new Label(description);
+            desc.AddToClassList("nbm-reward-card__desc");
+
+            card.Add(name);
+            card.Add(category);
+            card.Add(desc);
+            card.RegisterCallback<ClickEvent>(_ => OnRewardChoiceClicked(reward));
+
+            return card;
         }
 
         // ── Battle log ────────────────────────────────────────────────────────────
