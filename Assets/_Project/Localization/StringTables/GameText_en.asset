@@ -3025,7 +3025,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1523475420033025
-    m_Localized: "\u9009\u62E9\u8BED\u8A00"
+    m_Localized: Select Language
     m_Metadata:
       m_Items: []
   - m_Id: 1523475420033026
@@ -3507,6 +3507,66 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2106983272165378
     m_Localized: Controls are only available during gameplay.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758467825664
+    m_Localized: VIDEO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963008
+    m_Localized: LANGUAGE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963009
+    m_Localized: ACCESS.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963010
+    m_Localized: Accessibility
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963011
+    m_Localized: Reduce visual intensity for comfort and epilepsy safety.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963012
+    m_Localized: Screen Shake
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963013
+    m_Localized: Flash Effects
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963014
+    m_Localized: On
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963015
+    m_Localized: Off
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963016
+    m_Localized: "3\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273920
+    m_Localized: No active quests.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273921
+    m_Localized: No recipes discovered yet.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273922
+    m_Localized: No ingredients required.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273923
+    m_Localized: '{0} uses'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273924
+    m_Localized: Completed
     m_Metadata:
       m_Items: []
   references:

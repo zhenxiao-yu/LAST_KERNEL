@@ -226,10 +226,11 @@ TextField,
 .lk-ui-scale--large .lk-label--body,
 .lk-ui-scale--large .lk-resource-counter__value,
 .lk-ui-scale--large .lk-info-panel__header,
-.lk-ui-scale--large .lk-list__header-label,
-.lk-ui-scale--large .lk-list__item-label,
 .lk-ui-scale--large .lk-defeat__message,
 .lk-ui-scale--large .lk-toast__label                          { font-size: 25px; }
+
+.lk-ui-scale--large .lk-list__header-label,
+.lk-ui-scale--large .lk-list__item-label                      { font-size: 20px; }
 
 .lk-ui-scale--large .lk-button--text,
 .lk-ui-scale--large .lk-label--subheader,
@@ -266,10 +267,11 @@ TextField,
 .lk-ui-scale--xlarge .lk-label--body,
 .lk-ui-scale--xlarge .lk-resource-counter__value,
 .lk-ui-scale--xlarge .lk-info-panel__header,
-.lk-ui-scale--xlarge .lk-list__header-label,
-.lk-ui-scale--xlarge .lk-list__item-label,
 .lk-ui-scale--xlarge .lk-defeat__message,
 .lk-ui-scale--xlarge .lk-toast__label                         { font-size: 30px; }
+
+.lk-ui-scale--xlarge .lk-list__header-label,
+.lk-ui-scale--xlarge .lk-list__item-label                     { font-size: 22px; }
 
 .lk-ui-scale--xlarge .lk-button--text,
 .lk-ui-scale--xlarge .lk-label--subheader,

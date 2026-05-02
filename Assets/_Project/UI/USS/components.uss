@@ -541,9 +541,12 @@
 
 .lk-list__header-label {
     color: var(--lk-accent);
-    font-size: var(--lk-font-size-md);
+    font-size: var(--lk-font-size-sm);
     -unity-font-style: bold;
     flex-grow: 1;
+    min-width: 0;
+    white-space: normal;
+    overflow: hidden;
 }
 
 .lk-list__header:hover .lk-list__header-label {
@@ -556,6 +559,8 @@
     min-height: var(--lk-touch-min);
     padding-left: var(--lk-padding-medium);
     padding-right: var(--lk-padding-medium);
+    padding-top: 4px;
+    padding-bottom: 4px;
     border-bottom-color: var(--lk-border-dim);
     border-bottom-width: 1px;
     transition-property: background-color;
@@ -563,11 +568,23 @@
     transition-timing-function: linear;
 }
 
+.lk-list__item-icon {
+    width: 26px;
+    min-height: 26px;
+    background-color: var(--lk-panel-overlay);
+    border-color: var(--lk-border-dim);
+    border-width: 1px;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
 .lk-list__item-label {
     color: var(--lk-text);
-    font-size: var(--lk-font-size-md);
+    font-size: var(--lk-font-size-sm);
     flex-grow: 1;
+    min-width: 0;
     white-space: normal;
+    overflow: hidden;
 }
 
 .lk-list__item:hover {
@@ -589,16 +606,18 @@
 }
 
 /* ════════════════════════════════════════════════════════════════════════
- * Unity Slider  (GameOptionsUI volume controls)
+ * Unity Slider  (all sliders — volume, duration, etc.)
  * ════════════════════════════════════════════════════════════════════════ */
 
 .unity-base-slider--horizontal {
     min-height: var(--lk-touch-min);
     align-items: center;
+    margin-left: 8px;
+    margin-right: 8px;
 }
 
 .unity-base-slider__drag-container {
-    height: 6px;
+    height: 12px;
     background-color: var(--lk-border-dim);
     border-width: 1px;
     border-color: var(--lk-border-dim);
@@ -611,20 +630,34 @@
     border-width: 0;
 }
 
-.unity-base-slider__dragger {
-    width: 10px;
-    height: 22px;
-    top: -8px;
-    background-color: var(--lk-accent);
+.unity-base-slider__fill {
+    background-color: var(--lk-accent-dim);
     border-width: 0;
     border-radius: 0;
-    transition-property: background-color;
+}
+
+.unity-base-slider__dragger {
+    width: 12px;
+    height: 32px;
+    top: -10px;
+    background-color: var(--lk-text-header);
+    border-width: 1px;
+    border-color: var(--lk-accent);
+    border-radius: 0;
+    transition-property: background-color, border-color;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: linear;
 }
 
-.unity-base-slider__dragger:hover  { background-color: var(--lk-text-header); }
-.unity-base-slider__dragger:active { background-color: var(--lk-accent); }
+.unity-base-slider__dragger:hover {
+    background-color: var(--lk-accent);
+    border-color: var(--lk-accent);
+}
+
+.unity-base-slider__dragger:active {
+    background-color: var(--lk-accent);
+    border-color: var(--lk-text-header);
+}
 
 /* ════════════════════════════════════════════════════════════════════════
  * Unity Toggle  (GameplayPrefsUI friendly mode)
@@ -983,7 +1016,7 @@ Toggle:checked .unity-toggle__checkmark {
     right: 0;
     top: var(--lk-hud-height);
     bottom: 0;
-    width: 300px;
+    width: 360px;
     background-color: var(--lk-panel);
     border-left-color: var(--lk-border);
     border-left-width: 2px;

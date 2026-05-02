@@ -11,8 +11,10 @@ namespace Markyu.LastKernel
     {
         // ── Constants ────────────────────────────────────────────────────
 
-        private const float PANEL_WIDTH   = 300f;
         private const float SLIDE_SECONDS = 0.2f;
+        private const float PANEL_WIDTH_FALLBACK = 360f;
+
+        private float _panelWidth = PANEL_WIDTH_FALLBACK;
 
         private const string SYMBOL_EXPANDED  = "▼"; // ▼
         private const string SYMBOL_COLLAPSED = "►"; // ►
@@ -39,7 +41,7 @@ namespace Markyu.LastKernel
         // ── Slide state ──────────────────────────────────────────────────
 
         private bool    _isOpen;
-        private float   _slideX = PANEL_WIDTH; // current translate X (px)
+        private float   _slideX = PANEL_WIDTH_FALLBACK;
         private Tweener _slideTween;
 
         // ── Quest tracking ───────────────────────────────────────────────
@@ -84,7 +86,8 @@ namespace Markyu.LastKernel
             _lblRecipesEmpty   = _root.Q<Label>("lbl-recipes-empty");
 
             // Start fully closed (off-screen to the right)
-            SetTranslateX(PANEL_WIDTH);
+            SetTranslateX(_panelWidth);
+            _panel.RegisterCallback<GeometryChangedEvent>(OnPanelGeometryChanged);
 
             _btnToggle.clicked     += OnToggle;
             _btnTabQuests.clicked  += () => ShowTab(quests: true);
@@ -136,11 +139,19 @@ namespace Markyu.LastKernel
             AudioManager.Instance?.PlaySFX(AudioId.Click);
         }
 
+        private void OnPanelGeometryChanged(GeometryChangedEvent evt)
+        {
+            float w = evt.newRect.width;
+            if (w <= 0) return;
+            _panelWidth = w;
+            if (!_isOpen) SetTranslateX(_panelWidth);
+        }
+
         private void Close()
         {
             _isOpen = false;
             _btnToggle.text = "»";
-            SlideTo(PANEL_WIDTH, Ease.InCubic);
+            SlideTo(_panelWidth, Ease.InCubic);
             AudioManager.Instance?.PlaySFX(AudioId.Click);
         }
 
@@ -262,7 +273,8 @@ namespace Markyu.LastKernel
                 item.Add(MakeDot());
             }
 
-            var nameLabel = MakeLabel($"• {quest.QuestData.Title}", "lk-list__item-label");
+            item.Add(MakeIconPlaceholder());
+            var nameLabel = MakeLabel(quest.QuestData.Title, "lk-list__item-label");
             item.Add(nameLabel);
             AppendQuestRight(item, quest);
 
@@ -335,7 +347,7 @@ namespace Markyu.LastKernel
 
             item.AddToClassList("lk-list__item--completed");
             var nameLabel = item.Q<Label>(className: "lk-list__item-label");
-            if (nameLabel != null) nameLabel.text = $"• {quest.QuestData.Title}";
+            if (nameLabel != null) nameLabel.text = quest.QuestData.Title;
             AppendQuestRight(item, quest);
 
             RefreshGroupCount(quest.QuestData);
@@ -457,7 +469,8 @@ namespace Markyu.LastKernel
                 item.Add(MakeDot());
             }
 
-            var nameLabel = MakeLabel($"• {recipe.DisplayName}", "lk-list__item-label");
+            item.Add(MakeIconPlaceholder());
+            var nameLabel = MakeLabel(recipe.DisplayName, "lk-list__item-label");
             item.Add(nameLabel);
 
             item.RegisterCallback<PointerEnterEvent>(_ =>
@@ -633,6 +646,13 @@ namespace Markyu.LastKernel
             var dot = new VisualElement();
             dot.AddToClassList("lk-new-dot");
             return dot;
+        }
+
+        private static VisualElement MakeIconPlaceholder()
+        {
+            var icon = new VisualElement();
+            icon.AddToClassList("lk-list__item-icon");
+            return icon;
         }
 
         private static string GetGroupName(QuestGroup group)

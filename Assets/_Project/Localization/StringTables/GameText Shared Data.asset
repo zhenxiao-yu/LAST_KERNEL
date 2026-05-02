@@ -4236,6 +4236,81 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 2581770992171876591
+  - m_Id: 2138758467825664
+    m_Key: options.tab.video
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876630
+  - m_Id: 2138758513963008
+    m_Key: options.tab.language
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876631
+  - m_Id: 2138758513963009
+    m_Key: options.tab.accessibility
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876632
+  - m_Id: 2138758513963010
+    m_Key: options.accessibility
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876633
+  - m_Id: 2138758513963011
+    m_Key: options.accessibility.hint
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876634
+  - m_Id: 2138758513963012
+    m_Key: options.screenshake
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876635
+  - m_Id: 2138758513963013
+    m_Key: options.flash
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876636
+  - m_Id: 2138758513963014
+    m_Key: common.on
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876637
+  - m_Id: 2138758513963015
+    m_Key: common.off
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876638
+  - m_Id: 2138758513963016
+    m_Key: hud.pace.veryffast
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876639
+  - m_Id: 2138761672273920
+    m_Key: menu.quests.empty
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876640
+  - m_Id: 2138761672273921
+    m_Key: menu.recipes.empty
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876641
+  - m_Id: 2138761672273922
+    m_Key: recipe.no_ingredients
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876642
+  - m_Id: 2138761672273923
+    m_Key: card.usesLeft
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876643
+  - m_Id: 2138761672273924
+    m_Key: quest.completed
+    m_Metadata:
+      m_Items:
+      - rid: 2581770992171876644
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
@@ -4669,6 +4744,72 @@ MonoBehaviour:
       data:
         m_CommentText: "Options panel Controls tab \u2014 shown when Input System
           is absent"
+    - rid: 2581770992171876630
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Video tab label"
+    - rid: 2581770992171876631
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Language tab label"
+    - rid: 2581770992171876632
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Accessibility tab label (abbreviated
+          for narrow tabs)"
+    - rid: 2581770992171876633
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Accessibility section header"
+    - rid: 2581770992171876634
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Accessibility section description"
+    - rid: 2581770992171876635
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Screen Shake toggle label"
+    - rid: 2581770992171876636
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Options panel \u2014 Flash Effects toggle label"
+    - rid: 2581770992171876637
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Shared toggle state \u2014 feature enabled"
+    - rid: 2581770992171876638
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "Shared toggle state \u2014 feature disabled"
+    - rid: 2581770992171876639
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: "HUD time pace button \u2014 very fast speed (3\xD7)"
+    - rid: 2581770992171876640
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876641
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876642
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876643
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
+    - rid: 2581770992171876644
+      type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
+          direct GameLocalization.Get calls are migrated.
     - rid: 8800497158023282712
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
@@ -8185,8 +8326,7 @@ MonoBehaviour:
     - rid: 8800497247455543971
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_CommentText: Legacy GameLocalization compatibility row. Keep until all
-          direct GameLocalization.Get calls are migrated.
+        m_CommentText: "Options panel \u2014 Language tab section title"
     - rid: 8800497247455543972
       type: {class: Comment, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:

@@ -26,12 +26,11 @@
 
             <!-- Nav buttons -->
             <ui:VisualElement name="title-buttons" class="lk-column">
-                <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-mb-sm" text="New Game" />
-                <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-mb-sm" text="Load Game" />
-                <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-mb-sm" text="Achievements" />
-                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-mb-sm" text="Options" />
-                <ui:Button name="btn-language"      class="lk-button lk-button--text lk-mb-sm" />
-                <ui:Button name="btn-quit"          class="lk-button lk-button--text"           text="Quit" />
+                <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-mb-sm" text="NEW GAME" />
+                <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-mb-sm" text="LOAD GAME" />
+                <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-mb-sm" text="ACHIEVEMENTS" />
+                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-mb-sm" text="OPTIONS" />
+                <ui:Button name="btn-quit"          class="lk-button lk-button--text"           text="QUIT" />
             </ui:VisualElement>
 
         </ui:VisualElement>
@@ -61,7 +60,7 @@
                         <!-- Day duration -->
                         <ui:Label name="lbl-duration" class="lk-label lk-label--body lk-mb-sm" />
                         <ui:Slider name="slider-duration" low-value="30" high-value="300" value="120"
-                                   class="lk-mb-sm" />
+                                   show-fill-area="true" class="lk-mb-sm" />
 
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
@@ -134,11 +133,13 @@
                         <ui:Label name="lbl-opts-audio" class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:VisualElement class="lk-column lk-mb-sm">
                             <ui:Label name="lbl-sfx" class="lk-label lk-label--body lk-mb-sm" />
-                            <ui:Slider name="slider-sfx" low-value="0" high-value="1" value="1" />
+                            <ui:Slider name="slider-sfx" low-value="0" high-value="1" value="1"
+                                       show-fill-area="true" />
                         </ui:VisualElement>
                         <ui:VisualElement class="lk-column lk-mb-md">
                             <ui:Label name="lbl-bgm" class="lk-label lk-label--body lk-mb-sm" />
-                            <ui:Slider name="slider-bgm" low-value="0" high-value="1" value="1" />
+                            <ui:Slider name="slider-bgm" low-value="0" high-value="1" value="1"
+                                       show-fill-area="true" />
                         </ui:VisualElement>
 
                     </ui:VisualElement>

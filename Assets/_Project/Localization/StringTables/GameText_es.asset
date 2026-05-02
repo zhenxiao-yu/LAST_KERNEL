@@ -557,7 +557,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7037792262
-    m_Localized: Options
+    m_Localized: Opciones
     m_Metadata:
       m_Items: []
   - m_Id: 7037792263
@@ -3507,6 +3507,66 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2106983272165378
     m_Localized: "Los controles solo est\xE1n disponibles durante el juego."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758467825664
+    m_Localized: "V\xCDDEO"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963008
+    m_Localized: IDIOMA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963009
+    m_Localized: ACCESO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963010
+    m_Localized: Accesibilidad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963011
+    m_Localized: Reduce la intensidad visual para mayor comodidad.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963012
+    m_Localized: "Vibraci\xF3n de pantalla"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963013
+    m_Localized: Efectos de destello
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963014
+    m_Localized: Activado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963015
+    m_Localized: Desactivado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963016
+    m_Localized: "3\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273920
+    m_Localized: Sin misiones activas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273921
+    m_Localized: Ninguna receta descubierta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273922
+    m_Localized: Sin ingredientes.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273923
+    m_Localized: '{0} usos'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273924
+    m_Localized: Completado
     m_Metadata:
       m_Items: []
   references:

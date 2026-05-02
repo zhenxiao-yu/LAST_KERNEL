@@ -557,7 +557,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7037792262
-    m_Localized: Options
+    m_Localized: "\u9078\u9805"
     m_Metadata:
       m_Items: []
   - m_Id: 7037792263
@@ -3507,6 +3507,66 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2106983272165378
     m_Localized: "\u64CD\u63A7\u8A2D\u5B9A\u50C5\u5728\u904A\u6232\u4E2D\u53EF\u7528\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758467825664
+    m_Localized: "\u8996\u8A0A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963008
+    m_Localized: "\u8A9E\u8A00"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963009
+    m_Localized: "\u7121\u969C\u7919"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963010
+    m_Localized: "\u7121\u969C\u7919\u8A2D\u5B9A"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963011
+    m_Localized: "\u6E1B\u5C11\u8996\u89BA\u523A\u6FC0\uFF0C\u7167\u9867\u8996\u89BA\u654F\u611F\u53CA\u5149\u654F\u611F\u4EBA\u7FA4\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963012
+    m_Localized: "\u87A2\u5E55\u9707\u52D5"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963013
+    m_Localized: "\u9583\u5149\u6548\u679C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963014
+    m_Localized: "\u958B"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963015
+    m_Localized: "\u95DC"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963016
+    m_Localized: "3\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273920
+    m_Localized: "\u66AB\u7121\u6FC0\u6D3B\u4EFB\u52D9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273921
+    m_Localized: "\u5C1A\u672A\u767C\u73FE\u4EFB\u4F55\u914D\u65B9\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273922
+    m_Localized: "\u7121\u9700\u6750\u6599\u3002"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273923
+    m_Localized: "\u5269\u9918 {0} \u6B21"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273924
+    m_Localized: "\u5DF2\u5B8C\u6210"
     m_Metadata:
       m_Items: []
   references:

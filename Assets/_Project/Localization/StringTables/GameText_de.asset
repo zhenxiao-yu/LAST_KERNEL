@@ -557,7 +557,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 7037792262
-    m_Localized: Options
+    m_Localized: Optionen
     m_Metadata:
       m_Items: []
   - m_Id: 7037792263
@@ -3025,7 +3025,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1523475420033025
-    m_Localized: Sprache wahlen
+    m_Localized: "Sprache w\xE4hlen"
     m_Metadata:
       m_Items: []
   - m_Id: 1523475420033026
@@ -3507,6 +3507,66 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 2106983272165378
     m_Localized: "Steuerung ist nur w\xE4hrend des Spiels verf\xFCgbar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758467825664
+    m_Localized: VIDEO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963008
+    m_Localized: SPRACHE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963009
+    m_Localized: ZUGANG
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963010
+    m_Localized: Barrierefreiheit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963011
+    m_Localized: "Visuelle Intensit\xE4t f\xFCr Komfort reduzieren."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963012
+    m_Localized: Bildschirmzittern
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963013
+    m_Localized: Blitzeffekte
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963014
+    m_Localized: Ein
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963015
+    m_Localized: Aus
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138758513963016
+    m_Localized: "3\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273920
+    m_Localized: Keine aktiven Aufgaben.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273921
+    m_Localized: Noch keine Rezepte.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273922
+    m_Localized: Keine Zutaten.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273923
+    m_Localized: "Noch {0}\xD7"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2138761672273924
+    m_Localized: Abgeschlossen
     m_Metadata:
       m_Items: []
   references:
