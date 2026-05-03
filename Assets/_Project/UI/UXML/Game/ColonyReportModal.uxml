@@ -1,0 +1,206 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
+
+    <!-- Full-screen backdrop — controller toggles lk-hidden to show/hide -->
+    <ui:VisualElement name="colony-report-backdrop" class="lk-screen lk-screen--overlay lk-center lk-hidden">
+
+        <!-- Centred panel, 600 px wide, scrollable body -->
+        <ui:VisualElement name="colony-report-panel" class="lk-panel">
+
+            <!-- ── HEADER ───────────────────────────────────────── -->
+            <ui:VisualElement class="lk-panel__header" style="flex-direction: row; justify-content: space-between; align-items: flex-start;">
+                <ui:VisualElement style="flex-direction: column;">
+                    <ui:VisualElement style="flex-direction: row; align-items: center; gap: 8px;">
+                        <!-- Icon: delapouite/notebook.png -->
+                        <ui:VisualElement class="lk-icon lk-icon--report" />
+                        <ui:Label name="lbl-report-title"    class="lk-panel__title" />
+                    </ui:VisualElement>
+                    <ui:Label name="lbl-report-subtitle" class="lk-panel__subtitle" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+
+            <!-- ── SCROLLABLE BODY ──────────────────────────────── -->
+            <ui:ScrollView name="colony-report-scroll" style="flex-grow: 1;">
+
+                <!-- ════ SECTION 1: POPULATION & MORALE ════ -->
+                <ui:VisualElement style="flex-direction: row; align-items: center; gap: 6px;">
+                    <!-- Icon: delapouite/meeple-group.png -->
+                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--population" />
+                    <ui:Label name="lbl-section-population" class="lk-label lk-label--value colony-report__section-heading" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-divider lk-divider--accent" />
+
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-pop-characters-key"   class="lk-label" />
+                    <ui:Label name="lbl-pop-characters-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-pop-casualties-key"   class="lk-label" />
+                    <ui:Label name="lbl-pop-casualties-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-pop-injured-key"      class="lk-label" />
+                    <ui:Label name="lbl-pop-injured-value"    class="lk-label--value" />
+                </ui:VisualElement>
+
+                <!-- Morale bar -->
+                <ui:VisualElement class="colony-report__meter-row">
+                    <ui:Label name="lbl-morale-key"   class="lk-label" />
+                    <ui:Label name="lbl-morale-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-progress-bar" style="margin-left: 8px; margin-right: 8px; margin-bottom: 4px;">
+                    <ui:VisualElement name="fill-morale" class="lk-progress-bar__fill" />
+                </ui:VisualElement>
+
+                <!-- Fatigue bar -->
+                <ui:VisualElement class="colony-report__meter-row">
+                    <ui:Label name="lbl-fatigue-key"   class="lk-label" />
+                    <ui:Label name="lbl-fatigue-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-progress-bar" style="margin-left: 8px; margin-right: 8px; margin-bottom: 8px;">
+                    <ui:VisualElement name="fill-fatigue" class="lk-progress-bar__fill" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="lk-divider" style="margin-top: 8px; margin-bottom: 8px;" />
+
+                <!-- ════ SECTION 2: RESOURCES ════ -->
+                <ui:VisualElement style="flex-direction: row; align-items: center; gap: 6px;">
+                    <!-- Icon: delapouite/coins.png (reuses lk-icon--economy) -->
+                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--economy" />
+                    <ui:Label name="lbl-section-resources" class="lk-label lk-label--value colony-report__section-heading" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-divider lk-divider--accent" />
+
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-res-food-key"   class="lk-label" />
+                    <ui:Label name="lbl-res-food-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-res-currency-key"   class="lk-label" />
+                    <ui:Label name="lbl-res-currency-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-res-cards-key"   class="lk-label" />
+                    <ui:Label name="lbl-res-cards-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <!-- Excess cards row — hidden when excess == 0 -->
+                <ui:VisualElement name="row-excess-cards" class="colony-report__row lk-hidden">
+                    <ui:Label name="lbl-res-excess-key"   class="lk-label" />
+                    <ui:Label name="lbl-res-excess-value" class="lk-label--value colony-report__value--danger" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="lk-divider" style="margin-top: 8px; margin-bottom: 8px;" />
+
+                <!-- ════ SECTION 3: COLONY PRESSURES ════ -->
+                <ui:VisualElement style="flex-direction: row; align-items: center; gap: 6px;">
+                    <!-- Icon: lorc/biohazard.png -->
+                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--pressure" />
+                    <ui:Label name="lbl-section-pressures" class="lk-label lk-label--value colony-report__section-heading" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-divider lk-divider--accent" />
+
+                <!-- Shown when all pressures are 0 -->
+                <ui:Label name="lbl-pressures-clear" class="lk-label--body colony-report__clear-label lk-hidden" />
+
+                <!-- Structural Damage -->
+                <ui:VisualElement name="row-structural" class="colony-report__meter-row">
+                    <ui:Label name="lbl-structural-key"   class="lk-label" />
+                    <ui:Label name="lbl-structural-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement name="bar-structural" class="lk-progress-bar" style="margin-left: 8px; margin-right: 8px; margin-bottom: 4px;">
+                    <ui:VisualElement name="fill-structural" class="lk-progress-bar__fill lk-progress-bar__fill--warning" />
+                </ui:VisualElement>
+
+                <!-- Power Deficit -->
+                <ui:VisualElement name="row-power" class="colony-report__meter-row">
+                    <ui:Label name="lbl-power-key"   class="lk-label" />
+                    <ui:Label name="lbl-power-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement name="bar-power" class="lk-progress-bar" style="margin-left: 8px; margin-right: 8px; margin-bottom: 4px;">
+                    <ui:VisualElement name="fill-power" class="lk-progress-bar__fill lk-progress-bar__fill--warning" />
+                </ui:VisualElement>
+
+                <!-- Corruption -->
+                <ui:VisualElement name="row-corruption" class="colony-report__meter-row">
+                    <ui:Label name="lbl-corruption-key"   class="lk-label" />
+                    <ui:Label name="lbl-corruption-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement name="bar-corruption" class="lk-progress-bar" style="margin-left: 8px; margin-right: 8px; margin-bottom: 8px;">
+                    <ui:VisualElement name="fill-corruption" class="lk-progress-bar__fill lk-progress-bar__fill--danger" />
+                </ui:VisualElement>
+
+                <ui:VisualElement class="lk-divider" style="margin-top: 8px; margin-bottom: 8px;" />
+
+                <!-- ════ SECTION 4: LAST NIGHT (conditional) ════ -->
+                <ui:VisualElement name="section-last-night" class="lk-hidden">
+                    <ui:VisualElement style="flex-direction: row; align-items: center; gap: 6px;">
+                        <!-- Icon: lorc/skull-crossed-bones.png (reuses lk-icon--cat-mob) -->
+                        <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--enemy" />
+                        <ui:Label name="lbl-section-lastnight" class="lk-label lk-label--value colony-report__section-heading" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="lk-divider lk-divider--accent" />
+
+                    <ui:VisualElement class="colony-report__row">
+                        <ui:Label name="lbl-ln-enemies-key"   class="lk-label" />
+                        <ui:Label name="lbl-ln-enemies-value" class="lk-label--value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="colony-report__row">
+                        <ui:Label name="lbl-ln-defenders-key"   class="lk-label" />
+                        <ui:Label name="lbl-ln-defenders-value" class="lk-label--value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="colony-report__row">
+                        <ui:Label name="lbl-ln-morale-key"   class="lk-label" />
+                        <ui:Label name="lbl-ln-morale-value" class="lk-label--value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="colony-report__row">
+                        <ui:Label name="lbl-ln-fatigue-key"   class="lk-label" />
+                        <ui:Label name="lbl-ln-fatigue-value" class="lk-label--value" />
+                    </ui:VisualElement>
+                    <ui:VisualElement class="colony-report__row">
+                        <ui:Label name="lbl-ln-salvage-key"   class="lk-label" />
+                        <ui:Label name="lbl-ln-salvage-value" class="lk-label--value colony-report__value--accent" />
+                    </ui:VisualElement>
+
+                    <ui:VisualElement class="lk-divider" style="margin-top: 8px; margin-bottom: 8px;" />
+                </ui:VisualElement>
+
+                <!-- ════ SECTION 5: SURVIVAL RECORD ════ -->
+                <ui:VisualElement style="flex-direction: row; align-items: center; gap: 6px;">
+                    <!-- Icon: lorc/hourglass.png (reuses lk-icon--time) -->
+                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--time" />
+                    <ui:Label name="lbl-section-survival" class="lk-label lk-label--value colony-report__section-heading" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-divider lk-divider--accent" />
+
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-surv-day-key"   class="lk-label" />
+                    <ui:Label name="lbl-surv-day-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-surv-nights-key"   class="lk-label" />
+                    <ui:Label name="lbl-surv-nights-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-surv-total-cas-key"   class="lk-label" />
+                    <ui:Label name="lbl-surv-total-cas-value" class="lk-label--value" />
+                </ui:VisualElement>
+                <ui:VisualElement class="colony-report__row">
+                    <ui:Label name="lbl-surv-salvage-key"   class="lk-label" />
+                    <ui:Label name="lbl-surv-salvage-value" class="lk-label--value colony-report__value--accent" />
+                </ui:VisualElement>
+
+            </ui:ScrollView>
+
+            <!-- ── FOOTER ───────────────────────────────────────── -->
+            <ui:VisualElement class="lk-panel__footer lk-justify-center">
+                <ui:Button name="btn-report-close" class="lk-button lk-button--primary" style="min-width: 200px;" />
+            </ui:VisualElement>
+
+        </ui:VisualElement>
+
+    </ui:VisualElement>
+
+</ui:UXML>
