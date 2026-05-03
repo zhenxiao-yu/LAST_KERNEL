@@ -75,6 +75,7 @@ namespace Markyu.LastKernel
 
         private void ShowBackdrop()
         {
+            AudioManager.Instance?.PlayBGM(MusicContext.Defeat);
             Time.timeScale = 1f;
 
             if (_titleLabel != null)

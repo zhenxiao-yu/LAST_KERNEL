@@ -71,6 +71,8 @@ namespace Markyu.LastKernel
 
         private void ShowRewards(RewardData reward)
         {
+            AudioManager.Instance?.PlayBGM(MusicContext.Victory);
+
             if (_titleLabel != null)
                 _titleLabel.text = reward != null && !string.IsNullOrEmpty(reward.RewardTitle)
                     ? reward.RewardTitle
