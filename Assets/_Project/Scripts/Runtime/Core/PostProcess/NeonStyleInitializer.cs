@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
+using Sirenix.OdinInspector;
 
 namespace Markyu.LastKernel
 {
@@ -11,19 +12,19 @@ namespace Markyu.LastKernel
     /// </summary>
     public class NeonStyleInitializer : MonoBehaviour
     {
-        [Header("Card Glow")]
+        [Title("Card Glow")]
         [SerializeField, Range(0f, 8f), Tooltip("Multiplier on CardFeelPresenter hover/drag glow. 4 = vivid neon.")]
         private float neonGlowScale = 4f;
         [SerializeField, Range(0f, 1f), Tooltip("Strength of the per-card idle ambient breathe emission.")]
         private float neonAmbientIntensity = 1f;
 
-        [Header("URP Bloom")]
+        [Title("URP Bloom")]
         [SerializeField] private float bloomIntensity  = 1.8f;
         [SerializeField] private float bloomThreshold  = 0.85f;
         [SerializeField] private float bloomScatter    = 0.7f;
         [SerializeField] private Color bloomTint       = new Color(0.4f, 0.85f, 1f, 1f);
 
-        [Header("URP Chromatic Aberration")]
+        [Title("URP Chromatic Aberration")]
         [SerializeField, Range(0f, 1f)] private float chromaticIntensity = 0.3f;
 
         private Volume         _volume;

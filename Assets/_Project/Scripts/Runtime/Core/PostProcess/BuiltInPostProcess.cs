@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using Sirenix.OdinInspector;
 
 namespace Markyu.LastKernel
 {
@@ -11,7 +12,7 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("Material that applies the post-processing shader during rendering.")]
         private Material effectMaterial;
 
-        [Header("Pixel Art")]
+        [Title("Pixel Art")]
         [SerializeField, Range(0f, 1f), Tooltip("0 = native resolution. 1 = full 320×180 pixel snap.")]
         private float pixelizeAmount = 1f;
         [SerializeField, Range(80f, 640f),  Tooltip("Horizontal pixels in the pixel-art grid.")]
@@ -19,11 +20,11 @@ namespace Markyu.LastKernel
         [SerializeField, Range(45f, 360f),  Tooltip("Vertical pixels in the pixel-art grid.")]
         private float pixelResY = 180f;
 
-        [Header("Base")]
+        [Title("Base")]
         [SerializeField, Range(0f, 3f)]    private float vignetteIntensity  = 0f;
         [SerializeField, Range(0f, 1f)]    private float grayscaleIntensity = 0f;
 
-        [Header("Neon Style")]
+        [Title("Neon Style")]
         [SerializeField, Range(0f, 0.02f)]   private float chromaticAmount  = 0.004f;
         [SerializeField, Range(0f, 1f)]      private float scanlineStrength = 0.06f;
         [SerializeField, Range(50f, 1000f)]  private float scanlineFreq     = 270f;

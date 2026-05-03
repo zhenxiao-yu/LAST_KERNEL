@@ -191,9 +191,34 @@ namespace Markyu.LastKernel
         public void LoadBindings()
         {
             string json = PlayerPrefs.GetString(OverridesKey, string.Empty);
-            if (!string.IsNullOrEmpty(json))
-                InputActionRebindingExtensions.LoadBindingOverridesFromJson(_map, json);
+            if (string.IsNullOrEmpty(json)) return;
+
+            // Binding IDs in saved JSON must match current map's IDs.
+            // Since BuildActions() generates fresh GUIDs each launch, any previously
+            // saved override will be stale — silently reset rather than spew warnings.
+            var validIds = new System.Collections.Generic.HashSet<string>();
+            foreach (var b in _map.bindings)
+                validIds.Add(b.id.ToString());
+
+            bool isStale = false;
+            foreach (var entry in UnityEngine.JsonUtility.FromJson<BindingOverrideList>(json)?.bindings
+                                  ?? System.Array.Empty<BindingOverrideObject>())
+            {
+                if (!string.IsNullOrEmpty(entry.id) && !validIds.Contains(entry.id))
+                { isStale = true; break; }
+            }
+
+            if (isStale)
+            {
+                PlayerPrefs.DeleteKey(OverridesKey);
+                return;
+            }
+
+            InputActionRebindingExtensions.LoadBindingOverridesFromJson(_map, json);
         }
+
+        [System.Serializable] private class BindingOverrideList   { public BindingOverrideObject[] bindings; }
+        [System.Serializable] private class BindingOverrideObject  { public string id; public string path; }
 
         public void ResetAllBindings()
         {
