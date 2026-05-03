@@ -21,19 +21,31 @@
 
             <ui:VisualElement name="pause-buttons" class="lk-column lk-title-nav-frame">
                 <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
-                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--deploy" />
+                    <!-- Icon: guard13007/play-button.png -->
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--deploy">
+                        <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--menu-resume" />
+                    </ui:VisualElement>
                     <ui:Button name="btn-resume" class="lk-button lk-button--text lk-button--command lk-edge-button" />
                 </ui:VisualElement>
                 <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
-                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--archive" />
+                    <!-- Icon: delapouite/save.png -->
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--archive">
+                        <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--menu-save" />
+                    </ui:VisualElement>
                     <ui:Button name="btn-save" class="lk-button lk-button--text lk-button--utility lk-edge-button" />
                 </ui:VisualElement>
                 <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
-                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--config" />
+                    <!-- Icon: delapouite/settings-knobs.png -->
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--config">
+                        <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--menu-settings" />
+                    </ui:VisualElement>
                     <ui:Button name="btn-options" class="lk-button lk-button--text lk-button--utility lk-edge-button" />
                 </ui:VisualElement>
                 <ui:VisualElement class="lk-menu-action-row">
-                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--exit" />
+                    <!-- Icon: delapouite/exit-door.png -->
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--exit">
+                        <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--menu-exit" />
+                    </ui:VisualElement>
                     <ui:Button name="btn-back-to-title" class="lk-button lk-button--text lk-button--critical lk-edge-button" />
                 </ui:VisualElement>
             </ui:VisualElement>

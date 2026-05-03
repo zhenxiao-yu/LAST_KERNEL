@@ -9,8 +9,12 @@
 
         <ui:VisualElement class="lk-panel" style="width: 520px;">
 
-            <!-- Title — filled by RewardData.RewardTitle or fallback key -->
-            <ui:Label name="lbl-victory-title" class="lk-victory__title text-auto-size text-auto-size-min-12 text-auto-size-max-32" />
+            <!-- Title row: trophy icon + title label -->
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px;">
+                <!-- Icon: lorc/trophy.png -->
+                <ui:VisualElement class="lk-icon lk-icon--victory" style="width: 28px; height: 28px;" />
+                <ui:Label name="lbl-victory-title" class="lk-victory__title text-auto-size text-auto-size-min-12 text-auto-size-max-32" />
+            </ui:VisualElement>
 
             <ui:VisualElement class="lk-divider lk-divider--accent" style="margin-bottom: 24px;" />
 
@@ -18,8 +22,12 @@
             <ui:Label name="lbl-victory-desc" class="lk-label lk-label--body lk-mb-md text-auto-size text-auto-size-min-8 text-auto-size-max-14"
                       style="-unity-text-align: middle-center; white-space: normal;" />
 
-            <!-- Scrap reward — "+N Scrap" -->
-            <ui:Label name="lbl-victory-scrap" class="lk-victory__reward text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
+            <!-- Scrap reward row: coin icon + "+N Scrap" -->
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; gap: 8px;">
+                <!-- Icon: delapouite/coins.png -->
+                <ui:VisualElement class="lk-icon lk-icon--economy" />
+                <ui:Label name="lbl-victory-scrap" class="lk-victory__reward text-auto-size text-auto-size-min-10 text-auto-size-max-24" />
+            </ui:VisualElement>
 
             <ui:VisualElement class="lk-panel__footer lk-justify-center" style="margin-top: 32px;">
                 <ui:Button name="btn-victory-continue" class="lk-button lk-button--primary text-auto-size text-auto-size-min-8 text-auto-size-max-14"

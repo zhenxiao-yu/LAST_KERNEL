@@ -9,8 +9,12 @@
 
         <ui:VisualElement class="lk-panel lk-panel--accent" style="width: 480px; border-color: rgba(215,55,35,0.6);">
 
-            <!-- Title -->
-            <ui:Label name="lbl-defeat-title" class="lk-defeat__title text-auto-size text-auto-size-min-12 text-auto-size-max-32" />
+            <!-- Title row: broken-shield icon + title label -->
+            <ui:VisualElement style="flex-direction: row; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px;">
+                <!-- Icon: lorc/broken-shield.png -->
+                <ui:VisualElement class="lk-icon lk-icon--defeat" style="width: 28px; height: 28px;" />
+                <ui:Label name="lbl-defeat-title" class="lk-defeat__title text-auto-size text-auto-size-min-12 text-auto-size-max-32" />
+            </ui:VisualElement>
 
             <ui:VisualElement class="lk-divider" style="background-color: rgba(215,55,35,0.4); margin-bottom: 24px;" />
 

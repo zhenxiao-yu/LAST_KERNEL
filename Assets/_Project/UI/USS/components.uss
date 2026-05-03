@@ -540,6 +540,8 @@
     border-width: 1px;
     border-left-color: var(--lk-accent);
     border-left-width: 4px;
+    border-top-color: rgba(0, 220, 255, 0.22);
+    border-top-width: 1px;
     border-radius: 0;
     padding: var(--lk-padding-small);
     padding-left: var(--lk-padding-medium);
@@ -547,59 +549,358 @@
 }
 
 .lk-info-panel__header {
-    color: var(--lk-accent);
+    color: var(--lk-text-header);
     font-size: var(--lk-font-size-card);
     -unity-font-style: bold;
-    margin-bottom: 4px;
-    white-space: normal;
-    line-height: 1.3;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    -unity-text-overflow-position: End;
+    flex-grow: 1;
+    min-width: 0;
+    text-shadow: 0px 0px 6px rgba(0, 220, 255, 0.24), 0px 1px 2px rgba(0, 0, 0, 0.9);
 }
 
 .lk-info-panel__body {
     color: var(--lk-text);
-    font-size: var(--lk-font-size-md);
+    font-size: var(--lk-font-size-sm);
     white-space: normal;
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
 .lk-info-card {
     flex-direction: column;
-    background-color: rgba(3, 7, 14, 0.58);
-    border-top-color: rgba(0, 220, 255, 0.16);
+    background-color: rgba(2, 5, 12, 0.42);
+    border-top-color: rgba(0, 220, 255, 0.18);
     border-top-width: 1px;
-    padding-top: 8px;
+    padding-top: 10px;
+    padding-bottom: 4px;
 }
 
 .lk-info-section {
     flex-direction: column;
-    margin-top: 6px;
-    border-left-color: rgba(0, 220, 255, 0.18);
+    margin-top: 5px;
+    border-left-color: rgba(0, 220, 255, 0.22);
     border-left-width: 2px;
-    padding-left: 8px;
+    padding-left: 10px;
 }
 
 .lk-info-section__toggle {
-    min-height: 24px;
+    min-height: 28px;
     padding-left: 0;
-    padding-right: 0;
+    padding-right: 8px;
+    padding-top: 3px;
+    padding-bottom: 3px;
     background-color: rgba(0, 0, 0, 0);
     border-width: 0;
-    color: var(--lk-accent);
+    border-bottom-color: rgba(0, 220, 255, 0.10);
+    border-bottom-width: 1px;
+    color: var(--lk-text-dim);
     -unity-font-style: bold;
     -unity-text-align: middle-left;
     font-size: var(--lk-font-size-xs);
     letter-spacing: 1px;
+    text-transform: uppercase;
+    transition-property: color, background-color, border-bottom-color;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: linear;
 }
 
 .lk-info-section__toggle:hover {
-    color: var(--lk-accent-hot);
+    color: var(--lk-accent);
     background-color: rgba(0, 220, 255, 0.06);
+    border-bottom-color: rgba(0, 220, 255, 0.28);
 }
 
 .lk-info-section__content {
-    margin-top: 2px;
+    margin-top: 4px;
+    padding-bottom: 4px;
     white-space: normal;
     line-height: 1.45;
+}
+
+/* ── Info panel title bar ───────────────────────────────────────────────────
+ * Full-width header row inside .lk-info-panel.
+ * Contains: [INFO] prefix | header label (flex-grow) | category badge | type chip
+ * ─────────────────────────────────────────────────────────────────────────── */
+
+.lk-info-panel__titlebar {
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 220, 255, 0.048);
+    border-bottom-color: rgba(0, 220, 255, 0.18);
+    border-bottom-width: 1px;
+    /* bleed beyond panel padding to reach left accent border and right edge */
+    margin-top: -8px;
+    margin-left: -16px;
+    margin-right: -8px;
+    margin-bottom: var(--lk-gap-small);
+    /* restore visual indent matching panel's original content position */
+    padding: 6px var(--lk-padding-small) 7px var(--lk-padding-medium);
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+/* [INFO] / [SYS] terminal-style prefix badge */
+.lk-info-panel__prefix {
+    color: var(--lk-accent-dim);
+    font-size: 11px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    opacity: 0.68;
+}
+
+/* HP bar row inside card section */
+.lk-info-hp-row {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 6px;
+    gap: 8px;
+    padding-left: 2px;
+}
+
+/* "HP 12 / 20" label — min-width keeps bar from collapsing */
+.lk-info-hp-label {
+    color: var(--lk-text-dim);
+    font-size: var(--lk-font-size-xs);
+    min-width: 56px;
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* Chips cluster row: sell / food / uses — flex-wrap so they never overflow */
+.lk-info-chips-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 6px;
+    align-items: center;
+}
+
+/* Info section header row — icon slot + toggle button on same line */
+.lk-info-section__header {
+    flex-direction: row;
+    align-items: center;
+    gap: 6px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Icon slot system
+ *
+ * HOW TO INTEGRATE SPRITES IN ONE PROMPT:
+ *   1. Download white-on-transparent PNGs from the pack listed below each slot.
+ *   2. Import to Assets/_Project/UI/Icons/
+ *        Texture Type: Sprite (2D and UI)
+ *        Filter Mode: Point  (pixel-art, no blur)
+ *        Compression: None
+ *   3. For each slot, uncomment the background-image line and replace
+ *      REPLACE_GUID with the guid from the icon's .meta file. Remove the
+ *      placeholder background-color line at the same time.
+ *
+ *        background-image: url("project://database/Assets/_Project/UI/Icons/ICON.png?fileID=2800000&guid=YOUR_GUID&type=3#ICON");
+ *
+ * RECOMMENDED FREE PACKS:
+ *   ① game-icons.net  CC BY 3.0  4 400+ game icons — resources, weapons,
+ *                     creatures, symbols. Download as PNG: choose white icon +
+ *                     transparent background before downloading.
+ *                     Best for: resource HUD, card categories, combat icons.
+ *
+ *   ② kenney.nl/assets  CC0  Pixel-art UI packs (Game Icons, Input Prompts).
+ *                     Best for: info/close/chevron/settings HUD chrome.
+ *                     Download the "Game Icons" pack and "UI Pack".
+ *
+ * BASE PATTERN:
+ *   All sprites are white. Color is applied via -unity-background-image-tint-color.
+ *   The placeholder border + background-color shows until the sprite is added.
+ * ════════════════════════════════════════════════════════════════════════ */
+
+/* Base slot — 16 × 16, point-sampled, white-tint-ready */
+.lk-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    -unity-background-scale-mode: scale-to-fit;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+}
+
+.lk-icon--sm { width: 12px; height: 12px; }
+.lk-icon--lg { width: 20px; height: 20px; }
+
+/* ── Info panel icons ─────────────────────────────────────────────── */
+
+/* delapouite/info.png */
+.lk-icon--info {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/info.png?fileID=2800000&guid=f9fd52feb72bd6342bd1081bf3c68ff9&type=3#info");
+    -unity-background-image-tint-color: var(--lk-accent-dim);
+}
+
+/* lorc/sword-array.png */
+.lk-icon--stats {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/sword-array.png?fileID=2800000&guid=4e4626984a4f66f4f8c79d9023dff55c&type=3#sword-array");
+    -unity-background-image-tint-color: var(--lk-accent);
+}
+
+/* lorc/open-book.png */
+.lk-icon--lore {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/open-book.png?fileID=2800000&guid=7363dedaae99aa14f92005ad67e450d6&type=3#open-book");
+    -unity-background-image-tint-color: var(--lk-accent-secondary);
+}
+
+/* lorc/hidden.png */
+.lk-icon--hidden {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/hidden.png?fileID=2800000&guid=3869c38981f17d84ab0aa4bb67ab718f&type=3#hidden");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+
+/* delapouite/coins.png */
+.lk-icon--economy {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/coins.png?fileID=2800000&guid=dc80b8d9960977d4cad7db5d3d2aa535&type=3#coins");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+
+/* ── Card category icons ─────────────────────────────────────────────
+ * Set from C#: iconEl.EnableInClassList("lk-icon--cat-X", true)
+ * ─────────────────────────────────────────────────────────────────── */
+
+/* delapouite/character.png */
+.lk-icon--cat-character  {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/character.png?fileID=2800000&guid=03d6161477f2a7047987f4dc69733f98&type=3#character");
+    -unity-background-image-tint-color: var(--lk-success);
+}
+/* caro-asercion/round-potion.png */
+.lk-icon--cat-consumable {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/caro-asercion/round-potion.png?fileID=2800000&guid=0dd955d6513b8564a85929463cf5a0c6&type=3#round-potion");
+    -unity-background-image-tint-color: var(--lk-success);
+}
+/* delapouite/wood-pile.png */
+.lk-icon--cat-resource   {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/wood-pile.png?fileID=2800000&guid=944f1c5032f425345a1d9a391d6c650d&type=3#wood-pile");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+/* lorc/metal-bar.png */
+.lk-icon--cat-material   {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/metal-bar.png?fileID=2800000&guid=9d37258f9a227344997c60bf4c028d37&type=3#metal-bar");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+/* delapouite/ancient-sword.png */
+.lk-icon--cat-equipment  {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/ancient-sword.png?fileID=2800000&guid=a9adc6e6b19b3bd4f9922ecc3ca0dba9&type=3#ancient-sword");
+    -unity-background-image-tint-color: var(--lk-accent-secondary);
+}
+/* delapouite/castle.png */
+.lk-icon--cat-structure  {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/castle.png?fileID=2800000&guid=050dea3254d49604eb3831f8b2dca34f&type=3#castle");
+    -unity-background-image-tint-color: var(--lk-accent);
+}
+/* lorc/skull-crossed-bones.png */
+.lk-icon--cat-mob        {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/skull-crossed-bones.png?fileID=2800000&guid=459be0329bbdb3345b1a5f9deb3c4294&type=3#skull-crossed-bones");
+    -unity-background-image-tint-color: var(--lk-danger);
+}
+
+/* ── HUD resource icons ──────────────────────────────────────────── */
+
+/* lorc/wheat.png */
+.lk-icon--food   {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/wheat.png?fileID=2800000&guid=19ebf3dd9f1ab3e4ba701cbfd7d7c386&type=3#wheat");
+    -unity-background-image-tint-color: var(--lk-success);
+}
+/* willdabeast/gold-bar.png */
+.lk-icon--gold   {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/willdabeast/gold-bar.png?fileID=2800000&guid=2c7fc3b1ed63a5647a04ae57ba86aaf1&type=3#gold-bar");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+/* faithtoken/card-draw.png */
+.lk-icon--cards  {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/faithtoken/card-draw.png?fileID=2800000&guid=e2a7aeef49e276d459ee79da43cb9c48&type=3#card-draw");
+    -unity-background-image-tint-color: var(--lk-accent);
+}
+/* sbed/health-normal.png */
+.lk-icon--hp     {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/sbed/health-normal.png?fileID=2800000&guid=0cb05e7492625d9439508dd3b00b10d3&type=3#health-normal");
+    -unity-background-image-tint-color: var(--lk-danger);
+}
+/* delapouite/shambling-zombie.png */
+.lk-icon--enemy  {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/shambling-zombie.png?fileID=2800000&guid=67063fa2574cb1b4d92e5a6cd5e46e96&type=3#shambling-zombie");
+    -unity-background-image-tint-color: var(--lk-accent-secondary);
+}
+/* lorc/hourglass.png */
+.lk-icon--time   {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/hourglass.png?fileID=2800000&guid=b155c08e032c3fa468669c945704d550&type=3#hourglass");
+    -unity-background-image-tint-color: var(--lk-accent-dim);
+}
+/* lorc/cog.png */
+.lk-icon--assets {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/cog.png?fileID=2800000&guid=251d6c7d6d3b63545a41cbfcd238b29e&type=3#cog");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+/* lorc/heavy-lightning.png */
+.lk-icon--breach {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/heavy-lightning.png?fileID=2800000&guid=f0c60c5f8ffe65d45a06816c395a5080&type=3#heavy-lightning");
+    -unity-background-image-tint-color: var(--lk-danger);
+}
+/* sbed/shield.png — base fortification / defence variant */
+.lk-icon--shield {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/sbed/shield.png?fileID=2800000&guid=072980d06e202b942bd76dce92dd35ff&type=3#shield");
+    -unity-background-image-tint-color: var(--lk-accent);
+}
+/* lorc/trophy.png — victory screen */
+.lk-icon--victory {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/trophy.png?fileID=2800000&guid=11f607cc2990beb409fcf09291b48e12&type=3#trophy");
+    -unity-background-image-tint-color: var(--lk-accent);
+}
+/* lorc/broken-shield.png — defeat screen */
+.lk-icon--defeat {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/broken-shield.png?fileID=2800000&guid=05876228bb85f2d4595e7c0165c728af&type=3#broken-shield");
+    -unity-background-image-tint-color: var(--lk-danger);
+}
+/* delapouite/checklist.png — quests side-menu tab */
+.lk-icon--quests {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/checklist.png?fileID=2800000&guid=e08a3219917cb3e498c4e9b01d20dbef&type=3#checklist");
+    -unity-background-image-tint-color: var(--lk-accent-dim);
+}
+/* delapouite/crafting.png — recipes side-menu tab */
+.lk-icon--recipes {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/crafting.png?fileID=2800000&guid=d6beab32113a43d44b5e8d452c75b2dc&type=3#crafting");
+    -unity-background-image-tint-color: var(--lk-accent-dim);
+}
+/* delapouite/notebook.png — colony report header */
+.lk-icon--report {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/notebook.png?fileID=2800000&guid=69143e9906c61a446a9fb79c164ab618&type=3#notebook");
+    -unity-background-image-tint-color: var(--lk-accent-dim);
+}
+/* delapouite/meeple-group.png — colony population section */
+.lk-icon--population {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/meeple-group.png?fileID=2800000&guid=8cd089676477abd4ca366b86ac3a54d9&type=3#meeple-group");
+    -unity-background-image-tint-color: var(--lk-text-dim);
+}
+/* lorc/biohazard.png — colony pressures section */
+.lk-icon--pressure {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/lorc/biohazard.png?fileID=2800000&guid=ec644529f46f107418084c54037eb004&type=3#biohazard");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+/* guard13007/play-button.png — pause menu resume */
+.lk-icon--menu-resume {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/guard13007/play-button.png?fileID=2800000&guid=94b2d7b964192414381942a9724f96f0&type=3#play-button");
+    -unity-background-image-tint-color: var(--lk-accent);
+}
+/* delapouite/save.png — pause menu save */
+.lk-icon--menu-save {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/save.png?fileID=2800000&guid=0bb386a3f0f57e64cb66c48b6bcf8efb&type=3#save");
+    -unity-background-image-tint-color: var(--lk-success);
+}
+/* delapouite/settings-knobs.png — pause menu options */
+.lk-icon--menu-settings {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/settings-knobs.png?fileID=2800000&guid=9f47d4bcad2adff4f8c1dd07350e570d&type=3#settings-knobs");
+    -unity-background-image-tint-color: var(--lk-warning);
+}
+/* delapouite/exit-door.png — pause menu exit */
+.lk-icon--menu-exit {
+    background-image: url("project://database/Assets/_Project/Art/UI/Icons/1x1/delapouite/exit-door.png?fileID=2800000&guid=049dbbc0b3776ba4c9e5f46784d6d01b&type=3#exit-door");
+    -unity-background-image-tint-color: var(--lk-danger);
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -1157,6 +1458,10 @@ Toggle:checked .unity-toggle__checkmark {
 
 .lk-tab {
     flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     background-color: rgba(0, 0, 0, 0);
     border-color: rgba(0, 0, 0, 0);
     border-width: 0;
@@ -1245,7 +1550,8 @@ Toggle:checked .unity-toggle__checkmark {
     color: var(--lk-text-dim);
     font-size: var(--lk-font-size-xs);
     white-space: normal;
-    line-height: 1.5;
+    line-height: 1.55;
+    letter-spacing: 0.3px;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -2039,6 +2345,8 @@ Toggle:checked .unity-toggle__checkmark {
     min-height: 48px;
     flex-shrink: 0;
     margin-right: 6px;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(3, 7, 14, 0.86);
     border-color: rgba(0, 220, 255, 0.22);
     border-width: 1px;
@@ -2046,8 +2354,8 @@ Toggle:checked .unity-toggle__checkmark {
     border-bottom-width: 3px;
 }
 
-.lk-menu-action-icon--deploy  { border-left-color: var(--lk-accent); border-left-width: 3px; }
-.lk-menu-action-icon--load    { border-left-color: var(--lk-steel);  border-left-width: 3px; }
+.lk-menu-action-icon--deploy  { border-left-color: var(--lk-accent);  border-left-width: 3px; }
+.lk-menu-action-icon--load    { border-left-color: var(--lk-steel);   border-left-width: 3px; }
 .lk-menu-action-icon--archive { border-left-color: var(--lk-success); border-left-width: 3px; }
 .lk-menu-action-icon--config  { border-left-color: var(--lk-warning); border-left-width: 3px; }
 .lk-menu-action-icon--exit    { border-left-color: var(--lk-danger);  border-left-width: 3px; }
@@ -2153,4 +2461,65 @@ Toggle:checked .unity-toggle__checkmark {
     border-color: rgba(80, 100, 128, 0.20);
     border-width: 1px;
     margin: 12px;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Colony Report Modal
+ * ════════════════════════════════════════════════════════════════════════ */
+
+#colony-report-panel {
+    width: 600px;
+    max-height: 800px;
+    overflow: hidden;
+}
+
+.colony-report__section-heading {
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.colony-report__row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 44px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.colony-report__meter-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 24px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 8px;
+}
+
+.colony-report__value--surplus { color: rgb(80, 220, 120); }
+.colony-report__value--danger  { color: var(--lk-danger, rgb(220, 60, 60)); }
+.colony-report__value--accent  { color: var(--lk-accent); }
+
+.colony-report__clear-label {
+    color: var(--lk-text-dim);
+    padding: 12px 8px;
+    -unity-text-align: middle-center;
+}
+
+/* HUD day button — visually flat, inherits label typography */
+.colony-hud__day-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    padding: 0;
+    margin: 0;
+    min-height: 44px;
+    min-width: 44px;
+    cursor: link;
+}
+
+.colony-hud__day-btn:hover,
+.colony-hud__day-btn.lk-ui-hovered {
+    color: var(--lk-accent);
+    background-color: rgba(0, 0, 0, 0);
 }

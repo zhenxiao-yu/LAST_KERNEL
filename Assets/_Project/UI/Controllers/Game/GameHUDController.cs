@@ -22,7 +22,7 @@ namespace Markyu.LastKernel
 
         private VisualElement _hudDay;
         private Label         _phaseLabel;
-        private Label         _dayLabel;
+        private Button        _dayButton;
         private VisualElement _timeFill;
         private Button        _paceButton;
         private Label         _nutritionLabel;
@@ -110,6 +110,9 @@ namespace Markyu.LastKernel
 
             if (CardManager.Instance != null)
                 CardManager.Instance.OnStatsChanged -= UpdateResources;
+
+            if (_dayButton != null)
+                _dayButton.clicked -= OnDayButtonClicked;
         }
 
         protected override void Start()
@@ -163,7 +166,8 @@ namespace Markyu.LastKernel
 
             _hudDay           = Root.Q<VisualElement>("hud-day");
             _phaseLabel       = Root.Q<Label>        ("lbl-phase");
-            _dayLabel         = Root.Q<Label>        ("lbl-day");
+            _dayButton        = Root.Q<Button>       ("btn-day");
+            _dayButton.clicked += OnDayButtonClicked;
             _timeFill         = Root.Q<VisualElement>("fill-time");
             _paceButton       = Root.Q<Button>       ("btn-pace");
             _nutritionLabel   = Root.Q<Label>        ("lbl-nutrition");
@@ -313,9 +317,11 @@ namespace Markyu.LastKernel
 
         private void UpdateDayLabel(int day)
         {
-            if (_dayLabel != null)
-                _dayLabel.text = GameLocalization.Format("day.current", day);
+            if (_dayButton != null)
+                _dayButton.text = GameLocalization.Format("day.current", day);
         }
+
+        private void OnDayButtonClicked() => ColonyReportController.Instance?.Show();
 
         private void UpdatePaceButton(TimePace pace)
         {

@@ -18,8 +18,9 @@
         <!-- Left: phase badge + day counter + time progress -->
         <ui:VisualElement class="lk-hud-command-rail">
             <ui:Label name="lbl-phase" class="lk-phase-label lk-hud-badge" />
-            <ui:Label name="lbl-day" class="lk-label lk-label--value" style="margin-left: 10px; margin-right: 10px;" />
-            <ui:VisualElement class="lk-mini-icon lk-mini-icon--time" />
+            <ui:Button name="btn-day" class="lk-button lk-label--value colony-hud__day-btn" style="margin-left: 10px; margin-right: 10px;" />
+            <!-- Icon: game-icons.net "hourglass" -->
+            <ui:VisualElement class="lk-mini-icon lk-mini-icon--time lk-icon lk-icon--sm lk-icon--time" />
             <ui:Label name="lbl-hud-time-key" class="lk-title-data-key" style="margin-right: 6px;" />
             <ui:VisualElement class="lk-progress-bar" style="width: 138px;">
                 <ui:VisualElement name="fill-time" class="lk-progress-bar__fill" />
@@ -31,23 +32,24 @@
 
         <!-- Centre: resource stat box with icon + value pairs -->
         <ui:VisualElement class="lk-hud-statbox">
-            <ui:VisualElement class="lk-mini-icon lk-mini-icon--assets" />
+            <!-- Icon: game-icons.net "cog" or "gears" -->
+            <ui:VisualElement class="lk-mini-icon lk-mini-icon--assets lk-icon lk-icon--sm lk-icon--assets" />
             <ui:Label name="lbl-hud-assets-key" class="lk-title-data-key" style="margin-right: 8px;" />
-            <!-- Nutrition / Food -->
+            <!-- Nutrition / Food — Icon: game-icons.net "wheat" or "meal" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement name="icon-nutrition" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--food" />
+                <ui:VisualElement name="icon-nutrition" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--food lk-icon lk-icon--food" />
                 <ui:Label name="lbl-nutrition" class="lk-resource-counter__value" />
             </ui:VisualElement>
             <ui:VisualElement class="lk-hud-divider-v" />
-            <!-- Currency / Gold -->
+            <!-- Currency / Gold — Icon: game-icons.net "coin" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement name="icon-currency" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--gold" />
+                <ui:VisualElement name="icon-currency" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--gold lk-icon lk-icon--gold" />
                 <ui:Label name="lbl-currency" class="lk-resource-counter__value" />
             </ui:VisualElement>
             <ui:VisualElement class="lk-hud-divider-v" />
-            <!-- Cards -->
+            <!-- Cards — Icon: game-icons.net "card-draw" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement name="icon-cards" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--cards" />
+                <ui:VisualElement name="icon-cards" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--cards lk-icon lk-icon--cards" />
                 <ui:Label name="lbl-cards" class="lk-resource-counter__value" />
             </ui:VisualElement>
         </ui:VisualElement>
@@ -76,20 +78,21 @@
 
         <!-- Centre: HP + enemy stat box -->
         <ui:VisualElement class="lk-hud-statbox lk-hud-statbox--night">
-            <ui:VisualElement class="lk-mini-icon lk-mini-icon--breach" />
+            <!-- Icon: game-icons.net "lightning-bolt" -->
+            <ui:VisualElement class="lk-mini-icon lk-mini-icon--breach lk-icon lk-icon--sm lk-icon--breach" />
             <ui:Label name="lbl-hud-breach-key" class="lk-title-data-key" style="margin-right: 8px; color: rgb(255, 160, 40);" />
-            <!-- Base HP: icon + value text + bar -->
+            <!-- Base HP: icon + value text + bar — Icon: game-icons.net "heart" or "shield" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement class="lk-hud-icon lk-hud-icon--hp" style="margin-right: 6px;" />
+                <ui:VisualElement class="lk-hud-icon lk-hud-icon--hp lk-icon lk-icon--sm lk-icon--hp" style="margin-right: 6px;" />
                 <ui:Label name="lbl-base-hp" class="lk-resource-counter__value" />
                 <ui:VisualElement class="lk-progress-bar lk-progress-bar--thick" style="width: 96px; margin-left: 8px; flex-shrink: 0;">
                     <ui:VisualElement name="fill-base-hp" class="lk-progress-bar__fill" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="lk-hud-divider-v" />
-            <!-- Enemy count: icon + value + remaining-enemies bar -->
+            <!-- Enemy count: icon + value + bar — Icon: game-icons.net "death-skull" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement class="lk-hud-icon lk-hud-icon--enemy" style="margin-right: 6px;" />
+                <ui:VisualElement class="lk-hud-icon lk-hud-icon--enemy lk-icon lk-icon--sm lk-icon--enemy" style="margin-right: 6px;" />
                 <ui:Label name="lbl-enemies" class="lk-resource-counter__value" />
                 <ui:VisualElement class="lk-progress-bar" style="width: 60px; margin-left: 8px; flex-shrink: 0;">
                     <ui:VisualElement name="fill-wave-enemies" class="lk-progress-bar__fill lk-progress-bar__fill--danger" />
