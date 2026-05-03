@@ -1,16 +1,18 @@
 """
 LAST KERNEL — Card & Pack Art Generator
-Recraft AI (recraftv3 / vector_illustration) → SVG → transparent PNG.
+Recraft AI (recraftv3 / digital_illustration) → transparent PNG.
 
 Setup:
     1. recraft.ai → Account → API → create key
     2. $env:RECRAFT_API_KEY = "your-key"
-    3. pip install "rembg[cpu]" Pillow svglib reportlab
+    3. pip install "rembg[cpu]" Pillow
 
 Workflow:
-    Tools/run_art.ps1                 # generate all cards & packs
+    Tools/run_art.ps1                   # generate all (skips existing)
+    Tools/run_art.ps1 --make-style      # preview reference, approve, regenerate all
+    Tools/run_art.ps1 --regen Warrior   # regenerate one card
 
-Output (transparent PNG, drop into Assets/_Project/Art/Sprites/):
+Output (transparent PNG):
     Tools/CardArt/*.png
     Tools/PackArt/*.png
 """
@@ -26,21 +28,14 @@ import urllib.request
 import urllib.error
 from typing import Dict, List, Optional, Tuple
 
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageFilter
 
 try:
     from rembg import remove as rembg_remove, new_session
-    _rembg_session = new_session("isnet-general-use")  # better for illustrated art
+    _rembg_session = new_session("isnet-general-use")
     REMBG_AVAILABLE = True
 except ImportError:
     REMBG_AVAILABLE = False
-
-try:
-    from svglib.svglib import svg2rlg
-    from reportlab.graphics import renderPM
-    SVGLIB_AVAILABLE = True
-except ImportError:
-    SVGLIB_AVAILABLE = False
 
 # ---------------------------------------------------------------------------
 # CONFIG
@@ -50,19 +45,20 @@ API_KEY    = os.getenv("RECRAFT_API_KEY", "")
 BASE_URL   = "https://external.api.recraft.ai/v1"
 STYLE_FILE = os.path.join(os.path.dirname(__file__), "recraft_style.json")
 
-CARD_DIR = "CardArt"
-PACK_DIR = "PackArt"
+_TOOLS_DIR = os.path.dirname(os.path.abspath(__file__))
+CARD_DIR   = os.path.join(_TOOLS_DIR, "CardArt")
+PACK_DIR   = os.path.join(_TOOLS_DIR, "PackArt")
 
 MODEL      = "recraftv3"
 STYLE      = "digital_illustration"
 IMAGE_SIZE = "1024x1024"
 
 MAX_RETRIES = 2
-RETRY_DELAY = 10  # seconds
+RETRY_DELAY = 10
 
-PIXEL_BLOCK     = 8   # pixel art block size (1024/8 = 128 logical pixels)
-OUTLINE_WIDTH   = 12  # black outline thickness around character silhouette (pixels)
-PALETTE_COLORS  = 24  # number of colors before pixelating
+PIXEL_BLOCK    = 8   # 1024/8 = 128 logical pixels
+OUTLINE_WIDTH  = 12  # black stroke around silhouette
+PALETTE_COLORS = 24  # colors after enhancement, before pixelation
 
 # ---------------------------------------------------------------------------
 # PROMPTS
@@ -156,14 +152,14 @@ CARDS: List[Tuple[str, str, str]] = [
     ("MycoChip",        "Consumable", "Myco Chip — dried fungal growth from ventilation shafts, dark dense disc, the vents provide"),
     ("Omelette",        "Consumable", "Protein Fold — cooked protein fold on metal camp tray, scorched edges, barely food"),
     ("Potato",          "Consumable", "Starch Root — hardy hydroponic tuber, grown in dirty nutrient trays, knobbled surface"),
-    ("RawMeat",         "Consumable", "Raw Meat — protein slab in vacuum-sealed tray, blood pooled at edge, warning label: COOK IT"),
+    ("RawMeat",         "Consumable", "Raw Meat — protein slab in vacuum-sealed tray, blood pooled at edge"),
     ("RoastedAcorn",    "Consumable", "Toasted Volt Nuts — roasted energy seeds in dented tin bowl, chemical char marks"),
-    ("SignalJerky",     "Consumable", "Dried Protein Strip — printed protein cured with mineral salts, tastes like nothing, lasts forever"),
+    ("SignalJerky",     "Consumable", "Dried Protein Strip — printed protein cured with mineral salts, shelf-stable dense"),
     ("Soup",            "Consumable", "District Broth — heat-sealed ration pouch, protein scraps in hot water, pull-tab vent"),
     ("Steak",           "Consumable", "Searpack — pressed protein flash-seared on hot plate, good morale per gram, mess tray"),
     ("Stew",            "Consumable", "Reactor Stew — dense communal pot cooked beside waste heat, slow heavy sustaining"),
     ("Turnip",          "Consumable", "Root Ration — mineral-rich root from low-power hydroponics, bulbous with faint veins"),
-    ("VatBroth",        "Consumable", "Vat Broth — protein-enriched broth from mixed organics in communal processing vats, hot barely"),
+    ("VatBroth",        "Consumable", "Vat Broth — protein-enriched broth from mixed organics in communal vats, hot barely"),
     # ── Equipment ───────────────────────────────────────────────────────────
     ("Bow",             "Equipment", "Tension Rig — distance is a strategy, so is not missing, recurve composite bow, taut string"),
     ("Cane",            "Equipment", "Signal Cane — subtle surgical expensive, sleek reinforced cane with hidden tech"),
@@ -174,52 +170,52 @@ CARDS: List[Tuple[str, str, str]] = [
     ("SlimeHat",        "Equipment", "Null Cap — doesn't stop hits, stops being found, helmet dripping viscous green slime"),
     ("Slingshot",       "Equipment", "Pocket Launcher — underestimated, good, Y-frame slingshot with reinforced fork"),
     ("Staff",           "Equipment", "Conduit Rod — amplifies what's already there, not always helpfully, glowing tech orb at crown"),
-    ("SurgeWeapon",     "Equipment", "Surge Blade — magnetically overcharged, three pulses before capacitors burn out, hits hardest"),
+    ("SurgeWeapon",     "Equipment", "Surge Blade — magnetically overcharged, three pulses before capacitors burn out"),
     ("Sword",           "Equipment", "Alloy Cutter — heavy cutting blade for close work in narrow streets, notched salvaged edge"),
     ("Tunic",           "Equipment", "Wirecloth Wrap — not armor, better than nothing by exactly that much, patched vest"),
     ("VitalityAmulet",  "Equipment", "Vital Cell — tracks your heartbeat so you don't have to think about it, circuit-etched amulet"),
     ("WoodenClub",      "Equipment", "Scrap Baton — the first weapon, still works, thick hardwood club with grip tape"),
     # ── Structures ──────────────────────────────────────────────────────────
-    ("Anvil",           "Structure", "heavy flat-topped iron anvil on block base, forge station"),
-    ("Booster_Warehouse","Structure","Cargo Depot — storage hub that expands board capacity, flat-roof depot with large rolling door"),
-    ("Booster_Yard",    "Structure", "Logistics Yard — cleared sorting yard for bulky salvage, fenced compound with gate"),
+    ("Anvil",                "Structure", "heavy flat-topped iron anvil on block base, forge station"),
+    ("Booster_Warehouse",    "Structure", "Cargo Depot — storage hub, flat-roof depot with large rolling door"),
+    ("Booster_Yard",         "Structure", "Logistics Yard — cleared sorting yard for bulky salvage, fenced compound with gate"),
     ("Enclosure_CreatureCage","Structure","Drone Cage — tight containment frame for damaged drones and hostile small units"),
-    ("Enclosure_CreaturePen","Structure","Containment Pen — fenced holding zone that keeps problems measurable, reinforced posts"),
-    ("Furnace",         "Structure", "squat box furnace, glowing orange front vent, flue pipe rising"),
-    ("Grower_Farm",     "Structure", "Hydroponic Farm — scaled food system for steady ration production, UV grow trays"),
-    ("Grower_PlanterBox","Structure","Nutrient Tray — small clean growth tray, simple stackable reliable, seedlings under strip light"),
-    ("House",           "Structure", "prefab shelter module, bolted panel walls, single exhaust vent on roof"),
-    ("Library",         "Structure", "data terminal kiosk, drive rack shelves behind glass, blinking status lights"),
-    ("LoggingCamp",     "Structure", "Recycler Yard — work yard for stripping scrap into usable stock, chainsaw arm extended"),
-    ("Market",          "Structure", "district market stall, corrugated awning, crates and bartered goods stacked"),
-    ("Sawmill",         "Structure", "Cutter Frame — cutting rig for turning scrap stock into clean plates, circular blade"),
-    ("StoneQuarry",     "Structure", "Rubble Extractor — crusher turning city rubble into circuit-grade salvage, drill rig on rock"),
+    ("Enclosure_CreaturePen","Structure", "Containment Pen — fenced holding zone that keeps problems measurable, reinforced posts"),
+    ("Furnace",              "Structure", "squat box furnace, glowing orange front vent, flue pipe rising"),
+    ("Grower_Farm",          "Structure", "Hydroponic Farm — scaled food system, UV grow trays, power-hungry worth it"),
+    ("Grower_PlanterBox",    "Structure", "Nutrient Tray — small clean growth tray, simple stackable reliable"),
+    ("House",                "Structure", "prefab shelter module, bolted panel walls, single exhaust vent on roof"),
+    ("Library",              "Structure", "data terminal kiosk, drive rack shelves behind glass, blinking status lights"),
+    ("LoggingCamp",          "Structure", "Recycler Yard — work yard stripping scrap into usable stock, chainsaw arm extended"),
+    ("Market",               "Structure", "district market stall, corrugated awning, crates and bartered goods stacked"),
+    ("Sawmill",              "Structure", "Cutter Frame — cutting rig turning scrap stock into clean plates, circular blade"),
+    ("StoneQuarry",          "Structure", "Rubble Extractor — crusher turning city rubble into circuit-grade salvage, drill rig"),
     # ── Areas ───────────────────────────────────────────────────────────────
-    ("Fields",          "Area", "Blackout Yard — open work yard under dead billboards, collapsed scaffolding, poor cover"),
-    ("Forest",          "Area", "Relay Graveyard — signal relay towers broken, antenna arrays tangled, cables everywhere"),
-    ("Graveyard",       "Area", "Memory Pit — server stacks used as grave markers, ghost signal trails, some entries still answering"),
-    ("Highlands",       "Area", "Dead Transit Line — elevated rail corridor above the district, exposed walkway, rusted supports"),
-    ("Ruins",           "Area", "Collapse Site — crumbled concrete district, buried systems, hostile code residue, rebar exposed"),
+    ("Fields",     "Area", "Blackout Yard — open work yard under dead billboards, collapsed scaffolding, poor cover"),
+    ("Forest",     "Area", "Relay Graveyard — signal relay towers broken, antenna arrays tangled, cables everywhere"),
+    ("Graveyard",  "Area", "Memory Pit — server stacks used as grave markers, ghost signal trails, some entries still answering"),
+    ("Highlands",  "Area", "Dead Transit Line — elevated rail corridor above district, exposed walkway, rusted supports"),
+    ("Ruins",      "Area", "Collapse Site — crumbled concrete district, buried systems, hostile code residue, rebar exposed"),
     # ── Resources ───────────────────────────────────────────────────────────
-    ("AppleTree",       "Resource", "Orchard Node — tagged by old sector authority, still bearing fruit, grow tube encased"),
-    ("BasaltColumns",   "Resource", "Basalt Stack — geometric immovable hexagonal pillars, sheared flat tops, worth harvesting"),
-    ("BerryBush",       "Resource", "Cluster Vine — nobody planted it, nobody needs to, glowing berry clusters on tangled vine"),
-    ("ClayPit",         "Resource", "Clay Bed — everything below this was once a lake, open excavation, clay walls"),
-    ("Coral",           "Resource", "Reef Token source — island-sector coral formation, branching bioluminescent tips"),
-    ("Grass",           "Resource", "Ground Cover — not useful, not nothing, bioluminescent moss on cracked concrete"),
-    ("IronDeposit",     "Resource", "Ore Seam — mine sees it first smelter sees it last, exposed iron vein in rock face"),
-    ("PalmTree",        "Resource", "Canopy Node — survived the collapse, take what it offers, tall palm with fiber wrapping at base"),
-    ("Rock",            "Resource", "Stone Deposit — slower than ore, free, that's the tradeoff, rubble chunk"),
-    ("Soil",            "Resource", "Growth Medium — the only input that doesn't ask what you're building, dark nutrient soil"),
-    ("Tree",            "Resource", "Salvage Grove — rooted in old concrete, still growing, bioluminescent vein pattern on trunk"),
+    ("AppleTree",      "Resource", "Orchard Node — tagged by old sector authority, still bearing fruit, grow tube encased"),
+    ("BasaltColumns",  "Resource", "Basalt Stack — geometric immovable hexagonal pillars, sheared flat tops"),
+    ("BerryBush",      "Resource", "Cluster Vine — nobody planted it, nobody needs to, glowing berry clusters on tangled vine"),
+    ("ClayPit",        "Resource", "Clay Bed — everything below this was once a lake, open excavation, clay walls"),
+    ("Coral",          "Resource", "Reef Token source — island-sector coral formation, branching bioluminescent tips"),
+    ("Grass",          "Resource", "Ground Cover — not useful, not nothing, bioluminescent moss on cracked concrete"),
+    ("IronDeposit",    "Resource", "Ore Seam — mine sees it first smelter sees it last, exposed iron vein in rock face"),
+    ("PalmTree",       "Resource", "Canopy Node — survived the collapse, take what it offers, tall palm with fiber wrapping"),
+    ("Rock",           "Resource", "Stone Deposit — slower than ore, free, that's the tradeoff, rubble chunk"),
+    ("Soil",           "Resource", "Growth Medium — the only input that doesn't ask what you're building, dark nutrient soil"),
+    ("Tree",           "Resource", "Salvage Grove — rooted in old concrete, still growing, bioluminescent vein pattern on trunk"),
     # ── Valuables ───────────────────────────────────────────────────────────
     ("BloodChalice",    "Valuable", "dark goblet with viscous liquid, rim pulsing red glow, ritual object"),
-    ("GoldenKey",       "Valuable", "Root Keycard — privileged access card for sealed systems, circuit-etched shaft, glowing bow"),
+    ("GoldenKey",       "Valuable", "Root Keycard — privileged access card for sealed systems, circuit-etched shaft, glowing"),
     ("SacrificialAltar","Valuable", "Blacksite Conduit — forbidden relay trading flesh data and power, stone altar with conduit cables"),
     ("TreasureChest",   "Valuable", "Encrypted Cache — sealed crate from before the blackout, heavy clasps, glowing tamper seal"),
     # ── Currency / Recipe ────────────────────────────────────────────────────
-    ("Coin",            "Currency", "Scrap Chip — district's preferred medium, untraceable by design, worn hexagonal token"),
-    ("Recipe",          "Recipe",   "Blueprint Packet — compressed build plan, data scroll with circuit and gear shapes printed"),
+    ("Coin",   "Currency", "Scrap Chip — district's preferred medium, untraceable by design, worn hexagonal token"),
+    ("Recipe", "Recipe",   "Blueprint Packet — compressed build plan, data scroll with circuit and gear shapes printed"),
 ]
 
 PACKS: List[Tuple[str, str, str]] = [
@@ -291,33 +287,15 @@ def generate_image(prompt: str, style_id: Optional[str]) -> bytes:
 # POST-PROCESSING
 # ---------------------------------------------------------------------------
 
-def _is_svg(data: bytes) -> bool:
-    head = data.lstrip()[:10]
-    return head.startswith(b"<svg") or head.startswith(b"<?xml")
+def remove_background(image_bytes: bytes) -> bytes:
+    if not REMBG_AVAILABLE:
+        return image_bytes
+    return rembg_remove(image_bytes, session=_rembg_session)
 
 
-def svg_to_png(svg_bytes: bytes, size: int = 1024) -> bytes:
-    import tempfile
-    with tempfile.NamedTemporaryFile(suffix=".svg", delete=False) as f:
-        f.write(svg_bytes)
-        tmp = f.name
-    try:
-        drawing = svg2rlg(tmp)
-        if drawing is None:
-            raise RuntimeError("svglib could not parse SVG")
-        scale = size / max(drawing.width, drawing.height)
-        drawing.width     = int(drawing.width  * scale)
-        drawing.height    = int(drawing.height * scale)
-        drawing.transform = (scale, 0, 0, scale, 0, 0)
-        out = io.BytesIO()
-        renderPM.drawToFile(drawing, out, fmt="PNG", bg=0x00000000)
-        return out.getvalue()
-    finally:
-        os.unlink(tmp)
-
-
-def fit_with_padding(image_bytes: bytes, padding: float = 0.08) -> bytes:
-    img = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
+def fit_to_canvas(image_bytes: bytes, padding: float = 0.06) -> bytes:
+    """Crop to opaque bbox, add uniform padding, scale back to original canvas size."""
+    img  = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
     bbox = img.getbbox()
     if bbox is None:
         return image_bytes
@@ -338,13 +316,12 @@ def fit_with_padding(image_bytes: bytes, padding: float = 0.08) -> bytes:
     return out.getvalue()
 
 
-def enhance_colors(image_bytes: bytes, saturation: float = 1.8, contrast: float = 1.3) -> bytes:
-    from PIL import ImageEnhance
+def enhance_colors(image_bytes: bytes) -> bytes:
     img = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
     r, g, b, a = img.split()
     rgb = Image.merge("RGB", (r, g, b))
-    rgb = ImageEnhance.Color(rgb).enhance(saturation)
-    rgb = ImageEnhance.Contrast(rgb).enhance(contrast)
+    rgb = ImageEnhance.Color(rgb).enhance(1.8)
+    rgb = ImageEnhance.Contrast(rgb).enhance(1.3)
     qr, qg, qb = rgb.split()
     result = Image.merge("RGBA", (qr, qg, qb, a))
     out = io.BytesIO()
@@ -352,11 +329,11 @@ def enhance_colors(image_bytes: bytes, saturation: float = 1.8, contrast: float 
     return out.getvalue()
 
 
-def standardize_palette(image_bytes: bytes, colors: int = PALETTE_COLORS) -> bytes:
+def quantize_palette(image_bytes: bytes) -> bytes:
     img = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
     r, g, b, a = img.split()
     rgb       = Image.merge("RGB", (r, g, b))
-    quantized = rgb.quantize(colors=colors, method=Image.Quantize.MEDIANCUT).convert("RGB")
+    quantized = rgb.quantize(colors=PALETTE_COLORS, method=Image.Quantize.MEDIANCUT).convert("RGB")
     qr, qg, qb = quantized.split()
     result = Image.merge("RGBA", (qr, qg, qb, a))
     out = io.BytesIO()
@@ -364,21 +341,20 @@ def standardize_palette(image_bytes: bytes, colors: int = PALETTE_COLORS) -> byt
     return out.getvalue()
 
 
-def pixelate(image_bytes: bytes, block: int = PIXEL_BLOCK) -> bytes:
-    img = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
+def pixelate(image_bytes: bytes) -> bytes:
+    img    = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
     w, h   = img.size
-    small  = img.resize((max(1, w // block), max(1, h // block)), Image.BOX)
+    small  = img.resize((max(1, w // PIXEL_BLOCK), max(1, h // PIXEL_BLOCK)), Image.BOX)
     result = small.resize((w, h), Image.NEAREST)
     out = io.BytesIO()
     result.save(out, format="PNG")
     return out.getvalue()
 
 
-def add_character_outline(image_bytes: bytes, thickness: int = OUTLINE_WIDTH) -> bytes:
-    from PIL import ImageFilter
+def add_outline(image_bytes: bytes) -> bytes:
     img = Image.open(io.BytesIO(image_bytes)).convert("RGBA")
-    _, _, _, a = img.split()
-    dilated     = a.filter(ImageFilter.MaxFilter(thickness * 2 + 1))
+    _, _, _, a  = img.split()
+    dilated     = a.filter(ImageFilter.MaxFilter(OUTLINE_WIDTH * 2 + 1))
     black_layer = Image.new("RGBA", img.size, (0, 0, 0, 0))
     black_layer.paste(Image.new("RGBA", img.size, (0, 0, 0, 255)), mask=dilated)
     black_layer.paste(img, mask=a)
@@ -388,25 +364,13 @@ def add_character_outline(image_bytes: bytes, thickness: int = OUTLINE_WIDTH) ->
 
 
 def post_process(image_bytes: bytes) -> bytes:
-    is_svg = _is_svg(image_bytes)
-    if is_svg:
-        if not SVGLIB_AVAILABLE:
-            raise RuntimeError("Received SVG but svglib is not installed — pip install svglib reportlab")
-        image_bytes = svg_to_png(image_bytes)
-    elif REMBG_AVAILABLE:
-        image_bytes = rembg_remove(
-            image_bytes, session=_rembg_session,
-            alpha_matting=True,
-            alpha_matting_foreground_threshold=270,
-            alpha_matting_background_threshold=10,
-            alpha_matting_erode_size=5,
-        )
-    image_bytes = fit_with_padding(image_bytes)
+    image_bytes = remove_background(image_bytes)
+    image_bytes = fit_to_canvas(image_bytes)
     image_bytes = enhance_colors(image_bytes)
-    image_bytes = standardize_palette(image_bytes)
+    image_bytes = quantize_palette(image_bytes)
     image_bytes = pixelate(image_bytes)
-    image_bytes = add_character_outline(image_bytes)
-    image_bytes = fit_with_padding(image_bytes, padding=0.04)  # final pixel-perfect frame
+    image_bytes = add_outline(image_bytes)
+    image_bytes = fit_to_canvas(image_bytes, padding=0.04)  # pixel-perfect final frame
     return image_bytes
 
 
@@ -435,40 +399,33 @@ def clear_art_dirs() -> None:
     print("  Cleared existing card art.")
 
 
-def make_style() -> None:
+def make_style() -> bool:
     print("=" * 54)
     print("  LAST KERNEL — Style Reference")
-    print("  Generating reference card (Warrior)...")
+    print("  Generating reference card (Enforcer)...")
     print("=" * 54)
 
     prompt = build_prompt(
         "Character",
-        "armored cyberpunk soldier, glowing visor, confident smirk, neon trim on armor, original design",
+        "Enforcer — armored cyberpunk soldier, glowing visor, cold confident expression, original design",
     )
-    raw      = generate_image(prompt, style_id=None)
-    is_svg   = _is_svg(raw)
+    raw       = generate_image(prompt, style_id=None)
     os.makedirs(CARD_DIR, exist_ok=True)
-
-    raw_ext  = "svg" if is_svg else "png"
-    raw_path = os.path.join(CARD_DIR, f"_style_reference_raw.{raw_ext}")
+    raw_path  = os.path.join(CARD_DIR, "_style_reference_raw.png")
     proc_path = os.path.join(CARD_DIR, "_style_reference.png")
     save_atomic(raw, raw_path)
     save_atomic(post_process(raw), proc_path)
 
-    abs_proc = os.path.abspath(proc_path)
-    os.startfile(abs_proc)
-    print(f"\n  Preview opened → {abs_proc}")
-    print(f"  Raw output     → {os.path.abspath(raw_path)}")
+    os.startfile(os.path.abspath(proc_path))
+    print(f"\n  Preview → {os.path.abspath(proc_path)}")
+    print(f"  Raw     → {os.path.abspath(raw_path)}")
 
-    answer = input("\n  Accept this style? [y/n]: ").strip().lower()
-    if answer != "y":
-        print("  Rejected. Adjust prompts and rerun --make-style.")
-        return
+    if input("\n  Accept? [y/n]: ").strip().lower() != "y":
+        print("  Rejected. Tweak prompts and rerun --make-style.")
+        return False
 
-    print("\n  Clearing existing art and starting full generation...")
     clear_art_dirs()
     return True
-
 
 # ---------------------------------------------------------------------------
 # BATCH GENERATION
@@ -523,22 +480,21 @@ def main() -> None:
     total    = len(CARDS) + len(PACKS)
 
     if args.make_style:
-        approved = make_style()
-        if not approved:
+        if not make_style():
             return
-        # fall through to batch generation below
 
     if args.regen:
-        name = args.regen
+        name      = args.regen
         all_items = CARDS + PACKS
-        match = next((it for it in all_items if it[0] == name), None)
+        match     = next((it for it in all_items if it[0] == name), None)
         if not match:
-            print(f"Unknown card name: {name}")
+            print(f"Unknown card: {name}. Valid names: {[it[0] for it in all_items]}")
             sys.exit(1)
-        d = CARD_DIR if match in CARDS else PACK_DIR
+        d    = CARD_DIR if match in CARDS else PACK_DIR
         path = os.path.join(d, f"{name}.png")
         if os.path.exists(path):
             os.remove(path)
+        os.makedirs(d, exist_ok=True)
         process_batch([match], d, 1, 1, style_id)
         return
 
@@ -552,8 +508,8 @@ def main() -> None:
     os.makedirs(CARD_DIR, exist_ok=True)
     os.makedirs(PACK_DIR, exist_ok=True)
 
-    cg, cs, cf = process_batch(CARDS, CARD_DIR, 1,               total, style_id)
-    pg, ps, pf = process_batch(PACKS, PACK_DIR, len(CARDS) + 1,  total, style_id)
+    cg, cs, cf = process_batch(CARDS, CARD_DIR, 1,              total, style_id)
+    pg, ps, pf = process_batch(PACKS, PACK_DIR, len(CARDS) + 1, total, style_id)
 
     print()
     print("=" * 54)

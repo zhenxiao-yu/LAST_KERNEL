@@ -173,6 +173,7 @@ namespace Markyu.LastKernel
             UnbindLane();
 
             // Restore prep layout (clear any battle-mode overrides from last night)
+            _battleZone?.RemoveFromClassList("lk-hidden");
             _bottomArea?.RemoveFromClassList("nbm-bottom-area--battle");
             _statusLabel?.RemoveFromClassList("nbm-status-label--battle");
             _assignHint?.RemoveFromClassList("lk-hidden");

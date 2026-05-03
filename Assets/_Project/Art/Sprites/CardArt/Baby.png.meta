@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 719a72e62dafeba4b975ad96edf4c4c3
+guid: fe5c4b57f871ece4cba141279be8eeb8
 AssetOrigin:
   serializedVersion: 1
   productId: 355516
   packageName: FortStack - Card Stacking Survival Game
   packageVersion: 1.0.0
-  assetPath: Assets/_Project/FortStack/Textures/CardArts/Baby.png
+  assetPath: Assets/_Project/FortStack/Textures/CardArts/TrollShaman.png
   uploadId: 847534
 TextureImporter:
   internalIDToNameTable: []

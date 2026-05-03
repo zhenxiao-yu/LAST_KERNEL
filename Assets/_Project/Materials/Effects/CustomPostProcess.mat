@@ -29,8 +29,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _ChromaticAmount: 0.004
+    - _ContrastBoost: 1.08
     - _GrayscaleAmount: 0
-    - _VignettePower: 1.2
-    m_Colors: []
+    - _NeonEdgeIntensity: 0
+    - _SaturationBoost: 1.15
+    - _ScanlineFreq: 270
+    - _ScanlineStrength: 0.06
+    - _VignettePower: 0
+    m_Colors:
+    - _NeonEdgeColor: {r: 0, g: 0.86, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
