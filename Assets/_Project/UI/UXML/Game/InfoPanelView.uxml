@@ -6,14 +6,14 @@
 
     <!-- Bottom-left anchored info panel. Controller adds/removes lk-hidden. -->
     <ui:VisualElement name="info-panel-anchor" class="lk-hud-bottom lk-hidden"
-                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 520px;">
+                      style="left: 0; right: auto; bottom: 0; padding: 8px; max-width: 400px;">
 
         <ui:VisualElement name="info-panel-root" class="lk-info-panel">
 
             <!-- ── Title bar: icon | card name | → spacer ← | category badge | type chip ── -->
             <ui:VisualElement class="lk-info-panel__titlebar">
                 <!-- Icon: game-icons.net "information" / kenney i-cursor -->
-                <ui:VisualElement class="lk-icon lk-icon--info" />
+                <ui:VisualElement class="lk-icon lk-icon--xl lk-icon--info" />
                 <ui:Label name="lbl-info-header" class="lk-info-panel__header lk-hidden" />
                 <ui:VisualElement class="lk-grow" />
                 <ui:Label name="lbl-info-category" class="lk-info-badge lk-hidden" />
@@ -30,7 +30,7 @@
                 <ui:VisualElement name="info-visible-section" class="lk-info-section">
                     <ui:VisualElement class="lk-info-section__header">
                         <!-- Icon: game-icons.net "bar-chart" or "sword-array" -->
-                        <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--stats" />
+                        <ui:VisualElement class="lk-icon lk-icon--stats" />
                         <ui:Button name="btn-info-visible" class="lk-info-section__toggle lk-grow" text="STATS" />
                     </ui:VisualElement>
                     <ui:Label name="lbl-info-visible-stats" class="lk-info-panel__stats lk-info-section__content" />
@@ -40,7 +40,7 @@
                 <ui:VisualElement name="info-lore-section" class="lk-info-section">
                     <ui:VisualElement class="lk-info-section__header">
                         <!-- Icon: game-icons.net "scroll-unfurled" or "book-cover" -->
-                        <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--lore" />
+                        <ui:VisualElement class="lk-icon lk-icon--lore" />
                         <ui:Button name="btn-info-lore" class="lk-info-section__toggle lk-grow" text="LORE" />
                     </ui:VisualElement>
                     <ui:Label name="lbl-info-lore" class="lk-info-panel__body lk-info-section__content" />
@@ -49,10 +49,10 @@
                 <!-- HP bar row -->
                 <ui:VisualElement name="info-hp-row" class="lk-info-hp-row lk-hidden">
                     <!-- Icon: game-icons.net "heart" -->
-                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--hp" />
+                    <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--hp" />
                     <ui:Label name="lbl-info-hp" class="lk-info-hp-label" />
-                    <ui:VisualElement class="lk-progress-bar lk-grow">
-                        <ui:VisualElement name="fill-info-hp" class="lk-progress-bar__fill" />
+                    <ui:VisualElement class="lk-progress-bar lk-progress-bar--thick lk-grow">
+                        <ui:VisualElement name="fill-info-hp" class="lk-progress-bar__fill lk-progress-bar__fill--danger" />
                     </ui:VisualElement>
                 </ui:VisualElement>
 
@@ -62,7 +62,7 @@
                 <ui:VisualElement name="info-hidden-section" class="lk-info-section">
                     <ui:VisualElement class="lk-info-section__header">
                         <!-- Icon: game-icons.net "eye-shield" or "closed-eye" -->
-                        <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--hidden" />
+                        <ui:VisualElement class="lk-icon lk-icon--hidden" />
                         <ui:Button name="btn-info-hidden" class="lk-info-section__toggle lk-grow" text="HIDDEN" />
                     </ui:VisualElement>
                     <ui:Label name="lbl-info-hidden-stats" class="lk-info-panel__stats lk-info-section__content lk-hidden" />
@@ -72,7 +72,7 @@
                 <ui:VisualElement name="info-economy-section" class="lk-info-section">
                     <ui:VisualElement class="lk-info-section__header">
                         <!-- Icon: game-icons.net "coins" or "trade" -->
-                        <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--economy" />
+                        <ui:VisualElement class="lk-icon lk-icon--economy" />
                         <ui:Button name="btn-info-economy" class="lk-info-section__toggle lk-grow" text="ECONOMY" />
                     </ui:VisualElement>
                     <ui:Label name="lbl-info-economy" class="lk-info-panel__stats lk-info-section__content" />

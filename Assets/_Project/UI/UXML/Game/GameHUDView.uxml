@@ -20,8 +20,8 @@
             <ui:Label name="lbl-phase" class="lk-phase-label lk-hud-badge" />
             <ui:Button name="btn-day" class="lk-button lk-label--value colony-hud__day-btn" style="margin-left: 10px; margin-right: 10px;" />
             <!-- Icon: game-icons.net "hourglass" -->
-            <ui:VisualElement class="lk-mini-icon lk-mini-icon--time lk-icon lk-icon--sm lk-icon--time" />
-            <ui:Label name="lbl-hud-time-key" class="lk-title-data-key" style="margin-right: 6px;" />
+            <ui:VisualElement class="lk-hud-section-icon lk-icon lk-icon--time" />
+            <ui:Label name="lbl-hud-time-key" class="lk-title-data-key lk-hidden" style="margin-right: 6px;" />
             <ui:VisualElement class="lk-progress-bar" style="width: 138px;">
                 <ui:VisualElement name="fill-time" class="lk-progress-bar__fill" />
             </ui:VisualElement>
@@ -33,8 +33,8 @@
         <!-- Centre: resource stat box with icon + value pairs -->
         <ui:VisualElement class="lk-hud-statbox">
             <!-- Icon: game-icons.net "cog" or "gears" -->
-            <ui:VisualElement class="lk-mini-icon lk-mini-icon--assets lk-icon lk-icon--sm lk-icon--assets" />
-            <ui:Label name="lbl-hud-assets-key" class="lk-title-data-key" style="margin-right: 8px;" />
+            <ui:VisualElement class="lk-hud-section-icon lk-icon lk-icon--assets" />
+            <ui:Label name="lbl-hud-assets-key" class="lk-title-data-key lk-hidden" style="margin-right: 8px;" />
             <!-- Nutrition / Food — Icon: game-icons.net "wheat" or "meal" -->
             <ui:VisualElement class="lk-resource-counter">
                 <ui:VisualElement name="icon-nutrition" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--food lk-icon lk-icon--food" />
@@ -79,8 +79,8 @@
         <!-- Centre: HP + enemy stat box -->
         <ui:VisualElement class="lk-hud-statbox lk-hud-statbox--night">
             <!-- Icon: game-icons.net "lightning-bolt" -->
-            <ui:VisualElement class="lk-mini-icon lk-mini-icon--breach lk-icon lk-icon--sm lk-icon--breach" />
-            <ui:Label name="lbl-hud-breach-key" class="lk-title-data-key" style="margin-right: 8px; color: rgb(255, 160, 40);" />
+            <ui:VisualElement class="lk-hud-section-icon lk-icon lk-icon--breach" />
+            <ui:Label name="lbl-hud-breach-key" class="lk-title-data-key lk-hidden" style="margin-right: 8px; color: rgb(255, 160, 40);" />
             <!-- Base HP: icon + value text + bar — Icon: game-icons.net "heart" or "shield" -->
             <ui:VisualElement class="lk-resource-counter">
                 <ui:VisualElement class="lk-hud-icon lk-hud-icon--hp lk-icon lk-icon--sm lk-icon--hp" style="margin-right: 6px;" />

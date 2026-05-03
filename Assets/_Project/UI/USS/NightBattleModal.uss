@@ -247,10 +247,10 @@
     height: 2px;
     background-image: linear-gradient(
         90deg,
-        rgba(0, 220, 255, 0.04),
+        rgba(0, 220, 255, 0.04)  0%,
         rgba(0, 220, 255, 0.28) 30%,
         rgba(0, 220, 255, 0.28) 70%,
-        rgba(0, 220, 255, 0.04)
+        rgba(0, 220, 255, 0.04) 100%
     );
     margin: 0 var(--lk-gap-medium);
 }

@@ -23,11 +23,11 @@
             <ui:VisualElement class="lk-tab-bar">
                 <!-- Icon: delapouite/checklist.png -->
                 <ui:Button name="btn-tab-quests"  class="lk-tab lk-tab--active">
-                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--quests" />
+                    <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--quests" />
                 </ui:Button>
                 <!-- Icon: delapouite/crafting.png -->
                 <ui:Button name="btn-tab-recipes" class="lk-tab">
-                    <ui:VisualElement class="lk-icon lk-icon--sm lk-icon--recipes" />
+                    <ui:VisualElement class="lk-icon lk-icon--lg lk-icon--recipes" />
                 </ui:Button>
             </ui:VisualElement>
 

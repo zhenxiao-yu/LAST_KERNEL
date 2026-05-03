@@ -4,7 +4,7 @@
     <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
     <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
 
-    <ui:VisualElement name="title-root" class="lk-screen lk-screen-bg">
+    <ui:VisualElement name="title-root" class="lk-screen" style="background-color: rgba(0,0,0,0);">
 
         <ui:VisualElement class="lk-title-bg-grid lk-scan-drift" />
 
