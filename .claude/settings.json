@@ -16,7 +16,9 @@
       "Bash(Get-ChildItem *)",
       "mcp__unity-mcp__read_console",
       "mcp__unity-mcp__find_gameobjects",
-      "Skill(*)"
+      "Skill(*)",
+      "Bash(\"C:/Users/YZX06/AppData/Local/Python/bin/python.exe\" assign_pixeltier_art.py)",
+      "Bash(python3 -c ' *)"
     ]
   },
   "enabledPlugins": {

@@ -9,6 +9,14 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("Material that applies the post-processing shader during rendering.")]
         private Material effectMaterial;
 
+        [Header("Pixel Art")]
+        [SerializeField, Range(0f, 1f), Tooltip("0 = native resolution. 1 = full 320×180 pixel snap.")]
+        private float pixelizeAmount = 1f;
+        [SerializeField, Range(80f, 640f),  Tooltip("Horizontal pixels in the pixel-art grid.")]
+        private float pixelResX = 320f;
+        [SerializeField, Range(45f, 360f),  Tooltip("Vertical pixels in the pixel-art grid.")]
+        private float pixelResY = 180f;
+
         [Header("Base")]
         [SerializeField, Range(0f, 3f)]    private float vignetteIntensity  = 0f;
         [SerializeField, Range(0f, 1f)]    private float grayscaleIntensity = 0f;
@@ -55,16 +63,21 @@ namespace Markyu.LastKernel
         private void Initialize()
         {
             if (effectMaterial == null) return;
-            effectMaterial.SetFloat("_VignettePower",    vignetteIntensity);
-            effectMaterial.SetFloat("_GrayscaleAmount",  grayscaleIntensity);
-            effectMaterial.SetFloat("_ChromaticAmount",  chromaticAmount);
-            effectMaterial.SetFloat("_ScanlineStrength", scanlineStrength);
-            effectMaterial.SetFloat("_ScanlineFreq",     scanlineFreq);
-            effectMaterial.SetFloat("_ContrastBoost",    contrastBoost);
-            effectMaterial.SetFloat("_SaturationBoost",  saturationBoost);
-            effectMaterial.SetColor("_NeonEdgeColor",    neonEdgeColor);
-            effectMaterial.SetFloat("_NeonEdgeIntensity", neonEdgeIntensity);
+
+            effectMaterial.SetFloat  ("_PixelizeAmount",   pixelizeAmount);
+            effectMaterial.SetVector ("_PixelRes",         new Vector4(pixelResX, pixelResY, 0f, 0f));
+            effectMaterial.SetFloat  ("_VignettePower",    vignetteIntensity);
+            effectMaterial.SetFloat  ("_GrayscaleAmount",  grayscaleIntensity);
+            effectMaterial.SetFloat  ("_ChromaticAmount",  chromaticAmount);
+            effectMaterial.SetFloat  ("_ScanlineStrength", scanlineStrength);
+            effectMaterial.SetFloat  ("_ScanlineFreq",     scanlineFreq);
+            effectMaterial.SetFloat  ("_ContrastBoost",    contrastBoost);
+            effectMaterial.SetFloat  ("_SaturationBoost",  saturationBoost);
+            effectMaterial.SetColor  ("_NeonEdgeColor",    neonEdgeColor);
+            effectMaterial.SetFloat  ("_NeonEdgeIntensity", neonEdgeIntensity);
         }
+
+        // ── Day / Night transitions ────────────────────────────────────────────────
 
         private void HandleTimePaceChanged(TimePace pace)
         {
@@ -75,12 +88,14 @@ namespace Markyu.LastKernel
         private void HandleDayEnded(int _)   { FadeInVignette();  FadeInNeonEdge(); }
         private void HandleDayStarted(int _) { FadeOutVignette(); FadeOutNeonEdge(); }
 
+        // ── Tweens ────────────────────────────────────────────────────────────────
+
         private void FadeInGrayscale(float duration = 0.3f, float target = 1f)
         {
             _grayscaleTween?.Kill();
             _grayscaleTween = DOTween.To(
                 () => grayscaleIntensity,
-                x  => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
+                x  => { grayscaleIntensity = x; effectMaterial?.SetFloat("_GrayscaleAmount", x); },
                 target, duration).SetUpdate(true).SetLink(gameObject);
         }
 
@@ -89,7 +104,7 @@ namespace Markyu.LastKernel
             _grayscaleTween?.Kill();
             _grayscaleTween = DOTween.To(
                 () => grayscaleIntensity,
-                x  => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
+                x  => { grayscaleIntensity = x; effectMaterial?.SetFloat("_GrayscaleAmount", x); },
                 0f, duration).SetUpdate(true).SetLink(gameObject);
         }
 
@@ -98,7 +113,7 @@ namespace Markyu.LastKernel
             _vignetteTween?.Kill();
             _vignetteTween = DOTween.To(
                 () => vignetteIntensity,
-                x  => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
+                x  => { vignetteIntensity = x; effectMaterial?.SetFloat("_VignettePower", x); },
                 target, duration).SetUpdate(true).SetLink(gameObject);
         }
 
@@ -107,7 +122,7 @@ namespace Markyu.LastKernel
             _vignetteTween?.Kill();
             _vignetteTween = DOTween.To(
                 () => vignetteIntensity,
-                x  => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
+                x  => { vignetteIntensity = x; effectMaterial?.SetFloat("_VignettePower", x); },
                 0f, duration).SetUpdate(true).SetLink(gameObject);
         }
 
@@ -116,7 +131,7 @@ namespace Markyu.LastKernel
             _neonEdgeTween?.Kill();
             _neonEdgeTween = DOTween.To(
                 () => neonEdgeIntensity,
-                x  => { neonEdgeIntensity = x; effectMaterial.SetFloat("_NeonEdgeIntensity", x); },
+                x  => { neonEdgeIntensity = x; effectMaterial?.SetFloat("_NeonEdgeIntensity", x); },
                 target, duration).SetUpdate(true).SetLink(gameObject);
         }
 
@@ -125,7 +140,7 @@ namespace Markyu.LastKernel
             _neonEdgeTween?.Kill();
             _neonEdgeTween = DOTween.To(
                 () => neonEdgeIntensity,
-                x  => { neonEdgeIntensity = x; effectMaterial.SetFloat("_NeonEdgeIntensity", x); },
+                x  => { neonEdgeIntensity = x; effectMaterial?.SetFloat("_NeonEdgeIntensity", x); },
                 0f, duration).SetUpdate(true).SetLink(gameObject);
         }
     }

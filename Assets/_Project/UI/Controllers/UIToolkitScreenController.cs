@@ -42,6 +42,8 @@ namespace Markyu.LastKernel
             if (attr != null) Document.sortingOrder = attr.SortingOrder;
 
             OnBind();
+            LKUIInteractionPolisher.Bind(Root);
+
             if (AffectedByUIScale) UIScaleManager.Register(Document, Root);
 
             if (rootController != null && !string.IsNullOrEmpty(screenId))

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3574124267337003788}
   - component: {fileID: 7562419935639933782}
+  - component: {fileID: 2060554165209669151}
   m_Layer: 0
   m_Name: CameraController
   m_TagString: Untagged
@@ -49,9 +50,38 @@ MonoBehaviour:
   panSpeed: 0.01
   smoothTime: 0.15
   panPadding: 0.5
+  wasdPanSpeed: 8
   zoomSpeed: 1
+  pinchZoomSpeed: 0.004
   minDistance: 5
   maxDistance: 20
+  clampMin: {x: -10, y: -5}
+  clampMax: {x: 10, y: 5}
+--- !u!114 &2060554165209669151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5278510511362137352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ac2d0121611304b82e61447c36c97e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.BuiltInPostProcess
+  effectMaterial: {fileID: 2100000, guid: f074581d5d41b9c4c88bd1762c82251f, type: 2}
+  pixelizeAmount: 1
+  pixelResX: 320
+  pixelResY: 180
+  vignetteIntensity: 0
+  grayscaleIntensity: 0
+  chromaticAmount: 0.004
+  scanlineStrength: 0.06
+  scanlineFreq: 270
+  contrastBoost: 1.08
+  saturationBoost: 1.15
+  neonEdgeColor: {r: 0, g: 0.86, b: 1, a: 1}
+  neonEdgeIntensity: 0
 --- !u!1 &5618464254248951832
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +206,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectMaterial: {fileID: 2100000, guid: f074581d5d41b9c4c88bd1762c82251f, type: 2}
+  pixelizeAmount: 1
+  pixelResX: 320
+  pixelResY: 180
+  vignetteIntensity: 0
+  grayscaleIntensity: 0
+  chromaticAmount: 0.004
+  scanlineStrength: 0.06
+  scanlineFreq: 270
+  contrastBoost: 1.08
+  saturationBoost: 1.15
+  neonEdgeColor: {r: 0, g: 0.86, b: 1, a: 1}
+  neonEdgeIntensity: 0
 --- !u!114 &6435384948624849276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +254,6 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
     m_Quality: 3
     m_FrameInfluence: 0.1
@@ -220,3 +261,4 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+  m_Version: 2

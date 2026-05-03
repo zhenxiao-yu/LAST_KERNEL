@@ -33,11 +33,13 @@ Material:
     - _ContrastBoost: 1.08
     - _GrayscaleAmount: 0
     - _NeonEdgeIntensity: 0
+    - _PixelizeAmount: 1
     - _SaturationBoost: 1.15
     - _ScanlineFreq: 270
     - _ScanlineStrength: 0.06
     - _VignettePower: 0
     m_Colors:
     - _NeonEdgeColor: {r: 0, g: 0.86, b: 1, a: 1}
+    - _PixelRes: {r: 320, g: 180, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
