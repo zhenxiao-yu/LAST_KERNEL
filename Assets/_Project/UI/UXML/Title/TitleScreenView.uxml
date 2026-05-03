@@ -9,22 +9,22 @@
         <ui:VisualElement class="lk-title-bg-grid lk-scan-drift" />
 
         <ui:VisualElement class="lk-title-data-panel">
-            <ui:Label class="lk-screen-title-kicker" text="BUNKER TELEMETRY" />
+            <ui:Label name="lbl-telemetry-title" class="lk-screen-title-kicker" />
             <ui:VisualElement class="lk-title-data-row">
-                <ui:Label class="lk-title-data-key" text="CORE" />
-                <ui:Label class="lk-title-data-value lk-terminal-pulse" text="STABLE" />
+                <ui:Label name="lbl-telemetry-core-key" class="lk-title-data-key" />
+                <ui:Label name="lbl-telemetry-core-value" class="lk-title-data-value lk-terminal-pulse" />
             </ui:VisualElement>
             <ui:VisualElement class="lk-title-data-row">
-                <ui:Label class="lk-title-data-key" text="SIGNAL" />
-                <ui:Label class="lk-title-data-value" text="72%" />
+                <ui:Label name="lbl-telemetry-signal-key" class="lk-title-data-key" />
+                <ui:Label name="lbl-telemetry-signal-value" class="lk-title-data-value" />
             </ui:VisualElement>
             <ui:VisualElement class="lk-title-data-row">
-                <ui:Label class="lk-title-data-key" text="SECTOR" />
-                <ui:Label class="lk-title-data-value" text="BLACKOUT" />
+                <ui:Label name="lbl-telemetry-sector-key" class="lk-title-data-key" />
+                <ui:Label name="lbl-telemetry-sector-value" class="lk-title-data-value" />
             </ui:VisualElement>
             <ui:VisualElement class="lk-title-data-row">
-                <ui:Label class="lk-title-data-key" text="THREAT" />
-                <ui:Label class="lk-title-data-value" style="color: rgb(255, 160, 40);" text="RISING" />
+                <ui:Label name="lbl-telemetry-threat-key" class="lk-title-data-key" />
+                <ui:Label name="lbl-telemetry-threat-value" class="lk-title-data-value" style="color: rgb(255, 160, 40);" />
             </ui:VisualElement>
         </ui:VisualElement>
 
@@ -34,7 +34,7 @@
 
             <!-- Logo + subtitle -->
             <ui:VisualElement name="title-header" class="lk-column">
-                <ui:Label class="lk-screen-title-kicker" text="COLONY COMMAND INTERFACE" />
+                <ui:Label name="lbl-title-kicker" class="lk-screen-title-kicker" />
                 <!-- Sprite slot: assign background-image in C#, add class lk-logo-icon-visible to show -->
                 <ui:VisualElement name="logo-icon" class="lk-logo-icon" />
                 <!-- Letter labels + ParticleImage created at runtime by TitleLogoAnimator -->
@@ -45,21 +45,36 @@
 
             <!-- Accent rule between logo and nav -->
             <ui:VisualElement class="lk-divider lk-divider--accent"
-                              style="width: 312px; margin-bottom: 16px;" />
+                              style="width: 380px; margin-bottom: 16px;" />
 
             <!-- Nav buttons -->
-            <ui:VisualElement class="lk-hud-command-rail" style="width: 330px; margin-bottom: 10px;">
-                <ui:Label class="lk-title-data-key" text="BOOT TARGET" />
+            <ui:VisualElement class="lk-hud-command-rail" style="width: 380px; margin-bottom: 10px;">
+                <ui:Label name="lbl-boot-target-key" class="lk-title-data-key" />
                 <ui:VisualElement class="lk-grow" />
-                <ui:Label class="lk-title-data-value" text="PLAYER" />
+                <ui:Label name="lbl-boot-target-value" class="lk-title-data-value" />
             </ui:VisualElement>
 
             <ui:VisualElement name="title-buttons" class="lk-column lk-title-nav-frame">
-                <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-button--command lk-mb-sm" text="NEW GAME" />
-                <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-button--utility lk-mb-sm" text="LOAD GAME" />
-                <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-button--utility lk-mb-sm" text="ACHIEVEMENTS" />
-                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-button--quiet lk-mb-sm" text="OPTIONS" />
-                <ui:Button name="btn-quit"          class="lk-button lk-button--text lk-button--critical"          text="QUIT" />
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--deploy" />
+                    <ui:Button name="btn-new-game" class="lk-button lk-button--text lk-button--command lk-edge-button" text="NEW GAME" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--load" />
+                    <ui:Button name="btn-load-game" class="lk-button lk-button--text lk-button--utility lk-edge-button" text="LOAD GAME" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--archive" />
+                    <ui:Button name="btn-achievements" class="lk-button lk-button--text lk-button--utility lk-edge-button" text="ACHIEVEMENTS" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--config" />
+                    <ui:Button name="btn-options" class="lk-button lk-button--text lk-button--quiet lk-edge-button" text="OPTIONS" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--exit" />
+                    <ui:Button name="btn-quit" class="lk-button lk-button--text lk-button--critical lk-edge-button" text="QUIT" />
+                </ui:VisualElement>
             </ui:VisualElement>
 
         </ui:VisualElement>
@@ -79,7 +94,7 @@
                     <ui:Label name="lbl-prefs-subtitle" class="lk-panel__subtitle" />
                 </ui:VisualElement>
 
-                <ui:ScrollView name="prefs-scroll" style="max-height: 420px;">
+                <ui:ScrollView name="prefs-scroll" horizontal-scroller-visibility="Hidden" style="max-height: 420px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <!-- Difficulty: cycling button -->
@@ -122,7 +137,7 @@
                     <ui:Label name="lbl-saves-subtitle" class="lk-panel__subtitle" />
                 </ui:VisualElement>
 
-                <ui:ScrollView name="saves-scroll" style="max-height: 480px;">
+                <ui:ScrollView name="saves-scroll" horizontal-scroller-visibility="Hidden" style="max-height: 480px;">
                     <ui:Label name="lbl-saves-empty" class="lk-label lk-label--dim lk-hidden"
                               style="padding: 24px; -unity-text-align: middle-center;" />
                     <ui:VisualElement name="saves-container" class="lk-list" style="padding-bottom: 8px;" />
@@ -154,7 +169,7 @@
                 </ui:VisualElement>
 
                 <!-- Settings: UI Scale + Audio -->
-                <ui:ScrollView name="opts-scroll" style="height: 400px;">
+                <ui:ScrollView name="opts-scroll" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-ui" class="lk-label lk-label--subheader lk-mb-sm" />
@@ -178,7 +193,7 @@
                 </ui:ScrollView>
 
                 <!-- Video: Graphics -->
-                <ui:ScrollView name="video-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="video-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-graphics" class="lk-label lk-label--subheader lk-mb-sm" />
@@ -192,7 +207,7 @@
                 </ui:ScrollView>
 
                 <!-- Language -->
-                <ui:ScrollView name="language-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="language-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-language-hint" class="lk-hint lk-mb-sm" />
                         <ui:Button name="btn-opt-language"  class="lk-button lk-button--utility lk-full-width" />
@@ -200,12 +215,12 @@
                 </ui:ScrollView>
 
                 <!-- Controls -->
-                <ui:ScrollView name="controls-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="controls-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement name="keybind-list" style="flex-direction: column;" />
                 </ui:ScrollView>
 
                 <!-- Accessibility -->
-                <ui:ScrollView name="accessibility-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="accessibility-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-opts-accessibility"  class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:Label  name="lbl-accessibility-hint"  class="lk-hint lk-mb-md" />
@@ -238,7 +253,7 @@
                 </ui:VisualElement>
 
                 <!-- Dashboard grid in scrollview -->
-                <ui:ScrollView name="ach-scroll" style="flex-grow: 1; max-height: 560px;">
+                <ui:ScrollView name="ach-scroll" horizontal-scroller-visibility="Hidden" style="flex-grow: 1; max-height: 560px;">
                     <ui:Label name="lbl-ach-empty" class="lk-label lk-label--dim lk-hidden"
                               style="padding: 32px; -unity-text-align: middle-center;" />
                     <ui:VisualElement name="ach-list" class="lk-ach-grid" />

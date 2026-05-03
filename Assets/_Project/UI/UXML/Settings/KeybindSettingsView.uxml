@@ -26,7 +26,8 @@
 
             <!-- Scrollable action rows — populated at runtime by KeybindSettingsController -->
             <ui:ScrollView name="keybind-scroll" style="flex-grow: 1; min-height: 100px;"
-                           vertical-scroller-visibility="AlwaysVisible">
+                           vertical-scroller-visibility="AlwaysVisible"
+                           horizontal-scroller-visibility="Hidden">
                 <ui:VisualElement name="keybind-list" style="flex-direction: column;" />
             </ui:ScrollView>
 

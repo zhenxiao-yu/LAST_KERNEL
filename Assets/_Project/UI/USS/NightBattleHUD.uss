@@ -452,8 +452,8 @@
 .nb-fighter-card.lk-ui-hovered {
     background-color: rgba(18, 29, 48, 0.96);
     border-color: var(--lk-accent);
-    translate: 0px -3px;
-    scale: 1.025 1.025;
+    translate: 0px 0px;
+    scale: 1 1;
 }
 
 .nb-fighter-card--enemy:hover,

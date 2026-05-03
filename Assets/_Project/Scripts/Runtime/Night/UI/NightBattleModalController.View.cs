@@ -11,7 +11,7 @@ namespace Markyu.LastKernel
         private void BuildEnemyPreview(NightWaveDefinition wave)
         {
             if (wave == null || _enemyRow == null) return;
-            var enemies = wave.BuildEnemyList();
+            var enemies = NightBattleManager.BuildEnemyListForCurrentDay(wave);
 
             for (int i = 0; i < enemies.Count; i++)
             {
@@ -60,6 +60,11 @@ namespace Markyu.LastKernel
             {
                 var sv = new NightPrepSlotView(i);
                 sv.OnClicked += OnSlotClicked;
+                sv.Root.RegisterCallback<PointerDownEvent>(evt =>
+                {
+                    if (sv.AssignedFighter != null)
+                        BeginDragCandidate(sv.AssignedFighter, sv.SlotIndex, sv.Root, evt);
+                });
                 _slotViews[i] = sv;
                 _playerRow.Add(sv.Root);
             }
@@ -118,6 +123,7 @@ namespace Markyu.LastKernel
             row.Add(badge);
 
             row.RegisterCallback<ClickEvent>(_ => OnVillagerClicked(fighter));
+            row.RegisterCallback<PointerDownEvent>(evt => BeginDragCandidate(fighter, -1, row, evt));
 
             return row;
         }
@@ -153,23 +159,40 @@ namespace Markyu.LastKernel
             var card = new VisualElement();
             card.AddToClassList("nbm-reward-card");
 
+            var art = new VisualElement();
+            art.AddToClassList("nbm-reward-card__art");
+            if (reward.ArtTexture != null)
+                art.style.backgroundImage = new StyleBackground(Background.FromTexture2D(reward.ArtTexture));
+            card.Add(art);
+
             var name = new Label(reward.DisplayName);
             name.AddToClassList("nbm-reward-card__name");
 
             var category = new Label(GameLocalization.Format(
                 "night.modal.reward.category",
-                reward.Category.ToString().ToUpperInvariant()));
+                CardDossierFormatter.CategoryLabel(reward.Category).ToUpperInvariant()));
             category.AddToClassList("nbm-reward-card__category");
 
-            string description = string.IsNullOrWhiteSpace(reward.Description)
+            var statPod = new Label(CardDossierFormatter.BuildRewardPod(reward));
+            statPod.AddToClassList("nbm-reward-card__stat-pod");
+
+            string lore = CardDossierFormatter.BuildLore(reward);
+            string description = string.IsNullOrWhiteSpace(lore)
                 ? GameLocalization.Get("night.modal.reward.noDescription")
-                : reward.Description;
+                : lore;
             var desc = new Label(description);
             desc.AddToClassList("nbm-reward-card__desc");
 
+            string hiddenStats = CardDossierFormatter.BuildHiddenStats(reward);
+            var hidden = new Label(hiddenStats);
+            hidden.AddToClassList("nbm-reward-card__hidden");
+            hidden.EnableInClassList("lk-hidden", string.IsNullOrWhiteSpace(hiddenStats));
+
             card.Add(name);
             card.Add(category);
+            card.Add(statPod);
             card.Add(desc);
+            card.Add(hidden);
             card.RegisterCallback<ClickEvent>(_ => OnRewardChoiceClicked(reward));
 
             return card;
@@ -224,6 +247,8 @@ namespace Markyu.LastKernel
         {
             if (_root == null) return;
             _root.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
+            if (visible)
+                _root.schedule.Execute(() => _root.Focus()).StartingIn(0);
         }
 
         private void SetStatus(string text)
@@ -247,7 +272,7 @@ namespace Markyu.LastKernel
         {
             int totalAtk = 0;
             if (wave != null)
-                foreach (var e in wave.BuildEnemyList()) totalAtk += e.Attack;
+                foreach (var e in NightBattleManager.BuildEnemyListForCurrentDay(wave)) totalAtk += e.Attack;
 
             string tierKey = totalAtk <= 3  ? "night.modal.threat.low"
                            : totalAtk <= 8  ? "night.modal.threat.moderate"

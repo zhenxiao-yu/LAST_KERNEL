@@ -51,7 +51,7 @@
     max-width: 1400px;
     height: 92%;
     overflow: hidden;
-    background-color: rgb(22, 30, 48);
+    background-color: rgb(16, 22, 36);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
@@ -192,7 +192,7 @@
     padding: var(--lk-padding-small) var(--lk-padding-medium) 0;
     border-bottom-width: 2px;
     border-bottom-color: var(--lk-border-dim);
-    background-color: rgba(5, 8, 18, 0.55);
+    background-color: rgba(5, 8, 18, 0.68);
 }
 
 .nbm-section-header {
@@ -374,6 +374,20 @@
     border-bottom-color: var(--lk-accent-dim);
     background-color: rgba(0, 220, 255, 0.07);
 }
+.nb-prep-slot--drag-source {
+    opacity: 0.62;
+    border-left-color: var(--lk-warning);
+    border-top-color: var(--lk-warning);
+}
+.nb-prep-slot--drag-over {
+    border-left-width: 3px;
+    border-top-width: 2px;
+    border-left-color: var(--lk-accent-hot);
+    border-top-color: var(--lk-accent-hot);
+    border-right-color: var(--lk-accent);
+    border-bottom-color: var(--lk-accent);
+    background-color: rgba(0, 220, 255, 0.13);
+}
 .nb-prep-slot--dead   { opacity: 0.28; }
 .nb-prep-slot--locked { cursor: arrow; }
 
@@ -541,6 +555,12 @@
 .nbm-villager-entry:hover {
     background-color: rgba(0, 220, 255, 0.05);
     border-left-color: var(--lk-accent-dim);
+}
+.nbm-villager-entry.nbm-dragging,
+.nb-prep-slot.nbm-dragging {
+    opacity: 0.72;
+    border-left-color: var(--lk-warning);
+    background-color: rgba(255, 160, 40, 0.10);
 }
 .nbm-villager-entry--selected {
     background-color: rgba(0, 220, 255, 0.10);
@@ -775,18 +795,19 @@
     align-items: stretch;
     justify-content: center;
     max-width: 760px;
+    flex-wrap: wrap;
     margin-bottom: var(--lk-gap-large);
 }
 
 /* Reward card */
 .nbm-reward-card {
-    width: 220px;
-    min-height: 132px;
+    width: 236px;
+    min-height: 196px;
     margin-left: 6px;
     margin-right: 6px;
     padding: 10px;
     flex-direction: column;
-    background-color: rgb(22, 30, 48);
+    background-color: rgb(14, 21, 35);
     border-top-width:    1px;
     border-left-width:   2px;
     border-right-width:  1px;
@@ -811,11 +832,24 @@
     background-color: rgba(63, 175, 111, 0.10);
 }
 
+.nbm-reward-card__art {
+    height: 44px;
+    margin-bottom: 8px;
+    background-color: rgba(0, 220, 255, 0.05);
+    background-size: cover;
+    background-position: center;
+    border-left-width: 2px;
+    border-left-color: var(--lk-accent-dim);
+    border-top-width: 1px;
+    border-top-color: rgba(0, 220, 255, 0.18);
+}
+
 .nbm-reward-card__name {
     color: var(--lk-text-header);
     font-size: var(--lk-font-size-sm);
     -unity-font-style: bold;
     white-space: normal;
+    line-height: 1.25;
     margin-bottom: 4px;
     letter-spacing: 1px;
 }
@@ -826,12 +860,40 @@
     letter-spacing: 2px;
     margin-bottom: 6px;
 }
+
+.nbm-reward-card__stat-pod {
+    color: var(--lk-accent-hot);
+    font-size: var(--lk-font-size-xs);
+    -unity-font-style: bold;
+    white-space: normal;
+    line-height: 1.3;
+    margin-bottom: 7px;
+    padding: 5px 7px;
+    background-color: rgba(0, 220, 255, 0.07);
+    border-left-width: 2px;
+    border-left-color: var(--lk-accent);
+    border-top-width: 1px;
+    border-top-color: rgba(0, 220, 255, 0.22);
+}
+
 .nbm-reward-card__desc {
     color: var(--lk-text-dim);
     font-size: var(--lk-font-size-xs);
     white-space: normal;
     line-height: 1.35;
     flex-grow: 1;
+    overflow: hidden;
+}
+
+.nbm-reward-card__hidden {
+    color: rgba(170, 190, 210, 0.78);
+    font-size: 10px;
+    white-space: normal;
+    line-height: 1.25;
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top-width: 1px;
+    border-top-color: rgba(90, 115, 145, 0.30);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

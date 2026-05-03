@@ -44,6 +44,9 @@ namespace Markyu.LastKernel
         /// <summary>Fired when gold changes (shop purchase). Controller updates the gold label.</summary>
         public static event Action<int> OnGoldChanged;
 
+        /// <summary>Fired after rewards/aftermath are applied and control can return to the day HUD.</summary>
+        public static event Action<NightCombatResult> OnNightSequenceEnded;
+
         // ── Inspector ─────────────────────────────────────────────────────────────
 
         [BoxGroup("Wave")]
@@ -168,11 +171,11 @@ namespace Markyu.LastKernel
             if (defenderUnits.Count == 0)
             {
                 yield return HandleUndefendedNight(wave);
-                _isRunning = false;
+                FinishNightSequence();
                 yield break;
             }
 
-            var enemyDefs   = wave?.BuildEnemyList() ?? new List<EnemyDefinition>();
+            var enemyDefs   = BuildEnemyListForCurrentDay(wave);
             var enemyUnits  = enemyDefs.Select(CombatUnit.FromEnemyDefinition).ToList();
             var lane        = new CombatLane(defenderUnits, enemyUnits, wave);
 
@@ -247,7 +250,7 @@ namespace Markyu.LastKernel
             }
             finally
             {
-                _isRunning = false;
+                FinishNightSequence();
             }
         }
 
@@ -342,7 +345,7 @@ namespace Markyu.LastKernel
 
         private IEnumerator HandleUndefendedNight(NightWaveDefinition wave)
         {
-            int totalEnemies = wave?.BuildEnemyList().Count ?? 0;
+            int totalEnemies = BuildEnemyListForCurrentDay(wave).Count;
 
             LastResult = new NightCombatResult(
                 playerWon:         false,
@@ -400,19 +403,30 @@ namespace Markyu.LastKernel
         private NightWaveDefinition BuildProceduralWave()
         {
             int day   = TimeManager.Instance?.CurrentDay ?? 1;
-            int hp    = Mathf.RoundToInt(6 + day * 1.5f);
-            int atk   = 2 + day / 7;
+            int hp    = 8;
+            int atk   = 2;
             int def   = day / 10;
             int count = Mathf.Clamp(1 + (day - 1) / 4, 1, 6);
 
             var scavenger = EnemyDefinition.CreateRuntime(
                 GameLocalization.GetOptional("night.enemy.scavenger", "Scavenger"),
-                hp, atk, def);
+                hp, atk, def,
+                hpFlatPerDay: 1.5f,
+                atkFlatPerDay: 0.22f);
 
             return NightWaveDefinition.CreateRuntime(
                 GameLocalization.GetOptional("night.wave.procedural.name", "Nightly Incursion"),
                 GameLocalization.GetOptional("night.wave.procedural.flavor", "Scavengers probe the perimeter under cover of dark."),
                 new List<EnemyEntry> { new EnemyEntry { Enemy = scavenger, Count = count } });
+        }
+
+        public static List<EnemyDefinition> BuildEnemyListForCurrentDay(NightWaveDefinition wave)
+        {
+            if (wave == null)
+                return new List<EnemyDefinition>();
+
+            int day = TimeManager.Instance?.CurrentDay ?? 1;
+            return wave.BuildEnemyListScaled(day);
         }
 
         // ── Shop selection ────────────────────────────────────────────────────────
@@ -604,6 +618,12 @@ namespace Markyu.LastKernel
                                                          && c.Definition != null
                                                          && c.Definition.Category == CardCategory.Character
                                                          && c.CurrentHealth > 0) == true;
+        }
+
+        private void FinishNightSequence()
+        {
+            _isRunning = false;
+            OnNightSequenceEnded?.Invoke(LastResult);
         }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD

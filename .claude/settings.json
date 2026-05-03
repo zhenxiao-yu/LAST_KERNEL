@@ -18,7 +18,8 @@
       "mcp__unity-mcp__find_gameobjects",
       "Skill(*)",
       "Bash(\"C:/Users/YZX06/AppData/Local/Python/bin/python.exe\" assign_pixeltier_art.py)",
-      "Bash(python3 -c ' *)"
+      "Bash(python3 -c ' *)",
+      "Bash(git reset *)"
     ]
   },
   "enabledPlugins": {

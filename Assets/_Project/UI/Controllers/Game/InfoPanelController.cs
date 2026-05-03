@@ -40,6 +40,19 @@ namespace Markyu.LastKernel
         // Card detail section
         private VisualElement _cardSection;
         private Label         _categoryBadge;
+        private Label         _combatTypeBadge;
+        private VisualElement _loreSection;
+        private Button        _loreToggle;
+        private Label         _loreLabel;
+        private VisualElement _visibleSection;
+        private Button        _visibleToggle;
+        private Label         _visibleStatsLabel;
+        private VisualElement _hiddenSection;
+        private Button        _hiddenToggle;
+        private Label         _hiddenStatsLabel;
+        private VisualElement _economySection;
+        private Button        _economyToggle;
+        private Label         _economyLabel;
         private VisualElement _hpRow;
         private Label         _hpLabel;
         private VisualElement _hpFill;
@@ -49,6 +62,10 @@ namespace Markyu.LastKernel
         private Label         _nutritionInfoLabel;
         private VisualElement _usesRow;
         private Label         _usesLabel;
+        private bool          _loreExpanded = true;
+        private bool          _visibleExpanded = true;
+        private bool          _hiddenExpanded = true;
+        private bool          _economyExpanded = true;
 
         // ── Lifecycle ──────────────────────────────────────────────────────────
 
@@ -91,6 +108,19 @@ namespace Markyu.LastKernel
 
             _cardSection      = Root.Q<VisualElement>("info-card-section");
             _categoryBadge    = Root.Q<Label>        ("lbl-info-category");
+            _combatTypeBadge  = Root.Q<Label>        ("lbl-info-combat-type");
+            _loreSection      = Root.Q<VisualElement>("info-lore-section");
+            _loreToggle       = Root.Q<Button>       ("btn-info-lore");
+            _loreLabel        = Root.Q<Label>        ("lbl-info-lore");
+            _visibleSection   = Root.Q<VisualElement>("info-visible-section");
+            _visibleToggle    = Root.Q<Button>       ("btn-info-visible");
+            _visibleStatsLabel = Root.Q<Label>       ("lbl-info-visible-stats");
+            _hiddenSection    = Root.Q<VisualElement>("info-hidden-section");
+            _hiddenToggle     = Root.Q<Button>       ("btn-info-hidden");
+            _hiddenStatsLabel = Root.Q<Label>        ("lbl-info-hidden-stats");
+            _economySection   = Root.Q<VisualElement>("info-economy-section");
+            _economyToggle    = Root.Q<Button>       ("btn-info-economy");
+            _economyLabel     = Root.Q<Label>        ("lbl-info-economy");
             _hpRow            = Root.Q<VisualElement>("info-hp-row");
             _hpLabel          = Root.Q<Label>        ("lbl-info-hp");
             _hpFill           = Root.Q<VisualElement>("fill-info-hp");
@@ -100,6 +130,11 @@ namespace Markyu.LastKernel
             _nutritionInfoLabel = Root.Q<Label>        ("lbl-info-nutrition");
             _usesRow            = Root.Q<VisualElement>("info-uses-row");
             _usesLabel          = Root.Q<Label>        ("lbl-info-uses");
+
+            _loreToggle?.RegisterCallback<ClickEvent>(_ => ToggleSection(ref _loreExpanded));
+            _visibleToggle?.RegisterCallback<ClickEvent>(_ => ToggleSection(ref _visibleExpanded));
+            _hiddenToggle?.RegisterCallback<ClickEvent>(_ => ToggleSection(ref _hiddenExpanded));
+            _economyToggle?.RegisterCallback<ClickEvent>(_ => ToggleSection(ref _economyExpanded));
 
             InfoPanel.Register(RequestInfoDisplay, ClearInfoRequest, RegisterHover, UnregisterHover, RegisterCardHover);
             RefreshDisplay();
@@ -178,6 +213,7 @@ namespace Markyu.LastKernel
 
             bool hasHeader = !string.IsNullOrEmpty(top.Header);
             bool hasButton = !string.IsNullOrEmpty(top.ButtonLabel) && top.ButtonAction != null;
+            bool hasCard = top.CardInfo.HasValue;
 
             if (_headerLabel != null)
             {
@@ -186,7 +222,10 @@ namespace Markyu.LastKernel
             }
 
             if (_bodyLabel != null)
+            {
                 _bodyLabel.text = top.Body ?? string.Empty;
+                _bodyLabel.EnableInClassList("lk-hidden", hasCard || string.IsNullOrWhiteSpace(top.Body));
+            }
 
             if (_actionButton != null)
             {
@@ -195,8 +234,6 @@ namespace Markyu.LastKernel
                 _currentButtonAction = hasButton ? top.ButtonAction : null;
             }
 
-            // Card detail section
-            bool hasCard = top.CardInfo.HasValue;
             _cardSection?.EnableInClassList("lk-hidden", !hasCard);
             if (hasCard)
                 UpdateCardSection(top.CardInfo.Value);
@@ -208,9 +245,49 @@ namespace Markyu.LastKernel
         {
             if (_categoryBadge != null)
             {
-                _categoryBadge.text = card.Category.ToString().ToUpperInvariant();
+                _categoryBadge.text = CardDossierFormatter.CategoryLabel(card.Category).ToUpperInvariant();
                 SetCategoryBadgeModifier(_categoryBadge, card.Category);
             }
+
+            if (_combatTypeBadge != null)
+            {
+                bool show = card.Combat != CombatType.None;
+                _combatTypeBadge.EnableInClassList("lk-hidden", !show);
+                if (show)
+                    _combatTypeBadge.text = CardDossierFormatter.CombatTypeLabel(card.Combat).ToUpperInvariant();
+            }
+
+            SetSection(
+                _loreSection,
+                _loreToggle,
+                _loreLabel,
+                GameLocalization.Get("card.section.lore"),
+                card.LoreText,
+                _loreExpanded);
+
+            SetSection(
+                _visibleSection,
+                _visibleToggle,
+                _visibleStatsLabel,
+                GameLocalization.Get("card.section.visibleStats"),
+                card.VisibleStatsText,
+                _visibleExpanded);
+
+            SetSection(
+                _hiddenSection,
+                _hiddenToggle,
+                _hiddenStatsLabel,
+                GameLocalization.Get("card.section.hiddenStats"),
+                card.HiddenStatsText,
+                _hiddenExpanded);
+
+            SetSection(
+                _economySection,
+                _economyToggle,
+                _economyLabel,
+                GameLocalization.Get("card.section.economy"),
+                card.EconomyText,
+                _economyExpanded);
 
             if (_hpRow != null)
             {
@@ -221,7 +298,7 @@ namespace Markyu.LastKernel
                     float pct = card.MaxHP > 0 ? (float)card.CurrentHP / card.MaxHP : 0f;
                     if (_hpLabel != null)
                     {
-                        _hpLabel.text = $"{card.CurrentHP}/{card.MaxHP}";
+                        _hpLabel.text = GameLocalization.Format("card.health", card.CurrentHP, card.MaxHP);
                         _hpLabel.EnableInClassList("lk-label--warning", pct is > 0.2f and <= 0.5f);
                         _hpLabel.EnableInClassList("lk-label--danger",  pct <= 0.2f);
                     }
@@ -236,10 +313,7 @@ namespace Markyu.LastKernel
 
             if (_statsLabel != null)
             {
-                bool show = card.HasCombat;
-                _statsLabel.EnableInClassList("lk-hidden", !show);
-                if (show)
-                    _statsLabel.text = card.FormattedStats;
+                _statsLabel.EnableInClassList("lk-hidden", true);
             }
 
             if (_resourceRow != null)
@@ -293,6 +367,34 @@ namespace Markyu.LastKernel
                 _                       => null,
             };
             if (mod != null) badge.AddToClassList(mod);
+        }
+
+        private void ToggleSection(ref bool expanded)
+        {
+            expanded = !expanded;
+            RefreshDisplay();
+        }
+
+        private static void SetSection(
+            VisualElement section,
+            Button toggle,
+            Label content,
+            string title,
+            string body,
+            bool expanded)
+        {
+            bool show = !string.IsNullOrWhiteSpace(body);
+            section?.EnableInClassList("lk-hidden", !show);
+            if (!show) return;
+
+            if (toggle != null)
+                toggle.text = $"{(expanded ? "[-]" : "[+]")} {title}";
+
+            if (content != null)
+            {
+                content.text = body;
+                content.EnableInClassList("lk-hidden", !expanded);
+            }
         }
 
         private void OnActionClicked(ClickEvent evt)

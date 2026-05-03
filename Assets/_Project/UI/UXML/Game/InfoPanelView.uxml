@@ -17,8 +17,23 @@
             <ui:Label name="lbl-info-body" class="lk-info-panel__body" />
 
             <!-- Card detail section — shown when InfoRequest carries CardInfoData -->
-            <ui:VisualElement name="info-card-section" class="lk-hidden" style="margin-top: 6px;">
-                <ui:Label name="lbl-info-category" class="lk-info-badge" />
+            <ui:VisualElement name="info-card-section" class="lk-info-card lk-hidden" style="margin-top: 6px;">
+                <ui:VisualElement class="lk-row lk-align-center">
+                    <ui:Label name="lbl-info-category" class="lk-info-badge" />
+                    <ui:VisualElement class="lk-grow" />
+                    <ui:Label name="lbl-info-combat-type" class="lk-info-chip lk-info-chip--type lk-hidden" />
+                </ui:VisualElement>
+
+                <ui:VisualElement name="info-lore-section" class="lk-info-section">
+                    <ui:Button name="btn-info-lore" class="lk-info-section__toggle" />
+                    <ui:Label name="lbl-info-lore" class="lk-info-panel__body lk-info-section__content" />
+                </ui:VisualElement>
+
+                <ui:VisualElement name="info-visible-section" class="lk-info-section">
+                    <ui:Button name="btn-info-visible" class="lk-info-section__toggle" />
+                    <ui:Label name="lbl-info-visible-stats" class="lk-info-panel__stats lk-info-section__content" />
+                </ui:VisualElement>
+
                 <ui:VisualElement name="info-hp-row" class="lk-row lk-align-center lk-hidden" style="margin-top: 4px;">
                     <ui:Label name="lbl-info-hp" class="lk-label--dim" style="min-width: 56px;" />
                     <ui:VisualElement class="lk-progress-bar" style="flex-grow: 1; margin-left: 6px;">
@@ -26,6 +41,17 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
                 <ui:Label name="lbl-info-stats" class="lk-info-panel__stats lk-hidden" style="margin-top: 4px;" />
+
+                <ui:VisualElement name="info-hidden-section" class="lk-info-section">
+                    <ui:Button name="btn-info-hidden" class="lk-info-section__toggle" />
+                    <ui:Label name="lbl-info-hidden-stats" class="lk-info-panel__stats lk-info-section__content lk-hidden" />
+                </ui:VisualElement>
+
+                <ui:VisualElement name="info-economy-section" class="lk-info-section">
+                    <ui:Button name="btn-info-economy" class="lk-info-section__toggle" />
+                    <ui:Label name="lbl-info-economy" class="lk-info-panel__stats lk-info-section__content" />
+                </ui:VisualElement>
+
                 <ui:VisualElement name="info-resource-row" class="lk-row lk-hidden" style="margin-top: 6px; gap: 4px;">
                     <ui:Label name="lbl-info-sell"      class="lk-info-chip lk-info-chip--sell" />
                     <ui:Label name="lbl-info-nutrition" class="lk-info-chip lk-info-chip--food" />

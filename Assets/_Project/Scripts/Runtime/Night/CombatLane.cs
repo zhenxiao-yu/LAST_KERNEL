@@ -57,30 +57,38 @@ namespace Markyu.LastKernel
             ProcessAllPendingDeaths();
             if (!IsOngoing) return;
 
-            // Phase 2: attack processing
-            ProcessSide(_defenders, _enemies, deltaTime);
-            ProcessSide(_enemies, _defenders, deltaTime);
+            // Phase 2: front-line auto-battler processing.
+            // Only the front living unit on each side attacks; when it falls, the
+            // next living unit naturally becomes the front on the following tick.
+            var defenderFront = GetFrontAlive(_defenders);
+            var enemyFront    = GetFrontAlive(_enemies);
+
+            ProcessFrontUnit(defenderFront, _enemies, deltaTime);
+            ProcessAllPendingDeaths();
+            if (!IsOngoing) return;
+
+            if (enemyFront != null && enemyFront.IsAlive)
+                ProcessFrontUnit(enemyFront, _defenders, deltaTime);
+
+            ProcessAllPendingDeaths();
 
             CheckEndCondition();
         }
 
-        private void ProcessSide(List<CombatUnit> attackers, List<CombatUnit> targets, float deltaTime)
+        private void ProcessFrontUnit(CombatUnit attacker, List<CombatUnit> targets, float deltaTime)
         {
-            foreach (var attacker in attackers)
-            {
-                if (!attacker.IsAlive) continue;
+            if (attacker == null || !attacker.IsAlive) return;
 
-                attacker.AttackTimer += deltaTime;
+            attacker.AttackTimer += deltaTime;
 
-                if (attacker.AttackTimer < attacker.EffectiveAttackCooldown) continue;
+            if (attacker.AttackTimer < attacker.EffectiveAttackCooldown) return;
 
-                attacker.AttackTimer -= attacker.EffectiveAttackCooldown;
+            attacker.AttackTimer -= attacker.EffectiveAttackCooldown;
 
-                var target = AbilityResolver.GetTarget(targets);
-                if (target == null) continue;
+            var target = AbilityResolver.GetTarget(targets);
+            if (target == null) return;
 
-                ResolveAttack(attacker, target);
-            }
+            ResolveAttack(attacker, target);
         }
 
         private void ResolveAttack(CombatUnit attacker, CombatUnit target)
@@ -168,6 +176,13 @@ namespace Markyu.LastKernel
                 PlayerWon = !enemiesAlive;
                 OnCombatEnded?.Invoke(PlayerWon);
             }
+        }
+
+        private static CombatUnit GetFrontAlive(IReadOnlyList<CombatUnit> units)
+        {
+            foreach (var unit in units)
+                if (unit.IsAlive) return unit;
+            return null;
         }
 
         /// <summary>Forces combat to end in a draw (defenders survive). Safety fallback.</summary>

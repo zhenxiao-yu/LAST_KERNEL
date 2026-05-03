@@ -28,7 +28,7 @@
             <!-- ── Quests tab ──────────────────────────────────────────── -->
             <ui:VisualElement name="quests-tab" class="lk-grow lk-column">
 
-                <ui:ScrollView name="quests-scroll" class="lk-grow">
+                <ui:ScrollView name="quests-scroll" class="lk-grow" horizontal-scroller-visibility="Hidden">
                     <!-- Quest groups + items injected here from C# -->
                     <ui:VisualElement name="quests-list" class="lk-list lk-full-width" />
                     <ui:Label name="lbl-quests-empty" class="lk-empty-state lk-hidden" />
@@ -47,7 +47,7 @@
             <!-- ── Recipes tab (hidden by default) ────────────────────── -->
             <ui:VisualElement name="recipes-tab" class="lk-grow lk-column lk-hidden">
 
-                <ui:ScrollView name="recipes-scroll" class="lk-grow">
+                <ui:ScrollView name="recipes-scroll" class="lk-grow" horizontal-scroller-visibility="Hidden">
                     <!-- Recipe categories + items injected here from C# -->
                     <ui:VisualElement name="recipes-list" class="lk-list lk-full-width" />
                     <ui:Label name="lbl-recipes-empty" class="lk-empty-state lk-hidden" />

@@ -250,7 +250,9 @@ namespace Markyu.LastKernel
 
             var scavenger = EnemyDefinition.CreateRuntime(
                 GameLocalization.GetOptional("night.enemy.scavenger", "Scavenger"),
-                hp, atk, def);
+                hp, atk, def,
+                hpFlatPerDay: 0f,
+                atkFlatPerDay: 0f);
 
             return NightWaveDefinition.CreateRuntime(
                 GameLocalization.GetOptional("night.wave.procedural.name", "Nightly Incursion"),
@@ -286,7 +288,7 @@ namespace Markyu.LastKernel
                 survivorDefenders: new List<CardInstance>(),
                 totalDefenders: 0,
                 enemiesKilled: 0,
-                totalEnemies: wave.BuildEnemyList().Count,
+                totalEnemies: BuildEnemyUnits(wave).Count,
                 moraleDelta: wave.DefeatMoraleDelta,
                 fatigueDelta: 0,
                 salvageDelta: 0

@@ -17,13 +17,25 @@
                       style="margin-bottom: 40px;" />
 
             <ui:VisualElement class="lk-divider lk-divider--accent"
-                              style="width: 312px; margin-bottom: 16px;" />
+                              style="width: 380px; margin-bottom: 16px;" />
 
             <ui:VisualElement name="pause-buttons" class="lk-column lk-title-nav-frame">
-                <ui:Button name="btn-resume"        class="lk-button lk-button--text lk-button--command lk-mb-sm" />
-                <ui:Button name="btn-save"          class="lk-button lk-button--text lk-button--utility lk-mb-sm" />
-                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-button--utility lk-mb-sm" />
-                <ui:Button name="btn-back-to-title" class="lk-button lk-button--text lk-button--critical" />
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--deploy" />
+                    <ui:Button name="btn-resume" class="lk-button lk-button--text lk-button--command lk-edge-button" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--archive" />
+                    <ui:Button name="btn-save" class="lk-button lk-button--text lk-button--utility lk-edge-button" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row lk-mb-sm">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--config" />
+                    <ui:Button name="btn-options" class="lk-button lk-button--text lk-button--utility lk-edge-button" />
+                </ui:VisualElement>
+                <ui:VisualElement class="lk-menu-action-row">
+                    <ui:VisualElement class="lk-menu-action-icon lk-menu-action-icon--exit" />
+                    <ui:Button name="btn-back-to-title" class="lk-button lk-button--text lk-button--critical lk-edge-button" />
+                </ui:VisualElement>
             </ui:VisualElement>
 
         </ui:VisualElement>
@@ -36,7 +48,7 @@
                     <ui:Label name="lbl-save-panel-title" class="lk-panel__title" />
                 </ui:VisualElement>
 
-                <ui:ScrollView name="save-scroll" style="max-height: 480px;">
+                <ui:ScrollView name="save-scroll" horizontal-scroller-visibility="Hidden" style="max-height: 480px;">
                     <ui:Label name="lbl-save-empty" class="lk-label lk-label--dim lk-hidden"
                               style="padding: 24px; -unity-text-align: middle-center;" />
                     <ui:VisualElement name="save-slots-container" class="lk-list" style="padding-bottom: 8px;" />
@@ -67,7 +79,7 @@
                 </ui:VisualElement>
 
                 <!-- Settings: UI Scale + Audio -->
-                <ui:ScrollView name="opts-scroll" style="height: 400px;">
+                <ui:ScrollView name="opts-scroll" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-ui" class="lk-label lk-label--subheader lk-mb-sm" />
@@ -89,7 +101,7 @@
                 </ui:ScrollView>
 
                 <!-- Video: Graphics -->
-                <ui:ScrollView name="video-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="video-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-graphics" class="lk-label lk-label--subheader lk-mb-sm" />
@@ -103,7 +115,7 @@
                 </ui:ScrollView>
 
                 <!-- Language -->
-                <ui:ScrollView name="language-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="language-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-language-hint" class="lk-hint lk-mb-sm" />
                         <ui:Button name="btn-opt-language"  class="lk-button lk-button--utility lk-full-width" />
@@ -111,12 +123,12 @@
                 </ui:ScrollView>
 
                 <!-- Controls -->
-                <ui:ScrollView name="controls-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="controls-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement name="keybind-list" style="flex-direction: column;" />
                 </ui:ScrollView>
 
                 <!-- Accessibility -->
-                <ui:ScrollView name="accessibility-scroll" class="lk-hidden" style="height: 400px;">
+                <ui:ScrollView name="accessibility-scroll" class="lk-hidden" horizontal-scroller-visibility="Hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-opts-accessibility"  class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:Label  name="lbl-accessibility-hint"  class="lk-hint lk-mb-md" />

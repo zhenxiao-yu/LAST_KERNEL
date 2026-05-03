@@ -154,6 +154,11 @@ namespace Markyu.LastKernel
             _btnFast?.RegisterCallback<ClickEvent>(_ => OnFastResolveClicked());
             _btnCancel?.RegisterCallback<ClickEvent>(_ => OnCancelClicked());
             _btnReturn?.RegisterCallback<ClickEvent>(_ => OnReturnDayClicked());
+            if (_root != null)
+            {
+                _root.focusable = true;
+                _root.RegisterCallback<KeyDownEvent>(HandleModalKeyDown);
+            }
 
             BindStaticText();
             SetVisible(false);
@@ -204,7 +209,7 @@ namespace Markyu.LastKernel
             int day = TimeManager.Instance?.CurrentDay ?? 1;
             if (_nightLabel    != null) _nightLabel.text    = GameLocalization.Format("night.modal.nightTitle", day);
             if (_threatLabel   != null) _threatLabel.text   = ComputeThreatLabel(ctx.Wave);
-            if (_incomingLabel != null) _incomingLabel.text = GameLocalization.Format("night.modal.incoming", ctx.Wave?.BuildEnemyList().Count ?? 0);
+            if (_incomingLabel != null) _incomingLabel.text = GameLocalization.Format("night.modal.incoming", NightBattleManager.BuildEnemyListForCurrentDay(ctx.Wave).Count);
             if (_goldLabel     != null) _goldLabel.text     = GameLocalization.Format("night.modal.gold", ctx.StartingGold);
 
             BuildEnemyPreview(ctx.Wave);
@@ -417,6 +422,45 @@ namespace Markyu.LastKernel
             _btnReturn?.SetEnabled(true);
             AudioManager.Instance?.PlaySFX(AudioId.Click);
             AddLog(GameLocalization.Format("night.modal.log.rewardSelected", reward.DisplayName), "nbm-log-entry--victory");
+        }
+
+        private void HandleModalKeyDown(KeyDownEvent evt)
+        {
+            if (_root == null || _root.resolvedStyle.display == DisplayStyle.None)
+                return;
+
+            bool handled = true;
+            switch (evt.keyCode)
+            {
+                case KeyCode.Return:
+                case KeyCode.KeypadEnter:
+                    if (_phase == Phase.Prep) OnStartBattleClicked();
+                    else if (_phase == Phase.Result && _btnReturn?.enabledSelf == true) OnReturnDayClicked();
+                    else handled = false;
+                    break;
+
+                case KeyCode.A:
+                    if (_phase == Phase.Prep) OnCancelClicked();
+                    else handled = false;
+                    break;
+
+                case KeyCode.F:
+                    if (_phase == Phase.Battle && _btnFast?.enabledSelf == true) OnFastResolveClicked();
+                    else handled = false;
+                    break;
+
+                case KeyCode.Escape:
+                    if (_phase == Phase.Prep) CancelCurrentSelection();
+                    else handled = false;
+                    break;
+
+                default:
+                    handled = false;
+                    break;
+            }
+
+            if (handled)
+                evt.StopPropagation();
         }
 
         // ── CombatLane event handling (battle phase) ──────────────────────────────

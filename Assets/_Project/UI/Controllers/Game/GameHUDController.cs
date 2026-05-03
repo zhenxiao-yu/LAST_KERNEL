@@ -28,6 +28,8 @@ namespace Markyu.LastKernel
         private Label         _nutritionLabel;
         private Label         _currencyLabel;
         private Label         _cardsLabel;
+        private Label         _timeKeyLabel;
+        private Label         _assetsKeyLabel;
         private Button        _startNightButton;
 
         // ── Night strip ────────────────────────────────────────────────────────
@@ -38,8 +40,10 @@ namespace Markyu.LastKernel
         private VisualElement _hpFill;
         private Label         _hpLabel;
         private Label         _enemiesLabel;
+        private Label         _breachKeyLabel;
         private VisualElement _enemyProgressFill;
         private Button        _speedButton;
+        private bool          _unifiedNightActive;
 
         // ── Resource icons (optional — assigned by C# for sprite-based icons) ─
 
@@ -65,6 +69,11 @@ namespace Markyu.LastKernel
             if (NightBattlefieldController.Instance != null)
                 NightBattlefieldController.Instance.OnEnemyCountChanged += UpdateEnemyCount;
 
+            NightBattleManager.OnNightModalOpened  += HandleUnifiedNightOpened;
+            NightBattleManager.OnBattleStarted     += HandleUnifiedBattleStarted;
+            NightBattleManager.OnBattleComplete    += HandleUnifiedBattleComplete;
+            NightBattleManager.OnNightSequenceEnded += HandleUnifiedNightEnded;
+
             TimeManager tm = TimeManager.Instance;
             if (tm != null)
             {
@@ -86,6 +95,11 @@ namespace Markyu.LastKernel
                 BaseCoreController.Instance.OnDamaged -= UpdateBaseHP;
             if (NightBattlefieldController.Instance != null)
                 NightBattlefieldController.Instance.OnEnemyCountChanged -= UpdateEnemyCount;
+
+            NightBattleManager.OnNightModalOpened  -= HandleUnifiedNightOpened;
+            NightBattleManager.OnBattleStarted     -= HandleUnifiedBattleStarted;
+            NightBattleManager.OnBattleComplete    -= HandleUnifiedBattleComplete;
+            NightBattleManager.OnNightSequenceEnded -= HandleUnifiedNightEnded;
 
             TimeManager tm = TimeManager.Instance;
             if (tm != null)
@@ -155,6 +169,8 @@ namespace Markyu.LastKernel
             _nutritionLabel   = Root.Q<Label>        ("lbl-nutrition");
             _currencyLabel    = Root.Q<Label>        ("lbl-currency");
             _cardsLabel       = Root.Q<Label>        ("lbl-cards");
+            _timeKeyLabel     = Root.Q<Label>        ("lbl-hud-time-key");
+            _assetsKeyLabel   = Root.Q<Label>        ("lbl-hud-assets-key");
             _startNightButton = Root.Q<Button>       ("btn-start-night");
 
             _hudNight        = Root.Q<VisualElement>("hud-night");
@@ -163,6 +179,7 @@ namespace Markyu.LastKernel
             _hpFill          = Root.Q<VisualElement>("fill-base-hp");
             _hpLabel         = Root.Q<Label>        ("lbl-base-hp");
             _enemiesLabel      = Root.Q<Label>        ("lbl-enemies");
+            _breachKeyLabel    = Root.Q<Label>        ("lbl-hud-breach-key");
             _enemyProgressFill = Root.Q<VisualElement>("fill-wave-enemies");
             _speedButton       = Root.Q<Button>       ("btn-speed");
 
@@ -208,6 +225,9 @@ namespace Markyu.LastKernel
             if (_phaseLabel       != null) _phaseLabel.text       = GameLocalization.Get("hud.day");
             if (_nightPhaseLabel  != null) _nightPhaseLabel.text  = GameLocalization.Get("hud.night");
             if (_startNightButton != null) _startNightButton.text = GameLocalization.Get("hud.startNight");
+            if (_timeKeyLabel     != null) _timeKeyLabel.text     = GameLocalization.GetOptional("hud.time", "TIME");
+            if (_assetsKeyLabel   != null) _assetsKeyLabel.text   = GameLocalization.GetOptional("hud.assets", "ASSETS");
+            if (_breachKeyLabel   != null) _breachKeyLabel.text   = GameLocalization.GetOptional("hud.breach", "BREACH");
             UpdateSpeedButton();
 
             TimeManager tm = TimeManager.Instance;
@@ -225,6 +245,9 @@ namespace Markyu.LastKernel
 
         private void HandlePhaseChanged(DefensePhase phase)
         {
+            if (_unifiedNightActive)
+                return;
+
             bool isDay = phase == DefensePhase.Day || phase == DefensePhase.NightPrep;
             ShowDay(isDay);
             if (isDay && _isDoubleSpeed)
@@ -238,6 +261,52 @@ namespace Markyu.LastKernel
         {
             _hudDay?.EnableInClassList("lk-hidden", !day);
             _hudNight?.EnableInClassList("lk-hidden", day);
+        }
+
+        private void HandleUnifiedNightOpened(NightModalContext context)
+        {
+            _unifiedNightActive = true;
+            ShowDay(false);
+
+            int day = TimeManager.Instance?.CurrentDay ?? 1;
+            SetWaveNumber(day);
+
+            var enemies = NightBattleManager.BuildEnemyListForCurrentDay(context.Wave);
+            UpdateEnemyCount(enemies.Count, enemies.Count);
+
+            if (BaseCoreController.Instance != null)
+                UpdateBaseHP(BaseCoreController.Instance.CurrentHP, BaseCoreController.Instance.MaxHP);
+        }
+
+        private void HandleUnifiedBattleStarted(CombatLane lane, NightWaveDefinition wave)
+        {
+            _unifiedNightActive = true;
+            ShowDay(false);
+
+            int total = lane?.Enemies?.Count ?? NightBattleManager.BuildEnemyListForCurrentDay(wave).Count;
+            UpdateEnemyCount(total, total);
+        }
+
+        private void HandleUnifiedBattleComplete(NightCombatResult result)
+        {
+            if (result == null)
+                return;
+
+            _unifiedNightActive = true;
+            ShowDay(false);
+            int alive = Mathf.Max(0, result.TotalEnemies - result.EnemiesKilled);
+            UpdateEnemyCount(alive, result.TotalEnemies);
+        }
+
+        private void HandleUnifiedNightEnded(NightCombatResult _)
+        {
+            _unifiedNightActive = false;
+            if (_isDoubleSpeed)
+            {
+                _isDoubleSpeed = false;
+                UpdateSpeedButton();
+            }
+            ShowDay(true);
         }
 
         // ── Day: time progress ─────────────────────────────────────────────────

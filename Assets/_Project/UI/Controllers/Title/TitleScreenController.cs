@@ -21,6 +21,18 @@ namespace Markyu.LastKernel
 
         private Label             _subtitleLabel;
         private Label             _versionLabel;
+        private Label             _titleKickerLabel;
+        private Label             _telemetryTitleLabel;
+        private Label             _telemetryCoreKeyLabel;
+        private Label             _telemetryCoreValueLabel;
+        private Label             _telemetrySignalKeyLabel;
+        private Label             _telemetrySignalValueLabel;
+        private Label             _telemetrySectorKeyLabel;
+        private Label             _telemetrySectorValueLabel;
+        private Label             _telemetryThreatKeyLabel;
+        private Label             _telemetryThreatValueLabel;
+        private Label             _bootTargetKeyLabel;
+        private Label             _bootTargetValueLabel;
         private TitleLogoAnimator _logoAnimator;
 
         // ── Nav buttons ────────────────────────────────────────────────────────
@@ -45,8 +57,20 @@ namespace Markyu.LastKernel
         protected override void OnBind()
         {
             // Labels
-            _subtitleLabel = Root.Q<Label>("lbl-subtitle");
-            _versionLabel  = Root.Q<Label>("lbl-version");
+            _subtitleLabel             = Root.Q<Label>("lbl-subtitle");
+            _versionLabel              = Root.Q<Label>("lbl-version");
+            _titleKickerLabel          = Root.Q<Label>("lbl-title-kicker");
+            _telemetryTitleLabel       = Root.Q<Label>("lbl-telemetry-title");
+            _telemetryCoreKeyLabel     = Root.Q<Label>("lbl-telemetry-core-key");
+            _telemetryCoreValueLabel   = Root.Q<Label>("lbl-telemetry-core-value");
+            _telemetrySignalKeyLabel   = Root.Q<Label>("lbl-telemetry-signal-key");
+            _telemetrySignalValueLabel = Root.Q<Label>("lbl-telemetry-signal-value");
+            _telemetrySectorKeyLabel   = Root.Q<Label>("lbl-telemetry-sector-key");
+            _telemetrySectorValueLabel = Root.Q<Label>("lbl-telemetry-sector-value");
+            _telemetryThreatKeyLabel   = Root.Q<Label>("lbl-telemetry-threat-key");
+            _telemetryThreatValueLabel = Root.Q<Label>("lbl-telemetry-threat-value");
+            _bootTargetKeyLabel        = Root.Q<Label>("lbl-boot-target-key");
+            _bootTargetValueLabel      = Root.Q<Label>("lbl-boot-target-value");
 
             // Buttons
             _newGameButton      = Root.Q<Button>("btn-new-game");
@@ -110,6 +134,8 @@ namespace Markyu.LastKernel
             if (_optionsButton      != null) _optionsButton.text      = GameLocalization.Get("title.options").ToUpper();
             if (_quitButton         != null) _quitButton.text         = GameLocalization.Get("title.quitGame").ToUpper();
 
+            SetTelemetryLabels();
+
             // Propagate to sub-panels (keeps hidden panels in sync for instant display)
             if (_modal         != null) _modal.OnLocalizationRefresh();
             if (_langModal     != null) _langModal.OnLocalizationRefresh();
@@ -147,6 +173,28 @@ namespace Markyu.LastKernel
                 GameLocalization.Get("title.quitConfirmTitle"),
                 GameLocalization.Get("title.quitConfirmBody"),
                 Application.Quit);
+        }
+
+        private void SetTelemetryLabels()
+        {
+            SetLabel(_titleKickerLabel,          "title.kicker",          "COLONY COMMAND INTERFACE");
+            SetLabel(_telemetryTitleLabel,       "title.telemetry",       "BUNKER TELEMETRY");
+            SetLabel(_telemetryCoreKeyLabel,     "title.telemetry.core",  "CORE");
+            SetLabel(_telemetryCoreValueLabel,   "title.telemetry.stable","STABLE");
+            SetLabel(_telemetrySignalKeyLabel,   "title.telemetry.signal","SIGNAL");
+            SetLabel(_telemetrySignalValueLabel, "title.telemetry.value", "72%");
+            SetLabel(_telemetrySectorKeyLabel,   "title.telemetry.sector","SECTOR");
+            SetLabel(_telemetrySectorValueLabel, "title.telemetry.blackout", "BLACKOUT");
+            SetLabel(_telemetryThreatKeyLabel,   "title.telemetry.threat","THREAT");
+            SetLabel(_telemetryThreatValueLabel, "title.telemetry.rising","RISING");
+            SetLabel(_bootTargetKeyLabel,        "title.bootTarget",      "BOOT TARGET");
+            SetLabel(_bootTargetValueLabel,      "title.bootPlayer",      "PLAYER");
+        }
+
+        private static void SetLabel(Label label, string key, string fallback)
+        {
+            if (label != null)
+                label.text = GameLocalization.GetOptional(key, fallback);
         }
     }
 }

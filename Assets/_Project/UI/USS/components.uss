@@ -307,6 +307,7 @@
     color: var(--lk-text);
     font-size: var(--lk-font-size-md);
     white-space: normal;
+    line-height: 1.35;
 }
 
 /* Logo icon — sprite slot above logo text, hidden until assigned in C# */
@@ -373,6 +374,8 @@
 .lk-label--dim {
     color: var(--lk-text-dim);
     font-size: var(--lk-font-size-xs);
+    white-space: normal;
+    line-height: 1.35;
 }
 
 /* Fine-print hint — sits below an interactive control as a context note */
@@ -392,6 +395,7 @@
     -unity-font-style: bold;
     -unity-text-align: middle-right;
     white-space: nowrap;
+    min-width: 0;
     text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
@@ -556,6 +560,46 @@
     font-size: var(--lk-font-size-md);
     white-space: normal;
     line-height: 1.5;
+}
+
+.lk-info-card {
+    flex-direction: column;
+    background-color: rgba(3, 7, 14, 0.58);
+    border-top-color: rgba(0, 220, 255, 0.16);
+    border-top-width: 1px;
+    padding-top: 8px;
+}
+
+.lk-info-section {
+    flex-direction: column;
+    margin-top: 6px;
+    border-left-color: rgba(0, 220, 255, 0.18);
+    border-left-width: 2px;
+    padding-left: 8px;
+}
+
+.lk-info-section__toggle {
+    min-height: 24px;
+    padding-left: 0;
+    padding-right: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 0;
+    color: var(--lk-accent);
+    -unity-font-style: bold;
+    -unity-text-align: middle-left;
+    font-size: var(--lk-font-size-xs);
+    letter-spacing: 1px;
+}
+
+.lk-info-section__toggle:hover {
+    color: var(--lk-accent-hot);
+    background-color: rgba(0, 220, 255, 0.06);
+}
+
+.lk-info-section__content {
+    margin-top: 2px;
+    white-space: normal;
+    line-height: 1.45;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -1099,7 +1143,7 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-side-menu-toggle:hover {
     background-color: var(--lk-accent-faint);
     color: var(--lk-text-header);
-    translate: -2px 0px;
+    translate: 0px 0px;
 }
 
 /* ── Tab bar ─────────────────────────────────────────────────────────── */
@@ -1403,6 +1447,7 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-info-chip--sell  { color: var(--lk-warning);  border-color: rgba(230, 180, 40, 0.45); }
 .lk-info-chip--food  { color: var(--lk-success);  border-color: rgba(60, 200, 90, 0.45);  }
 .lk-info-chip--uses  { color: var(--lk-accent);   border-color: rgba(0, 180, 210, 0.40);  }
+.lk-info-chip--type  { color: var(--lk-accent-secondary); border-color: rgba(175, 120, 255, 0.44); }
 
 /* ════════════════════════════════════════════════════════════════════════
  * Empty state label  (side menu quests / recipes — no items to show)
@@ -1519,7 +1564,7 @@ Toggle:checked .unity-toggle__checkmark {
     border-left-width: 2px;
     border-bottom-color: var(--lk-panel-deep);
     border-bottom-width: 3px;
-    padding: 18px;
+    padding: 20px;
     transition-property: opacity, translate, scale, border-color, background-color;
     transition-duration: var(--lk-transition-normal);
     transition-timing-function: ease-out;
@@ -1540,6 +1585,7 @@ Toggle:checked .unity-toggle__checkmark {
     padding-top: 10px;
     padding-right: 12px;
     padding-bottom: 12px;
+    margin-bottom: 18px;
     transition-property: background-color, border-bottom-color;
     transition-duration: var(--lk-transition-normal);
 }
@@ -1573,6 +1619,9 @@ Toggle:checked .unity-toggle__checkmark {
     border-bottom-width: 3px;
     color: var(--lk-text);
     text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.9);
+    white-space: nowrap;
+    -unity-text-overflow-position: End;
+    overflow: hidden;
     transition-property: background-color, border-color, color, scale, translate;
     transition-duration: var(--lk-transition-fast);
     transition-timing-function: ease-out;
@@ -1586,8 +1635,8 @@ Toggle:checked .unity-toggle__checkmark {
     border-color: var(--lk-accent);
     border-bottom-color: var(--lk-accent-dim);
     color: var(--lk-text-header);
-    translate: 0px -1px;
-    scale: 1.015 1.015;
+    translate: 0px 0px;
+    scale: 1 1;
 }
 
 .lk-button:active,
@@ -1624,7 +1673,7 @@ Toggle:checked .unity-toggle__checkmark {
     background-color: var(--lk-accent-hot);
     color: rgb(0, 5, 10);
     border-color: rgb(195, 255, 255);
-    scale: 1.025 1.025;
+    scale: 1 1;
 }
 
 .lk-button--command {
@@ -1634,13 +1683,17 @@ Toggle:checked .unity-toggle__checkmark {
     padding-left: 18px;
     padding-right: 20px;
     letter-spacing: 1px;
+    border-right-color: var(--lk-accent-dim);
+    border-right-width: 2px;
 }
 
 .lk-button--command:hover,
 .lk-button--command.lk-ui-hovered,
 .lk-button--command.lk-ui-focused {
-    translate: 10px 0px;
+    translate: 0px 0px;
     background-color: rgba(0, 220, 255, 0.14);
+    border-left-color: var(--lk-accent-hot);
+    border-right-color: var(--lk-accent-hot);
 }
 
 .lk-button--utility {
@@ -1706,7 +1759,7 @@ Toggle:checked .unity-toggle__checkmark {
 }
 
 .lk-button--text {
-    min-width: 236px;
+    min-width: 0;
     border-width: 1px;
     border-left-width: 4px;
     border-left-color: rgba(0, 220, 255, 0.18);
@@ -1716,13 +1769,25 @@ Toggle:checked .unity-toggle__checkmark {
     background-color: rgba(6, 12, 24, 0.42);
 }
 
+.lk-edge-button {
+    flex-grow: 1;
+    align-self: stretch;
+    width: auto;
+    min-width: 0;
+    min-height: 48px;
+    -unity-text-align: middle-left;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden;
+}
+
 .lk-button--text:hover,
 .lk-button--text.lk-ui-hovered,
 .lk-button--text.lk-ui-focused {
     color: var(--lk-accent-hot);
     border-left-color: var(--lk-accent);
     background-color: rgba(0, 220, 255, 0.12);
-    translate: 8px 0px;
+    translate: 0px 0px;
 }
 
 .lk-tab {
@@ -1788,8 +1853,8 @@ Toggle:checked .unity-toggle__checkmark {
     border-left-width: 2px;
     border-bottom-width: 3px;
     border-bottom-color: var(--lk-panel-deep);
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
     min-height: 42px;
 }
 
@@ -1822,11 +1887,11 @@ Toggle:checked .unity-toggle__checkmark {
     left: 68px;
     top: 56px;
     bottom: 64px;
-    width: 600px;
+    width: 620px;
     flex-direction: column;
     justify-content: center;
-    padding-left: 36px;
-    padding-right: 36px;
+    padding-left: 40px;
+    padding-right: 28px;
     background-color: rgba(4, 8, 16, 0.58);
     border-left-color: rgba(0, 220, 255, 0.34);
     border-left-width: 2px;
@@ -1857,8 +1922,8 @@ Toggle:checked .unity-toggle__checkmark {
     position: absolute;
     right: 72px;
     top: 84px;
-    width: 360px;
-    padding: 14px;
+    width: 380px;
+    padding: 16px;
     background-color: rgba(5, 10, 20, 0.68);
     border-color: rgba(0, 220, 255, 0.28);
     border-width: 1px;
@@ -1876,28 +1941,36 @@ Toggle:checked .unity-toggle__checkmark {
     border-bottom-width: 1px;
     padding-top: 4px;
     padding-bottom: 4px;
+    gap: 10px;
 }
 
 .lk-title-data-key {
     color: var(--lk-text-dim);
     font-size: var(--lk-font-size-xs);
     letter-spacing: 1px;
+    white-space: nowrap;
+    min-width: 56px;
 }
 
 .lk-title-data-value {
     color: var(--lk-accent-hot);
     font-size: var(--lk-font-size-xs);
     -unity-font-style: bold;
+    white-space: nowrap;
+    -unity-text-align: middle-right;
 }
 
 .lk-title-nav-frame {
-    width: 330px;
-    padding: 12px;
+    width: 380px;
+    padding: 10px;
     background-color: rgba(2, 5, 12, 0.55);
     border-color: rgba(0, 220, 255, 0.18);
     border-width: 1px;
     border-left-color: rgba(0, 220, 255, 0.55);
     border-left-width: 2px;
+    border-right-color: rgba(0, 220, 255, 0.22);
+    border-right-width: 1px;
+    overflow: hidden;
 }
 
 .lk-title-footer-strip {
@@ -1922,6 +1995,8 @@ Toggle:checked .unity-toggle__checkmark {
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 8px;
+    white-space: normal;
+    line-height: 1.35;
 }
 
 .lk-hud-command-rail {
@@ -1929,11 +2004,67 @@ Toggle:checked .unity-toggle__checkmark {
     align-items: center;
     padding-left: 10px;
     padding-right: 10px;
+    gap: 6px;
     min-height: 42px;
     background-color: rgba(4, 8, 16, 0.55);
     border-color: rgba(0, 220, 255, 0.16);
     border-width: 1px;
+    border-left-color: rgba(0, 220, 255, 0.36);
+    border-left-width: 2px;
 }
+
+.lk-menu-action-row {
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    overflow: hidden;
+}
+
+.lk-menu-action-row:hover .lk-menu-action-icon {
+    border-color: var(--lk-accent);
+    background-color: rgba(0, 220, 255, 0.14);
+}
+
+.lk-menu-action-row:hover .lk-edge-button,
+.lk-menu-action-row .lk-edge-button.lk-ui-focused {
+    background-color: rgba(0, 220, 255, 0.13);
+    border-left-color: var(--lk-accent-hot);
+    color: var(--lk-accent-hot);
+}
+
+.lk-menu-action-icon {
+    width: 46px;
+    min-height: 48px;
+    flex-shrink: 0;
+    margin-right: 6px;
+    background-color: rgba(3, 7, 14, 0.86);
+    border-color: rgba(0, 220, 255, 0.22);
+    border-width: 1px;
+    border-bottom-color: var(--lk-panel-deep);
+    border-bottom-width: 3px;
+}
+
+.lk-menu-action-icon--deploy  { border-left-color: var(--lk-accent); border-left-width: 3px; }
+.lk-menu-action-icon--load    { border-left-color: var(--lk-steel);  border-left-width: 3px; }
+.lk-menu-action-icon--archive { border-left-color: var(--lk-success); border-left-width: 3px; }
+.lk-menu-action-icon--config  { border-left-color: var(--lk-warning); border-left-width: 3px; }
+.lk-menu-action-icon--exit    { border-left-color: var(--lk-danger);  border-left-width: 3px; }
+
+.lk-mini-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    margin-right: 2px;
+    background-color: rgba(0, 220, 255, 0.10);
+    border-color: rgba(0, 220, 255, 0.38);
+    border-width: 1px;
+}
+
+.lk-mini-icon--time   { border-bottom-color: var(--lk-accent);  border-bottom-width: 3px; }
+.lk-mini-icon--assets { border-bottom-color: var(--lk-warning); border-bottom-width: 3px; }
+.lk-mini-icon--breach { border-bottom-color: var(--lk-danger);  border-bottom-width: 3px; }
 
 .lk-save-slot,
 .lk-list__item,
@@ -1957,7 +2088,7 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-keybind-row:hover {
     background-color: rgba(0, 220, 255, 0.08);
     border-color: rgba(0, 220, 255, 0.58);
-    translate: 2px 0px;
+    translate: 0px 0px;
 }
 
 .lk-ach-card--unlocked {

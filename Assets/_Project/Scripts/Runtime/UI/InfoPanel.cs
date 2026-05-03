@@ -21,15 +21,25 @@ namespace Markyu.LastKernel
         public readonly int          SellPrice;
         public readonly int          Nutrition;
         public readonly int          UsesLeft;
+        public readonly string       LoreText;
+        public readonly string       VisibleStatsText;
+        public readonly string       HiddenStatsText;
+        public readonly string       EconomyText;
 
         public bool HasHP        => MaxHP > 0;
         public bool HasCombat    => Combat != CombatType.None && !string.IsNullOrEmpty(FormattedStats);
         public bool HasSell      => SellPrice > 0;
         public bool HasNutrition => Nutrition > 0;
         public bool HasUses      => UsesLeft > 0;
+        public bool HasLore      => !string.IsNullOrWhiteSpace(LoreText);
+        public bool HasVisibleStats => !string.IsNullOrWhiteSpace(VisibleStatsText);
+        public bool HasHiddenStats  => !string.IsNullOrWhiteSpace(HiddenStatsText);
+        public bool HasEconomy      => !string.IsNullOrWhiteSpace(EconomyText);
 
         public CardInfoData(CardCategory category, CombatType combat, int currentHP, int maxHP,
-            string formattedStats, int sellPrice, int nutrition, int usesLeft = 0)
+            string formattedStats, int sellPrice, int nutrition, int usesLeft = 0,
+            string loreText = null, string visibleStatsText = null, string hiddenStatsText = null,
+            string economyText = null)
         {
             Category       = category;
             Combat         = combat;
@@ -39,6 +49,10 @@ namespace Markyu.LastKernel
             SellPrice      = sellPrice;
             Nutrition      = nutrition;
             UsesLeft       = usesLeft;
+            LoreText       = loreText;
+            VisibleStatsText = visibleStatsText;
+            HiddenStatsText  = hiddenStatsText;
+            EconomyText      = economyText;
         }
     }
 

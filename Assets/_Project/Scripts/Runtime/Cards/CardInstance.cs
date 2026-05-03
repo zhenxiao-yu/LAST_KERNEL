@@ -151,7 +151,7 @@ namespace Markyu.LastKernel
         {
             _isHovered = true;
             _feedbackController?.SetHover(true);
-            InfoPanel.Instance?.RegisterHover(GetInfo());
+            InfoPanel.Instance?.RegisterCardHover(GetInfo(), GetCardInfo());
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -216,7 +216,11 @@ namespace Markyu.LastKernel
                 formattedStats: def.CombatType != CombatType.None ? stats.GetFormattedStats() : null,
                 sellPrice:      def.SellPrice,
                 nutrition:      CurrentNutrition,
-                usesLeft:       UsesLeft
+                usesLeft:       UsesLeft,
+                loreText:       CardDossierFormatter.BuildLore(def),
+                visibleStatsText: CardDossierFormatter.BuildVisibleStats(def, stats, CurrentHealth),
+                hiddenStatsText:  CardDossierFormatter.BuildHiddenStats(def, stats),
+                economyText:      CardDossierFormatter.BuildEconomy(def, CurrentNutrition, UsesLeft)
             );
         }
 
@@ -262,18 +266,7 @@ namespace Markyu.LastKernel
             else if (Stack.TopCard != null)
             {
                 info.header = Stack.TopCard.Definition.DisplayName;
-                info.body = Stack.TopCard.Definition.Description;
-
-                if (Stack.TopCard.Definition.Category is CardCategory.Character)
-                {
-                    info.body += "\n" + GameLocalization.Format("card.health", CurrentHealth, Stack.TopCard.Stats.MaxHealth.Value);
-
-                    if (Stack.TopCard.Definition.CombatType != CombatType.None)
-                    {
-                        info.body += $"\n{Stack.TopCard.Definition.CombatType.ToString()}";
-                        info.body += $"\n{Stack.TopCard.Stats.GetFormattedStats()}";
-                    }
-                }
+                info.body = CardDossierFormatter.BuildLore(Stack.TopCard.Definition);
             }
 
             return info;

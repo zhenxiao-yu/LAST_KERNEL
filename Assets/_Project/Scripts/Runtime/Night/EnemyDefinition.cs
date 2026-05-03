@@ -140,7 +140,11 @@ namespace Markyu.LastKernel
             int speed = 80, float accuracy = 90f, float dodge = 0f,
             float critChance = 5f, float critMult = 150f,
             EnemyFactionDefinition faction = null,
-            UnitAbilityDefinition[] abilities = null)
+            UnitAbilityDefinition[] abilities = null,
+            float hpFlatPerDay = 0f,
+            float atkFlatPerDay = 0f,
+            float scalingExponent = 1f,
+            float scalingCurvePower = 0f)
         {
             var e = ScriptableObject.CreateInstance<EnemyDefinition>();
             e.displayName    = name;
@@ -154,6 +158,10 @@ namespace Markyu.LastKernel
             e.critMultiplier = critMult;
             e.faction        = faction;
             e.abilities      = abilities ?? System.Array.Empty<UnitAbilityDefinition>();
+            e.hpFlatPerDay   = Mathf.Max(0f, hpFlatPerDay);
+            e.atkFlatPerDay  = Mathf.Max(0f, atkFlatPerDay);
+            e.scalingExponent = Mathf.Clamp(scalingExponent, 0.5f, 3f);
+            e.scalingCurvePower = Mathf.Max(0f, scalingCurvePower);
             return e;
         }
     }
