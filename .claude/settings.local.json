@@ -20,7 +20,9 @@
       "Bash(curl -s --max-time 3 http://127.0.0.1:8080 -o /dev/null -w \"%{http_code}\")",
       "Bash(curl -s --max-time 3 http://127.0.0.1:8080)",
       "Bash(python3 -c ' *)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(git push *)",
+      "Bash(echo \"EXIT:$?\")"
     ],
     "deny": [
       "Read(Library/**)",
