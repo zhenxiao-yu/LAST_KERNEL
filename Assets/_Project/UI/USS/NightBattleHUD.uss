@@ -148,7 +148,7 @@
 }
 
 .nb-fighter-card--enemy {
-    border-color: rgb(100, 30, 30);
+    border-color: var(--lk-danger-muted);
 }
 
 /* Front slot highlight */
@@ -177,7 +177,7 @@
     margin-bottom: 4px;
 }
 
-.nb-fighter-name--enemy  { color: rgb(220, 100, 100); }
+.nb-fighter-name--enemy  { color: var(--lk-danger-hot); }
 .nb-fighter-name--player { color: var(--lk-accent); }
 .nb-fighter-name--dead   { color: var(--lk-text-dim); }
 
@@ -302,8 +302,8 @@
 }
 
 .nb-btn--start:hover {
-    background-color: rgb(0, 180, 210);
-    border-color: rgb(0, 180, 210);
+    background-color: var(--lk-border);
+    border-color: var(--lk-border);
 }
 
 .nb-btn--start:disabled {

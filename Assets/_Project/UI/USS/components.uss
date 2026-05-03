@@ -16,6 +16,10 @@
     background-color: var(--lk-bg);
 }
 
+.lk-screen--transparent {
+    background-color: var(--lk-transparent);
+}
+
 /* Full-screen black overlay for scene transitions. Opacity driven by ScreenFaderController. */
 .lk-screen-fader {
     position: absolute;
@@ -119,6 +123,45 @@
     margin-top: var(--lk-gap-medium);
 }
 
+.lk-panel__footer--flush {
+    margin-top: 0;
+}
+
+.lk-panel__footer--wide-gap {
+    gap: var(--lk-gap-medium);
+}
+
+.lk-panel__header--compact {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 0;
+    padding: 12px 16px;
+}
+
+.lk-panel__header.lk-panel-header-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.lk-panel__header.lk-panel-header-stack {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.lk-panel__title--grow {
+    flex-grow: 1;
+}
+
+.lk-panel--danger {
+    border-color: var(--lk-danger-line);
+    border-left-color: var(--lk-danger);
+}
+
+.lk-panel.lk-panel--pad-none {
+    padding: 0;
+}
+
 /* ════════════════════════════════════════════════════════════════════════
  * Modal
  * Overlay backdrop + centred dialog.
@@ -133,6 +176,11 @@
     background-color: var(--lk-overlay-bg);
     align-items: center;
     justify-content: center;
+    pointer-events: auto;
+}
+
+.lk-keybind-backdrop {
+    background-color: var(--lk-scrim-soft);
     pointer-events: auto;
 }
 
@@ -236,13 +284,13 @@
 
 /* Danger — destructive action */
 .lk-button--danger {
-    border-color: rgba(215, 55, 35, 0.5);
+    border-color: var(--lk-danger-line);
     color: var(--lk-danger);
 }
 
 .lk-button--danger:hover {
     border-color: var(--lk-danger);
-    background-color: rgba(215, 55, 35, 0.12);
+    background-color: var(--lk-danger-faint);
     color: var(--lk-warning);
 }
 
@@ -405,6 +453,20 @@
 .lk-label--danger  { color: var(--lk-danger);   }
 .lk-label--success { color: var(--lk-success);  }
 
+.lk-text-center {
+    -unity-text-align: middle-center;
+}
+
+.lk-text-wrap {
+    white-space: normal;
+}
+
+.lk-text-micro-hint {
+    font-size: 10px;
+    opacity: 0.4;
+    -unity-font-style: italic;
+}
+
 /* ════════════════════════════════════════════════════════════════════════
  * Divider
  * ════════════════════════════════════════════════════════════════════════ */
@@ -419,6 +481,10 @@
 
 .lk-divider--accent {
     background-color: var(--lk-border);
+}
+
+.lk-divider--danger {
+    background-color: var(--lk-danger-line);
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -453,6 +519,10 @@
 /* Thicker variant for base HP bar in NightHUD */
 .lk-progress-bar--thick {
     height: 14px;
+}
+
+.lk-progress-bar.lk-h-6 {
+    height: 6px;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -735,6 +805,7 @@
 .lk-icon--sm { width: 16px; height: 16px; }
 .lk-icon--lg { width: 24px; height: 24px; }
 .lk-icon--xl { width: 32px; height: 32px; }
+.lk-icon.lk-icon-28 { width: 28px; height: 28px; }
 
 /* ── Info panel icons ─────────────────────────────────────────────── */
 
@@ -1313,7 +1384,7 @@ Toggle:checked .unity-toggle__checkmark {
 }
 
 .lk-hud-statbox--night {
-    border-color: rgba(215, 55, 35, 0.35);
+    border-color: rgba(204, 46, 46, 0.35);
     border-left-color: rgba(204, 46, 46, 0.80);
     border-left-width: 2px;
 }
@@ -1340,9 +1411,9 @@ Toggle:checked .unity-toggle__checkmark {
     align-self: center;
     -unity-background-scale-mode: scale-to-fit;
     padding: 4px;
-    border-radius: 3px;
+    border-radius: var(--lk-radius-icon);
     border-width: 1px;
-    border-color: rgba(255, 255, 255, 0.10);
+    border-color: var(--lk-border-subtle);
 }
 
 .lk-hud-icon--food   { background-color: var(--lk-success);           }
@@ -1366,8 +1437,8 @@ Toggle:checked .unity-toggle__checkmark {
 }
 
 .lk-hud-badge--night {
-    background-color: rgba(215, 55, 35, 0.1);
-    border-color: rgba(215, 55, 35, 0.5);
+    background-color: rgba(204, 46, 46, 0.10);
+    border-color: var(--lk-danger-line);
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -1405,6 +1476,10 @@ Toggle:checked .unity-toggle__checkmark {
     min-width: 44px;
     font-size: var(--lk-font-size-lg);
     -unity-font-style: bold;
+}
+
+.lk-hud-pace-btn {
+    font-size: 11px;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -1698,6 +1773,14 @@ Toggle:checked .unity-toggle__checkmark {
     transition-timing-function: linear;
 }
 
+.lk-keybind-row--settings {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
 .lk-keybind-row:hover {
     background-color: var(--lk-accent-faint);
 }
@@ -1708,6 +1791,42 @@ Toggle:checked .unity-toggle__checkmark {
     flex-grow: 1;
     white-space: normal;
     min-width: 100px;
+}
+
+.lk-keybind-row__name--fixed {
+    width: 200px;
+    flex-grow: 0;
+}
+
+.lk-keybind-row__binding {
+    color: var(--lk-text);
+    font-size: var(--lk-font-size-sm);
+    flex-grow: 1;
+    white-space: normal;
+}
+
+.lk-keybind-heading {
+    border-bottom-width: 1px;
+    border-bottom-color: var(--lk-border-subtle);
+    opacity: 0.5;
+}
+
+.lk-keybind-action-col {
+    width: 200px;
+}
+
+.lk-keybind-binding-col {
+    flex-grow: 1;
+}
+
+.lk-keybind-icon-button {
+    width: 36px;
+    min-height: 36px;
+}
+
+.lk-keybind-icon-button--spaced {
+    margin-left: 4px;
+    margin-right: 2px;
 }
 
 /* Keyboard key badge — binding display */
@@ -1769,10 +1888,23 @@ Toggle:checked .unity-toggle__checkmark {
     white-space: nowrap;
 }
 
-.lk-info-chip--sell  { color: var(--lk-warning);  border-color: rgba(230, 180, 40, 0.45); }
-.lk-info-chip--food  { color: var(--lk-success);  border-color: rgba(60, 200, 90, 0.45);  }
-.lk-info-chip--uses  { color: var(--lk-accent);   border-color: rgba(0, 180, 210, 0.40);  }
-.lk-info-chip--type  { color: var(--lk-accent-secondary); border-color: rgba(175, 120, 255, 0.44); }
+.lk-info-chip--sell  { color: var(--lk-warning);  border-color: var(--lk-warning-line); }
+.lk-info-chip--food  { color: var(--lk-success);  border-color: var(--lk-success-line); }
+.lk-info-chip--uses  { color: var(--lk-accent);   border-color: var(--lk-accent-line);  }
+.lk-info-chip--type  { color: var(--lk-accent-secondary); border-color: var(--lk-accent-secondary-line); }
+
+.lk-info-panel-anchor {
+    left: 0;
+    right: auto;
+    bottom: 0;
+    padding: var(--lk-padding-small);
+    max-width: 400px;
+}
+
+.lk-info-action {
+    margin-top: var(--lk-gap-small);
+    align-self: flex-start;
+}
 
 /* ════════════════════════════════════════════════════════════════════════
  * Empty state label  (side menu quests / recipes — no items to show)
@@ -1789,6 +1921,16 @@ Toggle:checked .unity-toggle__checkmark {
     padding-right: 24px;
     align-self: stretch;
     opacity: 0.7;
+}
+
+.lk-empty-state--compact {
+    padding: 24px;
+    -unity-text-align: middle-center;
+}
+
+.lk-empty-state--large {
+    padding: 32px;
+    -unity-text-align: middle-center;
 }
 
 /* ════════════════════════════════════════════════════════════════════════
@@ -2063,7 +2205,7 @@ Toggle:checked .unity-toggle__checkmark {
     border-color: rgba(204, 46, 46, 0.58);
     border-left-color: var(--lk-danger);
     border-left-width: 4px;
-    color: rgb(255, 150, 120);
+    color: var(--lk-danger-hot);
 }
 
 .lk-button--critical:hover,
@@ -2289,8 +2431,26 @@ Toggle:checked .unity-toggle__checkmark {
     border-top-width: 1px;
 }
 
+.lk-title-subtitle {
+    margin-top: var(--lk-gap-small);
+    margin-bottom: 26px;
+    max-width: 390px;
+}
+
 .lk-title-logo-area {
     margin-bottom: 10px;
+}
+
+.lk-language-grid {
+    flex-direction: column;
+    gap: var(--lk-gap-small);
+    padding-top: 4px;
+    padding-bottom: var(--lk-gap-small);
+}
+
+.lk-language-row {
+    flex-direction: row;
+    gap: var(--lk-gap-small);
 }
 
 .lk-logo-letter {
@@ -2389,7 +2549,7 @@ Toggle:checked .unity-toggle__checkmark {
     padding: 5px;
     margin-right: 10px;
     background-color: rgba(0, 220, 255, 0.07);
-    border-radius: 4px;
+    border-radius: var(--lk-radius-icon);
     border-width: 1px;
     border-color: rgba(0, 220, 255, 0.18);
 }
@@ -2534,8 +2694,8 @@ Toggle:checked .unity-toggle__checkmark {
     padding-top: 8px;
 }
 
-.colony-report__value--surplus { color: rgb(80, 220, 120); }
-.colony-report__value--danger  { color: var(--lk-danger, rgb(220, 60, 60)); }
+.colony-report__value--surplus { color: var(--lk-success-hot); }
+.colony-report__value--danger  { color: var(--lk-danger); }
 .colony-report__value--accent  { color: var(--lk-accent); }
 
 .colony-report__clear-label {
@@ -2560,3 +2720,11 @@ Toggle:checked .unity-toggle__checkmark {
     color: var(--lk-accent);
     background-color: rgba(0, 0, 0, 0);
 }
+
+/* Late utility overrides: keep atomic sizing authoritative after premium component pass. */
+.lk-panel.lk-panel--pad-none { padding: 0; }
+.lk-panel.lk-panel--danger {
+    border-color: var(--lk-danger-line);
+    border-left-color: var(--lk-danger);
+}
+.lk-progress-bar.lk-h-6 { height: 6px; }

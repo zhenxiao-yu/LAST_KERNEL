@@ -95,31 +95,29 @@ namespace Markyu.LastKernel
         private VisualElement CreateRow(ActionEntry entry)
         {
             var row = new VisualElement();
-            row.style.flexDirection     = FlexDirection.Row;
-            row.style.alignItems        = Align.Center;
-            row.style.paddingTop        = row.style.paddingBottom = 4;
-            row.style.paddingLeft       = row.style.paddingRight  = 12;
-            row.style.borderBottomWidth = 1;
-            row.style.borderBottomColor = new StyleColor(new Color(1, 1, 1, 0.06f));
+            row.AddToClassList("lk-keybind-row");
+            row.AddToClassList("lk-keybind-row--settings");
 
             var nameLabel = new Label(entry.DisplayName);
-            nameLabel.AddToClassList("lk-label");
-            nameLabel.style.width = 200;
+            nameLabel.AddToClassList("lk-keybind-row__name");
+            nameLabel.AddToClassList("lk-keybind-row__name--fixed");
 
             var bindingLabel = new Label(GetDisplayString(entry.Action));
-            bindingLabel.AddToClassList("lk-label");
-            bindingLabel.style.flexGrow = 1;
+            bindingLabel.AddToClassList("lk-keybind-row__binding");
 
             var rebindBtn = new Button { text = "✎" };
             rebindBtn.AddToClassList("lk-button");
-            rebindBtn.style.width      = 36;
-            rebindBtn.style.marginLeft  = 4;
-            rebindBtn.style.marginRight = 2;
+            rebindBtn.AddToClassList("lk-button--compact");
+            rebindBtn.AddToClassList("lk-button--utility");
+            rebindBtn.AddToClassList("lk-keybind-icon-button");
+            rebindBtn.AddToClassList("lk-keybind-icon-button--spaced");
             rebindBtn.RegisterCallback<ClickEvent>(_ => StartRebind(entry, bindingLabel, rebindBtn));
 
             var resetBtn = new Button { text = "↩" };
             resetBtn.AddToClassList("lk-button");
-            resetBtn.style.width = 36;
+            resetBtn.AddToClassList("lk-button--compact");
+            resetBtn.AddToClassList("lk-button--quiet");
+            resetBtn.AddToClassList("lk-keybind-icon-button");
             resetBtn.RegisterCallback<ClickEvent>(_ => ResetSingle(entry, bindingLabel));
 
             row.Add(nameLabel);

@@ -304,17 +304,15 @@ namespace Markyu.LastKernel
             rebindBtn.AddToClassList("lk-button");
             rebindBtn.AddToClassList("lk-button--compact");
             rebindBtn.AddToClassList("lk-button--utility");
-            rebindBtn.style.width      = 36;
-            rebindBtn.style.minHeight  = 36;
-            rebindBtn.style.marginLeft = 4;
+            rebindBtn.AddToClassList("lk-keybind-icon-button");
+            rebindBtn.AddToClassList("lk-keybind-icon-button--spaced");
             rebindBtn.clicked += () => StartRebind(entry, bindingLabel, rebindBtn);
 
             var resetBtn = new Button { text = "↩" };
             resetBtn.AddToClassList("lk-button");
             resetBtn.AddToClassList("lk-button--compact");
             resetBtn.AddToClassList("lk-button--quiet");
-            resetBtn.style.width     = 36;
-            resetBtn.style.minHeight = 36;
+            resetBtn.AddToClassList("lk-keybind-icon-button");
             resetBtn.clicked += () => ResetSingleKeybind(entry, bindingLabel);
 
             row.Add(nameLabel);

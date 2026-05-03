@@ -122,16 +122,16 @@
 }
 
 .nbm-btn--start {
-    color: rgb(6, 8, 16);
+    color: var(--lk-bg);
     background-color: var(--lk-accent);
-    border-left-color:   rgb(120, 240, 255);
+    border-left-color:   var(--lk-accent-hot);
     border-top-color:    var(--lk-accent);
     border-right-color:  var(--lk-accent-dim);
     border-bottom-color: var(--lk-accent-dim);
 }
 .nbm-btn--start:hover {
-    background-color: rgb(0, 200, 240);
-    border-left-color: rgb(160, 255, 255);
+    background-color: var(--lk-accent-hot);
+    border-left-color: var(--lk-accent-hot);
 }
 .nbm-btn--start:disabled {
     background-color: var(--lk-disabled);
@@ -207,7 +207,7 @@
     letter-spacing: 3px;
 }
 .nbm-section-title--enemy {
-    color: rgb(220, 80, 80);
+    color: var(--lk-danger-hot);
     border-left-width: 2px;
     border-left-color: var(--lk-danger);
     padding-left: var(--lk-gap-small);
@@ -280,15 +280,15 @@
 .nbm-enemy-card {
     flex-direction: column;
     align-items: stretch;
-    background-color: rgba(50, 10, 10, 0.55);
+    background-color: var(--lk-danger-surface);
     border-top-width:    1px;
     border-left-width:   2px;
     border-right-width:  1px;
     border-bottom-width: 1px;
-    border-top-color:    rgb(80, 25, 25);
+    border-top-color:    var(--lk-danger-muted);
     border-left-color:   var(--lk-danger);
-    border-right-color:  rgb(50, 18, 18);
-    border-bottom-color: rgb(50, 18, 18);
+    border-right-color:  var(--lk-danger-deep);
+    border-bottom-color: var(--lk-danger-deep);
     margin: 0 4px;
     padding: var(--lk-padding-small);
     min-width: 120px;
@@ -299,11 +299,11 @@
 .nbm-enemy-card--front {
     border-top-width: 2px;
     border-top-color: var(--lk-danger);
-    border-left-color: rgb(245, 60, 60);
-    background-color: rgba(80, 15, 15, 0.72);
+    border-left-color: var(--lk-danger-hot);
+    background-color: var(--lk-danger-surface-strong);
 }
 .nbm-enemy-card__name {
-    color: rgb(230, 100, 100);
+    color: var(--lk-danger-hot);
     font-size: var(--lk-font-size-sm);
     -unity-font-style: bold;
     overflow: hidden;
@@ -311,7 +311,7 @@
     letter-spacing: 1px;
 }
 .nbm-enemy-card__stats {
-    color: rgb(155, 75, 75);
+    color: var(--lk-danger-muted);
     font-size: var(--lk-font-size-sm);
     margin-bottom: 4px;
     letter-spacing: 1px;
@@ -448,26 +448,26 @@
     width: 100%;
     background-image: linear-gradient(
         180deg,
-        rgba(100, 255, 255, 0.40) 0%,
-        rgb(0, 185, 215)          18%,
-        rgb(0, 130, 160)          100%
+        var(--lk-accent-glow) 0%,
+        var(--lk-accent)      18%,
+        var(--lk-accent-dim)  100%
     );
     transition: width var(--lk-transition-fast) linear;
 }
 .nb-hp-fill--enemy {
     background-image: linear-gradient(
         180deg,
-        rgba(255, 100, 100, 0.40) 0%,
-        rgb(185, 38, 38)          18%,
-        rgb(130, 26, 26)          100%
+        var(--lk-danger-line) 0%,
+        var(--lk-danger)      18%,
+        var(--lk-danger-deep) 100%
     );
 }
 .nb-hp-fill--low {
     background-image: linear-gradient(
         180deg,
-        rgba(255, 210, 100, 0.40) 0%,
-        rgb(215, 130, 25)         18%,
-        rgb(165, 95, 15)          100%
+        var(--lk-warning-line) 0%,
+        var(--lk-warning)      18%,
+        var(--lk-warning)      100%
     );
 }
 
@@ -667,12 +667,12 @@
 }
 
 .nbm-gold-label {
-    color: rgb(255, 210, 55);
+    color: var(--lk-warning-hot);
     font-size: var(--lk-font-size-md);
     -unity-font-style: bold;
     letter-spacing: 2px;
     border-left-width: 2px;
-    border-left-color: rgb(200, 155, 30);
+    border-left-color: var(--lk-warning);
     padding-left: 6px;
 }
 
@@ -726,7 +726,7 @@
     margin-bottom: 4px;
 }
 .nb-shop-item__cost {
-    color: rgb(255, 210, 55);
+    color: var(--lk-warning-hot);
     font-size: var(--lk-font-size-xs);
     -unity-font-style: bold;
     letter-spacing: 1px;
@@ -912,9 +912,9 @@
 
 /* Fast-resolve: amber fill when active */
 .nbm-btn--fast--active {
-    color: rgb(6, 8, 16);
+    color: var(--lk-bg);
     background-color: var(--lk-warning);
-    border-left-color:   rgb(255, 210, 80);
+    border-left-color:   var(--lk-warning-hot);
     border-top-color:    var(--lk-warning);
     border-right-color:  rgba(255, 160, 40, 0.55);
     border-bottom-color: rgba(255, 160, 40, 0.55);

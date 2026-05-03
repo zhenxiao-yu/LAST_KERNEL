@@ -1,9 +1,9 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="../../USS/theme.uss" />
-    <Style src="../../USS/layout.uss" />
-    <Style src="../../USS/components.uss" />
-    <Style src="../../USS/animations.uss" />
-    <Style src="../../USS/NightBattleHUD.uss" />
+    <ui:Style src="../../USS/theme.uss" />
+    <ui:Style src="../../USS/layout.uss" />
+    <ui:Style src="../../USS/components.uss" />
+    <ui:Style src="../../USS/animations.uss" />
+    <ui:Style src="../../USS/NightBattleHUD.uss" />
 
     <!-- ══════════════════════════════════════════════════════════════════
          NightBattleHUD — full-screen overlay, hidden by default.

@@ -1,43 +1,36 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
-    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
-    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
 
-    <ui:VisualElement name="keybind-backdrop" class="lk-screen lk-center"
-                      style="background-color: rgba(0,0,0,0.75); pointer-events: auto;">
+    <ui:VisualElement name="keybind-backdrop" class="lk-screen lk-center lk-keybind-backdrop">
 
-        <ui:VisualElement name="keybind-panel" class="lk-panel"
-                          style="width: 600px; max-height: 80%; flex-direction: column; padding: 0;">
+        <ui:VisualElement name="keybind-panel" class="lk-panel lk-panel--w-600 lk-panel--max-h-80p lk-flex-column lk-panel--pad-none">
 
             <!-- Header -->
-            <ui:VisualElement class="lk-panel__header" style="margin-bottom: 0; padding: 12px 16px;">
-                <ui:Label name="lbl-header" class="lk-label lk-panel__title" text="CONTROLS"
-                          style="flex-grow: 1;" />
-                <ui:Button name="btn-close" class="lk-button" text="✕"
-                           style="width: 32px; height: 32px;" />
+            <ui:VisualElement class="lk-panel__header lk-panel__header--compact">
+                <ui:Label name="lbl-header" class="lk-label lk-panel__title lk-panel__title--grow" text="CONTROLS" />
+                <ui:Button name="btn-close" class="lk-button lk-w-32 lk-h-32" text="✕" />
             </ui:VisualElement>
 
             <!-- Column headings -->
-            <ui:VisualElement class="lk-row lk-align-center lk-pad-md"
-                              style="border-bottom-width: 1px; border-bottom-color: rgba(255,255,255,0.1); opacity: 0.5;">
-                <ui:Label class="lk-label" text="ACTION"  style="width: 200px;" />
-                <ui:Label class="lk-label" text="BINDING" style="flex-grow: 1;" />
+            <ui:VisualElement class="lk-row lk-align-center lk-pad-md lk-keybind-heading">
+                <ui:Label class="lk-label lk-keybind-action-col" text="ACTION" />
+                <ui:Label class="lk-label lk-keybind-binding-col" text="BINDING" />
             </ui:VisualElement>
 
             <!-- Scrollable action rows — populated at runtime by KeybindSettingsController -->
-            <ui:ScrollView name="keybind-scroll" style="flex-grow: 1; min-height: 100px;"
+            <ui:ScrollView name="keybind-scroll" class="lk-scroll-grow-min"
                            vertical-scroller-visibility="AlwaysVisible"
                            horizontal-scroller-visibility="Hidden">
-                <ui:VisualElement name="keybind-list" style="flex-direction: column;" />
+                <ui:VisualElement name="keybind-list" class="lk-flex-column" />
             </ui:ScrollView>
 
             <!-- Footer -->
-            <ui:VisualElement class="lk-panel__footer lk-row lk-align-center"
-                              style="margin-top: 0; justify-content: flex-start;">
+            <ui:VisualElement class="lk-panel__footer lk-panel__footer--flush lk-row lk-align-center lk-justify-start">
                 <ui:Button name="btn-reset-all" class="lk-button" text="RESET ALL" />
                 <ui:VisualElement class="lk-grow" />
-                <ui:Label name="lbl-hint" class="lk-label"
-                          style="font-size: 10px; opacity: 0.4; -unity-font-style: italic;"
+                <ui:Label name="lbl-hint" class="lk-label lk-text-micro-hint"
                           text="Click ✎ then press a key" />
             </ui:VisualElement>
 

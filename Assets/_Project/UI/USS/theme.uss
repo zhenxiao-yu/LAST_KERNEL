@@ -19,6 +19,12 @@
     --lk-panel-glass:        rgba(14, 24, 42, 0.88);/* Layered UI surfaces  */
     --lk-overlay-bg:         rgba(4, 6, 14, 0.92); /* Modal backdrop        */
     --lk-hud-bg:             rgba(16, 20, 36, 0.97);/* HUD strips           */
+    --lk-transparent:        rgba(0, 0, 0, 0);
+    --lk-scrim-soft:         rgba(2, 5, 12, 0.75);
+    --lk-scrim-strong:       rgba(2, 5, 12, 0.88);
+    --lk-surface-raised:     rgba(18, 30, 52, 0.94);
+    --lk-surface-command:    rgba(4, 9, 18, 0.62);
+    --lk-surface-inset:      rgba(4, 8, 16, 0.68);
 
     /* ── Primary accent — cyan terminal glow ─────────────────────────────*/
     --lk-accent:             rgb(0, 220, 255);
@@ -26,10 +32,13 @@
     --lk-accent-hot:         rgb(110, 245, 255);
     --lk-accent-faint:       rgba(0, 220, 255, 0.08);
     --lk-accent-glow:        rgba(0, 220, 255, 0.34);
+    --lk-accent-line:        rgba(0, 220, 255, 0.24);
+    --lk-accent-line-strong: rgba(0, 220, 255, 0.58);
 
     /* ── Secondary accent — muted magenta ────────────────────────────────*/
     --lk-accent-secondary:   rgb(160, 50, 145);
     --lk-accent-secondary-dim: rgba(160, 50, 145, 0.18);
+    --lk-accent-secondary-line: rgba(160, 50, 145, 0.44);
 
     /* ── Text ─────────────────────────────────────────────────────────────*/
     --lk-text:               rgb(195, 210, 222);   /* Body / default        */
@@ -40,16 +49,32 @@
     --lk-warning:            rgb(255, 160, 40);    /* Amber — threat / HP   */
     --lk-danger:             rgb(204, 46, 46);     /* Red — defeat / threat */
     --lk-success:            rgb(63, 175, 111);   /* Green — completion    */
+    --lk-warning-hot:        rgb(255, 210, 80);
+    --lk-danger-hot:         rgb(245, 90, 80);
+    --lk-danger-muted:       rgb(155, 75, 75);
+    --lk-danger-deep:        rgb(50, 18, 18);
+    --lk-danger-surface:     rgba(50, 10, 10, 0.55);
+    --lk-danger-surface-strong: rgba(80, 15, 15, 0.72);
+    --lk-success-hot:        rgb(80, 220, 120);
+    --lk-warning-faint:      rgba(255, 160, 40, 0.10);
+    --lk-danger-faint:       rgba(204, 46, 46, 0.12);
+    --lk-success-faint:      rgba(63, 175, 111, 0.10);
+    --lk-warning-line:       rgba(255, 160, 40, 0.45);
+    --lk-danger-line:        rgba(204, 46, 46, 0.58);
+    --lk-success-line:       rgba(63, 175, 111, 0.45);
     --lk-steel:              rgb(80, 100, 128);    /* Cold secondary line   */
     --lk-disabled:           rgb(60, 72, 88);      /* Locked / inactive     */
 
     /* ── Borders ──────────────────────────────────────────────────────────*/
     --lk-border:             rgb(0, 140, 165);     /* Active / accent edge  */
     --lk-border-dim:         rgb(52, 64, 88);      /* Passive / structural  */
+    --lk-border-faint:       rgba(80, 100, 128, 0.34);
+    --lk-border-subtle:      rgba(255, 255, 255, 0.10);
     --lk-border-width:       1px;
 
     /* ── Shape — pixel art: hard corners only ─────────────────────────────*/
     --lk-radius:             0px;
+    --lk-radius-icon:        0px;
 
     /* ── Spacing grid: 8 / 16 / 32 px ────────────────────────────────────*/
     --lk-padding-small:      8px;

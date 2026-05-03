@@ -1,11 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
-    <Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
-    <Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
-    <Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/theme.uss?fileID=7433441132597879392&amp;guid=b2cc30a98936cb64aafb91e99f96d041&amp;type=3#theme" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/layout.uss?fileID=7433441132597879392&amp;guid=2d1296df433b4ca4da7b5d8fbac2f945&amp;type=3#layout" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/components.uss?fileID=7433441132597879392&amp;guid=af360b202d942224e987282a996f8e79&amp;type=3#components" />
+    <ui:Style src="project://database/Assets/_Project/UI/USS/animations.uss?fileID=7433441132597879392&amp;guid=0edd5f8ede39041408ab237ba41967d6&amp;type=3#animations" />
 
     <!-- Watermark — first child = lowest z-order, never overlaps HUD strips or panels -->
-    <ui:VisualElement class="lk-hud-bottom lk-pad-sm" style="align-items: center; pointer-events: none;">
+    <ui:VisualElement class="lk-hud-bottom lk-pad-sm lk-align-center lk-pointer-none">
         <ui:Label name="lbl-watermark" class="lk-watermark" />
     </ui:VisualElement>
 
@@ -18,14 +18,14 @@
         <!-- Left: phase badge + day counter + time progress -->
         <ui:VisualElement class="lk-hud-command-rail">
             <ui:Label name="lbl-phase" class="lk-phase-label lk-hud-badge" />
-            <ui:Button name="btn-day" class="lk-button lk-label--value colony-hud__day-btn" style="margin-left: 10px; margin-right: 10px;" />
+            <ui:Button name="btn-day" class="lk-button lk-label--value colony-hud__day-btn lk-ml-10 lk-mr-10" />
             <!-- Icon: game-icons.net "hourglass" -->
             <ui:VisualElement class="lk-hud-section-icon lk-icon lk-icon--time" />
-            <ui:Label name="lbl-hud-time-key" class="lk-title-data-key lk-hidden" style="margin-right: 6px;" />
-            <ui:VisualElement class="lk-progress-bar" style="width: 138px;">
+            <ui:Label name="lbl-hud-time-key" class="lk-title-data-key lk-hidden lk-mr-6" />
+            <ui:VisualElement class="lk-progress-bar lk-w-138">
                 <ui:VisualElement name="fill-time" class="lk-progress-bar__fill" />
             </ui:VisualElement>
-            <ui:Button name="btn-pace" class="lk-button lk-button--icon lk-button--hud lk-button--compact" style="margin-left: 6px; width: 84px; font-size: 11px;" />
+            <ui:Button name="btn-pace" class="lk-button lk-button--icon lk-button--hud lk-button--compact lk-hud-pace-btn lk-ml-6 lk-w-84" />
         </ui:VisualElement>
 
         <ui:VisualElement class="lk-grow" />
@@ -34,7 +34,7 @@
         <ui:VisualElement class="lk-hud-statbox">
             <!-- Icon: game-icons.net "cog" or "gears" -->
             <ui:VisualElement class="lk-hud-section-icon lk-icon lk-icon--assets" />
-            <ui:Label name="lbl-hud-assets-key" class="lk-title-data-key lk-hidden" style="margin-right: 8px;" />
+            <ui:Label name="lbl-hud-assets-key" class="lk-title-data-key lk-hidden lk-mr-8" />
             <!-- Nutrition / Food — Icon: game-icons.net "wheat" or "meal" -->
             <ui:VisualElement class="lk-resource-counter">
                 <ui:VisualElement name="icon-nutrition" class="lk-resource-counter__icon lk-hud-icon lk-hud-icon--food lk-icon lk-icon--food" />
@@ -71,7 +71,7 @@
         <!-- Left: phase badge + wave counter -->
         <ui:VisualElement class="lk-hud-command-rail">
             <ui:Label name="lbl-night-phase" class="lk-phase-label lk-phase-label--night lk-hud-badge lk-hud-badge--night" />
-            <ui:Label name="lbl-wave" class="lk-label lk-label--value" style="margin-left: 14px;" />
+            <ui:Label name="lbl-wave" class="lk-label lk-label--value lk-ml-14" />
         </ui:VisualElement>
 
         <ui:VisualElement class="lk-grow" />
@@ -80,21 +80,21 @@
         <ui:VisualElement class="lk-hud-statbox lk-hud-statbox--night">
             <!-- Icon: game-icons.net "lightning-bolt" -->
             <ui:VisualElement class="lk-hud-section-icon lk-icon lk-icon--breach" />
-            <ui:Label name="lbl-hud-breach-key" class="lk-title-data-key lk-hidden" style="margin-right: 8px; color: rgb(255, 160, 40);" />
+            <ui:Label name="lbl-hud-breach-key" class="lk-title-data-key lk-label--warning lk-hidden lk-mr-8" />
             <!-- Base HP: icon + value text + bar — Icon: game-icons.net "heart" or "shield" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement class="lk-hud-icon lk-hud-icon--hp lk-icon lk-icon--sm lk-icon--hp" style="margin-right: 6px;" />
+                <ui:VisualElement class="lk-hud-icon lk-hud-icon--hp lk-icon lk-icon--sm lk-icon--hp lk-mr-6" />
                 <ui:Label name="lbl-base-hp" class="lk-resource-counter__value" />
-                <ui:VisualElement class="lk-progress-bar lk-progress-bar--thick" style="width: 96px; margin-left: 8px; flex-shrink: 0;">
+                <ui:VisualElement class="lk-progress-bar lk-progress-bar--thick lk-w-96 lk-ml-8 lk-no-shrink">
                     <ui:VisualElement name="fill-base-hp" class="lk-progress-bar__fill" />
                 </ui:VisualElement>
             </ui:VisualElement>
             <ui:VisualElement class="lk-hud-divider-v" />
             <!-- Enemy count: icon + value + bar — Icon: game-icons.net "death-skull" -->
             <ui:VisualElement class="lk-resource-counter">
-                <ui:VisualElement class="lk-hud-icon lk-hud-icon--enemy lk-icon lk-icon--sm lk-icon--enemy" style="margin-right: 6px;" />
+                <ui:VisualElement class="lk-hud-icon lk-hud-icon--enemy lk-icon lk-icon--sm lk-icon--enemy lk-mr-6" />
                 <ui:Label name="lbl-enemies" class="lk-resource-counter__value" />
-                <ui:VisualElement class="lk-progress-bar" style="width: 60px; margin-left: 8px; flex-shrink: 0;">
+                <ui:VisualElement class="lk-progress-bar lk-w-60 lk-ml-8 lk-no-shrink">
                     <ui:VisualElement name="fill-wave-enemies" class="lk-progress-bar__fill lk-progress-bar__fill--danger" />
                 </ui:VisualElement>
             </ui:VisualElement>
@@ -103,7 +103,7 @@
         <ui:VisualElement class="lk-grow" />
 
         <!-- Right: speed toggle button -->
-        <ui:Button name="btn-speed" class="lk-button lk-button--icon lk-button--hud lk-button--compact lk-hud-speed-btn" style="min-width: 44px;" />
+        <ui:Button name="btn-speed" class="lk-button lk-button--icon lk-button--hud lk-button--compact lk-hud-speed-btn lk-min-w-44" />
 
     </ui:VisualElement>
 
