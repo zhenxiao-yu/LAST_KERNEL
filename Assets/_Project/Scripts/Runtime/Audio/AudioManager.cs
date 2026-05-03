@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -24,12 +25,16 @@ namespace Markyu.LastKernel
         private float _SFXCooldown = 0.05f;
 
         [BoxGroup("BGM Settings")]
-        [SerializeField, Tooltip("Default music clip to play on scene load.")]
-        private AudioClip _BGMClip;
+        [SerializeField, Tooltip("All music tracks, organised by game context. Populated automatically via Tools > LAST KERNEL > Sync Music Playlist.")]
+        private MusicPlaylist _musicPlaylist;
 
         [BoxGroup("BGM Settings")]
-        [SerializeField, Tooltip("Default music volume for the BGM AudioSource.")]
-        private float _defaultMusicVolume = 0.3f;
+        [SerializeField, Tooltip("Source volume for each BGM AudioSource (0–1). Mixer group controls perceived loudness separately.")]
+        private float _defaultMusicVolume = 0.7f;
+
+        [BoxGroup("BGM Settings")]
+        [SerializeField, Min(0f), Tooltip("Default crossfade duration in seconds when switching contexts.")]
+        private float _defaultFadeDuration = 1.5f;
 
         [BoxGroup("Audio Mixer")]
         [SerializeField, Tooltip("Main AudioMixer controlling overall game audio.")]
@@ -54,7 +59,12 @@ namespace Markyu.LastKernel
         private List<AudioSource> _SFXSourcePool;
         private int _nextSFXSourceIndex = 0;
 
-        private AudioSource _BGMSource;
+        // Two sources for crossfading (A/B flip).
+        private AudioSource _bgmA;
+        private AudioSource _bgmB;
+        private bool _onA = true;
+        private MusicContext _currentContext = MusicContext.None;
+        private Tween _bgmFadeTween;
 
         private const string SFX_VOL_KEY = "VolumeSFX";
         private const string BGM_VOL_KEY = "VolumeBGM";
@@ -90,15 +100,9 @@ namespace Markyu.LastKernel
                 _SFXSourcePool.Add(source);
             }
 
-            // Initialize BGM AudioSource
-            _BGMSource = gameObject.AddComponent<AudioSource>();
-            _BGMSource.clip = _BGMClip;
-            _BGMSource.outputAudioMixerGroup = _BGMAudioGroup;
-            _BGMSource.volume = _defaultMusicVolume;
-            _BGMSource.playOnAwake = false;
-            _BGMSource.spatialBlend = 0f;
-            _BGMSource.loop = true;
-            _BGMSource.Play();
+            // Initialize A/B BGM sources for crossfading.
+            _bgmA = CreateBGMSource("BGM_A");
+            _bgmB = CreateBGMSource("BGM_B");
         }
 
         private void Start()
@@ -108,9 +112,69 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
-            // Stop any in-progress BGM / SFX coroutines so PauseBGM doesn't
-            // attempt to restore mixer volume after the object is gone.
+            _bgmFadeTween?.Kill();
             StopAllCoroutines();
+        }
+
+        // ── BGM ───────────────────────────────────────────────────────────────────
+
+        /// <summary>
+        /// Crossfades to a random track from the given context.
+        /// No-ops if the context is already playing. Pass fadeDuration = 0 for an instant swap.
+        /// </summary>
+        public void PlayBGM(MusicContext context, float fadeDuration = -1f)
+        {
+            if (context == MusicContext.None || context == _currentContext) return;
+
+            var clip = _musicPlaylist != null ? _musicPlaylist.PickTrack(context) : null;
+            if (clip == null)
+            {
+                Debug.LogWarning($"[AudioManager] No clip found for MusicContext.{context}. Add tracks to Audio/Music/{context}/");
+                return;
+            }
+
+            _currentContext = context;
+
+            float duration = fadeDuration < 0f ? _defaultFadeDuration : fadeDuration;
+
+            AudioSource incoming = _onA ? _bgmA : _bgmB;
+            AudioSource outgoing = _onA ? _bgmB : _bgmA;
+            _onA = !_onA;
+
+            incoming.clip   = clip;
+            incoming.volume = 0f;
+            incoming.Play();
+
+            _bgmFadeTween?.Kill();
+
+            if (duration <= 0f)
+            {
+                incoming.volume = _defaultMusicVolume;
+                outgoing.Stop();
+                outgoing.clip = null;
+                return;
+            }
+
+            float outStart = outgoing.volume;
+            _bgmFadeTween = DOTween.Sequence()
+                .Append(DOTween.To(() => outgoing.volume, v => outgoing.volume = v, 0f, duration))
+                .Join(DOTween.To(() => incoming.volume,   v => incoming.volume = v, _defaultMusicVolume, duration))
+                .OnComplete(() => { outgoing.Stop(); outgoing.clip = null; })
+                .SetUpdate(true)
+                .SetLink(gameObject);
+        }
+
+        private AudioSource CreateBGMSource(string label)
+        {
+            var go  = new GameObject(label);
+            go.transform.SetParent(transform);
+            var src = go.AddComponent<AudioSource>();
+            src.outputAudioMixerGroup = _BGMAudioGroup;
+            src.volume     = 0f;
+            src.playOnAwake = false;
+            src.spatialBlend = 0f;
+            src.loop = true;
+            return src;
         }
 
         /// <summary>

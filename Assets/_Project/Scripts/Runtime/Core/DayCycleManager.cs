@@ -169,6 +169,7 @@ namespace Markyu.LastKernel
         private IEnumerator EncounterPhase()
         {
             RunStateManager.Instance?.SetPhase(GamePhase.Night);
+            AudioManager.Instance?.PlayBGM(MusicContext.Night);
 
             InputManager.Instance.AddLock(dayCycleInputLock);
             InfoPanel.Instance?.ClearInfoRequest(dayCycleRequester);
@@ -343,6 +344,7 @@ namespace Markyu.LastKernel
                     InputManager.Instance.RemoveLock(dayCycleInputLock);
                     TimeManager.Instance.StartNewDay();
                     RunStateManager.Instance?.SetPhase(GamePhase.Day);
+                    AudioManager.Instance?.PlayBGM(MusicContext.Day);
                     GameDirector.Instance.SaveGame();
                 }
             );

@@ -46,9 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _SFXPoolSize: 8
   _randomizeSFXPitch: 0
-  _BGMClip: {fileID: 8300000, guid: 4bf724baf39409243874f8809f2a2fb6, type: 3}
-  _defaultMusicVolume: 0.3
   _SFXCooldown: 0.05
+  _musicPlaylist: {fileID: 11400000, guid: 6b28a9f2a15e3574ca6c97c0ce289cb1, type: 2}
+  _defaultMusicVolume: 0.3
+  _defaultFadeDuration: 1.5
   _audioMixer: {fileID: 24100000, guid: 4ad26b530df593243aa867deee1ec81a, type: 2}
   _SFXAudioGroup: {fileID: -5459859178912290297, guid: 4ad26b530df593243aa867deee1ec81a, type: 2}
   _BGMAudioGroup: {fileID: -4230701730503260072, guid: 4ad26b530df593243aa867deee1ec81a, type: 2}
