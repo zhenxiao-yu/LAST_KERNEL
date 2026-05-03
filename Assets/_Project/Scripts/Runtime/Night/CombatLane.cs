@@ -8,16 +8,22 @@ namespace Markyu.LastKernel
     /// <summary>
     /// Pure simulation of the night combat lane. Plain C# — no MonoBehaviour, no Unity lifecycle.
     /// Driven externally via Tick(). Produces a NightCombatResult when finished.
-    /// Does not kill colony cards, mutate the board, or transition game phases.
+    ///
+    /// Ability hooks are delegated to AbilityResolver:
+    ///   Battle-start: shields, GangUp auras initialised.
+    ///   Per-tick: DoT, Repair, Healer, GangUp aura refresh.
+    ///   Per-attack: Ethereal evasion, Executioner bonus, Poison on-hit.
+    ///   On death: Resilient survival check, Veteran/Rally/Infect triggers.
     /// </summary>
     public class CombatLane
     {
-        public event Action<CombatUnit> OnUnitDied;
+        public event Action<CombatUnit>                    OnUnitDied;
         public event Action<CombatUnit, CombatUnit, int, bool> OnAttackResolved; // attacker, target, damage, isCrit
-        public event Action<bool> OnCombatEnded; // playerWon
+        public event Action<bool>                          OnCombatEnded;       // playerWon
 
         public IReadOnlyList<CombatUnit> Defenders => _defenders;
-        public IReadOnlyList<CombatUnit> Enemies => _enemies;
+        public IReadOnlyList<CombatUnit> Enemies   => _enemies;
+        public IEnumerable<CombatUnit>   AllUnits   => _defenders.Concat(_enemies);
 
         public bool IsOngoing { get; private set; } = true;
         public bool PlayerWon { get; private set; }
@@ -34,20 +40,24 @@ namespace Markyu.LastKernel
             NightWaveDefinition waveDef)
         {
             _defenders = new List<CombatUnit>(defenders);
-            _enemies = new List<CombatUnit>(enemies);
-            _waveDef = waveDef;
+            _enemies   = new List<CombatUnit>(enemies);
+            _waveDef   = waveDef;
+
+            AbilityResolver.ApplyBattleStartAbilities(_defenders, _enemies);
         }
 
         // ── Simulation ────────────────────────────────────────────────────────────
 
-        /// <summary>
-        /// Advances all unit attack timers by deltaTime and resolves any attacks that fire.
-        /// Call once per tick from NightPhaseManager's coroutine.
-        /// </summary>
         public void Tick(float deltaTime)
         {
             if (!IsOngoing) return;
 
+            // Phase 1: time-based effects (DoT, Repair, Healer, aura refresh)
+            AbilityResolver.ApplyTickEffects(_defenders, _enemies);
+            ProcessAllPendingDeaths();
+            if (!IsOngoing) return;
+
+            // Phase 2: attack processing
             ProcessSide(_defenders, _enemies, deltaTime);
             ProcessSide(_enemies, _defenders, deltaTime);
 
@@ -62,11 +72,11 @@ namespace Markyu.LastKernel
 
                 attacker.AttackTimer += deltaTime;
 
-                if (attacker.AttackTimer < attacker.AttackCooldown) continue;
+                if (attacker.AttackTimer < attacker.EffectiveAttackCooldown) continue;
 
-                attacker.AttackTimer -= attacker.AttackCooldown;
+                attacker.AttackTimer -= attacker.EffectiveAttackCooldown;
 
-                var target = GetFrontTarget(targets);
+                var target = AbilityResolver.GetTarget(targets);
                 if (target == null) continue;
 
                 ResolveAttack(attacker, target);
@@ -85,6 +95,13 @@ namespace Markyu.LastKernel
                 return;
             }
 
+            // Ethereal: one-time complete evasion of the first hit
+            if (AbilityResolver.CheckEtherealEvasion(target))
+            {
+                OnAttackResolved?.Invoke(attacker, target, 0, false);
+                return;
+            }
+
             int baseDamage = Mathf.Max(1, attacker.Attack - target.Defense);
 
             bool isCrit = UnityEngine.Random.value < attacker.CritChancePercent / 100f;
@@ -92,29 +109,58 @@ namespace Markyu.LastKernel
                 ? Mathf.RoundToInt(baseDamage * (attacker.CritMultiplier / 100f))
                 : baseDamage;
 
-            target.TakeDamage(finalDamage);
-            OnAttackResolved?.Invoke(attacker, target, finalDamage, isCrit);
+            // Executioner: bonus damage against low-HP targets
+            finalDamage += AbilityResolver.ComputeBonusDamage(attacker, target, finalDamage);
+
+            int actualDamage = target.TakeDamage(finalDamage);
+            OnAttackResolved?.Invoke(attacker, target, actualDamage, isCrit);
+
+            AbilityResolver.ResolveOnHitAbilities(attacker, target, actualDamage);
 
             if (!target.IsAlive)
-            {
-                if (target.Side == CombatUnitSide.Enemy) _enemiesKilled++;
-                OnUnitDied?.Invoke(target);
-            }
+                ProcessPotentialDeath(target, attacker);
         }
 
-        private static CombatUnit GetFrontTarget(List<CombatUnit> units)
+        // ── Death processing ──────────────────────────────────────────────────────
+
+        private void ProcessAllPendingDeaths()
         {
-            foreach (var u in units)
-            {
-                if (u.IsAlive) return u;
-            }
-            return null;
+            foreach (var u in _defenders) ProcessPotentialDeath(u);
+            foreach (var u in _enemies)   ProcessPotentialDeath(u);
+        }
+
+        private void ProcessPotentialDeath(CombatUnit dying, CombatUnit killer = null)
+        {
+            if (dying.IsAlive || dying.DeathProcessed) return;
+
+            // Resilient: survive at 1 HP once
+            if (AbilityResolver.CheckDeathSurvival(dying)) return;
+
+            dying.MarkDeathProcessed();
+
+            if (dying.Side == CombatUnitSide.Enemy) _enemiesKilled++;
+
+            AbilityResolver.ResolveOnKillAbilities(killer, dying);
+
+            var deadAllies = dying.Side == CombatUnitSide.Enemy
+                ? (IReadOnlyList<CombatUnit>)_enemies
+                : _defenders;
+            var deadFoes = dying.Side == CombatUnitSide.Enemy
+                ? (IReadOnlyList<CombatUnit>)_defenders
+                : _enemies;
+
+            AbilityResolver.ResolveOnDeathAbilities(dying, deadAllies, deadFoes);
+            OnUnitDied?.Invoke(dying);
+
+            CheckEndCondition();
         }
 
         private void CheckEndCondition()
         {
+            if (!IsOngoing) return;
+
             bool defendersAlive = _defenders.Any(u => u.IsAlive);
-            bool enemiesAlive = _enemies.Any(u => u.IsAlive);
+            bool enemiesAlive   = _enemies.Any(u => u.IsAlive);
 
             if (!defendersAlive || !enemiesAlive)
             {
@@ -124,7 +170,7 @@ namespace Markyu.LastKernel
             }
         }
 
-        /// <summary>Forces combat to end in a draw (defenders survive). Used as a safety fallback.</summary>
+        /// <summary>Forces combat to end in a draw (defenders survive). Safety fallback.</summary>
         public void ForceEnd()
         {
             if (!IsOngoing) return;
@@ -150,18 +196,12 @@ namespace Markyu.LastKernel
             int salvageDelta = _enemiesKilled * (_waveDef?.SalvagePerKill ?? 1);
 
             if (PlayerWon)
-            {
                 moraleDelta = _waveDef?.VictoryMoraleDelta ?? 7;
-            }
             else
-            {
                 moraleDelta = _waveDef?.DefeatMoraleDelta ?? -7;
-            }
 
             if (_waveDef != null)
-            {
                 fatigueDelta = _defenders.Count * _waveDef.FatigueCostPerDefender;
-            }
 
             return new NightCombatResult(
                 PlayerWon,

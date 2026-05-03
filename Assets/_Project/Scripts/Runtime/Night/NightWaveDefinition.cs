@@ -59,6 +59,23 @@ namespace Markyu.LastKernel
             return result;
         }
 
+        /// <summary>
+        /// Builds the enemy list with stats scaled for the given day number.
+        /// Day 1 returns base stats; higher days apply EnemyDefinition.ScaledForDay().
+        /// </summary>
+        public List<EnemyDefinition> BuildEnemyListScaled(int day)
+        {
+            var result = new List<EnemyDefinition>();
+            foreach (var entry in enemies)
+            {
+                if (entry.Enemy == null) continue;
+                var scaled = entry.Enemy.ScaledForDay(day);
+                for (int i = 0; i < entry.Count; i++)
+                    result.Add(scaled);
+            }
+            return result;
+        }
+
         public static NightWaveDefinition CreateRuntime(
             string name, string flavor, List<EnemyEntry> entries,
             int victoryMorale = 7, int defeatMorale = -7,

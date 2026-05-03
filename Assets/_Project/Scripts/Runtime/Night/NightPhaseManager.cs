@@ -206,8 +206,9 @@ namespace Markyu.LastKernel
 
         private List<CombatUnit> BuildEnemyUnits(NightWaveDefinition wave)
         {
+            int day = TimeManager.Instance?.CurrentDay ?? 1;
             var units = new List<CombatUnit>();
-            foreach (var enemyDef in wave.BuildEnemyList())
+            foreach (var enemyDef in wave.BuildEnemyListScaled(day))
                 units.Add(CombatUnit.FromEnemyDefinition(enemyDef));
             return units;
         }
