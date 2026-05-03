@@ -14,16 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: _Project.Runtime::Markyu.LastKernel.MusicPlaylist
   tracks:
   - context: 1
+    transitionIn: {fileID: 0}
     clips:
     - {fileID: 8300000, guid: 2a10e67f79b37bb4daeb80e6bf4912d9, type: 3}
+    - {fileID: 8300000, guid: feb93bbdd21fad44a8cbcb67e9c0e749, type: 3}
+    - {fileID: 8300000, guid: 2f474628ecbcae14593165a6388a43d2, type: 3}
   - context: 2
+    transitionIn: {fileID: 8300000, guid: 67394638fcc6dea4c82a6ff3d3490623, type: 3}
     clips:
-    - {fileID: 8300000, guid: 4bf724baf39409243874f8809f2a2fb6, type: 3}
+    - {fileID: 8300000, guid: c67be10a393d24044b6e7f5aeefe0a83, type: 3}
   - context: 3
-    clips: []
+    transitionIn: {fileID: 8300000, guid: b1edd4c29bd740540b2a9cc68943a368, type: 3}
+    clips:
+    - {fileID: 8300000, guid: e77c5631be14bac448fb0567efa3fbed, type: 3}
   - context: 4
-    clips: []
+    transitionIn: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: a254b7e18dbc0a445aecf868aca58bee, type: 3}
   - context: 5
-    clips: []
+    transitionIn: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 9618d1543167eb445891c9d6b4cd272c, type: 3}
+    - {fileID: 8300000, guid: fbfefeefc5262284a8a1c622bc72c57d, type: 3}
   - context: 6
-    clips: []
+    transitionIn: {fileID: 0}
+    clips:
+    - {fileID: 8300000, guid: 4dac18fa9e0aefc45bbf2c2209847776, type: 3}
