@@ -37,12 +37,14 @@ namespace Markyu.LastKernel
             _bodyLabel.text  = body;
             _pendingAccept   = onAccept;
             Root.RemoveFromClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
         {
             _pendingAccept = null;
             Root.AddToClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelClose();
         }
 
         // ── Localization ───────────────────────────────────────────────────────

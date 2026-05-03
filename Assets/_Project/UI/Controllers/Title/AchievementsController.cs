@@ -39,9 +39,14 @@ namespace Markyu.LastKernel
             Root.RemoveFromClassList("lk-hidden");
             Rebuild();
             OnLocalizationRefresh();
+            LKUIInteractionPolisher.PlayPanelOpen();
         }
 
-        public void Hide() => Root.AddToClassList("lk-hidden");
+        public void Hide()
+        {
+            Root.AddToClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelClose();
+        }
 
         // ── Localization ───────────────────────────────────────────────────────
 
@@ -61,7 +66,11 @@ namespace Markyu.LastKernel
             bool hasData = svc != null && svc.Database != null && svc.Database.All.Count > 0;
 
             _emptyLabel?.EnableInClassList("lk-hidden", hasData);
-            if (!hasData) return;
+            if (!hasData)
+            {
+                LKUIInteractionPolisher.Refresh(Root);
+                return;
+            }
 
             int total    = 0;
             int unlocked = 0;
@@ -76,6 +85,7 @@ namespace Markyu.LastKernel
             }
 
             UpdateFooter(unlocked, total);
+            LKUIInteractionPolisher.Refresh(Root);
         }
 
         private static VisualElement BuildCard(AchievementDefinition def, AchievementService svc, bool isUnlocked)

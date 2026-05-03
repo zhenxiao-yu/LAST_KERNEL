@@ -171,6 +171,7 @@ namespace Markyu.LastKernel
             SwitchTab(OptionsTab.Settings);
             RefreshFromManagers();
             OnLocalizationRefresh();
+            LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
@@ -182,6 +183,7 @@ namespace Markyu.LastKernel
 #endif
             PlayerPrefs.Save();
             Root.AddToClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelClose();
         }
 
         public override void OnLocalizationRefresh()
@@ -271,13 +273,16 @@ namespace Markyu.LastKernel
                 var msg = new Label { text = GameLocalization.GetOptional("options.controls.unavailable", "Controls are only available during gameplay.") };
                 msg.AddToClassList("lk-keybind-unavailable");
                 _keybindList.Add(msg);
+                LKUIInteractionPolisher.Refresh(Root);
                 return;
             }
 
             foreach (var entry in handler.AllActions)
                 _keybindList.Add(CreateKeybindRow(entry));
+            LKUIInteractionPolisher.Refresh(Root);
 #else
             _keybindList.Add(new Label { text = "New Input System required for rebinding." });
+            LKUIInteractionPolisher.Refresh(Root);
 #endif
         }
 

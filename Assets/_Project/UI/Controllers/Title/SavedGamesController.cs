@@ -52,9 +52,14 @@ namespace Markyu.LastKernel
             Root.RemoveFromClassList("lk-hidden");
             RebuildSlots();
             OnLocalizationRefresh();
+            LKUIInteractionPolisher.PlayPanelOpen();
         }
 
-        public void Hide() => Root.AddToClassList("lk-hidden");
+        public void Hide()
+        {
+            Root.AddToClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelClose();
+        }
 
         // ── Localization ───────────────────────────────────────────────────────
 
@@ -85,6 +90,7 @@ namespace Markyu.LastKernel
             }
 
             _emptyLabel?.EnableInClassList("lk-hidden", _trackedSlots.Count > 0);
+            LKUIInteractionPolisher.Refresh(Root);
         }
 
         private VisualElement BuildSlotRow(GameData data)

@@ -1849,3 +1849,40 @@ Toggle:checked .unity-toggle__checkmark {
     border-color: rgba(0, 220, 255, 0.16);
     border-width: 1px;
 }
+
+.lk-save-slot,
+.lk-list__item,
+.lk-ach-card,
+.lk-keybind-row {
+    background-color: rgba(4, 8, 16, 0.68);
+    border-color: rgba(80, 100, 128, 0.34);
+    border-width: 1px;
+    border-left-width: 2px;
+    border-left-color: rgba(0, 220, 255, 0.24);
+    border-bottom-width: 3px;
+    border-bottom-color: var(--lk-panel-deep);
+    transition-property: background-color, border-color, translate, scale;
+    transition-duration: var(--lk-transition-fast);
+    transition-timing-function: ease-out;
+}
+
+.lk-save-slot:hover,
+.lk-list__item:hover,
+.lk-ach-card:hover,
+.lk-keybind-row:hover {
+    background-color: rgba(0, 220, 255, 0.08);
+    border-color: rgba(0, 220, 255, 0.58);
+    translate: 2px 0px;
+}
+
+.lk-ach-card--unlocked {
+    border-left-color: var(--lk-success);
+    background-color: rgba(20, 36, 28, 0.74);
+}
+
+.lk-ach-card__icon {
+    background-color: var(--lk-panel-deep);
+    border-color: rgba(0, 220, 255, 0.25);
+    border-bottom-width: 3px;
+    border-bottom-color: rgb(0, 0, 0);
+}

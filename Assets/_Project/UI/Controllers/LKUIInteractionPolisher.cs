@@ -54,6 +54,10 @@ namespace Markyu.LastKernel
             });
         }
 
+        public static void PlayPanelOpen() => Play(AudioId.Pop);
+
+        public static void PlayPanelClose() => Play(AudioId.Click);
+
         private static void OnPointerEnter(PointerEnterEvent evt)
         {
             if (FindInteractive(evt.target as VisualElement) is not { } el) return;
@@ -170,7 +174,12 @@ namespace Markyu.LastKernel
                 return;
 
             _lastHoverSoundTime = now;
-            AudioManager.Instance.PlaySFX(AudioId.Pop);
+            Play(AudioId.Pop);
+        }
+
+        private static void Play(AudioId id)
+        {
+            AudioManager.Instance?.PlaySFX(id);
         }
     }
 }

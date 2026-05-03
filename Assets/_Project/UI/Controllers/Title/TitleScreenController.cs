@@ -93,6 +93,8 @@ namespace Markyu.LastKernel
 
             _achievements = new AchievementsController();
             _achievements.Bind(Root.Q<VisualElement>("panel-achievements"));
+
+            _newGameButton.schedule.Execute(() => _newGameButton.Focus()).StartingIn(150);
         }
 
         // ── Localization ───────────────────────────────────────────────────────

@@ -6,27 +6,55 @@
 
     <ui:VisualElement name="title-root" class="lk-screen lk-screen-bg">
 
+        <ui:VisualElement class="lk-title-bg-grid lk-scan-drift" />
+
+        <ui:VisualElement class="lk-title-data-panel">
+            <ui:Label class="lk-screen-title-kicker" text="BUNKER TELEMETRY" />
+            <ui:VisualElement class="lk-title-data-row">
+                <ui:Label class="lk-title-data-key" text="CORE" />
+                <ui:Label class="lk-title-data-value lk-terminal-pulse" text="STABLE" />
+            </ui:VisualElement>
+            <ui:VisualElement class="lk-title-data-row">
+                <ui:Label class="lk-title-data-key" text="SIGNAL" />
+                <ui:Label class="lk-title-data-value" text="72%" />
+            </ui:VisualElement>
+            <ui:VisualElement class="lk-title-data-row">
+                <ui:Label class="lk-title-data-key" text="SECTOR" />
+                <ui:Label class="lk-title-data-value" text="BLACKOUT" />
+            </ui:VisualElement>
+            <ui:VisualElement class="lk-title-data-row">
+                <ui:Label class="lk-title-data-key" text="THREAT" />
+                <ui:Label class="lk-title-data-value" style="color: rgb(255, 160, 40);" text="RISING" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+
         <!-- ── Main menu ─────────────────────────────────────────────────────── -->
-        <!-- Left-aligned column: logo in upper third, buttons below centre -->
-        <ui:VisualElement name="title-main" class="lk-screen lk-column lk-justify-center"
-                          style="padding-left: 120px; padding-bottom: 80px;">
+        <!-- Left command surface: logo, diegetic status, and nav controls. -->
+        <ui:VisualElement name="title-main" class="lk-command-surface">
 
             <!-- Logo + subtitle -->
             <ui:VisualElement name="title-header" class="lk-column">
+                <ui:Label class="lk-screen-title-kicker" text="COLONY COMMAND INTERFACE" />
                 <!-- Sprite slot: assign background-image in C#, add class lk-logo-icon-visible to show -->
                 <ui:VisualElement name="logo-icon" class="lk-logo-icon" />
                 <!-- Letter labels + ParticleImage created at runtime by TitleLogoAnimator -->
                 <ui:VisualElement name="title-logo-area" class="lk-title-logo-area" />
                 <ui:Label name="lbl-subtitle" class="lk-label lk-label--dim"
-                          style="margin-top: 8px; margin-bottom: 40px;" />
+                          style="margin-top: 8px; margin-bottom: 26px; max-width: 390px;" />
             </ui:VisualElement>
 
             <!-- Accent rule between logo and nav -->
             <ui:VisualElement class="lk-divider lk-divider--accent"
-                              style="width: 240px; margin-bottom: 32px;" />
+                              style="width: 312px; margin-bottom: 16px;" />
 
             <!-- Nav buttons -->
-            <ui:VisualElement name="title-buttons" class="lk-column">
+            <ui:VisualElement class="lk-hud-command-rail" style="width: 330px; margin-bottom: 10px;">
+                <ui:Label class="lk-title-data-key" text="BOOT TARGET" />
+                <ui:VisualElement class="lk-grow" />
+                <ui:Label class="lk-title-data-value" text="PLAYER" />
+            </ui:VisualElement>
+
+            <ui:VisualElement name="title-buttons" class="lk-column lk-title-nav-frame">
                 <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-mb-sm" text="NEW GAME" />
                 <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-mb-sm" text="LOAD GAME" />
                 <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-mb-sm" text="ACHIEVEMENTS" />
@@ -37,14 +65,14 @@
         </ui:VisualElement>
 
         <!-- Version footer — bottom-left, pointer-events: none so it never blocks nav buttons -->
-        <ui:VisualElement name="title-footer" class="lk-hud-bottom lk-pad-sm"
-                          style="padding-left: 120px; pointer-events: none;">
+        <ui:VisualElement name="title-footer" class="lk-hud-bottom lk-pad-sm lk-title-footer-strip"
+                          style="padding-left: 78px; pointer-events: none;">
             <ui:Label name="lbl-version" class="lk-watermark" />
         </ui:VisualElement>
 
         <!-- ── Gameplay Prefs panel ───────────────────────────────────────────── -->
         <ui:VisualElement name="panel-gameplay-prefs" class="lk-modal-backdrop lk-hidden">
-            <ui:VisualElement class="lk-panel" style="width: 480px;">
+            <ui:VisualElement class="lk-panel lk-boot-in" style="width: 480px;">
 
                 <ui:VisualElement class="lk-panel__header">
                     <ui:Label name="lbl-prefs-title"    class="lk-panel__title" />
@@ -87,7 +115,7 @@
 
         <!-- ── Saved Games panel ─────────────────────────────────────────────── -->
         <ui:VisualElement name="panel-saved-games" class="lk-modal-backdrop lk-hidden">
-            <ui:VisualElement class="lk-panel" style="width: 560px;">
+            <ui:VisualElement class="lk-panel lk-boot-in" style="width: 560px;">
 
                 <ui:VisualElement class="lk-panel__header">
                     <ui:Label name="lbl-saves-title"    class="lk-panel__title" />
@@ -110,7 +138,7 @@
 
         <!-- ── Options panel ─────────────────────────────────────────────────── -->
         <ui:VisualElement name="panel-options" class="lk-modal-backdrop lk-hidden">
-            <ui:VisualElement class="lk-panel" style="width: 640px;">
+            <ui:VisualElement class="lk-panel lk-boot-in" style="width: 640px;">
 
                 <ui:VisualElement class="lk-panel__header">
                     <ui:Label name="lbl-opts-title"    class="lk-panel__title" />
@@ -196,7 +224,7 @@
 
         <!-- ── Achievements panel ────────────────────────────────────────────── -->
         <ui:VisualElement name="panel-achievements" class="lk-modal-backdrop lk-hidden">
-            <ui:VisualElement class="lk-panel" style="width: 860px; max-height: 720px;">
+            <ui:VisualElement class="lk-panel lk-boot-in" style="width: 860px; max-height: 720px;">
 
                 <!-- Header: title row + full-width progress bar -->
                 <ui:VisualElement class="lk-panel__header" style="flex-direction: column; align-items: stretch;">
@@ -226,7 +254,7 @@
 
         <!-- ── Confirmation modal ─────────────────────────────────────────────── -->
         <ui:VisualElement name="panel-modal" class="lk-modal-backdrop lk-hidden">
-            <ui:VisualElement class="lk-modal">
+            <ui:VisualElement class="lk-modal lk-boot-in">
                 <ui:Label name="lbl-modal-title" class="lk-modal__title" />
                 <ui:Label name="lbl-modal-body"  class="lk-modal__body text-auto-size text-auto-size-min-8 text-auto-size-max-14" />
                 <ui:VisualElement class="lk-modal__actions">
@@ -238,7 +266,7 @@
 
         <!-- ── Language picker modal ─────────────────────────────────────────── -->
         <ui:VisualElement name="panel-language" class="lk-modal-backdrop lk-hidden">
-            <ui:VisualElement class="lk-panel" style="width: 580px;">
+            <ui:VisualElement class="lk-panel lk-boot-in" style="width: 580px;">
 
                 <ui:VisualElement class="lk-panel__header">
                     <ui:Label name="lbl-lang-title"    class="lk-panel__title" />

@@ -66,11 +66,13 @@ namespace Markyu.LastKernel
             _originalLanguage = GameLocalization.CurrentLanguage;
             OnLocalizationRefresh();
             Root.RemoveFromClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
         {
             Root.AddToClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelClose();
         }
 
         // ── Localization ───────────────────────────────────────────────────────

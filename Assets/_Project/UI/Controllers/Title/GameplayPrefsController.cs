@@ -65,11 +65,13 @@ namespace Markyu.LastKernel
         {
             Root.RemoveFromClassList("lk-hidden");
             OnLocalizationRefresh();
+            LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
         {
             Root.AddToClassList("lk-hidden");
+            LKUIInteractionPolisher.PlayPanelClose();
         }
 
         // ── Localization ───────────────────────────────────────────────────────
