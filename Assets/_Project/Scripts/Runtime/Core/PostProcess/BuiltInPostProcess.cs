@@ -6,6 +6,8 @@ namespace Markyu.LastKernel
     [ExecuteInEditMode]
     public class BuiltInPostProcess : MonoBehaviour
     {
+        public static BuiltInPostProcess Instance { get; private set; }
+
         [SerializeField, Tooltip("Material that applies the post-processing shader during rendering.")]
         private Material effectMaterial;
 
@@ -33,6 +35,15 @@ namespace Markyu.LastKernel
         private Tweener _vignetteTween;
         private Tweener _grayscaleTween;
         private Tweener _neonEdgeTween;
+        private Tweener _glitchChromaTween;
+        private Tweener _glitchNeonTween;
+
+        private void Awake()
+        {
+            if (!Application.isPlaying) return;
+            if (Instance != null && Instance != this) { Destroy(gameObject); return; }
+            Instance = this;
+        }
 
         private void OnValidate() => Initialize();
 
@@ -49,6 +60,8 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
+            if (Instance == this) Instance = null;
+
             if (TimeManager.Instance != null)
             {
                 TimeManager.Instance.OnTimePaceChanged -= HandleTimePaceChanged;
@@ -58,6 +71,56 @@ namespace Markyu.LastKernel
             _vignetteTween?.Kill();
             _grayscaleTween?.Kill();
             _neonEdgeTween?.Kill();
+            _glitchChromaTween?.Kill();
+            _glitchNeonTween?.Kill();
+        }
+
+        /// <summary>
+        /// Brief screen-space glitch flash: spikes chromatic aberration then restores it.
+        /// Safe to call from any gameplay code; ignored in Edit mode.
+        /// </summary>
+        public void PlayGlitchFlash(float peakChromatic = 0.025f, float peakNeonEdge = 0.35f, float duration = 0.22f)
+        {
+            if (!Application.isPlaying || effectMaterial == null) return;
+
+            float restoreChroma = chromaticAmount;
+            float restoreNeon   = neonEdgeIntensity;
+            float attackTime    = duration * 0.2f;
+            float releaseTime   = duration * 0.8f;
+
+            _glitchChromaTween?.Kill();
+            _glitchChromaTween = DOTween.To(
+                    () => chromaticAmount,
+                    x => { chromaticAmount = x; effectMaterial.SetFloat("_ChromaticAmount", x); },
+                    peakChromatic, attackTime)
+                .SetUpdate(true)
+                .SetLink(gameObject)
+                .OnComplete(() =>
+                {
+                    _glitchChromaTween = DOTween.To(
+                            () => chromaticAmount,
+                            x => { chromaticAmount = x; effectMaterial.SetFloat("_ChromaticAmount", x); },
+                            restoreChroma, releaseTime)
+                        .SetUpdate(true)
+                        .SetLink(gameObject);
+                });
+
+            _glitchNeonTween?.Kill();
+            _glitchNeonTween = DOTween.To(
+                    () => neonEdgeIntensity,
+                    x => { neonEdgeIntensity = x; effectMaterial.SetFloat("_NeonEdgeIntensity", x); },
+                    peakNeonEdge, attackTime)
+                .SetUpdate(true)
+                .SetLink(gameObject)
+                .OnComplete(() =>
+                {
+                    _glitchNeonTween = DOTween.To(
+                            () => neonEdgeIntensity,
+                            x => { neonEdgeIntensity = x; effectMaterial.SetFloat("_NeonEdgeIntensity", x); },
+                            restoreNeon, releaseTime)
+                        .SetUpdate(true)
+                        .SetLink(gameObject);
+                });
         }
 
         private void Initialize()

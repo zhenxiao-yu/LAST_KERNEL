@@ -171,6 +171,7 @@ namespace Markyu.LastKernel
         public bool IsAILocked;
 
         public string OriginalId; // Preserves the base personnel definition after a class upgrade.
+        [UnityEngine.SerializeReference]
         public List<CardData> EquippedItems = new();
 
         public CardData() { }

@@ -167,7 +167,7 @@ namespace Markyu.LastKernel
             GameData.LastSaved = System.DateTime.Now;
             string fileName = $"SaveSlot{GameData.SlotNumber:D3}";
             SaveSystem.SaveData<GameData>(GameData, fileName);
-            SavedGames.TryAdd(fileName, GameData);
+            SavedGames?.TryAdd(fileName, GameData);
         }
 
         /// <summary>

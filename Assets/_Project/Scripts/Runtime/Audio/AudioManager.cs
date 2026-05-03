@@ -5,6 +5,7 @@ using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace Markyu.LastKernel
 {
@@ -106,6 +107,9 @@ namespace Markyu.LastKernel
             _bgmA          = CreateBGMSource("BGM_A",       loop: true);
             _bgmB          = CreateBGMSource("BGM_B",       loop: true);
             _stingerSource = CreateBGMSource("BGM_Stinger", loop: false);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            EnsureAudioListener();
         }
 
         private void Start()
@@ -115,8 +119,32 @@ namespace Markyu.LastKernel
 
         private void OnDestroy()
         {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
             _bgmFadeTween?.Kill();
             StopAllCoroutines();
+        }
+
+        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            EnsureAudioListener();
+        }
+
+        // Adds a fallback AudioListener to this GameObject if the scene has none.
+        // Removes it again if a proper listener already exists elsewhere.
+        private void EnsureAudioListener()
+        {
+            var existing = FindObjectsByType<AudioListener>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            var ours = GetComponent<AudioListener>();
+
+            if (existing.Length == 0 || (existing.Length == 1 && ours != null))
+            {
+                if (ours == null)
+                    gameObject.AddComponent<AudioListener>();
+            }
+            else if (existing.Length > 1 && ours != null)
+            {
+                Destroy(ours);
+            }
         }
 
         // ── BGM ───────────────────────────────────────────────────────────────────
