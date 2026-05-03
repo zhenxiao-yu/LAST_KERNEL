@@ -209,7 +209,7 @@ namespace Markyu.LastKernel
                 oldStack.SetTargetPosition(oldStack.TargetPosition);
                 // Re-evaluate the leftover stack — it may still form a recipe.
                 if (oldStack.IsCrafting)
-                    CraftingManager.Instance?.StopCraftingTask(oldStack);
+                    CraftingManager.Instance?.ValidateAndResumeTask(oldStack);
                 else
                     CraftingManager.Instance?.CheckForRecipe(oldStack);
             }
@@ -269,7 +269,8 @@ namespace Markyu.LastKernel
 
             if (Board.Instance.IsPointValid(next, _card.Stack))
             {
-                _card.Stack.SetTargetPosition(next);
+                // Tight stagger (0.02s) keeps the stack cohesive while hunting — feels urgent.
+                _card.Stack.SetTargetPositionOrganic(next, duration: 0.18f, trailStagger: 0.02f);
                 CardManager.Instance?.ResolveOverlaps();
             }
         }
@@ -286,7 +287,8 @@ namespace Markyu.LastKernel
 
                 if (Board.Instance.IsPointValid(candidate, _card.Stack))
                 {
-                    _card.Stack.SetTargetPosition(candidate);
+                    // Loose stagger (0.06s) lets trailing cards sway behind — feels lazy and alive.
+                    _card.Stack.SetTargetPositionOrganic(candidate, duration: 0.32f, trailStagger: 0.06f);
                     CardManager.Instance?.ResolveOverlaps();
                     return;
                 }

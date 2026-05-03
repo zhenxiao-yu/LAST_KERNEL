@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -53,6 +54,7 @@ namespace Markyu.LastKernel
                 if (equipperCard == null || equipperCard.EquipperComponent == null) return;
 
                 equipperCard.EquipperComponent.Unequip(_card.Definition.EquipmentSlot);
+                equipperCard.FeelPresenter?.OnMergeReceived();
                 _card.IsBeingDragged = true;
                 _card.Stack.KillAllTweens();
 
@@ -120,7 +122,9 @@ namespace Markyu.LastKernel
                     if (oldStack.IsCrafting)
                     {
                         _card.OriginalCraftingStack = oldStack;
-                        CraftingManager.Instance.PauseCraftingTask(oldStack);
+                        // Pause if remaining cards still form the recipe; stop immediately
+                        // if not so the progress bar disappears rather than hanging frozen.
+                        CraftingManager.Instance.PauseOrStopCraftingTask(oldStack);
                     }
                     else
                     {
@@ -267,7 +271,28 @@ namespace Markyu.LastKernel
 
             var attachedToStack = _card.TryAttachToNearbyStack(_card.Settings.AttachRadius, stackToIgnore: null);
 
-            attachedToStack?.TopCard?.FeelPresenter?.OnMergeReceived();
+            // Ripple the merge punch down the whole receiving stack so every card
+            // reacts to the impact — top card first, trailing cards follow 35 ms apart.
+            if (attachedToStack != null)
+            {
+                for (int i = 0; i < attachedToStack.Cards.Count; i++)
+                {
+                    var c = attachedToStack.Cards[i];
+                    if (c?.FeelPresenter == null) continue;
+                    float delay = i * 0.035f;
+                    if (delay <= 0f)
+                    {
+                        c.FeelPresenter.OnMergeReceived();
+                    }
+                    else
+                    {
+                        var captured = c;
+                        DOVirtual.DelayedCall(delay, () => captured.FeelPresenter?.OnMergeReceived())
+                            .SetUpdate(true)
+                            .SetLink(captured.gameObject);
+                    }
+                }
+            }
 
             if (_card.OriginalCraftingStack != null)
             {
@@ -357,12 +382,15 @@ namespace Markyu.LastKernel
                 }
             }
 
-            if (targetCharacter != null)
+            if (targetCharacter != null && targetCharacter.EquipperComponent != null)
             {
-                if (targetCharacter.EquipperComponent != null)
+                bool equipped = targetCharacter.EquipperComponent.Equip(_card);
+                if (equipped)
                 {
-                    return targetCharacter.EquipperComponent.Equip(_card);
+                    targetCharacter.FeelPresenter?.OnMergeReceived();
+                    AudioManager.Instance?.PlaySFX(AudioId.CardDrop);
                 }
+                return equipped;
             }
 
             return false;

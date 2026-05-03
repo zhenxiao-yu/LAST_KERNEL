@@ -71,7 +71,7 @@
 }
 
 .nb-section-title {
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     -unity-font-style: bold;
     letter-spacing: 2px;
 }
@@ -91,7 +91,7 @@
     flex-direction: row;
     align-items: stretch;
     flex-shrink: 0;
-    min-height: 100px;
+    min-height: 130px;
 }
 
 /* Fighter cards in enemy row flow right-to-left (slot 0 = rightmost = FRONT) */
@@ -136,8 +136,8 @@
     border-color: var(--lk-border-dim);
     margin: 0 4px;
     padding: var(--lk-padding-small);
-    min-width: 110px;
-    max-width: 160px;
+    min-width: 130px;
+    max-width: 190px;
     flex-grow: 1;
     flex-shrink: 1;
     transition: border-color var(--lk-transition-fast) linear;
@@ -183,7 +183,7 @@
 
 .nb-fighter-stats {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     margin-bottom: 6px;
 }
 
@@ -216,13 +216,13 @@
 
 .nb-fighter-hp-text {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     -unity-text-align: upper-right;
 }
 
 .nb-fighter-role {
     color: var(--lk-text-dim);
-    font-size: var(--lk-font-size-xs);
+    font-size: var(--lk-font-size-sm);
     letter-spacing: 1px;
     margin-top: 2px;
 }
@@ -238,7 +238,7 @@
     border-top-width: 1px;
     border-top-color: var(--lk-border-dim);
     padding: var(--lk-padding-small) var(--lk-padding-medium);
-    max-height: 140px;
+    max-height: 200px;
 }
 
 .nb-log-header {
@@ -256,8 +256,8 @@
 /* Individual log entry labels — added dynamically */
 .nb-log-entry {
     color: var(--lk-text);
-    font-size: var(--lk-font-size-xs);
-    padding: 1px 0;
+    font-size: var(--lk-font-size-sm);
+    padding: 2px 0;
     white-space: normal;
 }
 
@@ -340,7 +340,7 @@
     position: absolute;
     /* sits over the battle area — controller sets top/bottom in C# or use flex */
     top: 52px;   /* below topbar (~52px) */
-    bottom: 230px; /* above log + controls (~230px combined) */
+    bottom: 260px; /* above log (200px) + controls (~60px) */
     left: 0; right: 0;
     align-items: center;
     justify-content: center;

@@ -75,19 +75,58 @@ namespace Markyu.LastKernel
 
         public void HighlightStackableStacks(CardInstance liftedCard)
         {
+            if (liftedCard == null) return;
+
+            var craftingMgr = CraftingManager.Instance;
+            var allRecipes  = craftingMgr?.AllRecipes;
+
+            // Collect the definitions of every card currently being dragged.
+            // Used to simulate the combined stack for recipe matching below.
+            var draggedDefs = new List<CardDefinition>(
+                liftedCard.Stack != null ? liftedCard.Stack.Cards.Count : 1);
+            if (liftedCard.Stack != null)
+            {
+                foreach (var c in liftedCard.Stack.Cards)
+                    if (c?.BaseDefinition != null) draggedDefs.Add(c.BaseDefinition);
+            }
+            else if (liftedCard.BaseDefinition != null)
+            {
+                draggedDefs.Add(liftedCard.BaseDefinition);
+            }
+
             foreach (var stack in stacks)
             {
                 if (stack.BottomCard == null) continue;
 
-                bool canStack = CanStack(liftedCard.Definition, stack.BottomCard.Definition);
-                bool sameCard = liftedCard == stack.BottomCard;
+                bool sameCard  = liftedCard == stack.BottomCard;
                 bool sameStack = liftedCard.Stack == stack;
+                if (sameCard || sameStack) continue;
 
-                if (canStack && !sameCard && !sameStack && !stack.IsCrafting)
+                if (!CanStack(liftedCard.Definition, stack.BottomCard.Definition)) continue;
+
+                // Active workstations: accept only valid ingredients; no recipe-existence
+                // check needed because the task is already running.
+                bool craftingAccepts = !stack.IsCrafting
+                    || (craftingMgr != null
+                        && craftingMgr.CanJoinActiveCraft(stack, liftedCard.Definition));
+                if (!craftingAccepts) continue;
+
+                // Idle stacks: only highlight when the combined cards would actually trigger
+                // a recipe. This prevents phantom highlights for cards whose recipe has not
+                // been authored yet, or whose prerequisite research hasn't been done.
+                if (!stack.IsCrafting && allRecipes != null)
                 {
-                    stack.BottomCard.SetHighlighted(true);
-                    highlightedCards.Add(stack.BottomCard);
+                    var combined = new List<CardDefinition>(stack.Cards.Count + draggedDefs.Count);
+                    foreach (var c in stack.Cards)
+                        if (c?.BaseDefinition != null) combined.Add(c.BaseDefinition);
+                    combined.AddRange(draggedDefs);
+
+                    if (RecipeMatcher.FindMatchingRecipes(combined, allRecipes).Count == 0)
+                        continue;
                 }
+
+                stack.BottomCard.SetHighlighted(true);
+                highlightedCards.Add(stack.BottomCard);
             }
         }
 

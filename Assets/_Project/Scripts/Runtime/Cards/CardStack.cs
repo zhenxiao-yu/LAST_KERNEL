@@ -14,6 +14,7 @@
 //       nearby stack on its first frame.
 
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Markyu.LastKernel
@@ -262,6 +263,40 @@ namespace Markyu.LastKernel
                 : newTargetPosition;
 
             SetTargetPosition(finalPosition);
+        }
+
+        /// <summary>
+        /// Moves the stack with an organic "slinky" feel: the lead card starts immediately,
+        /// trailing cards follow with a staggered delay. Used by mob/villager AI movement
+        /// so that a stack of cards feels alive rather than sliding as a rigid block.
+        /// </summary>
+        /// <param name="newPosition">Target world position for the top of the stack.</param>
+        /// <param name="duration">Tween duration for each card.</param>
+        /// <param name="trailStagger">Extra delay (seconds) added per card index after the first.</param>
+        public void SetTargetPositionOrganic(Vector3 newPosition, float duration = 0.28f, float trailStagger = 0.055f)
+        {
+            TargetPosition = newPosition;
+
+            for (int i = 0; i < Cards.Count; i++)
+            {
+                var card         = Cards[i];
+                var cardTarget   = TargetPosition + card.Settings.StackStep * i;
+                float delay      = i * trailStagger;
+
+                if (delay <= 0f)
+                {
+                    card.SetTargetAnimated(cardTarget, duration, Ease.OutSine);
+                }
+                else
+                {
+                    var capturedCard   = card;
+                    var capturedTarget = cardTarget;
+                    DOVirtual.DelayedCall(delay,
+                            () => capturedCard.SetTargetAnimated(capturedTarget, duration, Ease.OutSine))
+                        .SetUpdate(true)
+                        .SetLink(capturedCard.gameObject);
+                }
+            }
         }
 
         /// <summary>

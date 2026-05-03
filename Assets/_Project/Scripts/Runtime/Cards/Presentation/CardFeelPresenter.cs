@@ -52,6 +52,10 @@ namespace Markyu.LastKernel
         // would unconditionally clear the flag, breaking hover suppression on other cards.
         private bool _ownsIsDraggingAny;
 
+        public static float NeonGlowScale       = 1f;
+        public static float NeonAmbientIntensity = 0f;
+        private float _neonAmbient;
+
         public static bool IsDraggingAny { get; private set; }
 
         public static CardInstance HoveredCard { get; private set; }
@@ -250,6 +254,7 @@ namespace Markyu.LastKernel
                 targetGlow = _profile.HoverGlowIntensity;
 
             _currentGlow = Mathf.Lerp(_currentGlow, targetGlow, 1f - Mathf.Exp(-14f * deltaTime));
+            _neonAmbient = 0.6f + 0.4f * Mathf.Sin(Time.unscaledTime * 0.65f + _phaseOffset);
 
             ApplyMaterialFeedback();
         }
@@ -385,7 +390,9 @@ namespace Markyu.LastKernel
 
             if (_hasEmissionColor)
             {
-                Color glow = _profile.GlowColor * Mathf.Clamp01(_currentGlow + _flashAmount * 0.35f);
+                float effectiveGlow = Mathf.Clamp01(_currentGlow + _flashAmount * 0.35f) * NeonGlowScale;
+                float ambient       = _neonAmbient * NeonAmbientIntensity;
+                Color glow = _profile.GlowColor * (effectiveGlow + ambient);
                 _propertyBlock.SetColor(EmissionColorId, _baseEmissionColor + glow);
             }
 

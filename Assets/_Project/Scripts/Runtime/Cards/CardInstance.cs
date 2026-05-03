@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -67,7 +67,8 @@ namespace Markyu.LastKernel
 
         private bool _isHovered;
 
-        private Vector3 _dampVelocity;
+        private VillagerLockToggle _lockToggle;
+
         private Vector3 _dampedTargetPos;
         private bool _isFollowingDamped;
         #endregion
@@ -106,6 +107,7 @@ namespace Markyu.LastKernel
             FeelPresenter = CardFeelPresenter.EnsureOn(gameObject);
             CardLongPressHandler.EnsureOn(gameObject);
             View = GetComponent<CardView>();
+            _lockToggle = GetComponent<VillagerLockToggle>();
 
             gameObject.name = $"{(definition is PackDefinition ? "Pack" : "Card")}_{definition.DisplayName}";
 
@@ -239,17 +241,23 @@ namespace Markyu.LastKernel
             {
                 info.header = GameLocalization.Get("card.stackHeader");
 
-                var grouped = Stack.Cards
-                    .GroupBy(c => c.Definition)
-                    .Select(g => new { g.Key.DisplayName, Count = g.Count() })
-                    .ToList();
-
-                for (int i = 0; i < grouped.Count; i++)
+                var counts = new Dictionary<CardDefinition, int>();
+                foreach (var c in Stack.Cards)
                 {
-                    var item = grouped[i];
-                    info.body += $"{item.DisplayName} x{item.Count}";
-                    info.body += i < grouped.Count - 1 ? ", " : ".";
+                    counts.TryGetValue(c.Definition, out int n);
+                    counts[c.Definition] = n + 1;
                 }
+
+                var sb = new StringBuilder();
+                bool first = true;
+                foreach (var kvp in counts)
+                {
+                    if (!first) sb.Append(", ");
+                    sb.Append(kvp.Key.DisplayName).Append(" x").Append(kvp.Value);
+                    first = false;
+                }
+                sb.Append('.');
+                info.body = sb.ToString();
             }
             else if (Stack.TopCard != null)
             {
@@ -420,8 +428,12 @@ namespace Markyu.LastKernel
                 CardManager.Instance?.ResolveOverlaps();
             }
 
-            // Never reset an active workstation timer — only check for a new recipe on idle stacks.
-            if (!bestCandidateStack.IsCrafting)
+            // If the target was already crafting, adding a card may satisfy or break the
+            // current recipe — re-validate so an invalid composition is stopped immediately.
+            // On idle stacks, check from scratch for a new recipe.
+            if (bestCandidateStack.IsCrafting)
+                CraftingManager.Instance?.ValidateAndResumeTask(bestCandidateStack);
+            else
                 CraftingManager.Instance?.CheckForRecipe(bestCandidateStack);
 
             return bestCandidateStack;
@@ -611,8 +623,7 @@ namespace Markyu.LastKernel
                 return;
             }
 
-            var lockToggle = GetComponent<VillagerLockToggle>();
-            string title = lockToggle != null && lockToggle.IsLocked
+            string title = _lockToggle != null && _lockToggle.IsLocked
                 ? $"[#] {Definition.DisplayName}"
                 : Definition.DisplayName;
 
@@ -654,6 +665,23 @@ namespace Markyu.LastKernel
             KillMoveTween();
             _moveTween = transform.DOMove(target, Settings.MoveDuration)
                 .SetEase(Settings.MoveEase)
+                .SetUpdate(true)
+                .SetLink(gameObject);
+
+            if (Time.timeScale == 0f)
+            {
+                _moveTween.OnUpdate(() => Physics.SyncTransforms());
+            }
+        }
+
+        public void SetTargetAnimated(Vector3 target, float duration, Ease ease, bool forceGround = false)
+        {
+            _isFollowingDamped = false;
+
+            if (forceGround) target.y = 0f;
+            KillMoveTween();
+            _moveTween = transform.DOMove(target, duration)
+                .SetEase(ease)
                 .SetUpdate(true)
                 .SetLink(gameObject);
 

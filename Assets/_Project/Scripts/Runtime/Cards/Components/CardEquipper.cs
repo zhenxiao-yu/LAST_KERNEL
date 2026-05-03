@@ -73,23 +73,18 @@ namespace Markyu.LastKernel
                 }
                 _classChangeItem = equipmentCard;
 
-                var allEquipped = _equippedItems.Values.ToList();
-                foreach (var item in allEquipped)
+                foreach (var item in _equippedItems.Values)
                 {
                     foreach (var modifier in item.Definition.StatModifiers)
-                    {
                         GetStatFromType(modifier.Stat)?.RemoveModifier(modifier);
-                    }
                 }
 
                 _card.SetDefinition(equipmentCard.Definition.ClassChangeResult);
 
-                foreach (var item in allEquipped)
+                foreach (var item in _equippedItems.Values)
                 {
                     foreach (var modifier in item.Definition.StatModifiers)
-                    {
                         GetStatFromType(modifier.Stat)?.AddModifier(modifier);
-                    }
                 }
             }
             else // --- STANDARD STAT MODIFICATION ---
@@ -126,26 +121,20 @@ namespace Markyu.LastKernel
             // --- START: Class Revert Logic ---
             if (OriginalDefinition != null && equipmentToDrop == _classChangeItem)
             {
-                var otherItems = _equippedItems.Values
-                    .Where(item => item != equipmentToDrop)
-                    .ToList();
-
-                foreach (var item in otherItems)
+                foreach (var item in _equippedItems.Values)
                 {
+                    if (item == equipmentToDrop) continue;
                     foreach (var modifier in item.Definition.StatModifiers)
-                    {
                         GetStatFromType(modifier.Stat)?.RemoveModifier(modifier);
-                    }
                 }
 
                 _card.SetDefinition(OriginalDefinition);
 
-                foreach (var item in otherItems)
+                foreach (var item in _equippedItems.Values)
                 {
+                    if (item == equipmentToDrop) continue;
                     foreach (var modifier in item.Definition.StatModifiers)
-                    {
                         GetStatFromType(modifier.Stat)?.AddModifier(modifier);
-                    }
                 }
                 OriginalDefinition = null;
                 _classChangeItem = null;

@@ -212,12 +212,14 @@ namespace Markyu.LastKernel
 
             if (px < pz)
             {
-                float sign = Mathf.Sign(dx);
+                // Mathf.Sign(0) returns 0, producing a zero-length separation for perfectly
+                // coincident stacks. Fall back to +X so two stacks never stay locked together.
+                float sign = dx != 0f ? Mathf.Sign(dx) : 1f;
                 separation = new Vector3(px * sign, 0f, 0f);
             }
             else
             {
-                float sign = Mathf.Sign(dz);
+                float sign = dz != 0f ? Mathf.Sign(dz) : 1f;
                 separation = new Vector3(0f, 0f, pz * sign);
             }
 

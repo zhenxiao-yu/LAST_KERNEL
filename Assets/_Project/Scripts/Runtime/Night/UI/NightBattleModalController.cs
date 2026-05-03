@@ -173,7 +173,6 @@ namespace Markyu.LastKernel
             UnbindLane();
 
             // Restore prep layout (clear any battle-mode overrides from last night)
-            _battleZone?.RemoveFromClassList("lk-hidden");
             _bottomArea?.RemoveFromClassList("nbm-bottom-area--battle");
             _statusLabel?.RemoveFromClassList("nbm-status-label--battle");
             _assignHint?.RemoveFromClassList("lk-hidden");
@@ -274,8 +273,7 @@ namespace Markyu.LastKernel
             _btnStart?.AddToClassList("lk-hidden");
             _btnCancel?.AddToClassList("lk-hidden");
 
-            // Switch layout: hide prep zone, expand log, promote status text
-            _battleZone?.AddToClassList("lk-hidden");
+            // Switch layout: keep battle zone visible (HP bars update live), hide prep/shop, expand log
             _bottomArea?.AddToClassList("nbm-bottom-area--battle");
             _statusLabel?.AddToClassList("nbm-status-label--battle");
             _assignHint?.AddToClassList("lk-hidden");

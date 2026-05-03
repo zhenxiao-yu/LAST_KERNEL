@@ -2,6 +2,7 @@
     <Style src="../../USS/theme.uss" />
     <Style src="../../USS/layout.uss" />
     <Style src="../../USS/components.uss" />
+    <Style src="../../USS/animations.uss" />
     <Style src="../../USS/NightBattleHUD.uss" />
 
     <!-- ══════════════════════════════════════════════════════════════════

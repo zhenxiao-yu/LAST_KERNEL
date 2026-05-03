@@ -374,11 +374,27 @@ namespace Markyu.LastKernel
         }
 
         /// <summary>
+        /// Called when a card is picked up from a crafting stack mid-drag.
+        /// Pauses if the remaining cards still satisfy the recipe (the player may return the card).
+        /// Stops and clears the progress bar immediately if the recipe is now broken.
+        /// </summary>
+        public void PauseOrStopCraftingTask(CardStack stack)
+        {
+            var task = GetCraftingTask(stack);
+            if (task == null) return;
+
+            if (DoesStackMatchRecipe(stack, task.Recipe))
+                task.Pause();
+            else
+                StopCraftingTask(stack);
+        }
+
+        /// <summary>
         /// Re-evaluates an active crafting task after a card has been removed from its stack.
         /// </summary>
         /// <param name="stack">The stack whose composition has changed.</param>
         /// <remarks>
-        /// If the remaining cards still satisfy the recipe requirements (common in "Workstation" recipes), 
+        /// If the remaining cards still satisfy the recipe requirements (common in "Workstation" recipes),
         /// the task resumes. If the stack is no longer valid, the crafting task is stopped.
         /// </remarks>
         public void ValidateAndResumeTask(CardStack stack)

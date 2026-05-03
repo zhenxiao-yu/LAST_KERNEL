@@ -9,29 +9,33 @@ namespace Markyu.LastKernel
         [SerializeField, Tooltip("Material that applies the post-processing shader during rendering.")]
         private Material effectMaterial;
 
-        [SerializeField, Range(0f, 1f), Tooltip("Current vignette intensity (0 = disabled, 1 = full).")]
-        private float vignetteIntensity = 0f;
+        [Header("Base")]
+        [SerializeField, Range(0f, 3f)]    private float vignetteIntensity  = 0f;
+        [SerializeField, Range(0f, 1f)]    private float grayscaleIntensity = 0f;
 
-        [SerializeField, Range(0f, 1f), Tooltip("Current grayscale intensity (0 = color, 1 = grayscale).")]
-        private float grayscaleIntensity = 0f;
+        [Header("Neon Style")]
+        [SerializeField, Range(0f, 0.02f)]   private float chromaticAmount  = 0.004f;
+        [SerializeField, Range(0f, 1f)]      private float scanlineStrength = 0.06f;
+        [SerializeField, Range(50f, 1000f)]  private float scanlineFreq     = 270f;
+        [SerializeField, Range(0.8f, 1.5f)]  private float contrastBoost    = 1.08f;
+        [SerializeField, Range(0.8f, 2.0f)]  private float saturationBoost  = 1.15f;
+        [SerializeField]                     private Color neonEdgeColor     = new Color(0f, 0.86f, 1f, 1f);
+        [SerializeField, Range(0f, 1f)]      private float neonEdgeIntensity = 0f;
 
-        private Tweener vignetteTween;
-        private Tweener grayscaleTween;
+        private Tweener _vignetteTween;
+        private Tweener _grayscaleTween;
+        private Tweener _neonEdgeTween;
 
-        private void OnValidate()
-        {
-            Initialize();
-        }
+        private void OnValidate() => Initialize();
 
         private void Start()
         {
             if (TimeManager.Instance != null)
             {
                 TimeManager.Instance.OnTimePaceChanged += HandleTimePaceChanged;
-                TimeManager.Instance.OnDayEnded += HandleDayEnded;
-                TimeManager.Instance.OnDayStarted += HandleDayStarted;
+                TimeManager.Instance.OnDayEnded        += HandleDayEnded;
+                TimeManager.Instance.OnDayStarted      += HandleDayStarted;
             }
-
             Initialize();
         }
 
@@ -40,21 +44,26 @@ namespace Markyu.LastKernel
             if (TimeManager.Instance != null)
             {
                 TimeManager.Instance.OnTimePaceChanged -= HandleTimePaceChanged;
-                TimeManager.Instance.OnDayEnded -= HandleDayEnded;
-                TimeManager.Instance.OnDayStarted -= HandleDayStarted;
+                TimeManager.Instance.OnDayEnded        -= HandleDayEnded;
+                TimeManager.Instance.OnDayStarted      -= HandleDayStarted;
             }
-
-            vignetteTween?.Kill();
-            grayscaleTween?.Kill();
+            _vignetteTween?.Kill();
+            _grayscaleTween?.Kill();
+            _neonEdgeTween?.Kill();
         }
 
         private void Initialize()
         {
-            if (effectMaterial != null)
-            {
-                effectMaterial.SetFloat("_VignettePower", vignetteIntensity);
-                effectMaterial.SetFloat("_GrayscaleAmount", grayscaleIntensity);
-            }
+            if (effectMaterial == null) return;
+            effectMaterial.SetFloat("_VignettePower",    vignetteIntensity);
+            effectMaterial.SetFloat("_GrayscaleAmount",  grayscaleIntensity);
+            effectMaterial.SetFloat("_ChromaticAmount",  chromaticAmount);
+            effectMaterial.SetFloat("_ScanlineStrength", scanlineStrength);
+            effectMaterial.SetFloat("_ScanlineFreq",     scanlineFreq);
+            effectMaterial.SetFloat("_ContrastBoost",    contrastBoost);
+            effectMaterial.SetFloat("_SaturationBoost",  saturationBoost);
+            effectMaterial.SetColor("_NeonEdgeColor",    neonEdgeColor);
+            effectMaterial.SetFloat("_NeonEdgeIntensity", neonEdgeIntensity);
         }
 
         private void HandleTimePaceChanged(TimePace pace)
@@ -63,59 +72,61 @@ namespace Markyu.LastKernel
             else FadeOutGrayscale();
         }
 
-        private void HandleDayEnded(int _)
-        {
-            FadeInVignette();
-        }
-
-        private void HandleDayStarted(int _)
-        {
-            FadeOutVignette();
-        }
+        private void HandleDayEnded(int _)   { FadeInVignette();  FadeInNeonEdge(); }
+        private void HandleDayStarted(int _) { FadeOutVignette(); FadeOutNeonEdge(); }
 
         private void FadeInGrayscale(float duration = 0.3f, float target = 1f)
         {
-            grayscaleTween?.Kill();
-            grayscaleTween = DOTween.To(
+            _grayscaleTween?.Kill();
+            _grayscaleTween = DOTween.To(
                 () => grayscaleIntensity,
-                x => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
-                target,
-                duration
-            ).SetUpdate(true).SetLink(gameObject);
+                x  => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
+                target, duration).SetUpdate(true).SetLink(gameObject);
         }
 
         private void FadeOutGrayscale(float duration = 0.3f)
         {
-            grayscaleTween?.Kill();
-            grayscaleTween = DOTween.To(
+            _grayscaleTween?.Kill();
+            _grayscaleTween = DOTween.To(
                 () => grayscaleIntensity,
-                x => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
-                0f,
-                duration
-            ).SetUpdate(true).SetLink(gameObject);
+                x  => { grayscaleIntensity = x; effectMaterial.SetFloat("_GrayscaleAmount", x); },
+                0f, duration).SetUpdate(true).SetLink(gameObject);
         }
 
         private void FadeInVignette(float duration = 0.5f, float target = 1.2f)
         {
-            vignetteTween?.Kill();
-            vignetteTween = DOTween.To(
+            _vignetteTween?.Kill();
+            _vignetteTween = DOTween.To(
                 () => vignetteIntensity,
-                x => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
-                target,
-                duration
-            ).SetUpdate(true).SetLink(gameObject);
+                x  => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
+                target, duration).SetUpdate(true).SetLink(gameObject);
         }
 
         private void FadeOutVignette(float duration = 0.5f)
         {
-            vignetteTween?.Kill();
-            vignetteTween = DOTween.To(
+            _vignetteTween?.Kill();
+            _vignetteTween = DOTween.To(
                 () => vignetteIntensity,
-                x => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
-                0f,
-                duration
-            ).SetUpdate(true).SetLink(gameObject);
+                x  => { vignetteIntensity = x; effectMaterial.SetFloat("_VignettePower", x); },
+                0f, duration).SetUpdate(true).SetLink(gameObject);
+        }
+
+        private void FadeInNeonEdge(float duration = 1.2f, float target = 0.25f)
+        {
+            _neonEdgeTween?.Kill();
+            _neonEdgeTween = DOTween.To(
+                () => neonEdgeIntensity,
+                x  => { neonEdgeIntensity = x; effectMaterial.SetFloat("_NeonEdgeIntensity", x); },
+                target, duration).SetUpdate(true).SetLink(gameObject);
+        }
+
+        private void FadeOutNeonEdge(float duration = 0.8f)
+        {
+            _neonEdgeTween?.Kill();
+            _neonEdgeTween = DOTween.To(
+                () => neonEdgeIntensity,
+                x  => { neonEdgeIntensity = x; effectMaterial.SetFloat("_NeonEdgeIntensity", x); },
+                0f, duration).SetUpdate(true).SetLink(gameObject);
         }
     }
 }
-

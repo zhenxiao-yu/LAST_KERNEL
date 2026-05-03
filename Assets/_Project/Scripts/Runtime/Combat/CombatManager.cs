@@ -187,7 +187,7 @@ namespace Markyu.LastKernel
             var tasksToMerge = FindOverlappingTasks(attackers, defenders);
 
             // 2. If overlaps are found, initiate a merge.
-            if (tasksToMerge.Any())
+            if (tasksToMerge.Count > 0)
             {
                 return MergeCombats(attackers, defenders, tasksToMerge);
             }
@@ -230,7 +230,7 @@ namespace Markyu.LastKernel
                 }
             }
 
-            if (tasksToMergeWith.Any())
+            if (tasksToMergeWith.Count > 0)
             {
                 // We must include the sourceTask itself in the list of tasks to be cleaned up.
                 var allTasksToCleanUp = new List<CombatTask>(tasksToMergeWith);
@@ -316,30 +316,21 @@ namespace Markyu.LastKernel
         /// <returns>A List of existing CombatTasks whose Rects overlap with the new combat's potential area.</returns>
         private List<CombatTask> FindOverlappingTasks(List<CardInstance> newAttackers, List<CardInstance> newDefenders)
         {
-            var overlappingTasks = new HashSet<CombatTask>();
-            var allNewCombatants = newAttackers.Concat(newDefenders).ToList();
-
-            if (!allNewCombatants.Any())
-            {
+            if (newAttackers.Count == 0 && newDefenders.Count == 0)
                 return new List<CombatTask>();
-            }
 
-            // 1. Calculate the bounds of the combat that is ABOUT to be created.
-            Bounds potentialBounds = CalculatePotentialBounds(allNewCombatants);
+            // _activeCombats contains unique entries, so a List with direct Add is duplicate-free.
+            var overlappingTasks = new List<CombatTask>();
+            Bounds potentialBounds = CalculatePotentialBounds(newAttackers, newDefenders);
 
-            // 2. Iterate through existing combats and check for intersection.
             foreach (var existingTask in _activeCombats)
             {
                 Bounds existingBounds = GetWorldBounds(existingTask.Rect);
-
-                // 3. Use Bounds.Intersects() for a precise AABB check.
                 if (potentialBounds.Intersects(existingBounds))
-                {
                     overlappingTasks.Add(existingTask);
-                }
             }
 
-            return overlappingTasks.ToList();
+            return overlappingTasks;
         }
         #endregion
 
@@ -464,31 +455,40 @@ namespace Markyu.LastKernel
         /// </remarks>
         /// <param name="combatants">The combined list of attacker and defender CardInstances.</param>
         /// <returns>A Bounds struct representing the calculated potential world-space boundaries.</returns>
-        private Bounds CalculatePotentialBounds(List<CardInstance> combatants)
+        private Bounds CalculatePotentialBounds(List<CardInstance> attackers, List<CardInstance> defenders)
         {
-            var validCombatants = combatants
-                .Where(card => card != null && card.Definition != null)
-                .ToList();
+            int validCount = 0;
+            Vector3 posSum = Vector3.zero;
+            int attackerCount = 0;
+            CardInstance firstCard = null;
 
-            if (validCombatants.Count == 0)
+            foreach (var card in attackers)
             {
-                return new Bounds();
+                if (card == null || card.Definition == null) continue;
+                if (firstCard == null) firstCard = card;
+                posSum += card.transform.position;
+                attackerCount++;
+                validCount++;
             }
 
-            Vector3 center = validCombatants
-                .Select(c => c.transform.position)
-                .Aggregate(Vector3.zero, (acc, v) => acc + v) / validCombatants.Count;
+            foreach (var card in defenders)
+            {
+                if (card == null || card.Definition == null) continue;
+                if (firstCard == null) firstCard = card;
+                posSum += card.transform.position;
+                validCount++;
+            }
 
-            int attackerCount = validCombatants.Count(c => c.Definition.Faction == CardFaction.Player);
-            int defenderCount = validCombatants.Count - attackerCount;
-            var firstCard = validCombatants[0];
+            if (validCount == 0 || firstCard == null) return new Bounds();
+
+            Vector3 center = posSum / validCount;
+            int defenderCount = validCount - attackerCount;
 
             Vector2 rectSize = CombatRect.CalculateRequiredSize(
                 attackerCount, defenderCount, firstCard.Size, CombatRect.Margin
             );
 
-            var size = new Vector3(rectSize.x, 1f, rectSize.y);
-            return new Bounds(center, size);
+            return new Bounds(center, new Vector3(rectSize.x, 1f, rectSize.y));
         }
         #endregion
     }
