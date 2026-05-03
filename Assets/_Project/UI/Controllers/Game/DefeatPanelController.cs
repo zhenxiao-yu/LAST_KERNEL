@@ -84,13 +84,21 @@ namespace Markyu.LastKernel
                 _messageLabel.text = GameLocalization.Get("defeat.message");
 
             if (_backdrop != null)
+            {
+                bool wasHidden = _backdrop.ClassListContains("lk-hidden");
                 _backdrop.RemoveFromClassList("lk-hidden");
+                if (wasHidden) LKUIInteractionPolisher.PlayPanelOpen();
+            }
         }
 
         private void HideBackdrop()
         {
             if (_backdrop != null)
+            {
+                bool wasVisible = !_backdrop.ClassListContains("lk-hidden");
                 _backdrop.AddToClassList("lk-hidden");
+                if (wasVisible) LKUIInteractionPolisher.PlayPanelClose();
+            }
         }
 
         private void OnRetryClicked()

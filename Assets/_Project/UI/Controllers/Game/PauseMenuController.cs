@@ -142,6 +142,7 @@ namespace Markyu.LastKernel
 
         private void SetPaused(bool paused)
         {
+            bool wasPaused = _isPaused;
             _isPaused = paused;
             if (_backdrop != null) _backdrop.EnableInClassList("lk-hidden", !paused);
             if (TimeManager.Instance != null) TimeManager.Instance.SetExternalPause(paused);
@@ -149,11 +150,15 @@ namespace Markyu.LastKernel
             if (paused)
             {
                 if (InputManager.Instance != null) InputManager.Instance.AddLock(this);
+                if (!wasPaused) LKUIInteractionPolisher.PlayPanelOpen();
+                _resumeButton?.schedule.Execute(() => _resumeButton.Focus()).StartingIn(50);
             }
             else
             {
+                bool nestedPanelVisible = IsAnySubPanelVisible();
                 CloseSubPanels();
                 if (InputManager.Instance != null) InputManager.Instance.RemoveLock(this);
+                if (wasPaused && !nestedPanelVisible) LKUIInteractionPolisher.PlayPanelClose();
             }
         }
 
@@ -177,6 +182,20 @@ namespace Markyu.LastKernel
             CloseConfirm();
         }
 
+        private bool IsAnySubPanelVisible()
+        {
+            return IsVisiblePanel("panel-save-slots")
+                || IsVisiblePanel("panel-options")
+                || IsVisiblePanel("panel-language")
+                || IsVisiblePanel("panel-confirm");
+        }
+
+        private bool IsVisiblePanel(string name)
+        {
+            VisualElement panel = Root?.Q<VisualElement>(name);
+            return panel != null && !panel.ClassListContains("lk-hidden");
+        }
+
         private void OnBackToTitleClicked()
         {
             CloseSubPanels();
@@ -190,13 +209,23 @@ namespace Markyu.LastKernel
             if (_confirmTitle != null) _confirmTitle.text = title;
             if (_confirmBody  != null) _confirmBody.text  = body;
             _pendingConfirm = onAccept;
-            if (_confirmPanel != null) _confirmPanel.RemoveFromClassList("lk-hidden");
+            if (_confirmPanel != null)
+            {
+                bool wasHidden = _confirmPanel.ClassListContains("lk-hidden");
+                _confirmPanel.RemoveFromClassList("lk-hidden");
+                if (wasHidden) LKUIInteractionPolisher.PlayPanelOpen();
+            }
         }
 
         private void CloseConfirm()
         {
             _pendingConfirm = null;
-            if (_confirmPanel != null) _confirmPanel.AddToClassList("lk-hidden");
+            if (_confirmPanel != null)
+            {
+                bool wasVisible = !_confirmPanel.ClassListContains("lk-hidden");
+                _confirmPanel.AddToClassList("lk-hidden");
+                if (wasVisible) LKUIInteractionPolisher.PlayPanelClose();
+            }
         }
 
         private void AcceptConfirm()

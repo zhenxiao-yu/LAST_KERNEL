@@ -59,12 +59,22 @@ namespace Markyu.LastKernel
         public void Open()
         {
             RebuildSlots();
-            if (_panel != null) _panel.RemoveFromClassList("lk-hidden");
+            if (_panel != null)
+            {
+                bool wasHidden = _panel.ClassListContains("lk-hidden");
+                _panel.RemoveFromClassList("lk-hidden");
+                if (wasHidden) LKUIInteractionPolisher.PlayPanelOpen();
+            }
         }
 
         public void Close()
         {
-            if (_panel != null) _panel.AddToClassList("lk-hidden");
+            if (_panel != null)
+            {
+                bool wasVisible = !_panel.ClassListContains("lk-hidden");
+                _panel.AddToClassList("lk-hidden");
+                if (wasVisible) LKUIInteractionPolisher.PlayPanelClose();
+            }
         }
 
         // ── Save slots ─────────────────────────────────────────────────────────
@@ -88,6 +98,7 @@ namespace Markyu.LastKernel
 
             bool hasSlots = _slotsContainer.childCount > 0;
             if (_emptyLabel != null) _emptyLabel.EnableInClassList("lk-hidden", hasSlots);
+            LKUIInteractionPolisher.Refresh(Root);
         }
 
         private VisualElement BuildSlotRow(GameData data, GameData current)
@@ -109,7 +120,7 @@ namespace Markyu.LastKernel
                 ? GameLocalization.Get("pause.save")
                 : GameLocalization.Get("save.overwrite");
             btn.AddToClassList("lk-button");
-            if (!isCurrent) btn.AddToClassList("lk-button--danger");
+            btn.AddToClassList(isCurrent ? "lk-button--utility" : "lk-button--critical");
             btn.RegisterCallback<ClickEvent>(OnSlotClicked);
 
             var actions = new VisualElement();

@@ -62,7 +62,7 @@
 
     /* ── HUD strip height — consumed by .lk-hud-strip (min-height) and
      *    .lk-side-menu-panel (top). Override per scale tier below.          */
-    --lk-hud-height:         48px;
+    --lk-hud-height:         56px;
 
     /* ── Typography ───────────────────────────────────────────────────────
      * Sizes target 1920×1080 reference. Scale mode: Scale With Screen Size.

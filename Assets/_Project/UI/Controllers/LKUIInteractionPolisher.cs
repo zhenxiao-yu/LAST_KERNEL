@@ -6,15 +6,15 @@ namespace Markyu.LastKernel
 {
     /// <summary>
     /// Adds a consistent premium interaction layer to every UI Toolkit document:
-    /// hover/focus/press classes, throttled hover audio, and arrow/WASD focus movement.
+    /// hover/focus/press classes, restrained click/panel audio, and arrow/WASD focus movement.
     /// Styling lives in USS; this class only coordinates state.
     /// </summary>
     internal static class LKUIInteractionPolisher
     {
-        private const float HoverSoundCooldown = 0.075f;
+        private const float ClickSoundCooldown = 0.05f;
 
         private static readonly HashSet<int> BoundRoots = new();
-        private static float _lastHoverSoundTime;
+        private static float _lastClickSoundTime;
 
         public static void Bind(VisualElement root)
         {
@@ -34,6 +34,7 @@ namespace Markyu.LastKernel
             root.RegisterCallback<FocusInEvent>(OnFocusIn, TrickleDown.TrickleDown);
             root.RegisterCallback<FocusOutEvent>(OnFocusOut, TrickleDown.TrickleDown);
             root.RegisterCallback<KeyDownEvent>(OnKeyDown, TrickleDown.TrickleDown);
+            root.RegisterCallback<ClickEvent>(OnClick, TrickleDown.TrickleDown);
         }
 
         public static void Refresh(VisualElement root)
@@ -62,7 +63,6 @@ namespace Markyu.LastKernel
         {
             if (FindInteractive(evt.target as VisualElement) is not { } el) return;
             el.AddToClassList("lk-ui-hovered");
-            PlayHoverSound();
         }
 
         private static void OnPointerLeave(PointerLeaveEvent evt)
@@ -89,7 +89,12 @@ namespace Markyu.LastKernel
         {
             if (FindInteractive(evt.target as VisualElement) is not { } el) return;
             el.AddToClassList("lk-ui-focused");
-            PlayHoverSound();
+        }
+
+        private static void OnClick(ClickEvent evt)
+        {
+            if (FindInteractive(evt.target as VisualElement) is not Button) return;
+            PlayClickSound(AudioId.Click);
         }
 
         private static void OnFocusOut(FocusOutEvent evt)
@@ -164,17 +169,17 @@ namespace Markyu.LastKernel
             return null;
         }
 
-        private static void PlayHoverSound()
+        private static void PlayClickSound(AudioId id)
         {
             if (AudioManager.Instance == null)
                 return;
 
             float now = Time.unscaledTime;
-            if (now - _lastHoverSoundTime < HoverSoundCooldown)
+            if (now - _lastClickSoundTime < ClickSoundCooldown)
                 return;
 
-            _lastHoverSoundTime = now;
-            Play(AudioId.Pop);
+            _lastClickSoundTime = now;
+            Play(id);
         }
 
         private static void Play(AudioId id)

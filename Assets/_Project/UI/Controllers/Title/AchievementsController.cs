@@ -36,16 +36,18 @@ namespace Markyu.LastKernel
 
         public void Show()
         {
+            bool wasHidden = Root.ClassListContains("lk-hidden");
             Root.RemoveFromClassList("lk-hidden");
             Rebuild();
             OnLocalizationRefresh();
-            LKUIInteractionPolisher.PlayPanelOpen();
+            if (wasHidden) LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
         {
+            bool wasVisible = !Root.ClassListContains("lk-hidden");
             Root.AddToClassList("lk-hidden");
-            LKUIInteractionPolisher.PlayPanelClose();
+            if (wasVisible) LKUIInteractionPolisher.PlayPanelClose();
         }
 
         // ── Localization ───────────────────────────────────────────────────────

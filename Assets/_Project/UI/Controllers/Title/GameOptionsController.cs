@@ -167,11 +167,12 @@ namespace Markyu.LastKernel
 
         public void Show()
         {
+            bool wasHidden = Root.ClassListContains("lk-hidden");
             Root.RemoveFromClassList("lk-hidden");
             SwitchTab(OptionsTab.Settings);
             RefreshFromManagers();
             OnLocalizationRefresh();
-            LKUIInteractionPolisher.PlayPanelOpen();
+            if (wasHidden) LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
@@ -181,9 +182,10 @@ namespace Markyu.LastKernel
             _rebindOp?.Dispose();
             _rebindOp = null;
 #endif
+            bool wasVisible = !Root.ClassListContains("lk-hidden");
             PlayerPrefs.Save();
             Root.AddToClassList("lk-hidden");
-            LKUIInteractionPolisher.PlayPanelClose();
+            if (wasVisible) LKUIInteractionPolisher.PlayPanelClose();
         }
 
         public override void OnLocalizationRefresh()
@@ -300,6 +302,8 @@ namespace Markyu.LastKernel
 
             var rebindBtn = new Button { text = "✎" };
             rebindBtn.AddToClassList("lk-button");
+            rebindBtn.AddToClassList("lk-button--compact");
+            rebindBtn.AddToClassList("lk-button--utility");
             rebindBtn.style.width      = 36;
             rebindBtn.style.minHeight  = 36;
             rebindBtn.style.marginLeft = 4;
@@ -307,6 +311,8 @@ namespace Markyu.LastKernel
 
             var resetBtn = new Button { text = "↩" };
             resetBtn.AddToClassList("lk-button");
+            resetBtn.AddToClassList("lk-button--compact");
+            resetBtn.AddToClassList("lk-button--quiet");
             resetBtn.style.width     = 36;
             resetBtn.style.minHeight = 36;
             resetBtn.clicked += () => ResetSingleKeybind(entry, bindingLabel);

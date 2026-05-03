@@ -46,6 +46,7 @@ namespace Markyu.LastKernel
         private void OnClick(ClickEvent evt)
         {
             if (evt.target is not Button) return;
+            if (_document?.rootVisualElement?.ClassListContains("lk-premium-root") == true) return;
             Play(config != null ? config.ButtonClick : AudioId.Click);
         }
 

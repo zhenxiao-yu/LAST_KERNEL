@@ -1061,10 +1061,14 @@ Toggle:checked .unity-toggle__checkmark {
     right: 0;
     top: var(--lk-hud-height);
     bottom: 0;
-    width: 360px;
-    background-color: var(--lk-panel);
+    width: 380px;
+    background-color: rgba(7, 12, 22, 0.96);
     border-left-color: var(--lk-border);
-    border-left-width: 2px;
+    border-left-width: 3px;
+    border-top-color: rgba(0, 220, 255, 0.24);
+    border-top-width: 1px;
+    border-bottom-color: var(--lk-panel-deep);
+    border-bottom-width: 4px;
     flex-direction: column;
     overflow: visible;
 }
@@ -1072,13 +1076,15 @@ Toggle:checked .unity-toggle__checkmark {
 /* Pull tab — protrudes 44 px left of the panel, always on screen */
 .lk-side-menu-toggle {
     position: absolute;
-    left: -44px;
-    top: 0;
-    width: 44px;
+    left: -48px;
+    top: 8px;
+    width: 48px;
     min-height: 88px;
-    background-color: var(--lk-panel);
+    background-color: rgba(7, 12, 22, 0.98);
     border-color: var(--lk-border-dim);
     border-width: 1px;
+    border-left-color: var(--lk-accent-dim);
+    border-left-width: 2px;
     border-right-width: 0;
     border-radius: 0;
     color: var(--lk-accent);
@@ -1093,6 +1099,7 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-side-menu-toggle:hover {
     background-color: var(--lk-accent-faint);
     color: var(--lk-text-header);
+    translate: -2px 0px;
 }
 
 /* ── Tab bar ─────────────────────────────────────────────────────────── */
@@ -1147,9 +1154,9 @@ Toggle:checked .unity-toggle__checkmark {
 .lk-side-menu-footer {
     border-top-color: var(--lk-border-dim);
     border-top-width: 1px;
-    padding: var(--lk-padding-small);
+    padding: 10px 12px;
     flex-shrink: 0;
-    background-color: var(--lk-panel-overlay);
+    background-color: rgba(3, 6, 12, 0.88);
     flex-direction: row;
     align-items: center;
 }
@@ -1620,6 +1627,84 @@ Toggle:checked .unity-toggle__checkmark {
     scale: 1.025 1.025;
 }
 
+.lk-button--command {
+    min-height: 52px;
+    border-left-width: 5px;
+    border-left-color: var(--lk-accent);
+    padding-left: 18px;
+    padding-right: 20px;
+    letter-spacing: 1px;
+}
+
+.lk-button--command:hover,
+.lk-button--command.lk-ui-hovered,
+.lk-button--command.lk-ui-focused {
+    translate: 10px 0px;
+    background-color: rgba(0, 220, 255, 0.14);
+}
+
+.lk-button--utility {
+    background-color: rgba(8, 14, 26, 0.72);
+    border-color: rgba(120, 145, 175, 0.42);
+    color: var(--lk-text);
+}
+
+.lk-button--utility:hover,
+.lk-button--utility.lk-ui-hovered,
+.lk-button--utility.lk-ui-focused {
+    background-color: rgba(120, 145, 175, 0.10);
+    border-color: var(--lk-steel);
+    color: var(--lk-text-header);
+}
+
+.lk-button--quiet {
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(80, 100, 128, 0.34);
+    border-bottom-width: 1px;
+    color: var(--lk-text-dim);
+}
+
+.lk-button--quiet:hover,
+.lk-button--quiet.lk-ui-hovered,
+.lk-button--quiet.lk-ui-focused {
+    color: var(--lk-text-header);
+    border-color: var(--lk-steel);
+    background-color: rgba(80, 100, 128, 0.08);
+}
+
+.lk-button--hud {
+    min-height: 38px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom-width: 2px;
+    font-size: var(--lk-font-size-sm);
+}
+
+.lk-button--compact {
+    min-width: 40px;
+    min-height: 38px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.lk-button--critical {
+    background-color: rgba(204, 46, 46, 0.12);
+    border-color: rgba(204, 46, 46, 0.58);
+    border-left-color: var(--lk-danger);
+    border-left-width: 4px;
+    color: rgb(255, 150, 120);
+}
+
+.lk-button--critical:hover,
+.lk-button--critical.lk-ui-hovered,
+.lk-button--critical.lk-ui-focused {
+    background-color: rgba(204, 46, 46, 0.20);
+    border-color: var(--lk-danger);
+    color: var(--lk-warning);
+}
+
 .lk-button--text {
     min-width: 236px;
     border-width: 1px;
@@ -1885,4 +1970,56 @@ Toggle:checked .unity-toggle__checkmark {
     border-color: rgba(0, 220, 255, 0.25);
     border-bottom-width: 3px;
     border-bottom-color: rgb(0, 0, 0);
+}
+
+.lk-list__header {
+    background-color: rgba(2, 5, 12, 0.82);
+    border-color: rgba(0, 220, 255, 0.14);
+    border-width: 1px;
+    border-left-color: rgba(0, 220, 255, 0.42);
+    border-left-width: 3px;
+    border-bottom-color: var(--lk-panel-deep);
+    border-bottom-width: 2px;
+    margin-bottom: 4px;
+}
+
+.lk-list__header:hover {
+    background-color: rgba(0, 220, 255, 0.08);
+    border-left-color: var(--lk-accent);
+}
+
+.lk-list__item {
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 6px;
+    padding-left: 10px;
+    padding-right: 10px;
+    min-height: 42px;
+}
+
+.lk-list__item--completed {
+    opacity: 0.78;
+    border-left-color: var(--lk-success);
+}
+
+.lk-list__item--new {
+    border-left-color: var(--lk-warning);
+    background-color: rgba(255, 160, 40, 0.07);
+}
+
+.lk-list__item-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    background-color: rgba(0, 220, 255, 0.12);
+    border-color: rgba(0, 220, 255, 0.32);
+    border-width: 1px;
+    flex-shrink: 0;
+}
+
+.lk-empty-state {
+    background-color: rgba(4, 8, 16, 0.56);
+    border-color: rgba(80, 100, 128, 0.20);
+    border-width: 1px;
+    margin: 12px;
 }

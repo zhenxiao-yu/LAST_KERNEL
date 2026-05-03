@@ -12,7 +12,7 @@ namespace Markyu.LastKernel
         // ── Constants ────────────────────────────────────────────────────
 
         private const float SLIDE_SECONDS = 0.2f;
-        private const float PANEL_WIDTH_FALLBACK = 360f;
+        private const float PANEL_WIDTH_FALLBACK = 380f;
 
         private float _panelWidth = PANEL_WIDTH_FALLBACK;
 

@@ -55,11 +55,11 @@
             </ui:VisualElement>
 
             <ui:VisualElement name="title-buttons" class="lk-column lk-title-nav-frame">
-                <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-mb-sm" text="NEW GAME" />
-                <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-mb-sm" text="LOAD GAME" />
-                <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-mb-sm" text="ACHIEVEMENTS" />
-                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-mb-sm" text="OPTIONS" />
-                <ui:Button name="btn-quit"          class="lk-button lk-button--text"           text="QUIT" />
+                <ui:Button name="btn-new-game"      class="lk-button lk-button--text lk-button--command lk-mb-sm" text="NEW GAME" />
+                <ui:Button name="btn-load-game"     class="lk-button lk-button--text lk-button--utility lk-mb-sm" text="LOAD GAME" />
+                <ui:Button name="btn-achievements"  class="lk-button lk-button--text lk-button--utility lk-mb-sm" text="ACHIEVEMENTS" />
+                <ui:Button name="btn-options"       class="lk-button lk-button--text lk-button--quiet lk-mb-sm" text="OPTIONS" />
+                <ui:Button name="btn-quit"          class="lk-button lk-button--text lk-button--critical"          text="QUIT" />
             </ui:VisualElement>
 
         </ui:VisualElement>
@@ -83,7 +83,7 @@
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <!-- Difficulty: cycling button -->
-                        <ui:Button name="btn-difficulty" class="lk-button lk-full-width lk-mb-sm" />
+                    <ui:Button name="btn-difficulty" class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
 
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
@@ -95,19 +95,19 @@
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
                         <!-- Starting resources: cycling button -->
-                        <ui:Button name="btn-start-resources" class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-start-resources" class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
 
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
                         <!-- Friendly mode: cycling button -->
-                        <ui:Button name="btn-friendly-mode" class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-friendly-mode" class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
 
                     </ui:VisualElement>
                 </ui:ScrollView>
 
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
-                    <ui:Button name="btn-prefs-cancel"  class="lk-button lk-mr-sm" />
-                    <ui:Button name="btn-prefs-confirm" class="lk-button lk-button--primary" />
+                    <ui:Button name="btn-prefs-cancel"  class="lk-button lk-button--quiet lk-mr-sm" />
+                    <ui:Button name="btn-prefs-confirm" class="lk-button lk-button--primary lk-button--command" />
                 </ui:VisualElement>
 
             </ui:VisualElement>
@@ -130,7 +130,7 @@
 
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
                     <ui:Button name="btn-saves-clear" class="lk-button lk-button--danger" />
-                    <ui:Button name="btn-saves-close" class="lk-button" />
+                    <ui:Button name="btn-saves-close" class="lk-button lk-button--quiet" />
                 </ui:VisualElement>
 
             </ui:VisualElement>
@@ -158,7 +158,7 @@
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-ui" class="lk-label lk-label--subheader lk-mb-sm" />
-                        <ui:Button name="btn-opt-ui-scale" class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-ui-scale" class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
 
                         <ui:VisualElement class="lk-divider lk-mb-sm" />
 
@@ -182,11 +182,11 @@
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
 
                         <ui:Label name="lbl-opts-graphics" class="lk-label lk-label--subheader lk-mb-sm" />
-                        <ui:Button name="btn-opt-resolution" class="lk-button lk-full-width lk-mb-sm" />
-                        <ui:Button name="btn-opt-fullscreen" class="lk-button lk-full-width lk-mb-sm" />
-                        <ui:Button name="btn-opt-vsync"      class="lk-button lk-full-width lk-mb-sm" />
-                        <ui:Button name="btn-opt-fps"        class="lk-button lk-full-width lk-mb-sm" />
-                        <ui:Button name="btn-opt-shadows"    class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-resolution" class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-fullscreen" class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-vsync"      class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-fps"        class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-shadows"    class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
 
                     </ui:VisualElement>
                 </ui:ScrollView>
@@ -195,7 +195,7 @@
                 <ui:ScrollView name="language-scroll" class="lk-hidden" style="height: 400px;">
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-language-hint" class="lk-hint lk-mb-sm" />
-                        <ui:Button name="btn-opt-language"  class="lk-button lk-full-width" />
+                        <ui:Button name="btn-opt-language"  class="lk-button lk-button--utility lk-full-width" />
                     </ui:VisualElement>
                 </ui:ScrollView>
 
@@ -209,14 +209,14 @@
                     <ui:VisualElement class="lk-column" style="padding: 4px 2px;">
                         <ui:Label  name="lbl-opts-accessibility"  class="lk-label lk-label--subheader lk-mb-sm" />
                         <ui:Label  name="lbl-accessibility-hint"  class="lk-hint lk-mb-md" />
-                        <ui:Button name="btn-opt-screenshake"     class="lk-button lk-full-width lk-mb-sm" />
-                        <ui:Button name="btn-opt-flash"           class="lk-button lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-screenshake"     class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
+                        <ui:Button name="btn-opt-flash"           class="lk-button lk-button--utility lk-full-width lk-mb-sm" />
                     </ui:VisualElement>
                 </ui:ScrollView>
 
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
                     <ui:Button name="btn-opt-reset" class="lk-button lk-button--danger" />
-                    <ui:Button name="btn-opt-close" class="lk-button" />
+                    <ui:Button name="btn-opt-close" class="lk-button lk-button--quiet" />
                 </ui:VisualElement>
 
             </ui:VisualElement>
@@ -246,7 +246,7 @@
 
                 <!-- Footer: close button only -->
                 <ui:VisualElement class="lk-panel__footer">
-                    <ui:Button name="btn-ach-close" class="lk-button" />
+                    <ui:Button name="btn-ach-close" class="lk-button lk-button--quiet" />
                 </ui:VisualElement>
 
             </ui:VisualElement>
@@ -258,8 +258,8 @@
                 <ui:Label name="lbl-modal-title" class="lk-modal__title" />
                 <ui:Label name="lbl-modal-body"  class="lk-modal__body text-auto-size text-auto-size-min-8 text-auto-size-max-14" />
                 <ui:VisualElement class="lk-modal__actions">
-                    <ui:Button name="btn-modal-decline" class="lk-button lk-mr-sm" />
-                    <ui:Button name="btn-modal-accept"  class="lk-button lk-button--primary" />
+                    <ui:Button name="btn-modal-decline" class="lk-button lk-button--quiet lk-mr-sm" />
+                    <ui:Button name="btn-modal-accept"  class="lk-button lk-button--primary lk-button--command" />
                 </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
@@ -289,8 +289,8 @@
                 </ui:VisualElement>
 
                 <ui:VisualElement class="lk-panel__footer lk-justify-between">
-                    <ui:Button name="btn-lang-cancel" class="lk-button" />
-                    <ui:Button name="btn-lang-apply"  class="lk-button lk-button--primary" />
+                    <ui:Button name="btn-lang-cancel" class="lk-button lk-button--quiet" />
+                    <ui:Button name="btn-lang-apply"  class="lk-button lk-button--primary lk-button--command" />
                 </ui:VisualElement>
 
             </ui:VisualElement>

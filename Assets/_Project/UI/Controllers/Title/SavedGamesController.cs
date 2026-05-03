@@ -49,16 +49,18 @@ namespace Markyu.LastKernel
 
         public void Show()
         {
+            bool wasHidden = Root.ClassListContains("lk-hidden");
             Root.RemoveFromClassList("lk-hidden");
             RebuildSlots();
             OnLocalizationRefresh();
-            LKUIInteractionPolisher.PlayPanelOpen();
+            if (wasHidden) LKUIInteractionPolisher.PlayPanelOpen();
         }
 
         public void Hide()
         {
+            bool wasVisible = !Root.ClassListContains("lk-hidden");
             Root.AddToClassList("lk-hidden");
-            LKUIInteractionPolisher.PlayPanelClose();
+            if (wasVisible) LKUIInteractionPolisher.PlayPanelClose();
         }
 
         // ── Localization ───────────────────────────────────────────────────────
@@ -109,13 +111,14 @@ namespace Markyu.LastKernel
                 text = GameLocalization.Get("common.loadButton")
             };
             loadBtn.AddToClassList("lk-button");
+            loadBtn.AddToClassList("lk-button--utility");
 
             var deleteBtn = new Button(() => ShowDeleteConfirmation(data))
             {
                 text = GameLocalization.Get("common.deleteButton")
             };
             deleteBtn.AddToClassList("lk-button");
-            deleteBtn.AddToClassList("lk-button--danger");
+            deleteBtn.AddToClassList("lk-button--critical");
 
             actions.Add(loadBtn);
             actions.Add(deleteBtn);

@@ -23,7 +23,7 @@
             <ui:VisualElement class="lk-progress-bar" style="width: 138px;">
                 <ui:VisualElement name="fill-time" class="lk-progress-bar__fill" />
             </ui:VisualElement>
-            <ui:Button name="btn-pace" class="lk-button lk-button--icon" style="margin-left: 6px; width: 84px; font-size: 11px;" />
+            <ui:Button name="btn-pace" class="lk-button lk-button--icon lk-button--hud lk-button--compact" style="margin-left: 6px; width: 84px; font-size: 11px;" />
         </ui:VisualElement>
 
         <ui:VisualElement class="lk-grow" />
@@ -53,7 +53,7 @@
         <ui:VisualElement class="lk-grow" />
 
         <!-- Right: start night CTA -->
-        <ui:Button name="btn-start-night" class="lk-button lk-button--primary lk-terminal-pulse" />
+        <ui:Button name="btn-start-night" class="lk-button lk-button--primary lk-button--command lk-terminal-pulse" />
 
     </ui:VisualElement>
 
@@ -97,7 +97,7 @@
         <ui:VisualElement class="lk-grow" />
 
         <!-- Right: speed toggle button -->
-        <ui:Button name="btn-speed" class="lk-button lk-button--icon lk-hud-speed-btn" style="min-width: 44px;" />
+        <ui:Button name="btn-speed" class="lk-button lk-button--icon lk-button--hud lk-button--compact lk-hud-speed-btn" style="min-width: 44px;" />
 
     </ui:VisualElement>
 
