@@ -18,7 +18,9 @@
       "Read(//c/Users/YZX06/AppData/Roaming/Python/Python312/Scripts/**)",
       "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 8080 -InformationLevel Quiet 2>&1)",
       "Bash(curl -s --max-time 3 http://127.0.0.1:8080 -o /dev/null -w \"%{http_code}\")",
-      "Bash(curl -s --max-time 3 http://127.0.0.1:8080)"
+      "Bash(curl -s --max-time 3 http://127.0.0.1:8080)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e ' *)"
     ],
     "deny": [
       "Read(Library/**)",
@@ -31,6 +33,9 @@
       "Read(MemoryCaptures/**)",
       "Read(*.csproj)",
       "Read(*.sln)"
+    ],
+    "additionalDirectories": [
+      "\\tmp"
     ]
   },
   "enabledMcpjsonServers": [

@@ -61,6 +61,23 @@
         "*.meta": "yaml",
         "*.prefab": "yaml",
         "*.unity": "yaml",
+        "*.uss": "css",
+        "*.uxml": "html"
+    },
+    "search.exclude": {
+        "Library/**": true,
+        "Temp/**": true,
+        "Logs/**": true,
+        "Obj/**": true,
+        "Build/**": true,
+        "Builds/**": true,
+        "UserSettings/**": true,
+        "**/*.meta": true,
+        "**/*.dll": true,
+        "**/*.exe": true
+    },
+    "[csharp]": {
+        "editor.formatOnSave": true
     },
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
