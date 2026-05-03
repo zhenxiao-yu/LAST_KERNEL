@@ -1,0 +1,117 @@
+LAST KERNEL — Music Asset Guide
+================================
+
+HOW TO ADD MUSIC
+----------------
+1. Drop your audio file into the right subfolder:
+
+   Audio/Music/
+   ├── MainMenu/     title screen loop
+   ├── Day/          colony management loop (the "thinking" phase)
+   ├── Night/        combat loop (tense, urgent)
+   ├── Encounter/    card event / story beats
+   ├── Victory/      end-of-run win stinger or loop
+   └── Defeat/       end-of-run loss stinger or loop
+
+2. Unity auto-syncs the playlist on import.
+   Or force it: Tools > LAST KERNEL > Sync Music Playlist
+
+3. That's it. No code changes needed.
+
+
+TRANSITION STINGERS (optional)
+-------------------------------
+A stinger is a short non-looping clip that plays BEFORE the loop starts.
+It bridges the silence between two moods (e.g. a clock-strike sound when
+transitioning from Day → Night).
+
+Name convention: include "_transition" anywhere in the filename.
+Examples:
+   night_transition.ogg       ← placed in Music/Night/
+   Day_transition.wav         ← placed in Music/Day/
+
+The sync tool detects the "_transition" suffix and assigns it automatically.
+Only one stinger per context folder is used; if you have multiple, the
+first alphabetically wins.
+
+
+RECOMMENDED FORMATS
+-------------------
+Loops (BGM):
+  Format:      OGG Vorbis (.ogg)   ← best compression, Unity native support
+  Fallback:    WAV (.wav)          ← uncompressed, large files, OK for jam builds
+  Avoid:       MP3                 ← patent history, no advantage over OGG in Unity
+
+Stingers / one-shots:
+  Format:      OGG or WAV (either is fine for short clips)
+
+
+RECOMMENDED DURATIONS
+---------------------
+Context     Loop duration   Notes
+--------    -------------   -----
+MainMenu    60–120 s        Relaxed, sets mood. Loops seamlessly.
+Day         60–120 s        Upbeat or tense. Varies with run progress.
+Night       45–90 s         Urgent, tense. Loops faster than Day.
+Encounter   30–60 s         Calm or dramatic depending on event type.
+Victory     8–20 s          Fanfare stinger into a short triumphant loop,
+                            OR just a stinger (no loop).
+Defeat      5–15 s          Somber stinger, can be loop or one-shot.
+
+Transition stingers:
+  2–6 s is the sweet spot. The loop starts before the stinger fully ends
+  so they overlap slightly for a natural blend.
+
+
+UNITY IMPORT SETTINGS (set per-clip in the Inspector)
+------------------------------------------------------
+Setting               BGM loops           Stingers / short clips
+---------             ---------           ----------------------
+Load Type             Streaming           Compressed In Memory
+Compression Format    Vorbis              Vorbis
+Quality               65–75%              75–85%
+Sample Rate Setting   Preserve Sample     Preserve Sample Rate
+                      Rate
+Loop                  YES                 NO
+Normalize             NO (set levels      NO
+                      in your DAW)
+Preload Audio Data    unchecked           checked
+
+Why Streaming for BGM? Unity decompresses in chunks from disk instead
+of loading the full file into RAM — important for 60–120 s tracks.
+Stingers are short, so Compressed In Memory is faster to play back.
+
+
+MAKING SEAMLESS LOOPS (in Audacity — free)
+------------------------------------------
+1. Open your track in Audacity.
+2. Find a natural "phrase end" (usually a bar boundary).
+3. Select from that point to the end → Edit > Copy.
+4. File > New → paste. This is your loop body.
+5. Listen for clicks at the loop point — use Effect > Fade In/Out on
+   the first/last ~50 ms if needed.
+6. Export as OGG (File > Export > Export as OGG), Quality 6 (≈ 192 kbps).
+
+Loop quality check: in Unity, enable "Loop" on the clip, enter Play Mode,
+and let the AudioSource loop twice. Any click = go back to step 5.
+
+
+LOUDNESS TARGET
+---------------
+Normalize your tracks to -14 LUFS (integrated) for consistency.
+Louder than -10 LUFS will clip against SFX. Unity's mixer handles final
+mix, but source files should all be at the same relative loudness.
+
+Tools: Audacity (free), iZotope RX (paid), or loudness-normalize.com.
+
+
+NAMING CONVENTION
+-----------------
+  {context}_{mood}_{optional-number}.ogg
+
+Examples:
+  day_calm_01.ogg
+  night_tense_01.ogg
+  night_tense_02.ogg        ← both are picked randomly
+  night_transition.ogg      ← auto-detected as stinger
+  victory_fanfare.ogg

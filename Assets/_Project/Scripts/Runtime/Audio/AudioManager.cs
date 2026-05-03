@@ -59,12 +59,14 @@ namespace Markyu.LastKernel
         private List<AudioSource> _SFXSourcePool;
         private int _nextSFXSourceIndex = 0;
 
-        // Two sources for crossfading (A/B flip).
+        // Two looping sources for crossfading (A/B flip).
         private AudioSource _bgmA;
         private AudioSource _bgmB;
+        private AudioSource _stingerSource;   // one-shot, non-looping, plays before the loop starts
         private bool _onA = true;
         private MusicContext _currentContext = MusicContext.None;
         private Tween _bgmFadeTween;
+        private Coroutine _stingerCoroutine;
 
         private const string SFX_VOL_KEY = "VolumeSFX";
         private const string BGM_VOL_KEY = "VolumeBGM";
@@ -100,9 +102,10 @@ namespace Markyu.LastKernel
                 _SFXSourcePool.Add(source);
             }
 
-            // Initialize A/B BGM sources for crossfading.
-            _bgmA = CreateBGMSource("BGM_A");
-            _bgmB = CreateBGMSource("BGM_B");
+            // Initialize A/B BGM sources for crossfading plus a one-shot stinger source.
+            _bgmA          = CreateBGMSource("BGM_A",       loop: true);
+            _bgmB          = CreateBGMSource("BGM_B",       loop: true);
+            _stingerSource = CreateBGMSource("BGM_Stinger", loop: false);
         }
 
         private void Start()
@@ -119,24 +122,71 @@ namespace Markyu.LastKernel
         // ── BGM ───────────────────────────────────────────────────────────────────
 
         /// <summary>
-        /// Crossfades to a random track from the given context.
-        /// No-ops if the context is already playing. Pass fadeDuration = 0 for an instant swap.
+        /// Transitions to a random loop track from the given context.
+        /// If the playlist has a transitionIn stinger for the context, that plays first
+        /// (at full volume), then the loop fades in underneath once the stinger ends.
+        /// No-ops if the same context is already playing.
         /// </summary>
         public void PlayBGM(MusicContext context, float fadeDuration = -1f)
         {
             if (context == MusicContext.None || context == _currentContext) return;
 
-            var clip = _musicPlaylist != null ? _musicPlaylist.PickTrack(context) : null;
-            if (clip == null)
+            var loopClip = _musicPlaylist?.PickTrack(context);
+            if (loopClip == null)
             {
-                Debug.LogWarning($"[AudioManager] No clip found for MusicContext.{context}. Add tracks to Audio/Music/{context}/");
+                Debug.LogWarning($"[AudioManager] No track for MusicContext.{context}. Drop a file into Audio/Music/{context}/");
                 return;
             }
 
             _currentContext = context;
+            float duration  = fadeDuration < 0f ? _defaultFadeDuration : fadeDuration;
 
-            float duration = fadeDuration < 0f ? _defaultFadeDuration : fadeDuration;
+            // Cancel any previous stinger-then-loop coroutine.
+            if (_stingerCoroutine != null)
+            {
+                StopCoroutine(_stingerCoroutine);
+                _stingerCoroutine = null;
+            }
 
+            var stinger = _musicPlaylist?.PickTransition(context);
+            if (stinger != null)
+            {
+                // Fade out current loop, play stinger, then start new loop.
+                FadeOutCurrent(duration * 0.5f);
+                _stingerSource.Stop();
+                _stingerSource.volume = _defaultMusicVolume;
+                _stingerSource.clip   = stinger;
+                _stingerSource.Play();
+                // Start the loop slightly before the stinger ends so they blend.
+                float loopDelay = Mathf.Max(0f, stinger.length - duration * 0.5f);
+                _stingerCoroutine = StartCoroutine(DelayedLoop(loopClip, loopDelay, duration * 0.5f));
+            }
+            else
+            {
+                CrossfadeToLoop(loopClip, duration);
+            }
+        }
+
+        private void FadeOutCurrent(float duration)
+        {
+            _bgmFadeTween?.Kill();
+            AudioSource outgoing = _onA ? _bgmB : _bgmA;  // the one currently playing
+            if (!outgoing.isPlaying) return;
+            _bgmFadeTween = DOTween.To(() => outgoing.volume, v => outgoing.volume = v, 0f, duration)
+                .OnComplete(() => { outgoing.Stop(); outgoing.clip = null; })
+                .SetUpdate(true).SetLink(gameObject);
+        }
+
+        private IEnumerator DelayedLoop(AudioClip clip, float delay, float fadeDuration)
+        {
+            if (delay > 0f)
+                yield return new WaitForSecondsRealtime(delay);
+            CrossfadeToLoop(clip, fadeDuration);
+            _stingerCoroutine = null;
+        }
+
+        private void CrossfadeToLoop(AudioClip clip, float duration)
+        {
             AudioSource incoming = _onA ? _bgmA : _bgmB;
             AudioSource outgoing = _onA ? _bgmB : _bgmA;
             _onA = !_onA;
@@ -155,7 +205,6 @@ namespace Markyu.LastKernel
                 return;
             }
 
-            float outStart = outgoing.volume;
             _bgmFadeTween = DOTween.Sequence()
                 .Append(DOTween.To(() => outgoing.volume, v => outgoing.volume = v, 0f, duration))
                 .Join(DOTween.To(() => incoming.volume,   v => incoming.volume = v, _defaultMusicVolume, duration))
@@ -164,16 +213,16 @@ namespace Markyu.LastKernel
                 .SetLink(gameObject);
         }
 
-        private AudioSource CreateBGMSource(string label)
+        private AudioSource CreateBGMSource(string label, bool loop)
         {
             var go  = new GameObject(label);
             go.transform.SetParent(transform);
             var src = go.AddComponent<AudioSource>();
             src.outputAudioMixerGroup = _BGMAudioGroup;
-            src.volume     = 0f;
+            src.volume      = 0f;
             src.playOnAwake = false;
             src.spatialBlend = 0f;
-            src.loop = true;
+            src.loop = loop;
             return src;
         }
 
